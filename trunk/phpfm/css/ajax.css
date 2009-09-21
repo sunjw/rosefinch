@@ -1,0 +1,91 @@
+﻿@CHARSET "UTF-8";
+/* Ajax Cut, Copy, Paste and Rename sector */
+#ajaxBg
+{
+	width: 100%;
+	height: 100%;
+	position: absolute;
+	z-index: 1000;
+	top: 0;
+	left: 0;
+	display: none;
+	background-color: Black;
+	opacity: 0.7;
+	-ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=70)"; /* IE */
+	filter: alpha(opacity=70);
+}
+.inputRequire
+{
+	color: Red;
+	font-size: x-small;
+	font-weight: bold;
+}
+div.ajaxHeader
+{
+	background-color: Black;
+	color: White;
+	height: 18px;
+	line-height: 18px;
+	padding: 6px 10px;
+}
+div.ajaxHeader span
+{
+	float: left;
+	width: 150px;
+}
+div.ajaxHeader a.ajaxFuncClose
+{
+	float: right;
+	color: White;
+}
+#ajaxInput, #ajaxDelete, #ajaxWait
+{
+	display: none;
+	background-color: white;
+	z-index: 1005;
+	position: absolute;
+	top: 150px;
+	width: 400px;
+	border: 1px solid #cccccc;
+}
+
+/* Rename sector */
+#ajaxInput form
+{
+	padding: 6px 10px;
+}
+#ajaxInput form
+{
+	
+}
+#ajaxInput form div.ajaxHidden
+{
+	display: none;
+}
+#ajaxInput form div div
+{
+	height: 2em;
+	line-height: 2em;
+}
+#ajaxInput form div#oldnameLine
+{
+	display: none;
+}
+
+/* Delete sector */
+#ajaxDelete #deleteMsg
+{
+	text-align: center;
+}
+#ajaxDelete #deleteMsg p
+{
+	height: 2em;
+	line-height: 2em;
+	margin: 0 5px;
+}
+
+/* Watingsector */
+div.wating
+{
+	margin: 10px 80px;
+}

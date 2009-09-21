@@ -1,0 +1,71 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"POT-Creation-Date: 2009-09-20 04:03+0200\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+msgid "Rosefinch"
+msgstr ""
+
+msgid "Rosefinch - PHP File Manager"
+msgstr ""
+
+msgid "About"
+msgstr ""
+
+msgid "Notice: Rosefinch only supports IE 7 or newer versions and other modern browser"
+msgstr ""
+
+msgid "Generating time"
+msgstr ""
+
+msgid "Using Tango icon library"
+msgstr ""
+
+msgid "Current path:"
+msgstr ""
+
+msgid "Refresh"
+msgstr ""
+
+msgid "Up"
+msgstr ""
+
+msgid "Select All"
+msgstr ""
+
+msgid "Deselect"
+msgstr ""
+
+msgid "Cut"
+msgstr ""
+
+msgid "Copy"
+msgstr ""
+
+msgid "Paste"
+msgstr ""
+
+msgid "New Folder"
+msgstr ""
+
+msgid "Rename"
+msgstr ""
+
+msgid "Delete"
+msgstr ""
+
+msgid "Upload"
+msgstr ""
+
+msgid "Large Icon View"
+msgstr ""
+
+msgid "Detail View"
+msgstr ""
+

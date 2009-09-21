@@ -1,0 +1,245 @@
+﻿/* Global sector */
+.clear
+{
+	clear: both;
+}
+.rightAlign
+{
+	text-align: right;
+}
+#mainView
+{
+	border: 1px solid #999999;
+}
+#mainView a
+{
+	color: Black;
+	
+}
+#mainView, #fullpath, #toolbar
+{
+	width: 880px;
+	margin: 1px 0;
+}
+
+/* Fullpath sector */
+#fullpath ul
+{
+	list-style-type: none;
+	list-style-image: none;
+}
+#fullpath div.divDir, #fullpath div.divLabel, #fullpath div.pathSlash
+{
+	height: 22px;
+	float: left;
+	padding: 1px;
+	/*float: left;*/
+}
+#fullpath div.divLabel
+{
+	line-height: 22px;
+}
+#fullpath a
+{
+	color: Black;
+	text-decoration: none;
+	display: block;
+}
+#fullpath a, #fullpath div.pathSlash a.arrow
+{
+	border: 1px solid white;
+	padding: 1px 1px;
+}
+#fullpath a:hover, #fullpath div.pathSlash a.selected, #fullpath div.pathSlash a.arrow:hover
+{
+	border: 1px solid #B8D1ED;
+	
+	-moz-border-radius: 2px;
+	-khtml-border-radius: 2px;
+	-webkit-border-radius: 2px;
+	border-radius: 2px;
+	
+}
+#fullpath 
+{
+	background-color: white;
+}
+#fullpath div.pathSlash
+{
+	
+}
+#fullpath div.pathSlash a.arrow
+{
+	width: 16px;
+	color: transparent;
+	background: url('../images/path-arrow-right.gif') center center no-repeat;
+}
+
+#fullpath .subMenu
+{
+	display: none;
+	z-index: 2000;
+	position: absolute;
+	width: 160px;
+	padding: 0 5px 5px 0;
+	background: transparent url('../images/shadow.gif') no-repeat right bottom;
+	/*
+	-webkit-box-shadow: 2px 2px 2px #888;
+	-moz-box-shadow: 2px 2px 2px #888;
+	*/
+}
+#fullpath .subMenu ul
+{
+	background-color: white;
+	border: solid 1px #666666;
+	padding: 1px;
+	max-height: 360px; /* 最大高度 菜单不会太长 IE6 及以下无效 */
+	overflow: auto; /* 溢出就有滚动条 */
+}
+#fullpath .subMenu li
+{
+	float: none;
+	padding-top: 0;
+	border: 0;
+}
+#fullpath .subMenu li a
+{
+	display: block;
+	height: 22px;
+	line-height: 22px;
+	text-indent: 4px;
+	overflow: hidden;
+	text-decoration: none;
+	border: 0;
+	padding: 0;
+}
+#fullpath .subMenu li a:hover
+{
+	text-decoration: underline;
+}
+
+/* Toolbar sector */
+#toolbar
+{
+	height: 22px;
+	line-height: 22px;
+	
+}
+#toolbar .splitRight
+{
+	border-right: 1px solid #cccccc;
+}
+#toolbar .splitLeft
+{
+	border-left: 1px solid #cccccc;
+}
+#toolbar #leftToolbar
+{
+	float: left;
+}
+#toolbar #rightToolbar
+{
+	float: right;
+}
+#toolbar a
+{
+	display: block;
+	float: left;
+	height: 20px;
+	width: 24px;
+	text-align: center;
+	border-bottom: 1px solid white;
+}
+#toolbar a:hover
+{
+	border-bottom: 1px solid #B8D1ED;
+}
+#toolbar a.disable:hover
+{
+	border-bottom: 1px solid white;
+}
+#toolbar a img
+{
+	border: 0;
+	margin-top: 1px;
+	height: 16px;
+	width: 16px;
+}
+
+/* View sector */
+#mainView .header
+{
+	padding: 0;
+	margin: 0;
+	background: white url('../images/header_border_bottom.jpg') bottom left repeat-x;
+	height: 25px;
+}
+#mainView .header span
+{
+	display: block;
+	float: left;
+	overflow: hidden;
+	height: 23px;
+	line-height: 23px;
+	padding: 0 0 0 5px;
+}
+#mainView .header a
+{
+	display: block;
+	line-height: 22px;
+}
+#mainView .header span.split
+{
+	background: transparent url('../images/header_split.jpg') top left no-repeat;
+}
+#mainView .header span.check
+{
+	width: 17px;
+}
+#mainView .header span.icon
+{
+	width: 20px;
+}
+#mainView .header span.name
+{
+	width: 420px;	
+}
+#mainView .header span.size
+{	
+	width: 125px;	
+}
+#mainView .header span.type
+{
+	width: 120px;	
+}
+#mainView .header span.mtime
+{
+	width: 100px;
+}
+#mainView .header span a.sorta
+{
+	background: url('../images/order_asc.jpg') center 2px no-repeat;
+}
+#mainView .header span a.sortd
+{
+	background: url('../images/order_desc.jpg') center 2px no-repeat;
+}
+
+/* Message Sector */
+#phpfmMessage
+{
+	display: none;
+
+	position: absolute;
+	top: 0;
+	right: 0;
+	width: 500px;
+	height: 45px;
+	overflow: auto;
+	
+	background-color: #CCFF99;
+	border: 1px green solid;
+	font-size: small;
+	color: #0099CC;
+	padding: 2px;
+}

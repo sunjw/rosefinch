@@ -1,0 +1,116 @@
+<?php
+
+require_once "defines.inc.php";
+require_once "common.inc.php";
+require_once "messageboard.class.php";
+require_once "utility.class.php";
+
+@session_start();
+
+/**
+ * Clip Board Class
+ *
+ * 2009-8-11
+ * @author Sun Junwen
+ *
+ */
+class ClipBoard
+{
+	private $oper;
+	private $items;
+
+	function __construct()
+	{
+		$this->clear();
+	}
+
+	/**
+	 * 清楚剪贴板内容
+	 */
+	private function clear()
+	{
+		$this->oper = "";
+		$this->items = Array();
+	}
+
+	/**
+	 * 添加项目
+	 * @param $oper 操作
+	 * @param $items 项目
+	 */
+	public function set_items($oper, $items)
+	{
+		$this->oper = $oper;
+		$this->items = $items;
+	}
+
+	/**
+	 * 粘贴，并记录到消息板
+	 * @param $target_subdir 目标子文件夹
+	 */
+	public function paste($target_subdir)
+	{
+		$messageboard = Utility::get_messageboard();
+		$message = "";
+		$files_base_dir = $_SESSION['base_dir'];
+		//$old_dir = $files_base_dir . $this->subdir;
+		$new_dir = $files_base_dir . $target_subdir;
+		$count = count($this->items);
+		for($i = 0; $i < $count; $i++)
+		{
+			$item = $this->items[$i];
+			$oldname = $files_base_dir . $item;
+			$basename = get_basename($item);
+			$newname = $new_dir . $basename;
+			log_to_file($this->oper . ": " . $oldname . " to " . $newname);
+
+			// 处理重名
+			$success = false;
+			if($this->oper == "cut")
+			{
+				$message .= "剪切 $item ";
+				$success = Utility::phpfm_rename($oldname, $newname);
+			}
+			else if($this->oper == "copy")
+			{
+				$message .= "复制 $item ";
+				$success = Utility::phpfm_copy($oldname, $newname);
+			}
+			if($success)
+				$message .= "成功<br />";
+			else
+				$message .= "<strong>失败</strong><br />";
+		}
+		$messageboard->set_message($message);
+		$this->clear();
+	}
+	
+	/**
+	 * 剪贴板中是否有内容
+	 * @return bool 有 true，没有 false
+	 */
+	public function have_items()
+	{
+		if(is_array($this->items))
+		{
+			if(count($this->items) > 0 && $this->oper != "")
+			{
+				return true;
+			}
+		}
+
+		return false;
+	}
+
+	/**
+	 * 输出 debug 信息
+	 */
+	public function debug()
+	{
+		print_r($this->oper);
+		print_r($this->items);
+	}
+
+}
+
+?>

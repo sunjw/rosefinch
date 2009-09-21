@@ -1,0 +1,2 @@
+﻿php 代码使用下划线风格
+css, javascript, html 使用驼峰风格
