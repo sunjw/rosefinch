@@ -106,7 +106,7 @@ function setButton(className, src, clickFunc, addClass, removeClass) {
 
 function getLeftMargin() {
 	var viewWidth = document.documentElement.clientWidth;
-	var leftMargin = (viewWidth - 400) / 2; // 居中
+	var leftMargin = (viewWidth - 420) / 2; // 居中
 	return leftMargin;
 }
 

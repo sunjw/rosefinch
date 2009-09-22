@@ -1,6 +1,7 @@
 <?php
 require_once "../inc/defines.inc.php";
 require_once "../inc/common.inc.php";
+require_once "../inc/gettext.inc.php";
 require_once "../inc/messageboard.class.php";
 require_once "../inc/utility.class.php";
 require_once "../log/log.func.php";
@@ -30,9 +31,9 @@ if(false === strpos($sub_dir, "..") &&
 	
 }
 if($success)
-	$messageboard->set_message("重命名:&nbsp;" . post_query("oldname") . " 为 " . post_query("newname") . " 成功");
+	$messageboard->set_message(_("Rename") . ":&nbsp;" . post_query("oldname") . "&nbsp;" . _("to") . "&nbsp;" . post_query("newname") . "&nbsp;" . _("succeed"));
 else
-	$messageboard->set_message("重命名:&nbsp;" . post_query("oldname") . " 为 " . post_query("newname") . " <strong>失败<strong>");
+	$messageboard->set_message(_("Rename") . ":&nbsp;" . post_query("oldname") . "&nbsp;" . _("to") . "&nbsp;" . post_query("newname") . " <strong>" . _("failed") . "<strong>");
 
 Utility::redirct_after_oper(false, 1);
 

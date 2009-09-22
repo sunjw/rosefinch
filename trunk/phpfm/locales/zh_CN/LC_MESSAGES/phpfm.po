@@ -69,3 +69,66 @@ msgstr "以大图标方式查看"
 msgid "Detail View"
 msgstr "以详细信息方式查看"
 
+msgid "Name"
+msgstr "名称"
+
+msgid "Size"
+msgstr "大小"
+
+msgid "Type"
+msgstr "类型"
+
+msgid "Modified Time"
+msgstr "修改时间"
+
+msgid "File"
+msgstr "文件"
+
+msgid "Folder"
+msgstr "目录"
+
+msgid "Old Name:"
+msgstr "原名称:"
+
+msgid "New Name:"
+msgstr "新名称:"
+
+msgid "There should not have %s in new name"
+msgstr "名称中不得有: %s"
+
+msgid "Select File:"
+msgstr "选择文件:"
+
+msgid "File cannot be larger than "
+msgstr "文件不能大于 "
+
+msgid "OK"
+msgstr "确定"
+
+msgid "Cancel"
+msgstr "取消"
+
+msgid "Deleting Confirm"
+msgstr "确认删除"
+
+msgid "Are you sure to delete these items?"
+msgstr "确定要删除这些项？"
+
+msgid "Working..."
+msgstr "正在执行..."
+
+msgid "Add items to clipboard:"
+msgstr "向剪贴板添加项目:"
+
+msgid "succeed"
+msgstr "成功"
+
+msgid "failed"
+msgstr "失败"
+
+msgid "Make new folder:"
+msgstr "新建目录:"
+
+msgid "to"
+msgstr "为"
+

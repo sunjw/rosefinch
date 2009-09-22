@@ -315,7 +315,7 @@ class FileManager
 					$a_href = "func/download.func.php?file=" . rawurlencode($this->request_sub_dir . $file['name']);
 					$type_html = "";
 					if($file['type'] == "")
-						$type_html = "文件";
+						$type_html = _("File");
 					else
 						$type_html = $file['type'];
 						
@@ -407,7 +407,7 @@ class FileManager
 						$item_path = $this->request_sub_dir . $dir['name'];
 						
 						$dir['size_str'] = "&nbsp;";
-						$dir['type_html'] = "文件夹";
+						$dir['type_html'] = _("Folder");
 						$dir['a_href'] = $a_href;
 						$dir['item_path'] = $item_path;
 			        	
@@ -709,50 +709,50 @@ class FileManager
 				<input type="hidden" id="return" name="return" value="<?php echo rawurlencode(getURI()); ?>" />
 				<div id="divInput">
 					<div id="oldnameLine">
-						<label for="oldname">原名称:&nbsp;</label>
+						<label for="oldname"><?php printf("%s&nbsp;", _("Old Name:")); ?></label>
 						<input id="oldname" type="text" name="oldname" value="" size="40" maxlength="128" readonly="readonly"/>
 					</div>
 					<div>
-						<label for="newname">新名称:&nbsp;</label>
+						<label for="newname"><?php printf("%s&nbsp;", _("New Name:")); ?></label>
 						<input id="newname" type="text" name="newname" value="" size="40" maxlength="128" />
 					</div>
 					<div>
-						<span class="inputRequire">名称中不得有: .., /, \, *, ?, ", |, &amp;, &lt;, &gt;</span>
+						<span class="inputRequire"><?php printf(_("There should not have %s in new name"), ".., /, \, *, ?, \", |, &amp;, &lt;, &gt;"); ?></span>
 					</div>
 				</div>
 				<div id="divUpload">
 					<div>
-						<label for="uploadFile">选择文件:&nbsp;</label>
+						<label for="uploadFile"><?php printf("%s&nbsp;", _("Select File:")); ?></label>
 						<input id="uploadFile" type="file" name="uploadFile" size="20"/>
 					</div>
 					<div>
-						<span class="inputRequire">文件不能大于 2MB</span>
+						<span class="inputRequire"><?php printf("%s%s", _("File cannot be larger than "), "2MB"); ?></span>
 					</div>
 				</div>
 				<div class="rightAlign">
-					<input type="submit" value="确定"/>
-					<input type="button" value="取消" onclick="closeAjax()"/>
+					<input type="submit" value="<?php echo _("OK"); ?>"/>
+					<input type="button" value="<?php echo _("Cancel"); ?>" onclick="closeAjax()"/>
 				</div>
 			</form>
 		</div>
 		<div id="ajaxDelete">
 			<div class="ajaxHeader">
-				<span>确认删除</span>
+				<span><?php echo _("Deleting Confirm"); ?></span>
 				<a class="ajaxFuncClose" href="javascript:;">
 					<img alt="Close" src="images/ajax-func-close.gif" border="0">
 				</a>
 			</div>
 			<div id="deleteMsg">
-				<p>确定要删除这些项？</p>
+				<p><?php echo _("Are you sure to delete these items?"); ?></p>
 				<p class="rightAlign">
-					<input type="button" value="确定" onclick="doDelete()"/>
-					<input type="button" value="取消" onclick="closeAjax()"/>
+					<input type="button" value="<?php echo _("OK"); ?>" onclick="doDelete()"/>
+					<input type="button" value="<?php echo _("Cancel"); ?>" onclick="closeAjax()"/>
 				</p>
 			</div>
 		</div>
 		<div id="ajaxWait">
 			<div class="ajaxHeader">
-				<span>正在执行...</span>
+				<span><?php echo _("Working..."); ?></span>
 			</div>
 			<div class="wating">
 				<img alt="wating" src="images/loadingAnimation.gif" border="0">
@@ -859,22 +859,22 @@ class FileManager
 			<span class="name split">
 				<a href="<?php echo $_SERVER['PHP_SELF'] . "?dir=" .
 				$request_sub_dir . "&s=n" .
-				"&o=" . $norder; ?>">名称</a>
+				"&o=" . $norder; ?>"><?php echo _("Name"); ?></a>
 			</span>
 			<span class="size split">
 				<a href="<?php echo $_SERVER['PHP_SELF'] . "?dir=" .
 				$request_sub_dir . "&s=s" .
-				"&o=" . $sorder; ?>">大小</a>
+				"&o=" . $sorder; ?>"><?php echo _("Size"); ?></a>
 			</span>
 			<span class="type split">
 				<a href="<?php echo $_SERVER['PHP_SELF'] . "?dir=" .
 				$request_sub_dir . "&s=t" .
-				"&o=" . $torder; ?>">类型</a>
+				"&o=" . $torder; ?>"><?php echo _("Type"); ?></a>
 			</span>
 			<span class="mtime split">
 				<a href="<?php echo $_SERVER['PHP_SELF'] . "?dir=" .
 				$request_sub_dir . "&s=m" .
-				"&o=" . $morder; ?>">修改时间</a>
+				"&o=" . $morder; ?>"><?php echo _("Modified Time"); ?></a>
 			</span>
 		</div>
 <?php 
@@ -919,7 +919,7 @@ class FileManager
 					<span class="icon">
 					<img src="images/go-up.gif" alt="file icon" width="16" height="16" border="0" />
 					</span>
-					<span class="name">向上</span>
+					<span class="name"><?php echo _("Up"); ?></span>
 					<span class="size">&nbsp;</span>
 					<span class="type">&nbsp;</span>
 					<span class="mtime">&nbsp;</span>

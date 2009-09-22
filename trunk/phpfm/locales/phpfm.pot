@@ -69,3 +69,66 @@ msgstr ""
 msgid "Detail View"
 msgstr ""
 
+msgid "Name"
+msgstr ""
+
+msgid "Size"
+msgstr ""
+
+msgid "Type"
+msgstr ""
+
+msgid "Modified Time"
+msgstr ""
+
+msgid "File"
+msgstr ""
+
+msgid "Folder"
+msgstr ""
+
+msgid "Old Name:"
+msgstr ""
+
+msgid "New Name:"
+msgstr ""
+
+msgid "There should not have %s in new name"
+msgstr ""
+
+msgid "Select File:"
+msgstr ""
+
+msgid "File cannot be larger than "
+msgstr ""
+
+msgid "OK"
+msgstr ""
+
+msgid "Cancel"
+msgstr ""
+
+msgid "Deleting Confirm"
+msgstr ""
+
+msgid "Are you sure to delete these items?"
+msgstr ""
+
+msgid "Working..."
+msgstr ""
+
+msgid "Add items to clipboard:"
+msgstr ""
+
+msgid "succeed"
+msgstr ""
+
+msgid "failed"
+msgstr ""
+
+msgid "Make new folder:"
+msgstr ""
+
+msgid "to"
+msgstr ""
+

@@ -1,6 +1,7 @@
 <?php
 require_once "../inc/defines.inc.php";
 require_once "../inc/common.inc.php";
+require_once "../inc/gettext.inc.php";
 require_once "../inc/messageboard.class.php";
 require_once "../inc/utility.class.php";
 require_once "../log/log.func.php";
@@ -21,10 +22,10 @@ if(isset($_FILES['uploadFile']))
 	$uploadfile = $files_base_dir. $sub_dir . $_FILES['uploadFile']['name'];
 	
 	if (Utility::phpfm_move_uploaded_file($_FILES['uploadFile']['tmp_name'], $uploadfile)) {
-		$messageboard->set_message("上传:&nbsp;" . $_FILES['uploadFile']['name'] . " 成功");
+		$messageboard->set_message(_("Upload") . ":&nbsp;" . $_FILES['uploadFile']['name'] . "&nbsp;" . _("succeed"));
 		log_to_file("upload success: " . $uploadfile);
 	} else {
-		$messageboard->set_message("上传:&nbsp;" . $_FILES['uploadFile']['name'] . " <strong>失败<strong>");
+		$messageboard->set_message(_("Upload") . ":&nbsp;" . $_FILES['uploadFile']['name'] . " <strong>" . _("failed") . "<strong>");
 		log_to_file("upload failed: " . $uploadfile);
 	}
 }

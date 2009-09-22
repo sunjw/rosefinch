@@ -2,6 +2,7 @@
 
 require_once "../inc/defines.inc.php";
 require_once "../inc/common.inc.php";
+require_once "../inc/gettext.inc.php";
 require_once "../inc/messageboard.class.php";
 require_once "../inc/utility.class.php";
 require_once "../log/log.func.php";
@@ -31,7 +32,7 @@ for($i = 0; $i < $count; $i++)
 	$item = $items[$i];
 	$path = $files_base_dir . $item;
 	log_to_file("try to delete: $path");
-	$message .= ("删除 $item ");
+	$message .= (_("Delete") . " $item ");//("删除 $item ");
 	$path = convert_toplat($path);
 	if(file_exists($path))
 	{
@@ -45,9 +46,9 @@ for($i = 0; $i < $count; $i++)
 		}
 	}
 	if($success)
-		$message .= "成功<br />";
+		$message .= (_("succeed") . "<br />");
 	else
-		$message .= "<strong>失败</strong><br />";
+		$message .= ("<strong>" . _("failed") . "</strong><br />");
 }
 
 $messageboard->set_message($message);

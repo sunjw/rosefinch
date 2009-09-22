@@ -1,6 +1,7 @@
 <?php
 require_once "../inc/defines.inc.php";
 require_once "../inc/common.inc.php";
+require_once "../inc/gettext.inc.php";
 require_once "../inc/clipboard.class.php";
 require_once "../inc/messageboard.class.php";
 require_once "../inc/utility.class.php";
@@ -28,7 +29,7 @@ if($clipboard != null)
 	
 	if($clipboard->have_items())
 	{
-		$message = "向剪贴板添加项目:&nbsp;<br />";
+		$message = _("Add items to clipboard:") . "&nbsp;<br />";//"向剪贴板添加项目:&nbsp;<br />";
 		$message .= (join("<br />", $items));
 		$messageboard->set_message($message);
 		echo "ok";

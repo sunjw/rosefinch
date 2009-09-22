@@ -22,7 +22,7 @@ $fileManager = new FileManager();
 </head>
 <body>
 	<div id="header">
-
+        
     </div>
     <div id="nav">
         <?php $fileManager->html_navigation(); ?>

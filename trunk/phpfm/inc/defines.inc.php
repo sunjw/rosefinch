@@ -1,6 +1,6 @@
 <?php
 
-define("VERSION", "1.2.5");
+define("VERSION", "1.2.8");
 
 define("INC_DIR_NAME", "inc");
 
@@ -27,7 +27,7 @@ date_default_timezone_set("Asia/Shanghai"); // 设置时区
 // 定义 gettext 参数
 define("DOMAIN", "phpfm");
 define("LOCALE", "zh_CN"); // 定义使用语言，如zh_CN, en_US
-
+//define("LOCALE", "en_US");
 
 
 ?>

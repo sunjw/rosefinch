@@ -2,6 +2,7 @@
 
 require_once "defines.inc.php";
 require_once "common.inc.php";
+require_once "gettext.inc.php";
 require_once "messageboard.class.php";
 require_once "utility.class.php";
 
@@ -68,18 +69,18 @@ class ClipBoard
 			$success = false;
 			if($this->oper == "cut")
 			{
-				$message .= "剪切 $item ";
+				$message .= (_("Cut") . " $item ");
 				$success = Utility::phpfm_rename($oldname, $newname);
 			}
 			else if($this->oper == "copy")
 			{
-				$message .= "复制 $item ";
+				$message .= (_("Copy") . " $item ");
 				$success = Utility::phpfm_copy($oldname, $newname);
 			}
 			if($success)
-				$message .= "成功<br />";
+				$message .= (_("succeed") . "<br />");
 			else
-				$message .= "<strong>失败</strong><br />";
+				$message .= ("<strong>" . _("failed") . "</strong><br />");
 		}
 		$messageboard->set_message($message);
 		$this->clear();

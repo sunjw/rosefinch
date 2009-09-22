@@ -1,6 +1,7 @@
 <?php
 require_once "../inc/defines.inc.php";
 require_once "../inc/common.inc.php";
+require_once "../inc/gettext.inc.php";
 require_once "../inc/messageboard.class.php";
 require_once "../inc/utility.class.php";
 require_once "../log/log.func.php";
@@ -28,9 +29,9 @@ if(false === strpos($sub_dir, "..") && Utility::check_name($name)) // 过滤
 }
 
 if($success)
-	$messageboard->set_message("新建目录:&nbsp;" . post_query("newname") . " 成功");
+	$messageboard->set_message(_("Make new folder:") . "&nbsp;" . post_query("newname") . "&nbsp;" . _("succeed"));
 else
-	$messageboard->set_message("新建目录:&nbsp;" . post_query("newname") . " <strong>失败</strong>");
+	$messageboard->set_message(_("Make new folder:") . "&nbsp;" . post_query("newname") . "&nbsp;<strong>" . _("failed") . "</strong>");
 
 
 Utility::redirct_after_oper(false, 1);
