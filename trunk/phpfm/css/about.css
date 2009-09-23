@@ -3,11 +3,11 @@
 #phpfmHelpNav, #phpfmHelp
 {
 	margin: 10px 0;
+	font-size: small;
 }
 #phpfmHelpNav, #phpfmHelpNav a
 {
 	color: #666666;
-	font-size: small;
 }
 #phpfmHelpNav a:hover
 {
@@ -15,10 +15,13 @@
 }
 #phpfmHelp
 {
-
 	line-height: 1.5em;
+}
+#phpfmHelp h4
+{
 }
 #phpfmHelp p
 {
 	text-indent: 2em;
+	
 }

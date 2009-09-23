@@ -138,12 +138,12 @@ msgstr "为"
 msgid "Readme"
 msgstr "Readme"
 
+msgid "Licence"
+msgstr "许可协议"
+
 msgid "Install"
 msgstr "安装"
 
 msgid "Setting"
 msgstr "设置"
-
-msgid "about.lang.php"
-msgstr "about.zh_CN.php"
 

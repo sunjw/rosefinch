@@ -35,7 +35,7 @@ function initNav() {
 }
 
 function init() {
-	contents = new Array("Readme", "Install", "About");
+	contents = new Array("Readme", "Licence", "Install", "About");
 	initContents();
 	initNav();
 }

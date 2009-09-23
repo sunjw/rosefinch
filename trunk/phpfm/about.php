@@ -30,9 +30,9 @@ $begin_time = microtime(true);
     </div>
     <div id="content">
         <div id="phpfmHelpNav">
-			<a href="#Readme"><?php echo _("Readme"); ?></a>&nbsp;|&nbsp;<a href="#Install"><?php echo _("Install"); ?></a>&nbsp;|&nbsp;<a href="#About"><?php echo _("About"); ?></a>
+			<a href="#Readme"><?php echo _("Readme"); ?></a>&nbsp;|&nbsp;<a href="#Licence"><?php echo _("Licence"); ?></a>&nbsp;|&nbsp;<a href="#Install"><?php echo _("Install"); ?></a>&nbsp;|&nbsp;<a href="#About"><?php echo _("About"); ?></a>
         </div>
-        <?php include "inc/" . _("about.lang.php"); ?>
+        <?php include "about/about." . LOCALE . ".php"; ?>
     </div>
     <div id="footer">
         <?php Utility::html_copyright_info($begin_time); ?>
