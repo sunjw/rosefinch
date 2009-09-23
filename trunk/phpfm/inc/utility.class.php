@@ -596,6 +596,32 @@ class Utility
 		return $clipboard;
 	}
 	
+	/**
+	 * 显示导航栏
+	 */
+	public static function html_navigation($page = "index")
+	{
+?>
+		<a href="index.php" id="phpfmNavHome" class="<?php $page == "index" ? print("current") : print(""); ?>">Rosefinch</a>
+        <ul>
+            <li class="li-item<?php $page == "about" ? print(" current") : print(""); ?>"><a href="about.php"><?php echo _("About"); ?></a></li>
+        </ul>
+<?php 
+	}
+	
+	/**
+	 * 版权信息
+	 */
+	public static function html_copyright_info($begin_time)
+	{
+?>
+		<div id="copyright">
+        	<div><?php echo _("Notice: Rosefinch only supports IE 7 or newer versions and other modern browser"); ?>&nbsp;|&nbsp;<?php echo _("Generating time"); ?>&nbsp;<?php echo (microtime(true) - $begin_time) . "s"; ?></div>
+            <div><?php printf("Rosefinch - %s - PHPFM %s&nbsp;|&nbsp;SUN Junwen&nbsp;|&nbsp;%s", _("Rosefinch"), VERSION, _("Using Tango icon library")); ?></div>
+        </div>
+<?php 	
+	}
+	
 }
 
 ?>

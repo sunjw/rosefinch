@@ -18,7 +18,6 @@ require_once "utility.class.php";
  */
 class FileManager
 {
-	private $begin_time;
 	private $request_sub_dir; // 请求的子目录
 	private $request_dir; // 请求目录对应的系统绝对路径
 	private $sort_type; // 排序方式
@@ -37,7 +36,6 @@ class FileManager
 	
 	function __construct()
 	{
-		$this->begin_time = microtime(true);
 		$this->clipboard = Utility::get_clipboard();
 		$this->messageboard = Utility::get_messageboard();
 		
@@ -163,32 +161,6 @@ class FileManager
 	    <script type="text/javascript" language="javascript" src="js/jquery-1.3.2.min.js"></script>
 	    <script type="text/javascript" language="javascript" src="js/filemanager.js"></script>
 <?php 
-	}
-	
-	/**
-	 * 显示导航栏
-	 */
-	public function html_navigation()
-	{
-?>
-		<a href="index.php" class="home">Rosefinch</a>
-        <ul>
-            <li class="li-item"><a href="about.php"><?php echo _("About"); ?></a></li>
-        </ul>
-<?php 
-	}
-	
-	/**
-	 * 版权信息
-	 */
-	public function html_copyright_info()
-	{
-?>
-		<div id="copyright">
-        	<div><?php echo _("Notice: Rosefinch only supports IE 7 or newer versions and other modern browser"); ?>&nbsp;|&nbsp;<?php echo _("Generating time"); ?>&nbsp;<?php echo (microtime(true) - $this->begin_time) . "s"; ?></div>
-            <div><?php printf("Rosefinch - %s - PHPFM %s&nbsp;|&nbsp;SUN Junwen&nbsp;|&nbsp;%s", _("Rosefinch"), VERSION, _("Using Tango icon library")); ?></div>
-        </div>
-<?php 	
 	}
 	
 	/**

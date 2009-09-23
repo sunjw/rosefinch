@@ -36,7 +36,7 @@ body
 	margin-left: 200px;
 	background-color: black;
 }
-#nav, #nav ul li a, #nav a.home
+#nav, #nav ul li a, #nav a#phpfmNavHome
 {
 	font-family: 微软雅黑;
 	color: White;
@@ -68,7 +68,7 @@ body
 {
 	background-color: Black;
 }
-#nav ul .li-item a:hover, #nav ul .li-current a
+#nav ul .li-item a:hover, #nav ul .current a
 {
 	background: url('../images/nav-hover-bg.jpg') left center repeat-x;
 }
@@ -76,17 +76,25 @@ body
 {
 	
 }
-#nav a.home
+#nav a#phpfmNavHome
 {
 	display: block;
 	height: 35px;
 	line-height: 35px;
 	width: 200px;
 	text-align: center;
-	background: transparent url('../images/nav-home-current-bg.gif') left center repeat-x;
+	background: transparent url('../images/nav-home-bg.gif') left center repeat-x;
 	position: absolute;
 	top: -10px;
 
+}
+#nav a#phpfmNavHome.current
+{
+	background: transparent url('../images/nav-home-current-bg.gif') left center repeat-x;
+}
+#nav a#phpfmNavHome:hover
+{
+	background: transparent url('../images/nav-home-current-bg.gif') left center repeat-x;
 }
 #content
 {

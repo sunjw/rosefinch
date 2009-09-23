@@ -15,6 +15,9 @@ msgstr ""
 msgid "Rosefinch - PHP File Manager"
 msgstr ""
 
+msgid "Help"
+msgstr ""
+
 msgid "About"
 msgstr ""
 
@@ -130,5 +133,14 @@ msgid "Make new folder:"
 msgstr ""
 
 msgid "to"
+msgstr ""
+
+msgid "Readme"
+msgstr ""
+
+msgid "Install"
+msgstr ""
+
+msgid "Setting"
 msgstr ""
 

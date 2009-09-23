@@ -1,0 +1,24 @@
+@CHARSET "UTF-8";
+
+#phpfmHelpNav, #phpfmHelp
+{
+	margin: 10px 0;
+}
+#phpfmHelpNav, #phpfmHelpNav a
+{
+	color: #666666;
+	font-size: small;
+}
+#phpfmHelpNav a:hover
+{
+	color: black;
+}
+#phpfmHelp
+{
+
+	line-height: 1.5em;
+}
+#phpfmHelp p
+{
+	text-indent: 2em;
+}

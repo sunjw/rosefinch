@@ -15,6 +15,9 @@ msgstr "朱雀"
 msgid "Rosefinch - PHP File Manager"
 msgstr "Rosefinch - PHP File Manager"
 
+msgid "Help"
+msgstr "帮助"
+
 msgid "About"
 msgstr "关于"
 
@@ -131,4 +134,16 @@ msgstr "新建目录:"
 
 msgid "to"
 msgstr "为"
+
+msgid "Readme"
+msgstr "Readme"
+
+msgid "Install"
+msgstr "安装"
+
+msgid "Setting"
+msgstr "设置"
+
+msgid "about.lang.php"
+msgstr "about.zh_CN.php"
 
