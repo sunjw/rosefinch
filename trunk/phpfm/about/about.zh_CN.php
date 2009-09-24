@@ -37,6 +37,9 @@
 	</div>
 	<div id="phpfmHelpAbout">
 	   	<a name="About"></a>
-		<?php printf("<p>Rosefinch - %s - PHPFM %s</p><p>SUN Junwen</p><p>%s</p>", _("Rosefinch"), VERSION, _("Using Tango icon library")); ?>
+	   	<h4>关于</h4>
+		<?php printf("<p>Rosefinch - %s - PHPFM %s</p><p>%s</p>", _("Rosefinch"), VERSION, _("Using Tango icon library")); ?>
+		<h4>作者</h4>
+		<p>Sun Junwen</p>
 	</div>
 </div>

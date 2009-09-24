@@ -111,7 +111,7 @@ msgstr ""
 msgid "Cancel"
 msgstr ""
 
-msgid "Deleting Confirm"
+msgid "Confirm"
 msgstr ""
 
 msgid "Are you sure to delete these items?"
@@ -136,6 +136,9 @@ msgid "to"
 msgstr ""
 
 msgid "Readme"
+msgstr ""
+
+msgid "Licence"
 msgstr ""
 
 msgid "Install"

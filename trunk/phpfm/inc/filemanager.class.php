@@ -709,7 +709,7 @@ class FileManager
 		</div>
 		<div id="ajaxDelete">
 			<div class="ajaxHeader">
-				<span><?php echo _("Deleting Confirm"); ?></span>
+				<span><?php echo _("Confirm"); ?></span>
 				<a class="ajaxFuncClose" href="javascript:;">
 					<img alt="Close" src="images/ajax-func-close.gif" border="0">
 				</a>

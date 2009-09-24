@@ -111,8 +111,8 @@ msgstr "确定"
 msgid "Cancel"
 msgstr "取消"
 
-msgid "Deleting Confirm"
-msgstr "确认删除"
+msgid "Confirm"
+msgstr "确认"
 
 msgid "Are you sure to delete these items?"
 msgstr "确定要删除这些项？"
