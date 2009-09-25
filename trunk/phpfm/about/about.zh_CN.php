@@ -14,6 +14,7 @@
 		<a name="Licence"></a>
 		<p>Rosefinch (朱雀) 使用 GPL 2.0 协议授权。</p>
 		<p>协议文本: <a href="gpl-2.0.txt">GPL 2.0</a></p>
+		<p>您可以修改代码，再分发以及其他用途，但必须遵守 GPL 2.0 协议。</p>
 		<p>其他授权，请联系作者。</p>
 	</div>
 	<div id="phpfmHelpInstall">
