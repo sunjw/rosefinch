@@ -132,8 +132,8 @@ msgstr "失败"
 msgid "Make new folder:"
 msgstr "新建目录:"
 
-msgid "to"
-msgstr "为"
+msgid "Rename %s to %s "
+msgstr "重命名 %s 为 %s "
 
 msgid "Readme"
 msgstr "Readme"

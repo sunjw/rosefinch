@@ -31,9 +31,9 @@ if(false === strpos($sub_dir, "..") &&
 	
 }
 if($success)
-	$messageboard->set_message(_("Rename") . ":&nbsp;" . post_query("oldname") . "&nbsp;" . _("to") . "&nbsp;" . post_query("newname") . "&nbsp;" . _("succeed"));
+	$messageboard->set_message(sprintf(_("Rename %s to %s ") . _("succeed"), post_query("oldname"), post_query("newname")));
 else
-	$messageboard->set_message(_("Rename") . ":&nbsp;" . post_query("oldname") . "&nbsp;" . _("to") . "&nbsp;" . post_query("newname") . " <strong>" . _("failed") . "<strong>");
+	$messageboard->set_message(sprintf(_("Rename %s to %s ") . " <strong>" . _("failed") . "<strong>", post_query("oldname"), post_query("newname")));
 
 Utility::redirct_after_oper(false, 1);
 
