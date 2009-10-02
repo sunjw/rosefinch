@@ -156,10 +156,16 @@ class Utility
 			return Utility::generate_img_html("images/application" . $img_postfix . ".gif", $size, $size, "app");
 		case "mp3":
 		case "wma":
-			return Utility::generate_img_html("images/music" . $img_postfix . ".gif", $size, $size, "mu");
+			return Utility::generate_img_html("images/music" . $img_postfix . ".gif", $size, $size, "music");
 		case "html":
 		case "htm":
-			return Utility::generate_img_html("images/html" . $img_postfix . ".gif", $size, $size, "mu");
+			return Utility::generate_img_html("images/html" . $img_postfix . ".gif", $size, $size, "html");
+		case "jpg":
+		case "jpeg":
+		case "bmp":
+		case "png":
+		case "gif":
+			return Utility::generate_img_html("images/image" . $img_postfix . ".gif", $size, $size, "image");
 		default:
 			return Utility::generate_img_html("images/generic" . $img_postfix . ".gif", $size, $size, "file");
 	    }

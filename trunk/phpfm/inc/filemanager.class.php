@@ -158,7 +158,9 @@ class FileManager
 	    <link href="css/detailView.css" rel="stylesheet" type="text/css" />
 	    <link href="css/largeiconView.css" rel="stylesheet" type="text/css" />
 	    <link href="css/ajax.css" rel="stylesheet" type="text/css" />
+	    <link href="css/jquery.lightbox-0.5.css" rel="stylesheet" type="text/css" />
 	    <script type="text/javascript" language="javascript" src="js/jquery-1.3.2.min.js"></script>
+	    <script type="text/javascript" language="javascript" src="js/jquery.lightbox-0.5.sun.js"></script>
 	    <script type="text/javascript" language="javascript" src="js/filemanager.js"></script>
 <?php 
 	}
@@ -921,12 +923,15 @@ class FileManager
 									$type = "",
 									$mtime = 0)
 	{
+		$class = "";
+		if(LIGHTBOX && $this->is_img_type($type))
+			$class = 'class="lightboxImg"';
 ?>
 			<li >
 				<span class="check">
 					<input class="inputCheck" type="checkbox" name="<?php echo $item_path; ?>" />
 				</span>
-				<a href="<?php echo $a_href; ?>" title="<?php echo $a_title; ?>">
+				<a href="<?php echo $a_href; ?>" title="<?php echo $a_title; ?>" <?php echo $class; ?>>
 					<span class="icon"><?php echo $img_html; ?></span>
 					<span class="name"><?php echo str_replace(" ", "&nbsp;", $name); ?></span>
 					<span class="size"><?php echo $size; ?></span>
@@ -956,6 +961,9 @@ class FileManager
 										$type = "",
 										$mtime = 0)
 	{
+		$class = "";
+		if(LIGHTBOX && $this->is_img_type($type))
+			$class = 'class="lightboxImg"';
 ?>
 			<div class="largeIconItem" >
 				<div class="firstLine">
@@ -963,12 +971,12 @@ class FileManager
 					<span class="type"><?php echo $type; ?></span>
 				</div>
 				<div class="imgLine">
-					<a href="<?php echo $a_href; ?>" title="<?php echo $a_title; ?>">
+					<a href="<?php echo $a_href; ?>" title="<?php echo $a_title; ?>" <?php echo $class; ?>>
 						<?php echo $img_html; ?>
 					</a>
 				</div>
 				<div class="infoLine">
-					<a href="<?php echo $a_href; ?>" title="<?php echo $a_title; ?>">
+					<a href="<?php echo $a_href; ?>" title="<?php echo $a_title; ?>" <?php echo $class; ?>>
 						<span class="name"><?php echo str_replace(" ", "&nbsp;", $name); ?></span>
 					</a>
 					<span class="size"><?php echo $size; ?></span>
@@ -1004,6 +1012,24 @@ class FileManager
 			}
 		}
 	}
+	
+	/**
+	 * 根据扩展名判断是不是图片格式
+	 * @param $type 扩展名
+	 * @return boolean 是 true，否 false
+	 */
+	private function is_img_type($type)
+	{
+		$type = strtolower($type);
+		if($type == "jpg" ||
+			$type == "jpeg" ||
+			$type == "bmp" ||
+			$type == "png" ||
+			$type == "gif" )
+			return true;
+		else
+			return false;
+	}	
 	
 }
 

@@ -476,6 +476,8 @@ function init() {
 	initAjaxFunc();
 
 	getMessage();
+	
+	$('a.lightboxImg').lightBox();
 
 }
 
