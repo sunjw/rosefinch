@@ -7,6 +7,7 @@
 		<p>您可以用 Apache (推荐) 或 IIS (下载没有断点续传和多线程能力) 以及其他可以解析 php 的 web 服务程序来运行 Rosefinch (朱雀)，您的操作系统可以是 Linux、Windows 或其他操作系统。</p>
 		<p>您运行 Rosefinch (朱雀) 的操作系统可以是任何字符能够转换成 UTF-8 编码的语言。对于操作系统使用的本地编码方式，只需简单的设置便可支持。</p>
 		<p>Rosefinch (朱雀) 可以提供多种语言的界面，使用的是 gettext 的方案，你也可以自己本地化界面。</p>
+		<p>Rosefinch (朱雀) 可以为图片提供 LightBox 支持。</p>
 		<h4>Rosefinch (朱雀) 对于浏览器的要求</h4>
 		<p>由于使用到一些 javascript 和 ajax 技术，所以需要浏览器支持 javascript。Rosefinch (朱雀) 通过 Cookie 记录下用户的一些设置 (如：排序方法)，所以需要浏览器能够记录 Cookie。如果希望功能保持完整并得到最佳的界面效果，使用 IE 7 及以上版本的 IE 浏览器，或者<strong>最好</strong>使用诸如 Firefox 之类的现代浏览器。</p>
 	</div>
@@ -33,6 +34,9 @@
 		<p>4. 设置界面语言</p>
 		<p>修改“<em>define("LOCALE", "zh_CN");</em>”，修改“<em>zh_CN</em>”为您想使用的语言，如 en_US、ja_JP等 (目前只有中文、英文 可以显示)。</p>
 		<p><em>注意: 如果您熟悉 php，可以随意修改代码；若不熟悉，请<strong>小心</strong>。</em></p>
+		<p>5. 设置启用 LightBox</p>
+		<p>修改“<em>define("LIGHTBOX", 1);</em>”，定义为 1 时，为图片启用 LightBox；定义为 0 时，不起用 LightBox。</p>
+		<p><em>注意: Rosefinch (朱雀) 中的 LightBox 是修改过的，当图片宽度大于 1000 像素时，会被按比例缩放至 1000 像素。</em></p>
 		<h4>已知问题</h4>
 		<p>只有支持 $_SERVER['HTTP_RANGE'] 的 web 服务程序 (如: Apache) 才能提供断点续传。</p>
 	</div>
