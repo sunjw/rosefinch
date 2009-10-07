@@ -5,15 +5,24 @@ var sortName;
 var sortOrder;
 var delayID = 0;
 
+/*
+ * 什么也不做
+ */
 function doNothing() {
 	void (0);
 }
 
+/*
+ * 详细信息模式时，当鼠标移到项目上的操作
+ */
 function detailViewItemOver(item) {
 	var detailViewItem = $(item);
 	detailViewItem.addClass("selected");
 }
 
+/*
+ * 详细信息模式时，当鼠标移出项目的操作
+ */
 function detailViewItemOut(item) {
 	var detailViewItem = $(item);
 	var checkBox = $(detailViewItem.children().get(0)).children().get(0); // 比较笨的办法
@@ -22,11 +31,17 @@ function detailViewItemOut(item) {
 	}
 }
 
+/*
+ * 大图标模式时，当鼠标移到项目上的操作
+ */
 function largeiconViewItemOver(item) {
 	var largeiconViewItem = $(item);
 	largeiconViewItem.addClass("selected");
 }
 
+/*
+ * 大图标模式时，当鼠标移出项目的操作
+ */
 function largeiconViewItemOut(item) {
 	var largeiconViewItem = $(item);
 	var checkBox = $(largeiconViewItem.children().get(0)).children().get(0); // 比较笨的办法
@@ -35,6 +50,9 @@ function largeiconViewItemOut(item) {
 	}
 }
 
+/*
+ * 大图标模式时，当鼠标点击项目的操作
+ */
 function largeiconViewItemClicked(item) {
 	var largeiconViewItem = $(item);
 	var checkBox = $(largeiconViewItem.children().get(0)).children().get(0); // 比较笨的办法
@@ -47,6 +65,9 @@ function largeiconViewItemClicked(item) {
 	viewItemCheck();
 }
 
+/*
+ * 项目选择改变
+ */
 function viewItemCheck() {
 	setButton("toolbarCut", "images/toolbar-cut-disable.gif", doNothing,
 			"disable", "");
@@ -87,6 +108,9 @@ function viewItemCheck() {
 	}
 }
 
+/*
+ * 设置按钮
+ */
 function setButton(className, src, clickFunc, addClass, removeClass) {
 	var buttons = $("div#leftToolbar > a");
 
@@ -104,22 +128,225 @@ function setButton(className, src, clickFunc, addClass, removeClass) {
 	}
 }
 
+/*
+ * 点击了重命名的操作
+ */
+function clickRename() {
+	displayAjaxBg(true);
+
+	setOldname();
+
+	displayAjaxInput("func/post.func.php", "rename", "重命名", true);
+}
+
+/*
+ * 点击了新建目录的操作
+ */
+function clickNewFolder() {
+	// alert("newfolder");
+	displayAjaxBg(true);
+
+	displayAjaxInput("func/post.func.php", "newfolder", "新建目录", true);
+}
+
+/*
+ * 点击了剪切的操作
+ */
+function clickCut() {
+	// alert("cut");
+	sendAjaxOper("cut");
+}
+
+/*
+ * 点击了复制的操作
+ */
+function clickCopy() {
+	sendAjaxOper("copy");
+}
+
+/*
+ * 点击了粘贴的操作
+ */
+function clickPaste() {
+	var subdir = $("input#subdir").attr("value");
+	var returnURL = $("input#return").val();
+
+	displayAjaxBg(false);
+
+	var ajaxWait = $("div#ajaxWait");
+
+	ajaxWait.css("left", getLeftMargin() + "px");
+	ajaxWait.fadeIn();
+
+	$.post("func/post.func.php", {
+		"oper" :"paste",
+		"subdir" :subdir,
+		"return" :returnURL
+	}, function(data) {
+		// alert(data);
+			if (data == "ok") {
+				window.location.reload();
+			}
+		});
+	/*
+	 * $.get("func/paste.ajax.php?subdir=" + subdir + "&return=" + returnURL,
+	 * function(data) { // alert(data); window.location.reload(); });
+	 */
+}
+
+/*
+ * 点击了删除的操作
+ */
+function clickDelete() {
+	displayAjaxBg(true);
+
+	var ajaxDelete = $("div#ajaxDelete");
+
+	ajaxDelete.css("left", getLeftMargin() + "px");
+	ajaxDelete.fadeIn();
+
+}
+
+/*
+ * 确认删除后的操作
+ */
+function doDelete() {
+	// 准备界面
+	var ajaxDelete = $("div#ajaxDelete");
+	ajaxDelete.css("display", "none");
+
+	ajaxBg.get(0).onclick = doNothing;
+
+	var ajaxWait = $("div#ajaxWait");
+
+	ajaxWait.css("left", getLeftMargin() + "px");
+	ajaxWait.fadeIn();
+
+	var itemsStr = selectedItems.join("|");
+
+	// var subdir = $("input#subdir").val();
+
+	$.post("func/post.func.php", {
+		"oper" :"delete",
+		"items" :itemsStr
+	}, function(data) {
+		// alert(data);
+			if (data == "ok") {
+				window.location.reload();
+			}
+		});
+}
+
+/*
+ * 点击了上传的操作
+ */
+function clickUpload() {
+	displayAjaxBg(true);
+	displayAjaxInput("func/post.func.php", "upload", "上传", false);
+}
+
+/*
+ * 点击了全选的操作
+ */
+function selectAll() {
+	var count = inputChecks.length;
+
+	for ( var i = 0; i < count; i++) {
+		var checkBox = $(inputChecks.get(i));
+		checkBox.attr("checked", "checked");
+	}
+
+	viewItemCheck();
+}
+
+/*
+ * 点击了取消选择的操作
+ */
+function deselect() {
+	var count = inputChecks.length;
+
+	for ( var i = 0; i < count; i++) {
+		var checkBox = $(inputChecks.get(i));
+		checkBox.removeAttr("checked");
+	}
+
+	viewItemCheck();
+}
+
+/*
+ * 设置显示排序的箭头
+ */
+function setSortArrow(name, order) {
+	sortName = name;
+	sortOrder = order;
+	// var str = "#mainView > .header > span." + name + " > a";
+	// var item = $(str);
+	// item.addClass("sort" + order);
+}
+
+/*
+ * 获得消息
+ */
+function getMessage() {
+	$.get("func/getmessage.ajax.php", function(data) {
+		if (data != "") {
+			var phpfmMessage = $("#phpfmMessage");
+			if (phpfmMessage.length == 1) {
+				phpfmMessage.html(data);
+				phpfmMessage.fadeIn();
+			}
+
+			clearTimeout(delayID);
+			delayID = setTimeout("closeMessage()", 5000);
+		}
+	});
+
+}
+
+/*
+ * 关闭消息
+ */
+function closeMessage() {
+	$("#phpfmMessage").fadeOut();
+}
+
+/*
+ * 获得左边距，使得输入部分居中
+ */
 function getLeftMargin() {
 	var viewWidth = document.documentElement.clientWidth;
 	var leftMargin = (viewWidth - 420) / 2; // 居中
 	return leftMargin;
 }
 
-function displayAjaxBg(canClose) {
-	if (canClose) {
-		ajaxBg.get(0).onclick = closeAjax;
-	} else {
-		ajaxBg.get(0).onclick = doNothing;
-	}
-	ajaxBg.css("height", document.documentElement.scrollHeight + "px");
-	ajaxBg.css("display", "block");
+/*
+ * 发送 ajax
+ */
+function sendAjaxOper(oper) {
+
+	var itemsStr = selectedItems.join("|");
+
+	// var subdir = $("input#subdir").val();
+
+	$.post("func/post.func.php", {
+		"oper" :oper,
+		"items" :itemsStr
+	}, function(data) {
+		if (data == "ok") {
+			setButton("toolbarPaste", "images/toolbar-paste.gif", clickPaste,
+					"", "disable");
+		} else {
+			setButton("toolbarPaste", "images/toolbar-paste-disable.gif",
+					doNothing, "disable", "");
+		}
+	});
+
+	setTimeout("getMessage()", 500);
 }
 
+/*
+ * 设置修改名称时的原名称
+ */
 function setOldname() {
 	$("div#oldnameLine").css("display", "block");
 	var oldnameInput = $("input#oldname");
@@ -130,6 +357,9 @@ function setOldname() {
 	newnameInput.attr("value", oldname);
 }
 
+/*
+ * 清除修改名称输入框中的原名称
+ */
 function cleanOldname() {
 	var oldnameInput = $("input#oldname");
 	var newnameInput = $("input#newname");
@@ -137,8 +367,39 @@ function cleanOldname() {
 	newnameInput.attr("value", "");
 }
 
-function displayAjaxInput(action, title, isInput) {
+/*
+ * 初始化 ajax
+ */
+function initAjaxFunc() {
+	ajaxBg = $("div#ajaxBg");
+
+	var ajaxFuncClose = $("div.ajaxHeader > .ajaxFuncClose");
+	var count = ajaxFuncClose.length;
+	for ( var i = 0; i < count; i++) {
+		ajaxFuncClose.get(i).onclick = closeAjax;
+	}
+}
+
+/*
+ * 显示 Ajax 输入的半透明背景
+ */
+function displayAjaxBg(canClose) {
+	if (canClose) {
+		ajaxBg.get(0).onclick = closeAjax;
+	} else {
+		ajaxBg.get(0).onclick = doNothing;
+	}
+	ajaxBg.css("height", document.documentElement.scrollHeight + "px");
+	ajaxBg.css("display", "block");
+}
+
+/*
+ * 显示 ajax 输入部分
+ */
+function displayAjaxInput(action, oper, title, isInput) {
 	var ajaxInput = $("div#ajaxInput");
+	var operInput = $("input#oper");
+	operInput.val(oper);
 	var form = ajaxInput.children("form");
 	form.attr("action", action);
 	var titleSpan = ajaxInput.children("div.ajaxHeader").children("span");
@@ -161,161 +422,26 @@ function displayAjaxInput(action, title, isInput) {
 	}
 }
 
-function clickRename() {
-	displayAjaxBg(true);
-
-	setOldname();
-
-	displayAjaxInput("func/rename.func.php", "重命名", true);
-}
-
-function clickNewFolder() {
-	// alert("newfolder");
-	displayAjaxBg(true);
-
-	displayAjaxInput("func/newfolder.func.php", "新建目录", true);
-}
-
-function clickCut() {
-	// alert("cut");
-	sendAjaxOper("cut");
-}
-
-function clickCopy() {
-	sendAjaxOper("copy");
-}
-
-function sendAjaxOper(oper) {
-
-	var itemsStr = selectedItems.join("|");
-
-	// var subdir = $("input#subdir").val();
-
-	$.post("func/clipboard.ajax.php", {
-		"oper" :oper,
-		"items" :itemsStr
-	}, function(data) {
-		if (data == "ok") {
-			setButton("toolbarPaste", "images/toolbar-paste.gif", clickPaste,
-					"", "disable");
-		} else {
-			setButton("toolbarPaste", "images/toolbar-paste-disable.gif",
-					doNothing, "disable", "");
-		}
-	});
-
-	setTimeout("getMessage()", 500);
-}
-
-function clickPaste() {
-	var subdir = $("input#subdir").attr("value");
-	var returnURL = $("input#return").val();
-
-	displayAjaxBg(false);
-
-	var ajaxWait = $("div#ajaxWait");
-
-	ajaxWait.css("left", getLeftMargin() + "px");
-	ajaxWait.fadeIn();
-
-	$.get("func/paste.ajax.php?subdir=" + subdir + "&return=" + returnURL,
-			function(data) {
-				// alert(data);
-			window.location.reload();
-		});
-}
-
-function clickDelete() {
-	displayAjaxBg(true);
+/*
+ * 关闭 ajax 部分
+ */
+function closeAjax() {
+	var ajaxInput = $("div#ajaxInput");
+	if (ajaxInput.css("display") == "block")
+		ajaxInput.fadeOut();
 
 	var ajaxDelete = $("div#ajaxDelete");
+	if (ajaxDelete.css("display") == "block")
+		ajaxDelete.fadeOut();
 
-	ajaxDelete.css("left", getLeftMargin() + "px");
-	ajaxDelete.fadeIn();
-
+	$("div#oldnameLine").css("display", "none");
+	cleanOldname();
+	ajaxBg.css("display", "none");
 }
 
-function doDelete() {
-	// 准备界面
-	var ajaxDelete = $("div#ajaxDelete");
-	ajaxDelete.css("display", "none");
-
-	ajaxBg.get(0).onclick = doNothing;
-
-	var ajaxWait = $("div#ajaxWait");
-
-	ajaxWait.css("left", getLeftMargin() + "px");
-	ajaxWait.fadeIn();
-
-	var itemsStr = selectedItems.join("|");
-
-	// var subdir = $("input#subdir").val();
-
-	$.post("func/delete.ajax.php", {
-		"items" :itemsStr
-	}, function(data) {
-		// alert(data);
-			if (data == "ok") {
-				window.location.reload();
-			}
-		});
-}
-
-function clickUpload() {
-	displayAjaxBg(true);
-	displayAjaxInput("func/upload.func.php", "上传", false);
-}
-
-function selectAll() {
-	var count = inputChecks.length;
-
-	for ( var i = 0; i < count; i++) {
-		var checkBox = $(inputChecks.get(i));
-		checkBox.attr("checked", "checked");
-	}
-
-	viewItemCheck();
-}
-
-function deselect() {
-	var count = inputChecks.length;
-
-	for ( var i = 0; i < count; i++) {
-		var checkBox = $(inputChecks.get(i));
-		checkBox.removeAttr("checked");
-	}
-
-	viewItemCheck();
-}
-
-function setSortArrow(name, order) {
-	sortName = name;
-	sortOrder = order;
-	// var str = "#mainView > .header > span." + name + " > a";
-	// var item = $(str);
-	// item.addClass("sort" + order);
-}
-
-function getMessage() {
-	$.get("func/getmessage.ajax.php", function(data) {
-		if (data != "") {
-			var phpfmMessage = $("#phpfmMessage");
-			if (phpfmMessage.length == 1) {
-				phpfmMessage.html(data);
-				phpfmMessage.fadeIn();
-			}
-
-			clearTimeout(delayID);
-			delayID = setTimeout("CloseMessage()", 5000);
-		}
-	});
-
-}
-
-function CloseMessage() {
-	$("#phpfmMessage").fadeOut();
-}
-
+/*
+ * 准备主视图
+ */
 function initMainView() {
 	var detailViewItems = $("ul#detailView");
 	var largeiconViewItems = $("div#largeiconView");
@@ -376,30 +502,9 @@ function initMainView() {
 	viewItemCheck();
 }
 
-function initAjaxFunc() {
-	ajaxBg = $("div#ajaxBg");
-
-	var ajaxFuncClose = $("div.ajaxHeader > .ajaxFuncClose");
-	var count = ajaxFuncClose.length;
-	for ( var i = 0; i < count; i++) {
-		ajaxFuncClose.get(i).onclick = closeAjax;
-	}
-}
-
-function closeAjax() {
-	var ajaxInput = $("div#ajaxInput");
-	if (ajaxInput.css("display") == "block")
-		ajaxInput.fadeOut();
-
-	var ajaxDelete = $("div#ajaxDelete");
-	if (ajaxDelete.css("display") == "block")
-		ajaxDelete.fadeOut();
-
-	$("div#oldnameLine").css("display", "none");
-	cleanOldname();
-	ajaxBg.css("display", "none");
-}
-
+/*
+ * 初始化完整路径
+ */
 function initFullPath() {
 	var body = $("body").get(0);
 	body.onclick = hideAllSubMenus;
@@ -439,6 +544,9 @@ function initFullPath() {
 	}
 }
 
+/*
+ * 关闭所有子菜单
+ */
 function hideAllSubMenus() {
 	var subMenus = $(".subMenu");
 	for ( var i = 0; i < subMenus.length; i++) {
@@ -449,11 +557,17 @@ function hideAllSubMenus() {
 	}
 }
 
+/*
+ * 关闭子菜单
+ */
 function hideSubMenu(subMenu) {
 	// subMenu.css("display", "none");
 	subMenu.fadeOut("fast");
 }
 
+/*
+ * 阻止事件浮升
+ */
 function stopBubble(e) {
 	var e = e ? e : window.event;
 	if (window.event) { // IE
@@ -464,6 +578,9 @@ function stopBubble(e) {
 	}
 }
 
+/*
+ * 初始化
+ */
 function init() {
 	var str = "#mainView > .header > span." + sortName + " > a";
 	var item = $(str);
@@ -476,7 +593,7 @@ function init() {
 	initAjaxFunc();
 
 	getMessage();
-	
+
 	$('a.lightboxImg').lightBox();
 
 }

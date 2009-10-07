@@ -6,7 +6,7 @@ require_once "gettext.inc.php";
 require_once "messageboard.class.php";
 require_once "utility.class.php";
 
-@session_start();
+//@session_start();
 
 /**
  * Clip Board Class

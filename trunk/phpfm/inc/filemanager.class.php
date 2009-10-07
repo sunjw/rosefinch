@@ -679,6 +679,7 @@ class FileManager
 				</a>
 			</div>
 			<form action="" method="post" enctype="multipart/form-data">
+				<input type="hidden" id="oper" name="oper" value="" />
 				<input type="hidden" id="subdir" name="subdir" value="<?php echo rawurlencode($this->request_sub_dir); ?>" />
 				<input type="hidden" id="return" name="return" value="<?php echo rawurlencode(getURI()); ?>" />
 				<div id="divInput">

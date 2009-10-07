@@ -1,4 +1,5 @@
 <?php
+//完成集成
 require_once "../inc/defines.inc.php";
 require_once "../inc/common.inc.php";
 require_once "../inc/gettext.inc.php";
