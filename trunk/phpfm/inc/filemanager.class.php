@@ -160,8 +160,8 @@ class FileManager
 	    <link href="css/ajax.css" rel="stylesheet" type="text/css" />
 	    <link href="css/jquery.lightbox-0.5.css" rel="stylesheet" type="text/css" />
 	    <script type="text/javascript" language="javascript" src="js/jquery-1.3.2.min.js"></script>
-	    <script type="text/javascript" language="javascript" src="js/jquery.lightbox-0.5.sun.js"></script>
-	    <script type="text/javascript" language="javascript" src="js/filemanager.js"></script>
+	    <script type="text/javascript" language="javascript" src="js/jquery.lightbox-0.5.sun.pack.js"></script>
+	    <script type="text/javascript" language="javascript" src="js/filemanager.min.js"></script>
 <?php 
 	}
 	

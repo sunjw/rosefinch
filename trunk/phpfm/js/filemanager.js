@@ -279,9 +279,6 @@ function deselect() {
 function setSortArrow(name, order) {
 	sortName = name;
 	sortOrder = order;
-	// var str = "#mainView > .header > span." + name + " > a";
-	// var item = $(str);
-	// item.addClass("sort" + order);
 }
 
 /*

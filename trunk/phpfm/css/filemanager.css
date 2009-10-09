@@ -242,5 +242,9 @@
 	font-size: small;
 	color: #0099CC;
 	padding: 2px;
+	
+	opacity: 0.9; /* 透明 firefox */
+	-ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=90)"; /* IE */
+	filter: alpha(opacity=90);
 }
 
