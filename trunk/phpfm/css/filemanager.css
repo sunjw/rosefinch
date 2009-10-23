@@ -81,8 +81,10 @@
 	z-index: 2000;
 	position: absolute;
 	width: 160px;
-	padding: 0 5px 5px 0;
-	background: transparent url('../images/shadow.gif') no-repeat right bottom;
+	padding: 0 3px 3px 0;
+	background: transparent url('../images/shadow.png') no-repeat right bottom;
+	filter:progid:DXImageTransform.Microsoft.AlphaImageLoader(
+     src='../images/shadow.png', sizingMethod='scale');
 	/*
 	-webkit-box-shadow: 2px 2px 2px #888;
 	-moz-box-shadow: 2px 2px 2px #888;
