@@ -12,8 +12,8 @@ msgstr ""
 msgid "Rosefinch"
 msgstr "朱雀"
 
-msgid "Rosefinch - PHP File Manager"
-msgstr "Rosefinch - PHP File Manager"
+msgid "PHP File Manager"
+msgstr "PHP File Manager"
 
 msgid "Help"
 msgstr "帮助"

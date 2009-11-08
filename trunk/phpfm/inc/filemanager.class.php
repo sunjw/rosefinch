@@ -145,7 +145,7 @@ class FileManager
 	 */
 	public function title()
 	{
-		return _("Rosefinch - PHP File Manager");
+		return _(TITLENAME) . " - " . _("PHP File Manager");
 	}
 	
 	/**

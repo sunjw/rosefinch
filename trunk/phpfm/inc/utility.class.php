@@ -608,7 +608,7 @@ class Utility
 	public static function html_navigation($page = "index")
 	{
 ?>
-		<a href="index.php" id="phpfmNavHome" class="<?php $page == "index" ? print("current") : print(""); ?>">Rosefinch</a>
+		<a href="index.php" id="phpfmNavHome" class="<?php $page == "index" ? print("current") : print(""); ?>"><?php echo _(TITLENAME); ?></a>
         <ul>
         	<li class="li-item<?php $page == "help" ? print(" current") : print(""); ?>"><a href="help.php"><?php echo _("Help"); ?></a></li>
             <li class="li-item<?php $page == "about" ? print(" current") : print(""); ?>"><a href="about.php"><?php echo _("About"); ?></a></li>
