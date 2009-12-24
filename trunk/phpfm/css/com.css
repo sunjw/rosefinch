@@ -62,15 +62,19 @@ body
 {
 	height: 25px;
 	line-height: 25px;
+}
+#nav ul .li-item
+{
 	border-right: 1px dotted #666666;
 }
 #nav ul .li-item a
 {
 	background-color: Black;
 }
-#nav ul .li-item a:hover, #nav ul .current a
+#nav ul .li-itsem a:hover, #nav ul .current a
 {
-	background: url('../images/nav-hover-bg.jpg') left center repeat-x;
+	background-color: rgb(64, 109, 168);
+	/*background: url('../images/nav-hover-bg.jpg') left center repeat-x;*/
 }
 #nav ul .li-current a:hover
 {

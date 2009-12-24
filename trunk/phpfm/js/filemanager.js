@@ -579,6 +579,7 @@ function stopBubble(e) {
  * 初始化
  */
 function init() {
+
 	var str = "#mainView > .header > span." + sortName + " > a";
 	var item = $(str);
 	item.addClass("sort" + sortOrder);

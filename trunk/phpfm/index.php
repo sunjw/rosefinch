@@ -21,7 +21,9 @@ $fileManager = new FileManager();
     <title><?php echo $fileManager->title(); ?></title>
 	<meta http-equiv="Content-type" content="text/html;charset=UTF-8" />
 	<link href="css/com.css" rel="stylesheet" type="text/css" />
-    <?php echo $fileManager->html_include_files(); ?>
+    <?php echo $fileManager->html_include_files(true); ?>
+    <script type="text/javascript" language="javascript" src="js/jquery-color.js"></script>
+    <script type="text/javascript" language="javascript" src="js/hover.test.js"></script>
 </head>
 <body>
 	<div id="header">

@@ -151,7 +151,7 @@ class FileManager
 	/**
 	 * 需要载入的 css 和 js 文件 HTML 代码
 	 */
-	public function html_include_files()
+	public function html_include_files($debug)
 	{
 ?>
 		<link href="css/filemanager.css" rel="stylesheet" type="text/css" />
@@ -160,9 +160,21 @@ class FileManager
 	    <link href="css/ajax.css" rel="stylesheet" type="text/css" />
 	    <link href="css/jquery.lightbox-0.5.css" rel="stylesheet" type="text/css" />
 	    <script type="text/javascript" language="javascript" src="js/jquery-1.3.2.min.js"></script>
-	    <script type="text/javascript" language="javascript" src="js/jquery.lightbox-0.5.sun.pack.js"></script>
-	    <script type="text/javascript" language="javascript" src="js/filemanager.min.js"></script>
 <?php 
+		if($debug)
+		{
+?>
+			<script type="text/javascript" language="javascript" src="js/jquery.lightbox-0.5.sun.js"></script>
+	    	<script type="text/javascript" language="javascript" src="js/filemanager.js"></script>
+<?php 
+		}
+		else
+		{
+?>
+	    	<script type="text/javascript" language="javascript" src="js/jquery.lightbox-0.5.sun.pack.js"></script>
+	    	<script type="text/javascript" language="javascript" src="js/filemanager.min.js"></script>
+<?php 
+		}
 	}
 	
 	/**
