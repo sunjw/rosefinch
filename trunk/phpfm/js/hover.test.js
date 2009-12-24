@@ -7,13 +7,13 @@ function init() {
 			if (!$(this.parentNode).hasClass("current")) {
 				$(this).animate( {
 					'backgroundColor' :'rgb(64, 109, 168)'
-				}, 250);
+				}, "fast");
 			}
 		}, function() {
 			if (!$(this.parentNode).hasClass("current")) {
 				$(this).animate( {
 					'backgroundColor' :'black'
-				}, 250);
+				}, "fast");
 			}
 		})
 	}

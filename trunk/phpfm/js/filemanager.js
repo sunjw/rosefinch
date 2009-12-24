@@ -531,7 +531,11 @@ function initFullPath() {
 
 			if (thisSub.css("display") == "none") {
 				$(this).addClass("selected");
-				thisSub.fadeIn("fast");
+				thisSub.css("background", "none");
+				thisSub.fadeIn("fast", function() {
+					// IE-hack 去掉背景
+					$(this).css("background", "transparent url('images/shadow.png') no-repeat right bottom");
+				});
 			} else {
 				$(this).removeClass("selected");
 				// thisSub.css("display", "none");
@@ -559,6 +563,7 @@ function hideAllSubMenus() {
  */
 function hideSubMenu(subMenu) {
 	// subMenu.css("display", "none");
+	subMenu.css("background", "none"); // IE-hack 去掉背景
 	subMenu.fadeOut("fast");
 }
 
