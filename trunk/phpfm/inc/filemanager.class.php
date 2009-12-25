@@ -151,7 +151,7 @@ class FileManager
 	/**
 	 * 需要载入的 css 和 js 文件 HTML 代码
 	 */
-	public function html_include_files($debug)
+	public function html_include_files($debug = false)
 	{
 ?>
 		<link href="css/filemanager.css" rel="stylesheet" type="text/css" />

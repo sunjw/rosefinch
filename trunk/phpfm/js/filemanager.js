@@ -4,6 +4,8 @@ var selectedItems;
 var sortName;
 var sortOrder;
 var delayID = 0;
+var isIE;
+var inlineShadow = "transparent url('images/shadow.png') no-repeat right bottom";
 
 /*
  * 什么也不做
@@ -528,13 +530,20 @@ function initFullPath() {
 					hideSubMenu(subMenu);
 				}
 			}
-
+			/*
+			 * if(!isIE) { thisSub.css("background", "transparent
+			 * url('images/shadow.png') no-repeat right bottom"); }
+			 */
 			if (thisSub.css("display") == "none") {
 				$(this).addClass("selected");
-				thisSub.css("background", "none");
+				if (isIE) {
+					thisSub.css("background", "none");
+				}
 				thisSub.fadeIn("fast", function() {
-					// IE-hack 去掉背景
-					$(this).css("background", "transparent url('images/shadow.png') no-repeat right bottom");
+					if (isIE) {
+						// IE-hack 去掉背景
+						$(this).css("background", inlineShadow);
+					}
 				});
 			} else {
 				$(this).removeClass("selected");
@@ -563,7 +572,8 @@ function hideAllSubMenus() {
  */
 function hideSubMenu(subMenu) {
 	// subMenu.css("display", "none");
-	subMenu.css("background", "none"); // IE-hack 去掉背景
+	if (isIE)
+		subMenu.css("background", "none"); // IE-hack 去掉背景
 	subMenu.fadeOut("fast");
 }
 
@@ -584,7 +594,7 @@ function stopBubble(e) {
  * 初始化
  */
 function init() {
-
+	isIE = $.browser.msie ? true : false;
 	var str = "#mainView > .header > span." + sortName + " > a";
 	var item = $(str);
 	item.addClass("sort" + sortOrder);

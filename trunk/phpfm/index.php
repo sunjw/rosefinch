@@ -22,7 +22,7 @@ $fileManager = new FileManager();
 	<meta http-equiv="Content-type" content="text/html;charset=UTF-8" />
 	<link href="css/com.css" rel="stylesheet" type="text/css" />
     <?php echo $fileManager->html_include_files(true); ?>
-    <script type="text/javascript" language="javascript" src="js/jquery-color.js"></script>
+    <script type="text/javascript" language="javascript" src="js/jquery.color.pack.js"></script>
     <script type="text/javascript" language="javascript" src="js/hover.test.js"></script>
 </head>
 <body>

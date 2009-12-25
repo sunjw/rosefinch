@@ -82,7 +82,7 @@
 	position: absolute;
 	width: 160px;
 	padding: 0 3px 3px 0;
-	/*
+	
 	background: transparent url('../images/shadow.png') no-repeat right bottom;
 	filter:progid:DXImageTransform.Microsoft.AlphaImageLoader(
      src='../images/shadow.png', sizingMethod='scale');

@@ -19,7 +19,7 @@ $begin_time = microtime(true);
 	<link href="css/about.css" rel="stylesheet" type="text/css" />
 	<script type="text/javascript" language="javascript" src="js/jquery-1.3.2.min.js"></script>
 	<script type="text/javascript" language="javascript" src="js/about.js"></script>
-	<script type="text/javascript" language="javascript" src="js/jquery-color.js"></script>
+	<script type="text/javascript" language="javascript" src="js/jquery.color.pack.js"></script>
     <script type="text/javascript" language="javascript" src="js/hover.test.js"></script>
 </head>
 <body>
