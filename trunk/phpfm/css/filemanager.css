@@ -18,7 +18,10 @@
 }
 #mainView, #fullpath, #toolbar
 {
-	width: 880px;
+	/*
+	 * 设定主界面各个重要元素的共同属性
+	 */
+	/*width: 880px;*/
 	margin: 1px 0;
 }
 
@@ -234,16 +237,16 @@
 	display: none;
 
 	position: absolute;
-	top: 0;
-	right: 0;
+	top: 50px;
+	right: 40px;
 	width: 500px;
 	height: 45px;
 	overflow: auto;
 	
 	background-color: #CCFF99;
-	border: 1px green solid;
+	border: 1px #339900 solid;
 	font-size: small;
-	color: #0099CC;
+	color: #339900;
 	padding: 2px;
 	
 	opacity: 0.9; /* 透明 firefox */

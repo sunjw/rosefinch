@@ -5,10 +5,11 @@
 }
 body
 {
-	background: url('../images/body-mozilla.jpg') top center no-repeat; 
-	width: 900px;
-	margin-left: auto; /* 使网页居中 */
-	margin-right: auto; /* 使网页居中 */
+	background: url('../images/body-mozilla.jpg') top center no-repeat;
+	/*width: 900px;*/
+	min-width: 900px;
+	margin-left: 40px;
+	margin-right: 40px;
 }
 .clear
 {
@@ -23,23 +24,43 @@ body
 #header
 {
 	padding: 10px;
-	height: 40px;
+	height: 80px;
+}
+#header #mainTitle
+{
+	float: left;
+	margin-top: 20px;
+	font-size: xx-large;
+	font-style: italic;
+	font-weight: bold;
+	font-family: 微软雅黑, "Segoe UI", Arial, Sans-serif;
+	color: #223355;
+}
+#header #subTitle
+{
+	float: left;
+	margin-top: 42px;
+	margin-left: 20px;
+	font-size: small;
+	color: #003595
 }
 #nav
 {
+	margin-top: 5px;
 	position: relative;
 }
 #nav ul
 {
 	list-style-type: none;
 	list-style-image: none;
-	margin-left: 200px;
-	background-color: black;
+	/*margin-left: 200px;*/
+	float: right;
+	
 }
 #nav, #nav ul li a, #nav a#phpfmNavHome
 {
 	font-family: 微软雅黑;
-	color: White;
+	color: black;
 	text-decoration: none;
 }
 #nav ul li a
@@ -69,42 +90,40 @@ body
 }
 #nav ul .li-item a
 {
-	background-color: Black;
+	
 }
-#nav ul .li-itsem a:hover, #nav ul .current a
+#nav ul .li-item a:hover, #nav ul .current a
 {
-	background-color: rgb(64, 109, 168);
+	background-color: rgb(181, 217, 229);
 	/*background: url('../images/nav-hover-bg.jpg') left center repeat-x;*/
 }
 #nav ul .li-current a:hover
 {
 	
 }
-#nav a#phpfmNavHome
+#nav a#phpfmNavHome /* Rosefinch 主页按钮 */
 {
 	display: block;
 	height: 35px;
 	line-height: 35px;
 	width: 200px;
 	text-align: center;
-	background: transparent url('../images/nav-home-bg.gif') left center repeat-x;
+	color: white;
+	background: transparent url('../images/nav-home-bg-reverse.gif') left center repeat-x;
 	position: absolute;
-	top: -10px;
+	top: -1px;
 
 }
-#nav a#phpfmNavHome.current
+#nav a#phpfmNavHome:hover, #nav a#phpfmNavHome.current
 {
-	background: transparent url('../images/nav-home-current-bg.gif') left center repeat-x;
-}
-#nav a#phpfmNavHome:hover
-{
-	background: transparent url('../images/nav-home-current-bg.gif') left center repeat-x;
+	background: transparent url('../images/nav-home-current-bg-reverse.gif') left center repeat-x;
 }
 #content
 {
 	font-family: 宋体, "Times New Roman";
-	padding: 10px;
+	padding: 6px 10px;
 	background-color: white;
+	border-top: solid #B5D9E5 5px;
 }
 /*
 a:active, a:link, a:visited

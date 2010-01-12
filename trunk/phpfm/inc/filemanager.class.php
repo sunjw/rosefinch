@@ -178,6 +178,34 @@ class FileManager
 	}
 	
 	/**
+	 * 获得当前路径
+	 * @return 当前路径
+	 */
+	public function get_current_path()
+	{
+		return "/" . $this->request_sub_dir;
+	}
+	
+	/**
+	 * 获得当前目录
+	 * @return 当前目录
+	 */
+	public function get_current_dir()
+	{
+		$current_dir = "";
+		$temp = $this->request_sub_dir;
+		if(mb_substr($this->request_sub_dir, -1) == "/" || mb_substr($this->request_sub_dir, -1) == "\\" )
+			$temp = mb_substr($this->request_sub_dir, 0, mb_strlen($this->request_sub_dir) - 1);
+		
+		if($temp == "")
+			$current_dir = "Root";
+		else
+			$current_dir = get_basename($temp);
+		
+		return $current_dir;
+	}
+	
+	/**
 	 * 在 $_GET 中获得所请求的子目录，并适当的整理格式
 	 * @return $request_sub_dir
 	 */

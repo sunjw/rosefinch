@@ -26,12 +26,19 @@ $fileManager = new FileManager();
     <script type="text/javascript" language="javascript" src="js/hover.test.js"></script>
 </head>
 <body>
-	<div id="header">
-        
-    </div>
     <div id="nav">
         <?php Utility::html_navigation(); ?>
         <div class="clear"></div>
+    </div>
+    <div id="header">
+    	<div id="mainTitle">
+    		<?php echo $fileManager->get_current_dir(); ?>
+        </div>
+        <div id="subTitle">
+    		<?php 
+    		//echo " - " . $fileManager->get_current_path(); 
+    		?>
+    	</div>
     </div>
     <div id="content">
         <?php 

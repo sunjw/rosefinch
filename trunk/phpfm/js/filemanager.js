@@ -186,9 +186,7 @@ function clickPaste() {
 		"return" :returnURL
 	}, function(data) {
 		// alert(data);
-			if (data == "ok") {
-				window.location.reload();
-			}
+		window.location.reload();
 		});
 	/*
 	 * $.get("func/paste.ajax.php?subdir=" + subdir + "&return=" + returnURL,

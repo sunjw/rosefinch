@@ -23,12 +23,17 @@ $begin_time = microtime(true);
     <script type="text/javascript" language="javascript" src="js/hover.test.js"></script>
 </head>
 <body>
-	<div id="header">
-        
-    </div>
     <div id="nav">
         <?php Utility::html_navigation("about"); ?>
         <div class="clear"></div>
+    </div>
+    <div id="header">
+        <div id="mainTitle">
+    		<?php echo _("About"); ?>
+        </div>
+        <div id="subTitle">
+    		
+    	</div>
     </div>
     <div id="content">
         <div id="phpfmHelpNav">

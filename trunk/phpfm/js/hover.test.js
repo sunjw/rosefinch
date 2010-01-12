@@ -6,7 +6,7 @@ function init() {
 		a.hover( function() {
 			if (!$(this.parentNode).hasClass("current")) {
 				$(this).animate( {
-					'backgroundColor' :'rgb(64, 109, 168)'
+					'backgroundColor' :'rgb(181, 217, 229)'
 				}, "fast");
 			}
 		}, function() {
@@ -19,4 +19,4 @@ function init() {
 	}
 }
 
-$(window).load(init); // 运行准备函数
+//$(window).load(init); // 运行准备函数
