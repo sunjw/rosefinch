@@ -135,14 +135,14 @@ msgstr "新建目录:"
 msgid "Rename %s to %s "
 msgstr "重命名 %s 为 %s "
 
+msgid "Install"
+msgstr "安装"
+
 msgid "Readme"
 msgstr "Readme"
 
 msgid "Licence"
 msgstr "许可协议"
-
-msgid "Install"
-msgstr "安装"
 
 msgid "Setting"
 msgstr "设置"

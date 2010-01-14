@@ -5,7 +5,7 @@
 }
 body
 {
-	background: url('../images/body-mozilla.jpg') top center no-repeat;
+	background: url('../images/body-mozilla.jpg') top center repeat-x;
 	/*width: 900px;*/
 	min-width: 900px;
 	margin-left: 40px;

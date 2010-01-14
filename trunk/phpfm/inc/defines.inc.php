@@ -29,11 +29,10 @@ define("DOMAIN", "phpfm");
 define("LOCALE", "zh_CN"); // 定义使用语言，如zh_CN, en_US
 //define("LOCALE", "en_US");
 
-// 控制 lightbox
-define("LIGHTBOX", 1);
-
 // 名称
 define("TITLENAME", "Rosefinch");
 
+// 控制 lightbox
+define("LIGHTBOX", 1);
 
 ?>

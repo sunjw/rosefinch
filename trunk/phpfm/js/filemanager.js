@@ -605,7 +605,10 @@ function init() {
 
 	getMessage();
 
-	$('a.lightboxImg').lightBox();
+	$('a.lightboxImg').lightBox({
+		maxWidth: 1000,
+		maxHeight: 500
+	});
 
 }
 

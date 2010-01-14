@@ -44,7 +44,9 @@
 			keyToNext:				'n',		// (string) (n = next) Letter to show the next image.
 			// Don´t alter these variables in any way
 			imageArray:				[],
-			activeImage:			0
+			activeImage:			0,
+			maxWidth:				-1,			// (integer) Image width limit
+			maxHeight:				-1			// (integer) Image height limit
 		},settings);
 		// Caching the jQuery object with all elements matched
 		var jQueryMatchedObj = this; // This, in this context, refer to jQuery object
@@ -187,20 +189,25 @@
 			objImagePreloader.onload = function() {
 				$('#lightbox-image').attr('src',settings.imageArray[settings.activeImage][0]);
 				// Perfomance an effect in the image container resizing it
-				// Set max width of the image 1000px.
-				// If the image is wider than 1000px, resize <img> and keep original radio
-				var maxwidth = 1000;
-				var showwidth = objImagePreloader.width;
-				var showheight = objImagePreloader.height;
-				var radio = objImagePreloader.width/objImagePreloader.height;
-				if(objImagePreloader.width > maxwidth) {
-					showwidth = maxwidth;
-					showheight = maxwidth / radio;
+				var showWidth = objImagePreloader.width;
+				var showHeight = objImagePreloader.height;
+				if(settings.maxWidth > 0 || settings.maxHeight > 0) {
+					var maxWidth = settings.maxWidth;
+					var maxHeight = settings.maxHeight;
+					var ratio = objImagePreloader.width/objImagePreloader.height;
+					if(maxWidth > 0 && showWidth > maxWidth) {
+						showWidth = maxWidth;
+						showHeight = showWidth / ratio;
+					}
+					if(maxHeight > 0 && showHeight > maxHeight) {
+						showHeight = maxHeight;
+						showWidth = showHeight * ratio;
+					}
+					$('#lightbox-image').css("width", showWidth);
+					$('#lightbox-image').css("height", showHeight);
 				}
-				$('#lightbox-image').css("width", showwidth);
-				$('#lightbox-image').css("height", showheight);
 				//_resize_container_image_box(objImagePreloader.width,objImagePreloader.height);
-				_resize_container_image_box(showwidth,showheight);
+				_resize_container_image_box(showWidth,showHeight);
 				//	clear onLoad, IE behaves irratically with animated gifs otherwise
 				objImagePreloader.onload=function(){};
 			};

@@ -2,50 +2,44 @@
 
 require_once "inc/defines.inc.php";
 require_once "inc/common.inc.php";
-require_once "inc/filemanager.class.php";
+require_once "inc/gettext.inc.php";
 require_once "inc/utility.class.php";
-require_once "log/log.func.php";
 
 @session_start();
 
 $begin_time = microtime(true);
 
-log_to_file($_SERVER['REMOTE_ADDR']." visited.");
-
-$fileManager = new FileManager();
-
 ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
-    <title><?php echo $fileManager->title(); ?></title>
+    <title><?php printf("%s - %s", _("Rosefinch - PHP File Manager"), _("Help")); ?></title>
 	<meta http-equiv="Content-type" content="text/html;charset=UTF-8" />
 	<link href="css/com.css" rel="stylesheet" type="text/css" />
-    <?php echo $fileManager->html_include_files(true); ?>
+	<link href="css/document.css" rel="stylesheet" type="text/css" />
+	<script type="text/javascript" language="javascript" src="js/jquery-1.3.2.min.js"></script>
+	<script type="text/javascript" language="javascript" src="js/document.js"></script>
 </head>
 <body>
     <div id="nav">
-        <?php Utility::html_navigation(); ?>
+        <?php Utility::html_navigation("help"); ?>
         <div class="clear"></div>
     </div>
     <div id="header">
-    	<div id="mainTitle">
-    		<?php echo $fileManager->get_current_dir(); ?>
+        <div id="mainTitle">
+    		<?php echo _("Help"); ?>
         </div>
         <div id="subTitle">
-    		<?php 
-    		//echo " - " . $fileManager->get_current_path(); 
-    		?>
+    		
     	</div>
     </div>
     <div id="content">
+        <div id="phpfmDocNav">
+			
+        </div>
         <?php 
-        $fileManager->display_full_path(); // 显示全路径
-	    $fileManager->display_toolbar();
-	    $fileManager->display_main_view();
-		
-	    // Ajax 部分
-	    $fileManager->display_ajax_pre();
+        	if(file_exists("help/help." . LOCALE . ".php"))
+        		require "help/help." . LOCALE . ".php";
         ?>
     </div>
     <div id="footer">

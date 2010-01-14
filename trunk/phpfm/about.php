@@ -16,11 +16,9 @@ $begin_time = microtime(true);
     <title><?php printf("%s - %s", _("Rosefinch - PHP File Manager"), _("About")); ?></title>
 	<meta http-equiv="Content-type" content="text/html;charset=UTF-8" />
 	<link href="css/com.css" rel="stylesheet" type="text/css" />
-	<link href="css/about.css" rel="stylesheet" type="text/css" />
+	<link href="css/document.css" rel="stylesheet" type="text/css" />
 	<script type="text/javascript" language="javascript" src="js/jquery-1.3.2.min.js"></script>
-	<script type="text/javascript" language="javascript" src="js/about.js"></script>
-	<script type="text/javascript" language="javascript" src="js/jquery.color.pack.js"></script>
-    <script type="text/javascript" language="javascript" src="js/hover.test.js"></script>
+	<script type="text/javascript" language="javascript" src="js/document.js"></script>
 </head>
 <body>
     <div id="nav">
@@ -36,8 +34,8 @@ $begin_time = microtime(true);
     	</div>
     </div>
     <div id="content">
-        <div id="phpfmHelpNav">
-			<a href="#Readme"><?php echo _("Readme"); ?></a>&nbsp;|&nbsp;<a href="#Licence"><?php echo _("Licence"); ?></a>&nbsp;|&nbsp;<a href="#Install"><?php echo _("Install"); ?></a>&nbsp;|&nbsp;<a href="#About"><?php echo _("About"); ?></a>
+        <div id="phpfmDocNav">
+			
         </div>
         <?php 
         	if(file_exists("about/about." . LOCALE . ".php"))
