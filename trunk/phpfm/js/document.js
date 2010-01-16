@@ -1,5 +1,6 @@
 var prefix = "#phpfmDoc";
 var contents;
+var browser;
 
 function display(name, isAni) {
 	var length = contents.length;
@@ -50,14 +51,24 @@ function initNav() {
 		navHTML += ("<a href=\"#" + name + "\">" + title + "</a>");
 	}
 	nav.html(navHTML);
-
-	initClick();
+	
+	if(browser) {
+		initClick();
+	}
 }
 
 function init() {
+	if($.browser.msie) {
+		browser = ($.browser.version >= 8) ? true : false;
+	} else {
+		browser = true ;
+	}
 	contents = new Array();
 	initNav();
-	initContents();
+	
+	if(browser) {
+		initContents();
+	}
 
 }
 

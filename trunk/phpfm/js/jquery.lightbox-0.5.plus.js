@@ -2,6 +2,7 @@
  * jQuery lightBox plugin
  * This jQuery plugin was inspired and based on Lightbox 2 by Lokesh Dhakar (http://www.huddletogether.com/projects/lightbox2/)
  * and adapted to me for use like a plugin from jQuery.
+ * Changed by Sun Junwen. Add size control to full size view.
  * @name jquery-lightbox-0.5.js
  * @author Leandro Vieira Pinho - http://leandrovieira.com
  * @version 0.5
@@ -45,6 +46,7 @@
 			// Don´t alter these variables in any way
 			imageArray:				[],
 			activeImage:			0,
+			autoAdapt:				false,		// (boolean) Auto adapt image size to size of browser's window.
 			maxWidth:				-1,			// (integer) Image width limit
 			maxHeight:				-1			// (integer) Image height limit
 		},settings);
@@ -191,9 +193,21 @@
 				// Perfomance an effect in the image container resizing it
 				var showWidth = objImagePreloader.width;
 				var showHeight = objImagePreloader.height;
-				if(settings.maxWidth > 0 || settings.maxHeight > 0) {
-					var maxWidth = settings.maxWidth;
-					var maxHeight = settings.maxHeight;
+				var maxWidth = settings.maxWidth;
+				var maxHeight = settings.maxHeight;
+				if(settings.autoAdapt) {
+					var autoWidth = document.documentElement.clientWidth-200;
+					var autoHeight = document.documentElement.clientHeight-150;
+					if(maxWidth < 0) {
+						maxWidth = autoWidth;
+					}
+					if(maxHeight < 0) {
+						maxHeight = autoHeight;
+					}
+				}
+				if(maxWidth > 0 || maxHeight > 0) {
+					var maxWidth = maxWidth;
+					var maxHeight = maxHeight;
 					var ratio = objImagePreloader.width/objImagePreloader.height;
 					if(maxWidth > 0 && showWidth > maxWidth) {
 						showWidth = maxWidth;

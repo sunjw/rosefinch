@@ -606,8 +606,8 @@ function init() {
 	getMessage();
 
 	$('a.lightboxImg').lightBox({
-		maxWidth: 1000,
-		maxHeight: 500
+		overlayOpacity: 0.5,
+		autoAdapt: true
 	});
 
 }
