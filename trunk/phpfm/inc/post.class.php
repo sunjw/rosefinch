@@ -103,16 +103,22 @@ class Post
 				}
 				else
 				{
-					$success = unlink($path);
+					$success = @unlink($path);
 				}
 			}
-			if($success)
+			if($success === TRUE)
+			{
 				$message .= (_("succeed") . "<br />");
+				$stat = 1;
+			}
 			else
+			{
 				$message .= ("<strong>" . _("failed") . "</strong><br />");
+				$stat = 2;
+			}
 		}
 		
-		$this->messageboard->set_message($message);
+		$this->messageboard->set_message($message, $stat);
 		
 		echo "ok";
 	}
@@ -149,13 +155,17 @@ class Post
 			log_to_file("mkdir: $name");
 			$name = convert_toplat($name);
 			if(!file_exists($name))
-				$success = mkdir($name);
+				$success = @mkdir($name);
 		}
 		
-		if($success)
-			$this->messageboard->set_message(_("Make new folder:") . "&nbsp;" . post_query("newname") . "&nbsp;" . _("succeed"));
+		if($success === TRUE)
+			$this->messageboard->set_message(
+				_("Make new folder:") . "&nbsp;" . post_query("newname") . "&nbsp;" . _("succeed"), 
+				1);
 		else
-			$this->messageboard->set_message(_("Make new folder:") . "&nbsp;" . post_query("newname") . "&nbsp;<strong>" . _("failed") . "</strong>");
+			$this->messageboard->set_message(
+				_("Make new folder:") . "&nbsp;" . post_query("newname") . "&nbsp;<strong>" . _("failed") . "</strong>", 
+				2);
 		
 		
 		Utility::redirct_after_oper(false, 1);
@@ -185,10 +195,14 @@ class Post
 			}
 			
 		}
-		if($success)
-			$this->messageboard->set_message(sprintf(_("Rename %s to %s ") . _("succeed"), post_query("oldname"), post_query("newname")));
+		if($success === TRUE)
+			$this->messageboard->set_message(
+				sprintf(_("Rename %s to %s ") . _("succeed"), post_query("oldname"), post_query("newname")), 
+				1);
 		else
-			$this->messageboard->set_message(sprintf(_("Rename %s to %s ") . " <strong>" . _("failed") . "<strong>", post_query("oldname"), post_query("newname")));
+			$this->messageboard->set_message(
+				sprintf(_("Rename %s to %s ") . " <strong>" . _("failed") . "<strong>", post_query("oldname"), post_query("newname")), 
+				2);
 		
 		Utility::redirct_after_oper(false, 1);
 	}
@@ -205,10 +219,14 @@ class Post
 			$uploadfile = $this->files_base_dir. $sub_dir . $_FILES['uploadFile']['name'];
 			
 			if (Utility::phpfm_move_uploaded_file($_FILES['uploadFile']['tmp_name'], $uploadfile)) {
-				$this->messageboard->set_message(_("Upload") . ":&nbsp;" . $_FILES['uploadFile']['name'] . "&nbsp;" . _("succeed"));
+				$this->messageboard->set_message(
+					_("Upload") . ":&nbsp;" . $_FILES['uploadFile']['name'] . "&nbsp;" . _("succeed"),
+					1);
 				log_to_file("upload success: " . $uploadfile);
 			} else {
-				$this->messageboard->set_message(_("Upload") . ":&nbsp;" . $_FILES['uploadFile']['name'] . " <strong>" . _("failed") . "<strong>");
+				$this->messageboard->set_message(
+					_("Upload") . ":&nbsp;" . $_FILES['uploadFile']['name'] . " <strong>" . _("failed") . "<strong>",
+					2);
 				log_to_file("upload failed: " . $uploadfile);
 			}
 		}

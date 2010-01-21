@@ -3,6 +3,7 @@
 define("VERSION", "1.2.8");
 
 define("INC_DIR_NAME", "inc");
+define("DEBUG", true); // Debug 模式
 
 define("DIR_PARAM", "dir"); // 请求子目录的查询参数
 define("SORT_PARAM", "s"); // 排序元素的查询参数

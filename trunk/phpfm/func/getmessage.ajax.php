@@ -9,6 +9,12 @@ require_once "../log/log.func.php";
 $messageboard = isset($_SESSION['messageboard']) ? $_SESSION['messageboard'] : null;
 if($messageboard != null)
 {
-	echo $messageboard->get_message();
+	$message = "";
+	$stat = 0;
+	if($messageboard->have_new_message())
+	{
+		$messageboard->get_message($message, $stat);
+		echo $message . "|PHPFM|" . $stat;
+	}
 }
 ?>

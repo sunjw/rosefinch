@@ -186,7 +186,7 @@ function clickPaste() {
 		"return" :returnURL
 	}, function(data) {
 		// alert(data);
-		window.location.reload();
+			window.location.reload();
 		});
 	/*
 	 * $.get("func/paste.ajax.php?subdir=" + subdir + "&return=" + returnURL,
@@ -289,7 +289,21 @@ function getMessage() {
 		if (data != "") {
 			var phpfmMessage = $("#phpfmMessage");
 			if (phpfmMessage.length == 1) {
-				phpfmMessage.html(data);
+				var msg;
+				var stat;
+
+				data = data.split("|PHPFM|");
+				msg = data[0];
+				stat = data[1];
+
+				phpfmMessage.html(msg);
+				if (stat == 2) {
+					// 错误消息
+					phpfmMessage.addClass("wrong");
+				} else {
+					phpfmMessage.removeClass("wrong");
+				}
+
 				phpfmMessage.fadeIn();
 			}
 
@@ -605,9 +619,9 @@ function init() {
 
 	getMessage();
 
-	$('a.lightboxImg').lightBox({
-		overlayOpacity: 0.5,
-		autoAdapt: true
+	$('a.lightboxImg').lightBox( {
+		overlayOpacity :0.5,
+		autoAdapt :true
 	});
 
 }

@@ -78,11 +78,17 @@ class ClipBoard
 				$success = Utility::phpfm_copy($oldname, $newname);
 			}
 			if($success)
+			{
 				$message .= (_("succeed") . "<br />");
+				$stat = 1;
+			}
 			else
+			{
 				$message .= ("<strong>" . _("failed") . "</strong><br />");
+				$stat = 2;
+			}
 		}
-		$messageboard->set_message($message);
+		$messageboard->set_message($message, $stat);
 		$this->clear();
 	}
 	

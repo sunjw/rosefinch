@@ -21,7 +21,7 @@ $fileManager = new FileManager();
     <title><?php echo $fileManager->title(); ?></title>
 	<meta http-equiv="Content-type" content="text/html;charset=UTF-8" />
 	<link href="css/com.css" rel="stylesheet" type="text/css" />
-    <?php echo $fileManager->html_include_files(true); ?>
+    <?php echo $fileManager->html_include_files(DEBUG); ?>
 </head>
 <body>
     <div id="nav">

@@ -148,7 +148,7 @@ function xcopy($src, $dest)
 			$dest_folder_content = $dest. '/' .$item;
 			
 			if(is_file($src_folder_content))
-				copy($src_folder_content, $dest_folder_content);
+				@copy($src_folder_content, $dest_folder_content);
 			elseif(is_dir($src_folder_content))
 				xcopy($src_folder_content, $dest_folder_content);
 		}

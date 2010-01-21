@@ -440,7 +440,8 @@ class Utility
 		{
 			if(file_exists($plat_newname))
 			{
-				$newname = Utility::deal_same_name($newname);
+				//$newname = Utility::deal_same_name($newname);
+				return FALSE;
 			}
 		}
 		else
@@ -449,7 +450,7 @@ class Utility
 		}
 	
 		$plat_newname = convert_toplat($newname);
-		return rename($plat_oldname, $plat_newname);
+		return @rename($plat_oldname, $plat_newname);
 	}
 	
 	/**
@@ -480,7 +481,7 @@ class Utility
 		}
 		else
 		{
-			return copy($plat_oldname, $plat_newname);
+			return @copy($plat_oldname, $plat_newname);
 		}
 	}
 	
@@ -488,14 +489,14 @@ class Utility
 	 * 处理过删除文件夹
 	 * 可以直接删除文件夹
 	 * @param $path
-	 * @return bool 成功 true，失败 false
+	 * @return bool 完成 TRUE, 失败 FALSE
 	 */
 	public static function phpfm_rmdir($path)
 	{
 		if(!$dh = @opendir($path))
-			return false;
+			return FALSE;
 		
-		$success = true;
+		$success = TRUE;
 		while(false !== ($item = readdir($dh)))
 		{
 			if($item != '.' && $item != '..')
@@ -504,7 +505,7 @@ class Utility
 				
 				if(is_file($folder_content))
 				{
-					$success = $success && unlink($folder_content);
+					$success = $success && @unlink($folder_content);
 				}
 				elseif(is_dir($folder_content))
 				{
@@ -514,7 +515,7 @@ class Utility
 		}
 		closedir($dh);
 		
-		$success = $success && rmdir($path);
+		$success = $success && @rmdir($path);
 		
 		return $success;
 	}

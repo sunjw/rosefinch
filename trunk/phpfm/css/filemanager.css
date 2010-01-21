@@ -253,4 +253,11 @@
 	-ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=90)"; /* IE */
 	filter: alpha(opacity=90);
 }
+#phpfmMessage.wrong
+{
+	border: 1px red solid;
+	background-color: #ffddd5;
+	color: red;
+}
+
 
