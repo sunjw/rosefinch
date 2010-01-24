@@ -1,0 +1,30 @@
+@CHARSET "UTF-8";
+
+/* Message Sector */
+#phpfmMessage
+{
+	display: none;
+
+	position: absolute;
+	top: 50px;
+	right: 40px;
+	width: 500px;
+	height: 45px;
+	overflow: auto;
+	
+	background-color: #CCFF99;
+	border: 1px #339900 solid;
+	font-size: small;
+	color: #339900;
+	padding: 2px;
+	
+	opacity: 0.9; /* 透明 firefox */
+	-ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=90)"; /* IE */
+	filter: alpha(opacity=90);
+}
+#phpfmMessage.wrong
+{
+	border: 1px red solid;
+	background-color: #ffddd5;
+	color: red;
+}

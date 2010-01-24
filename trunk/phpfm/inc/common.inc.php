@@ -1,7 +1,5 @@
 <?php
 
-require_once "defines.inc.php";
-
 /**
  * 获得当前页面的 URI
  * @return URI 字符串
@@ -63,6 +61,20 @@ function get_cookie($name)
 }
 
 /**
+ * 获得当前页面的 URI
+ * @return URI 字符串
+ */
+function get_URI()
+{
+	if($_SERVER['QUERY_STRING'] != "")
+	$uri = $_SERVER['PHP_SELF'].'?'.$_SERVER['QUERY_STRING'];
+	else
+	$uri = $_SERVER['PHP_SELF'];
+		
+	return $uri;
+}
+
+/**
  * 获得该系统的基路径，结尾有'/'
  * @return 基路径
  */
@@ -105,26 +117,6 @@ function convert_gbtoutf8($str)
 function convert_utf8togb($str)
 {
 	return @iconv("UTF-8", "GB2312", $str);
-}
-
-/**
- * 将指定字符串从<strong>定义的平台字符串</strong>转换成 UTF-8
- * @param $str 目标字符串
- * @return 转换后的 UTF-8 字符串
- */
-function convert_toutf8($str)
-{
-	return @iconv(PLAT_CHARSET, "UTF-8", $str);
-}
-
-/**
- * 将指定字符串从  UTF-8 转换成<strong>定义的平台字符串</strong>
- * @param $str 目标  UTF-8 字符串
- * @return 转换后的本地编码字符串
- */
-function convert_toplat($str)
-{
-	return @iconv("UTF-8", PLAT_CHARSET, $str);
 }
 
 /**

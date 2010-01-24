@@ -308,7 +308,7 @@ function getMessage() {
 			}
 
 			clearTimeout(delayID);
-			delayID = setTimeout("closeMessage()", 5000);
+			delayID = setTimeout("closeMessage()", 10000);
 		}
 	});
 

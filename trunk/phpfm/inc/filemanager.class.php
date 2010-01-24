@@ -155,6 +155,7 @@ class FileManager
 	{
 ?>
 		<link href="css/filemanager.css" rel="stylesheet" type="text/css" />
+		<link href="css/message.css" rel="stylesheet" type="text/css" />
 	    <link href="css/detailView.css" rel="stylesheet" type="text/css" />
 	    <link href="css/largeiconView.css" rel="stylesheet" type="text/css" />
 	    <link href="css/ajax.css" rel="stylesheet" type="text/css" />

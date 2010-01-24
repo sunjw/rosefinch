@@ -162,6 +162,10 @@ function prepare_file_path($request_file)
 $request_file = rawurldecode(get_query("file"));
 log_to_file(join($_GET));
 
+if(substr($request_file, -1) == "\"")
+{
+	$request_file = substr($request_file, 0, -1);
+}
 $request_file = prepare_file_path($request_file);
 
 if($request_file != false)

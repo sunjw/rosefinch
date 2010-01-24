@@ -147,3 +147,51 @@ msgstr "许可协议"
 msgid "Setting"
 msgstr "设置"
 
+msgid "Basic Settings"
+msgstr "基本设置"
+
+msgid "Timezone and Language"
+msgstr "时区和语言"
+
+msgid "Others Settings"
+msgstr "其它设置"
+
+msgid "Type of root directory path"
+msgstr "根目录路径类型"
+
+msgid "Relative path"
+msgstr "相对路径"
+
+msgid "Absolute path"
+msgstr "绝对路径"
+
+msgid "Path"
+msgstr "路径"
+
+msgid "Charset"
+msgstr "字符集"
+
+msgid "Language"
+msgstr "语言"
+
+msgid "Timezone"
+msgstr "时区"
+
+msgid "Title"
+msgstr "标题"
+
+msgid "Enable LightBox for pictures"
+msgstr "为图片启用 LightBox"
+
+msgid "Enable"
+msgstr "启用"
+
+msgid "Disable"
+msgstr "关闭"
+
+msgid "Prepare Rosefinch for first time using."
+msgstr "为第一次使用准备 Rosefinch"
+
+msgid "There is something wrong in your settings."
+msgstr "您的设置有误。"
+

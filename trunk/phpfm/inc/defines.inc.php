@@ -1,8 +1,12 @@
 <?php
 
+require_once "common.inc.php";
+
+// DO NOT EDIT
+
 define("VERSION", "1.2.8");
 
-define("INC_DIR_NAME", "inc");
+define("INC_DIR_NAME", "inc"); // include 文件夹
 define("DEBUG", true); // Debug 模式
 
 define("DIR_PARAM", "dir"); // 请求子目录的查询参数
@@ -10,30 +14,38 @@ define("SORT_PARAM", "s"); // 排序元素的查询参数
 define("ORDER_PARAM", "o"); // 排序方向的查询参数
 define("VIEW_PARAM", "view"); // 视图模式的查询参数
 
-/*
- * 如果是相对路径，定义 FILE_POSITION 为 relative，
- * FILES_DIR 是 PHP File Manager 根目录下的指定目录；
- * 绝对路径，定义 FILE_POSITION 为 absolute，
- * FILES_DIR 是指定目录的完整路径，最后的 '\\' 或 '/' 不需要；
- */
-//define("FILE_POSITION", "relative");
-define("FILE_POSITION", "absolute");
-define("FILES_DIR", "E:\\temp\\phpfm_文件");
-//define("FILES_DIR", "F:\\Sun Junwen Documents\\Programs\\php\\phpdl\\files");
-
-define("PLAT_CHARSET", "GB2312"); // Windows 用的是 GB2312
-
-date_default_timezone_set("Asia/Shanghai"); // 设置时区
-
 // 定义 gettext 参数
-define("DOMAIN", "phpfm");
-define("LOCALE", "zh_CN"); // 定义使用语言，如zh_CN, en_US
-//define("LOCALE", "en_US");
+define("DOMAIN", "phpfm"); // 不要修改
 
-// 名称
-define("TITLENAME", "Rosefinch");
+/**
+ * 将指定字符串从<strong>定义的平台字符串</strong>转换成 UTF-8
+ * @param $str 目标字符串
+ * @return 转换后的 UTF-8 字符串
+ */
+function convert_toutf8($str)
+{
+	return @iconv(PLAT_CHARSET, "UTF-8", $str);
+}
 
-// 控制 lightbox
-define("LIGHTBOX", 1);
+/**
+ * 将指定字符串从  UTF-8 转换成<strong>定义的平台字符串</strong>
+ * @param $str 目标  UTF-8 字符串
+ * @return 转换后的本地编码字符串
+ */
+function convert_toplat($str)
+{
+	return @iconv("UTF-8", PLAT_CHARSET, $str);
+}
+
+$settings = dirname(__FILE__) . "/../admin/settings.php";
+if(file_exists($settings))
+{
+	require_once $settings;
+}
+else
+{
+	// 没有配置文件，跳转至安装
+	redirect("admin/install.php");
+}
 
 ?>
