@@ -195,3 +195,9 @@ msgstr "为第一次使用准备 Rosefinch"
 msgid "There is something wrong in your settings."
 msgstr "您的设置有误。"
 
+msgid "Set preferences of your Rosefinch."
+msgstr "设置您的 Rosefinch。"
+
+msgid "Settings have been changed. Go to <a href='../index.php'>index page</a> and see."
+msgstr "设置已经改变。去<a href='../index.php'>首页</a>看看。"
+

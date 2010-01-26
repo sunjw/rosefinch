@@ -608,12 +608,30 @@ class Utility
 	 */
 	public static function html_navigation($page = "index")
 	{
-?>
-		<a href="index.php" id="phpfmNavHome" class="<?php $page == "index" ? print("current") : print(""); ?>"><?php echo _(TITLENAME); ?></a>
+        if($page == "setting")
+        {
+        ?>
+        <a href="../index.php" id="phpfmNavHome" class="<?php $page == "index" ? print("current") : print(""); ?>"><?php echo _(TITLENAME); ?></a>
         <ul>
+        	<li class="li-item current"><a href="setting.php"><?php echo _("Setting"); ?></a></li>
+        	<li class="li-item"><a href="../help.php"><?php echo _("Help"); ?></a></li>
+            <li class="li-item"><a href="../about.php"><?php echo _("About"); ?></a></li>
+        </ul>
+        <?php 
+        }
+        else
+        {
+        ?>
+        <a href="index.php" id="phpfmNavHome" class="<?php $page == "index" ? print("current") : print(""); ?>"><?php echo _(TITLENAME); ?></a>
+        <ul>
+        	<li class="li-item"><a href="admin/setting.php"><?php echo _("Setting"); ?></a></li>
         	<li class="li-item<?php $page == "help" ? print(" current") : print(""); ?>"><a href="help.php"><?php echo _("Help"); ?></a></li>
             <li class="li-item<?php $page == "about" ? print(" current") : print(""); ?>"><a href="about.php"><?php echo _("About"); ?></a></li>
         </ul>
+        <?php 
+        }
+        ?>	
+        
 <?php 
 	}
 	

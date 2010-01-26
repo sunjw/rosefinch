@@ -37,7 +37,7 @@ function convert_toplat($str)
 	return @iconv("UTF-8", PLAT_CHARSET, $str);
 }
 
-$settings = dirname(__FILE__) . "/../admin/settings.php";
+$settings = dirname(__FILE__) . "/../admin/settings.inc.php";
 if(file_exists($settings))
 {
 	require_once $settings;

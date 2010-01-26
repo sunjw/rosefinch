@@ -2,11 +2,16 @@
 
 require_once "../inc/common.inc.php";
 
+/**
+ * 将设置保存到 settings.inc.php 中
+ * @param $settings settings 数组
+ */
 function save_settings(&$settings)
 {
 	$settings['root_type'] = post_query("rootType");
 	$settings['root_path'] = post_query("rootPath");
 	$settings['charset'] = post_query("charset");
+	$settings['timezone'] = post_query("timezone");
 	$settings['language'] = post_query("language");
 	$settings['title_name'] = post_query("titleName");
 	$settings['lightbox'] = post_query("lightbox");
@@ -20,7 +25,7 @@ function save_settings(&$settings)
 	{
 		// 指定的路径存在
 		//echo 1;
-		$file_name = "settings.tpl";
+		$file_name = "settings.inc.tpl";
 		$settings_tpl = fopen($file_name, "r");
 		$settings_str = fread($settings_tpl, filesize($file_name));
 		fclose($settings_tpl);
@@ -44,7 +49,7 @@ function save_settings(&$settings)
 		$settings_str = str_replace($templates, $values, $settings_str);
 		//echo $settings;
 		
-		$settings_php = fopen("settings.php", "w");
+		$settings_php = fopen("settings.inc.php", "w");
 		fwrite($settings_php, $settings_str); // 写回配置文件
 		fclose($settings_php);
 		

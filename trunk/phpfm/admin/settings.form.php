@@ -1,10 +1,5 @@
-		<div id="phpfmMessage" <?php if($wrong)print("style='display:block' class='wrong'")?>>
-    		<?php 
-    			echo _("There is something wrong in your settings.");
-    		?>
-    	</div>
         <form id="phpfmInstallForm" action="<?php echo get_URI(); ?>" method="post">
-        	<input type="hidden" name="installForm" value="installForm" />
+        	<input type="hidden" name="settingsForm" value="settingsForm" />
         	<fieldset>
         		<legend><?php echo _("Basic Settings"); ?></legend>
         		<label for="rootType"><?php echo _("Type of root directory path") . ":"; ?></label>
