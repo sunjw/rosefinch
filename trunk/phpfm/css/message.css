@@ -1,8 +1,7 @@
 @CHARSET "UTF-8";
 
 /* Message Sector */
-#phpfmMessage
-{
+#phpfmMessage {
 	display: none;
 
 	position: absolute;
@@ -22,8 +21,7 @@
 	-ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=90)"; /* IE */
 	filter: alpha(opacity=90);
 }
-#phpfmMessage.wrong
-{
+#phpfmMessage.wrong {
 	border: 1px red solid;
 	background-color: #ffddd5;
 	color: red;

@@ -1,20 +1,6 @@
 <?php
 
 /**
- * 获得当前页面的 URI
- * @return URI 字符串
- */
-function getURI()
-{
-	if($_SERVER['QUERY_STRING'] != "")
-	$uri = $_SERVER['PHP_SELF'].'?'.$_SERVER['QUERY_STRING'];
-	else
-	$uri = $_SERVER['PHP_SELF'];
-		
-	return $uri;
-}
-
-/**
  * 获得 $_POST 中的 query 参数的值
  * @param $param_name 参数名称
  * @return 参数值或""
@@ -67,9 +53,9 @@ function get_cookie($name)
 function get_URI()
 {
 	if($_SERVER['QUERY_STRING'] != "")
-	$uri = $_SERVER['PHP_SELF'].'?'.$_SERVER['QUERY_STRING'];
+		$uri = $_SERVER['PHP_SELF'].'?'.$_SERVER['QUERY_STRING'];
 	else
-	$uri = $_SERVER['PHP_SELF'];
+		$uri = $_SERVER['PHP_SELF'];
 		
 	return $uri;
 }
@@ -81,7 +67,7 @@ function get_URI()
 function get_base_dir()
 {
 	$current_file_path = dirname(__FILE__); // inc 文件夹的绝对路径
-	$current_base_path = substr($current_file_path, 0, strlen($current_file_path) - 3);
+	$current_base_path = substr($current_file_path, 0, -3);
 	if(substr($current_base_path, strlen($current_base_path) - 1, 1) != "\\" && 
 		substr($current_base_path, strlen($current_base_path) - 1, 1) != "/")
 	{
@@ -134,8 +120,10 @@ function xcopy($src, $dest)
 		if(!@mkdir($dest))
 			return false;
 	
-	while(false !== ($item = readdir($dh))){
-		if($item != '.' && $item != '..'){
+	while(false !== ($item = readdir($dh)))
+	{
+		if($item != '.' && $item != '..')
+		{
 			$src_folder_content = $src. '/' .$item;
 			$dest_folder_content = $dest. '/' .$item;
 			

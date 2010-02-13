@@ -31,4 +31,8 @@ form select
 form div.info
 {
 	display: inline;
+	font-family: Arial;
+	font-size: x-small;
+	color: #666666;
+	overflow: hidden;
 }

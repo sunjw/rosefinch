@@ -36,6 +36,10 @@ class FileManager
 	
 	function __construct()
 	{
+		/*
+		 * 内部字符串全部使用 UTF-8 编码
+		 */
+		
 		$this->clipboard = Utility::get_clipboard();
 		$this->messageboard = Utility::get_messageboard();
 		
@@ -221,7 +225,7 @@ class FileManager
 		
 		if($request_sub_dir != "")
 		{
-			if(substr($request_sub_dir, strlen($request_sub_dir) - 1, 1) != "/")
+			if(substr($request_sub_dir, -1) != "/")
 			{
 				$request_sub_dir .= "/";
 			}
@@ -722,7 +726,7 @@ class FileManager
 			<form action="" method="post" enctype="multipart/form-data">
 				<input type="hidden" id="oper" name="oper" value="" />
 				<input type="hidden" id="subdir" name="subdir" value="<?php echo rawurlencode($this->request_sub_dir); ?>" />
-				<input type="hidden" id="return" name="return" value="<?php echo rawurlencode(getURI()); ?>" />
+				<input type="hidden" id="return" name="return" value="<?php echo rawurlencode(get_URI()); ?>" />
 				<div id="divInput">
 					<div id="oldnameLine">
 						<label for="oldname"><?php printf("%s&nbsp;", _("Old Name:")); ?></label>

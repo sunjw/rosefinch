@@ -438,11 +438,11 @@ function displayAjaxInput(action, oper, title, isInput) {
  */
 function closeAjax() {
 	var ajaxInput = $("div#ajaxInput");
-	if (ajaxInput.css("display") == "block")
+	if (ajaxInput.is(":visible"))
 		ajaxInput.fadeOut();
 
 	var ajaxDelete = $("div#ajaxDelete");
-	if (ajaxDelete.css("display") == "block")
+	if (ajaxDelete.is(":visible"))
 		ajaxDelete.fadeOut();
 
 	$("div#oldnameLine").css("display", "none");
@@ -536,7 +536,7 @@ function initFullPath() {
 			for ( var i = 0; i < subMenus.length; i++) {
 				var subMenu = $(subMenus[i]);
 				if (thisSub.get(0) != subMenu.get(0)
-						&& subMenu.css("display") == "block") {
+						&& subMenu.is(":visible")) {
 					subMenu.prev(".arrow").removeClass("selected");
 					// subMenu.css("display", "none");
 					hideSubMenu(subMenu);
@@ -546,7 +546,7 @@ function initFullPath() {
 			 * if(!isIE) { thisSub.css("background", "transparent
 			 * url('images/shadow.png') no-repeat right bottom"); }
 			 */
-			if (thisSub.css("display") == "none") {
+			if (!thisSub.is(":visible")) {
 				$(this).addClass("selected");
 				if (isIE) {
 					thisSub.css("background", "none");
@@ -626,4 +626,5 @@ function init() {
 
 }
 
-$(window).load(init); // 运行准备函数
+//$(window).load(init); // 运行准备函数
+$(init);

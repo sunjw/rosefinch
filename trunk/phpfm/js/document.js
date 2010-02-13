@@ -53,4 +53,4 @@ function init() {
 	initContents();
 }
 
-$(window).load(init); // 运行准备函数
+$(init); // 运行准备函数

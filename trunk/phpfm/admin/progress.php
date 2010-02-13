@@ -16,6 +16,17 @@ function save_settings(&$settings)
 	$settings['title_name'] = post_query("titleName");
 	$settings['lightbox'] = post_query("lightbox");
 	
+	if($settings['root_type'] == "" ||
+		$settings['root_path'] == "" ||
+		$settings['charset'] == "" ||
+		$settings['timezone'] == "" ||
+		$settings['language'] == "" ||
+		$settings['title_name'] == "" ||
+		$settings['lightbox'] == "")
+	{
+		return false;	
+	}
+	
 	$plat_root_path = @iconv(get_encoding(), $settings['charset'], $settings['root_path']);
 	if($settings['root_type'] == "relative")
 	{

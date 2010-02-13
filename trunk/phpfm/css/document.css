@@ -1,27 +1,26 @@
 @CHARSET "UTF-8";
 
-#phpfmDocNav, #phpfmDoc
-{
+#phpfmDocNav,#phpfmDoc {
 	margin: 10px 0;
 	font-size: small;
 }
-#phpfmDocNav, #phpfmDocNav a
-{
+
+#phpfmDocNav,#phpfmDocNav a {
 	color: #666666;
 }
-#phpfmDocNav a:hover
-{
+
+#phpfmDocNav a:hover {
 	color: black;
 }
-#phpfmDoc
-{
+
+#phpfmDoc {
 	line-height: 1.5em;
 }
-#phpfmDoc h4
-{
-}
-#phpfmDoc p
-{
-	text-indent: 2em;
+
+#phpfmDoc h4 {
 	
+}
+
+#phpfmDoc p {
+	text-indent: 2em;
 }

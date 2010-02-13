@@ -1,11 +1,11 @@
 ﻿@CHARSET "UTF-8";
-#mainView #largeIconView
-{
+
+#mainView #largeIconView {
 	padding: 2px 0 0 0;
 	margin: 0;
 }
-#mainView #largeiconView div.largeIconItem
-{
+
+#mainView #largeiconView div.largeIconItem {
 	width: 160px;
 	height: 120px;
 	float: left;
@@ -13,79 +13,83 @@
 	padding: 0;
 	position: relative;
 }
-#mainView #largeiconView div.selected
-{
+
+#mainView #largeiconView div.selected {
 	background: url('../images/largeicon_selected.jpg') top left no-repeat;
 }
-div.largeIconItem div.firstLine, div.largeIconItem div.imgLine, div.largeIconItem div.infoLine
-{
+
+div.largeIconItem div.firstLine,div.largeIconItem div.imgLine,div.largeIconItem div.infoLine
+	{
 	margin: 4px 2px;
 }
-div.largeIconItem div.firstLine
-{
+
+div.largeIconItem div.firstLine {
 	margin-top: 2px;
 }
-div.largeIconItem div.firstLine, div.largeIconItem div.firstLine input.inputCheck
-{
+
+div.largeIconItem div.firstLine,div.largeIconItem div.firstLine input.inputCheck
+	{
 	height: 20px;
 	line-height: 20px;
 }
-div.largeIconItem div.firstLine input.inputCheck
-{
+
+div.largeIconItem div.firstLine input.inputCheck {
 	margin-top: 0.2px;
 	margin-left: 2px;
 	width: 20px;
 	float: left;
 }
-div.largeIconItem span.type, div.largeIconItem span.size, div.largeIconItem span.mtime
-{
+
+div.largeIconItem span.type,div.largeIconItem span.size,div.largeIconItem span.mtime
+	{
 	color: #999999;
 	font-size: small;
 	cursor: default;
 }
-div.largeIconItem span.size, div.largeIconItem span.mtime
-{
+
+div.largeIconItem span.size,div.largeIconItem span.mtime {
 	margin: 2px 0;
 }
-div.largeIconItem div.firstLine span.type
-{
+
+div.largeIconItem div.firstLine span.type {
 	float: right;
 }
-div.largeIconItem div.imgLine, div.largeIconItem div.infoLine
-{
+
+div.largeIconItem div.imgLine,div.largeIconItem div.infoLine {
 	text-align: center;
 }
-div.largeIconItem div.imgLine a
-{
+
+div.largeIconItem div.imgLine a {
 	display: block;
 	width: 32px;
 	height: 32px;
 	margin-left: auto;
 	margin-right: auto;
 }
-div.largeIconItem div.imgLine a img
-{
+
+div.largeIconItem div.imgLine a img {
 	width: 32px;
 	height: 32px;
 	border: 0;
 }
-div.largeIconItem div.infoLine
-{
+
+div.largeIconItem div.infoLine {
 	
 }
-div.largeIconItem div.infoLine a, div.largeIconItem div.infoLine span.size, div.largeIconItem div.infoLine span.mtime
-{
+
+div.largeIconItem div.infoLine a,div.largeIconItem div.infoLine span.size,div.largeIconItem div.infoLine span.mtime
+	{
 	display: block;
 }
-div.largeIconItem div.infoLine a
-{
+
+div.largeIconItem div.infoLine a {
 	height: 20px;
 	line-height: 20px;
 	overflow: hidden;
 	text-decoration: none;
 }
-div.largeIconItem div.infoLine a:hover span
-{
+
+div.largeIconItem div.infoLine a:hover span {
 	color: Black;
 	text-decoration: underline;
 }

@@ -1,33 +1,32 @@
-﻿*
-{
+﻿* {
 	margin: 0px;
 	padding: 0px;
 }
-body
-{
+
+body {
 	background: url('../images/body-mozilla.jpg') top center repeat-x;
 	/*width: 900px;*/
 	min-width: 900px;
 	margin-left: 40px;
 	margin-right: 40px;
 }
-.clear
-{
+
+.clear {
 	clear: both;
 }
-#header h1
-{
+
+#header h1 {
 	font-size: xx-large;
-	font-family: "Times New Roman" , Times, serif;
+	font-family: "Times New Roman", Times, serif;
 	color: white;
 }
-#header
-{
+
+#header {
 	padding: 10px;
 	height: 80px;
 }
-#header #mainTitle
-{
+
+#header #mainTitle {
 	float: left;
 	margin-top: 20px;
 	font-size: xx-large;
@@ -36,95 +35,97 @@ body
 	font-family: 微软雅黑, "Segoe UI", Arial, Sans-serif;
 	color: #223355;
 }
-#header #subTitle
-{
+
+#header #subTitle {
 	float: left;
 	margin-top: 42px;
 	margin-left: 20px;
 	font-size: small;
 	color: #003595
 }
-#nav
-{
+
+#nav {
 	margin-top: 5px;
 	position: relative;
 }
-#nav ul
-{
+
+#nav ul {
 	list-style-type: none;
 	list-style-image: none;
 	/*margin-left: 200px;*/
 	float: right;
-	
 }
-#nav, #nav ul li a, #nav a#phpfmNavHome
-{
+
+#nav,#nav ul li a,#nav a#phpfmNavHome {
 	font-family: 微软雅黑;
 	color: black;
 	text-decoration: none;
 }
-#nav ul li a
-{
+
+#nav ul li a {
 	display: block;
 	padding: 0 1em;
 }
-#nav ul, #nav ul li
-{
+
+#nav ul,#nav ul li {
 	
 }
-#nav ul li
-{
+
+#nav ul li {
 	float: left;
 	font-size: 16px;
 	text-align: center;
 	display: block;
 }
-#nav ul, #nav ul .li-item
-{
+
+#nav ul,#nav ul .li-item {
 	height: 25px;
 	line-height: 25px;
 }
-#nav ul .li-item
-{
+
+#nav ul .li-item {
 	border-right: 1px dotted #666666;
 }
-#nav ul .li-item a
-{
+
+#nav ul .li-item a {
 	
 }
-#nav ul .li-item a:hover, #nav ul .current a
-{
+
+#nav ul .li-item a:hover,#nav ul .current a {
 	background-color: rgb(181, 217, 229);
 	/*background: url('../images/nav-hover-bg.jpg') left center repeat-x;*/
 }
-#nav ul .li-current a:hover
-{
+
+#nav ul .li-current a:hover {
 	
 }
-#nav a#phpfmNavHome /* Rosefinch 主页按钮 */
-{
+
+/* Rosefinch 主页按钮 */ 
+#nav a#phpfmNavHome {
 	display: block;
 	height: 35px;
 	line-height: 35px;
 	width: 200px;
 	text-align: center;
 	color: white;
-	background: transparent url('../images/nav-home-bg-reverse.gif') left center repeat-x;
+	background: transparent url('../images/nav-home-bg-reverse.gif') left
+		center repeat-x;
 	position: absolute;
 	top: -1px;
+}
 
+#nav a#phpfmNavHome :hover,#nav a#phpfmNavHome.current {
+	background: transparent url('../images/nav-home-current-bg-reverse.gif')
+		left center repeat-x;
 }
-#nav a#phpfmNavHome:hover, #nav a#phpfmNavHome.current
-{
-	background: transparent url('../images/nav-home-current-bg-reverse.gif') left center repeat-x;
-}
-#content
-{
+
+#content {
 	font-family: 宋体, "Times New Roman";
 	padding: 6px 10px;
 	background-color: white;
 	border-top: solid #B5D9E5 5px;
 }
+
 /*
 a:active, a:link, a:visited
 {
@@ -137,8 +138,7 @@ a:hover
 	color: White;
 }
 */
-#footer
-{
+#footer {
 	margin-bottom: 10px;
 	background-color: White;
 	font-family: Arial;
@@ -146,13 +146,11 @@ a:hover
 	color: #666666;
 	padding: 0 10px 10px 10px;
 }
-#footer #copyright
-{
+
+#footer #copyright {
 	text-align: right;
 }
-.select
-{
+
+.select {
 	font-size: large;
 }
-
-
