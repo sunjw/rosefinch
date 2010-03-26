@@ -12,7 +12,7 @@ msgstr ""
 msgid "Rosefinch"
 msgstr ""
 
-msgid "Rosefinch - PHP File Manager"
+msgid "PHP File Manager"
 msgstr ""
 
 msgid "Help"
@@ -132,7 +132,10 @@ msgstr ""
 msgid "Make new folder:"
 msgstr ""
 
-msgid "to"
+msgid "Rename %s to %s "
+msgstr ""
+
+msgid "Install"
 msgstr ""
 
 msgid "Readme"
@@ -141,9 +144,84 @@ msgstr ""
 msgid "Licence"
 msgstr ""
 
-msgid "Install"
+msgid "Setting"
 msgstr ""
 
-msgid "Setting"
+msgid "Basic Settings"
+msgstr ""
+
+msgid "Timezone and Language"
+msgstr ""
+
+msgid "Others Settings"
+msgstr ""
+
+msgid "Type of root directory path"
+msgstr ""
+
+msgid "Relative path"
+msgstr ""
+
+msgid "Absolute path"
+msgstr ""
+
+msgid "Path"
+msgstr ""
+
+msgid "Charset"
+msgstr ""
+
+msgid "Language"
+msgstr ""
+
+msgid "Timezone"
+msgstr ""
+
+msgid "Title"
+msgstr ""
+
+msgid "Enable LightBox for pictures"
+msgstr ""
+
+msgid "Enable"
+msgstr ""
+
+msgid "Disable"
+msgstr ""
+
+msgid "Prepare Rosefinch for first time using."
+msgstr ""
+
+msgid "There is something wrong in your settings."
+msgstr ""
+
+msgid "Set preferences of your Rosefinch."
+msgstr ""
+
+msgid "Settings have been changed. Go to <a href='../index.php'>index page</a> and see."
+msgstr ""
+
+msgid "Type of path you entered. \"Absolute\" means the path is an absolute path in filesystem. \"Relative\" means the path will be determined from directory of this Rosefinch."
+msgstr ""
+
+msgid "The path of your files which you want to show in this Rosefinch."
+msgstr ""
+
+msgid "Charset which operation system running this Rosefinch use in file system. Windows uses local charset like GB2312 and *nixs mostly use UTF-8."
+msgstr ""
+
+msgid "Time zone server which runs Rosefinch use."
+msgstr ""
+
+msgid "Language you want to use in this Rosefinch."
+msgstr ""
+
+msgid "Title you want to display in this Rosefinch."
+msgstr ""
+
+msgid "Let Rosefinch enable jQuery lightbox for pictures."
+msgstr ""
+
+msgid "Knowing Issue"
 msgstr ""
 

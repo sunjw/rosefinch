@@ -222,3 +222,6 @@ msgstr "Rosefinch 中显示的标题"
 msgid "Let Rosefinch enable jQuery lightbox for pictures."
 msgstr "让 Rosefinch 为图片使用 jQuery lightbox。"
 
+msgid "Knowing Issue"
+msgstr "已知问题"
+
