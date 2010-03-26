@@ -1,4 +1,5 @@
 <?php
+$begin_time = microtime(true);
 
 require_once "inc/defines.inc.php";
 require_once "inc/common.inc.php";
@@ -6,8 +7,6 @@ require_once "inc/gettext.inc.php";
 require_once "inc/utility.class.php";
 
 @session_start();
-
-$begin_time = microtime(true);
 
 ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">

@@ -1,4 +1,5 @@
 <?php
+$begin_time = microtime(true);
 
 require_once "inc/defines.inc.php";
 require_once "inc/common.inc.php";
@@ -7,8 +8,6 @@ require_once "inc/utility.class.php";
 require_once "log/log.func.php";
 
 @session_start();
-
-$begin_time = microtime(true);
 
 log_to_file($_SERVER['REMOTE_ADDR']." visited.");
 

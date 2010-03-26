@@ -1,4 +1,5 @@
 <?php
+$begin_time = microtime(true);
 
 require_once "../inc/defines.inc.php";
 require_once "../inc/common.inc.php";
@@ -88,7 +89,7 @@ textdomain($domain);
     	<?php include "settings.form.php"; ?>
     </div>
     <div id="footer">
-        
+        <?php Utility::html_copyright_info($begin_time); ?>
     </div>
 </body>
 </html>
