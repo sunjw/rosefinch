@@ -273,9 +273,21 @@
 		 */
 		function _show_image_data() {
 			$('#lightbox-container-image-data-box').slideDown('fast');
+			$('#lightbox-image-details-caption').get(0).onclick = function(e){
+				var e = e ? e : window.event;
+				if (window.event) { // IE
+					e.cancelBubble = true;
+				} else { // FF
+					// e.preventDefault();
+					e.stopPropagation();
+				}
+			};
 			$('#lightbox-image-details-caption').hide();
 			if ( settings.imageArray[settings.activeImage][1] ) {
-				$('#lightbox-image-details-caption').html(settings.imageArray[settings.activeImage][1]).show();
+				$('#lightbox-image-details-caption')
+					.html("Download: <a href=\"" + settings.imageArray[settings.activeImage][0] 
+						+ "\">" + settings.imageArray[settings.activeImage][1] + "</a>")
+					.show();
 			}
 			// If we have a image set, display 'Image X of X'
 			if ( settings.imageArray.length > 1 ) {

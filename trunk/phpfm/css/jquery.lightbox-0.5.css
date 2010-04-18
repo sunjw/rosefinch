@@ -83,6 +83,9 @@
 	padding: 0 10px; 
 	color: #666; 
 }
+#lightbox-container-image-data a{
+	color: #666; 
+}
 #lightbox-container-image-data #lightbox-image-details { 
 	width: 70%; 
 	float: left; 
