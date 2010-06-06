@@ -450,10 +450,36 @@ function closeAjax() {
 	ajaxBg.css("display", "none");
 }
 
+function changeMainViewListHeight() {
+	// 自适应 mainViewList 高度
+	var mainViewList = $("div#mainViewList");
+	var mainViewListOffset = mainViewList.offset();
+	var footerHeight = $("div#footer").height();
+	var windowHeight = $(window).height();
+	var mainViewListHeight;
+	if(isIE && $.browser.version < 8) {
+		var innerList = mainViewList.children();
+		innerList = $(innerList[0]);
+		mainViewListHeight = innerList.height() + 10;
+		if($.browser.version > 6 && innerList.attr("id") == "largeiconView") {
+			// IE7 xxxx!
+			mainViewListHeight += 120;
+		}
+		mainViewList.css("height", mainViewListHeight + "px");
+	} else {
+		mainViewListHeight = windowHeight - mainViewListOffset.top - footerHeight - 30;
+		mainViewList.css("height", mainViewListHeight + "px");
+		mainViewList.css("overflow", "auto");
+	}
+}
+
 /*
  * 准备主视图
  */
 function initMainView() {
+	//changeMainViewHeight();
+	changeMainViewListHeight();
+	
 	var detailViewItems = $("ul#detailView");
 	var largeiconViewItems = $("div#largeiconView");
 	if (detailViewItems.length > 0) {
@@ -607,12 +633,13 @@ function stopBubble(e) {
  */
 function init() {
 	isIE = $.browser.msie ? true : false;
+	//alert($.browser.version);
 	var str = "#mainView > .header > span." + sortName + " > a";
 	var item = $(str);
 	item.addClass("sort" + sortOrder);
 
 	initFullPath();
-
+	
 	initMainView();
 
 	initAjaxFunc();
@@ -624,6 +651,7 @@ function init() {
 		autoAdapt :true
 	});
 
+	$(window).resize(changeMainViewListHeight);
 }
 
 //$(window).load(init); // 运行准备函数

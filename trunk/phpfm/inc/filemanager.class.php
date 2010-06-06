@@ -702,8 +702,12 @@ class FileManager
 			
 			$items = array_merge($this->dstats, $this->fstats);
 			
+			?>
+			<div id="mainViewList">
+			<?php 
 			$this->render_main_view($items);
 			?>
+			</div>
         </div>
 <?php 
 	}
@@ -809,7 +813,7 @@ class FileManager
 											$item['stat']['mtime']);
 				$i++;
 			}
-			$this->mark_to_20($i);
+			//$this->mark_to_20($i);
 ?>
 				<div class="clear"></div>
 			</div>
@@ -834,7 +838,7 @@ class FileManager
 											$item['stat']['mtime']);
 				$i++;
 			}
-			$this->mark_to_20($i);
+			//$this->mark_to_20($i);
 ?>
             </ul>
 <?php 

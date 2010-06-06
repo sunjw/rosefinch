@@ -9,6 +9,7 @@
 
 #mainView {
 	border: 1px solid #999999;
+	background-color: white;
 }
 
 #mainView a {
