@@ -21,8 +21,8 @@ msgstr "帮助"
 msgid "About"
 msgstr "关于"
 
-msgid "Notice: Rosefinch only supports IE 8 or newer versions and other modern browser"
-msgstr "注意: 仅支持 IE 8 及其以上版本和其他现代浏览器"
+msgid "Notice: Rosefinch only supports IE 7 or newer versions and other modern browser"
+msgstr "注意: 仅支持 IE 7 及其以上版本和其他现代浏览器"
 
 msgid "Generating time"
 msgstr "生成时间"

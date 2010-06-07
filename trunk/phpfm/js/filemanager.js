@@ -458,14 +458,7 @@ function changeMainViewListHeight() {
 	var windowHeight = $(window).height();
 	var mainViewListHeight;
 	if(isIE && $.browser.version < 8) {
-		var innerList = mainViewList.children();
-		innerList = $(innerList[0]);
-		mainViewListHeight = innerList.height() + 10;
-		if($.browser.version > 6 && innerList.attr("id") == "largeiconView") {
-			// IE7 xxxx!
-			mainViewListHeight += 120;
-		}
-		mainViewList.css("height", mainViewListHeight + "px");
+		return;
 	} else {
 		mainViewListHeight = windowHeight - mainViewListOffset.top - footerHeight - 30;
 		mainViewList.css("height", mainViewListHeight + "px");
@@ -479,6 +472,7 @@ function changeMainViewListHeight() {
 function initMainView() {
 	//changeMainViewHeight();
 	changeMainViewListHeight();
+	$(window).resize(changeMainViewListHeight);
 	
 	var detailViewItems = $("ul#detailView");
 	var largeiconViewItems = $("div#largeiconView");
@@ -650,8 +644,6 @@ function init() {
 		overlayOpacity :0.5,
 		autoAdapt :true
 	});
-
-	$(window).resize(changeMainViewListHeight);
 }
 
 //$(window).load(init); // 运行准备函数
