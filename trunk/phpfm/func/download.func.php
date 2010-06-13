@@ -143,7 +143,7 @@ function prepare_file_path($request_file)
 		if(!is_file($file))
 		{
 			// 不存在，试试转化成 UTF-8  编码
-			$file = $files_base_dir_plat . convert_toutf8($request_file); // Linux 上可能要转换成 utf-8
+			$file = $files_base_dir_plat . convert_gbtoutf8($request_file); // Linux 上可能要转换成 utf-8
 			if(!is_file($file))
 			{
 				$file = false; // 没有这个文件

@@ -269,7 +269,7 @@ class FileManager
 			if(!file_exists($request_dir))
 			{
 				// 不存在，试试转化成 UTF-8  编码
-				$request_sub_dir = convert_toutf8($request_sub_dir);
+				$request_sub_dir = convert_gbtoutf8($request_sub_dir);
 				$request_dir = $files_base_dir_plat . $request_sub_dir; // Linux 上可能要转换成 utf-8
 				if(!file_exists($request_dir))
 				{
