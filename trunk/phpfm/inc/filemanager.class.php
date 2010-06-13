@@ -165,6 +165,7 @@ class FileManager
 	    <link href="css/ajax.css" rel="stylesheet" type="text/css" />
 	    <link href="css/jquery.lightbox-0.5.css" rel="stylesheet" type="text/css" />
 	    <script type="text/javascript" language="javascript" src="js/jquery-1.3.2.min.js"></script>
+	    <script type="text/javascript" src="js/audio-player.js"></script>  
 <?php 
 		if($debug)
 		{
@@ -713,9 +714,9 @@ class FileManager
 	}
 	
 	/**
-	 * 显示为 Ajax 功能准备的 HTML 内容
+	 * 为功能准备的 HTML 内容
 	 */
-	public function display_ajax_pre()
+	public function display_func_pre()
 	{
 ?>
 		<div id="ajaxBg">
@@ -782,6 +783,18 @@ class FileManager
 				<img alt="wating" src="images/loadingAnimation.gif" border="0">
 			</div>
 		</div>
+		<div id="ajaxAudioPlayer">
+			<div class="ajaxHeader">
+				<span><?php echo _("Audio Player"); ?></span>
+				<a class="ajaxFuncClose" href="javascript:;">
+					<img alt="Close" src="images/ajax-func-close.gif" border="0">
+				</a>
+			</div>
+			<div class="flashAudioPlayer">
+				<p id="pAudioPlayer">Audio Player</p>
+				<p id="link"></p>
+			</div>
+    	</div>
 		<div id="phpfmMessage">
     	
     	</div>
@@ -976,6 +989,11 @@ class FileManager
 		$class = "";
 		if(LIGHTBOX && $this->is_img_type($type))
 			$class = 'class="lightboxImg"';
+
+		if($this->is_audio_type($type))
+			$class = 'class="audioPlayer"';
+			
+		
 ?>
 			<li >
 				<span class="check">
@@ -1014,6 +1032,8 @@ class FileManager
 		$class = "";
 		if(LIGHTBOX && $this->is_img_type($type))
 			$class = 'class="lightboxImg"';
+		else if($this->is_audio_type($type))
+			$class = 'class="audioPlayer"';
 ?>
 			<div class="largeIconItem" >
 				<div class="firstLine">
@@ -1080,6 +1100,22 @@ class FileManager
 		else
 			return false;
 	}	
+	
+	/**
+	 * 根据扩展名判断是不是音乐格式
+	 * @param $type 扩展名
+	 * @return boolean 是 true，否 false
+	 */
+	private function is_audio_type($type)
+	{
+		$type = strtolower($type);
+		if($type == "mp3" ||
+			$type == "ogg" ||
+			$type == "wma" )
+			return true;
+		else
+			return false;
+	}
 	
 }
 

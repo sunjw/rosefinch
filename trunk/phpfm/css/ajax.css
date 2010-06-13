@@ -10,11 +10,10 @@
 	left: 0;
 	display: none;
 	background-color: Black;
-	
 	opacity: 0.5;
 	-ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=50)";
 	/* IE */
-	filter: alpha(opacity = 50);
+	filter: alpha(opacity =   50);
 }
 
 .inputRequire {
@@ -41,7 +40,7 @@ div.ajaxHeader a.ajaxFuncClose {
 	color: White;
 }
 
-#ajaxInput,#ajaxDelete,#ajaxWait {
+#ajaxInput,#ajaxDelete,#ajaxWait,#ajaxAudioPlayer {
 	display: none;
 	background-color: white;
 	z-index: 1005;
@@ -49,6 +48,12 @@ div.ajaxHeader a.ajaxFuncClose {
 	top: 150px;
 	width: 420px;
 	border: 1px solid #cccccc;
+}
+
+#ajaxDelete #deleteMsg p,#ajaxAudioPlayer .flashAudioPlayer p {
+	height: 2em;
+	line-height: 2em;
+	margin: 0 5px;
 }
 
 /* Rename sector */
@@ -78,10 +83,10 @@ div.ajaxHeader a.ajaxFuncClose {
 	text-align: center;
 }
 
-#ajaxDelete #deleteMsg p {
-	height: 2em;
-	line-height: 2em;
-	margin: 0 5px;
+/* Audio Player sector*/
+#ajaxAudioPlayer .flashAudioPlayer {
+	padding: 10px 0;
+	text-align: center;
 }
 
 /* Watingsector */

@@ -43,8 +43,8 @@ $fileManager = new FileManager();
 	    $fileManager->display_toolbar();
 	    $fileManager->display_main_view();
 		
-	    // Ajax 部分
-	    $fileManager->display_ajax_pre();
+	    // 准备部分
+	    $fileManager->display_func_pre();
         ?>
     </div>
     <div id="footer">

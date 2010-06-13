@@ -299,18 +299,18 @@ function getMessage() {
 				phpfmMessage.html(msg);
 				if (stat == 2) {
 					// 错误消息
-					phpfmMessage.addClass("wrong");
-				} else {
-					phpfmMessage.removeClass("wrong");
-				}
-
-				phpfmMessage.fadeIn();
-			}
-
-			clearTimeout(delayID);
-			delayID = setTimeout("closeMessage()", 10000);
+			phpfmMessage.addClass("wrong");
+		} else {
+			phpfmMessage.removeClass("wrong");
 		}
-	});
+
+		phpfmMessage.fadeIn();
+	}
+
+	clearTimeout(delayID);
+	delayID = setTimeout("closeMessage()", 10000);
+}
+}	);
 
 }
 
@@ -434,6 +434,45 @@ function displayAjaxInput(action, oper, title, isInput) {
 }
 
 /*
+ * 显示 AudioPlayer
+ */
+function displayAjaxAudioPlayer() {
+	var ajaxAudioPlayer = $("div#ajaxAudioPlayer");
+
+	ajaxAudioPlayer.css("left", getLeftMargin() + "px");
+	ajaxAudioPlayer.fadeIn();
+}
+
+/*
+ * 准备 AudioPlayer
+ */
+function initAudioPlayer() {
+	AudioPlayer.setup("images/player.swf", {
+		width :290,
+		initialvolume :100
+	});
+
+	$("a.audioPlayer").click( function() {
+		// alert("!");
+			var audioObj = $(this);
+			var audioLink = audioObj.attr("href");
+			var divFlash = $("div.flashAudioPlayer");
+
+			AudioPlayer.embed("pAudioPlayer", {
+				soundFile :audioLink
+			}); // Player
+			var pLink = divFlash.find("p#link");
+			pLink.html("<a href=\"" + audioLink + "\">"
+					+ audioObj.attr("title") + "</a>");
+
+			displayAjaxBg(true);
+			displayAjaxAudioPlayer();
+
+			return false;
+		});
+}
+
+/*
  * 关闭 ajax 部分
  */
 function closeAjax() {
@@ -448,6 +487,12 @@ function closeAjax() {
 	$("div#oldnameLine").css("display", "none");
 	cleanOldname();
 	ajaxBg.css("display", "none");
+
+	var ajaxAudioPlayer = $("div#ajaxAudioPlayer");
+	if (ajaxAudioPlayer.is(":visible")) {
+		AudioPlayer.close("pAudioPlayer");
+		ajaxAudioPlayer.fadeOut();
+	}
 }
 
 function changeMainViewListHeight() {
@@ -457,10 +502,11 @@ function changeMainViewListHeight() {
 	var footerHeight = $("div#footer").height();
 	var windowHeight = $(window).height();
 	var mainViewListHeight;
-	if(isIE && $.browser.version < 8) {
+	if (isIE && $.browser.version < 8) {
 		return;
 	} else {
-		mainViewListHeight = windowHeight - mainViewListOffset.top - footerHeight - 30;
+		mainViewListHeight = windowHeight - mainViewListOffset.top
+				- footerHeight - 30;
 		mainViewList.css("height", mainViewListHeight + "px");
 		mainViewList.css("overflow", "auto");
 	}
@@ -470,10 +516,10 @@ function changeMainViewListHeight() {
  * 准备主视图
  */
 function initMainView() {
-	//changeMainViewHeight();
+	// changeMainViewHeight();
 	changeMainViewListHeight();
 	$(window).resize(changeMainViewListHeight);
-	
+
 	var detailViewItems = $("ul#detailView");
 	var largeiconViewItems = $("div#largeiconView");
 	if (detailViewItems.length > 0) {
@@ -555,8 +601,7 @@ function initFullPath() {
 			var subMenus = $(".subMenu");
 			for ( var i = 0; i < subMenus.length; i++) {
 				var subMenu = $(subMenus[i]);
-				if (thisSub.get(0) != subMenu.get(0)
-						&& subMenu.is(":visible")) {
+				if (thisSub.get(0) != subMenu.get(0) && subMenu.is(":visible")) {
 					subMenu.prev(".arrow").removeClass("selected");
 					// subMenu.css("display", "none");
 					hideSubMenu(subMenu);
@@ -627,13 +672,13 @@ function stopBubble(e) {
  */
 function init() {
 	isIE = $.browser.msie ? true : false;
-	//alert($.browser.version);
+	// alert($.browser.version);
 	var str = "#mainView > .header > span." + sortName + " > a";
 	var item = $(str);
 	item.addClass("sort" + sortOrder);
 
 	initFullPath();
-	
+
 	initMainView();
 
 	initAjaxFunc();
@@ -644,7 +689,9 @@ function init() {
 		overlayOpacity :0.5,
 		autoAdapt :true
 	});
+
+	initAudioPlayer();
 }
 
-//$(window).load(init); // 运行准备函数
+// $(window).load(init); // 运行准备函数
 $(init);
