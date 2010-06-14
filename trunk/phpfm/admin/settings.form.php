@@ -83,6 +83,18 @@
 	        			?>
 	        		</div>
         		</div>
+        		<div>
+	        		<label for="audioPlayer"><?php echo _("Enable Audio Player for audio files") . ":"; ?></label>
+	        		<select id="audioPlayer" name="audioPlayer">
+	        			<option value="1" <?php if($settings['audioPlayer'] == 1)print("selected='selected'"); ?>><?php echo _("Enable"); ?></option>
+	        			<option value="0" <?php if($settings['audioPlayer'] == 0)print("selected='selected'"); ?>><?php echo _("Disable"); ?></option>
+	        		</select>
+	        		<div class="info">
+	        			<?php 
+	        			echo _("Let Rosefinch enable Audio Player for audio files.");
+	        			?>
+	        		</div>
+        		</div>
         	</fieldset>
         	<input type="submit" value="<?php echo _("OK"); ?>" />
         </form>

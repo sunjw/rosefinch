@@ -23,7 +23,8 @@ $settings = array('root_type' => FILE_POSITION,
 				'timezone' => $timezone,
 				'language' => LOCALE,
 				'title_name' => TITLENAME,
-				'lightbox' => LIGHTBOX);
+				'lightbox' => LIGHTBOX,
+				'audioPlayer' => AUDIOPLAYER);
 
 $wrong = false;
 $display_msg = false;

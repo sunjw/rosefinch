@@ -222,6 +222,12 @@ msgstr "Rosefinch 中显示的标题"
 msgid "Let Rosefinch enable jQuery lightbox for pictures."
 msgstr "让 Rosefinch 为图片使用 jQuery lightbox。"
 
+msgid "Enable Audio Player for audio files"
+msgstr "为音乐文件启用 Audio Player"
+
+msgid "Let Rosefinch enable Audio Player for audio files."
+msgstr "让 Rosefinch 为音乐文件启用 Audio Player。"
+
 msgid "Knowing Issue"
 msgstr "已知问题"
 

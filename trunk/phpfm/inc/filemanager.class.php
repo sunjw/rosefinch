@@ -990,7 +990,7 @@ class FileManager
 		if(LIGHTBOX && $this->is_img_type($type))
 			$class = 'class="lightboxImg"';
 
-		if($this->is_audio_type($type))
+		if(AUDIOPLAYER && $this->is_audio_type($type))
 			$class = 'class="audioPlayer"';
 			
 		
@@ -1032,7 +1032,7 @@ class FileManager
 		$class = "";
 		if(LIGHTBOX && $this->is_img_type($type))
 			$class = 'class="lightboxImg"';
-		else if($this->is_audio_type($type))
+		if(AUDIOPLAYER && $this->is_audio_type($type))
 			$class = 'class="audioPlayer"';
 ?>
 			<div class="largeIconItem" >

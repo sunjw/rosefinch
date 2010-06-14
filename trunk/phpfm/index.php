@@ -17,7 +17,7 @@ $fileManager = new FileManager();
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
-    <title><?php echo $fileManager->title(); ?></title>
+    <title><?php echo $fileManager->title()." - ".$fileManager->get_current_dir(); ?></title>
 	<meta http-equiv="Content-type" content="text/html;charset=UTF-8" />
 	<link href="css/com.css" rel="stylesheet" type="text/css" />
     <?php echo $fileManager->html_include_files(DEBUG); ?>

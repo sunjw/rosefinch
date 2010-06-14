@@ -15,6 +15,7 @@ function save_settings(&$settings)
 	$settings['language'] = post_query("language");
 	$settings['title_name'] = post_query("titleName");
 	$settings['lightbox'] = post_query("lightbox");
+	$settings['audioPlayer'] = post_query("audioPlayer");
 	
 	if($settings['root_type'] == "" ||
 		$settings['root_path'] == "" ||
@@ -22,7 +23,8 @@ function save_settings(&$settings)
 		$settings['timezone'] == "" ||
 		$settings['language'] == "" ||
 		$settings['title_name'] == "" ||
-		$settings['lightbox'] == "")
+		$settings['lightbox'] == "" ||
+		$settings['audioPlayer'] == "")
 	{
 		return false;	
 	}
@@ -48,14 +50,16 @@ function save_settings(&$settings)
 							"&&TIME_ZONE&&",
 							"&&LOCALE&&",
 							"&&TITLENAME&&",
-							"&&LIGHTBOX&&");
+							"&&LIGHTBOX&&",
+							"&&AUDIOPLAYER&&");
 		$values = array($settings['root_type'],
 						$settings['root_path'],
 						$settings['charset'],
 						$settings['timezone'],
 						$settings['language'],
 						$settings['title_name'],
-						$settings['lightbox']);
+						$settings['lightbox'],
+						$settings['audioPlayer']);
 		
 		$settings_str = str_replace($templates, $values, $settings_str);
 		//echo $settings;
