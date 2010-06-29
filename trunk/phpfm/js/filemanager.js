@@ -1,4 +1,5 @@
 ﻿var ajaxBg;
+var multilanTitles;
 var inputChecks;
 var selectedItems;
 var sortName;
@@ -138,7 +139,7 @@ function clickRename() {
 
 	setOldname();
 
-	displayAjaxInput("func/post.func.php", "rename", "重命名", true);
+	displayAjaxInput("func/post.func.php", "rename", "rename", true);
 }
 
 /*
@@ -148,7 +149,7 @@ function clickNewFolder() {
 	// alert("newfolder");
 	displayAjaxBg(true);
 
-	displayAjaxInput("func/post.func.php", "newfolder", "新建目录", true);
+	displayAjaxInput("func/post.func.php", "newfolder", "new folder", true);
 }
 
 /*
@@ -242,7 +243,7 @@ function doDelete() {
  */
 function clickUpload() {
 	displayAjaxBg(true);
-	displayAjaxInput("func/post.func.php", "upload", "上传", false);
+	displayAjaxInput("func/post.func.php", "upload", "upload", false);
 }
 
 /*
@@ -381,8 +382,24 @@ function cleanOldname() {
 /*
  * 初始化 ajax
  */
-function initAjaxFunc() {
+function initFuncPre() {
 	ajaxBg = $("div#ajaxBg");
+
+	var rawTitles = $("div#ajaxInput > .ajaxHeader > span");
+	rawTitles = $(rawTitles[0]);
+	rawTitles = rawTitles.html();
+	rawTitles = rawTitles.split("|");
+
+	multilanTitles = new Array();
+	var count = rawTitles.length;
+	var rawTitle, key, value;
+	for ( var i = 0; i < count; ++i) {
+		rawTitle = rawTitles[i];
+		rawTitle = rawTitle.split(":");
+		key = rawTitle[0];
+		value = rawTitle[1];
+		multilanTitles[key] = value;
+	}
 
 	var ajaxFuncClose = $("div.ajaxHeader > .ajaxFuncClose");
 	var count = ajaxFuncClose.length;
@@ -414,7 +431,7 @@ function displayAjaxInput(action, oper, title, isInput) {
 	var form = ajaxInput.children("form");
 	form.attr("action", action);
 	var titleSpan = ajaxInput.children("div.ajaxHeader").children("span");
-	titleSpan.html(title);
+	titleSpan.html(multilanTitles[title]);
 	if (isInput) {
 		// form.removeAttr("enctype");
 		$("div#divInput").removeClass("ajaxHidden");
@@ -681,7 +698,7 @@ function init() {
 
 	initMainView();
 
-	initAjaxFunc();
+	initFuncPre();
 
 	getMessage();
 

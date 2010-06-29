@@ -718,12 +718,16 @@ class FileManager
 	 */
 	public function display_func_pre()
 	{
+		$multilan_titles = "";
+		$multilan_titles .= ("rename:"._("Rename")."|");
+		$multilan_titles .= ("new folder:"._("New Folder")."|");
+		$multilan_titles .= ("upload:"._("Upload"));
 ?>
 		<div id="ajaxBg">
 		</div>
 		<div id="ajaxInput">
 			<div class="ajaxHeader">
-				<span></span>
+				<span><?php echo $multilan_titles; ?></span>
 				<a class="ajaxFuncClose" href="javascript:;">
 					<img alt="Close" src="images/ajax-func-close.gif" border="0">
 				</a>
@@ -1109,9 +1113,7 @@ class FileManager
 	private function is_audio_type($type)
 	{
 		$type = strtolower($type);
-		if($type == "mp3" ||
-			$type == "ogg" ||
-			$type == "wma" )
+		if($type == "mp3")
 			return true;
 		else
 			return false;
