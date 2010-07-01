@@ -176,7 +176,14 @@ class Post
 	 */
 	private function post_rename()
 	{
-		$sub_dir = rawurldecode(post_query("subdir"));
+		//$sub_dir = rawurldecode(post_query("subdir"));
+		$oldpath = post_query("renamePath");
+		$sub_dir = "";
+		if(strrpos($oldpath, "/") != false)
+		{
+			$sub_dir = substr($oldpath, 0, strrpos($oldpath, "/") + 1);
+		}
+		
 		$oldname = post_query("oldname");
 		$newname = post_query("newname");
 		

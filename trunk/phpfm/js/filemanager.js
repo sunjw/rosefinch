@@ -361,9 +361,11 @@ function sendAjaxOper(oper) {
  */
 function setOldname() {
 	$("div#oldnameLine").css("display", "block");
+	var oldPathInput = $("input#renamePath");
 	var oldnameInput = $("input#oldname");
 	var newnameInput = $("input#newname");
 	var path = selectedItems[0];
+	oldPathInput.attr("value", path);
 	var oldname = path.substring(path.lastIndexOf("/") + 1, path.length);
 	oldnameInput.attr("value", oldname); // 显示原文件名
 	newnameInput.attr("value", oldname);
