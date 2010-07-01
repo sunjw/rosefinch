@@ -616,15 +616,15 @@ class FileManager
 							"&dir=" . rawurlencode($this->request_sub_dir) . "&view=largeicon";
 		
 		$paste_img_src = "images/toolbar-paste-disable.gif";
-		$paste_click = "doNothing()";
+		$paste_click = "FileManager.doNothing()";
 		$paste_class = "disable";
 		if($this->clipboard->have_items())
 		{
 			$paste_img_src = "images/toolbar-paste.gif";
-			$paste_click = "clickPaste()";
+			$paste_click = "FileManager.clickPaste()";
 			$paste_class = "";
 		}
-		$upload_click = "clickUpload()";
+		$upload_click = "FileManager.clickUpload()";
 		
 		$button_names['Refresh'] = _("Refresh");
 		$button_names['Up'] = _("Up");
@@ -649,10 +649,10 @@ class FileManager
 				<a href="<?php echo $up; ?>" title="<?php echo $button_names['Up']; ?>" class="toolbarUp splitRight">
 					<img alt="<?php echo $button_names['Up']; ?>" src="images/toolbar-up.gif" />
 				</a>
-				<a href="javascript:;" title="<?php echo $button_names['Select All']; ?>" class="toolbarSelectAll" onclick="selectAll()">
+				<a href="javascript:;" title="<?php echo $button_names['Select All']; ?>" class="toolbarSelectAll" onclick="FileManager.selectAll()">
 					<img alt="<?php echo $button_names['Select All']; ?>" src="images/toolbar-select-all.gif" />
 				</a>
-				<a href="javascript:;" title="<?php echo $button_names['Deselect']; ?>" class="toolbarDeselect splitRight" onclick="deselect()">
+				<a href="javascript:;" title="<?php echo $button_names['Deselect']; ?>" class="toolbarDeselect splitRight" onclick="FileManager.deselect()">
 					<img alt="<?php echo $button_names['Deselect']; ?>" src="images/toolbar-deselect.gif" />
 				</a>
 				<a href="javascript:;" title="<?php echo $button_names['Cut']; ?>" class="toolbarCut">
@@ -664,7 +664,7 @@ class FileManager
 				<a href="javascript:;" title="<?php echo $button_names['Paste']; ?>" class="toolbarPaste splitRight <?php echo $paste_class; ?>" onclick="<?php echo $paste_click; ?>">
 					<img alt="<?php echo $button_names['Paste']; ?>" src="<?php echo $paste_img_src; ?>" />
 				</a>
-				<a href="javascript:;" title="<?php echo $button_names['New Folder']; ?>" class="toolbarNewFolder" onclick="clickNewFolder()">
+				<a href="javascript:;" title="<?php echo $button_names['New Folder']; ?>" class="toolbarNewFolder" onclick="FileManager.clickNewFolder()">
 					<img alt="<?php echo $button_names['New Folder']; ?>" src="images/toolbar-new-folder.gif" />
 				</a>
 				<a href="javascript:;" title="<?php echo $button_names['Rename']; ?>" class="toolbarRename">
@@ -761,7 +761,7 @@ class FileManager
 				</div>
 				<div class="rightAlign">
 					<input type="submit" value="<?php echo _("OK"); ?>"/>
-					<input type="button" value="<?php echo _("Cancel"); ?>" onclick="closeAjax()"/>
+					<input type="button" value="<?php echo _("Cancel"); ?>" onclick="FileManager.closeAjax()"/>
 				</div>
 			</form>
 		</div>
@@ -775,8 +775,8 @@ class FileManager
 			<div id="deleteMsg">
 				<p><?php echo _("Are you sure to delete these items?"); ?></p>
 				<p class="rightAlign">
-					<input type="button" value="<?php echo _("OK"); ?>" onclick="doDelete()"/>
-					<input type="button" value="<?php echo _("Cancel"); ?>" onclick="closeAjax()"/>
+					<input type="button" value="<?php echo _("OK"); ?>" onclick="FileManager.doDelete()"/>
+					<input type="button" value="<?php echo _("Cancel"); ?>" onclick="FileManager.closeAjax()"/>
 				</p>
 			</div>
 		</div>
@@ -937,7 +937,7 @@ class FileManager
 ?>
 		<script type="text/javascript" >
 			//<![CDATA[
-			setSortArrow("<?php echo $javascript_call_arg; ?>", "<?php echo $order; ?>");
+			FileManager.setSortArrow("<?php echo $javascript_call_arg; ?>", "<?php echo $order; ?>");
 			//]]>
 		</script>
 <?php 
