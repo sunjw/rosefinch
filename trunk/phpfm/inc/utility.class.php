@@ -421,12 +421,13 @@ class Utility
 	}
 	
 	/**
-	 * 处理过重名的 rename
+	 * 重名的 rename
 	 * @param $oldname 原路径 (UTF-8)
 	 * @param $newname 新路径 (UTF-8)
+	 * @param $deal_same_name 是否处理重名
 	 * @return 完成 TRUE, 失败 FALSE
 	 */
-	public static function phpfm_rename($oldname, $newname)
+	public static function phpfm_rename($oldname, $newname, $deal_same_name)
 	{
 		$newname_dir_part = dirname($newname);
 		if($newname_dir_part == $oldname)
@@ -434,14 +435,18 @@ class Utility
 		
 		$plat_oldname = convert_toplat($oldname);
 		$plat_newname = convert_toplat($newname);
+		if($plat_oldname == $plat_newname)
+			return TRUE;
 		
 		// 处理文件重名
 		if(file_exists($plat_oldname))
 		{
 			if(file_exists($plat_newname))
 			{
-				//$newname = Utility::deal_same_name($newname);
-				return FALSE;
+				if($deal_same_name)
+					$newname = Utility::deal_same_name($newname);
+				else
+					return FALSE;
 			}
 		}
 		else

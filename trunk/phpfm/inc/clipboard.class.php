@@ -70,7 +70,7 @@ class ClipBoard
 			if($this->oper == "cut")
 			{
 				$message .= (_("Cut") . " $item ");
-				$success = Utility::phpfm_rename($oldname, $newname);
+				$success = Utility::phpfm_rename($oldname, $newname, true);
 			}
 			else if($this->oper == "copy")
 			{

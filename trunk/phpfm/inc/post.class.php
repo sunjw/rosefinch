@@ -191,15 +191,12 @@ class Post
 		if(false === strpos($sub_dir, "..") &&
 			Utility::check_name($newname) && Utility::check_name($oldname)) // 过滤
 		{
-			if($newname != $oldname)
-			{
-				$oldname = $this->files_base_dir . $sub_dir . $oldname;
-				$newname = $this->files_base_dir . $sub_dir . $newname;
+			$oldname = $this->files_base_dir . $sub_dir . $oldname;
+			$newname = $this->files_base_dir . $sub_dir . $newname;
+			
+			log_to_file("Try to rename: $oldname to $newname");
 				
-				log_to_file("Try to rename: $oldname to $newname");
-				
-				$success = Utility::phpfm_rename($oldname, $newname);
-			}
+			$success = Utility::phpfm_rename($oldname, $newname, false);
 			
 		}
 		if($success === TRUE)
