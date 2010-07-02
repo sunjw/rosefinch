@@ -6,6 +6,12 @@ require_once "clipboard.class.php";
 require_once "messageboard.class.php";
 require_once "../log/log.func.php";
 
+/**
+ * Search Class
+ * 2009-10-7
+ * @author Sun Junwen
+ *
+ */
 class Post
 {
 	private $files_base_dir;

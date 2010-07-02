@@ -3,7 +3,15 @@ require_once "defines.inc.php";
 require_once "common.inc.php";
 require_once "clipboard.class.php";
 require_once "messageboard.class.php";
+include_once "ez_sql_core.php"; // Include ezSQL core
+include_once "ez_sql_mysql.php"; // Include ezSQL database specific component
 
+/**
+ * Utility Class
+ * 2009-9-11
+ * @author Sun Junwen
+ *
+ */
 class Utility
 {
 	/**
@@ -606,6 +614,22 @@ class Utility
 		}
 		
 		return $clipboard;
+	}
+	
+	/**
+	 * 获得数据库连接
+	 * @return ezSQL_mysql 对象
+	 */
+	public static function get_ezMysql()
+	{
+		// Initialise database object and establish a connection
+		// at the same time - db_user / db_password / db_name / db_host
+		$db = new ezSQL_mysql(DB_USER, DB_PSWD, DB_NAME, DB_HOST);
+		
+		$db->hide_errors();
+		$db->query("set names 'utf8'");
+		
+		return $db;
 	}
 	
 	/**

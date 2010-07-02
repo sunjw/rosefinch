@@ -17,6 +17,12 @@ define("VIEW_PARAM", "view"); // 视图模式的查询参数
 // 定义 gettext 参数
 define("DOMAIN", "phpfm"); // 不要修改
 
+// 数据库参数(要移到设置里面)
+define("DB_USER", "rosefinch");
+define("DB_PSWD", "rose");
+define("DB_NAME", "rosefinch");
+define("DB_HOST", "localhost");
+
 /**
  * 将指定字符串从<strong>定义的平台字符串</strong>转换成 UTF-8
  * @param $str 目标字符串

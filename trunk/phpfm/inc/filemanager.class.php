@@ -12,7 +12,7 @@ require_once "utility.class.php";
 
 /**
  * File Manager Class
- * 2009-8-4 rev.1
+ * 2009-8-4
  * @author Sun Junwen
  *
  */
