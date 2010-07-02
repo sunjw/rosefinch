@@ -162,7 +162,7 @@ class FileManager
 		<link href="css/message.css" rel="stylesheet" type="text/css" />
 	    <link href="css/detailView.css" rel="stylesheet" type="text/css" />
 	    <link href="css/largeiconView.css" rel="stylesheet" type="text/css" />
-	    <link href="css/ajax.css" rel="stylesheet" type="text/css" />
+	    <link href="css/func.css" rel="stylesheet" type="text/css" />
 	    <link href="css/jquery.lightbox-0.5.css" rel="stylesheet" type="text/css" />
 	    <script type="text/javascript" language="javascript" src="js/jquery-1.3.2.min.js"></script>
 	    <script type="text/javascript" src="js/audio-player.js"></script>  

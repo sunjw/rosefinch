@@ -424,10 +424,10 @@ class Utility
 	 * 重名的 rename
 	 * @param $oldname 原路径 (UTF-8)
 	 * @param $newname 新路径 (UTF-8)
-	 * @param $deal_same_name 是否处理重名
+	 * @param $deal_same_name 是否处理重名, 默认不处理
 	 * @return 完成 TRUE, 失败 FALSE
 	 */
-	public static function phpfm_rename($oldname, $newname, $deal_same_name)
+	public static function phpfm_rename($oldname, $newname, $deal_same_name = false)
 	{
 		$newname_dir_part = dirname($newname);
 		if($newname_dir_part == $oldname)
