@@ -48,6 +48,10 @@ div.ajaxHeader a.ajaxFuncClose {
 	top: 150px;
 	width: 420px;
 	border: 1px solid #cccccc;
+	-moz-box-shadow: 0 4px 30px #000000;
+	-webkit-box-shadow: 0 4px 30px #000000;
+    box-shadow: 0 4px 30px #000000;
+
 }
 
 #ajaxDelete #deleteMsg p,#ajaxAudioPlayer .flashAudioPlayer p {

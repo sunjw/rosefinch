@@ -3,8 +3,8 @@ require_once "defines.inc.php";
 require_once "common.inc.php";
 require_once "clipboard.class.php";
 require_once "messageboard.class.php";
-include_once "ez_sql_core.php"; // Include ezSQL core
-include_once "ez_sql_mysql.php"; // Include ezSQL database specific component
+require_once "ez_sql_core.php"; // Include ezSQL core
+require_once "ez_sql_mysql.php"; // Include ezSQL database specific component
 
 /**
  * Utility Class

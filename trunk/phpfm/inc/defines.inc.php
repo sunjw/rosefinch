@@ -17,6 +17,9 @@ define("VIEW_PARAM", "view"); // 视图模式的查询参数
 // 定义 gettext 参数
 define("DOMAIN", "phpfm"); // 不要修改
 
+// 定义搜索状态
+define("SEARCH", true);
+
 // 数据库参数(要移到设置里面)
 define("DB_USER", "rosefinch");
 define("DB_PSWD", "rose");

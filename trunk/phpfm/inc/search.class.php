@@ -3,7 +3,6 @@
 require_once "defines.inc.php";
 require_once "common.inc.php";
 require_once "utility.class.php";
-require_once "../log/log.func.php";
 
 /**
  * Search Class
@@ -48,19 +47,34 @@ class Search
 	
 	/**
 	 * 创建索引
+	 * 索引的主键是相对于基路径的相对路径的 md5 值
 	 * @param $subdir 子文件夹路径，必须是 UTF-8 字符串
 	 */
 	function create_index($subdir = "")
 	{
+		if($subdir != "" && 
+			substr($subdir, strlen($subdir) - 1, 1) != "\\" && 
+			substr($subdir, strlen($subdir) - 1, 1) != "/")
+		{
+			$subdir .= "/";
+		}
+		
 		// 应用事务
 		$query = "START TRANSACTION";
 		$this->db->query($query);
 		
+		// 预处理状态
+		$query = "UPDATE fileindex SET refreshed=1 WHERE `path` NOT LIKE '$subdir%'";
+		$this->db->query($query);
+		
+		// 索引文件
 		$this->create_index_r($subdir);
 		
+		// 删除未更新的索引
 		$query = "DELETE FROM fileindex WHERE refreshed=0";
 		$this->db->query($query);
 		
+		// 回复状态
 		$query = "UPDATE fileindex SET refreshed=0";
 		$this->db->query($query);
 		
@@ -132,7 +146,7 @@ class Search
 						//echo $query."<br />";
 						//echo date("Y-n-j H:i:s", $dir['stat']['mtime'])."<br />";
 						$rows = $this->db->query($query);
-						echo $rows;
+						//echo $rows;
 						
 						if($rows != 1)
 						{
@@ -145,7 +159,7 @@ class Search
 								" WHERE path_hash='".$dir['hash']."'";
 							//echo $query."<br />";
 							$rows = $this->db->query($query);
-							echo $rows;
+							//echo $rows;
 						}
 						
 			        	array_push($dirs, $dir);
@@ -204,7 +218,7 @@ class Search
 					//echo $query."<br />";
 					//echo date("Y-n-j H:i:s", $file['stat']['mtime'])."<br />";
 					$rows = $this->db->query($query);
-					echo $rows;
+					//echo $rows;
 						
 					if($rows != 1)
 					{
@@ -217,7 +231,7 @@ class Search
 							" WHERE path_hash='".$file['hash']."'";
 						//echo $query."<br />";
 						$rows = $this->db->query($query);
-						echo $rows;
+						//echo $rows;
 					}
 		        	
 		        	array_push($files, $file);

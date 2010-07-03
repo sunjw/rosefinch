@@ -2,8 +2,10 @@
 require_once "defines.inc.php";
 require_once "common.inc.php";
 require_once "gettext.inc.php";
+require_once "utility.class.php";
 require_once "clipboard.class.php";
 require_once "messageboard.class.php";
+require_once "search.class.php";
 require_once "../log/log.func.php";
 
 /**
@@ -90,6 +92,12 @@ class Post
 		$items = split("[|]", $items);
 		$items = Utility::filter_paths($items);
 		
+		$search = null;
+		if(SEARCH)
+		{
+			$search = new Search();
+		}
+		
 		$message = "";
 		
 		$count = count($items);
@@ -97,6 +105,7 @@ class Post
 		{
 			$success = false;
 			$item = $items[$i];
+			$sub_dir = dirname($item);
 			$path = $this->files_base_dir . $item;
 			log_to_file("try to delete: $path");
 			$message .= (_("Delete") . " $item ");//("删除 $item ");
@@ -116,6 +125,11 @@ class Post
 			{
 				$message .= (_("succeed") . "<br />");
 				$stat = 1;
+				
+				if(SEARCH)
+				{
+					$search->create_index($sub_dir);
+				}
 			}
 			else
 			{
@@ -151,6 +165,12 @@ class Post
 	 */
 	private function post_newfolder()
 	{
+		$search = null;
+		if(SEARCH)
+		{
+			$search = new Search();
+		}
+		
 		$sub_dir = rawurldecode(post_query("subdir"));
 		$name = post_query("newname");
 		
@@ -165,13 +185,22 @@ class Post
 		}
 		
 		if($success === TRUE)
+		{
 			$this->messageboard->set_message(
 				_("Make new folder:") . "&nbsp;" . post_query("newname") . "&nbsp;" . _("succeed"), 
 				1);
+				
+			if(SEARCH)
+			{
+				$search->create_index($sub_dir);
+			}
+		}
 		else
+		{
 			$this->messageboard->set_message(
 				_("Make new folder:") . "&nbsp;" . post_query("newname") . "&nbsp;<strong>" . _("failed") . "</strong>", 
 				2);
+		}
 		
 		
 		Utility::redirct_after_oper(false, 1);
@@ -182,6 +211,12 @@ class Post
 	 */
 	private function post_rename()
 	{
+		$search = null;
+		if(SEARCH)
+		{
+			$search = new Search();
+		}
+		
 		//$sub_dir = rawurldecode(post_query("subdir"));
 		$oldpath = post_query("renamePath");
 		$sub_dir = "";
@@ -206,13 +241,22 @@ class Post
 			
 		}
 		if($success === TRUE)
+		{
 			$this->messageboard->set_message(
 				sprintf(_("Rename %s to %s ") . _("succeed"), post_query("oldname"), post_query("newname")), 
 				1);
+				
+			if(SEARCH)
+			{
+				$search->create_index($sub_dir);
+			}
+		}
 		else
+		{
 			$this->messageboard->set_message(
 				sprintf(_("Rename %s to %s ") . " <strong>" . _("failed") . "<strong>", post_query("oldname"), post_query("newname")), 
 				2);
+		}
 		
 		Utility::redirct_after_oper(false, 1);
 	}
@@ -222,6 +266,12 @@ class Post
 	 */
 	private function post_upload()
 	{
+		$search = null;
+		if(SEARCH)
+		{
+			$search = new Search();
+		}
+		
 		$sub_dir = rawurldecode(post_query("subdir"));
 		
 		if(isset($_FILES['uploadFile']))
@@ -233,6 +283,12 @@ class Post
 					_("Upload") . ":&nbsp;" . $_FILES['uploadFile']['name'] . "&nbsp;" . _("succeed"),
 					1);
 				log_to_file("upload success: " . $uploadfile);
+				
+				if(SEARCH)
+				{
+					$search->create_index($sub_dir);
+				}
+				
 			} else {
 				$this->messageboard->set_message(
 					_("Upload") . ":&nbsp;" . $_FILES['uploadFile']['name'] . " <strong>" . _("failed") . "<strong>",

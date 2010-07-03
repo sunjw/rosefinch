@@ -5,6 +5,7 @@ require_once "common.inc.php";
 require_once "gettext.inc.php";
 require_once "messageboard.class.php";
 require_once "utility.class.php";
+require_once "search.class.php";
 
 //@session_start();
 
@@ -53,6 +54,13 @@ class ClipBoard
 	{
 		$messageboard = Utility::get_messageboard();
 		$message = "";
+		
+		$search = null;
+		if(SEARCH)
+		{
+			$search = new Search();
+		}
+		
 		$files_base_dir = $_SESSION['base_dir'];
 		//$old_dir = $files_base_dir . $this->subdir;
 		$new_dir = $files_base_dir . $target_subdir;
@@ -60,6 +68,7 @@ class ClipBoard
 		for($i = 0; $i < $count; $i++)
 		{
 			$item = $this->items[$i];
+			$item_sub_dir = dirname($item);
 			$oldname = $files_base_dir . $item;
 			$basename = get_basename($item);
 			$newname = $new_dir . $basename;
@@ -77,10 +86,21 @@ class ClipBoard
 				$message .= (_("Copy") . " $item ");
 				$success = Utility::phpfm_copy($oldname, $newname);
 			}
+			
 			if($success)
 			{
 				$message .= (_("succeed") . "<br />");
 				$stat = 1;
+				
+				if(SEARCH)
+				{
+					if($this->oper == "cut")
+					{
+						$search->create_index($item_sub_dir);
+					}
+					
+					$search->create_index($target_subdir);
+				}
 			}
 			else
 			{
