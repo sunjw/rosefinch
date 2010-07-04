@@ -163,4 +163,23 @@ function redirect($url, $need_rawurldecode = false)
 	exit;
 }
 
+/**
+ * 将时间字符串转换为 timestamp
+ * @param $str 时间字符串 格式为 Y-n-j H:i:s
+ * @return int timestamp
+ */
+function timestrtotime($str)
+{
+	$array = split("[ ]", $str);
+	$date = $array[0];
+	$time = $array[1];
+	
+	$date = split("-", $date);
+	$time = split(":", $time);
+	
+	$timestamp = mktime($time[0], $time[1], $time[2], $date[1], $date[2], $date[0]);
+	
+	return $timestamp;
+}
+
 ?>

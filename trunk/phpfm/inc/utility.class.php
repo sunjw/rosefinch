@@ -627,7 +627,12 @@ class Utility
 		$db = new ezSQL_mysql(DB_USER, DB_PSWD, DB_NAME, DB_HOST);
 		
 		$db->hide_errors();
-		$db->query("set names 'utf8'");
+		
+		$ret = $db->query("set names 'utf8'");
+		if(!is_numeric($ret) && !$ret)
+		{
+			return null;
+		}
 		
 		return $db;
 	}

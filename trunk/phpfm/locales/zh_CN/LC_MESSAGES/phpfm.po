@@ -135,6 +135,15 @@ msgstr "新建目录:"
 msgid "Rename %s to %s "
 msgstr "重命名 %s 为 %s "
 
+msgid "Search"
+msgstr "搜索"
+
+msgid "Search \"%s\" in \"%s\""
+msgstr "搜索“%s”，在“%s”之中"
+
+msgid "Clean Search"
+msgstr "清除搜索"
+
 msgid "Install"
 msgstr "安装"
 

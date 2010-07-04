@@ -2,6 +2,7 @@
 
 require_once "defines.inc.php";
 require_once "common.inc.php";
+require_once "sort.inc.php";
 require_once "utility.class.php";
 
 /**
@@ -19,6 +20,8 @@ class Search
 	{
 		$this->db = Utility::get_ezMysql();
 		//$this->db->debug();
+		if(!$this->check_db())
+			return;
 		
 		$this->files_base_dir = Utility::get_file_base_dir();
 		
@@ -27,6 +30,14 @@ class Search
 			$this->files_base_dir = convert_toplat($this->files_base_dir);
 		}
 		
+	}
+	
+	private function check_db()
+	{
+		if($this->db != null)
+			return true;
+		else
+			return false;
 	}
 	
 	/**
@@ -52,6 +63,9 @@ class Search
 	 */
 	function create_index($subdir = "")
 	{
+		if(!$this->check_db())
+			return;
+			
 		if($subdir != "" && 
 			substr($subdir, strlen($subdir) - 1, 1) != "\\" && 
 			substr($subdir, strlen($subdir) - 1, 1) != "/")
@@ -88,6 +102,9 @@ class Search
 	 */
 	private function create_index_r($subdir = "")
 	{
+		if(!$this->check_db())
+			return;
+			
 		if($subdir != "" && 
 			substr($subdir, strlen($subdir) - 1, 1) != "\\" && 
 			substr($subdir, strlen($subdir) - 1, 1) != "/")
@@ -249,6 +266,38 @@ class Search
 			$this->create_index_r($dir['item_path']);
 		} 
 
+	}
+	
+	function query($query_str, $subdir, $sort = 1)
+	{
+		if(!$this->check_db() || $query_str == "")
+		{
+			return null;
+		}
+		
+		if($subdir != "" && 
+			substr($subdir, strlen($subdir) - 1, 1) != "/")
+		{
+			$subdir .= "/";
+		}
+		if(substr($subdir, strlen($subdir) - 1, 1) == "\\")
+		{
+			$subdir = substr($subdir, 0, strlen($subdir) - 1);
+			$subdir .= "/";
+		}
+		
+		$subdir .= "%";
+		
+		$query = "SELECT * FROM `fileindex` WHERE name LIKE \"%$query_str%\"";
+		if($subdir != "%")
+		{
+			$query .= " AND path LIKE \"$subdir\"";
+		}
+		
+		//echo $query;
+		$rows = $this->db->get_results($query);
+		
+		return $rows;
 	}
 	
 }

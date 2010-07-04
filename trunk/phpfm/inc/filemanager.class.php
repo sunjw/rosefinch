@@ -6,6 +6,7 @@ require_once "gettext.inc.php";
 require_once "sort.inc.php";
 require_once "clipboard.class.php";
 require_once "messageboard.class.php";
+require_once "search.class.php";
 require_once "utility.class.php";
 
 @session_start();
@@ -31,10 +32,15 @@ class FileManager
 	private $fstats;
 	private $dstats;
 	
+	private $is_search;
+	private $browser_page; // 浏览页面名称 默认为 index.php
+	private $search_page; // 搜索页面名称 默认为 search.php
+	private $search_query;
+	
 	private $clipboard;
 	private $messageboard;
 	
-	function __construct()
+	function __construct($is_search = false, $browser_page = "index.php", $search_page = "search.php")
 	{
 		/*
 		 * 内部字符串全部使用 UTF-8 编码
@@ -43,7 +49,13 @@ class FileManager
 		$this->clipboard = Utility::get_clipboard();
 		$this->messageboard = Utility::get_messageboard();
 		
+		$this->is_search = $is_search;
+		$this->browser_page = $browser_page;
+		$this->search_page = $search_page;
+		$this->search_query = "";
+		
 		$files_base_dir = Utility::get_file_base_dir();
+		$_SESSION['base_dir'] = $files_base_dir; // 将文件基路径存入 SESSION
 		
 		$this->request_sub_dir = $this->get_request_subdir();
 		//echo $this->request_sub_dir;
@@ -54,7 +66,6 @@ class FileManager
 		else
 			$this->request_sub_dir = substr(convert_toutf8($this->request_dir), strlen($files_base_dir));
 		//echo $this->request_sub_dir;
-		$_SESSION['base_dir'] = $files_base_dir; // 将文件基路径存入 SESSION
 		
 		$this->sort_type = get_query(SORT_PARAM);
 		$this->order = get_query(ORDER_PARAM);
@@ -137,10 +148,49 @@ class FileManager
 			$this->dsort = $this->sort > 0 ? 2 : -2;
 		}
 		
-		$this->query_str = "s=" . $this->sort_type . "&o=" . $this->order . "&view=" . $this->view_type;
+		$this->query_str = "s=".$this->sort_type."&o=".$this->order."&view=".$this->view_type;
 		
+		if(!$this->is_search)
+		{
+			$this->init_browser();
+		}
+		else
+		{
+			$this->init_search();
+		}
+		
+	}
+	
+	/**
+	 * 初始化浏览页面
+	 */
+	private function init_browser()
+	{
 		$this->dstats = $this->get_dirs_list($this->request_dir, $this->dsort); // 获得已排序的目录数组
 		$this->fstats = $this->get_files_list($this->request_dir, $this->sort); // 获得已排序的文件数组
+	}
+	
+	/**
+	 * 初始化搜索页面
+	 */
+	private function init_search()
+	{
+		$this->search_query = $this->get_search_query();
+		if($this->search_query == "")
+		{
+			redirect($this->browser_page."?dir=".$this->request_sub_dir);
+		}
+		
+		$search = new Search();
+		
+		$rows = $search->query($this->search_query, $this->request_sub_dir, $this->sort_type);
+		//print_r($rows);
+		
+		if($rows != null)
+		{
+			$this->prepare_search_rows($rows);
+		}
+
 	}
 	
 	/**
@@ -149,7 +199,12 @@ class FileManager
 	 */
 	public function title()
 	{
-		return _(TITLENAME) . " - " . _("PHP File Manager");
+		return _(TITLENAME)." - "._("PHP File Manager");
+	}
+	
+	public function get_search()
+	{
+		return $this->search_query;
 	}
 	
 	/**
@@ -189,7 +244,7 @@ class FileManager
 	 */
 	public function get_current_path()
 	{
-		return "/" . $this->request_sub_dir;
+		return "/".$this->request_sub_dir;
 	}
 	
 	/**
@@ -245,13 +300,13 @@ class FileManager
 	{
 		//echo $request_sub_dir;
 		$files_base_dir_plat = convert_toplat($files_base_dir);
-		$request_dir = $files_base_dir_plat . $request_sub_dir; // 获得请求目录路径
+		$request_dir = $files_base_dir_plat.$request_sub_dir; // 获得请求目录路径
 		if(PLAT_CHARSET != "UTF-8")
 		{
 			if(!file_exists($request_dir))
 			{
 				// 不存在，试试转化成本地编码
-				$request_dir = $files_base_dir_plat . convert_toplat($request_sub_dir); // Windows 上可能要转换成 gb2312
+				$request_dir = $files_base_dir_plat.convert_toplat($request_sub_dir); // Windows 上可能要转换成 gb2312
 				if(!file_exists($request_dir))
 				{
 					$request_dir = $files_base_dir_plat;
@@ -270,7 +325,7 @@ class FileManager
 			{
 				// 不存在，试试转化成 UTF-8  编码
 				$request_sub_dir = convert_gbtoutf8($request_sub_dir);
-				$request_dir = $files_base_dir_plat . $request_sub_dir; // Linux 上可能要转换成 utf-8
+				$request_dir = $files_base_dir_plat.$request_sub_dir; // Linux 上可能要转换成 utf-8
 				if(!file_exists($request_dir))
 				{
 					$request_dir = $files_base_dir_plat;
@@ -285,6 +340,11 @@ class FileManager
 		
 		//echo $request_dir;
 		return $request_dir;
+	}
+	
+	private function get_search_query()
+	{
+		return get_query(SEARCH_PARAM);
 	}
 
 	/**
@@ -308,12 +368,12 @@ class FileManager
 			//echo "List of files:<br />";
 			
 		    while (false !== ($file_name = @readdir($handle))) {
-		        //echo convert_toutf8($file) . "<br />";
+		        //echo convert_toutf8($file)."<br />";
 		        
-		        $full_file_path = $path . $file_name;
+		        $full_file_path = $path.$file_name;
 		        if(!is_dir($full_file_path))
 		        {
-		        	//echo convert_toutf8($full_file_path) . "<br />";
+		        	//echo convert_toutf8($full_file_path)."<br />";
 		        	$fstat = stat($full_file_path);
 					$type = Utility::get_file_ext($file_name);
 					
@@ -331,15 +391,15 @@ class FileManager
 					$size = Utility::format_size($size);
 					//echo $request_sub_dir;
 					
-					//$a_href = FILES_DIR . "/" . $this->request_sub_dir . $file['name'];
-					$a_href = "func/download.func.php?file=" . rawurlencode($this->request_sub_dir . $file['name']);
+					//$a_href = FILES_DIR."/".$this->request_sub_dir.$file['name'];
+					$a_href = "func/download.func.php?file=".rawurlencode($this->request_sub_dir.$file['name']);
 					$type_html = "";
 					if($file['type'] == "")
 						$type_html = _("File");
 					else
 						$type_html = $file['type'];
 						
-					$item_path = $this->request_sub_dir . $file['name'];
+					$item_path = $this->request_sub_dir.$file['name'];
 					
 					$file['size_str'] = $size;
 					$file['type_html'] = $type_html;
@@ -402,13 +462,13 @@ class FileManager
 		if ($handle = @opendir($path)) {
 			//echo "List of dirs:<br />";
 		    while (false !== ($dir_name = @readdir($handle))) {
-		        //echo convert_toutf8($file) . "<br />";
-		        if($dir_name != "." && $dir_name != "..") // 过滤掉 . 和 ..
+		        //echo convert_toutf8($file)."<br />";
+		        if($dir_name != "." && $dir_name != "..") // 过滤掉.和 ..
 		        {
-			        $full_dir_path = $path . $dir_name;
+			        $full_dir_path = $path.$dir_name;
 			        if(is_dir($full_dir_path))
 			        {
-			        	//echo convert_toutf8($full_dir_path) . "<br />";
+			        	//echo convert_toutf8($full_dir_path)."<br />";
 			        	$dstat = stat($full_dir_path);
 			        	$dir = array();
 			        	$dir['name'] = htmlspecialchars(convert_toutf8($dir_name));
@@ -419,12 +479,12 @@ class FileManager
 			        	if($this->filte($dir))
 							continue;
 			
-						$a_href = $_SERVER['PHP_SELF'] . "?" .
-									$this->query_str. "&dir=" . 
-									rawurlencode($this->request_sub_dir . 
+						$a_href = $this->browser_page."?".
+									$this->query_str."&dir=". 
+									rawurlencode($this->request_sub_dir. 
 									$dir['name']);
 									
-						$item_path = $this->request_sub_dir . $dir['name'];
+						$item_path = $this->request_sub_dir.$dir['name'];
 						
 						$dir['size_str'] = "&nbsp;";
 						$dir['type_html'] = _("Folder");
@@ -458,6 +518,113 @@ class FileManager
 		    usort($dirs, $cmp_function);
 		}
 		return $dirs;
+	}
+	
+	private function prepare_search_rows($rows)
+	{
+		$dirs = array();
+		$files = array();
+		
+		foreach($rows as $row)
+		{
+			if($row->type == "dir")
+			{
+				$dir = array();
+				$dir['name'] = $row->name;
+			    $dir['stat']['mtime'] = timestrtotime($row->modified);
+			    $dir['type'] = "dir";
+			
+				$a_href = $this->browser_page."?".
+					$this->query_str."&dir=". 
+					rawurlencode($row->path);
+						
+				$dir['size_str'] = "&nbsp;";
+				$dir['type_html'] = _("Folder");
+				$dir['a_href'] = $a_href;
+				$dir['item_path'] = $row->path;
+			        	
+			    array_push($dirs, $dir);
+			}
+			else
+			{
+				$file = array();
+		        $file['name'] = $row->name;
+		        $file['type'] = $row->type;
+		        $file['stat']['mtime'] = timestrtotime($row->modified);
+		        $file['stat']['size'] = $row->size;
+					
+				// 处理大小
+				$size = $file['stat']['size'];
+				$size = Utility::format_size($size);
+				//echo $request_sub_dir;
+					
+				//$a_href = FILES_DIR."/".$this->request_sub_dir.$file['name'];
+				$a_href = "func/download.func.php?file=".rawurlencode($row->path);
+				$type_html = "";
+				if($file['type'] == "")
+					$type_html = _("File");
+				else
+					$type_html = $file['type'];
+					
+				$file['size_str'] = $size;
+				$file['type_html'] = $type_html;
+				$file['a_href'] = $a_href;
+				$file['item_path'] = $row->path;
+		        	
+		        array_push($files, $file);
+			}
+		}
+		
+		// 排序
+		$cmp_function = "cmp_name";
+		switch($this->dsort)
+		{
+		case 1:
+			$cmp_function = "cmp_name";
+			break;
+		case 2:
+			$cmp_function = "cmp_mtime";
+			break;
+		case -1:
+			$cmp_function = "rcmp_name";
+			break;
+		case -2:
+			$cmp_function = "rcmp_mtime";
+			break;
+		}
+		usort($dirs, $cmp_function);
+		
+		switch($this->sort)
+		{
+		case 1:
+			$cmp_function = "cmp_name";
+			break;
+		case 2:
+			$cmp_function = "cmp_size";
+			break;
+		case 3:
+		 	$cmp_function = "cmp_type";
+			break;
+		case 4:
+			$cmp_function = "cmp_mtime";
+			break;
+		case -1:
+			$cmp_function = "rcmp_name";
+			break;
+		case -2:
+			$cmp_function = "rcmp_size";
+			break;
+		case -3:
+			$cmp_function = "rcmp_type";
+			break;
+		case -4:
+			$cmp_function = "rcmp_mtime";
+		 	break;
+		}
+		usort($files, $cmp_function);
+		
+		$this->dstats = $dirs;
+		$this->fstats = $files;
 	}
 	
 	/**
@@ -513,7 +680,7 @@ class FileManager
 		<div id="fullpath">
 			<div>
 				<div class="divLabel"><?php echo _("Current path:"); ?>&nbsp;</div>
-			    <div class="divDir"><a href="index.php?<?php echo $this->query_str; ?>">Root</a></div>
+			    <div class="divDir"><a href="<?php echo $this->browser_page."?".$this->query_str; ?>">Root</a></div>
 			    <div class="pathSlash">
 			    	<a class="arrow" href="javascript:void(0);">&nbsp;</a>
 			        	
@@ -533,7 +700,7 @@ class FileManager
 			        	$dir_str .= $sub_dir;
 ?>
 			    <div class="divDir">
-			        <a href="index.php?<?php echo $this->query_str; ?>&dir=<?php echo rawurlencode($dir_str); ?>">
+			        <a href="<?php echo $this->browser_page."?".$this->query_str; ?>&dir=<?php echo rawurlencode($dir_str); ?>">
 			        	<?php echo str_replace(" ", "&nbsp;", $sub_dir); ?>
 			        </a>
 			    </div>
@@ -579,7 +746,7 @@ class FileManager
 					{
 ?>
 					<li>
-						<a href="index.php?<?php echo $this->query_str; ?>&dir=<?php echo rawurlencode($sub_dir_str . $sub_dstat['name']); ?>" title="<?php echo $sub_dstat['name']; ?>">
+						<a href="<?php echo $this->browser_page."?".$this->query_str; ?>&dir=<?php echo rawurlencode($sub_dir_str.$sub_dstat['name']); ?>" title="<?php echo $sub_dstat['name']; ?>">
 							<?php 
 								if($sub_dstat['name'] == $next_in_path)
 									printf("<strong>%s</strong>", str_replace(" ", "&nbsp;", $sub_dstat['name']));
@@ -604,16 +771,46 @@ class FileManager
 	 */
 	public function display_toolbar()
 	{
-		$up = "";
-		//echo $request_sub_dir;
-		$up = $_SERVER['PHP_SELF'] . "?";
-		$up .= $this->query_str;
-		$up .= ("&dir=" . rawurlencode($this->get_parent_dir($this->request_sub_dir)));
+		$this_page = $this->is_search ? $this->search_page : $this->browser_page;
+		$query_str = $this->query_str;
 		
-		$detail_view_url = $_SERVER['PHP_SELF'] . "?" . $this->query_str .
-							"&dir=" . rawurlencode($this->request_sub_dir) . "&view=detail";
-		$largeicon_view_url = $_SERVER['PHP_SELF'] . "?" . $this->query_str .
-							"&dir=" . rawurlencode($this->request_sub_dir) . "&view=largeicon";
+		$up = "";
+		$up_img = "images/toolbar-up.gif";
+		$new_folder_img = "images/toolbar-new-folder.gif";
+		$upload_img = "images/toolbar-upload.gif";
+		
+		$upload_click = "FileManager.clickUpload()";
+		$new_folder_click = "FileManager.clickNewFolder()";
+		//echo $request_sub_dir;
+		
+		if(!$this->is_search)
+		{
+			// 浏览模式
+			$up = $this->browser_page."?";
+			$up .= $this->query_str;
+			$up .= ("&dir=".rawurlencode($this->get_parent_dir($this->request_sub_dir)));
+			
+		}
+		else
+		{
+			// 搜索模式
+			$query_str = "q=".$this->search_query."&".$query_str;
+			
+			$up = "javascript:;";
+			$upload_click = "javascript:;";
+			$new_folder_click = "javascript:;";
+			
+			$up_img = "images/toolbar-up-disable.gif";
+			$new_folder_img = "images/toolbar-new-folder-disable.gif";
+			$upload_img = "images/toolbar-upload-disable.gif";
+		}
+		
+		$detail_view_url = $this_page."?".$query_str.
+							"&dir=".rawurlencode($this->request_sub_dir)."&view=detail";
+		$largeicon_view_url = $this_page."?".$query_str .
+							"&dir=".rawurlencode($this->request_sub_dir)."&view=largeicon";
+		$clean_search_url = $this->browser_page."?".$this->query_str.
+							"&dir=".rawurlencode($this->request_sub_dir);
 		
 		$paste_img_src = "images/toolbar-paste-disable.gif";
 		$paste_click = "FileManager.doNothing()";
@@ -624,7 +821,6 @@ class FileManager
 			$paste_click = "FileManager.clickPaste()";
 			$paste_class = "";
 		}
-		$upload_click = "FileManager.clickUpload()";
 		
 		$button_names['Refresh'] = _("Refresh");
 		$button_names['Up'] = _("Up");
@@ -639,6 +835,7 @@ class FileManager
 		$button_names['Upload'] = _("Upload");
 		$button_names['Large Icon View'] = _("Large Icon View");
 		$button_names['Detail View'] = _("Detail View");
+		$button_names['Clean Search'] = _("Clean Search");
 		
 ?>
 		<div id="toolbar">
@@ -647,7 +844,7 @@ class FileManager
 					<img alt="<?php echo $button_names['Refresh']; ?>" src="images/toolbar-refresh.gif" />
 				</a>
 				<a href="<?php echo $up; ?>" title="<?php echo $button_names['Up']; ?>" class="toolbarUp splitRight">
-					<img alt="<?php echo $button_names['Up']; ?>" src="images/toolbar-up.gif" />
+					<img alt="<?php echo $button_names['Up']; ?>" src="<?php echo $up_img; ?>" />
 				</a>
 				<a href="javascript:;" title="<?php echo $button_names['Select All']; ?>" class="toolbarSelectAll" onclick="FileManager.selectAll()">
 					<img alt="<?php echo $button_names['Select All']; ?>" src="images/toolbar-select-all.gif" />
@@ -664,8 +861,8 @@ class FileManager
 				<a href="javascript:;" title="<?php echo $button_names['Paste']; ?>" class="toolbarPaste splitRight <?php echo $paste_class; ?>" onclick="<?php echo $paste_click; ?>">
 					<img alt="<?php echo $button_names['Paste']; ?>" src="<?php echo $paste_img_src; ?>" />
 				</a>
-				<a href="javascript:;" title="<?php echo $button_names['New Folder']; ?>" class="toolbarNewFolder" onclick="FileManager.clickNewFolder()">
-					<img alt="<?php echo $button_names['New Folder']; ?>" src="images/toolbar-new-folder.gif" />
+				<a href="javascript:;" title="<?php echo $button_names['New Folder']; ?>" class="toolbarNewFolder" onclick="<?php echo $new_folder_click; ?>">
+					<img alt="<?php echo $button_names['New Folder']; ?>" src="<?php echo $new_folder_img; ?>" />
 				</a>
 				<a href="javascript:;" title="<?php echo $button_names['Rename']; ?>" class="toolbarRename">
 					<img alt="<?php echo $button_names['Rename']; ?>" src="images/toolbar-rename-disable.gif" />
@@ -674,16 +871,31 @@ class FileManager
 					<img alt="<?php echo $button_names['Delete']; ?>" src="images/toolbar-delete-disable.gif" />
 				</a>
 				<a href="javascript:;" title="<?php echo $button_names['Upload']; ?>" class="toolbarUpload splitRight"  onclick="<?php echo $upload_click; ?>">
-					<img alt="<?php echo $button_names['Upload']; ?>" src="images/toolbar-upload.gif" />
+					<img alt="<?php echo $button_names['Upload']; ?>" src="<?php echo $upload_img; ?>" />
 				</a>
 			</div>
             <div id="rightToolbar">
 				<a href="<?php echo $largeicon_view_url; ?>" title="<?php echo $button_names['Large Icon View']; ?>" class="splitLeft">
 					<img alt="<?php echo $button_names['Large Icon View']; ?>" src="images/view-largeicon.gif" />
 				</a>
-				<a href="<?php echo $detail_view_url; ?>" title=<?php echo $button_names['Detail View']; ?>">
+				<a href="<?php echo $detail_view_url; ?>" title=<?php echo $button_names['Detail View']; ?>" class="splitRight">
 					<img alt="<?php echo $button_names['Detail View']; ?>" src="images/view-detail.gif" />
 				</a>
+				<form id="searchForm" action="<?php echo $this->search_page ?>" method="get">
+            		<input id="q" name="q" type="text" value="<?php echo $this->search_query; ?>" maxlength="255" size="10" />
+            		<input type="hidden" name="dir" value="<?php echo $this->request_sub_dir; ?>" />
+            		<input type="submit" value="<?php echo _("Search"); ?>" />
+            		<?php 
+	            	if($this->is_search)
+	            	{
+	            	?>
+	            	<a href="<?php echo $clean_search_url; ?>" title="<?php echo $button_names['Clean Search']; ?>">
+						<img alt="<?php echo $button_names['Clean Search']; ?>" src="images/close.gif" />
+					</a>
+	            	<?php 
+	            	}
+	            	?>
+            	</form>
             </div>
         </div>
 <?php 
@@ -729,7 +941,7 @@ class FileManager
 			<div class="ajaxHeader">
 				<span><?php echo $multilan_titles; ?></span>
 				<a class="ajaxFuncClose" href="javascript:;">
-					<img alt="Close" src="images/ajax-func-close.gif" border="0">
+					<img alt="Close" src="images/close.gif" border="0">
 				</a>
 			</div>
 			<form action="" method="post" enctype="multipart/form-data">
@@ -769,7 +981,7 @@ class FileManager
 			<div class="ajaxHeader">
 				<span><?php echo _("Confirm"); ?></span>
 				<a class="ajaxFuncClose" href="javascript:;">
-					<img alt="Close" src="images/ajax-func-close.gif" border="0">
+					<img alt="Close" src="images/close.gif" border="0">
 				</a>
 			</div>
 			<div id="deleteMsg">
@@ -792,7 +1004,7 @@ class FileManager
 			<div class="ajaxHeader">
 				<span><?php echo _("Audio Player"); ?></span>
 				<a class="ajaxFuncClose" href="javascript:;">
-					<img alt="Close" src="images/ajax-func-close.gif" border="0">
+					<img alt="Close" src="images/close.gif" border="0">
 				</a>
 			</div>
 			<div class="flashAudioPlayer">
@@ -869,6 +1081,8 @@ class FileManager
 	 */
 	private function display_header()
 	{
+		$this_page = $this->is_search ? $this->search_page : $this->browser_page;
+		
 		$request_sub_dir = $this->request_sub_dir;
 		$sort_type = $this->sort_type;
 		$order = $this->order;
@@ -899,24 +1113,28 @@ class FileManager
 			<span class="check"></span>
 			<span class="icon">&nbsp;</span>
 			<span class="name split">
-				<a href="<?php echo $_SERVER['PHP_SELF'] . "?dir=" .
-				$request_sub_dir . "&s=n" .
-				"&o=" . $norder; ?>"><?php echo _("Name"); ?></a>
+				<a href="<?php echo $this_page."?q=".
+				$this->search_query."&dir=".
+				$request_sub_dir."&s=n".
+				"&o=".$norder; ?>"><?php echo _("Name"); ?></a>
 			</span>
 			<span class="size split">
-				<a href="<?php echo $_SERVER['PHP_SELF'] . "?dir=" .
-				$request_sub_dir . "&s=s" .
-				"&o=" . $sorder; ?>"><?php echo _("Size"); ?></a>
+				<a href="<?php echo $this_page."?q=".
+				$this->search_query."&dir=".
+				$request_sub_dir."&s=s" .
+				"&o=".$sorder; ?>"><?php echo _("Size"); ?></a>
 			</span>
 			<span class="type split">
-				<a href="<?php echo $_SERVER['PHP_SELF'] . "?dir=" .
-				$request_sub_dir . "&s=t" .
-				"&o=" . $torder; ?>"><?php echo _("Type"); ?></a>
+				<a href="<?php echo $this_page."?q=".
+				$this->search_query."&dir=".
+				$request_sub_dir."&s=t" .
+				"&o=".$torder; ?>"><?php echo _("Type"); ?></a>
 			</span>
 			<span class="mtime split">
-				<a href="<?php echo $_SERVER['PHP_SELF'] . "?dir=" .
-				$request_sub_dir . "&s=m" .
-				"&o=" . $morder; ?>"><?php echo _("Modified Time"); ?></a>
+				<a href="<?php echo $this_page."?q=".
+				$this->search_query."&dir=".
+				$request_sub_dir."&s=m" .
+				"&o=".$morder; ?>"><?php echo _("Modified Time"); ?></a>
 			</span>
 		</div>
 <?php 
@@ -938,6 +1156,7 @@ class FileManager
 		<script type="text/javascript" >
 			//<![CDATA[
 			FileManager.setSortArrow("<?php echo $javascript_call_arg; ?>", "<?php echo $order; ?>");
+			FileManager.setSearchMode(<?php echo ($this->is_search?"true":"false"); ?>);
 			//]]>
 		</script>
 <?php 
@@ -951,9 +1170,9 @@ class FileManager
 		if($this->request_sub_dir != "")
 		{
 			//echo $request_sub_dir;
-			$up = $_SERVER['PHP_SELF'] . "?";
+			$up = $this->browser_page."?";
 			$up .= $this->query_str;
-			$up .= ("&dir=" . $this->get_parent_dir($this->request_sub_dir));		
+			$up .= ("&dir=".$this->get_parent_dir($this->request_sub_dir));		
 ?>
 			<li>
 				<span class="check"></span>

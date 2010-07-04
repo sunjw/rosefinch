@@ -18,6 +18,7 @@ var FileManager = {
 	selectedItems :null,
 	sortName :null,
 	sortOrder :null,
+	isSearch :null,
 	delayID :0,
 	isIE :null,
 	inlineShadow :"transparent url('images/shadow.png') no-repeat right bottom",
@@ -301,6 +302,13 @@ var FileManager = {
 	setSortArrow : function(name, order) {
 		this.sortName = name;
 		this.sortOrder = order;
+	},
+
+	/*
+	 * 设置为搜索模式
+	 */
+	setSearchMode : function(isSearch) {
+		this.isSearch = isSearch;
 	},
 
 	/*

@@ -7,6 +7,10 @@
 	text-align: right;
 }
 
+input[type="submit"], input[type="button"] {
+	padding: 0 4px;
+}
+
 #mainView {
 	border: 1px solid #999999;
 	background-color: white;
@@ -163,6 +167,26 @@
 	margin-top: 1px;
 	height: 16px;
 	width: 16px;
+}
+
+#toolbar form#searchForm {
+	float: right;
+	height: 20px;
+}
+
+#toolbar form#searchForm input {
+	vertical-align: top;
+	float: left;
+	margin: 0 2px;
+}
+
+#toolbar form#searchForm input[type="text"] {
+	height: 16px;
+	color: #999999;
+}
+
+#toolbar form#searchForm input[type="submit"] {
+	font-size: 10px;
 }
 
 /* View sector */

@@ -19,6 +19,7 @@ define("DOMAIN", "phpfm"); // 不要修改
 
 // 定义搜索状态
 define("SEARCH", true);
+define("SEARCH_PARAM", "q");
 
 // 数据库参数(要移到设置里面)
 define("DB_USER", "rosefinch");
