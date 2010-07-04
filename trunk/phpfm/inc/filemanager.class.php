@@ -186,10 +186,7 @@ class FileManager
 		$rows = $search->query($this->search_query, $this->request_sub_dir, $this->sort_type);
 		//print_r($rows);
 		
-		if($rows != null)
-		{
-			$this->prepare_search_rows($rows);
-		}
+		$this->prepare_search_rows($rows);
 
 	}
 	
@@ -525,53 +522,57 @@ class FileManager
 		$dirs = array();
 		$files = array();
 		
-		foreach($rows as $row)
+		if($rows != null)
 		{
-			if($row->type == "dir")
+		
+			foreach($rows as $row)
 			{
-				$dir = array();
-				$dir['name'] = $row->name;
-			    $dir['stat']['mtime'] = timestrtotime($row->modified);
-			    $dir['type'] = "dir";
-			
-				$a_href = $this->browser_page."?".
-					$this->query_str."&dir=". 
-					rawurlencode($row->path);
-						
-				$dir['size_str'] = "&nbsp;";
-				$dir['type_html'] = _("Folder");
-				$dir['a_href'] = $a_href;
-				$dir['item_path'] = $row->path;
-			        	
-			    array_push($dirs, $dir);
-			}
-			else
-			{
-				$file = array();
-		        $file['name'] = $row->name;
-		        $file['type'] = $row->type;
-		        $file['stat']['mtime'] = timestrtotime($row->modified);
-		        $file['stat']['size'] = $row->size;
-					
-				// 处理大小
-				$size = $file['stat']['size'];
-				$size = Utility::format_size($size);
-				//echo $request_sub_dir;
-					
-				//$a_href = FILES_DIR."/".$this->request_sub_dir.$file['name'];
-				$a_href = "func/download.func.php?file=".rawurlencode($row->path);
-				$type_html = "";
-				if($file['type'] == "")
-					$type_html = _("File");
+				if($row->type == "dir")
+				{
+					$dir = array();
+					$dir['name'] = $row->name;
+				    $dir['stat']['mtime'] = timestrtotime($row->modified);
+				    $dir['type'] = "dir";
+				
+					$a_href = $this->browser_page."?".
+						$this->query_str."&dir=". 
+						rawurlencode($row->path);
+							
+					$dir['size_str'] = "&nbsp;";
+					$dir['type_html'] = _("Folder");
+					$dir['a_href'] = $a_href;
+					$dir['item_path'] = $row->path;
+				        	
+				    array_push($dirs, $dir);
+				}
 				else
-					$type_html = $file['type'];
-					
-				$file['size_str'] = $size;
-				$file['type_html'] = $type_html;
-				$file['a_href'] = $a_href;
-				$file['item_path'] = $row->path;
-		        	
-		        array_push($files, $file);
+				{
+					$file = array();
+			        $file['name'] = $row->name;
+			        $file['type'] = $row->type;
+			        $file['stat']['mtime'] = timestrtotime($row->modified);
+			        $file['stat']['size'] = $row->size;
+						
+					// 处理大小
+					$size = $file['stat']['size'];
+					$size = Utility::format_size($size);
+					//echo $request_sub_dir;
+						
+					//$a_href = FILES_DIR."/".$this->request_sub_dir.$file['name'];
+					$a_href = "func/download.func.php?file=".rawurlencode($row->path);
+					$type_html = "";
+					if($file['type'] == "")
+						$type_html = _("File");
+					else
+						$type_html = $file['type'];
+						
+					$file['size_str'] = $size;
+					$file['type_html'] = $type_html;
+					$file['a_href'] = $a_href;
+					$file['item_path'] = $row->path;
+			        	
+			        array_push($files, $file);
+				}
 			}
 		}
 		
