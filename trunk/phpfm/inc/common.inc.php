@@ -164,6 +164,14 @@ function redirect($url, $need_rawurldecode = false)
 }
 
 /**
+ * 在 header 中设置编码 UTF-8
+ */
+function set_response_utf8()
+{
+	header("Content-Type: text/html; charset=UTF-8");
+}
+
+/**
  * 将时间字符串转换为 timestamp
  * @param $str 时间字符串 格式为 Y-n-j H:i:s
  * @return int timestamp

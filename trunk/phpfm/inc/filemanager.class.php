@@ -45,6 +45,7 @@ class FileManager
 		/*
 		 * 内部字符串全部使用 UTF-8 编码
 		 */
+		set_response_utf8();
 		
 		$this->clipboard = Utility::get_clipboard();
 		$this->messageboard = Utility::get_messageboard();
@@ -816,7 +817,7 @@ class FileManager
 		$paste_img_src = "images/toolbar-paste-disable.gif";
 		$paste_click = "FileManager.doNothing()";
 		$paste_class = "disable";
-		if($this->clipboard->have_items())
+		if($this->clipboard->have_items() && $this->is_search == false)
 		{
 			$paste_img_src = "images/toolbar-paste.gif";
 			$paste_click = "FileManager.clickPaste()";

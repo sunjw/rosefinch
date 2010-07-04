@@ -9,6 +9,8 @@ require_once "../log/log.func.php";
 
 @session_start();
 
+set_response_utf8();
+
 log_to_file($_SERVER['REMOTE_ADDR']." setting...");
 
 //print_r($_GET);

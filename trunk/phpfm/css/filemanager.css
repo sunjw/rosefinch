@@ -170,7 +170,7 @@ input[type="submit"], input[type="button"] {
 }
 
 #toolbar form#searchForm {
-	float: right;
+	float: left;
 	height: 20px;
 }
 

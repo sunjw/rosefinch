@@ -373,7 +373,7 @@ var FileManager = {
 			"oper" :oper,
 			"items" :itemsStr
 		}, function(data) {
-			if (data == "ok") {
+			if (data == "ok" && this.isSearch == false) {
 				FileManager.setButton("toolbarPaste",
 						"images/toolbar-paste.gif", FileManager.clickPaste, "",
 						"disable");
