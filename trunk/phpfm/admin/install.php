@@ -19,7 +19,9 @@ $settings = array('root_type' => "absolute",
 				'timezone' => "",
 				'language' => "en_US",
 				'title_name' => "Rosefinch",
-				'lightbox' => 1);
+				'lightbox' => 1,
+				'audioPlayer' => 1,
+				'search' => 0);
 
 $wrong = false;
 

@@ -237,6 +237,15 @@ msgstr "为音乐文件启用 Audio Player"
 msgid "Let Rosefinch enable Audio Player for audio files."
 msgstr "让 Rosefinch 为音乐文件启用 Audio Player。"
 
+msgid "Enable search function"
+msgstr "启用搜索功能"
+
+msgid "If you enable search function, you should modify parameters in \"/inc/defines.inc.php\" file."
+msgstr "如果启用了搜索功能，您必须修改“/inc/defines.inc.php”里面的参数。"
+
+msgid "Index all files"
+msgstr "索引所有文件"
+
 msgid "Knowing Issue"
 msgstr "已知问题"
 

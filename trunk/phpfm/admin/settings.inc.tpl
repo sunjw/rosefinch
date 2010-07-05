@@ -20,6 +20,9 @@ date_default_timezone_set("&&TIME_ZONE&&"); // 设置时区
 
 define("LOCALE", "&&LOCALE&&"); // 定义使用语言，如zh_CN, en_US
 
+// 搜索
+define("SEARCH", &&SEARCH&&);
+
 // 名称
 define("TITLENAME", "&&TITLENAME&&");
 

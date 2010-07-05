@@ -61,6 +61,27 @@
         		</div>
         	</fieldset>
         	<fieldset>
+        		<legend><?php echo _("Search"); ?></legend>
+        		<div>
+	        		<label for="search"><?php echo _("Enable search function") . ":"; ?></label>
+	        		<select id="search" name="search">
+	        			<option value="1" <?php if($settings['search'] == 1)print("selected='selected'"); ?>><?php echo _("Enable"); ?></option>
+	        			<option value="0" <?php if($settings['search'] == 0)print("selected='selected'"); ?>><?php echo _("Disable"); ?></option>
+	        		</select>
+	        		<div class="info">
+	        			<?php 
+	        			echo _("If you enable search function, you should modify parameters in \"/inc/defines.inc.php\" file.");
+	        			?>
+	        		</div>
+        		</div>
+        		<div>
+	        		<input id="buttonIndexfile" type="button" value="<?php echo _("Index all files"); ?>" disabled="disabled" />
+	        		<div id="result" class="info">
+	        			
+	        		</div>
+        		</div>
+        	</fieldset>
+        	<fieldset>
         		<legend><?php echo _("Others Settings"); ?></legend>
         		<div>
 	        		<label for="titleName"><?php echo _("Title") . ":"; ?></label>

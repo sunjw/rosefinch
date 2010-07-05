@@ -373,7 +373,7 @@ var FileManager = {
 			"oper" :oper,
 			"items" :itemsStr
 		}, function(data) {
-			if (data == "ok" && this.isSearch == false) {
+			if (data == "ok" && FileManager.isSearch == false) {
 				FileManager.setButton("toolbarPaste",
 						"images/toolbar-paste.gif", FileManager.clickPaste, "",
 						"disable");
@@ -707,14 +707,14 @@ var FileManager = {
 
 	initMediaPreview : function() {
 		// lightbox
-	$('a.lightboxImg').lightBox( {
-		overlayOpacity :0.5,
-		autoAdapt :true
-	});
+		$('a.lightboxImg').lightBox( {
+			overlayOpacity :0.5,
+			autoAdapt :true
+		});
 
-	// AudioPlayer
-	FileManager.initAudioPlayer();
-}
+		// AudioPlayer
+		FileManager.initAudioPlayer();
+	}
 
 }
 

@@ -34,10 +34,20 @@ class Search
 	
 	private function check_db()
 	{
-		if($this->db != null)
-			return true;
-		else
+		if($this->db == null)
 			return false;
+		
+		$query = "SHOW TABLES";
+		$rows = $this->db->get_results($query, ARRAY_N);
+		//print_r($rows);
+		foreach($rows as $row)
+		{
+			//echo $row[0];
+			if($row[0] == "fileindex")
+				return true;
+		}
+		
+		return false;
 	}
 	
 	/**
@@ -64,7 +74,7 @@ class Search
 	function create_index($subdir = "")
 	{
 		if(!$this->check_db())
-			return;
+			return false;
 			
 		if($subdir != "" && 
 			substr($subdir, strlen($subdir) - 1, 1) != "\\" && 
@@ -94,6 +104,8 @@ class Search
 		
 		$query = "COMMIT";
 		$this->db->query($query);
+		
+		return true;
 	}
 	
 	/**

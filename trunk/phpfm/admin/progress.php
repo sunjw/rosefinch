@@ -6,7 +6,7 @@ require_once "../inc/common.inc.php";
  * 将设置保存到 settings.inc.php 中
  * @param $settings settings 数组
  */
-function save_settings(&$settings)
+function save_settings(&$settings, $is_install = false)
 {
 	$settings['root_type'] = post_query("rootType");
 	$settings['root_path'] = post_query("rootPath");
@@ -16,6 +16,7 @@ function save_settings(&$settings)
 	$settings['title_name'] = post_query("titleName");
 	$settings['lightbox'] = post_query("lightbox");
 	$settings['audioPlayer'] = post_query("audioPlayer");
+	$settings['search'] = post_query("search");
 	
 	if($settings['root_type'] == "" ||
 		$settings['root_path'] == "" ||
@@ -24,7 +25,8 @@ function save_settings(&$settings)
 		$settings['language'] == "" ||
 		$settings['title_name'] == "" ||
 		$settings['lightbox'] == "" ||
-		$settings['audioPlayer'] == "")
+		$settings['audioPlayer'] == "" ||
+		$settings['search'] == "")
 	{
 		return false;	
 	}
@@ -42,7 +44,7 @@ function save_settings(&$settings)
 		$settings_tpl = fopen($file_name, "r");
 		$settings_str = fread($settings_tpl, filesize($file_name));
 		fclose($settings_tpl);
-		//echo $settings;
+		//print_r( $settings);
 		
 		$templates = array("&&FILE_POSITION&&", 
 							"&&FILES_DIR&&", 
@@ -51,7 +53,8 @@ function save_settings(&$settings)
 							"&&LOCALE&&",
 							"&&TITLENAME&&",
 							"&&LIGHTBOX&&",
-							"&&AUDIOPLAYER&&");
+							"&&AUDIOPLAYER&&",
+							"&&SEARCH&&");
 		$values = array($settings['root_type'],
 						$settings['root_path'],
 						$settings['charset'],
@@ -59,7 +62,8 @@ function save_settings(&$settings)
 						$settings['language'],
 						$settings['title_name'],
 						$settings['lightbox'],
-						$settings['audioPlayer']);
+						$settings['audioPlayer'],
+						$settings['search']);
 		
 		$settings_str = str_replace($templates, $values, $settings_str);
 		//echo $settings;

@@ -20,6 +20,9 @@ date_default_timezone_set("Asia/Shanghai"); // 设置时区
 
 define("LOCALE", "zh_CN"); // 定义使用语言，如zh_CN, en_US
 
+// 搜索
+define("SEARCH", 1);
+
 // 名称
 define("TITLENAME", "Rosefinch");
 

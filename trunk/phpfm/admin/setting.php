@@ -26,7 +26,8 @@ $settings = array('root_type' => FILE_POSITION,
 				'language' => LOCALE,
 				'title_name' => TITLENAME,
 				'lightbox' => LIGHTBOX,
-				'audioPlayer' => AUDIOPLAYER);
+				'audioPlayer' => AUDIOPLAYER,
+				'search' => SEARCH);
 
 $wrong = false;
 $display_msg = false;
@@ -66,6 +67,7 @@ textdomain($domain);
 	<link href="../css/message.css" rel="stylesheet" type="text/css" />
 	<link href="../css/setting.css" rel="stylesheet" type="text/css" />
     <script type="text/javascript" language="javascript" src="../js/jquery-1.3.2.min.js"></script>
+    <script type="text/javascript" language="javascript" src="../js/indexfile.js"></script>
 </head>
 <body>
     <div id="nav">

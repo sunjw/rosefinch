@@ -18,14 +18,19 @@ define("VIEW_PARAM", "view"); // 视图模式的查询参数
 define("DOMAIN", "phpfm"); // 不要修改
 
 // 定义搜索状态
-define("SEARCH", true);
 define("SEARCH_PARAM", "q");
 
-// 数据库参数(要移到设置里面)
+// DO NOT EDIT
+
+// EDIT HERE
+// 数据库参数 Database parameters
 define("DB_USER", "rosefinch");
 define("DB_PSWD", "rose");
 define("DB_NAME", "rosefinch");
 define("DB_HOST", "localhost");
+// EDIT HERE
+
+// DO NOT EDIT
 
 /**
  * 将指定字符串从<strong>定义的平台字符串</strong>转换成 UTF-8
@@ -57,5 +62,7 @@ else
 	// 没有配置文件，跳转至安装
 	redirect("admin/install.php");
 }
+
+// DO NOT EDIT
 
 ?>

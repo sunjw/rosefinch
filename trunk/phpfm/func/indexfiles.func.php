@@ -7,6 +7,9 @@ require_once "../inc/search.class.php";
 $search = new Search();
 
 //$search->create_index();
-$search->create_index();
+if($search->create_index())
+	echo "ok";
+else
+	echo "error";
 
 ?>
