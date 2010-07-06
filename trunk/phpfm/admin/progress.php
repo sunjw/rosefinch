@@ -6,7 +6,7 @@ require_once "../inc/common.inc.php";
  * 将设置保存到 settings.inc.php 中
  * @param $settings settings 数组
  */
-function save_settings(&$settings, $is_install = false)
+function save_settings(&$settings)
 {
 	$settings['root_type'] = post_query("rootType");
 	$settings['root_path'] = post_query("rootPath");

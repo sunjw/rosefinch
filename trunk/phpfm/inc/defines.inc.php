@@ -20,18 +20,6 @@ define("DOMAIN", "phpfm"); // 不要修改
 // 定义搜索状态
 define("SEARCH_PARAM", "q");
 
-// DO NOT EDIT
-
-// EDIT HERE
-// 数据库参数 Database parameters
-define("DB_USER", "rosefinch");
-define("DB_PSWD", "rose");
-define("DB_NAME", "rosefinch");
-define("DB_HOST", "localhost");
-// EDIT HERE
-
-// DO NOT EDIT
-
 /**
  * 将指定字符串从<strong>定义的平台字符串</strong>转换成 UTF-8
  * @param $str 目标字符串
@@ -53,9 +41,14 @@ function convert_toplat($str)
 }
 
 $settings = dirname(__FILE__) . "/../admin/settings.inc.php";
+$database_inc = dirname(__FILE__) . "/../admin/database.inc.php";
 if(file_exists($settings))
 {
 	require_once $settings;
+	if(file_exists($database_inc))
+	{
+		require_once $database_inc;
+	}
 }
 else
 {

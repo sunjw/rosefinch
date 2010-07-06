@@ -192,6 +192,12 @@
 				$this->connect($this->dbuser, $this->dbpassword, $this->dbhost);
 				$this->select($this->dbname);
 			}
+			
+			// Sun Junwen add: Check db connection again
+			if(! $this->dbh)
+			{
+				return false;
+			}
 
 			// Perform the query via std mysql_query function..
 			$this->result = @mysql_query($query,$this->dbh);

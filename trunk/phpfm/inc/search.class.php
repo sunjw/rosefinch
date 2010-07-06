@@ -40,6 +40,9 @@ class Search
 		$query = "SHOW TABLES";
 		$rows = $this->db->get_results($query, ARRAY_N);
 		//print_r($rows);
+		if($rows == null)
+			return false;
+			
 		foreach($rows as $row)
 		{
 			//echo $row[0];

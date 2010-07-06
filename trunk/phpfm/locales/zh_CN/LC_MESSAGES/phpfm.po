@@ -240,11 +240,29 @@ msgstr "让 Rosefinch 为音乐文件启用 Audio Player。"
 msgid "Enable search function"
 msgstr "启用搜索功能"
 
-msgid "If you enable search function, you should modify parameters in \"/inc/defines.inc.php\" file."
-msgstr "如果启用了搜索功能，您必须修改“/inc/defines.inc.php”里面的参数。"
+msgid "If you enable search function, you should setup your database by click the link below after you click OK."
+msgstr "如果启用了搜索功能，请您在点击确定后使用下面的链接设置数据库。"
 
 msgid "Index all files"
 msgstr "索引所有文件"
+
+msgid "Database Setting"
+msgstr "数据库设置"
+
+msgid "Set database parameters"
+msgstr "设置数据库参数"
+
+msgid "Database user name"
+msgstr "数据库用户名"
+
+msgid "Database user password"
+msgstr "数据库用户密码"
+
+msgid "Database name"
+msgstr "数据库名称"
+
+msgid "Database host"
+msgstr "数据库主机"
 
 msgid "Knowing Issue"
 msgstr "已知问题"

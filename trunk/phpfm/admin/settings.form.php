@@ -70,16 +70,24 @@
 	        		</select>
 	        		<div class="info">
 	        			<?php 
-	        			echo _("If you enable search function, you should modify parameters in \"/inc/defines.inc.php\" file.");
+	        			echo _("If you enable search function, you should setup your database by click the link below after you click OK.");
 	        			?>
 	        		</div>
         		</div>
+        		<?php 
+        		if($settings['search'] == 1)
+        		{
+        		?>
         		<div>
+        			<a href="database.php"><?php echo _("Database Setting"); ?></a>&nbsp;&nbsp;
 	        		<input id="buttonIndexfile" type="button" value="<?php echo _("Index all files"); ?>" disabled="disabled" />
 	        		<div id="result" class="info">
-	        			
+	        			&nbsp;
 	        		</div>
         		</div>
+        		<?php 
+        		}
+        		?>
         	</fieldset>
         	<fieldset>
         		<legend><?php echo _("Others Settings"); ?></legend>

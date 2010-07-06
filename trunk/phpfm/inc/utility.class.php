@@ -629,7 +629,7 @@ class Utility
 		$db->hide_errors();
 		
 		$ret = $db->query("set names 'utf8'");
-		if(!is_numeric($ret) && !$ret)
+		if((!is_numeric($ret) && !$ret))
 		{
 			return null;
 		}

@@ -17,6 +17,7 @@ function indexfile() {
 
 function init() {
 	var button = $("input#buttonIndexfile");
+
 	button.click(indexfile);
 	button.removeAttr("disabled");
 }
