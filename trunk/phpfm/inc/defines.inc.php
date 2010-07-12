@@ -4,7 +4,7 @@ require_once "common.inc.php";
 
 // DO NOT EDIT
 
-define("VERSION", "1.0.2");
+define("VERSION", "1.0.5");
 
 define("INC_DIR_NAME", "inc"); // include 文件夹
 define("DEBUG", true); // Debug 模式
