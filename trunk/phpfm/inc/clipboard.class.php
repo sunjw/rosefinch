@@ -78,12 +78,12 @@ class ClipBoard
 			$success = false;
 			if($this->oper == "cut")
 			{
-				$message .= (_("Cut") . " $item ");
+				$message .= (_("Cut")." ".htmlentities_utf8($item)." ");
 				$success = Utility::phpfm_rename($oldname, $newname, true);
 			}
 			else if($this->oper == "copy")
 			{
-				$message .= (_("Copy") . " $item ");
+				$message .= (_("Copy")." ".htmlentities_utf8($item)." ");
 				$success = Utility::phpfm_copy($oldname, $newname);
 			}
 			

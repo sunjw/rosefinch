@@ -190,4 +190,9 @@ function timestrtotime($str)
 	return $timestamp;
 }
 
+function htmlentities_utf8($str)
+{
+	return htmlentities($str, ENT_COMPAT, "UTF-8");
+}
+
 ?>

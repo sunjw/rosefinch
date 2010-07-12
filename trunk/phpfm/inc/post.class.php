@@ -75,8 +75,9 @@ class Post
 			
 			if($this->clipboard->have_items())
 			{
-				$message = _("Add items to clipboard:") . "&nbsp;<br />";//"向剪贴板添加项目:&nbsp;<br />";
-				$message .= (join("<br />", $items));
+				$message = _("Add items to clipboard:")."&nbsp;<br />";//"向剪贴板添加项目:&nbsp;<br />";
+				$message .= htmlentities_utf8((join("***", $items)));
+				$message = str_replace("***", "<br />", $message);
 				$this->messageboard->set_message($message);
 				echo "ok";
 			}
@@ -106,9 +107,9 @@ class Post
 			$success = false;
 			$item = $items[$i];
 			$sub_dir = dirname($item);
-			$path = $this->files_base_dir . $item;
+			$path = $this->files_base_dir.$item;
 			log_to_file("try to delete: $path");
-			$message .= (_("Delete") . " $item ");//("删除 $item ");
+			$message .= (_("Delete")." ".htmlentities_utf8($item)." ");//("删除 $item ");
 			$path = convert_toplat($path);
 			if(file_exists($path))
 			{
@@ -123,7 +124,7 @@ class Post
 			}
 			if($success === TRUE)
 			{
-				$message .= (_("succeed") . "<br />");
+				$message .= (_("succeed")."<br />");
 				$stat = 1;
 				
 				if(SEARCH)
@@ -133,7 +134,7 @@ class Post
 			}
 			else
 			{
-				$message .= ("<strong>" . _("failed") . "</strong><br />");
+				$message .= ("<strong>"._("failed")."</strong><br />");
 				$stat = 2;
 			}
 		}
@@ -177,7 +178,7 @@ class Post
 		$success = false;
 		if(false === strpos($sub_dir, "..") && Utility::check_name($name)) // 过滤
 		{
-			$name = $this->files_base_dir . $sub_dir . $name;
+			$name = $this->files_base_dir.$sub_dir.$name;
 			log_to_file("mkdir: $name");
 			$name = convert_toplat($name);
 			if(!file_exists($name))
@@ -187,7 +188,7 @@ class Post
 		if($success === TRUE)
 		{
 			$this->messageboard->set_message(
-				_("Make new folder:") . "&nbsp;" . post_query("newname") . "&nbsp;" . _("succeed"), 
+				_("Make new folder:")."&nbsp;".htmlentities_utf8(post_query("newname"))."&nbsp;"._("succeed"), 
 				1);
 				
 			if(SEARCH)
@@ -198,7 +199,7 @@ class Post
 		else
 		{
 			$this->messageboard->set_message(
-				_("Make new folder:") . "&nbsp;" . post_query("newname") . "&nbsp;<strong>" . _("failed") . "</strong>", 
+				_("Make new folder:")."&nbsp;".htmlentities_utf8(post_query("newname"))."&nbsp;<strong>"._("failed")."</strong>", 
 				2);
 		}
 		
@@ -232,8 +233,8 @@ class Post
 		if(false === strpos($sub_dir, "..") &&
 			Utility::check_name($newname) && Utility::check_name($oldname)) // 过滤
 		{
-			$oldname = $this->files_base_dir . $sub_dir . $oldname;
-			$newname = $this->files_base_dir . $sub_dir . $newname;
+			$oldname = $this->files_base_dir.$sub_dir.$oldname;
+			$newname = $this->files_base_dir.$sub_dir.$newname;
 			
 			log_to_file("Try to rename: $oldname to $newname");
 				
@@ -243,7 +244,7 @@ class Post
 		if($success === TRUE)
 		{
 			$this->messageboard->set_message(
-				sprintf(_("Rename %s to %s ") . _("succeed"), post_query("oldname"), post_query("newname")), 
+				sprintf(_("Rename %s to %s ")._("succeed"), htmlentities_utf8(post_query("oldname")), htmlentities_utf8(post_query("newname"))), 
 				1);
 				
 			if(SEARCH)
@@ -254,7 +255,7 @@ class Post
 		else
 		{
 			$this->messageboard->set_message(
-				sprintf(_("Rename %s to %s ") . " <strong>" . _("failed") . "<strong>", post_query("oldname"), post_query("newname")), 
+				sprintf(_("Rename %s to %s ")." <strong>"._("failed")."<strong>", htmlentities_utf8(post_query("oldname")), htmlentities_utf8(post_query("newname"))), 
 				2);
 		}
 		
@@ -276,13 +277,13 @@ class Post
 		
 		if(isset($_FILES['uploadFile']))
 		{
-			$uploadfile = $this->files_base_dir. $sub_dir . $_FILES['uploadFile']['name'];
+			$uploadfile = $this->files_base_dir. $sub_dir.$_FILES['uploadFile']['name'];
 			
 			if (Utility::phpfm_move_uploaded_file($_FILES['uploadFile']['tmp_name'], $uploadfile)) {
 				$this->messageboard->set_message(
-					_("Upload") . ":&nbsp;" . $_FILES['uploadFile']['name'] . "&nbsp;" . _("succeed"),
+					_("Upload").":&nbsp;".$_FILES['uploadFile']['name']."&nbsp;"._("succeed"),
 					1);
-				log_to_file("upload success: " . $uploadfile);
+				log_to_file("upload success: ".$uploadfile);
 				
 				if(SEARCH)
 				{
@@ -291,9 +292,9 @@ class Post
 				
 			} else {
 				$this->messageboard->set_message(
-					_("Upload") . ":&nbsp;" . $_FILES['uploadFile']['name'] . " <strong>" . _("failed") . "<strong>",
+					_("Upload").":&nbsp;".$_FILES['uploadFile']['name']." <strong>"._("failed")."<strong>",
 					2);
-				log_to_file("upload failed: " . $uploadfile);
+				log_to_file("upload failed: ".$uploadfile);
 			}
 		}
 

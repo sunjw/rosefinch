@@ -200,9 +200,31 @@ class FileManager
 		return _(TITLENAME)." - "._("PHP File Manager");
 	}
 	
+	/**
+	 * title 部分的 HTML
+	 * @return title 字符串
+	 */
+	public function title_html()
+	{
+		return htmlentities_utf8($this->title());
+	}
+	
+	/**
+	 * 返回搜索关键字
+	 * @return 字符串
+	 */
 	public function get_search()
 	{
 		return $this->search_query;
+	}
+	
+	/**
+	 * 返回搜索关键字的 HTML
+	 * @return 字符串
+	 */
+	public function get_search_html()
+	{
+		return htmlentities_utf8($this->get_search());
 	}
 	
 	/**

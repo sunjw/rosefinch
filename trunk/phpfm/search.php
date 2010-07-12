@@ -29,7 +29,7 @@ $fileManager = new FileManager(true);
     </div>
     <div id="header">
     	<div id="mainTitle">
-    		<?php printf(_("Search \"%s\" in \"%s\""), $fileManager->get_search(), $fileManager->get_current_dir()); ?>
+    		<?php printf(_("Search \"%s\" in \"%s\""), $fileManager->get_search_html(), $fileManager->get_current_dir()); ?>
         </div>
         <div id="subTitle">
     		<?php 

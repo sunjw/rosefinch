@@ -645,7 +645,7 @@ class Utility
         if($page == "setting")
         {
         ?>
-        <a href="../index.php" id="phpfmNavHome" class="<?php $page == "index" ? print("current") : print(""); ?>"><?php echo _(TITLENAME); ?></a>
+        <a href="../index.php" id="phpfmNavHome" class="<?php $page == "index" ? print("current") : print(""); ?>"><?php echo htmlentities_utf8(_(TITLENAME)); ?></a>
         <ul>
         	<li class="li-item current"><a href="setting.php"><?php echo _("Setting"); ?></a></li>
         	<li class="li-item"><a href="../help.php"><?php echo _("Help"); ?></a></li>
@@ -656,7 +656,7 @@ class Utility
         else
         {
         ?>
-        <a href="index.php" id="phpfmNavHome" class="<?php $page == "index" ? print("current") : print(""); ?>"><?php echo _(TITLENAME); ?></a>
+        <a href="index.php" id="phpfmNavHome" class="<?php $page == "index" ? print("current") : print(""); ?>"><?php echo htmlentities_utf8(_(TITLENAME)); ?></a>
         <ul>
         	<li class="li-item"><a href="admin/setting.php"><?php echo _("Setting"); ?></a></li>
         	<li class="li-item<?php $page == "help" ? print(" current") : print(""); ?>"><a href="help.php"><?php echo _("Help"); ?></a></li>
