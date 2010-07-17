@@ -20,6 +20,7 @@ var FileManager = {
 	sortOrder :null,
 	isSearch :null,
 	delayID :0,
+	miniMainViewHeight :120,
 	isIE :null,
 	inlineShadow :"transparent url('images/shadow.png') no-repeat right bottom",
 
@@ -523,11 +524,14 @@ var FileManager = {
 		var footerHeight = $("div#footer").height();
 		var windowHeight = $(window).height();
 		var mainViewListHeight;
+
 		if (this.isIE && $.browser.version < 8) {
 			return;
 		} else {
 			mainViewListHeight = windowHeight - mainViewListOffset.top
 					- footerHeight - 30;
+			mainViewListHeight = mainViewListHeight > FileManager.miniMainViewHeight ? mainViewListHeight
+					: FileManager.miniMainViewHeight;
 			mainViewList.css("height", mainViewListHeight + "px");
 			mainViewList.css("overflow", "auto");
 		}
@@ -707,14 +711,14 @@ var FileManager = {
 
 	initMediaPreview : function() {
 		// lightbox
-		$('a.lightboxImg').lightBox( {
-			overlayOpacity :0.5,
-			autoAdapt :true
-		});
+	$('a.lightboxImg').lightBox( {
+		overlayOpacity :0.5,
+		autoAdapt :true
+	});
 
-		// AudioPlayer
-		FileManager.initAudioPlayer();
-	}
+	// AudioPlayer
+	FileManager.initAudioPlayer();
+}
 
 }
 

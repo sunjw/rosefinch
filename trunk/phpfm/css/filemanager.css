@@ -177,16 +177,22 @@ input[type="submit"], input[type="button"] {
 #toolbar form#searchForm input {
 	vertical-align: top;
 	float: left;
-	margin: 0 2px;
 }
 
 #toolbar form#searchForm input[type="text"] {
 	height: 16px;
 	color: #999999;
+	margin: 0 2px;
 }
 
 #toolbar form#searchForm input[type="submit"] {
 	font-size: 10px;
+	background: transparent url('../images/toolbar-search.gif') center no-repeat;
+	border: none;
+	width: 24px;
+	height: 20px;
+	text-indent: 30px;
+	cursor: pointer;
 }
 
 /* View sector */

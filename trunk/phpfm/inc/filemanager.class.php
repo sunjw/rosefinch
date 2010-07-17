@@ -912,7 +912,7 @@ class FileManager
 				<form id="searchForm" action="<?php echo $this->search_page ?>" method="get" class="splitLeft">
             		<input id="q" name="q" type="text" value="<?php echo $this->search_query; ?>" maxlength="255" size="10" />
             		<input type="hidden" name="dir" value="<?php echo $this->request_sub_dir; ?>" />
-            		<input type="submit" value="<?php echo _("Search"); ?>" />
+            		<input type="submit" value="<?php echo _("Search"); ?>" title="<?php echo _("Search"); ?>" />
             		<?php 
 	            	if($this->is_search)
 	            	{
