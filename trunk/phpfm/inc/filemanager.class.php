@@ -240,7 +240,7 @@ class FileManager
 	    <link href="css/func.css" rel="stylesheet" type="text/css" />
 	    <link href="css/jquery.lightbox-0.5.css" rel="stylesheet" type="text/css" />
 	    <script type="text/javascript" language="javascript" src="js/jquery-1.3.2.min.js"></script>
-	    <script type="text/javascript" src="js/audio-player.js"></script>  
+	    <script type="text/javascript" language="javascript" src="js/audio-player.js"></script>  
 <?php 
 		if($debug)
 		{
@@ -803,8 +803,6 @@ class FileManager
 		$new_folder_img = "images/toolbar-new-folder.gif";
 		$upload_img = "images/toolbar-upload.gif";
 		
-		$upload_click = "FileManager.clickUpload()";
-		$new_folder_click = "FileManager.clickNewFolder()";
 		//echo $request_sub_dir;
 		
 		if(!$this->is_search)
@@ -821,8 +819,6 @@ class FileManager
 			$query_str = "q=".$this->search_query."&".$query_str;
 			
 			$up = "javascript:;";
-			$upload_click = "javascript:;";
-			$new_folder_click = "javascript:;";
 			
 			$up_img = "images/toolbar-up-disable.gif";
 			$new_folder_img = "images/toolbar-new-folder-disable.gif";
@@ -837,12 +833,10 @@ class FileManager
 							"&dir=".rawurlencode($this->request_sub_dir);
 		
 		$paste_img_src = "images/toolbar-paste-disable.gif";
-		$paste_click = "FileManager.doNothing()";
 		$paste_class = "disable";
 		if($this->clipboard->have_items() && $this->is_search == false)
 		{
 			$paste_img_src = "images/toolbar-paste.gif";
-			$paste_click = "FileManager.clickPaste()";
 			$paste_class = "";
 		}
 		
@@ -864,45 +858,45 @@ class FileManager
 ?>
 		<div id="toolbar">
 			<div id="leftToolbar">
-				<a href="javascript:window.location.reload();" title="<?php echo $button_names['Refresh']; ?>" class="toolbarRefresh">
+				<span title="<?php echo $button_names['Refresh']; ?>" class="toolbarButton toolbarRefresh">
 					<img alt="<?php echo $button_names['Refresh']; ?>" src="images/toolbar-refresh.gif" />
-				</a>
-				<a href="<?php echo $up; ?>" title="<?php echo $button_names['Up']; ?>" class="toolbarUp splitRight">
+				</span>
+				<a href="<?php echo $up; ?>" title="<?php echo $button_names['Up']; ?>" class="toolbarButton toolbarUp splitRight">
 					<img alt="<?php echo $button_names['Up']; ?>" src="<?php echo $up_img; ?>" />
 				</a>
-				<a href="javascript:;" title="<?php echo $button_names['Select All']; ?>" class="toolbarSelectAll" onclick="FileManager.selectAll()">
+				<span title="<?php echo $button_names['Select All']; ?>" class="toolbarButton toolbarSelectAll">
 					<img alt="<?php echo $button_names['Select All']; ?>" src="images/toolbar-select-all.gif" />
-				</a>
-				<a href="javascript:;" title="<?php echo $button_names['Deselect']; ?>" class="toolbarDeselect splitRight" onclick="FileManager.deselect()">
+				</span>
+				<span title="<?php echo $button_names['Deselect']; ?>" class="toolbarButton toolbarDeselect splitRight">
 					<img alt="<?php echo $button_names['Deselect']; ?>" src="images/toolbar-deselect.gif" />
-				</a>
-				<a href="javascript:;" title="<?php echo $button_names['Cut']; ?>" class="toolbarCut">
+				</span>
+				<span title="<?php echo $button_names['Cut']; ?>" class="toolbarButton toolbarCut">
 					<img alt="<?php echo $button_names['Cut']; ?>" src="images/toolbar-cut-disable.gif" />
-				</a>
-				<a href="javascript:;" title="<?php echo $button_names['Copy']; ?>" class="toolbarCopy">
+				</span>
+				<span title="<?php echo $button_names['Copy']; ?>" class="toolbarButton toolbarCopy">
 					<img alt="<?php echo $button_names['Copy']; ?>" src="images/toolbar-copy-disable.gif" />
-				</a>
-				<a href="javascript:;" title="<?php echo $button_names['Paste']; ?>" class="toolbarPaste splitRight <?php echo $paste_class; ?>" onclick="<?php echo $paste_click; ?>">
+				</span>
+				<span title="<?php echo $button_names['Paste']; ?>" class="toolbarButton toolbarPaste splitRight <?php echo $paste_class; ?>">
 					<img alt="<?php echo $button_names['Paste']; ?>" src="<?php echo $paste_img_src; ?>" />
-				</a>
-				<a href="javascript:;" title="<?php echo $button_names['New Folder']; ?>" class="toolbarNewFolder" onclick="<?php echo $new_folder_click; ?>">
+				</span>
+				<span title="<?php echo $button_names['New Folder']; ?>" class="toolbarButton toolbarNewFolder">
 					<img alt="<?php echo $button_names['New Folder']; ?>" src="<?php echo $new_folder_img; ?>" />
-				</a>
-				<a href="javascript:;" title="<?php echo $button_names['Rename']; ?>" class="toolbarRename">
+				</span>
+				<span title="<?php echo $button_names['Rename']; ?>" class="toolbarButton toolbarRename">
 					<img alt="<?php echo $button_names['Rename']; ?>" src="images/toolbar-rename-disable.gif" />
-				</a>
-				<a href="javascript:;" title="<?php echo $button_names['Delete']; ?>" class="toolbarDelete splitRight" >
+				</span>
+				<span title="<?php echo $button_names['Delete']; ?>" class="toolbarButton toolbarDelete splitRight" >
 					<img alt="<?php echo $button_names['Delete']; ?>" src="images/toolbar-delete-disable.gif" />
-				</a>
-				<a href="javascript:;" title="<?php echo $button_names['Upload']; ?>" class="toolbarUpload splitRight"  onclick="<?php echo $upload_click; ?>">
+				</span>
+				<span title="<?php echo $button_names['Upload']; ?>" class="toolbarButton toolbarUpload splitRight">
 					<img alt="<?php echo $button_names['Upload']; ?>" src="<?php echo $upload_img; ?>" />
-				</a>
+				</span>
 			</div>
             <div id="rightToolbar">
-				<a href="<?php echo $largeicon_view_url; ?>" title="<?php echo $button_names['Large Icon View']; ?>" class="splitLeft">
+				<a href="<?php echo $largeicon_view_url; ?>" title="<?php echo $button_names['Large Icon View']; ?>" class="toolbarButton splitLeft">
 					<img alt="<?php echo $button_names['Large Icon View']; ?>" src="images/view-largeicon.gif" />
 				</a>
-				<a href="<?php echo $detail_view_url; ?>" title=<?php echo $button_names['Detail View']; ?>">
+				<a href="<?php echo $detail_view_url; ?>" title=<?php echo $button_names['Detail View']; ?>" class="toolbarButton">
 					<img alt="<?php echo $button_names['Detail View']; ?>" src="images/view-detail.gif" />
 				</a>
 				<?php 
@@ -917,7 +911,7 @@ class FileManager
 	            	if($this->is_search)
 	            	{
 	            	?>
-	            	<a href="<?php echo $clean_search_url; ?>" title="<?php echo $button_names['Clean Search']; ?>">
+	            	<a href="<?php echo $clean_search_url; ?>" title="<?php echo $button_names['Clean Search']; ?>" class="toolbarButton">
 						<img alt="<?php echo $button_names['Clean Search']; ?>" src="images/close.gif" />
 					</a>
 	            	<?php 

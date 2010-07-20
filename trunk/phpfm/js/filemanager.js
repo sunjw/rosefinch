@@ -134,7 +134,7 @@ var FileManager = {
 	 * 设置按钮
 	 */
 	setButton : function(className, src, clickFunc, addClass, removeClass) {
-		var buttons = $("div#leftToolbar > a");
+		var buttons = $("div#toolbar .toolbarButton");
 
 		for ( var i = 0; i < buttons.length; i++) {
 			var button = $(buttons.get(i));
@@ -273,10 +273,10 @@ var FileManager = {
 	 * 点击了全选的操作
 	 */
 	selectAll : function() {
-		var count = this.inputChecks.length;
+		var count = FileManager.inputChecks.length;
 
 		for ( var i = 0; i < count; i++) {
-			var checkBox = $(this.inputChecks.get(i));
+			var checkBox = $(FileManager.inputChecks.get(i));
 			checkBox.attr("checked", "checked");
 		}
 
@@ -287,10 +287,10 @@ var FileManager = {
 	 * 点击了取消选择的操作
 	 */
 	deselect : function() {
-		var count = this.inputChecks.length;
+		var count = FileManager.inputChecks.length;
 
 		for ( var i = 0; i < count; i++) {
-			var checkBox = $(this.inputChecks.get(i));
+			var checkBox = $(FileManager.inputChecks.get(i));
 			checkBox.removeAttr("checked");
 		}
 
@@ -537,6 +537,49 @@ var FileManager = {
 		}
 	},
 
+	toolbarButtonMouseIn : function() {
+		if (!$(this).hasClass("disable")) {
+			$(this).css("border-bottom", "1px solid #B8D1ED");
+		}
+	},
+
+	toolbarButtonMouseOut : function() {
+		$(this).css("border-bottom", "1px solid white");
+	},
+
+	/*
+	 * 准备工具栏
+	 */
+	initToolbar : function() {
+		var buttons = $("div#toolbar .toolbarButton");
+		buttons.filter(".toolbarRefresh").click( function() {
+			window.location.reload(); // 刷新
+			});
+		buttons.filter(".toolbarSelectAll").click(FileManager.selectAll); // 全选
+		buttons.filter(".toolbarDeselect").click(FileManager.deselect); // 取消选择
+		buttons.filter(".toolbarPaste").hasClass("disable") ? null : buttons
+				.filter(".toolbarPaste").click(FileManager.clickPaste); // 粘贴
+
+		if (FileManager.isSearch) {
+			// 搜索模式
+			buttons.filter(".toolbarUp").addClass("disable"); // 向上
+			buttons.filter(".toolbarNewFolder").addClass("disable"); // 新建目录
+			buttons.filter(".toolbarUpload").addClass("disable"); // 上传
+		} else {
+			// 浏览模式
+			buttons.filter(".toolbarNewFolder").click(
+					FileManager.clickNewFolder); // 新建目录
+			buttons.filter(".toolbarUpload").click(FileManager.clickUpload); // 上传
+		}
+
+		buttons.hover(FileManager.toolbarButtonMouseIn,
+				FileManager.toolbarButtonMouseOut); // 按钮 hover 时的效果
+
+		$("#toolbar form#searchForm input[type='submit']").hover(
+				FileManager.toolbarButtonMouseIn,
+				FileManager.toolbarButtonMouseOut); // 按钮 hover 时的效果
+	},
+
 	/*
 	 * 准备主视图
 	 */
@@ -733,6 +776,8 @@ FileManager.init = function() {
 	item.addClass("sort" + FileManager.sortOrder);
 
 	FileManager.initFullPath();
+
+	FileManager.initToolbar();
 
 	FileManager.initMainView();
 
