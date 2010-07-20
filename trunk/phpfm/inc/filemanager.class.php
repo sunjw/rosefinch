@@ -840,6 +840,8 @@ class FileManager
 			$paste_class = "";
 		}
 		
+		$button_names['Back'] = _('Back');
+		$button_names['Forward'] = _('Forward');
 		$button_names['Refresh'] = _("Refresh");
 		$button_names['Up'] = _("Up");
 		$button_names['Select All'] = _("Select All");
@@ -858,6 +860,12 @@ class FileManager
 ?>
 		<div id="toolbar">
 			<div id="leftToolbar">
+				<span title="<?php echo $button_names['Back']; ?>" class="toolbarButton toolbarBack">
+					<img alt="<?php echo $button_names['Back']; ?>" src="images/toolbar-back.gif" />
+				</span>
+				<span title="<?php echo $button_names['Forward']; ?>" class="toolbarButton toolbarForward">
+					<img alt="<?php echo $button_names['Forward']; ?>" src="images/toolbar-forward.gif" />
+				</span>
 				<span title="<?php echo $button_names['Refresh']; ?>" class="toolbarButton toolbarRefresh">
 					<img alt="<?php echo $button_names['Refresh']; ?>" src="images/toolbar-refresh.gif" />
 				</span>
