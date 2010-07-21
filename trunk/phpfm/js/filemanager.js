@@ -552,25 +552,20 @@ var FileManager = {
 	 */
 	initToolbar : function() {
 		var buttons = $("div#toolbar .toolbarButton");
-		
-		if(history.length > 1) {
-			buttons.filter(".toolbarBack").click( function() {
-				history.go(-1); // 后退
-			});
-			buttons.filter(".toolbarForward").click( function() {
-				history.go(1); // 前进
-			});
-		} else {
-			buttons.filter(".toolbarBack").addClass("disable"); // 后退
-			buttons.filter(".toolbarBack").find("img").attr("src", "images/toolbar-back-disable.gif")
-			buttons.filter(".toolbarForward").addClass("disable"); // 前进
-			buttons.filter(".toolbarForward").find("img").attr("src", "images/toolbar-forward-disable.gif")
+
+		if (buttons.filter(".toolbarBack").hasClass("disable")) {// 后退
+			buttons.filter(".toolbarBack").find("img").attr("src",
+					"images/toolbar-back-disable.gif");
 		}
-		
+		if (buttons.filter(".toolbarForward").hasClass("disable")) { // 前进
+			buttons.filter(".toolbarForward").find("img").attr("src",
+					"images/toolbar-forward-disable.gif");
+		}
+
 		buttons.filter(".toolbarRefresh").click( function() {
 			window.location.reload(); // 刷新
-		});
-			
+			});
+
 		buttons.filter(".toolbarSelectAll").click(FileManager.selectAll); // 全选
 		buttons.filter(".toolbarDeselect").click(FileManager.deselect); // 取消选择
 		buttons.filter(".toolbarPaste").hasClass("disable") ? null : buttons

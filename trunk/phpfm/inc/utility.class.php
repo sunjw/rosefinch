@@ -3,6 +3,7 @@ require_once "defines.inc.php";
 require_once "common.inc.php";
 require_once "clipboard.class.php";
 require_once "messageboard.class.php";
+require_once "history.class.php";
 require_once "ez_sql_core.php"; // Include ezSQL core
 require_once "ez_sql_mysql.php"; // Include ezSQL database specific component
 
@@ -635,6 +636,26 @@ class Utility
 		}
 		
 		return $db;
+	}
+	
+	/**
+	 * 从 SESSION 中获得当前 History 对象，并存入 SESSION
+	 * @param $need_new 不存在是否要新建，默认 true
+	 * @return History 对象或 null
+	 */
+	public static function get_history($need_new = true)
+	{
+		if($need_new)
+		{
+			$history = isset($_SESSION['history']) ? $_SESSION['history'] : new History();
+			$_SESSION['history'] = $history; // 将剪贴板存入 SESSION
+		}
+		else
+		{
+			$history = isset($_SESSION['history']) ? $_SESSION['history'] : null;
+		}
+		
+		return $history;
 	}
 	
 	/**

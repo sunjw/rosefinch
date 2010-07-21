@@ -6,6 +6,7 @@ require_once "gettext.inc.php";
 require_once "sort.inc.php";
 require_once "clipboard.class.php";
 require_once "messageboard.class.php";
+require_once "history.class.php";
 require_once "search.class.php";
 require_once "utility.class.php";
 
@@ -19,7 +20,7 @@ require_once "utility.class.php";
  */
 class FileManager
 {
-	private $request_sub_dir; // 请求的子目录
+	private $request_sub_dir; // 请求的子目录，一直是 UTF-8
 	private $request_dir; // 请求目录对应的系统绝对路径
 	private $sort_type; // 排序方式
 	private $order; // 排序方向
@@ -39,6 +40,7 @@ class FileManager
 	
 	private $clipboard;
 	private $messageboard;
+	private $history;
 	
 	function __construct($is_search = false, $browser_page = "index.php", $search_page = "search.php")
 	{
@@ -49,6 +51,7 @@ class FileManager
 		
 		$this->clipboard = Utility::get_clipboard();
 		$this->messageboard = Utility::get_messageboard();
+		$this->history = Utility::get_history();
 		
 		$this->is_search = $is_search;
 		$this->browser_page = $browser_page;
@@ -160,6 +163,17 @@ class FileManager
 			$this->init_search();
 		}
 		
+		if(!isset($_GET['h'])) // 如果有 h，表示是后退或前进来的
+		{
+			if(!$this->is_search)
+			{
+				$this->history->push($this->request_sub_dir);
+			}
+			else
+			{
+				$this->history->push($this->request_sub_dir, $this->search_query);
+			}
+		}
 	}
 	
 	/**
@@ -840,6 +854,23 @@ class FileManager
 			$paste_class = "";
 		}
 		
+		$back_url = "javascript:;";
+		$back_class = "disable";
+		$forward_url = "javascript:;";
+		$forward_class = "disable";
+		
+		if($this->history->able_to_back())
+		{
+			$back_class = "";
+			$back_url = "func/history.func.php?action=b";
+		}
+		
+		if($this->history->able_to_forward())
+		{
+			$forward_class = "";
+			$forward_url = "func/history.func.php?action=f";
+		}
+		
 		$button_names['Back'] = _('Back');
 		$button_names['Forward'] = _('Forward');
 		$button_names['Refresh'] = _("Refresh");
@@ -860,12 +891,12 @@ class FileManager
 ?>
 		<div id="toolbar">
 			<div id="leftToolbar">
-				<span title="<?php echo $button_names['Back']; ?>" class="toolbarButton toolbarBack">
+				<a href="<?php echo $back_url; ?>" title="<?php echo $button_names['Back']; ?>" class="toolbarButton toolbarBack <?php echo $back_class; ?>">
 					<img alt="<?php echo $button_names['Back']; ?>" src="images/toolbar-back.gif" />
-				</span>
-				<span title="<?php echo $button_names['Forward']; ?>" class="toolbarButton toolbarForward">
+				</a>
+				<a href="<?php echo $forward_url; ?>" title="<?php echo $button_names['Forward']; ?>" class="toolbarButton toolbarForward <?php echo $forward_class; ?>">
 					<img alt="<?php echo $button_names['Forward']; ?>" src="images/toolbar-forward.gif" />
-				</span>
+				</a>
 				<span title="<?php echo $button_names['Refresh']; ?>" class="toolbarButton toolbarRefresh">
 					<img alt="<?php echo $button_names['Refresh']; ?>" src="images/toolbar-refresh.gif" />
 				</span>
