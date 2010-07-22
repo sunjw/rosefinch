@@ -22,7 +22,6 @@ var FileManager = {
 	delayID :0,
 	miniMainViewHeight :120,
 	isIE :null,
-	inlineShadow :"transparent url('images/shadow.png') no-repeat right bottom",
 
 	/*
 	 * 什么也不做
@@ -659,82 +658,6 @@ var FileManager = {
 	},
 
 	/*
-	 * 初始化完整路径
-	 */
-	initFullPath : function() {
-		var body = $("body").get(0);
-		body.onclick = FileManager.hideAllSubMenus;
-
-		var divPathSlashes = $("div.pathSlash");
-		var count = divPathSlashes.length;
-		for ( var i = 0; i < count; i++) {
-			var divPathSlash = $(divPathSlashes.get(i));
-			divPathSlash.get(0).onclick = function(e) {
-				stopBubble(e); // 取消事件浮升
-			}
-			var button = divPathSlash.children(".arrow");
-			button.get(0).onclick = function() {
-				// $(this).css("background-image",
-				// "url('images/path-arrow-down.gif')");
-				var thisSub = $(this.parentNode).children(".subMenu");
-				var subMenus = $(".subMenu");
-				for ( var i = 0; i < subMenus.length; i++) {
-					var subMenu = $(subMenus[i]);
-					if (thisSub.get(0) != subMenu.get(0)
-							&& subMenu.is(":visible")) {
-						subMenu.prev(".arrow").removeClass("selected");
-						// subMenu.css("display", "none");
-						FileManager.hideSubMenu(subMenu);
-					}
-				}
-				/*
-				 * if(!isIE) { thisSub.css("background", "transparent
-				 * url('images/shadow.png') no-repeat right bottom"); }
-				 */
-				if (!thisSub.is(":visible")) {
-					$(this).addClass("selected");
-					if (this.isIE) {
-						thisSub.css("background", "none");
-					}
-					thisSub.fadeIn("fast", function() {
-						if (this.isIE) {
-							// IE-hack 去掉背景
-							$(this).css("background", this.inlineShadow);
-						}
-					});
-				} else {
-					$(this).removeClass("selected");
-					// thisSub.css("display", "none");
-					FileManager.hideSubMenu(thisSub);
-				}
-			};
-		}
-	},
-
-	/*
-	 * 关闭所有子菜单
-	 */
-	hideAllSubMenus : function() {
-		var subMenus = $(".subMenu");
-		for ( var i = 0; i < subMenus.length; i++) {
-			var subMenu = $(subMenus[i]);
-			subMenu.prev(".arrow").removeClass("selected");
-			// subMenu.css("display", "none");
-			FileManager.hideSubMenu(subMenu);
-		}
-	},
-
-	/*
-	 * 关闭子菜单
-	 */
-	hideSubMenu : function(subMenu) {
-		// subMenu.css("display", "none");
-		if (this.isIE)
-			subMenu.css("background", "none"); // IE-hack 去掉背景
-		subMenu.fadeOut("fast");
-	},
-
-	/*
 	 * 准备 AudioPlayer
 	 */
 	initAudioPlayer : function() {
@@ -786,7 +709,9 @@ FileManager.init = function() {
 	var item = $(str);
 	item.addClass("sort" + FileManager.sortOrder);
 
-	FileManager.initFullPath();
+	//FileManager.initFullPath();
+	jqMenu.isIE = FileManager.isIE;
+	jqMenu.init();
 
 	FileManager.initToolbar();
 

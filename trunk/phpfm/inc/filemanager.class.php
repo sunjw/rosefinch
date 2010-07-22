@@ -259,6 +259,7 @@ class FileManager
 		if($debug)
 		{
 ?>
+			<script type="text/javascript" language="javascript" src="js/jquery.menu.js"></script> 
 			<script type="text/javascript" language="javascript" src="js/jquery.lightbox-0.5.plus.js"></script>
 	    	<script type="text/javascript" language="javascript" src="js/filemanager.js"></script>
 <?php 
@@ -266,6 +267,7 @@ class FileManager
 		else
 		{
 ?>
+			<script type="text/javascript" language="javascript" src="js/jquery.menu.min.js"></script> 
 	    	<script type="text/javascript" language="javascript" src="js/jquery.lightbox-0.5.plus.pack.js"></script>
 	    	<script type="text/javascript" language="javascript" src="js/filemanager.min.js"></script>
 <?php 
