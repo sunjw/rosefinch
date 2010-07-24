@@ -710,7 +710,6 @@ FileManager.init = function() {
 	item.addClass("sort" + FileManager.sortOrder);
 
 	//FileManager.initFullPath();
-	jqMenu.isIE = FileManager.isIE;
 	jqMenu.init();
 
 	FileManager.initToolbar();

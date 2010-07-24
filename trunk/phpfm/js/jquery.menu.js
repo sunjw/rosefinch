@@ -1,5 +1,5 @@
 var jqMenu = {
-	menuItemsSeletor :"div.pathSlash",
+	menuItemsSeletor :".pathSlash",
 	menuButtonSeletor :".arrow",
 	subMenuSeletor :".subMenu",
 	inlineShadow :"transparent url('images/shadow.png') no-repeat right bottom",
@@ -44,7 +44,9 @@ var jqMenu = {
 	/*
 	 * 初始化菜单
 	 */
-	init : function() {
+	setup : function() {
+		jqMenu.isIE = $.browser.msie ? true : false;
+
 		var body = $("body").get(0);
 		body.onclick = jqMenu.hideAllSubMenus;
 
@@ -96,3 +98,7 @@ var jqMenu = {
 		}
 	}
 }
+
+jqMenu.init = function() {
+	jqMenu.setup();
+};
