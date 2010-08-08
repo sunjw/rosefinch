@@ -709,7 +709,7 @@ FileManager.init = function() {
 	var item = $(str);
 	item.addClass("sort" + FileManager.sortOrder);
 
-	//FileManager.initFullPath();
+	// FileManager.initFullPath();
 	jqMenu.init();
 
 	FileManager.initToolbar();
