@@ -1,4 +1,4 @@
-﻿/*
+/*
  * 阻止事件浮升
  */
 function stopBubble(e) {
