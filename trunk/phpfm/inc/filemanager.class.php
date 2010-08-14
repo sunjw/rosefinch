@@ -937,7 +937,7 @@ class FileManager
 				<a href="<?php echo $largeicon_view_url; ?>" title="<?php echo $button_names['Large Icon View']; ?>" class="toolbarButton splitLeft">
 					<img alt="<?php echo $button_names['Large Icon View']; ?>" src="images/view-largeicon.gif" />
 				</a>
-				<a href="<?php echo $detail_view_url; ?>" title=<?php echo $button_names['Detail View']; ?>" class="toolbarButton">
+				<a href="<?php echo $detail_view_url; ?>" title="<?php echo $button_names['Detail View']; ?>" class="toolbarButton">
 					<img alt="<?php echo $button_names['Detail View']; ?>" src="images/view-detail.gif" />
 				</a>
 				<?php 

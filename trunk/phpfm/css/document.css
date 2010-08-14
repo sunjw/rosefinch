@@ -9,6 +9,11 @@
 	color: #666666;
 }
 
+#phpfmDocNav a.selected {
+	color: black;
+	text-decoration: none;
+}
+
 #phpfmDocNav a:hover {
 	color: black;
 }

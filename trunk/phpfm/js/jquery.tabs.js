@@ -1,5 +1,6 @@
 var Tabs = {
 	prefix :"#phpfmDoc",
+	navs :null,
 	contents :null,
 	browser :null,
 
@@ -21,7 +22,13 @@ var Tabs = {
 			}
 		}
 
-		if (displayed == false) {
+		if (displayed) {
+			for(navName in this.navs) {
+				this.navs[navName].removeClass("selected");
+			}
+			
+			this.navs[name].addClass("selected");
+		} else {
 			Tabs.display(this.contents[0], isAni);
 		}
 	},
@@ -32,39 +39,42 @@ var Tabs = {
 
 	initNav : function() {
 		var nav = $(this.prefix + "Nav"); // 导航部分
-	var navHTML = "";
-	var doc = $(this.prefix); // 主体部分
-	var docContents = doc.children();
-	var length = docContents.length;
-	for ( var i = 0; i < length; i++) {
-		var docContent = $(docContents[i]);
-		var href = $(docContent.children().get(0));
-		var name = href.attr("name");
-		var title = href.attr("title");
-		this.contents.push(name);
-		if (i > 0) {
-			nav.append("&nbsp;|&nbsp;");
+		var navHTML = "";
+		var doc = $(this.prefix); // 主体部分
+		var docContents = doc.children();
+		var length = docContents.length;
+		for ( var i = 0; i < length; i++) {
+			var docContent = $(docContents[i]);
+			var href = $(docContent.children().get(0));
+			var name = href.attr("name");
+			var title = href.attr("title");
+			this.contents.push(name);
+			if (i > 0) {
+				nav.append("&nbsp;|&nbsp;");
+			}
+
+			// IE hacks: href is different in old version of IE, so use title
+			var link = $("<a/>").attr("href", "#" + name).attr("title", name).text(
+							title).click( function() {
+								Tabs.display($(this).attr("title"), true);
+							})
+			this.navs[name] = $(link);
+			nav.append(link);
 		}
+	},
 
-		// IE hacks: href is different in old version of IE, so use title
-		nav.append($("<a/>").attr("href", "#" + name).attr("title", name).text(
-				title).click( function() {
-			Tabs.display($(this).attr("title"), true);
-		}));
+	init : function() {
+		Tabs.contents = new Array();
+		Tabs.navs = new Array();
+		Tabs.initNav();
+
+		Tabs.initContents();
+
+		var url = window.location.href;
+		var curTitle = url.split("#")[1];
+
+		Tabs.display(curTitle, true);
 	}
-},
-
-init : function() {
-	Tabs.contents = new Array();
-	Tabs.initNav();
-
-	Tabs.initContents();
-
-	var url = window.location.href;
-	var curTitle = url.split("#")[1];
-
-	Tabs.display(curTitle, true);
-}
 }
 
 $(Tabs.init); // 运行准备函数
