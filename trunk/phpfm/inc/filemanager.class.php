@@ -291,8 +291,7 @@ class FileManager
 	{
 		$current_dir = "";
 		$temp = $this->request_sub_dir;
-		if(mb_substr($this->request_sub_dir, -1) == "/" || mb_substr($this->request_sub_dir, -1) == "\\" )
-			$temp = mb_substr($this->request_sub_dir, 0, mb_strlen($this->request_sub_dir) - 1);
+		$temp = erase_last_slash($this->request_sub_dir);
 		
 		if($temp == "")
 			$current_dir = "Root";
@@ -721,8 +720,8 @@ class FileManager
 			<div>
 				<div class="divLabel"><?php echo _("Current path:"); ?>&nbsp;</div>
 			    <div class="divDir"><a href="<?php echo $this->browser_page."?".$this->query_str; ?>">Root</a></div>
-			    <div class="pathSlash">
-			    	<a class="arrow" href="javascript:void(0);">&nbsp;</a>
+			    <div class="pathSlash menuContainer">
+			    	<a class="arrow menuButton" href="javascript:void(0);">&nbsp;</a>
 			        	
 <?php 
 					$sub_dirs = split("[/]", $this->request_sub_dir);
@@ -744,8 +743,8 @@ class FileManager
 			        	<?php echo str_replace(" ", "&nbsp;", $sub_dir); ?>
 			        </a>
 			    </div>
-			    <div class="pathSlash">
-			    	<a class="arrow" href="javascript:void(0);">&nbsp;</a>
+			    <div class="pathSlash menuContainer">
+			    	<a class="arrow menuButton" href="javascript:void(0);">&nbsp;</a>
 <?php 
 						$dir_str .= "/";
 						$this->display_sub_menus($dir_str, $sub_dirs[$i + 1]);
@@ -873,6 +872,34 @@ class FileManager
 			$forward_url = "func/history.func.php?action=f";
 		}
 		
+		$history_current = $this->history->get_current() - 1;
+		$history = $this->history->get_history();
+		$history_items = "";
+		$i = 0;
+		foreach($history as $item)
+		{
+			if($i >= $this->history->get_length())
+				break;
+				
+			$url = "func/history.func.php?action=f&step=".($i-$history_current);
+			if($i != $history_current)
+				$history_items .= ('<li><a href="'.$url.'">');
+			else
+				$history_items .= ('<li class="current">');
+				
+			if($item->is_search())
+				$history_items .= (_("Search").' '.$item->to_string());
+			else
+				$history_items .= ($item->to_string());
+			
+			if($i != $history_current)
+				$history_items .= '</a></li>';
+			else
+				$history_items .= '</li>';
+			
+			++$i;
+		}
+		
 		$button_names['Back'] = _('Back');
 		$button_names['Forward'] = _('Forward');
 		$button_names['Refresh'] = _("Refresh");
@@ -899,6 +926,21 @@ class FileManager
 				<a href="<?php echo $forward_url; ?>" title="<?php echo $button_names['Forward']; ?>" class="toolbarButton toolbarForward <?php echo $forward_class; ?>">
 					<img alt="<?php echo $button_names['Forward']; ?>" src="images/toolbar-forward.gif" />
 				</a>
+				<div class="toolbarSmallButton menuContainer toolbarHistory splitRight">
+					<img class="menuButton" src="images/toolbar-history.gif" />
+					<?php 
+					if($this->history->get_length() > 1)
+					{
+					?>
+					<div class="subMenu">
+						<ul class="menuSpace">
+							<?php echo $history_items; ?>
+						</ul>
+					</div>
+					<?php 
+					}
+					?>
+				</div>
 				<span title="<?php echo $button_names['Refresh']; ?>" class="toolbarButton toolbarRefresh">
 					<img alt="<?php echo $button_names['Refresh']; ?>" src="images/toolbar-refresh.gif" />
 				</span>

@@ -145,11 +145,13 @@ input[type="submit"], input[type="button"] {
 	float: right;
 }
 
-#toolbar .toolbarButton, #toolbar .toolbarButton:hover, #toolbar .disable, #toolbar .disable:hover {
+#toolbar .toolbarButton, #toolbar .toolbarButton:hover, 
+#toolbar .toolbarSmallButton, #toolbar .toolbarSmallButton:hover, 
+#toolbar .disable, #toolbar .disable:hover {
 	cursor: pointer;
 }
 
-#toolbar .toolbarButton {
+#toolbar .toolbarButton, #toolbar .toolbarSmallButton {
 	display: block;
 	float: left;
 	height: 20px;
@@ -158,11 +160,80 @@ input[type="submit"], input[type="button"] {
 	border-bottom: 1px solid white;
 }
 
-#toolbar .toolbarButton img {
+#toolbar .toolbarButton {
+	width: 24px;
+}
+#toolbar .toolbarSmallButton {
+	width: 12px;
+}
+
+#toolbar .toolbarButton img, #toolbar .toolbarSmallButton img {
 	border: 0;
 	margin-top: 1px;
 	height: 16px;
+}
+
+#toolbar .toolbarButton img {
 	width: 16px;
+}
+#toolbar .toolbarSmallButton img {
+	width: 10px;
+}
+
+#toolbar .subMenu {
+	display: none;
+	z-index: 2000;
+	position: absolute;
+	width: 150px;
+	padding: 0 3px 3px 0;
+	background: transparent url('../images/shadow.png') no-repeat right
+		bottom;
+	filter: progid : DXImageTransform.Microsoft.AlphaImageLoader ( 
+      src = '../images/shadow.png', sizingMethod = 'scale' );
+	/*
+	-webkit-box-shadow: 2px 2px 2px #888;
+	-moz-box-shadow: 2px 2px 2px #888;
+	*/
+}
+
+#toolbar .subMenu ul {
+	background-color: white;
+	border: solid 1px #666666;
+	padding: 1px;
+	list-style-type: none;
+	list-style-image: none;
+}
+
+#toolbar .subMenu li {
+	float: none;
+	padding-top: 0;
+	border: 0;
+}
+
+#toolbar .subMenu li {
+	display: block;
+	height: 22px;
+	line-height: 22px;
+	text-indent: 4px;
+	overflow: hidden;
+	text-decoration: none;
+	text-align: left;
+	border: 0;
+	padding: 0;
+	color: black;
+}
+
+#toolbar .subMenu li a {
+	text-decoration: none;
+	color: black;
+	display: block;
+}
+#toolbar .subMenu li a:hover {
+	text-decoration: underline;
+}
+
+#toolbar .toolbarHistory li.current {
+	font-weight: bold;
 }
 
 #toolbar form#searchForm {

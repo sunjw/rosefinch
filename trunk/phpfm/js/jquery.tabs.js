@@ -1,5 +1,6 @@
 var Tabs = {
 	prefix :"#phpfmDoc",
+	splitor :"&nbsp;|&nbsp;",
 	navs :null,
 	contents :null,
 	browser :null,
@@ -50,7 +51,7 @@ var Tabs = {
 			var title = href.attr("title");
 			this.contents.push(name);
 			if (i > 0) {
-				nav.append("&nbsp;|&nbsp;");
+				nav.append(this.splitor);
 			}
 
 			// IE hacks: href is different in old version of IE, so use title

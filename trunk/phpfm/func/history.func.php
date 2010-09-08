@@ -9,6 +9,7 @@ require_once "../inc/utility.class.php";
 $history = Utility::get_history(false);
 
 $action = get_query("action");
+$step = get_query("step");
 
 $redirect_url = "../index.php";
 $history_item = null;
@@ -16,12 +17,12 @@ $history_item = null;
 if($action == "b")
 {
 	// 后退
-	$history_item = $history->back();
+	$history_item = $history->back($step);
 }
 else if($action == "f")
 {
 	// 前进
-	$history_item = $history->forward();
+	$history_item = $history->forward($step);
 }
 
 $item_dir = $history_item->get_dir();

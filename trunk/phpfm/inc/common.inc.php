@@ -190,9 +190,27 @@ function timestrtotime($str)
 	return $timestamp;
 }
 
+/**
+ * htmlentities 的 UTF-8 编码版本
+ * @param $str 需要处理的字符串
+ * @return string 结果
+ */
 function htmlentities_utf8($str)
 {
 	return htmlentities($str, ENT_COMPAT, "UTF-8");
+}
+
+/**
+ * 将字符串最后的斜杠或反斜杠删掉
+ * @param $str 需要处理的字符串
+ * @return string 结果
+ */
+function erase_last_slash($str)
+{
+	if(mb_substr($str, -1) == "/" || mb_substr($str, -1) == "\\" )
+		$temp = mb_substr($str, 0, mb_strlen($str) - 1);
+		
+	return $temp;
 }
 
 ?>

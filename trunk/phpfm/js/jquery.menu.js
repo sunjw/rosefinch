@@ -1,6 +1,6 @@
 var jqMenu = {
-	menuItemsSeletor :".pathSlash",
-	menuButtonSeletor :".arrow",
+	menuItemsSeletor :".menuContainer",
+	menuButtonSeletor :".menuButton",
 	subMenuSeletor :".subMenu",
 	inlineShadow :"transparent url('images/shadow.png') no-repeat right bottom",
 	isIE :true,

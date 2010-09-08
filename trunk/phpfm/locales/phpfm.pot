@@ -135,6 +135,15 @@ msgstr ""
 msgid "Rename %s to %s "
 msgstr ""
 
+msgid "Search"
+msgstr ""
+
+msgid "Search \"%s\" in \"%s\""
+msgstr ""
+
+msgid "Clean Search"
+msgstr ""
+
 msgid "Install"
 msgstr ""
 
@@ -217,10 +226,44 @@ msgid "Language you want to use in this Rosefinch."
 msgstr ""
 
 msgid "Title you want to display in this Rosefinch."
-msgstr ""
+msgstr " 
 
 msgid "Let Rosefinch enable jQuery lightbox for pictures."
 msgstr ""
 
+msgid "Enable Audio Player for audio files"
+msgstr ""
+
+msgid "Let Rosefinch enable Audio Player for audio files."
+msgstr ""
+
+msgid "Enable search function"
+msgstr ""
+
+msgid "If you enable search function, you should setup your database by click the link below after you click OK."
+msgstr ""
+
+msgid "Index all files"
+msgstr ""
+
+msgid "Database Setting"
+msgstr ""
+
+msgid "Set database parameters"
+msgstr ""
+
+msgid "Database user name"
+msgstr ""
+
+msgid "Database user password"
+msgstr ""
+
+msgid "Database name"
+msgstr ""
+
+msgid "Database host"
+msgstr ""
+
 msgid "Knowing Issue"
 msgstr ""
+

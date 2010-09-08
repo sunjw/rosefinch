@@ -32,6 +32,21 @@ class HistoryItem
 		return ($this->dir == $dir && $this->search_key == $search_key);
 	}
 	
+	public function is_search()
+	{
+		return ($this->search_key != "");
+	}
+	
+	public function to_string()
+	{
+		if($this->search_key != "")
+			return $this->search_key;
+		else if($this->dir == "")
+			return "Root";
+		else
+			return erase_last_slash($this->dir);
+	}
+	
 }
 
 /**
@@ -87,13 +102,14 @@ class History
 	 * 获得后退去的 History item
 	 * @return HistoryItem
 	 */
-	public function back()
+	public function back($step = 1)
 	{
-		if($this->current < 1)
+		$step = $step==null ? 1 : $step;
+		if($this->current < $step)
 			return null;
 		
-		if($this->current > 1)
-			--$this->current;
+		if($this->current > $step)
+			$this->current -= $step;
 		
 		return $this->history_array[$this->current];
 	}
@@ -112,15 +128,43 @@ class History
 	 * 获得前进的 History item
 	 * @return HistoryItem
 	 */
-	public function forward()
+	public function forward($step = 1)
 	{
+		$step = $step==null ? 1 : $step;
 		if($this->current < 1)
 			return null;
 			
-		if($this->current < $this->length)
-			++$this->current;
+		if($this->current <= $this->length - $step)
+			$this->current += $step;
 		
 		return $this->history_array[$this->current];
+	}
+	
+	/**
+	 * 获得当前位置
+	 * @return current
+	 */
+	public function get_current()
+	{
+		return $this->current;
+	}
+	
+	/**
+	 * 获得历史长度，不是历史数组的长度
+	 * @return length
+	 */
+	public function get_length()
+	{
+		return $this->length;
+	}
+	
+	/**
+	 * 获得历史数组，注意它的长度并非历史的长度
+	 * @return Array 历史数组
+	 */
+	public function get_history()
+	{
+		return $this->history_array;
 	}
 	
 	/**
