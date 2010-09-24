@@ -941,39 +941,39 @@ class FileManager
 					}
 					?>
 				</div>
-				<span title="<?php echo $button_names['Refresh']; ?>" class="toolbarButton toolbarRefresh">
+				<div title="<?php echo $button_names['Refresh']; ?>" class="toolbarButton toolbarRefresh">
 					<img alt="<?php echo $button_names['Refresh']; ?>" src="images/toolbar-refresh.gif" />
-				</span>
+				</div>
 				<a href="<?php echo $up; ?>" title="<?php echo $button_names['Up']; ?>" class="toolbarButton toolbarUp splitRight">
 					<img alt="<?php echo $button_names['Up']; ?>" src="<?php echo $up_img; ?>" />
 				</a>
-				<span title="<?php echo $button_names['Select All']; ?>" class="toolbarButton toolbarSelectAll">
+				<div title="<?php echo $button_names['Select All']; ?>" class="toolbarButton toolbarSelectAll">
 					<img alt="<?php echo $button_names['Select All']; ?>" src="images/toolbar-select-all.gif" />
-				</span>
-				<span title="<?php echo $button_names['Deselect']; ?>" class="toolbarButton toolbarDeselect splitRight">
+				</div>
+				<div title="<?php echo $button_names['Deselect']; ?>" class="toolbarButton toolbarDeselect splitRight">
 					<img alt="<?php echo $button_names['Deselect']; ?>" src="images/toolbar-deselect.gif" />
-				</span>
-				<span title="<?php echo $button_names['Cut']; ?>" class="toolbarButton toolbarCut">
+				</div>
+				<div title="<?php echo $button_names['Cut']; ?>" class="toolbarButton toolbarCut">
 					<img alt="<?php echo $button_names['Cut']; ?>" src="images/toolbar-cut-disable.gif" />
-				</span>
-				<span title="<?php echo $button_names['Copy']; ?>" class="toolbarButton toolbarCopy">
+				</div>
+				<div title="<?php echo $button_names['Copy']; ?>" class="toolbarButton toolbarCopy">
 					<img alt="<?php echo $button_names['Copy']; ?>" src="images/toolbar-copy-disable.gif" />
-				</span>
-				<span title="<?php echo $button_names['Paste']; ?>" class="toolbarButton toolbarPaste splitRight <?php echo $paste_class; ?>">
+				</div>
+				<div title="<?php echo $button_names['Paste']; ?>" class="toolbarButton toolbarPaste splitRight <?php echo $paste_class; ?>">
 					<img alt="<?php echo $button_names['Paste']; ?>" src="<?php echo $paste_img_src; ?>" />
-				</span>
-				<span title="<?php echo $button_names['New Folder']; ?>" class="toolbarButton toolbarNewFolder">
+				</div>
+				<div title="<?php echo $button_names['New Folder']; ?>" class="toolbarButton toolbarNewFolder">
 					<img alt="<?php echo $button_names['New Folder']; ?>" src="<?php echo $new_folder_img; ?>" />
-				</span>
-				<span title="<?php echo $button_names['Rename']; ?>" class="toolbarButton toolbarRename">
+				</div>
+				<div title="<?php echo $button_names['Rename']; ?>" class="toolbarButton toolbarRename">
 					<img alt="<?php echo $button_names['Rename']; ?>" src="images/toolbar-rename-disable.gif" />
-				</span>
-				<span title="<?php echo $button_names['Delete']; ?>" class="toolbarButton toolbarDelete splitRight" >
+				</div>
+				<div title="<?php echo $button_names['Delete']; ?>" class="toolbarButton toolbarDelete splitRight" >
 					<img alt="<?php echo $button_names['Delete']; ?>" src="images/toolbar-delete-disable.gif" />
-				</span>
-				<span title="<?php echo $button_names['Upload']; ?>" class="toolbarButton toolbarUpload splitRight">
+				</div>
+				<div title="<?php echo $button_names['Upload']; ?>" class="toolbarButton toolbarUpload splitRight">
 					<img alt="<?php echo $button_names['Upload']; ?>" src="<?php echo $upload_img; ?>" />
-				</span>
+				</div>
 			</div>
             <div id="rightToolbar">
 				<a href="<?php echo $largeicon_view_url; ?>" title="<?php echo $button_names['Large Icon View']; ?>" class="toolbarButton splitLeft">

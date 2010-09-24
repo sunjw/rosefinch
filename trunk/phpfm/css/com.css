@@ -4,7 +4,7 @@
 }
 
 body {
-	background: url('../images/body-mozilla.jpg') top center repeat-x;
+	background: url('../images/body_new_apple.jpg') top center repeat-x;
 	/*width: 900px;*/
 	min-width: 900px;
 	padding-left: 40px;
@@ -32,7 +32,7 @@ body {
 	font-size: xx-large;
 	font-style: italic;
 	font-weight: bold;
-	font-family: 微软雅黑, "Segoe UI", Arial, Sans-serif;
+	font-family: 微软雅黑,"segoe ui",verdana,arial,sans-serif;
 	color: #223355;
 }
 
@@ -45,7 +45,7 @@ body {
 }
 
 #nav {
-	margin-top: 5px;
+	/*margin-top: 5px;*/
 	position: relative;
 }
 
@@ -57,7 +57,7 @@ body {
 }
 
 #nav,#nav ul li a,#nav a#phpfmNavHome {
-	font-family: 微软雅黑;
+	font-family: 微软雅黑,"segoe ui",verdana,arial,sans-serif;
 	color: black;
 	text-decoration: none;
 }
@@ -92,7 +92,8 @@ body {
 }
 
 #nav ul .li-item a:hover,#nav ul .current a {
-	background-color: rgb(181, 217, 229);
+	background-color: #666666;
+	color: white;
 	/*background: url('../images/nav-hover-bg.jpg') left center repeat-x;*/
 }
 
@@ -120,10 +121,11 @@ body {
 }
 
 #content {
-	font-family: 宋体, "Times New Roman";
+	font-family: 宋体,"Times New Roman",serif;
+	font-size: 14px;
 	padding: 6px 10px;
 	background-color: white;
-	border-top: solid #B5D9E5 5px;
+	border-top: solid #666666 5px;
 }
 
 /*
