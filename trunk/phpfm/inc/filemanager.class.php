@@ -904,8 +904,6 @@ class FileManager
 		$button_names['Forward'] = _('Forward');
 		$button_names['Refresh'] = _("Refresh");
 		$button_names['Up'] = _("Up");
-		$button_names['Select All'] = _("Select All");
-		$button_names['Deselect'] = _("Deselect");
 		$button_names['Cut'] = _("Cut");
 		$button_names['Copy'] = _("Copy");
 		$button_names['Paste'] = _("Paste");
@@ -947,12 +945,6 @@ class FileManager
 				<a href="<?php echo $up; ?>" title="<?php echo $button_names['Up']; ?>" class="toolbarButton toolbarUp splitRight">
 					<img alt="<?php echo $button_names['Up']; ?>" src="<?php echo $up_img; ?>" />
 				</a>
-				<div title="<?php echo $button_names['Select All']; ?>" class="toolbarButton toolbarSelectAll">
-					<img alt="<?php echo $button_names['Select All']; ?>" src="images/toolbar-select-all.gif" />
-				</div>
-				<div title="<?php echo $button_names['Deselect']; ?>" class="toolbarButton toolbarDeselect splitRight">
-					<img alt="<?php echo $button_names['Deselect']; ?>" src="images/toolbar-deselect.gif" />
-				</div>
 				<div title="<?php echo $button_names['Cut']; ?>" class="toolbarButton toolbarCut">
 					<img alt="<?php echo $button_names['Cut']; ?>" src="images/toolbar-cut-disable.gif" />
 				</div>
@@ -1218,7 +1210,9 @@ class FileManager
 		}
 ?>
 		<div class="header">
-			<span class="check"></span>
+			<span class="check">
+				<input id="checkSelectAll" type="checkbox" title="<?php echo _("Select All"); ?>" />
+			</span>
 			<span class="icon">&nbsp;</span>
 			<span class="name split">
 				<a href="<?php echo $this_page."?q=".

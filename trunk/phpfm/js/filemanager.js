@@ -1,16 +1,3 @@
-/*
- * 阻止事件浮升
- */
-function stopBubble(e) {
-	var e = e ? e : window.event;
-	if (window.event) { // IE
-		e.cancelBubble = true;
-	} else { // FF
-		// e.preventDefault();
-		e.stopPropagation();
-	}
-}
-
 var FileManager = {
 	ajaxBg :null,
 	multilanTitles :null,
@@ -22,6 +9,19 @@ var FileManager = {
 	delayID :0,
 	miniMainViewHeight :120,
 	isIE :null,
+	
+	/*
+	 * 阻止事件浮升
+	 */
+	stopBubble : function(e) {
+		var e = e ? e : window.event;
+		if (window.event) { // IE
+			e.cancelBubble = true;
+		} else { // FF
+			// e.preventDefault();
+			e.stopPropagation();
+		}
+	},
 
 	/*
 	 * 什么也不做
@@ -565,8 +565,8 @@ var FileManager = {
 			window.location.reload(); // 刷新
 			});
 
-		buttons.filter(".toolbarSelectAll").click(FileManager.selectAll); // 全选
-		buttons.filter(".toolbarDeselect").click(FileManager.deselect); // 取消选择
+		//buttons.filter(".toolbarSelectAll").click(FileManager.selectAll); // 全选
+		//buttons.filter(".toolbarDeselect").click(FileManager.deselect); // 取消选择
 		buttons.filter(".toolbarPaste").hasClass("disable") ? null : buttons
 				.filter(".toolbarPaste").click(FileManager.clickPaste); // 粘贴
 
@@ -588,6 +588,13 @@ var FileManager = {
 		$("#toolbar form#searchForm input[type='submit']").hover(
 				FileManager.toolbarButtonMouseIn,
 				FileManager.toolbarButtonMouseOut); // 按钮 hover 时的效果
+		
+		$("#mainView .header span #checkSelectAll").click(function (){
+			if(this.checked)
+				FileManager.selectAll();
+			else
+				FileManager.deselect();
+		});
 	},
 
 	/*
@@ -637,7 +644,7 @@ var FileManager = {
 					for ( var j = 0; j < as.length; j++) {
 						var a = as[j];
 						a.onclick = function(e) {
-							stopBubble(e);
+							FileManager.stopBubble(e);
 						};
 					}
 
@@ -651,7 +658,7 @@ var FileManager = {
 			var check = this.inputChecks.get(i);
 			check.onclick = function(e) {
 				FileManager.viewItemCheck();
-				stopBubble(e);
+				FileManager.stopBubble(e);
 			};
 		}
 		FileManager.viewItemCheck();

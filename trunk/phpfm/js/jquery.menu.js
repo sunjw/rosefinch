@@ -63,6 +63,8 @@ var jqMenu = {
 				// "url('images/path-arrow-down.gif')");
 				var thisSub = $(this.parentNode)
 						.children(jqMenu.subMenuSeletor);
+				if(!thisSub.length)
+					return;
 				var subMenus = $(jqMenu.subMenuSeletor);
 				for ( var i = 0; i < subMenus.length; i++) {
 					var subMenu = $(subMenus[i]);
@@ -82,6 +84,8 @@ var jqMenu = {
 					$(this).addClass("selected");
 					if (jqMenu.isIE) {
 						thisSub.css("background", "none");
+						if($.browser.version < 7)
+							thisSub.css("width", "160px");
 					}
 					thisSub.fadeIn("fast", function() {
 						if (jqMenu.isIE) {

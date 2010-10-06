@@ -54,8 +54,7 @@ input[type="submit"], input[type="button"] {
 	padding: 1px 1px;
 }
 
-#fullpath a:hover,#fullpath div.pathSlash a.selected,#fullpath div.pathSlash a.arrow:hover
-	{
+#fullpath a:hover,#fullpath div.pathSlash a.selected,#fullpath div.pathSlash a.arrow:hover {
 	border: 1px solid #B8D1ED;
 	-moz-border-radius: 2px;
 	-khtml-border-radius: 2px;
@@ -82,7 +81,7 @@ input[type="submit"], input[type="button"] {
 	display: none;
 	z-index: 2000;
 	position: absolute;
-	width: 160px;
+	/*min-width: 160px;*/
 	padding: 0 3px 3px 0;
 	background: transparent url('../images/shadow.png') no-repeat right
 		bottom;
@@ -112,11 +111,12 @@ input[type="submit"], input[type="button"] {
 	display: block;
 	height: 22px;
 	line-height: 22px;
-	text-indent: 4px;
+	/*text-indent: 4px;*/
 	overflow: hidden;
+	float: none;
 	text-decoration: none;
 	border: 0;
-	padding: 0;
+	padding: 0 5px;
 }
 
 #fullpath .subMenu li a:hover {
@@ -154,37 +154,31 @@ input[type="submit"], input[type="button"] {
 #toolbar .toolbarButton, #toolbar .toolbarSmallButton {
 	display: block;
 	float: left;
-	height: 20px;
-	width: 24px;
 	text-align: center;
 	border-bottom: 1px solid white;
 }
 
-#toolbar .toolbarButton {
-	width: 24px;
+#toolbar .toolbarButton img {
+	width: 16px;
+	margin: 0 4px;
 }
-#toolbar .toolbarSmallButton {
-	width: 12px;
+#toolbar .toolbarSmallButton img {
+	width: 10px;
+	margin: 0 1px;
 }
 
 #toolbar .toolbarButton img, #toolbar .toolbarSmallButton img {
 	border: 0;
 	margin-top: 1px;
 	height: 16px;
-}
-
-#toolbar .toolbarButton img {
-	width: 16px;
-}
-#toolbar .toolbarSmallButton img {
-	width: 10px;
+	margin-top: 2px;
+	margin-bottom: 2px;
 }
 
 #toolbar .subMenu {
 	display: none;
 	z-index: 2000;
 	position: absolute;
-	width: 150px;
 	padding: 0 3px 3px 0;
 	background: transparent url('../images/shadow.png') no-repeat right
 		bottom;
@@ -214,12 +208,11 @@ input[type="submit"], input[type="button"] {
 	display: block;
 	height: 22px;
 	line-height: 22px;
-	text-indent: 4px;
 	overflow: hidden;
 	text-decoration: none;
-	text-align: left;
+	text-align: left !important;
 	border: 0;
-	padding: 0;
+	padding: 0 5px;
 	color: black;
 }
 
@@ -283,6 +276,11 @@ input[type="submit"], input[type="button"] {
 
 #mainView .header a {
 	display: block;
+	line-height: 22px;
+}
+
+#mainView .header span #checkSelectAll {
+	height: 22px;
 	line-height: 22px;
 }
 
