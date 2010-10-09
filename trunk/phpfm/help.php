@@ -18,8 +18,21 @@ set_response_utf8();
 	<meta http-equiv="Content-type" content="text/html;charset=UTF-8" />
 	<link href="css/com.css" rel="stylesheet" type="text/css" />
 	<link href="css/document.css" rel="stylesheet" type="text/css" />
+	<link href="css/jquery.lightbox-0.5.css" rel="stylesheet" type="text/css" />
 	<script type="text/javascript" language="javascript" src="js/jquery-1.3.2.min.js"></script>
 	<script type="text/javascript" language="javascript" src="js/jquery.tabs.min.js"></script>
+	<script type="text/javascript" language="javascript" src="js/jquery.lightbox-0.5.plus.pack.js"></script>
+	<script type="text/javascript" >
+		//<![CDATA[
+		// Initial LightBox
+		$(function (){
+			$('a.lightboxImg').lightBox( {
+				overlayOpacity :0.5,
+				autoAdapt :true
+			});
+		});
+		//]]>
+	</script>
 </head>
 <body>
     <div id="nav">
@@ -36,8 +49,8 @@ set_response_utf8();
     </div>
     <div id="content">
         <div id="phpfmDocNav">
-			
-        </div>
+        	<a class="selected" title="MainUI" href="#MainUI"><?php echo _("Main UI"); ?></a>&nbsp;|&nbsp;<a class="" title="Setting" href="#Setting"><?php echo _("Setting"); ?></a>&nbsp;|&nbsp;<a class="" title="Issue" href="#Issue"><?php echo _("Knowing Issue"); ?></a>
+      	</div>
         <?php 
         	if(file_exists("help/help." . LOCALE . ".php"))
         		require "help/help." . LOCALE . ".php";

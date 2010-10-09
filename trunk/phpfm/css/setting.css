@@ -1,27 +1,33 @@
 @CHARSET "UTF-8";
 
 form {
-	padding: 5px 0;
+	margin: 15px;
 }
+
 form#installPrefer {
 	float: right;
 }
+
 form fieldset {
 	margin: 5px 0;
 	padding: 2px 8px;
 }
+
 form fieldset * {
 	margin: 5px 0;
 	line-height: 1.5em;
 	height: 1.5em;
 	vertical-align: middle;
 }
+
 form fieldset * * {
 	margin: 0;
 }
+
 form select {
 	width: 10em;
 }
+
 form div.info {
 	display: inline;
 	font-family: Arial;

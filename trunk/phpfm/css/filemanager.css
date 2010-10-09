@@ -7,7 +7,7 @@
 	text-align: right;
 }
 
-input[type="submit"], input[type="button"] {
+input[type="submit"],input[type="button"] {
 	padding: 0 4px;
 }
 
@@ -54,7 +54,8 @@ input[type="submit"], input[type="button"] {
 	padding: 1px 1px;
 }
 
-#fullpath a:hover,#fullpath div.pathSlash a.selected,#fullpath div.pathSlash a.arrow:hover {
+#fullpath a:hover,#fullpath div.pathSlash a.selected,#fullpath div.pathSlash a.arrow:hover
+	{
 	border: 1px solid #B8D1ED;
 	-moz-border-radius: 2px;
 	-khtml-border-radius: 2px;
@@ -85,8 +86,8 @@ input[type="submit"], input[type="button"] {
 	padding: 0 3px 3px 0;
 	background: transparent url('../images/shadow.png') no-repeat right
 		bottom;
-	filter: progid : DXImageTransform.Microsoft.AlphaImageLoader ( 
-      src = '../images/shadow.png', sizingMethod = 'scale' );
+	filter: progid :   DXImageTransform.Microsoft.AlphaImageLoader (  
+       src =   '../images/shadow.png', sizingMethod =   'scale' );
 	/*
 	-webkit-box-shadow: 2px 2px 2px #888;
 	-moz-box-shadow: 2px 2px 2px #888;
@@ -145,16 +146,14 @@ input[type="submit"], input[type="button"] {
 	float: right;
 }
 
-#toolbar .toolbarButton, #toolbar .toolbarButton:hover, 
-#toolbar .toolbarSmallButton, #toolbar .toolbarSmallButton:hover, 
-#toolbar .disable, #toolbar .disable:hover {
+#toolbar .toolbarButton,#toolbar .toolbarButton:hover,#toolbar .toolbarSmallButton,#toolbar .toolbarSmallButton:hover,#toolbar .disable,#toolbar .disable:hover
+	{
 	cursor: pointer;
 }
 
-#toolbar .toolbarButton, #toolbar .toolbarSmallButton {
+#toolbar .toolbarButton,#toolbar .toolbarSmallButton {
 	display: block;
 	float: left;
-	text-align: center;
 	border-bottom: 1px solid white;
 }
 
@@ -162,12 +161,13 @@ input[type="submit"], input[type="button"] {
 	width: 16px;
 	margin: 0 4px;
 }
+
 #toolbar .toolbarSmallButton img {
 	width: 10px;
 	margin: 0 1px;
 }
 
-#toolbar .toolbarButton img, #toolbar .toolbarSmallButton img {
+#toolbar .toolbarButton img,#toolbar .toolbarSmallButton img {
 	border: 0;
 	margin-top: 1px;
 	height: 16px;
@@ -182,8 +182,8 @@ input[type="submit"], input[type="button"] {
 	padding: 0 3px 3px 0;
 	background: transparent url('../images/shadow.png') no-repeat right
 		bottom;
-	filter: progid : DXImageTransform.Microsoft.AlphaImageLoader ( 
-      src = '../images/shadow.png', sizingMethod = 'scale' );
+	filter: progid :   DXImageTransform.Microsoft.AlphaImageLoader (  
+       src =   '../images/shadow.png', sizingMethod =   'scale' );
 	/*
 	-webkit-box-shadow: 2px 2px 2px #888;
 	-moz-box-shadow: 2px 2px 2px #888;
@@ -210,7 +210,6 @@ input[type="submit"], input[type="button"] {
 	line-height: 22px;
 	overflow: hidden;
 	text-decoration: none;
-	text-align: left !important;
 	border: 0;
 	padding: 0 5px;
 	color: black;
@@ -221,6 +220,7 @@ input[type="submit"], input[type="button"] {
 	color: black;
 	display: block;
 }
+
 #toolbar .subMenu li a:hover {
 	text-decoration: underline;
 }
@@ -247,7 +247,8 @@ input[type="submit"], input[type="button"] {
 
 #toolbar form#searchForm input[type="submit"] {
 	font-size: 10px;
-	background: transparent url('../images/toolbar-search.gif') center no-repeat;
+	background: transparent url('../images/toolbar-search.gif') center
+		no-repeat;
 	border: none;
 	width: 24px;
 	height: 20px;

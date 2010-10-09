@@ -13,12 +13,12 @@
 	opacity: 0.5;
 	-ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=50)";
 	/* IE */
-	filter: alpha(opacity =   50);
+	filter: alpha(opacity =     50);
 }
 
 .inputRequire {
 	color: Red;
-	font-size: x-small;
+	font-size: 12px;
 	font-weight: bold;
 }
 
@@ -50,14 +50,21 @@ div.ajaxHeader a.ajaxFuncClose {
 	border: 1px solid #cccccc;
 	-moz-box-shadow: 0 4px 30px #000000;
 	-webkit-box-shadow: 0 4px 30px #000000;
-    box-shadow: 0 4px 30px #000000;
-
+	box-shadow: 0 4px 30px #000000;
 }
 
 #ajaxDelete #deleteMsg p,#ajaxAudioPlayer .flashAudioPlayer p {
 	height: 2em;
 	line-height: 2em;
 	margin: 0 5px;
+}
+
+#ajaxAudioPlayer .flashAudioPlayer a {
+	color: #0099FF;
+	text-decoration: none;
+}
+#ajaxAudioPlayer .flashAudioPlayer a:hover {
+	text-decoration: underline;
 }
 
 /* Rename sector */

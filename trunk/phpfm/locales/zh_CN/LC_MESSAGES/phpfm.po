@@ -264,6 +264,9 @@ msgstr "数据库名称"
 msgid "Database host"
 msgstr "数据库主机"
 
+msgid "Main UI"
+msgstr "主界面"
+
 msgid "Knowing Issue"
 msgstr "已知问题"
 

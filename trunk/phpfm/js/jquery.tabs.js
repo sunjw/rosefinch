@@ -1,6 +1,13 @@
+/**
+ * jQuery Tabs
+ * License: GPL 2.0
+ * Author: Sun Junwen
+ * Version: 1.2
+ */
 var Tabs = {
 	prefix :"#phpfmDoc",
 	splitor :"&nbsp;|&nbsp;",
+	generateNav :false,
 	navs :null,
 	contents :null,
 	browser :null,
@@ -24,10 +31,10 @@ var Tabs = {
 		}
 
 		if (displayed) {
-			for(navName in this.navs) {
+			for (navName in this.navs) {
 				this.navs[navName].removeClass("selected");
 			}
-			
+
 			this.navs[name].addClass("selected");
 		} else {
 			Tabs.display(this.contents[0], isAni);
@@ -50,25 +57,38 @@ var Tabs = {
 			var name = href.attr("name");
 			var title = href.attr("title");
 			this.contents.push(name);
-			if (i > 0) {
-				nav.append(this.splitor);
-			}
+			if(Tabs.generateNav) {
+				if (i > 0) {
+					nav.append(this.splitor);
+				}
 
-			// IE hacks: href is different in old version of IE, so use title
-			var link = $("<a/>").attr("href", "#" + name).attr("title", name).text(
-							title).click( function() {
-								Tabs.display($(this).attr("title"), true);
-							})
-			this.navs[name] = $(link);
-			nav.append(link);
+				// IE hacks: href is different in old version of IE, so use title
+				var link = $("<a/>").attr("href", "#" + name).attr("title", name).text(
+						title);
+				this.navs[name] = $(link);
+				nav.append(link);
+			}
+		}
+	},
+
+	initClick : function() {
+		var navs = $(this.prefix + "Nav > a");
+		var length = navs.length;
+		for ( var i = 0; i < length; i++) {
+			var nav = $(navs[i]);
+			nav.click( function() {
+				Tabs.display($(this).attr("title"), true);
+			});
+			this.navs[nav.attr("title")] = nav;
 		}
 	},
 
 	init : function() {
 		Tabs.contents = new Array();
 		Tabs.navs = new Array();
+		
 		Tabs.initNav();
-
+		Tabs.initClick();
 		Tabs.initContents();
 
 		var url = window.location.href;

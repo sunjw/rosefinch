@@ -9,7 +9,7 @@ var FileManager = {
 	delayID :0,
 	miniMainViewHeight :120,
 	isIE :null,
-	
+
 	/*
 	 * 阻止事件浮升
 	 */
@@ -205,10 +205,10 @@ var FileManager = {
 			"oper" :"paste",
 			"subdir" :subdir,
 			"return" :returnURL
-		}, function(data) {
+			}, function(data) {
 			// alert(data);
 				window.location.reload();
-			});
+		});
 		/*
 		 * $.get("func/paste.ajax.php?subdir=" + subdir + "&return=" +
 		 * returnURL, function(data) { // alert(data); window.location.reload();
@@ -251,12 +251,12 @@ var FileManager = {
 		$.post("func/post.func.php", {
 			"oper" :"delete",
 			"items" :itemsStr
-		}, function(data) {
+			}, function(data) {
 			// alert(data);
 				if (data == "ok") {
 					window.location.reload();
 				}
-			});
+		});
 	},
 
 	/*
@@ -565,8 +565,10 @@ var FileManager = {
 			window.location.reload(); // 刷新
 			});
 
-		//buttons.filter(".toolbarSelectAll").click(FileManager.selectAll); // 全选
-		//buttons.filter(".toolbarDeselect").click(FileManager.deselect); // 取消选择
+		// buttons.filter(".toolbarSelectAll").click(FileManager.selectAll); //
+		// 全选
+		// buttons.filter(".toolbarDeselect").click(FileManager.deselect); //
+		// 取消选择
 		buttons.filter(".toolbarPaste").hasClass("disable") ? null : buttons
 				.filter(".toolbarPaste").click(FileManager.clickPaste); // 粘贴
 
@@ -588,9 +590,9 @@ var FileManager = {
 		$("#toolbar form#searchForm input[type='submit']").hover(
 				FileManager.toolbarButtonMouseIn,
 				FileManager.toolbarButtonMouseOut); // 按钮 hover 时的效果
-		
-		$("#mainView .header span #checkSelectAll").click(function (){
-			if(this.checked)
+
+		$("#mainView .header span #checkSelectAll").click( function() {
+			if (this.checked)
 				FileManager.selectAll();
 			else
 				FileManager.deselect();

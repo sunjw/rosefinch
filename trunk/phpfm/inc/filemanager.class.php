@@ -811,35 +811,11 @@ class FileManager
 	public function display_toolbar()
 	{
 		$this_page = $this->is_search ? $this->search_page : $this->browser_page;
-		$query_str = $this->query_str;
 		
-		$up = "";
-		$up_img = "images/toolbar-up.gif";
-		$new_folder_img = "images/toolbar-new-folder.gif";
-		$upload_img = "images/toolbar-upload.gif";
+		// 准备基本图标
+		$this->prepare_basic_funcs($query_str, $up, $up_img, $new_folder_img, $upload_img);
 		
-		//echo $request_sub_dir;
-		
-		if(!$this->is_search)
-		{
-			// 浏览模式
-			$up = $this->browser_page."?";
-			$up .= $this->query_str;
-			$up .= ("&dir=".rawurlencode($this->get_parent_dir($this->request_sub_dir)));
-			
-		}
-		else
-		{
-			// 搜索模式
-			$query_str = "q=".$this->search_query."&".$query_str;
-			
-			$up = "javascript:;";
-			
-			$up_img = "images/toolbar-up-disable.gif";
-			$new_folder_img = "images/toolbar-new-folder-disable.gif";
-			$upload_img = "images/toolbar-upload-disable.gif";
-		}
-		
+		// 准备图标模式和清除搜索
 		$detail_view_url = $this_page."?".$query_str.
 							"&dir=".rawurlencode($this->request_sub_dir)."&view=detail";
 		$largeicon_view_url = $this_page."?".$query_str .
@@ -847,74 +823,17 @@ class FileManager
 		$clean_search_url = $this->browser_page."?".$this->query_str.
 							"&dir=".rawurlencode($this->request_sub_dir);
 		
-		$paste_img_src = "images/toolbar-paste-disable.gif";
-		$paste_class = "disable";
-		if($this->clipboard->have_items() && $this->is_search == false)
-		{
-			$paste_img_src = "images/toolbar-paste.gif";
-			$paste_class = "";
-		}
+		// 准备粘贴
+		$this->prepare_paste_func($paste_img_src, $paste_class);
 		
-		$back_url = "javascript:;";
-		$back_class = "disable";
-		$forward_url = "javascript:;";
-		$forward_class = "disable";
+		// 准备历史
+		$this->prepare_history_funcs($back_url, $back_class, $forward_url, $forward_class);
+		$history_items = $this->render_history_items();
 		
-		if($this->history->able_to_back())
-		{
-			$back_class = "";
-			$back_url = "func/history.func.php?action=b";
-		}
+		// 准备按钮名称
+		$button_names = $this->prepare_buttons_name();
 		
-		if($this->history->able_to_forward())
-		{
-			$forward_class = "";
-			$forward_url = "func/history.func.php?action=f";
-		}
-		
-		$history_current = $this->history->get_current() - 1;
-		$history = $this->history->get_history();
-		$history_items = "";
-		$i = 0;
-		foreach($history as $item)
-		{
-			if($i >= $this->history->get_length())
-				break;
-				
-			$url = "func/history.func.php?action=f&step=".($i-$history_current);
-			if($i != $history_current)
-				$history_items .= ('<li><a href="'.$url.'">');
-			else
-				$history_items .= ('<li class="current">');
-				
-			if($item->is_search())
-				$history_items .= (_("Search").' '.$item->to_string());
-			else
-				$history_items .= ($item->to_string());
-			
-			if($i != $history_current)
-				$history_items .= '</a></li>';
-			else
-				$history_items .= '</li>';
-			
-			++$i;
-		}
-		
-		$button_names['Back'] = _('Back');
-		$button_names['Forward'] = _('Forward');
-		$button_names['Refresh'] = _("Refresh");
-		$button_names['Up'] = _("Up");
-		$button_names['Cut'] = _("Cut");
-		$button_names['Copy'] = _("Copy");
-		$button_names['Paste'] = _("Paste");
-		$button_names['New Folder'] = _("New Folder");
-		$button_names['Rename'] = _("Rename");
-		$button_names['Delete'] = _("Delete");
-		$button_names['Upload'] = _("Upload");
-		$button_names['Large Icon View'] = _("Large Icon View");
-		$button_names['Detail View'] = _("Detail View");
-		$button_names['Clean Search'] = _("Clean Search");
-		
+		// 下面是工具栏的 HTML 部分
 ?>
 		<div id="toolbar">
 			<div id="leftToolbar">
@@ -1257,7 +1176,7 @@ class FileManager
 ?>
 		<script type="text/javascript" >
 			//<![CDATA[
-			FileManager.setSortArrow("<?php echo $javascript_call_arg; ?>", "<?php echo $order; ?>");
+			FileManager.setSortArrow(<?php echo "\"$javascript_call_arg\""; ?>, <?php echo "\"$order\""; ?>);
 			FileManager.setSearchMode(<?php echo ($this->is_search?"true":"false"); ?>);
 			//]]>
 		</script>
@@ -1439,6 +1358,152 @@ class FileManager
 			return true;
 		else
 			return false;
+	}
+	
+	/**
+	 * 准备基本功能
+	 * @param $query_str query string
+	 * @param $up 向上地址
+	 * @param $up_img 向上图标
+	 * @param $new_folder_img 新建目录图标
+	 * @param $upload_img 上传图标
+	 */
+	private function prepare_basic_funcs(
+		&$query_str, &$up, 
+		&$up_img, &$new_folder_img, 
+		&$upload_img )
+	{
+		$query_str = $this->query_str;
+		$up = "";
+		$up_img = "images/toolbar-up.gif";
+		$new_folder_img = "images/toolbar-new-folder.gif";
+		$upload_img = "images/toolbar-upload.gif";
+		
+		//echo $request_sub_dir;
+		// 设置向上，新建目录和上传按钮状态
+		if(!$this->is_search)
+		{
+			// 浏览模式
+			$up = $this->browser_page."?";
+			$up .= $this->query_str;
+			$up .= ("&dir=".rawurlencode($this->get_parent_dir($this->request_sub_dir)));
+			
+		}
+		else
+		{
+			// 搜索模式
+			$query_str = "q=".$this->search_query."&".$query_str;
+			
+			$up = "javascript:;";
+			
+			$up_img = "images/toolbar-up-disable.gif";
+			$new_folder_img = "images/toolbar-new-folder-disable.gif";
+			$upload_img = "images/toolbar-upload-disable.gif";
+		}
+	}
+	
+	/**
+	 * 准备粘贴
+	 * @param $paste_img 粘贴图标
+	 * @param $paste_class 粘贴 class
+	 */
+	private function prepare_paste_func(&$paste_img, &$paste_class)
+	{
+		$paste_img = "images/toolbar-paste-disable.gif";
+		$paste_class = "disable";
+		if($this->clipboard->have_items() && $this->is_search == false)
+		{
+			$paste_img = "images/toolbar-paste.gif";
+			$paste_class = "";
+		}
+	}
+	
+	/**
+	 * 准备历史功能状态
+	 * @param $back_url 后退地址
+	 * @param $back_class 后退 class
+	 * @param $forward_url 前进地址
+	 * @param $forward_class 前进 class
+	 */
+	private function prepare_history_funcs(
+		&$back_url, &$back_class, 
+		&$forward_url, &$forward_class)
+	{
+		$back_url = "javascript:;";
+		$back_class = "disable";
+		$forward_url = "javascript:;";
+		$forward_class = "disable";
+		if($this->history->able_to_back())
+		{
+			$back_class = "";
+			$back_url = "func/history.func.php?action=b";
+		}
+		if($this->history->able_to_forward())
+		{
+			$forward_class = "";
+			$forward_url = "func/history.func.php?action=f";
+		}
+	}
+	
+	/**
+	 * 将历史转变成 HTML
+	 * @return string
+	 */
+	private function render_history_items()
+	{
+		$history_current = $this->history->get_current() - 1;
+		$history = $this->history->get_history();
+		$history_items = "";
+		$i = 0;
+		foreach($history as $item)
+		{
+			if($i >= $this->history->get_length())
+				break;
+				
+			$url = "func/history.func.php?action=f&step=".($i-$history_current);
+			if($i != $history_current)
+				$history_items .= ('<li><a href="'.$url.'">');
+			else
+				$history_items .= ('<li class="current">');
+				
+			if($item->is_search())
+				$history_items .= (_("Search").' '.$item->to_string());
+			else
+				$history_items .= ($item->to_string());
+			
+			if($i != $history_current)
+				$history_items .= '</a></li>';
+			else
+				$history_items .= '</li>';
+			
+			++$i;
+		}
+		
+		return $history_items;
+	}
+	
+	/**
+	 * 设置按钮的 title
+	 * @return Array
+	 */
+	private function prepare_buttons_name()
+	{
+		$button_names['Back'] = _('Back');
+		$button_names['Forward'] = _('Forward');
+		$button_names['Refresh'] = _("Refresh");
+		$button_names['Up'] = _("Up");
+		$button_names['Cut'] = _("Cut");
+		$button_names['Copy'] = _("Copy");
+		$button_names['Paste'] = _("Paste");
+		$button_names['New Folder'] = _("New Folder");
+		$button_names['Rename'] = _("Rename");
+		$button_names['Delete'] = _("Delete");
+		$button_names['Upload'] = _("Upload");
+		$button_names['Large Icon View'] = _("Large Icon View");
+		$button_names['Detail View'] = _("Detail View");
+		$button_names['Clean Search'] = _("Clean Search");
+		
+		return $button_names;
 	}
 	
 }

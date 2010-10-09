@@ -4,7 +4,8 @@
 }
 
 body {
-	background: url('../images/body_new_apple.jpg') top center repeat-x;
+	background: #F5F6F7 url('../images/body_new_apple.jpg') top center
+		repeat-x scroll;
 	/*width: 900px;*/
 	min-width: 900px;
 	padding-left: 40px;
@@ -32,7 +33,7 @@ body {
 	font-size: xx-large;
 	font-style: italic;
 	font-weight: bold;
-	font-family: 微软雅黑,"segoe ui",verdana,arial,sans-serif;
+	font-family: 微软雅黑, "segoe ui", verdana, arial, sans-serif;
 	color: #223355;
 }
 
@@ -44,8 +45,7 @@ body {
 	color: #003595
 }
 
-#nav {
-	/*margin-top: 5px;*/
+#nav { /*margin-top: 5px;*/
 	position: relative;
 }
 
@@ -57,7 +57,7 @@ body {
 }
 
 #nav,#nav ul li a,#nav a#phpfmNavHome {
-	font-family: 微软雅黑,"segoe ui",verdana,arial,sans-serif;
+	font-family: 微软雅黑, "segoe ui", verdana, arial, sans-serif;
 	color: black;
 	text-decoration: none;
 }
@@ -101,7 +101,7 @@ body {
 	
 }
 
-/* Rosefinch 主页按钮 */ 
+/* Rosefinch 主页按钮 */
 #nav a#phpfmNavHome {
 	display: block;
 	height: 35px;
@@ -121,7 +121,7 @@ body {
 }
 
 #content {
-	font-family: 宋体,"Times New Roman",serif;
+	font-family: 宋体, "Times New Roman", serif;
 	font-size: 14px;
 	padding: 6px 10px;
 	background-color: white;
