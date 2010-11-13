@@ -31,6 +31,12 @@ function save_settings(&$settings)
 		return false;	
 	}
 	
+	// prepare $settings['root_path']
+	if(strpos($settings['root_path'], "\\\\") === false)
+	{
+		$settings['root_path'] = str_replace("\\", "\\\\", $settings['root_path']);
+	}
+	
 	$plat_root_path = @iconv(get_encoding(), $settings['charset'], $settings['root_path']);
 	if($settings['root_type'] == "relative")
 	{
