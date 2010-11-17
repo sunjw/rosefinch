@@ -7,7 +7,7 @@
  * FILES_DIR 是指定目录的完整路径，最后的 '\\' 或 '/' 不需要；
  */
 define("FILE_POSITION", "absolute");
-define("FILES_DIR", "E:\\temp\\phpfm_文件\\");
+define("FILES_DIR", "E:\\temp\\phpfm_文件");
 
 /* 
  * PLAT_CHARSET 平台文件系统的编码

@@ -78,6 +78,5 @@
 }
 
 #mainView #detailView input.inputCheck {
-	height: 18px;
-	line-height: 18px;
+	margin-top: 1px;
 }

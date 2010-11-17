@@ -281,8 +281,9 @@ input[type="submit"],input[type="button"] {
 }
 
 #mainView .header span #checkSelectAll {
-	height: 22px;
-	line-height: 22px;
+	/*height: 22px;
+	line-height: 22px;*/
+	margin-top: 4px;
 }
 
 #mainView .header span.split {
