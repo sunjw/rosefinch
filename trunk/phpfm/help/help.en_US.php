@@ -84,5 +84,6 @@
 	   	<a name="Issue" title="<?php echo _("Knowing Issue"); ?>"></a>
 		<h4>Knowing Issue</h4>
 		<p>Only running on web server which supports $_SERVER['HTTP_RANGE'] like Apache HTTP Server, can resume pause download.</p>
+		<p>When try to close Audio Player on Internet Explorer 8 and 9, bug happens!</p>
 	</div>
 </div>

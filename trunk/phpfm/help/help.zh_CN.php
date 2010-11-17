@@ -84,5 +84,6 @@
 	   	<a name="Issue" title="<?php echo _("Knowing Issue"); ?>"></a>
 		<h4>已知问题</h4>
 		<p>只有支持 $_SERVER['HTTP_RANGE'] 的 web 服务程序 (如: Apache) 才能提供断点续传。</p>
+		<p>Internet Explorer 8 和 9 在 Audio Player 关闭时无法控制 flash 导致出错。</p>
 	</div>
 </div>

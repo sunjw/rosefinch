@@ -511,7 +511,7 @@ var FileManager = {
 
 		var ajaxAudioPlayer = $("div#ajaxAudioPlayer");
 		if (ajaxAudioPlayer.is(":visible")) {
-			AudioPlayer.close("pAudioPlayer"); // IE 9 has some bug on this
+			AudioPlayer.close("pAudioPlayer"); // IE 9 has a bug on this call
 			ajaxAudioPlayer.fadeOut();
 		}
 	},
