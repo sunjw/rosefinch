@@ -25,6 +25,7 @@
 #mainView #detailView li {
 	margin: 0 0 2px 0;
 	height: 18px;
+	cursor: default;
 }
 
 #mainView #detailView li.selected {
@@ -38,6 +39,9 @@
 
 #mainView #detailView li a:hover {
 	color: black;
+}
+#mainView #detailView li a:hover span {
+	text-decoration: underline;
 }
 
 #mainView #detailView li.empty {

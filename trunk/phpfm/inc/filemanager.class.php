@@ -724,7 +724,7 @@ class FileManager
 			    	<a class="arrow menuButton" href="javascript:void(0);">&nbsp;</a>
 			        	
 <?php 
-					$sub_dirs = split("[/]", $this->request_sub_dir);
+					$sub_dirs = explode("/", $this->request_sub_dir);
 					$dir_str = "";
 					$this->display_sub_menus($dir_str, $sub_dirs[0]);
 ?>
@@ -1247,10 +1247,10 @@ class FileManager
 				<a href="<?php echo $a_href; ?>" title="<?php echo $a_title; ?>" <?php echo $class; ?>>
 					<span class="icon"><?php echo $img_html; ?></span>
 					<span class="name"><?php echo str_replace(" ", "&nbsp;", $name); ?></span>
-					<span class="size"><?php echo $size; ?></span>
-					<span class="type"><?php echo $type; ?></span>
-					<span class="mtime"><?php echo date("Y-n-j H:i", $mtime); ?></span>
 				</a>
+				<span class="size"><?php echo $size; ?></span>
+				<span class="type"><?php echo $type; ?></span>
+				<span class="mtime"><?php echo date("Y-n-j H:i", $mtime); ?></span>
 			</li>
 <?php 
 	}
@@ -1274,11 +1274,15 @@ class FileManager
 										$type = "",
 										$mtime = 0)
 	{
-		$class = "";
+		$class_1 = "";
+		$class_2 = "";
 		if(LIGHTBOX && $this->is_img_type($type))
-			$class = 'class="lightboxImg"';
+			$class_1 = 'class="lightboxImg"';
 		if(AUDIOPLAYER && $this->is_audio_type($type))
-			$class = 'class="audioPlayer"';
+		{
+			$class_1 = 'class="audioPlayer"';
+			$class_2 = 'class="audioPlayer"';
+		}
 ?>
 			<div class="largeIconItem" >
 				<div class="firstLine">
@@ -1286,12 +1290,12 @@ class FileManager
 					<span class="type"><?php echo $type; ?></span>
 				</div>
 				<div class="imgLine">
-					<a href="<?php echo $a_href; ?>" title="<?php echo $a_title; ?>" <?php echo $class; ?>>
+					<a href="<?php echo $a_href; ?>" title="<?php echo $a_title; ?>" <?php echo $class_1; ?>>
 						<?php echo $img_html; ?>
 					</a>
 				</div>
 				<div class="infoLine">
-					<a href="<?php echo $a_href; ?>" title="<?php echo $a_title; ?>" <?php echo $class; ?>>
+					<a href="<?php echo $a_href; ?>" title="<?php echo $a_title; ?>" <?php echo $class_2; ?>>
 						<span class="name"><?php echo str_replace(" ", "&nbsp;", $name); ?></span>
 					</a>
 					<span class="size"><?php echo $size; ?></span>

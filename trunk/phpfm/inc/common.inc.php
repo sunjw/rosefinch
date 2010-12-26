@@ -178,12 +178,12 @@ function set_response_utf8()
  */
 function timestrtotime($str)
 {
-	$array = split("[ ]", $str);
+	$array = explode(" ", $str);
 	$date = $array[0];
 	$time = $array[1];
 	
-	$date = split("-", $date);
-	$time = split(":", $time);
+	$date = explode("-", $date);
+	$time = explode(":", $time);
 	
 	$timestamp = mktime($time[0], $time[1], $time[2], $date[1], $date[2], $date[0]);
 	
@@ -207,6 +207,7 @@ function htmlentities_utf8($str)
  */
 function erase_last_slash($str)
 {
+	$temp = $str;
 	if(mb_substr($str, -1) == "/" || mb_substr($str, -1) == "\\" )
 		$temp = mb_substr($str, 0, mb_strlen($str) - 1);
 		

@@ -67,7 +67,7 @@ class Post
 		{
 			$items = post_query("items");
 			
-			$items = split("[|]", $items);
+			$items = explode("|", $items);
 			$items = Utility::filter_paths($items);
 			//print_r($files);
 			
@@ -90,7 +90,7 @@ class Post
 	private function post_delete()
 	{
 		$items = post_query("items");
-		$items = split("[|]", $items);
+		$items = explode("|", $items);
 		$items = Utility::filter_paths($items);
 		
 		$search = null;

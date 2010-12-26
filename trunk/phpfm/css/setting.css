@@ -35,3 +35,7 @@ form div.info {
 	color: #666666;
 	overflow: hidden;
 }
+
+form input[type="button"], form input[type="submit"] {
+	padding: 0 6px;
+}

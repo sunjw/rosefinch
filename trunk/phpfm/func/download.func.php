@@ -39,6 +39,7 @@ function dl_file($file)
 	//echo $ctype;
     //check if http_range is sent by browser (or download manager)
     
+	$range = '';
     if(isset($_SERVER['HTTP_RANGE']))
     {
         list($size_unit, $range_orig) = explode('=', $_SERVER['HTTP_RANGE'], 2);
@@ -60,7 +61,8 @@ function dl_file($file)
     }
 
     //figure out download piece from range (if set)
-    list($seek_start, $seek_end) = explode('-', $range, 2);
+	if($range != '')
+		list($seek_start, $seek_end) = explode('-', $range, 2);
 
     //set start and end based on range (if set), else set defaults
     //also check for invalid ranges.
