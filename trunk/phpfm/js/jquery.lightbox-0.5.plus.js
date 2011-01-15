@@ -14,12 +14,12 @@
  */
 
 // Offering a Custom Alias suport - More info: http://docs.jquery.com/Plugins/Authoring#Custom_Alias
-(function($) {
+(function ($) {
 		/**
 		 * $ is an alias to jQuery object
 		 *
 		 */
-		$.fn.lightBox = function(settings) {
+		$.fn.lightBox = function (settings) {
 			// Settings to configure the jQuery lightBox plugin how you like
 			settings = jQuery.extend({
 					// Configuration related to overlay
@@ -79,15 +79,15 @@
 				// Unset image active information
 				settings.activeImage = 0;
 				// We have an image set? Or just an image? Let´s see it.
-				if(jQueryMatchedObj.length == 1) {
+				if (jQueryMatchedObj.length == 1) {
 					settings.imageArray.push(new Array(objClicked.getAttribute('href'), objClicked.getAttribute('title')));
 				} else {
 					// Add an Array (as many as we have), with href and title atributes, inside the Array that storage the images references		
-					for(var i = 0; i < jQueryMatchedObj.length; i++) {
+					for (var i = 0; i < jQueryMatchedObj.length; i++) {
 						settings.imageArray.push(new Array(jQueryMatchedObj[i].getAttribute('href'), jQueryMatchedObj[i].getAttribute('title')));
 					}
 				}
-				while(settings.imageArray[settings.activeImage][0] != objClicked.getAttribute('href')) {
+				while (settings.imageArray[settings.activeImage][0] != objClicked.getAttribute('href')) {
 					settings.activeImage++;
 				}
 				// Call the function that prepares image exibition
@@ -97,36 +97,36 @@
 			 * Create the jQuery lightBox plugin interface
 			 *
 			 * The HTML markup will be like that:
-				<div id="jquery-overlay"></div>
-				<div id="jquery-lightbox">
-					<div id="lightbox-container-image-box">
-						<div id="lightbox-container-image">
-							<img src="../fotos/XX.jpg" id="lightbox-image">
-							<div id="lightbox-nav">
-								<a href="#" id="lightbox-nav-btnPrev"></a>
-								<a href="#" id="lightbox-nav-btnNext"></a>
-							</div>
-							<div id="lightbox-loading">
-								<a href="#" id="lightbox-loading-link">
-									<img src="../images/lightbox-ico-loading.gif">
-								</a>
-							</div>
-						</div>
-					</div>
-					<div id="lightbox-container-image-data-box">
-						<div id="lightbox-container-image-data">
-							<div id="lightbox-image-details">
-								<span id="lightbox-image-details-caption"></span>
-								<span id="lightbox-image-details-currentNumber"></span>
-							</div>
-							<div id="lightbox-secNav">
-								<a href="#" id="lightbox-secNav-btnClose">
-									<img src="../images/lightbox-btn-close.gif">
-								</a>
-							</div>
-						</div>
-					</div>
-				</div>
+			<div id="jquery-overlay"></div>
+			<div id="jquery-lightbox">
+			<div id="lightbox-container-image-box">
+			<div id="lightbox-container-image">
+			<img src="../fotos/XX.jpg" id="lightbox-image">
+			<div id="lightbox-nav">
+			<a href="#" id="lightbox-nav-btnPrev"></a>
+			<a href="#" id="lightbox-nav-btnNext"></a>
+			</div>
+			<div id="lightbox-loading">
+			<a href="#" id="lightbox-loading-link">
+			<img src="../images/lightbox-ico-loading.gif">
+			</a>
+			</div>
+			</div>
+			</div>
+			<div id="lightbox-container-image-data-box">
+			<div id="lightbox-container-image-data">
+			<div id="lightbox-image-details">
+			<span id="lightbox-image-details-caption"></span>
+			<span id="lightbox-image-details-currentNumber"></span>
+			</div>
+			<div id="lightbox-secNav">
+			<a href="#" id="lightbox-secNav-btnClose">
+			<img src="../images/lightbox-btn-close.gif">
+			</a>
+			</div>
+			</div>
+			</div>
+			</div>
 			 *
 			 */
 			function _set_interface() {
@@ -149,16 +149,16 @@
 						left : arrPageScroll[0]
 					}).show();
 				// Assigning click events in elements to close overlay
-				$('#jquery-overlay,#jquery-lightbox').click(function() {
+				$('#jquery-overlay,#jquery-lightbox').click(function () {
 						_finish();
 					});
 				// Assign the _finish function to lightbox-loading-link and lightbox-secNav-btnClose objects
-				$('#lightbox-loading-link,#lightbox-secNav-btnClose').click(function() {
+				$('#lightbox-loading-link,#lightbox-secNav-btnClose').click(function () {
 						_finish();
 						return false;
 					});
 				// If window was resized, calculate the new overlay dimensions
-				$(window).resize(function() {
+				$(window).resize(function () {
 						// Get page sizes
 						var arrPageSizes = ___getPageSize();
 						// Style overlay and show it
@@ -182,7 +182,7 @@
 			function _set_image_to_view() { // show the loading
 				// Show the loading
 				$('#lightbox-loading').show();
-				if(settings.fixedNavigation) {
+				if (settings.fixedNavigation) {
 					$('#lightbox-image,#lightbox-container-image-data-box,#lightbox-image-details-currentNumber').hide();
 				} else {
 					// Hide some elements
@@ -190,32 +190,32 @@
 				}
 				// Image preload process
 				var objImagePreloader = new Image();
-				objImagePreloader.onload = function() {
+				objImagePreloader.onload = function () {
 					$('#lightbox-image').attr('src', settings.imageArray[settings.activeImage][0]);
 					// Perfomance an effect in the image container resizing it
 					var showWidth = objImagePreloader.width;
 					var showHeight = objImagePreloader.height;
 					var maxWidth = settings.maxWidth;
 					var maxHeight = settings.maxHeight;
-					if(settings.autoAdapt) {
+					if (settings.autoAdapt) {
 						var autoWidth = document.documentElement.clientWidth - 200;
 						var autoHeight = document.documentElement.clientHeight - 150;
-						if(maxWidth < 0) {
+						if (maxWidth < 0) {
 							maxWidth = autoWidth;
 						}
-						if(maxHeight < 0) {
+						if (maxHeight < 0) {
 							maxHeight = autoHeight;
 						}
 					}
-					if(maxWidth > 0 || maxHeight > 0) {
+					if (maxWidth > 0 || maxHeight > 0) {
 						var maxWidth = maxWidth;
 						var maxHeight = maxHeight;
 						var ratio = objImagePreloader.width / objImagePreloader.height;
-						if(maxWidth > 0 && showWidth > maxWidth) {
+						if (maxWidth > 0 && showWidth > maxWidth) {
 							showWidth = maxWidth;
 							showHeight = showWidth / ratio;
 						}
-						if(maxHeight > 0 && showHeight > maxHeight) {
+						if (maxHeight > 0 && showHeight > maxHeight) {
 							showHeight = maxHeight;
 							showWidth = showHeight * ratio;
 						}
@@ -225,7 +225,7 @@
 					//_resize_container_image_box(objImagePreloader.width,objImagePreloader.height);
 					_resize_container_image_box(showWidth, showHeight);
 					//	clear onLoad, IE behaves irratically with animated gifs otherwise
-					objImagePreloader.onload = function() {
+					objImagePreloader.onload = function () {
 					};
 				};
 				objImagePreloader.src = settings.imageArray[settings.activeImage][0];
@@ -250,11 +250,11 @@
 				$('#lightbox-container-image-box').animate({
 						width : intWidth,
 						height : intHeight
-					}, settings.containerResizeSpeed, function() {
+					}, settings.containerResizeSpeed, function () {
 						_show_image();
 					});
-				if((intDiffW == 0) && (intDiffH == 0)) {
-					if($.browser.msie) {
+				if ((intDiffW == 0) && (intDiffH == 0)) {
+					if ($.browser.msie) {
 						___pause(250);
 					} else {
 						___pause(100);
@@ -264,7 +264,7 @@
 						width : intImageWidth
 					});
 				$('#lightbox-nav-btnPrev,#lightbox-nav-btnNext').css({
-						height : intImageHeight + (settings.containerBorderSize * 2)
+						height : intImageHeight + (settings.containerBorderSize * 2) 
 					});
 			};
 			/**
@@ -273,7 +273,7 @@
 			 */
 			function _show_image() {
 				$('#lightbox-loading').hide();
-				$('#lightbox-image').fadeIn(function() {
+				$('#lightbox-image').fadeIn(function () {
 						_show_image_data();
 						_set_navigation();
 					});
@@ -285,9 +285,9 @@
 			 */
 			function _show_image_data() {
 				$('#lightbox-container-image-data-box').slideDown('fast');
-				$('#lightbox-image-details-caption').get(0).onclick = function(e) {
+				$('#lightbox-image-details-caption').get(0).onclick = function (e) {
 					var e = e ? e : window.event;
-					if(window.event) { // IE
+					if (window.event) { // IE
 						e.cancelBubble = true;
 					} else { // FF
 						// e.preventDefault();
@@ -295,14 +295,14 @@
 					}
 				};
 				$('#lightbox-image-details-caption').hide();
-				if(settings.imageArray[settings.activeImage][1]) {
+				if (settings.imageArray[settings.activeImage][1]) {
 					$('#lightbox-image-details-caption') 
 					.html("Download: <a href=\"" + settings.imageArray[settings.activeImage][0]
 						 + "\">" + settings.imageArray[settings.activeImage][1] + "</a>") 
 					.show();
 				}
 				// If we have a image set, display 'Image X of X'
-				if(settings.imageArray.length > 1) {
+				if (settings.imageArray.length > 1) {
 					$('#lightbox-image-details-currentNumber').html(settings.txtImage + ' ' + (settings.activeImage + 1) + ' ' + settings.txtOf + ' ' + settings.imageArray.length).show();
 				}
 			}
@@ -319,28 +319,28 @@
 					});
 				
 				// Show the prev button, if not the first image in set
-				if(settings.activeImage != 0) {
-					if(settings.fixedNavigation) {
+				if (settings.activeImage != 0) {
+					if (settings.fixedNavigation) {
 						$('#lightbox-nav-btnPrev').css({
 								'background' : 'url(' + settings.imageBtnPrev + ') left 15% no-repeat'
 							}) 
 						.unbind() 
-						.bind('click', function() {
+						.bind('click', function () {
 								settings.activeImage = settings.activeImage - 1;
 								_set_image_to_view();
 								return false;
 							});
 					} else {
 						// Show the images button for Next buttons
-						$('#lightbox-nav-btnPrev').unbind().hover(function() {
+						$('#lightbox-nav-btnPrev').unbind().hover(function () {
 								$(this).css({
 										'background' : 'url(' + settings.imageBtnPrev + ') left 15% no-repeat'
 									});
-							}, function() {
+							}, function () {
 								$(this).css({
 										'background' : 'transparent url(' + settings.imageBlank + ') no-repeat'
 									});
-							}).show().bind('click', function() {
+							}).show().bind('click', function () {
 								settings.activeImage = settings.activeImage - 1;
 								_set_image_to_view();
 								return false;
@@ -349,28 +349,28 @@
 				}
 				
 				// Show the next button, if not the last image in set
-				if(settings.activeImage != (settings.imageArray.length - 1)) {
-					if(settings.fixedNavigation) {
+				if (settings.activeImage != (settings.imageArray.length - 1)) {
+					if (settings.fixedNavigation) {
 						$('#lightbox-nav-btnNext').css({
 								'background' : 'url(' + settings.imageBtnNext + ') right 15% no-repeat'
 							}) 
 						.unbind() 
-						.bind('click', function() {
+						.bind('click', function () {
 								settings.activeImage = settings.activeImage + 1;
 								_set_image_to_view();
 								return false;
 							});
 					} else {
 						// Show the images button for Next buttons
-						$('#lightbox-nav-btnNext').unbind().hover(function() {
+						$('#lightbox-nav-btnNext').unbind().hover(function () {
 								$(this).css({
 										'background' : 'url(' + settings.imageBtnNext + ') right 15% no-repeat'
 									});
-							}, function() {
+							}, function () {
 								$(this).css({
 										'background' : 'transparent url(' + settings.imageBlank + ') no-repeat'
 									});
-							}).show().bind('click', function() {
+							}).show().bind('click', function () {
 								settings.activeImage = settings.activeImage + 1;
 								_set_image_to_view();
 								return false;
@@ -385,7 +385,7 @@
 			 *
 			 */
 			function _enable_keyboard_navigation() {
-				$(document).keydown(function(objEvent) {
+				$(document).keydown(function (objEvent) {
 						_keyboard_action(objEvent);
 					});
 			}
@@ -402,7 +402,7 @@
 			 */
 			function _keyboard_action(objEvent) {
 				// To ie
-				if(objEvent == null) {
+				if (objEvent == null) {
 					keycode = event.keyCode;
 					escapeKey = 27;
 					// To Mozilla
@@ -413,22 +413,22 @@
 				// Get the key in lower case form
 				key = String.fromCharCode(keycode).toLowerCase();
 				// Verify the keys to close the ligthBox
-				if((key == settings.keyToClose) || (key == 'x') || (keycode == escapeKey)) {
+				if ((key == settings.keyToClose) || (key == 'x') || (keycode == escapeKey)) {
 					_finish();
 				}
 				// Verify the key to show the previous image
-				if((key == settings.keyToPrev) || (keycode == 37)) {
+				if ((key == settings.keyToPrev) || (keycode == 37)) {
 					// If we´re not showing the first image, call the previous
-					if(settings.activeImage != 0) {
+					if (settings.activeImage != 0) {
 						settings.activeImage = settings.activeImage - 1;
 						_set_image_to_view();
 						_disable_keyboard_navigation();
 					}
 				}
 				// Verify the key to show the next image
-				if((key == settings.keyToNext) || (keycode == 39)) {
+				if ((key == settings.keyToNext) || (keycode == 39)) {
 					// If we´re not showing the last image, call the next
-					if(settings.activeImage != (settings.imageArray.length - 1)) {
+					if (settings.activeImage != (settings.imageArray.length - 1)) {
 						settings.activeImage = settings.activeImage + 1;
 						_set_image_to_view();
 						_disable_keyboard_navigation();
@@ -440,11 +440,11 @@
 			 *
 			 */
 			function _preload_neighbor_images() {
-				if((settings.imageArray.length - 1) > settings.activeImage) {
+				if ((settings.imageArray.length - 1) > settings.activeImage) {
 					objNext = new Image();
 					objNext.src = settings.imageArray[settings.activeImage + 1][0];
 				}
-				if(settings.activeImage > 0) {
+				if (settings.activeImage > 0) {
 					objPrev = new Image();
 					objPrev.src = settings.imageArray[settings.activeImage - 1][0];
 				}
@@ -455,7 +455,7 @@
 			 */
 			function _finish() {
 				$('#jquery-lightbox').remove();
-				$('#jquery-overlay').fadeOut(function() {
+				$('#jquery-overlay').fadeOut(function () {
 						$('#jquery-overlay').remove();
 					});
 				// Show some elements to avoid conflict with overlay in IE. These elements appear above the overlay.
@@ -472,10 +472,10 @@
 			function ___getPageSize() {
 				var xScroll,
 				yScroll;
-				if(window.innerHeight && window.scrollMaxY) {
+				if (window.innerHeight && window.scrollMaxY) {
 					xScroll = window.innerWidth + window.scrollMaxX;
 					yScroll = window.innerHeight + window.scrollMaxY;
-				} else if(document.body.scrollHeight > document.body.offsetHeight) { // all but Explorer Mac
+				} else if (document.body.scrollHeight > document.body.offsetHeight) { // all but Explorer Mac
 					xScroll = document.body.scrollWidth;
 					yScroll = document.body.scrollHeight;
 				} else { // Explorer Mac...would also work in Explorer 6 Strict, Mozilla and Safari
@@ -484,28 +484,28 @@
 				}
 				var windowWidth,
 				windowHeight;
-				if(self.innerHeight) { // all except Explorer
-					if(document.documentElement.clientWidth) {
+				if (self.innerHeight) { // all except Explorer
+					if (document.documentElement.clientWidth) {
 						windowWidth = document.documentElement.clientWidth;
 					} else {
 						windowWidth = self.innerWidth;
 					}
 					windowHeight = self.innerHeight;
-				} else if(document.documentElement && document.documentElement.clientHeight) { // Explorer 6 Strict Mode
+				} else if (document.documentElement && document.documentElement.clientHeight) { // Explorer 6 Strict Mode
 					windowWidth = document.documentElement.clientWidth;
 					windowHeight = document.documentElement.clientHeight;
-				} else if(document.body) { // other Explorers
+				} else if (document.body) { // other Explorers
 					windowWidth = document.body.clientWidth;
 					windowHeight = document.body.clientHeight;
 				}
 				// for small pages with total height less then height of the viewport
-				if(yScroll < windowHeight) {
+				if (yScroll < windowHeight) {
 					pageHeight = windowHeight;
 				} else {
 					pageHeight = yScroll;
 				}
 				// for small pages with total width less then width of the viewport
-				if(xScroll < windowWidth) {
+				if (xScroll < windowWidth) {
 					pageWidth = xScroll;
 				} else {
 					pageWidth = windowWidth;
@@ -522,13 +522,13 @@
 			function ___getPageScroll() {
 				var xScroll,
 				yScroll;
-				if(self.pageYOffset) {
+				if (self.pageYOffset) {
 					yScroll = self.pageYOffset;
 					xScroll = self.pageXOffset;
-				} else if(document.documentElement && document.documentElement.scrollTop) { // Explorer 6 Strict
+				} else if (document.documentElement && document.documentElement.scrollTop) { // Explorer 6 Strict
 					yScroll = document.documentElement.scrollTop;
 					xScroll = document.documentElement.scrollLeft;
-				} else if(document.body) { // all other Explorers
+				} else if (document.body) { // all other Explorers
 					yScroll = document.body.scrollTop;
 					xScroll = document.body.scrollLeft;
 				}
@@ -544,9 +544,10 @@
 				curDate = null;
 				do {
 					var curDate = new Date();
-				} while(curDate - date < ms) ;
+				} while (curDate - date < ms);
 			};
 			// Return the jQuery object for chaining. The unbind method is used to avoid click conflict when the plugin is called more than once
 			return this.unbind('click').click(_initialize);
 		};
-	})(jQuery); 
+	})(jQuery);
+ 

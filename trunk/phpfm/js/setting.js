@@ -4,8 +4,8 @@ function indexfile() {
 	var result = $("div#result");
 	button.attr("disabled", "disabled");
 	
-	$.get("../func/indexfiles.func.php", function(data) {
-			if(data == "ok") {
+	$.get("../func/indexfiles.func.php", function (data) {
+			if (data == "ok") {
 				result.html("OK");
 			} else {
 				result.html("Failed");

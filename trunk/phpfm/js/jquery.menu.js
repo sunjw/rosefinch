@@ -1,16 +1,22 @@
+/**
+ * jQuery Menu
+ * License: GPL 2.0
+ * Author: Sun Junwen
+ * Version: 1.6
+ */
 var jqMenu = {
-	menuItemsSeletor : ".menuContainer",
-	menuButtonSeletor : ".menuButton",
-	subMenuSeletor : ".subMenu",
-	inlineShadow : "transparent url('images/shadow.png') no-repeat right bottom",
+	menuItemsSelector : ".menu",
+	menuButtonSelector : ".subToggle",
+	subMenuSelector : ".submenu",
+	inlineShadow : "transparent url('shadow.png') no-repeat right bottom",
 	isIE : true,
 	
 	/*
 	 * 阻止事件浮升
 	 */
-	stopBubble : function(e) {
+	stopBubble : function (e) {
 		var e = e ? e : window.event;
-		if(window.event) { // IE
+		if (window.event) { // IE
 			e.cancelBubble = true;
 		} else { // FF
 			// e.preventDefault();
@@ -18,14 +24,25 @@ var jqMenu = {
 		}
 	},
 	
+	setup : function (values) {
+		jqMenu.menuItemsSelector = 
+			(values.menuItemsSelector != undefined) ? values.menuItemsSelector : jqMenu.menuItemsSelector;
+		jqMenu.menuButtonSelector = 
+			(values.menuButtonSelector != undefined) ? values.menuButtonSelector : jqMenu.menuButtonSelector;
+		jqMenu.subMenuSelector = 
+			(values.subMenuSelector != undefined) ? values.subMenuSelector : jqMenu.subMenuSelector;
+		jqMenu.inlineShadow = 
+			(values.inlineShadow != undefined) ? values.inlineShadow : jqMenu.inlineShadow;
+	},
+	
 	/*
 	 * 关闭所有子菜单
 	 */
-	hideAllSubMenus : function() {
-		var subMenus = $(jqMenu.subMenuSeletor);
-		for(var i = 0; i < subMenus.length; i++) {
+	hideAllSubMenus : function () {
+		var subMenus = $(jqMenu.subMenuSelector);
+		for (var i = 0; i < subMenus.length; i++) {
 			var subMenu = $(subMenus[i]);
-			subMenu.prev(jqMenu.menuButtonSeletor).removeClass("selected");
+			subMenu.prev(jqMenu.menuButtonSelector).removeClass("selected");
 			// subMenu.css("display", "none");
 			jqMenu.hideSubMenu(subMenu);
 		}
@@ -34,9 +51,9 @@ var jqMenu = {
 	/*
 	 * 关闭子菜单
 	 */
-	hideSubMenu : function(subMenu) {
+	hideSubMenu : function (subMenu) {
 		// subMenu.css("display", "none");
-		if(jqMenu.isIE) 
+		if (jqMenu.isIE) 
 			subMenu.css("background", "none"); // IE-hack 去掉背景
 		subMenu.fadeOut("fast");
 	},
@@ -44,34 +61,30 @@ var jqMenu = {
 	/*
 	 * 初始化菜单
 	 */
-	setup : function() {
+	init : function () {
 		jqMenu.isIE = $.browser.msie ? true : false;
 		
 		var body = $("body").get(0);
 		body.onclick = jqMenu.hideAllSubMenus;
 		
-		var menuItems = $(this.menuItemsSeletor);
+		var menuItems = $(jqMenu.menuItemsSelector);
 		var count = menuItems.length;
-		for(var i = 0; i < count; i++) {
+		for (var i = 0; i < count; i++) {
 			var menuItem = $(menuItems.get(i));
-			menuItem.get(0).onclick = function(e) {
+			menuItem.get(0).onclick = function (e) {
 				jqMenu.stopBubble(e); // 取消事件浮升
 			}
-			var button = menuItem.children(this.menuButtonSeletor);
-			button.get(0).onclick = function() {
+			var button = menuItem.children(jqMenu.menuButtonSelector);
+			button.get(0).onclick = function () {
 				// $(this).css("background-image",
 				// "url('images/path-arrow-down.gif')");
-				var thisSub = $(this.parentNode) 
-				.children(jqMenu.subMenuSeletor);
-				if(!thisSub.length) 
-					return;
-				var subMenus = $(jqMenu.subMenuSeletor);
-				for(var i = 0; i < subMenus.length; i++) {
+				var thisSub = $(this.parentNode).children(jqMenu.subMenuSelector);
+				var subMenus = $(jqMenu.subMenuSelector);
+				for (var i = 0; i < subMenus.length; i++) {
 					var subMenu = $(subMenus[i]);
-					if(thisSub.get(0) != subMenu.get(0) 
+					if (thisSub.get(0) != subMenu.get(0) 
 						 && subMenu.is(":visible")) {
-						subMenu.prev(jqMenu.menuButtonSeletor).removeClass(
-							"selected");
+						subMenu.prev(jqMenu.menuButtonSelector).removeClass("selected");
 						// subMenu.css("display", "none");
 						jqMenu.hideSubMenu(subMenu);
 					}
@@ -80,15 +93,13 @@ var jqMenu = {
 				 * if(!isIE) { thisSub.css("background", "transparent
 				 * url('images/shadow.png') no-repeat right bottom"); }
 				 */
-				if(!thisSub.is(":visible")) {
+				if (!thisSub.is(":visible")) {
 					$(this).addClass("selected");
-					if(jqMenu.isIE) {
+					if (jqMenu.isIE) {
 						thisSub.css("background", "none");
-						if($.browser.version < 7) 
-							thisSub.css("width", "160px");
 					}
-					thisSub.fadeIn("fast", function() {
-							if(jqMenu.isIE) {
+					thisSub.fadeIn("fast", function () {
+							if (jqMenu.isIE) {
 								// IE-hack 去掉背景
 								$(this).css("background", jqMenu.inlineShadow);
 							}
@@ -103,7 +114,5 @@ var jqMenu = {
 	}
 }
 
-jqMenu.init = function() {
-	jqMenu.setup();
-};
+
  

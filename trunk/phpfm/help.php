@@ -19,7 +19,7 @@ set_response_utf8();
 	<link href="css/com.css" rel="stylesheet" type="text/css" />
 	<link href="css/document.css" rel="stylesheet" type="text/css" />
 	<link href="css/jquery.lightbox-0.5.css" rel="stylesheet" type="text/css" />
-	<script type="text/javascript" language="javascript" src="js/jquery-1.3.2.min.js"></script>
+	<script type="text/javascript" language="javascript" src="js/jquery-1.4.4.min.js"></script>
 	<script type="text/javascript" language="javascript" src="js/jquery.tabs.min.js"></script>
 	<script type="text/javascript" language="javascript" src="js/jquery.lightbox-0.5.plus.pack.js"></script>
 	<script type="text/javascript" >
@@ -30,6 +30,12 @@ set_response_utf8();
 				overlayOpacity :0.5,
 				autoAdapt :true
 			});
+
+			jqTabs.setup({
+					prefix : "#phpfmDoc",
+					splitor : "&nbsp;|&nbsp;"
+				});
+			jqTabs.init();
 		});
 		//]]>
 	</script>

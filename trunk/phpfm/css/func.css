@@ -1,7 +1,7 @@
 ﻿@CHARSET "UTF-8";
 
-/* Ajax Cut, Copy, Paste and Rename sector */
-#ajaxBg {
+/* Func Cut, Copy, Paste and Rename sector */
+#funcBg {
 	width: 100%;
 	height: 100%;
 	position: absolute;
@@ -22,7 +22,7 @@
 	font-weight: bold;
 }
 
-div.ajaxHeader {
+div.divHeader {
 	background-color: Black;
 	color: White;
 	height: 18px;
@@ -30,17 +30,21 @@ div.ajaxHeader {
 	padding: 6px 10px;
 }
 
-div.ajaxHeader span {
+div.divHeader span {
 	float: left;
 	width: 150px;
 }
 
-div.ajaxHeader a.ajaxFuncClose {
+div.divHeader a.funcClose {
 	float: right;
 	color: White;
 }
 
-#ajaxInput,#ajaxDelete,#ajaxWait,#ajaxAudioPlayer {
+div.hidden {
+	display: none;
+}
+
+#funcDialog {
 	display: none;
 	background-color: white;
 	z-index: 1005;
@@ -53,54 +57,37 @@ div.ajaxHeader a.ajaxFuncClose {
 	box-shadow: 0 4px 30px #000000;
 }
 
-#ajaxDelete #deleteMsg p,#ajaxAudioPlayer .flashAudioPlayer p {
-	height: 2em;
-	line-height: 2em;
-	margin: 0 5px;
-}
-
-#ajaxAudioPlayer .flashAudioPlayer a {
-	color: #0099FF;
-	text-decoration: none;
-}
-#ajaxAudioPlayer .flashAudioPlayer a:hover {
-	text-decoration: underline;
-}
-
-/* Rename sector */
-#ajaxInput form {
+#funcDialog .container {
 	padding: 6px 10px;
 }
 
-#ajaxInput form {
-	
-}
-
-#ajaxInput form div.ajaxHidden {
-	display: none;
-}
-
-#ajaxInput form div div {
+#funcDialog #divInput form div div {
 	height: 2em;
 	line-height: 2em;
 }
 
-#ajaxInput form div#oldnameLine {
+#funcDialog #divDelete div, #funcDialog #divAudio div, #funcDialog #divAudio object, #funcDialog #divWaiting div{
+	height: 2em;
+	line-height: 2em;
+}
+
+/* Rename sector */
+#divReqInput div#oldnameLine {
 	display: none;
 }
 
 /* Delete sector */
-#ajaxDelete #deleteMsg {
-	text-align: center;
-}
 
 /* Audio Player sector*/
-#ajaxAudioPlayer .flashAudioPlayer {
-	padding: 10px 0;
-	text-align: center;
+#funcDialog #divAudio a {
+	color: #0099FF;
+	text-decoration: none;
+}
+#funcDialog #divAudio a:hover {
+	text-decoration: underline;
 }
 
 /* Watingsector */
 div.wating {
-	margin: 10px 80px;
+	margin: 10px 0;
 }

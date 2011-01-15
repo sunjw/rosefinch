@@ -18,7 +18,7 @@ set_response_utf8();
 	<meta http-equiv="Content-type" content="text/html;charset=UTF-8" />
 	<link href="css/com.css" rel="stylesheet" type="text/css" />
 	<link href="css/document.css" rel="stylesheet" type="text/css" />
-	<script type="text/javascript" language="javascript" src="js/jquery-1.3.2.min.js"></script>
+	<script type="text/javascript" language="javascript" src="js/jquery-1.4.4.min.js"></script>
 	<script type="text/javascript" language="javascript" src="js/jquery.tabs.min.js"></script>
 </head>
 <body>

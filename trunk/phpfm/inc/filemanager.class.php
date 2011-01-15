@@ -253,7 +253,7 @@ class FileManager
 	    <link href="css/largeiconView.css" rel="stylesheet" type="text/css" />
 	    <link href="css/func.css" rel="stylesheet" type="text/css" />
 	    <link href="css/jquery.lightbox-0.5.css" rel="stylesheet" type="text/css" />
-	    <script type="text/javascript" language="javascript" src="js/jquery-1.3.2.min.js"></script>
+	    <script type="text/javascript" language="javascript" src="js/jquery-1.4.4.min.js"></script>
 	    <script type="text/javascript" language="javascript" src="js/audio-player.js"></script>  
 <?php 
 		if($debug)
@@ -952,85 +952,72 @@ class FileManager
 		$multilan_titles = "";
 		$multilan_titles .= ("rename:"._("Rename")."|");
 		$multilan_titles .= ("new folder:"._("New Folder")."|");
-		$multilan_titles .= ("upload:"._("Upload"));
+		$multilan_titles .= ("upload:"._("Upload")."|");
+		$multilan_titles .= ("delete:"._("Confirm")."|");
+		$multilan_titles .= ("audio:"._("Audio Player")."|");
+		$multilan_titles .= ("waiting:"._("Working...")."|");
 ?>
-		<div id="ajaxBg">
+		<div id="funcBg">
 		</div>
-		<div id="ajaxInput">
-			<div class="ajaxHeader">
+		<div id="funcDialog">
+			<div class="divHeader">
 				<span><?php echo $multilan_titles; ?></span>
-				<a class="ajaxFuncClose" href="javascript:;">
+				<a class="funcClose" href="javascript:;">
 					<img alt="Close" src="images/close.gif" border="0">
 				</a>
 			</div>
-			<form action="" method="post" enctype="multipart/form-data">
-				<input type="hidden" id="oper" name="oper" value="" />
-				<input type="hidden" id="subdir" name="subdir" value="<?php echo rawurlencode($this->request_sub_dir); ?>" />
-				<input type="hidden" id="renamePath" name="renamePath" value="" />
-				<input type="hidden" id="return" name="return" value="<?php echo rawurlencode(get_URI()); ?>" />
-				<div id="divInput">
-					<div id="oldnameLine">
-						<label for="oldname"><?php printf("%s&nbsp;", _("Old Name:")); ?></label>
-						<input id="oldname" type="text" name="oldname" value="" size="40" maxlength="128" readonly="readonly"/>
+			<div id="divInput" class="container">
+				<form action="" method="post" enctype="multipart/form-data">
+					<input type="hidden" id="oper" name="oper" value="" />
+					<input type="hidden" id="subdir" name="subdir" value="<?php echo rawurlencode($this->request_sub_dir); ?>" />
+					<input type="hidden" id="renamePath" name="renamePath" value="" />
+					<input type="hidden" id="return" name="return" value="<?php echo rawurlencode(get_URI()); ?>" />
+					<div id="divReqInput">
+						<div id="oldnameLine">
+							<label for="oldname"><?php printf("%s&nbsp;", _("Old Name:")); ?></label>
+							<input id="oldname" type="text" name="oldname" value="" size="40" maxlength="128" readonly="readonly"/>
+						</div>
+						<div>
+							<label for="newname"><?php printf("%s&nbsp;", _("New Name:")); ?></label>
+							<input id="newname" type="text" name="newname" value="" size="40" maxlength="128" />
+						</div>
+						<div>
+							<span class="inputRequire"><?php printf(_("There should not have %s in new name"), ".., /, \, *, ?, \", |, &amp;, &lt;, &gt;"); ?></span>
+						</div>
 					</div>
-					<div>
-						<label for="newname"><?php printf("%s&nbsp;", _("New Name:")); ?></label>
-						<input id="newname" type="text" name="newname" value="" size="40" maxlength="128" />
+					<div id="divUpload">
+						<div>
+							<label for="uploadFile"><?php printf("%s&nbsp;", _("Select File:")); ?></label>
+							<input id="uploadFile" type="file" name="uploadFile" size="20"/>
+						</div>
+						<div>
+							<span class="inputRequire"><?php printf("%s%s", _("File cannot be larger than "), "2MB"); ?></span>
+						</div>
 					</div>
-					<div>
-						<span class="inputRequire"><?php printf(_("There should not have %s in new name"), ".., /, \, *, ?, \", |, &amp;, &lt;, &gt;"); ?></span>
+					<div class="rightAlign">
+						<input type="submit" value="<?php echo _("OK"); ?>"/>
+						<input type="button" value="<?php echo _("Cancel"); ?>" onclick="FileManager.closeFunc()"/>
 					</div>
-				</div>
-				<div id="divUpload">
-					<div>
-						<label for="uploadFile"><?php printf("%s&nbsp;", _("Select File:")); ?></label>
-						<input id="uploadFile" type="file" name="uploadFile" size="20"/>
-					</div>
-					<div>
-						<span class="inputRequire"><?php printf("%s%s", _("File cannot be larger than "), "2MB"); ?></span>
-					</div>
-				</div>
+				</form>
+			</div>
+			<div id="divDelete" class="container">
+				<div class="center"><?php echo _("Are you sure to delete these items?"); ?></div>
 				<div class="rightAlign">
-					<input type="submit" value="<?php echo _("OK"); ?>"/>
-					<input type="button" value="<?php echo _("Cancel"); ?>" onclick="FileManager.closeAjax()"/>
-				</div>
-			</form>
-		</div>
-		<div id="ajaxDelete">
-			<div class="ajaxHeader">
-				<span><?php echo _("Confirm"); ?></span>
-				<a class="ajaxFuncClose" href="javascript:;">
-					<img alt="Close" src="images/close.gif" border="0">
-				</a>
-			</div>
-			<div id="deleteMsg">
-				<p><?php echo _("Are you sure to delete these items?"); ?></p>
-				<p class="rightAlign">
 					<input type="button" value="<?php echo _("OK"); ?>" onclick="FileManager.doDelete()"/>
-					<input type="button" value="<?php echo _("Cancel"); ?>" onclick="FileManager.closeAjax()"/>
-				</p>
+					<input type="button" value="<?php echo _("Cancel"); ?>" onclick="FileManager.closeFunc()"/>
+				</div>
+			</div>
+			<div id="divAudio" class="container center">
+				<div id="divAudioPlayer">Audio Player</div>
+				<div id="link"></div>
+			</div>
+			<div id="divWaiting" class="container center">
+				<div class="wating">
+					<img alt="wating" src="images/loadingAnimation.gif" border="0">
+				</div>
 			</div>
 		</div>
-		<div id="ajaxWait">
-			<div class="ajaxHeader">
-				<span><?php echo _("Working..."); ?></span>
-			</div>
-			<div class="wating">
-				<img alt="wating" src="images/loadingAnimation.gif" border="0">
-			</div>
-		</div>
-		<div id="ajaxAudioPlayer">
-			<div class="ajaxHeader">
-				<span><?php echo _("Audio Player"); ?></span>
-				<a class="ajaxFuncClose" href="javascript:;">
-					<img alt="Close" src="images/close.gif" border="0">
-				</a>
-			</div>
-			<div class="flashAudioPlayer">
-				<p id="pAudioPlayer">Audio Player</p>
-				<p id="link"></p>
-			</div>
-    	</div>
+		
 		<div id="phpfmMessage">
     	
     	</div>
