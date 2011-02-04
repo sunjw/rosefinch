@@ -13,6 +13,7 @@ define("DIR_PARAM", "dir"); // 请求子目录的查询参数
 define("SORT_PARAM", "s"); // 排序元素的查询参数
 define("ORDER_PARAM", "o"); // 排序方向的查询参数
 define("VIEW_PARAM", "view"); // 视图模式的查询参数
+define("TOOLBAR_PARAM", "toolbar"); // 视图模式的查询参数
 
 // 定义 gettext 参数
 define("DOMAIN", "phpfm"); // 不要修改

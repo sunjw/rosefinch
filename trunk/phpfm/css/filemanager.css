@@ -74,7 +74,7 @@ input[type="submit"],input[type="button"] {
 #fullpath div.pathSlash a.arrow {
 	width: 16px;
 	color: transparent;
-	background: url('../images/path-arrow-right.gif') center center
+	background: url('../images/arrow-right.gif') center center
 		no-repeat;
 }
 
@@ -147,8 +147,12 @@ input[type="submit"],input[type="button"] {
 }
 
 #toolbar .toolbarButton,#toolbar .toolbarButton:hover,#toolbar .toolbarSmallButton,#toolbar .toolbarSmallButton:hover,#toolbar .disable,#toolbar .disable:hover
-	{
+{
 	cursor: pointer;
+}
+
+#toolbar .toolbarPart, #toolbar .toolbarHiddenable {
+	float: left;
 }
 
 #toolbar .toolbarButton,#toolbar .toolbarSmallButton {

@@ -67,7 +67,7 @@ var jqMenu = {
 	 */
 	showSubMenu : function () {
 		// $(this).css("background-image",
-		// "url('images/path-arrow-down.gif')");
+		// "url('images/arrow-down.gif')");
 		var thisSub = $(this.parentNode).children(jqMenu.subMenuSelector);
 		var subMenus = $(jqMenu.subMenuSelector);
 		for (var i = 0; i < subMenus.length; i++) {

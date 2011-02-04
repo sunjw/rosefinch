@@ -25,6 +25,7 @@ class FileManager
 	private $sort_type; // 排序方式
 	private $order; // 排序方向
 	private $view_type; // 视图模式
+	private $toolbar_type;
 	
 	private $sort; // 文件排序代号
 	private $dsort;
@@ -88,6 +89,10 @@ class FileManager
 		{
 			$this->view_type = get_cookie(VIEW_PARAM);
 		}
+		
+		$this->toolbar_type = get_cookie(TOOLBAR_PARAM);
+		if($this->toolbar_type != "little")
+			$this->toolbar_type = "full";
 		
 		$allowed_sort_type = array('', 'n', 's', 't', 'm');
 		$allowed_view_type = array('', 'detail', 'largeicon');
@@ -254,7 +259,8 @@ class FileManager
 	    <link href="css/func.css" rel="stylesheet" type="text/css" />
 	    <link href="css/jquery.lightbox-0.5.css" rel="stylesheet" type="text/css" />
 	    <script type="text/javascript" language="javascript" src="js/jquery-1.4.4.min.js"></script>
-	    <script type="text/javascript" language="javascript" src="js/audio-player.js"></script>  
+	    <script type="text/javascript" language="javascript" src="js/audio-player.js"></script> 
+	    <script type="text/javascript" language="javascript" src="js/jquery.common.min.js"></script>  
 <?php 
 		if($debug)
 		{
@@ -830,6 +836,15 @@ class FileManager
 		$this->prepare_history_funcs($back_url, $back_class, $forward_url, $forward_class);
 		$history_items = $this->render_history_items();
 		
+		// 准备 more
+		$more_img_src = "images/toolbar-arrow-left.gif";
+		$more_class = "full";
+		if($this->toolbar_type == "little")
+		{
+			$more_img_src = "images/toolbar-arrow-right.gif";
+			$more_class = "little";
+		}
+		
 		// 准备按钮名称
 		$button_names = $this->prepare_buttons_name();
 		
@@ -864,26 +879,33 @@ class FileManager
 				<a href="<?php echo $up; ?>" title="<?php echo $button_names['Up']; ?>" class="toolbarButton toolbarUp splitRight">
 					<img alt="<?php echo $button_names['Up']; ?>" src="<?php echo $up_img; ?>" />
 				</a>
-				<div title="<?php echo $button_names['Cut']; ?>" class="toolbarButton toolbarCut">
-					<img alt="<?php echo $button_names['Cut']; ?>" src="images/toolbar-cut-disable.gif" />
-				</div>
-				<div title="<?php echo $button_names['Copy']; ?>" class="toolbarButton toolbarCopy">
-					<img alt="<?php echo $button_names['Copy']; ?>" src="images/toolbar-copy-disable.gif" />
-				</div>
-				<div title="<?php echo $button_names['Paste']; ?>" class="toolbarButton toolbarPaste splitRight <?php echo $paste_class; ?>">
-					<img alt="<?php echo $button_names['Paste']; ?>" src="<?php echo $paste_img_src; ?>" />
-				</div>
-				<div title="<?php echo $button_names['New Folder']; ?>" class="toolbarButton toolbarNewFolder">
-					<img alt="<?php echo $button_names['New Folder']; ?>" src="<?php echo $new_folder_img; ?>" />
-				</div>
-				<div title="<?php echo $button_names['Rename']; ?>" class="toolbarButton toolbarRename">
-					<img alt="<?php echo $button_names['Rename']; ?>" src="images/toolbar-rename-disable.gif" />
-				</div>
-				<div title="<?php echo $button_names['Delete']; ?>" class="toolbarButton toolbarDelete splitRight" >
-					<img alt="<?php echo $button_names['Delete']; ?>" src="images/toolbar-delete-disable.gif" />
-				</div>
-				<div title="<?php echo $button_names['Upload']; ?>" class="toolbarButton toolbarUpload splitRight">
-					<img alt="<?php echo $button_names['Upload']; ?>" src="<?php echo $upload_img; ?>" />
+				<div class="toolbarPart">
+					<div class="toolbarHiddenable">
+						<div title="<?php echo $button_names['Cut']; ?>" class="toolbarButton toolbarCut">
+							<img alt="<?php echo $button_names['Cut']; ?>" src="images/toolbar-cut-disable.gif" />
+						</div>
+						<div title="<?php echo $button_names['Copy']; ?>" class="toolbarButton toolbarCopy">
+							<img alt="<?php echo $button_names['Copy']; ?>" src="images/toolbar-copy-disable.gif" />
+						</div>
+						<div title="<?php echo $button_names['Paste']; ?>" class="toolbarButton toolbarPaste splitRight <?php echo $paste_class; ?>">
+							<img alt="<?php echo $button_names['Paste']; ?>" src="<?php echo $paste_img_src; ?>" />
+						</div>
+						<div title="<?php echo $button_names['New Folder']; ?>" class="toolbarButton toolbarNewFolder">
+							<img alt="<?php echo $button_names['New Folder']; ?>" src="<?php echo $new_folder_img; ?>" />
+						</div>
+						<div title="<?php echo $button_names['Rename']; ?>" class="toolbarButton toolbarRename">
+							<img alt="<?php echo $button_names['Rename']; ?>" src="images/toolbar-rename-disable.gif" />
+						</div>
+						<div title="<?php echo $button_names['Delete']; ?>" class="toolbarButton toolbarDelete splitRight" >
+							<img alt="<?php echo $button_names['Delete']; ?>" src="images/toolbar-delete-disable.gif" />
+						</div>
+						<div title="<?php echo $button_names['Upload']; ?>" class="toolbarButton toolbarUpload splitRight">
+							<img alt="<?php echo $button_names['Upload']; ?>" src="<?php echo $upload_img; ?>" />
+						</div>
+					</div>
+					<div class="toolbarSmallButton toolbarMore <?php echo $more_class; ?>">
+						<img alt="<?php echo _("More..."); ?>" src="<?php echo $more_img_src; ?>" />
+					</div>
 				</div>
 			</div>
             <div id="rightToolbar">
@@ -898,7 +920,7 @@ class FileManager
 				{
 				?>
 				<form id="searchForm" action="<?php echo $this->search_page ?>" method="get" class="splitLeft">
-            		<input id="q" name="q" type="text" value="<?php echo $this->search_query; ?>" maxlength="255" size="10" placeholder="<?php echo _("Search"); ?>" />
+            		<input id="q" name="q" type="text" value="<?php echo $this->search_query; ?>" maxlength="255" size="10" />
             		<input type="hidden" name="dir" value="<?php echo $this->request_sub_dir; ?>" />
             		<input type="submit" value="<?php echo _("Search"); ?>" title="<?php echo _("Search"); ?>" />
             		<?php 

@@ -19,18 +19,12 @@ var FileManager = {
 		divWaiting : null
 	}, 
 	
-	/*
-	 * 阻止事件浮升
-	 */
-	stopBubble : function (e) {
-		var e = e ? e : window.event;
-		if (window.event) { // IE
-			e.cancelBubble = true;
-		} else { // FF
-			// e.preventDefault();
-			e.stopPropagation();
-		}
-	}, 
+	setCookie : function (c_name, value) {
+		var exdate=new Date();
+		exdate.setDate(exdate.getDate() + 365);
+		var c_value = escape(value) + "; expires=" + exdate.toUTCString();
+		document.cookie = c_name + "=" + c_value;
+	},
 	
 	/*
 	 * 检测是否支持 html5 <audio> 标签
@@ -625,7 +619,7 @@ var FileManager = {
 	 * 准备工具栏
 	 */
 	initToolbar : function () {
-		var buttons = $("div#toolbar .toolbarButton");
+		var buttons = $("div#toolbar .toolbarButton").add("div#toolbar .toolbarSmallButton");
 		
 		if (buttons.filter(".toolbarBack").hasClass("disable")) { // 后退
 			buttons.filter(".toolbarBack").find("img").attr("src", 
@@ -644,8 +638,8 @@ var FileManager = {
 		// 全选
 		// buttons.filter(".toolbarDeselect").click(FileManager.deselect); //
 		// 取消选择
-		buttons.filter(".toolbarPaste").hasClass("disable") ? null : buttons
-		.filter(".toolbarPaste").click(FileManager.clickPaste); // 粘贴
+		buttons.filter(".toolbarPaste").hasClass("disable") ? null : 
+		buttons.filter(".toolbarPaste").click(FileManager.clickPaste); // 粘贴
 		
 		if (FileManager.isSearch) {
 			// 搜索模式
@@ -672,6 +666,26 @@ var FileManager = {
 				else 
 					
 					FileManager.deselect();
+			});
+		
+		// more 按钮
+		var buttonMore = buttons.filter(".toolbarMore");
+		if (buttonMore.hasClass("little")) {
+			buttonMore.parent().find(".toolbarHiddenable").hide();
+			buttonMore.find("img").attr("src", "images/toolbar-arrow-right.gif");
+		}
+		buttonMore.click(function () {
+				var img = $(this).find("img");
+				var part = $(this).parent().find(".toolbarHiddenable");
+				if (part.is(":visible")) {
+					part.fadeOut("fast");
+					img.attr("src", "images/toolbar-arrow-right.gif");
+					FileManager.setCookie("toolbar", "little");
+				} else {
+					part.fadeIn("fast");
+					img.attr("src", "images/toolbar-arrow-left.gif");
+					FileManager.setCookie("toolbar", "full");
+				}
 			});
 	}, 
 	
@@ -704,7 +718,7 @@ var FileManager = {
 					};
 				}
 				item.children("a")[0].onclick = function (e) {
-					FileManager.stopBubble(e);
+					jqCommon.stopBubble(e);
 				};
 			}
 		} else if (largeiconViewItems.length > 0) {
@@ -728,7 +742,7 @@ var FileManager = {
 					for (var j = 0; j < as.length; j++) {
 						var a = as[j];
 						a.onclick = function (e) {
-							FileManager.stopBubble(e);
+							jqCommon.stopBubble(e);
 						};
 					}
 					
@@ -739,14 +753,14 @@ var FileManager = {
 		FileManager.inputChecks = $("input.inputCheck");
 		FileManager.inputChecks.onclick = function (e) {
 			FileManager.viewItemCheck();
-			FileManager.stopBubble(e);
+			jqCommon.stopBubble(e);
 		};
 		var count = FileManager.inputChecks.length;
 		for (var i = 0; i < count; i++) {
 			var check = FileManager.inputChecks.get(i);
 			check.onclick = function (e) {
 				FileManager.viewItemCheck();
-				FileManager.stopBubble(e);
+				jqCommon.stopBubble(e);
 			};
 		}
 		FileManager.viewItemCheck();
@@ -814,6 +828,8 @@ FileManager.init = function () {
 	FileManager.getMessage();
 	
 	FileManager.initMediaPreview();
+	
+	jqCommon.setPlaceholder("#searchForm", "#q", "搜索");
 };
 
 // $(window).load(init); // 运行准备函数
