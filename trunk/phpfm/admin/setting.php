@@ -27,7 +27,8 @@ $settings = array('root_type' => FILE_POSITION,
 				'title_name' => TITLENAME,
 				'lightbox' => LIGHTBOX,
 				'audioPlayer' => AUDIOPLAYER,
-				'search' => SEARCH);
+				'search' => SEARCH,
+				'usermng' => USERMNG);
 
 $wrong = false;
 $display_msg = false;
@@ -83,7 +84,10 @@ textdomain($domain);
     	</div>
     </div>
     <div id="content">
-    	<div id="phpfmMessage" <?php if($display_msg)print("style='display:block' "); if($wrong)print("class='wrong' "); ?>>
+    	<div id="phpfmDocNav">
+        	<?php echo _("Setting"); ?>&nbsp;|&nbsp;<a class="" title="<?php echo _("User Management"); ?>" href="usermgn.php"><?php echo _("User Management"); ?></a>
+      	</div>
+    	<div id="phpfmMessage" <?php if($display_msg)print("style='display:block'"); if($wrong)print("class='wrong' "); ?>>
     		<?php 
     		if($wrong)
     			echo _("There is something wrong in your settings.");

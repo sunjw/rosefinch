@@ -1,7 +1,22 @@
 @CHARSET "UTF-8";
 
-form {
+#phpfmDocNav, form, #demoMessage {
 	margin: 15px;
+}
+
+#phpfmDocNav {
+	font-size: 14px;
+	color: black;
+}
+#phpfmDocNav a {
+	color: #666666;
+}
+#phpfmDocNav a.selected {
+	color: black;
+	text-decoration: none;
+}
+#phpfmDocNav a:hover {
+	color: black;
 }
 
 form#installPrefer {

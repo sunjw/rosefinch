@@ -8,6 +8,7 @@ require_once "clipboard.class.php";
 require_once "messageboard.class.php";
 require_once "history.class.php";
 require_once "search.class.php";
+require_once "usermng.class.php";
 require_once "utility.class.php";
 
 @session_start();
@@ -42,6 +43,7 @@ class FileManager
 	private $clipboard;
 	private $messageboard;
 	private $history;
+	private $user_manager;
 	
 	function __construct($is_search = false, $browser_page = "index.php", $search_page = "search.php")
 	{
@@ -53,6 +55,7 @@ class FileManager
 		$this->clipboard = Utility::get_clipboard();
 		$this->messageboard = Utility::get_messageboard();
 		$this->history = Utility::get_history();
+		$this->user_manager = Utility::get_usermng();
 		
 		$this->is_search = $is_search;
 		$this->browser_page = $browser_page;
@@ -977,6 +980,7 @@ class FileManager
 		$multilan_titles .= ("upload:"._("Upload")."|");
 		$multilan_titles .= ("delete:"._("Confirm")."|");
 		$multilan_titles .= ("audio:"._("Audio Player")."|");
+		$multilan_titles .= ("user:"._("User")."|");
 		$multilan_titles .= ("waiting:"._("Working...")."|");
 ?>
 		<div id="funcBg">
@@ -1015,6 +1019,19 @@ class FileManager
 						<div>
 							<span class="inputRequire"><?php printf("%s%s", _("File cannot be larger than "), "2MB"); ?></span>
 						</div>
+					</div>
+					<div id="divLogin">
+						<div>
+							<label for="username"><?php printf("%s&nbsp;", _("Username:")); ?></label>
+							<input id="username" type="text" name="username" value="" size="40" maxlength="128"/>
+						</div>
+						<div>
+							<label for="password"><?php printf("%s&nbsp;", _("Password:")); ?></label>
+							<input id="password" type="password" name="password" value="" size="40" maxlength="128" />
+						</div>
+					</div>
+					<div id="divLogout">
+						<div class="center"><?php echo _("Are you sure to logout?"); ?></div>
 					</div>
 					<div class="rightAlign">
 						<input type="submit" value="<?php echo _("OK"); ?>"/>
@@ -1449,12 +1466,12 @@ class FileManager
 		if($this->history->able_to_back())
 		{
 			$back_class = "";
-			$back_url = "func/history.func.php?action=b";
+			$back_url = "func/history.func.php?action=b&sp=".$this->search_page;
 		}
 		if($this->history->able_to_forward())
 		{
 			$forward_class = "";
-			$forward_url = "func/history.func.php?action=f";
+			$forward_url = "func/history.func.php?action=f&sp=".$this->search_page;
 		}
 	}
 	
@@ -1473,7 +1490,7 @@ class FileManager
 			if($i >= $this->history->get_length())
 				break;
 				
-			$url = "func/history.func.php?action=f&step=".($i-$history_current);
+			$url = "func/history.func.php?action=f&sp=".$this->search_page."&step=".($i-$history_current);
 			if($i != $history_current)
 				$history_items .= ('<li><a href="'.$url.'">');
 			else
@@ -1519,6 +1536,41 @@ class FileManager
 		return $button_names;
 	}
 	
+	/**
+	 * 用户是否登录
+	 * 直接调用 UserManager->is_logged()
+	 */
+	private function is_logged()
+	{
+		return $this->user_manager->is_logged();
+	}
+	
+	/**
+	 * 获得用户对象
+	 * 直接调用 UserManager->get_user()
+	 */
+	private function get_user()
+	{
+		return 	$this->user_manager->get_user();
+	}
+
+	/**
+	 * 显示用户状态
+	 */
+	public function display_user()
+	{
+		if(!USERMNG)
+			return '';
+		$user = $this->get_user();
+    	if($user == null)
+    	{
+			echo _("Welcome").' '._("Guest").'&nbsp;|&nbsp;<a id="linkLogin" href="#">'._("Login").'</a>';
+    	}
+    	else
+    	{
+    		echo _("Welcome").' '.$user->name.'&nbsp;|&nbsp;<a id="linkLogout" href="#">'._("Logout").'</a>';;
+    	}
+	}
 }
 
 ?>

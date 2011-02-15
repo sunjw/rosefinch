@@ -20,11 +20,11 @@ var FileManager = {
 	}, 
 	
 	setCookie : function (c_name, value) {
-		var exdate=new Date();
+		var exdate = new Date();
 		exdate.setDate(exdate.getDate() + 365);
 		var c_value = escape(value) + "; expires=" + exdate.toUTCString();
 		document.cookie = c_name + "=" + c_value;
-	},
+	}, 
 	
 	/*
 	 * 检测是否支持 html5 <audio> 标签
@@ -350,6 +350,7 @@ var FileManager = {
 						phpfmMessage.fadeIn();
 					}
 					
+					phpfmMessage.click(FileManager.closeMessage);
 					clearTimeout(FileManager.delayID);
 					FileManager.delayID = setTimeout("FileManager.closeMessage()", 10000);
 				}
@@ -362,6 +363,7 @@ var FileManager = {
 	 */
 	closeMessage : function () {
 		$("#phpfmMessage").fadeOut();
+		clearTimeout(FileManager.delayID);
 	}, 
 	
 	/*
@@ -464,6 +466,24 @@ var FileManager = {
 		}
 	}, 
 	
+	displayFuncPart : function (part) {
+		FileManager.funcDialog.divInput.addClass("hidden");
+		FileManager.funcDialog.divDelete.addClass("hidden");
+		FileManager.funcDialog.divAudio.addClass("hidden");
+		FileManager.funcDialog.divWaiting.addClass("hidden");
+		
+		part.removeClass("hidden");
+	}, 
+	
+	displayInputPart : function (part) {
+		FileManager.funcDialog.divInput.find("div#divReqInput").addClass("hidden");
+		FileManager.funcDialog.divInput.find("div#divUpload").addClass("hidden");
+		FileManager.funcDialog.divInput.find("div#divLogin").addClass("hidden");
+		FileManager.funcDialog.divInput.find("div#divLogout").addClass("hidden");
+		
+		part.removeClass("hidden");
+	}, 
+	
 	/*
 	 * 显示 Func 输入的半透明背景
 	 */
@@ -498,48 +518,42 @@ var FileManager = {
 		case "newfolder": 
 		case "rename": 
 		case "upload": 
-			divInput.removeClass("hidden");
-			divDelete.addClass("hidden");
-			divAudio.addClass("hidden");
-			divWaiting.addClass("hidden");
+		case "login": 
+		case "logout": 
+			FileManager.displayFuncPart(divInput);
 			
 			var operInput = divInput.find("input#oper");
 			operInput.val(oper);
 			var form = divInput.find("form");
 			form.attr("action", action);
-			if (oper != "upload") {
-				// form.removeAttr("enctype");
-				divInput.find("div#divReqInput").removeClass("hidden");
-				divInput.find("div#divUpload").addClass("hidden");
-				
-			} else {
-				// form.attr("enctype", "multipart/form-data");
-				divInput.find("div#divReqInput").addClass("hidden");
-				divInput.find("div#divUpload").removeClass("hidden");
-			}
+			if (oper == "upload") 
+				FileManager.displayInputPart(divInput.find("div#divUpload"));
+			else if (oper == "login") 
+				FileManager.displayInputPart(divInput.find("div#divLogin"));
+			else if (oper == "logout") 
+				FileManager.displayInputPart(divInput.find("div#divLogout"));
+			else 
+				FileManager.displayInputPart(divInput.find("div#divReqInput"));
 			
 			FileManager.displayFuncBg(true);
 			funcDialog.fadeIn();
 			
-			if (oper != "upload") {
+			if (oper != "upload" && oper != "login") {
 				divInput.find("input#newname").focus();
 				divInput.find("input#newname").get(0).select();
+			} else if (oper == "login") {
+				divInput.find("input#username").focus();
+				divInput.find("input#username").get(0).select();
 			}
 			break;
 		case "delete": 
-			divInput.addClass("hidden");
-			divDelete.removeClass("hidden");
-			divAudio.addClass("hidden");
-			divWaiting.addClass("hidden");
+			FileManager.displayFuncPart(divDelete);
 			
 			FileManager.displayFuncBg(true);
 			funcDialog.fadeIn();
 			break;
 		case "audio": 
-			divInput.addClass("hidden");
-			divDelete.addClass("hidden");
-			divAudio.removeClass("hidden");
-			divWaiting.addClass("hidden");
+			FileManager.displayFuncPart(divAudio);
 			
 			var audioLink = data.link;
 			
@@ -556,10 +570,7 @@ var FileManager = {
 			funcDialog.fadeIn();
 			break;
 		case "waiting": 
-			divInput.addClass("hidden");
-			divDelete.addClass("hidden");
-			divAudio.addClass("hidden");
-			divWaiting.removeClass("hidden");
+			FileManager.displayFuncPart(divWaiting);
 			
 			FileManager.displayFuncBg(false);
 			funcDialog.fadeIn();
@@ -796,6 +807,27 @@ var FileManager = {
 		
 		// AudioPlayer
 		FileManager.initAudioPlayer();
+	}, 
+	
+	/*
+	 * 点击了登录的操作
+	 */
+	clickLogin : function () {
+		FileManager.displayFuncDialog("func/post.func.php", "login", "user", 
+			null);
+	}, 
+	
+	/*
+	 * 点击了登出的操作
+	 */
+	clickLogout : function () {
+		FileManager.displayFuncDialog("func/post.func.php", "logout", "user", 
+			null);
+	}, 
+	
+	initUserMng : function () {
+		$("a#linkLogin").click(FileManager.clickLogin);
+		$("a#linkLogout").click(FileManager.clickLogout);
 	}
 	
 }
@@ -820,16 +852,14 @@ FileManager.init = function () {
 	jqMenu.init();
 	
 	FileManager.initToolbar();
-	
 	FileManager.initMainView();
-	
 	FileManager.initFuncDialog();
-	
+	FileManager.initUserMng();
 	FileManager.getMessage();
-	
 	FileManager.initMediaPreview();
 	
 	jqCommon.setPlaceholder("#searchForm", "#q", "搜索");
+	jqCommon.setVerify("#searchForm", "#q", "empty", null, null);
 };
 
 // $(window).load(init); // 运行准备函数

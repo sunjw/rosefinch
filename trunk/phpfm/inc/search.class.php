@@ -20,8 +20,8 @@ class Search
 	{
 		$this->db = Utility::get_ezMysql();
 		//$this->db->debug();
-		if(!$this->check_db())
-			return;
+		//if(!$this->check_db())
+			//return;
 		
 		$this->files_base_dir = Utility::get_file_base_dir();
 		
@@ -300,6 +300,9 @@ class Search
 			$subdir = substr($subdir, 0, strlen($subdir) - 1);
 			$subdir .= "/";
 		}
+		
+		$subdir = $this->db->escape($subdir);
+		$query_str = $this->db->escape($query_str);
 		
 		$subdir .= "%";
 		

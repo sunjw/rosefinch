@@ -3,9 +3,9 @@
 -- http://www.phpmyadmin.net
 --
 -- 主机: localhost
--- 生成日期: 2010 年 07 月 02 日 11:25
+-- 生成日期: 2011 年 02 月 15 日 12:31
 -- 服务器版本: 5.0.67
--- PHP 版本: 5.2.9-2
+-- PHP 版本: 5.2.14
 
 SET SQL_MODE="NO_AUTO_VALUE_ON_ZERO";
 
@@ -38,3 +38,18 @@ CREATE TABLE IF NOT EXISTS `fileindex` (
   KEY `type` (`type`),
   KEY `size` (`size`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+-- --------------------------------------------------------
+
+--
+-- 表的结构 `users`
+--
+
+CREATE TABLE IF NOT EXISTS `users` (
+  `id` int(10) unsigned NOT NULL auto_increment,
+  `username` varchar(128) NOT NULL,
+  `password` varchar(32) NOT NULL,
+  `privilege` smallint(5) unsigned NOT NULL,
+  PRIMARY KEY  (`id`),
+  KEY `username` (`username`)
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=2 ;

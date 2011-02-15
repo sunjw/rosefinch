@@ -22,6 +22,8 @@ define("LOCALE", "&&LOCALE&&"); // 定义使用语言，如zh_CN, en_US
 
 // 搜索
 define("SEARCH", &&SEARCH&&);
+// 用户管理
+define("USERMNG", &&USERMNG&&);
 
 // 名称
 define("TITLENAME", "&&TITLENAME&&");

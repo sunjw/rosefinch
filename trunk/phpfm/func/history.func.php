@@ -10,6 +10,7 @@ $history = Utility::get_history(false);
 
 $action = get_query("action");
 $step = get_query("step");
+$search_page = get_query("sp"); // search page name
 
 $redirect_url = "../index.php";
 $history_item = null;
@@ -33,7 +34,7 @@ if($item_search_key == "")
 }
 else
 {
-	$redirect_url = "../search.php"."?q=".$item_search_key."&dir=".$item_dir."&h";
+	$redirect_url = "../".$search_page."?q=".$item_search_key."&dir=".$item_dir."&h";
 }
 
 redirect($redirect_url);

@@ -28,6 +28,7 @@ body {
 #header {
 	padding: 10px;
 	height: 80px;
+	font-family: 微软雅黑, "segoe ui", verdana, arial, sans-serif;
 }
 
 #header #mainTitle {
@@ -36,7 +37,6 @@ body {
 	font-size: xx-large;
 	font-style: italic;
 	font-weight: bold;
-	font-family: 微软雅黑, "segoe ui", verdana, arial, sans-serif;
 	color: #223355;
 }
 
@@ -46,6 +46,12 @@ body {
 	margin-left: 20px;
 	font-size: small;
 	color: #003595
+}
+
+#header #loginStatus {
+	float: right;
+	margin-top: 42px;
+	font-size: small;
 }
 
 #nav { /*margin-top: 5px;*/

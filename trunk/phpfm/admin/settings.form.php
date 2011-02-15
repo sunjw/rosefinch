@@ -1,4 +1,4 @@
-        <form id="phpfmInstallForm" action="<?php echo get_URI(); ?>" method="post">
+        <form id="phpfmInstallForm" class="container" action="<?php echo get_URI(); ?>" method="post">
         	<input type="hidden" name="settingsForm" value="settingsForm" />
         	<fieldset>
         		<legend><?php echo _("Basic Settings"); ?></legend>
@@ -63,14 +63,14 @@
         	<fieldset>
         		<legend><?php echo _("Search"); ?></legend>
         		<div>
-	        		<label for="search"><?php echo _("Enable search function") . ":"; ?></label>
+	        		<label for="search"><?php echo _("Enable search feature") . ":"; ?></label>
 	        		<select id="search" name="search">
 	        			<option value="1" <?php if($settings['search'] == 1)print("selected='selected'"); ?>><?php echo _("Enable"); ?></option>
 	        			<option value="0" <?php if($settings['search'] == 0)print("selected='selected'"); ?>><?php echo _("Disable"); ?></option>
 	        		</select>
 	        		<div class="info">
 	        			<?php 
-	        			echo _("If you enable search function, you should setup your database by click the link below after you click OK.");
+	        			echo _("If you enable search feature, you should setup your database.");
 	        			?>
 	        		</div>
         		</div>
@@ -79,8 +79,7 @@
         		{
         		?>
         		<div>
-        			<a href="database.php"><?php echo _("Database Setting"); ?></a>&nbsp;&nbsp;
-	        		<input id="buttonIndexfile" type="button" value="<?php echo _("Index all files"); ?>" disabled="disabled" />
+        			<input id="buttonIndexfile" type="button" value="<?php echo _("Index all files"); ?>" disabled="disabled" />
 	        		<div id="result" class="info">
 	        			&nbsp;
 	        		</div>
@@ -88,6 +87,21 @@
         		<?php 
         		}
         		?>
+        	</fieldset>
+        	<fieldset>
+        		<legend><?php echo _("User Management"); ?></legend>
+        		<div>
+	        		<label for="usermng"><?php echo _("Enable user management") . ":"; ?></label>
+	        		<select id="usermng" name="usermng">
+	        			<option value="1" <?php if($settings['usermng'] == 1)print("selected='selected'"); ?>><?php echo _("Enable"); ?></option>
+	        			<option value="0" <?php if($settings['usermng'] == 0)print("selected='selected'"); ?>><?php echo _("Disable"); ?></option>
+	        		</select>
+	        		<div class="info">
+	        			<?php 
+	        			echo _("If you enable user management, you should setup your database.");
+	        			?>
+	        		</div>
+        		</div>
         	</fieldset>
         	<fieldset>
         		<legend><?php echo _("Others Settings"); ?></legend>
@@ -121,6 +135,17 @@
 	        		<div class="info">
 	        			<?php 
 	        			echo _("Let Rosefinch enable Audio Player for audio files.");
+	        			?>
+	        		</div>
+        		</div>
+        	</fieldset>
+        	<fieldset>
+        		<legend><?php echo _("Database Setting"); ?></legend>
+        		<div>
+        			<a href="database.php"><?php echo _("Database Setting"); ?></a>
+        			<div class="info">
+	        			<?php 
+	        			echo _("If you need to use Search feature and User Management feature, you have to setup database.");
 	        			?>
 	        		</div>
         		</div>

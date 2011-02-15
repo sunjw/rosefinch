@@ -6,6 +6,7 @@ require_once "messageboard.class.php";
 require_once "history.class.php";
 require_once "ez_sql_core.php"; // Include ezSQL core
 require_once "ez_sql_mysql.php"; // Include ezSQL database specific component
+require_once "usermng.class.php";
 
 /**
  * Utility Class
@@ -625,6 +626,8 @@ class Utility
 	{
 		// Initialise database object and establish a connection
 		// at the same time - db_user / db_password / db_name / db_host
+		if(!defined('DB_USER') || !defined('DB_PSWD') || !defined('DB_NAME') ||!defined('DB_HOST'))
+			return null;
 		$db = new ezSQL_mysql(DB_USER, DB_PSWD, DB_NAME, DB_HOST);
 		
 		$db->hide_errors();
@@ -659,6 +662,26 @@ class Utility
 	}
 	
 	/**
+	 * 从 SESSION 中获得当前 UserManager 对象，并存入 SESSION
+	 * @param $need_new 不存在是否要新建，默认 true
+	 * @return UserManager 对象或 null
+	 */
+	public static function get_usermng($need_new = true)
+	{
+		if($need_new)
+		{
+			$usermgn = isset($_SESSION['usermgn']) ? $_SESSION['usermgn'] : new UserManager();
+			$_SESSION['usermgn'] = $usermgn; // 将剪贴板存入 SESSION
+		}
+		else
+		{
+			$usermgn = isset($_SESSION['usermgn']) ? $_SESSION['usermgn'] : null;
+		}
+		
+		return $usermgn;
+	}
+	
+	/**
 	 * 显示导航栏
 	 */
 	public static function html_navigation($page = "index")
@@ -668,6 +691,7 @@ class Utility
         ?>
         <a href="../index.php" id="phpfmNavHome" class="<?php $page == "index" ? print("current") : print(""); ?>"><?php echo htmlentities_utf8(_(TITLENAME)); ?></a>
         <ul>
+        	<li class="li-item"><a href="../"><?php echo htmlentities_utf8(_(TITLENAME)); ?></a></li>
         	<li class="li-item current"><a href="setting.php"><?php echo _("Setting"); ?></a></li>
         	<li class="li-item"><a href="../help.php"><?php echo _("Help"); ?></a></li>
             <li class="li-item"><a href="../about.php"><?php echo _("About"); ?></a></li>
@@ -679,7 +703,8 @@ class Utility
         ?>
         <a href="index.php" id="phpfmNavHome" class="<?php $page == "index" ? print("current") : print(""); ?>"><?php echo htmlentities_utf8(_(TITLENAME)); ?></a>
         <ul>
-        	<li class="li-item"><a href="admin/setting.php"><?php echo _("Setting"); ?></a></li>
+        	<li class="li-item<?php $page == "index" ? print(" current") : print(""); ?>"><a href="index.php"><?php echo htmlentities_utf8(_(TITLENAME)); ?></a></li>
+        	<li class="li-item<?php $page == "setting" ? print(" current") : print(""); ?>"><a href="admin/setting.php"><?php echo _("Setting"); ?></a></li>
         	<li class="li-item<?php $page == "help" ? print(" current") : print(""); ?>"><a href="help.php"><?php echo _("Help"); ?></a></li>
             <li class="li-item<?php $page == "about" ? print(" current") : print(""); ?>"><a href="about.php"><?php echo _("About"); ?></a></li>
         </ul>

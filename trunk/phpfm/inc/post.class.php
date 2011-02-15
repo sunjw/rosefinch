@@ -6,6 +6,7 @@ require_once "utility.class.php";
 require_once "clipboard.class.php";
 require_once "messageboard.class.php";
 require_once "search.class.php";
+require_once "usermng.class.php";
 require_once "../log/log.func.php";
 
 /**
@@ -19,6 +20,7 @@ class Post
 	private $files_base_dir;
 	private $messageboard;
 	private $clipboard;
+	private $user_manager;
 	private $oper;
 	
 	function __construct($oper)
@@ -26,6 +28,7 @@ class Post
 		$this->files_base_dir = Utility::get_file_base_dir();//$_SESSION['base_dir'];
 		$this->messageboard = Utility::get_messageboard();
 		$this->clipboard = Utility::get_clipboard(false);
+		$this->user_manager = Utility::get_usermng();
 		$this->oper = $oper;
 	}
 	
@@ -54,6 +57,12 @@ class Post
 				break;
 			case "upload":
 				$this->post_upload();
+				break;
+			case "login":
+				$this->post_login();
+				break;
+			case "logout":
+				$this->post_logout();
 				break;
 		}
 	}
@@ -298,6 +307,35 @@ class Post
 			}
 		}
 
+		Utility::redirct_after_oper(false, 1);
+	}
+	
+	/**
+	 * 登录
+	 */
+	private function post_login()
+	{
+		$cert = Array();
+		$cert['username'] = post_query('username');
+		$cert['password'] = post_query('password');
+		$this->user_manager->login($cert);
+		
+		if($this->user_manager->is_logged())
+			$this->messageboard->set_message(_("Login succeed."), 1);
+		else
+			$this->messageboard->set_message(_("Login failed."), 2);
+		
+		Utility::redirct_after_oper(false, 1);
+	}
+	
+	/**
+	 * 登出
+	 */
+	private function post_logout()
+	{
+		$this->user_manager->logout();
+		$this->messageboard->set_message(_("Logout."), 1);
+		
 		Utility::redirct_after_oper(false, 1);
 	}
 

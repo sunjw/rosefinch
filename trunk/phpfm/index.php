@@ -11,13 +11,23 @@ require_once "log/log.func.php";
 
 log_to_file($_SERVER['REMOTE_ADDR']." visited.");
 
-$fileManager = new FileManager();
+$search_mode = false;
+if(get_query("q") != "")
+	$search_mode = true;
 
+$fileManager = new FileManager($search_mode, "index.php", "index.php");
 ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
-    <title><?php echo $fileManager->title()." - ".$fileManager->get_current_dir(); ?></title>
+    <title>
+	    <?php 
+	    if(!$search_mode)
+	   		echo $fileManager->title()." - ".$fileManager->get_current_dir();
+	   	else
+	   		echo $fileManager->title()." - "._("Search")." - ".$fileManager->get_search();
+	    ?>
+    </title>
 	<meta http-equiv="Content-type" content="text/html;charset=UTF-8" />
 	<link href="css/com.css" rel="stylesheet" type="text/css" />
     <?php echo $fileManager->html_include_files(DEBUG); ?>
@@ -29,11 +39,21 @@ $fileManager = new FileManager();
     </div>
     <div id="header">
     	<div id="mainTitle">
-    		<?php echo $fileManager->get_current_dir(); ?>
+    		<?php 
+    		if(!$search_mode)
+    			echo $fileManager->get_current_dir();
+    		else
+    			printf(_("Search \"%s\" in \"%s\""), $fileManager->get_search_html(), $fileManager->get_current_dir());
+    		?>
         </div>
         <div id="subTitle">
     		<?php 
     		//echo " - " . $fileManager->get_current_path(); 
+    		?>
+    	</div>
+    	<div id="loginStatus">
+    		<?php 
+    		echo $fileManager->display_user();
     		?>
     	</div>
     </div>

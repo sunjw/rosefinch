@@ -4,8 +4,8 @@
 #phpfmMessage {
 	display: none;
 	position: absolute;
-	top: 50px;
-	right: 40px;
+	bottom: 0px;
+	left: 0px;
 	width: 500px;
 	height: 45px;
 	overflow: auto;
