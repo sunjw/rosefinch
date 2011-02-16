@@ -62,6 +62,9 @@ class FileManager
 		$this->search_page = $search_page;
 		$this->search_query = "";
 		
+		$this->dstats = Array();
+		$this->fstats = Array();
+		
 		$files_base_dir = Utility::get_file_base_dir();
 		$_SESSION['base_dir'] = $files_base_dir; // 将文件基路径存入 SESSION
 		
@@ -189,6 +192,11 @@ class FileManager
 	 */
 	private function init_browser()
 	{
+		if(!Utility::allow_to_browser())
+		{
+			$this->messageboard->set_message(_("Please login to browse files."), 2);
+			return;
+		}
 		$this->dstats = $this->get_dirs_list($this->request_dir, $this->dsort); // 获得已排序的目录数组
 		$this->fstats = $this->get_files_list($this->request_dir, $this->sort); // 获得已排序的文件数组
 	}
@@ -198,6 +206,11 @@ class FileManager
 	 */
 	private function init_search()
 	{
+		if(!Utility::allow_to_browser())
+		{
+			$this->messageboard->set_message(_("Please login to search files."), 2);
+			return;
+		}
 		$this->search_query = $this->get_search_query();
 		if($this->search_query == "")
 		{
@@ -724,6 +737,8 @@ class FileManager
 	 */
 	public function display_full_path()
 	{
+		if(!Utility::allow_to_browser())
+			return;
 ?>
 		<div id="fullpath">
 			<div>
@@ -882,6 +897,10 @@ class FileManager
 				<a href="<?php echo $up; ?>" title="<?php echo $button_names['Up']; ?>" class="toolbarButton toolbarUp splitRight">
 					<img alt="<?php echo $button_names['Up']; ?>" src="<?php echo $up_img; ?>" />
 				</a>
+				<?php 
+				if(Utility::allow_to_modify())
+				{
+				?>
 				<div class="toolbarPart">
 					<div class="toolbarHiddenable">
 						<div title="<?php echo $button_names['Cut']; ?>" class="toolbarButton toolbarCut">
@@ -910,6 +929,7 @@ class FileManager
 						<img alt="<?php echo _("More..."); ?>" src="<?php echo $more_img_src; ?>" />
 					</div>
 				</div>
+				<?php } ?>
 			</div>
             <div id="rightToolbar">
 				<a href="<?php echo $largeicon_view_url; ?>" title="<?php echo $button_names['Large Icon View']; ?>" class="toolbarButton splitLeft">
@@ -1552,24 +1572,6 @@ class FileManager
 	private function get_user()
 	{
 		return 	$this->user_manager->get_user();
-	}
-
-	/**
-	 * 显示用户状态
-	 */
-	public function display_user()
-	{
-		if(!USERMNG)
-			return '';
-		$user = $this->get_user();
-    	if($user == null)
-    	{
-			echo _("Welcome").' '._("Guest").'&nbsp;|&nbsp;<a id="linkLogin" href="#">'._("Login").'</a>';
-    	}
-    	else
-    	{
-    		echo _("Welcome").' '.$user->name.'&nbsp;|&nbsp;<a id="linkLogout" href="#">'._("Logout").'</a>';;
-    	}
 	}
 }
 

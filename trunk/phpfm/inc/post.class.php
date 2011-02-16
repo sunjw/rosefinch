@@ -74,6 +74,13 @@ class Post
 	{
 		if($this->clipboard != null)
 		{
+			if(!Utility::allow_to_modify())
+			{
+				$this->messageboard->set_message(_("Please login to cut or copy files."), 2);
+				echo "ok";
+				return;
+			}
+			
 			$items = post_query("items");
 			
 			$items = explode("|", $items);
@@ -98,6 +105,13 @@ class Post
 	 */
 	private function post_delete()
 	{
+		if(!Utility::allow_to_modify())
+		{
+			$this->messageboard->set_message(_("Please login to delete files."), 2);
+			echo "ok";
+			return;
+		}
+		
 		$items = post_query("items");
 		$items = explode("|", $items);
 		$items = Utility::filter_paths($items);
@@ -158,6 +172,12 @@ class Post
 	 */
 	private function post_paste()
 	{
+		if(!Utility::allow_to_modify())
+		{
+			$this->messageboard->set_message(_("Please login to paste files."), 2);
+			echo "ok";
+			return;
+		}
 		$target_subdir = rawurldecode(post_query("subdir"));
 
 		if($this->clipboard != null)
@@ -175,6 +195,12 @@ class Post
 	 */
 	private function post_newfolder()
 	{
+		if(!Utility::allow_to_modify())
+		{
+			$this->messageboard->set_message(_("Please login to make a new folder."), 2);
+			Utility::redirct_after_oper(false, 1);
+		}
+		
 		$search = null;
 		if(SEARCH)
 		{
@@ -221,6 +247,12 @@ class Post
 	 */
 	private function post_rename()
 	{
+		if(!Utility::allow_to_modify())
+		{
+			$this->messageboard->set_message(_("Please login to rename file."), 2);
+			Utility::redirct_after_oper(false, 1);
+		}
+		
 		$search = null;
 		if(SEARCH)
 		{
@@ -276,6 +308,12 @@ class Post
 	 */
 	private function post_upload()
 	{
+		if(!Utility::allow_to_modify())
+		{
+			$this->messageboard->set_message(_("Please login to upload file."), 2);
+			Utility::redirct_after_oper(false, 1);
+		}
+		
 		$search = null;
 		if(SEARCH)
 		{
@@ -336,7 +374,8 @@ class Post
 		$this->user_manager->logout();
 		$this->messageboard->set_message(_("Logout."), 1);
 		
-		Utility::redirct_after_oper(false, 1);
+		if(post_query("noredirect") == "")
+			Utility::redirct_after_oper(false, 1);
 	}
 
 }

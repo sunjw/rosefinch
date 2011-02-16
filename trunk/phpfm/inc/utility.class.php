@@ -681,6 +681,71 @@ class Utility
 		return $usermgn;
 	}
 	
+	private static function allow_to($do)
+	{
+		if(!USERMNG)
+			return true;
+		
+		$modify_privilege = $do;
+		if($modify_privilege == User::$NOBODY)
+			return true;
+			
+		$user_manager = Utility::get_usermng();
+		if(!$user_manager->is_logged())
+			return false;
+		
+		$user = $user_manager->get_user();
+		if($user->privilege >= $modify_privilege)
+			return true;
+		
+		return false;
+	}
+	
+	/**
+	 * 检查当前用户是否可以浏览文件
+	 * @return true, 可以；false, 不行
+	 */
+	public static function allow_to_browser()
+	{
+		return Utility::allow_to(ROSE_BROWSER);
+	}
+	
+	/**
+	 * 检查当前用户是否可以修改文件
+	 * @return true, 可以；false, 不行
+	 */
+	public static function allow_to_modify()
+	{
+		return Utility::allow_to(ROSE_MODIFY);
+	}
+	
+	/**
+	 * 检查当前用户是否可以管理
+	 * @return true, 可以；false, 不行
+	 */
+	public static function allow_to_admin()
+	{
+		return Utility::allow_to(ROSE_ADMIN);
+	}
+	
+	/**
+	 * 显示用户状态
+	 */
+	public static function display_user()
+	{
+		if(!USERMNG)
+			return '';
+		$user = Utility::get_usermng()->get_user();
+    	if($user == null)
+    	{
+			echo _("Welcome").' '._("Guest").'&nbsp;|&nbsp;<a id="linkLogin" href="#">'._("Login").'</a>';
+    	}
+    	else
+    	{
+    		echo _("Welcome").' '.$user->name.'&nbsp;|&nbsp;<a id="linkLogout" href="#">'._("Logout").'</a>';;
+    	}
+	}
+	
 	/**
 	 * 显示导航栏
 	 */

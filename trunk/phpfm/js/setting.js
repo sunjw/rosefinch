@@ -20,6 +20,15 @@ function init() {
 	
 	button.click(indexfile);
 	button.removeAttr("disabled");
+	
+	$("a#linkLogout").click(function () {
+			$.post("../func/post.func.php", {
+					oper : "logout", 
+					noredirect : "noredirect"
+				}, function () {
+					window.location.reload();
+				});
+		});
 }
 
 $(init);

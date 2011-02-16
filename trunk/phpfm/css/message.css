@@ -3,7 +3,7 @@
 /* Message Sector */
 #phpfmMessage {
 	display: none;
-	position: absolute;
+	position: fixed;
 	bottom: 0px;
 	left: 0px;
 	width: 500px;

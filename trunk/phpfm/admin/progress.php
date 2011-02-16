@@ -1,12 +1,34 @@
 <?php
 
 require_once "../inc/common.inc.php";
+require_once "../inc/utility.class.php";
 
 /**
  * 将设置保存到 settings.inc.php 中
  * @param $settings settings 数组
+ * @param $usermng 是否是用户管理
+ * @return true, 完成；false, 失败
  */
-function save_settings(&$settings)
+function save_settings(&$settings, $usermng)
+{
+	if(!Utility::allow_to_admin())
+		return false;
+	
+	$old_settings = $settings;
+	$ret = false;
+	$save_func = 'save_general';
+	if($usermng)
+	{
+		$save_func = 'save_usermng';
+	}
+	
+	if(!($ret = $save_func($settings)))
+		$settings = $old_settings;
+	
+	return $ret;
+}
+
+function save_general(&$settings)
 {
 	$settings['root_type'] = post_query("rootType");
 	$settings['root_path'] = post_query("rootPath");
@@ -85,6 +107,46 @@ function save_settings(&$settings)
 		return true;
 	}
 	return false;
+}
+
+function save_usermng(&$settings)
+{
+	$settings['rose_browser'] = post_query("roseBrowser");
+	$settings['rose_modify'] = post_query("roseModify");
+	$settings['rose_admin'] = post_query("roseAdmin");
+	
+	if($settings['rose_browser'] == "" ||
+		$settings['rose_modify'] == "" ||
+		$settings['rose_admin'] == "")
+	{
+		return false;	
+	}
+	
+	if($settings['rose_admin'] < User::$ADMIN)
+		$settings['rose_admin'] = User::$ADMIN;
+
+	//echo 1;
+	$file_name = "usermng.inc.tpl";
+	$settings_tpl = fopen($file_name, "r");
+	$settings_str = fread($settings_tpl, filesize($file_name));
+	fclose($settings_tpl);
+	//print_r( $settings);
+		
+	$templates = array("&&ROSE_BROWSER&&", 
+						"&&ROSE_MODIFY&&", 
+						"&&ROSE_ADMIN&&");
+	$values = array($settings['rose_browser'],
+					$settings['rose_modify'],
+					$settings['rose_admin']);
+		
+	$settings_str = str_replace($templates, $values, $settings_str);
+	//echo $settings;
+		
+	$settings_php = fopen("usermng.inc.php", "w");
+	fwrite($settings_php, $settings_str); // 写回配置文件
+	fclose($settings_php);
+	
+	return true;
 }
 
 ?>

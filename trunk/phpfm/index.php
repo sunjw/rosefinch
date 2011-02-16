@@ -53,7 +53,7 @@ $fileManager = new FileManager($search_mode, "index.php", "index.php");
     	</div>
     	<div id="loginStatus">
     		<?php 
-    		echo $fileManager->display_user();
+    		echo Utility::display_user();
     		?>
     	</div>
     </div>

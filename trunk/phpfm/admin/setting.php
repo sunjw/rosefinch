@@ -19,30 +19,53 @@ $settings = array();
 
 $timezone = date_default_timezone_get();
 
-$settings = array('root_type' => FILE_POSITION,
-				'root_path' => FILES_DIR,
-				'charset' => PLAT_CHARSET,
-				'timezone' => $timezone,
-				'language' => LOCALE,
-				'title_name' => TITLENAME,
-				'lightbox' => LIGHTBOX,
-				'audioPlayer' => AUDIOPLAYER,
-				'search' => SEARCH,
-				'usermng' => USERMNG);
+$USERMNG_ARG = "usermng";
+$usermng = 0;
+$arg = get_query("mode");
+if($arg == $USERMNG_ARG)
+	$usermng = 1;
+
+if($usermng)
+{
+	$settings = array('language' => LOCALE,
+					'rose_browser' => ROSE_BROWSER,
+					'rose_modify' => ROSE_MODIFY,
+					'rose_admin' => ROSE_ADMIN);
+}
+else
+{
+	$settings = array('root_type' => FILE_POSITION,
+					'root_path' => FILES_DIR,
+					'charset' => PLAT_CHARSET,
+					'timezone' => $timezone,
+					'language' => LOCALE,
+					'title_name' => TITLENAME,
+					'lightbox' => LIGHTBOX,
+					'audioPlayer' => AUDIOPLAYER,
+					'search' => SEARCH,
+					'usermng' => USERMNG);
+}
 
 $wrong = false;
 $display_msg = false;
 
 if(isset($_POST['settingsForm']))
 {
-	if(!save_settings($settings))
+	if(!save_settings($settings, $usermng))
 	{
 		$wrong = true;
 	}
 	$display_msg = true;
 }
 
-$settings['root_path'] = str_replace("\\\\", "\\", $settings['root_path']); // 修正显示
+if($usermng)
+{
+	
+}
+else
+{
+	$settings['root_path'] = str_replace("\\\\", "\\", $settings['root_path']); // 修正显示
+}
 
 $locale = $settings['language'];
 putenv("LANG=" . $locale);
@@ -67,6 +90,7 @@ textdomain($domain);
 	<link href="../css/com.css" rel="stylesheet" type="text/css" />
 	<link href="../css/message.css" rel="stylesheet" type="text/css" />
 	<link href="../css/setting.css" rel="stylesheet" type="text/css" />
+	<link href="../css/func.css" rel="stylesheet" type="text/css" />
     <script type="text/javascript" language="javascript" src="../js/jquery-1.4.4.min.js"></script>
     <script type="text/javascript" language="javascript" src="../js/setting.js"></script>
 </head>
@@ -82,11 +106,30 @@ textdomain($domain);
         <div id="subTitle">
     		<?php echo _("Set preferences of your Rosefinch."); ?>
     	</div>
+    	<div id="loginStatus">
+    		<?php 
+    		echo Utility::display_user();
+    		?>
+    	</div>
     </div>
     <div id="content">
+    	<?php 
+    	if($settings['usermng'] || ($usermng && USERMNG))
+    	{
+    	?>
     	<div id="phpfmDocNav">
-        	<?php echo _("Setting"); ?>&nbsp;|&nbsp;<a class="" title="<?php echo _("User Management"); ?>" href="usermgn.php"><?php echo _("User Management"); ?></a>
+    		<?php 
+    		if($usermng)
+    		{
+    		?>
+    			<a class="" title="<?php echo _("Setting"); ?>" href="setting.php"><?php echo _("Setting"); ?></a>&nbsp;|&nbsp;<?php echo _("User Management");  ?>
+    		<?php }
+    		else
+    		{
+    			echo _("Setting"); ?>&nbsp;|&nbsp;<a class="" title="<?php echo _("User Management"); ?>" href="setting.php?mode=<?php echo $USERMNG_ARG; ?>"><?php echo _("User Management"); ?></a>
+      		<?php } ?>
       	</div>
+      	<?php } ?>
     	<div id="phpfmMessage" <?php if($display_msg)print("style='display:block'"); if($wrong)print("class='wrong' "); ?>>
     		<?php 
     		if($wrong)
@@ -95,7 +138,23 @@ textdomain($domain);
     			echo _("Settings have been changed. Go to <a href='../index.php'>index page</a> and see.");
     		?>
     	</div>
-    	<?php include "settings.form.php"; ?>
+    	<?php 
+    	if(Utility::allow_to_admin())
+    	{
+    		if($usermng)
+				include "usermng.form.php";
+			else
+    			include "settings.form.php";
+    	} 
+    	else
+    	{
+    	?>
+    	<div id="privilegeMessage">
+    		<?php include "privilege.inc.php"; ?>
+    	</div>
+    	<?php 
+    	}
+    	?>
     </div>
     <div id="footer">
         <?php Utility::html_copyright_info($begin_time); ?>

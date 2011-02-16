@@ -1,4 +1,4 @@
-        <form id="phpfmInstallForm" class="container" action="<?php echo get_URI(); ?>" method="post">
+        <form id="phpfmSettingForm" class="container" action="<?php echo get_URI(); ?>" method="post">
         	<input type="hidden" name="settingsForm" value="settingsForm" />
         	<fieldset>
         		<legend><?php echo _("Basic Settings"); ?></legend>
