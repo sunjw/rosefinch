@@ -1,12 +1,4 @@
 ﻿/* Global sector */
-.clear {
-	clear: both;
-}
-
-.rightAlign {
-	text-align: right;
-}
-
 input[type="submit"],input[type="button"] {
 	padding: 0 4px;
 }

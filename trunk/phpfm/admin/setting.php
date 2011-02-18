@@ -93,6 +93,21 @@ textdomain($domain);
 	<link href="../css/func.css" rel="stylesheet" type="text/css" />
     <script type="text/javascript" language="javascript" src="../js/jquery-1.4.4.min.js"></script>
     <script type="text/javascript" language="javascript" src="../js/setting.js"></script>
+    <script type="text/javascript" language="javascript">
+  	//<![CDATA[
+  		var Strings = new Array();
+  		<?php 
+  		echo "Strings['OK'] = '"._('OK')."';\n";
+  		echo "Strings['Cancel'] = '"._('Cancel')."';\n";
+  		echo "Strings['Never mind...'] = '"._('Never mind...')."';\n";
+  		echo "Strings['Are you sure to logout?'] = '"._('Are you sure to logout?')."';\n";
+  		echo "Strings['User'] = '"._('User')."';\n";
+  		echo "Strings['Username:'] = '"._('Username:')."';\n";
+  		echo "Strings['Password:'] = '"._('Password:')."';\n";
+  		echo "Strings['return'] = '".rawurlencode(get_URI())."';\n";
+  		?>
+  	//]]>
+    </script>
 </head>
 <body>
     <div id="nav">
@@ -149,9 +164,13 @@ textdomain($domain);
     	else
     	{
     	?>
-    	<div id="privilegeMessage">
-    		<?php include "privilege.inc.php"; ?>
-    	</div>
+    	<script type="text/javascript">
+		//<![CDATA[
+			$(function(){
+					Setting.displayLogin();
+				});
+		//]]>
+		</script>
     	<?php 
     	}
     	?>

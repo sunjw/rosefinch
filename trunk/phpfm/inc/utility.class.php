@@ -738,11 +738,11 @@ class Utility
 		$user = Utility::get_usermng()->get_user();
     	if($user == null)
     	{
-			echo _("Welcome").' '._("Guest").'&nbsp;|&nbsp;<a id="linkLogin" href="#">'._("Login").'</a>';
+			echo _("Welcome").' '._("Guest").'&nbsp;|&nbsp;<a id="linkLogin" href="javascript:;">'._("Login").'</a>';
     	}
     	else
     	{
-    		echo _("Welcome").' '.$user->name.'&nbsp;|&nbsp;<a id="linkLogout" href="#">'._("Logout").'</a>';;
+    		echo _("Welcome").' '.$user->name.'&nbsp;|&nbsp;<a id="linkLogout" href="javascript:;">'._("Logout").'</a>';;
     	}
 	}
 	

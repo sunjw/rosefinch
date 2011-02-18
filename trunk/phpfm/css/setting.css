@@ -1,6 +1,6 @@
 @CHARSET "UTF-8";
 
-#phpfmDocNav, form, #privilegeMessage {
+#phpfmDocNav, #phpfmSettingForm, #privilegeMessage {
 	margin: 15px;
 }
 
