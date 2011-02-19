@@ -46,16 +46,16 @@ else
 					'usermng' => USERMNG);
 }
 
-$wrong = false;
-$display_msg = false;
-
 if(isset($_POST['settingsForm']))
 {
 	if(!save_settings($settings, $usermng))
 	{
-		$wrong = true;
+    	Utility::get_messageboard()->set_message(_("There is something wrong in your settings."), 2);
 	}
-	$display_msg = true;
+	else
+	{
+		Utility::get_messageboard()->set_message(_("Settings have been changed. Go to <a href='../index.php'>index page</a> and see."), 1);
+	}
 }
 
 if($usermng)
@@ -97,6 +97,7 @@ textdomain($domain);
   	//<![CDATA[
   		var Strings = new Array();
   		<?php 
+  		echo "Strings['return'] = '".rawurlencode(get_URI())."';\n";
   		echo "Strings['OK'] = '"._('OK')."';\n";
   		echo "Strings['Cancel'] = '"._('Cancel')."';\n";
   		echo "Strings['Never mind...'] = '"._('Never mind...')."';\n";
@@ -104,7 +105,13 @@ textdomain($domain);
   		echo "Strings['User'] = '"._('User')."';\n";
   		echo "Strings['Username:'] = '"._('Username:')."';\n";
   		echo "Strings['Password:'] = '"._('Password:')."';\n";
-  		echo "Strings['return'] = '".rawurlencode(get_URI())."';\n";
+  		echo "Strings['Privilege:'] = '"._('Privilege:')."';\n";
+  		echo "Strings['Working...'] = '"._('Working...')."';\n";
+  		echo "Strings['Done'] = '"._('Done')."';\n";
+  		echo "Strings['Add'] = '"._('Add')."';\n";
+  		echo "Strings['Delete'] = '"._('Delete')."';\n";
+  		echo "Strings['Are you sure to delete this user?'] = '"._('Are you sure to delete this user?')."';\n";
+  		echo "Strings['Modify'] = '"._('Modify')."';\n";
   		?>
   	//]]>
     </script>
@@ -145,13 +152,7 @@ textdomain($domain);
       		<?php } ?>
       	</div>
       	<?php } ?>
-    	<div id="phpfmMessage" <?php if($display_msg)print("style='display:block'"); if($wrong)print("class='wrong' "); ?>>
-    		<?php 
-    		if($wrong)
-    			echo _("There is something wrong in your settings.");
-    		else
-    			echo _("Settings have been changed. Go to <a href='../index.php'>index page</a> and see.");
-    		?>
+    	<div id="phpfmMessage">
     	</div>
     	<?php 
     	if(Utility::allow_to_admin())

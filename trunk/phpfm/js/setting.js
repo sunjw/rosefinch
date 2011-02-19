@@ -2,11 +2,54 @@ var Setting = {
 	funcBg : null, 
 	funcDialog : null, 
 	
+	users : null, 
+	oldTable : "", 
+	working : false, 
+	
 	/**
 	 * 无功能函数
 	 */
 	dummy : function () {
 		return;
+	}, 
+	
+	setStat : function (working) {
+		if (working) {
+			$("span#statUserMng").html("&nbsp;|&nbsp;" + Strings['Working...']);
+		} else {
+			$("span#statUserMng").html("&nbsp;|&nbsp;" + Strings['Done']);
+		}
+		Setting.working = working;
+	}, 
+	
+	/**
+	 * 获得消息
+	 */
+	getMessage : function () {
+		$.get("../func/getmessage.ajax.php", function (data) {
+				if (data != "") {
+					var phpfmMessage = $("#phpfmMessage");
+					if (phpfmMessage.length == 1) {
+						var msg;
+						var stat;
+						
+						data = data.split("|PHPFM|");
+						msg = data[0];
+						stat = data[1];
+						
+						phpfmMessage.html(msg);
+						if (stat == 2) {
+							// 错误消息
+							phpfmMessage.addClass("wrong");
+						} else {
+							phpfmMessage.removeClass("wrong");
+						}
+						
+						phpfmMessage.fadeIn();
+					}
+				}
+			});
+		
 	}, 
 	
 	/**
@@ -72,6 +115,8 @@ var Setting = {
 						type : "hidden", 
 						name : "noredirect"
 					}).val("noredirect"));
+		
+		form.unbind("submit");
 		
 		return form;
 	}, 
@@ -171,6 +216,9 @@ var Setting = {
 	 * 显示登出对话框
 	 */
 	displayLogout : function () {
+		if (Setting.working) 
+			return;
+		
 		var form = Setting.initFuncDialog(Strings['User'], "logout", true, true);
 		form.find("input#return").val("../");
 		var divLogout = $("<div/>");
@@ -180,6 +228,196 @@ var Setting = {
 		Setting.displaySubmit();
 		
 		Setting.displayFuncDialog();
+	}, 
+	
+	loadUsers : function (table) {
+		Setting.setStat(true);
+		$.post("../func/post.func.php", {
+				oper : "userlist"
+			}, function (data) {
+				table.html(Setting.oldTable);
+				data = $.parseJSON(data);
+				Setting.users = new Array();
+				var length = data.length;
+				for (var i = 0; i < length; ++i) {
+					var user = data[i];
+					Setting.users[user.id] = user;
+					var row = $("<tr></tr>");
+					if (i % 2) {
+						row.addClass("odd");
+					}
+					row.append($("<td></td>").html(user.id));
+					row.append($("<td></td>").html(user.username));
+					row.append($("<td></td>").html(user.privilege));
+					if (user.username == "root") 
+						row.append($("<td></td>").html(""));
+					else {
+						var html = "<a href='javascript:Setting.modifyUser(" + user.id + ")'>" + Strings['Modify'] + "</a>";
+						html += "&nbsp;|&nbsp;<a href='javascript:Setting.deleteUser(" + user.id + ")'>" + Strings['Delete'] + "</a>";
+						row.append($("<td></td>").html(html));
+					}
+					
+					table.append(row);
+				}
+				Setting.setStat(false);
+			});
+	}, 
+	
+	addUser : function () {
+		//alert("add");
+		if (Setting.working) 
+			return;
+		
+		var form = Setting.initFuncDialog(Strings['Add'], "adduser", true, true);
+		var divAddUser = $("<div/>");
+		divAddUser.attr("id", "divAddUser");
+		divAddUser.append(
+			$("<div/>").append(
+				$("<label/>").attr("for", "username").html(Strings['Username:'])).append(
+				$("<input/>").attr({
+						type : "text", 
+						name : "username", 
+						size : "40", 
+						maxlength : "128"
+					}).val("")));
+		divAddUser.append(
+			$("<div/>").append(
+				$("<label/>").attr("for", "password").html(Strings['Password:'])).append(
+				$("<input/>").attr({
+						type : "password", 
+						name : "password", 
+						size : "40", 
+						maxlength : "128"
+					}).val("")));
+		var select = $("<select/>").attr("name", "privilege");
+		select.append(
+			$("<option/>").val(25).html("User")).append(
+			$("<option/>").val(75).html("Administrator")).append(
+			$("<option/>").val(100).html("Root"));
+		divAddUser.append(
+			$("<div/>").append($("<label/>").attr("for", "privilege").html(Strings['Privilege:'])).append(select));
+		form.append(divAddUser);
+		Setting.displaySubmit();
+		
+		Setting.displayFuncDialog();
+		
+		form.submit(function () {
+				Setting.closeFunc();
+				Setting.setStat(true);
+				$.post("../func/post.func.php", {
+						oper : $("input[name='oper']").val(), 
+						noredirect : "noredirect", 
+						username : $("input[name='username']").val(), 
+						password : $("input[name='password']").val(), 
+						privilege : $("select[name='privilege']").val() 
+					}, function () {
+						Setting.getMessage();
+						Setting.loadUsers($("#tableUserMng"));
+					});
+				return false;
+			});
+	}, 
+	
+	modifyUser : function (id) {
+		if (Setting.working) 
+			return;
+		
+		var user = Setting.users[id];
+		var form = Setting.initFuncDialog(Strings['Modify'], "modiuser", true, true);
+		var divModifyUser = $("<div/>");
+		divModifyUser.attr("id", "divModifyUser");
+		divModifyUser.append(
+			$("<div/>").append(
+				$("<label/>").attr("for", "username").html(Strings['Username:'])).append(
+				$("<input/>").attr({
+						type : "text", 
+						name : "username", 
+						size : "40", 
+						maxlength : "128"
+					}).val(user.username)));
+		var select = $("<select/>").attr("name", "privilege");
+		var option = $("<option/>").val(25).html("User");
+		if (user.privilege == "User") 
+			option.attr("selected", "selected");
+		select.append(option);
+		option = $("<option/>").val(75).html("Administrator");
+		if (user.privilege == "Administrator") 
+			option.attr("selected", "selected");
+		select.append(option);
+		option = $("<option/>").val(100).html("Root");
+		if (user.privilege == "Root") 
+			option.attr("selected", "selected");
+		select.append(option);
+		
+		divModifyUser.append(
+			$("<div/>").append($("<label/>").attr("for", "privilege").html(Strings['Privilege:'])).append(select));
+		divModifyUser.append($("<input/>").attr({
+					type : "hidden", 
+					name : "id"
+				}).val(id));
+		form.append(divModifyUser);
+		Setting.displaySubmit();
+		
+		Setting.displayFuncDialog();
+		
+		form.submit(function () {
+				Setting.closeFunc();
+				Setting.setStat(true);
+				$.post("../func/post.func.php", {
+						oper : $("input[name='oper']").val(), 
+						noredirect : "noredirect", 
+						id : $("input[name='id']").val(), 
+						username : $("input[name='username']").val(), 
+						privilege : $("select[name='privilege']").val() 
+					}, function () {
+						Setting.getMessage();
+						Setting.loadUsers($("#tableUserMng"));
+					});
+				return false;
+			});
+	}, 
+	
+	deleteUser : function (id) {
+		if (Setting.working) 
+			return;
+		
+		var form = Setting.initFuncDialog(Strings['Delete'], "deluser", true, true);
+		var divDelUser = $("<div/>");
+		divDelUser.attr("id", "divDelUser");
+		divDelUser.append($("<div/>").html(Strings['Are you sure to delete this user?'] + " \"" + Setting.users[id].username + "\"").addClass("center"));
+		divDelUser.append($("<input/>").attr({
+					type : "hidden", 
+					name : "id"
+				}).val(id));
+		form.append(divDelUser);
+		Setting.displaySubmit();
+		
+		Setting.displayFuncDialog();
+		
+		form.submit(function () {
+				Setting.closeFunc();
+				Setting.setStat(true);
+				$.post("../func/post.func.php", {
+						oper : $("input[name='oper']").val(), 
+						noredirect : "noredirect", 
+						id : $("input[name='id']").val() 
+					}, function () {
+						Setting.getMessage();
+						Setting.loadUsers($("#tableUserMng"));
+					});
+				return false;
+			});
+	}, 
+	
+	initUserMng : function () {
+		var tableUserMng = $("#tableUserMng");
+		//alert(divUserMng.length);
+		if (tableUserMng.length == 0) 
+			return;
+		
+		Setting.oldTable = tableUserMng.html();
+		$("input#addUser").click(Setting.addUser);
+		Setting.loadUsers(tableUserMng);
 	}, 
 	
 	/**
@@ -192,6 +430,10 @@ var Setting = {
 		
 		var linkLogout = $("a#linkLogout");
 		linkLogout.click(Setting.displayLogout);
+		
+		Setting.initUserMng();
+		
+		Setting.getMessage();
 	}
 	
 };

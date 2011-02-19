@@ -1,6 +1,6 @@
 @CHARSET "UTF-8";
 
-#phpfmDocNav, #phpfmSettingForm, #privilegeMessage {
+#phpfmDocNav, #phpfmSettingForm, #privilegeMessage, #phpfmUserMng {
 	margin: 15px;
 }
 
@@ -23,19 +23,19 @@ form#installPrefer {
 	float: right;
 }
 
-form fieldset {
+fieldset {
 	margin: 5px 0;
 	padding: 2px 8px;
 }
 
-form fieldset * {
+fieldset * {
 	margin: 5px 0;
 	line-height: 1.5em;
 	height: 1.5em;
 	vertical-align: middle;
 }
 
-form fieldset * * {
+fieldset * * {
 	margin: 0;
 }
 
@@ -51,6 +51,30 @@ form div.info {
 	overflow: hidden;
 }
 
-form input[type="button"], form input[type="submit"] {
+input[type="button"], input[type="submit"] {
 	padding: 0 6px;
+}
+
+#phpfmUserMng #divUserMng {
+	height: auto;
+}
+
+#phpfmUserMng table th {
+	font-weight: normal;
+	text-align: left;
+}
+#phpfmUserMng table th.id {
+	width: 30px;
+}
+#phpfmUserMng table th.name {
+	width: 150px;
+}
+#phpfmUserMng table th.privilege {
+	width: 120px;
+}
+#phpfmUserMng table th.operation {
+	width: 100px;
+}
+#phpfmUserMng table td {
+	border-bottom: #ccc solid 1px;
 }

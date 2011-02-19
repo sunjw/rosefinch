@@ -48,7 +48,7 @@ div.hidden {
 	display: none;
 	background-color: white;
 	z-index: 1005;
-	position: absolute;
+	position: fixed;
 	top: 150px;
 	width: 420px;
 	border: 1px solid #cccccc;

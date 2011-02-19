@@ -560,6 +560,8 @@ class Utility
 	 */
 	public static function redirct_after_oper($is_from_get = true, $sub_dir_level = 0)
 	{
+		if(post_query("noredirect") != "")
+			return;
 		if($is_from_get)
 			$returnURL = rawurldecode(get_query("return"));
 		else

@@ -64,6 +64,18 @@ class Post
 			case "logout":
 				$this->post_logout();
 				break;
+			case "userlist":
+				$this->user_list();
+				break;
+			case "adduser":
+				$this->add_user();
+				break;
+			case "deluser":
+				$this->delete_user();
+				break;
+			case "modiuser":
+				$this->modify_user();
+				break;
 		}
 	}
 	
@@ -374,8 +386,120 @@ class Post
 		$this->user_manager->logout();
 		$this->messageboard->set_message(_("Logout."), 1);
 		
-		if(post_query("noredirect") == "")
-			Utility::redirct_after_oper(false, 1);
+		Utility::redirct_after_oper(false, 1);
+	}
+	
+	private function check_privilege($target_privilege)
+	{
+		$user = $this->user_manager->get_user();
+		$privilege = $user->privilege;
+		return (is_numeric($target_privilege) && $privilege >= $target_privilege);
+	}
+	
+	/**
+	 * 列出用户
+	 * 当前用户必须是可管理的，并且只列出当前级别或更低的用户
+	 */
+	private function user_list()
+	{
+		$ret = array();
+		
+		if(Utility::allow_to_admin())
+		{
+			$user = $this->user_manager->get_user();
+			$privilege = $user->privilege;
+			//print_r($user);
+			
+			$ret = $this->user_manager->get_users_by_privilege($privilege, true);
+		}
+		
+		echo json_encode($ret);
+	}
+	
+	/**
+	 * 添加用户
+	 * 只能添加比当前用户级别同等或更低的
+	 */
+	private function add_user()
+	{
+		if(Utility::allow_to_admin() && $this->check_privilege(post_query("privilege")))
+		{
+			$info = Array('username' => post_query("username"),
+						'password' => md5(post_query("password")),
+						'privilege' => post_query("privilege"));
+			$result = $this->user_manager->add_user($info);
+			if($result)
+			{
+				$this->messageboard->set_message(_("Adding user succeed"), 1);
+			}
+			else
+			{
+				$this->messageboard->set_message(_("Adding user failed"), 2);
+			}
+		}
+		else
+			$this->messageboard->set_message(_("Adding user failed"), 2);
+		
+		Utility::redirct_after_oper(false, 1);
+	}
+	
+	/**
+	 * 删除用户
+	 * 只能删除比当前用户级别同等或更低的
+	 */
+	private function delete_user()
+	{
+		if(Utility::allow_to_admin())
+		{
+			$del_id = post_query("id");
+			if(is_numeric($del_id))
+			{
+				$user = $this->user_manager->get_user_by_id($del_id);
+				//print_r($user[0]);
+				if($this->check_privilege($user[0]->privilege))
+				{
+					if($this->user_manager->delete_user($del_id))
+					{
+						$this->messageboard->set_message(_("Deleting user succeed"), 1);
+						Utility::redirct_after_oper(false, 1);
+						return;
+					}
+				}
+			}
+		}
+		
+		$this->messageboard->set_message(_("Deleting user failed"), 2);
+		Utility::redirct_after_oper(false, 1);
+	}
+	
+	/**
+	 * 修改用户
+	 * 只能修改比当前用户级别同等或更低的
+	 */
+	private function modify_user()
+	{
+		if(Utility::allow_to_admin())
+		{
+			$modify_id = post_query("id");
+			if(is_numeric($modify_id))
+			{
+				if($this->check_privilege(post_query("privilege")))
+				{
+					$info = Array('id' => $modify_id,
+								'username' => post_query("username"),
+								'privilege' => post_query("privilege"));
+					if($this->user_manager->modify_user($info))
+					{
+						$this->messageboard->set_message(_("Modifing user succeed"), 1);
+						Utility::redirct_after_oper(false, 1);
+						return;
+					}
+				}
+			}
+		}
+		
+		$this->messageboard->set_message(_("Modifing user failed"), 2);
+		Utility::redirct_after_oper(false, 1);
 	}
 
 }
