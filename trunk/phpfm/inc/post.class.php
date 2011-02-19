@@ -389,11 +389,11 @@ class Post
 		Utility::redirct_after_oper(false, 1);
 	}
 	
-	private function check_privilege($target_privilege)
+	private function check_permission($target_permission)
 	{
 		$user = $this->user_manager->get_user();
-		$privilege = $user->privilege;
-		return (is_numeric($target_privilege) && $privilege >= $target_privilege);
+		$permission = $user->permission;
+		return (is_numeric($target_permission) && $permission >= $target_permission);
 	}
 	
 	/**
@@ -407,10 +407,10 @@ class Post
 		if(Utility::allow_to_admin())
 		{
 			$user = $this->user_manager->get_user();
-			$privilege = $user->privilege;
+			$permission = $user->permission;
 			//print_r($user);
 			
-			$ret = $this->user_manager->get_users_by_privilege($privilege, true);
+			$ret = $this->user_manager->get_users_by_permission($permission, true);
 		}
 		
 		echo json_encode($ret);
@@ -422,23 +422,23 @@ class Post
 	 */
 	private function add_user()
 	{
-		if(Utility::allow_to_admin() && $this->check_privilege(post_query("privilege")))
+		if(Utility::allow_to_admin() && $this->check_permission(post_query("permission")))
 		{
 			$info = Array('username' => post_query("username"),
 						'password' => md5(post_query("password")),
-						'privilege' => post_query("privilege"));
+						'permission' => post_query("permission"));
 			$result = $this->user_manager->add_user($info);
 			if($result)
 			{
-				$this->messageboard->set_message(_("Adding user succeed"), 1);
+				$this->messageboard->set_message(_("Adding user succeed."), 1);
 			}
 			else
 			{
-				$this->messageboard->set_message(_("Adding user failed"), 2);
+				$this->messageboard->set_message(_("Adding user failed."), 2);
 			}
 		}
 		else
-			$this->messageboard->set_message(_("Adding user failed"), 2);
+			$this->messageboard->set_message(_("Adding user failed."), 2);
 		
 		Utility::redirct_after_oper(false, 1);
 	}
@@ -456,11 +456,11 @@ class Post
 			{
 				$user = $this->user_manager->get_user_by_id($del_id);
 				//print_r($user[0]);
-				if($this->check_privilege($user[0]->privilege))
+				if($this->check_permission($user[0]->permission))
 				{
 					if($this->user_manager->delete_user($del_id))
 					{
-						$this->messageboard->set_message(_("Deleting user succeed"), 1);
+						$this->messageboard->set_message(_("Deleting user succeed."), 1);
 						Utility::redirct_after_oper(false, 1);
 						return;
 					}
@@ -468,7 +468,7 @@ class Post
 			}
 		}
 		
-		$this->messageboard->set_message(_("Deleting user failed"), 2);
+		$this->messageboard->set_message(_("Deleting user failed."), 2);
 		Utility::redirct_after_oper(false, 1);
 	}
 	
@@ -483,14 +483,14 @@ class Post
 			$modify_id = post_query("id");
 			if(is_numeric($modify_id))
 			{
-				if($this->check_privilege(post_query("privilege")))
+				if($this->check_permission(post_query("permission")))
 				{
 					$info = Array('id' => $modify_id,
 								'username' => post_query("username"),
-								'privilege' => post_query("privilege"));
+								'permission' => post_query("permission"));
 					if($this->user_manager->modify_user($info))
 					{
-						$this->messageboard->set_message(_("Modifing user succeed"), 1);
+						$this->messageboard->set_message(_("Modifing user succeed."), 1);
 						Utility::redirct_after_oper(false, 1);
 						return;
 					}
@@ -498,7 +498,7 @@ class Post
 			}
 		}
 		
-		$this->messageboard->set_message(_("Modifing user failed"), 2);
+		$this->messageboard->set_message(_("Modifing user failed."), 2);
 		Utility::redirct_after_oper(false, 1);
 	}
 

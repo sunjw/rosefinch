@@ -63,14 +63,14 @@
         	<fieldset>
         		<legend><?php echo _("Search"); ?></legend>
         		<div>
-	        		<label for="search"><?php echo _("Enable search feature:"); ?></label>
+	        		<label for="search"><?php echo _("Enable search:"); ?></label>
 	        		<select id="search" name="search">
 	        			<option value="1" <?php if($settings['search'] == 1)print("selected='selected'"); ?>><?php echo _("Enable"); ?></option>
 	        			<option value="0" <?php if($settings['search'] == 0)print("selected='selected'"); ?>><?php echo _("Disable"); ?></option>
 	        		</select>
 	        		<div class="info">
 	        			<?php 
-	        			echo _("If you enable search feature, you should setup your database.");
+	        			echo _("If enable search, you should setup your database.");
 	        			?>
 	        		</div>
         		</div>
@@ -98,7 +98,7 @@
 	        		</select>
 	        		<div class="info">
 	        			<?php 
-	        			echo _("If you enable user management, you should setup your database.");
+	        			echo _("If enable user management, you should setup your database.");
 	        			?>
 	        		</div>
         		</div>
@@ -145,7 +145,7 @@
         			<a href="database.php"><?php echo _("Database Setting"); ?></a>
         			<div class="info">
 	        			<?php 
-	        			echo _("If you need to use Search feature and User Management feature, you have to setup database.");
+	        			echo _("If need to use Search and User Management, you have to setup database.");
 	        			?>
 	        		</div>
         		</div>

@@ -105,7 +105,7 @@ textdomain($domain);
   		echo "Strings['User'] = '"._('User')."';\n";
   		echo "Strings['Username:'] = '"._('Username:')."';\n";
   		echo "Strings['Password:'] = '"._('Password:')."';\n";
-  		echo "Strings['Privilege:'] = '"._('Privilege:')."';\n";
+  		echo "Strings['Permission:'] = '"._('Permission:')."';\n";
   		echo "Strings['Working...'] = '"._('Working...')."';\n";
   		echo "Strings['Done'] = '"._('Done')."';\n";
   		echo "Strings['Add'] = '"._('Add')."';\n";

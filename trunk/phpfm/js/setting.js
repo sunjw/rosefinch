@@ -248,7 +248,7 @@ var Setting = {
 					}
 					row.append($("<td></td>").html(user.id));
 					row.append($("<td></td>").html(user.username));
-					row.append($("<td></td>").html(user.privilege));
+					row.append($("<td></td>").html(user.permission));
 					if (user.username == "root") 
 						row.append($("<td></td>").html(""));
 					else {
@@ -289,13 +289,13 @@ var Setting = {
 						size : "40", 
 						maxlength : "128"
 					}).val("")));
-		var select = $("<select/>").attr("name", "privilege");
+		var select = $("<select/>").attr("name", "permission");
 		select.append(
 			$("<option/>").val(25).html("User")).append(
 			$("<option/>").val(75).html("Administrator")).append(
 			$("<option/>").val(100).html("Root"));
 		divAddUser.append(
-			$("<div/>").append($("<label/>").attr("for", "privilege").html(Strings['Privilege:'])).append(select));
+			$("<div/>").append($("<label/>").attr("for", "permission").html(Strings['Permission:'])).append(select));
 		form.append(divAddUser);
 		Setting.displaySubmit();
 		
@@ -309,7 +309,7 @@ var Setting = {
 						noredirect : "noredirect", 
 						username : $("input[name='username']").val(), 
 						password : $("input[name='password']").val(), 
-						privilege : $("select[name='privilege']").val() 
+						permission : $("select[name='permission']").val() 
 					}, function () {
 						Setting.getMessage();
 						Setting.loadUsers($("#tableUserMng"));
@@ -335,22 +335,22 @@ var Setting = {
 						size : "40", 
 						maxlength : "128"
 					}).val(user.username)));
-		var select = $("<select/>").attr("name", "privilege");
+		var select = $("<select/>").attr("name", "permission");
 		var option = $("<option/>").val(25).html("User");
-		if (user.privilege == "User") 
+		if (user.permission == "User") 
 			option.attr("selected", "selected");
 		select.append(option);
 		option = $("<option/>").val(75).html("Administrator");
-		if (user.privilege == "Administrator") 
+		if (user.permission == "Administrator") 
 			option.attr("selected", "selected");
 		select.append(option);
 		option = $("<option/>").val(100).html("Root");
-		if (user.privilege == "Root") 
+		if (user.permission == "Root") 
 			option.attr("selected", "selected");
 		select.append(option);
 		
 		divModifyUser.append(
-			$("<div/>").append($("<label/>").attr("for", "privilege").html(Strings['Privilege:'])).append(select));
+			$("<div/>").append($("<label/>").attr("for", "permission").html(Strings['Permission:'])).append(select));
 		divModifyUser.append($("<input/>").attr({
 					type : "hidden", 
 					name : "id"
@@ -368,7 +368,7 @@ var Setting = {
 						noredirect : "noredirect", 
 						id : $("input[name='id']").val(), 
 						username : $("input[name='username']").val(), 
-						privilege : $("select[name='privilege']").val() 
+						permission : $("select[name='permission']").val() 
 					}, function () {
 						Setting.getMessage();
 						Setting.loadUsers($("#tableUserMng"));

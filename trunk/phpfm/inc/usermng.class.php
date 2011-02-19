@@ -23,7 +23,7 @@ class User
 	/**
 	 * 权限
 	 */
-	public $privilege;
+	public $permission;
 	
 	/**
 	 * 最低权限
@@ -127,7 +127,7 @@ class UserManager
 			$user = new User();
 			$user->id = $row->id;
 			$user->name = $row->username;
-			$user->privilege = $row->privilege;
+			$user->permission = $row->permission;
 			$_SESSION['user'] = $user;
 		}
 		
@@ -139,52 +139,52 @@ class UserManager
 		$_SESSION['user'] = null;
 	}
 	
-	public function get_users_by_privilege($privilege, $privilege_str = false)
+	public function get_users_by_permission($permission, $permission_str = false)
 	{
-		if(!is_numeric($privilege))
+		if(!is_numeric($permission))
 			return null;
 		
-		$query = "SELECT id, username, privilege FROM `users` WHERE privilege<='".$privilege."'";
+		$query = "SELECT id, username, permission FROM `users` WHERE permission<='".$permission."'";
 		//echo $query;
 		$rows = $this->db->get_results($query);
 		
-		if($privilege_str)
+		if($permission_str)
 		{
 			foreach($rows as $row)
 			{
-				if($row->privilege == User::$ROOT)
-					$row->privilege = _("Root");
-				else if($row->privilege == User::$ADMIN)
-					$row->privilege = _("Administrator");
-				else if($row->privilege == User::$USER)
-					$row->privilege = _("User");
-				else if($row->privilege == User::$NOBODY)
-					$row->privilege = _("Everyone");
+				if($row->permission == User::$ROOT)
+					$row->permission = "Root";
+				else if($row->permission == User::$ADMIN)
+					$row->permission = "Administrator";
+				else if($row->permission == User::$USER)
+					$row->permission = "User";
+				else if($row->permission == User::$NOBODY)
+					$row->permission = "Everyone";
 			}
 		}
 		
 		return $rows;
 	}
 	
-	public function get_user_by_id($id, $privilege_str = false)
+	public function get_user_by_id($id, $permission_str = false)
 	{
 		if(!is_numeric($id))
 			return null;
 		
-		$query = "SELECT id, username, privilege FROM `users` WHERE id='".$id."'";
+		$query = "SELECT id, username, permission FROM `users` WHERE id='".$id."'";
 		//echo $query;
 		$row = $this->db->get_results($query);
 		
-		if($privilege_str)
+		if($permission_str)
 		{
-			if($row->privilege == User::$ROOT)
-				$row->privilege = _("Root");
-			else if($row->privilege == User::$ADMIN)
-				$row->privilege = _("Administrator");
-			else if($row->privilege == User::$USER)
-				$row->privilege = _("User");
-			else if($row->privilege == User::$NOBODY)
-				$row->privilege = _("Everyone");
+			if($row->permission == User::$ROOT)
+				$row->permission = "Root";
+			else if($row->permission == User::$ADMIN)
+				$row->permission = "Administrator";
+			else if($row->permission == User::$USER)
+				$row->permission = "User";
+			else if($row->permission == User::$NOBODY)
+				$row->permission = "Everyone";
 		}
 		
 		return $row;
@@ -194,11 +194,11 @@ class UserManager
 	{
 		$info['username'] = $this->db->escape($info['username']);
 		$info['password'] = $this->db->escape($info['password']);
-		$info['privilege'] = $this->db->escape($info['privilege']);
-		if($info['privilege'] < User::$USER)
+		$info['permission'] = $this->db->escape($info['permission']);
+		if($info['permission'] < User::$USER)
 			return 0;
 		
-		$query = "INSERT INTO `users` SET username='".$info['username']."', password='".$info['password']."', privilege=".$info['privilege'];
+		$query = "INSERT INTO `users` SET username='".$info['username']."', password='".$info['password']."', permission=".$info['permission'];
 		return ($this->db->query($query));
 		//print_r($result);
 	}
@@ -215,11 +215,11 @@ class UserManager
 	{
 		$info['id'] = $this->db->escape($info['id']);
 		$info['username'] = $this->db->escape($info['username']);
-		$info['privilege'] = $this->db->escape($info['privilege']);
-		if($info['privilege'] < User::$USER)
+		$info['permission'] = $this->db->escape($info['permission']);
+		if($info['permission'] < User::$USER)
 			return 0;
 		
-		$query = "UPDATE `users` SET username='".$info['username']."', privilege=".$info['privilege']." WHERE id='".$info['id']."' AND username<>'root'";
+		$query = "UPDATE `users` SET username='".$info['username']."', permission=".$info['permission']." WHERE id='".$info['id']."' AND username<>'root'";
 		return ($this->db->query($query));
 		//print_r($result);
 	}

@@ -3,6 +3,33 @@
 require_once "../inc/common.inc.php";
 require_once "../inc/utility.class.php";
 
+function check_table()
+{
+	$db = Utility::get_ezMysql();
+	$query = "SHOW TABLES";
+	$rows = $db->get_results($query, ARRAY_N);
+	//print_r($rows);
+	$has_fileindex = false;
+	$has_users = false;
+	if($rows != null)
+	{	
+		foreach($rows as $row)
+		{
+			//echo $row[0];
+			if($row[0] == "fileindex")
+			{
+				$has_fileindex = true;
+			}
+			if($row[0] == "users")
+			{
+				$has_users = true;
+			}
+		}
+	}
+	
+	return ($has_fileindex && $has_users);
+}
+
 /**
  * 将设置保存到 settings.inc.php 中
  * @param $settings settings 数组
@@ -75,6 +102,15 @@ function save_general(&$settings)
 		$settings_str = fread($settings_tpl, filesize($file_name));
 		fclose($settings_tpl);
 		//print_r( $settings);
+		
+		if($settings['search'] || $settings['usermng'])
+		{
+			if(!check_table())
+			{
+				$settings['search'] = 0;
+				$settings['usermng'] = 0;
+			}
+		}
 		
 		$templates = array("&&FILE_POSITION&&", 
 							"&&FILES_DIR&&", 

@@ -13,16 +13,13 @@ require_once "../log/log.func.php";
 
 set_response_utf8();
 
-if(!SEARCH)
-{
-	redirect("setting.php");
-}
-
 function check_table($db)
 {
 	$query = "SHOW TABLES";
 	$rows = $db->get_results($query, ARRAY_N);
 	//print_r($rows);
+	$has_fileindex = false;
+	$has_users = false;
 	if($rows != null)
 	{	
 		foreach($rows as $row)
@@ -30,12 +27,16 @@ function check_table($db)
 			//echo $row[0];
 			if($row[0] == "fileindex")
 			{
-				return true;
+				$has_fileindex = true;
+			}
+			if($row[0] == "users")
+			{
+				$has_users = true;
 			}
 		}
 	}
 	
-	return false;
+	return ($has_fileindex && $has_users);
 }
 
 function save_settings(&$settings)
@@ -44,11 +45,13 @@ function save_settings(&$settings)
 	$settings['db_pswd'] = post_query("dbPswd");
 	$settings['db_name'] = post_query("dbName");
 	$settings['db_host'] = post_query("dbHost");
+	$settings['root_password'] = post_query("rootPassword");
 	
 	if($settings['db_user'] == "" ||
 		$settings['db_pswd'] == "" ||
 		$settings['db_name'] == "" ||
-		$settings['db_host'] == "")
+		$settings['db_host'] == "" ||
+		$settings['root_password'] == "")
 	{
 		return false;
 	}
@@ -84,17 +87,25 @@ function save_settings(&$settings)
 			  KEY `type` (`type`),
 			  KEY `size` (`size`)
 			) ENGINE=InnoDB DEFAULT CHARSET=utf8;";
-		$ret = $db->query($query);
+		$db->query($query);
 		
-		if((!is_numeric($ret) && !$ret))
-		{
-			return false; // Cannot connect to database
-		}
+		$query = "CREATE TABLE IF NOT EXISTS `users` (
+			  `id` int(10) unsigned NOT NULL auto_increment,
+			  `username` varchar(128) NOT NULL,
+			  `password` varchar(32) NOT NULL,
+			  `permission` smallint(5) unsigned NOT NULL,
+			  PRIMARY KEY  (`id`),
+			  KEY `username` (`username`)
+			) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=1;";
+		$db->query($query);
 		
 		if(!check_table($db))
 		{
 			return false; // 数据库表添加失败
 		}
+		
+		$query = "INSERT INTO `users` SET username='root', password='".md5($settings['root_password'])."', permission=100";
+		$db->query($query);
 	}
 	
 	// 保存设置
@@ -178,29 +189,36 @@ if(isset($_POST['settingsForm']))
         	<fieldset>
         		<legend><?php echo _("Basic Settings"); ?></legend>
         		<div>
-	        		<label for="dbUser"><?php echo _("Database user name") . ":"; ?></label>
+	        		<label for="dbUser"><?php echo _("Database user name:"); ?></label>
 	        		<input id="dbUser" type="text" maxlength="256" value="<?php echo $settings['db_user']; ?>" name="dbUser"/>
 	        		<div class="info">
 	        			
 	        		</div>
         		</div>
         		<div>
-	        		<label for="dbPswd"><?php echo _("Database user password") . ":"; ?></label>
+	        		<label for="dbPswd"><?php echo _("Database user password:"); ?></label>
 	        		<input id="dbPswd" type="password" maxlength="256" value="" name="dbPswd"/>
 	        		<div class="info">
 	        			
 	        		</div>
         		</div>
         		<div>
-	        		<label for="dbName"><?php echo _("Database name") . ":"; ?></label>
+	        		<label for="dbName"><?php echo _("Database name:"); ?></label>
 	        		<input id="dbName" type="text" maxlength="256" value="<?php echo $settings['db_name']; ?>" name="dbName"/>
 	        		<div class="info">
 	        			
 	        		</div>
         		</div>
         		<div>
-	        		<label for="dbHost"><?php echo _("Database host") . ":"; ?></label>
+	        		<label for="dbHost"><?php echo _("Database host:"); ?></label>
 	        		<input id="dbHost" type="text" maxlength="256" value="<?php echo $settings['db_host']; ?>" name="dbHost"/>
+	        		<div class="info">
+	        			
+	        		</div>
+        		</div>
+        		<div>
+	        		<label for="rootPassword"><?php echo _("Root user password:"); ?></label>
+	        		<input id="rootPassword" type="password" maxlength="256" value="" name="rootPassword"/>
 	        		<div class="info">
 	        			
 	        		</div>

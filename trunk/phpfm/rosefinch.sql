@@ -49,7 +49,7 @@ CREATE TABLE IF NOT EXISTS `users` (
   `id` int(10) unsigned NOT NULL auto_increment,
   `username` varchar(128) NOT NULL,
   `password` varchar(32) NOT NULL,
-  `privilege` smallint(5) unsigned NOT NULL,
+  `permission` smallint(5) unsigned NOT NULL,
   PRIMARY KEY  (`id`),
   KEY `username` (`username`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=2 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=1;

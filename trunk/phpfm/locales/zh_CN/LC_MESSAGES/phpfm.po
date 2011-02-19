@@ -165,8 +165,8 @@ msgstr "时区和语言"
 msgid "Others Settings"
 msgstr "其它设置"
 
-msgid "Type of root directory path"
-msgstr "根目录路径类型"
+msgid "Type of root directory path:"
+msgstr "根目录路径类型:"
 
 msgid "Relative path"
 msgstr "相对路径"
@@ -174,23 +174,23 @@ msgstr "相对路径"
 msgid "Absolute path"
 msgstr "绝对路径"
 
-msgid "Path"
-msgstr "路径"
+msgid "Path:"
+msgstr "路径:"
 
-msgid "Charset"
-msgstr "字符集"
+msgid "Charset:"
+msgstr "字符集:"
 
-msgid "Language"
-msgstr "语言"
+msgid "Language:"
+msgstr "语言:"
 
-msgid "Timezone"
-msgstr "时区"
+msgid "Timezone:"
+msgstr "时区:"
 
-msgid "Title"
-msgstr "标题"
+msgid "Title:"
+msgstr "标题:"
 
-msgid "Enable LightBox for pictures"
-msgstr "为图片启用 LightBox"
+msgid "Enable LightBox for pictures:"
+msgstr "为图片启用 LightBox:"
 
 msgid "Enable"
 msgstr "启用"
@@ -231,17 +231,17 @@ msgstr "Rosefinch 中显示的标题"
 msgid "Let Rosefinch enable jQuery lightbox for pictures."
 msgstr "让 Rosefinch 为图片使用 jQuery lightbox。"
 
-msgid "Enable Audio Player for audio files"
-msgstr "为音乐文件启用 Audio Player"
+msgid "Enable Audio Player for audio files:"
+msgstr "为音乐文件启用 Audio Player:"
 
 msgid "Let Rosefinch enable Audio Player for audio files."
 msgstr "让 Rosefinch 为音乐文件启用 Audio Player。"
 
-msgid "Enable search function"
-msgstr "启用搜索功能"
+msgid "Enable search:"
+msgstr "启用搜索:"
 
-msgid "If you enable search function, you should setup your database by click the link below after you click OK."
-msgstr "如果启用了搜索功能，请您在点击确定后使用下面的链接设置数据库。"
+msgid "If enable search, you should setup your database."
+msgstr "如果启用搜索，你需要设置数据库设置数据库。"
 
 msgid "Index all files"
 msgstr "索引所有文件"
@@ -252,21 +252,138 @@ msgstr "数据库设置"
 msgid "Set database parameters"
 msgstr "设置数据库参数"
 
-msgid "Database user name"
-msgstr "数据库用户名"
+msgid "Database user name:"
+msgstr "数据库用户名:"
 
-msgid "Database user password"
-msgstr "数据库用户密码"
+msgid "Database user password:"
+msgstr "数据库用户密码:"
 
-msgid "Database name"
-msgstr "数据库名称"
+msgid "Database name:"
+msgstr "数据库名称:"
 
-msgid "Database host"
-msgstr "数据库主机"
+msgid "Database host:"
+msgstr "数据库主机:"
+
+msgid "Root user password:"
+msgstr "Root 密码:"
+
+msgid "If need to use Search and User Management, you have to setup database."
+msgstr "如果需要搜索和用户管理，你需要设置数据库。"
+
+msgid "User Management"
+msgstr "用户管理"
+
+msgid "Enable user management:"
+msgstr "启用用户管理"
+
+msgid "If enable user management, you should setup your database."
+msgstr "如果启用用户管理，你需要设置数据库。"
 
 msgid "Main UI"
 msgstr "主界面"
 
 msgid "Knowing Issue"
 msgstr "已知问题"
+
+msgid "Welcome"
+msgstr "欢迎"
+
+msgid "Guest"
+msgstr "未登录用户"
+
+msgid "Login"
+msgstr "登录"
+
+msgid "Login succeed."
+msgstr "登录成功。"
+
+msgid "Login failed."
+msgstr "登录失败。"
+
+msgid "Logout"
+msgstr "登出"
+
+msgid "Logout."
+msgstr "登出。"
+
+msgid "User"
+msgstr "用户"
+
+msgid "Username:"
+msgstr "用户名:"
+
+msgid "Password:"
+msgstr "密码:"
+
+msgid "Are you sure to logout?"
+msgstr "确定要登出？"
+
+msgid "User Permission"
+msgstr "用户权限"
+
+msgid "Browse Permission:"
+msgstr "浏览权限"
+
+msgid "Modification Permission:"
+msgstr "修改权限"
+
+msgid "Administration Permission:"
+msgstr "管理权限"
+
+msgid "Who can browse directories and files."
+msgstr "可以浏览目录和文件。"
+
+msgid "Who can modify (cut/copy, rename, upload, etc.) directories and files."
+msgstr "可以修改（剪切/复制、重命名、上传等）目录和文件。"
+
+msgid "Who can administrate Rosefinch."
+msgstr "可以管理朱雀 Rosefinch。"
+
+msgid "Add User"
+msgstr "添加用户"
+
+msgid "Username"
+msgstr "用户名"
+
+msgid "Permission"
+msgstr "权限"
+
+msgid "Operation"
+msgstr "操作"
+
+msgid "Never mind..."
+msgstr "算了..."
+
+msgid "Permission:"
+msgstr "权限:"
+
+msgid "Done"
+msgstr "完成"
+
+msgid "Add"
+msgstr "添加"
+
+msgid "Modify"
+msgstr "修改"
+
+msgid "Are you sure to delete this user?"
+msgstr "确定要删除这个用户吗？"
+
+msgid "Adding user succeed."
+msgstr "添加用户成功。"
+
+msgid "Adding user failed."
+msgstr "添加用户失败。"
+
+msgid "Deleting user succeed."
+msgstr "删除用户成功。"
+
+msgid "Deleting user failed."
+msgstr "删除用户失败。"
+
+msgid "Modifing user succeed."
+msgstr "修改用户成功。"
+
+msgid "Modifing user failed."
+msgstr "修改用户失败。"
 

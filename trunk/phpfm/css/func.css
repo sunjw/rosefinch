@@ -71,6 +71,18 @@ div.hidden {
 	line-height: 2em;
 }
 
+#funcDialog label {
+	display: inline;
+	width: 6em;
+	text-align: right;
+	float: left;
+	margin-right: 0.5em;
+}
+
+#funcDialog input[type="text"], #funcDialog input[type="password"], #funcDialog select {
+	margin: 3px 0;
+}
+
 /* Rename sector */
 #divReqInput div#oldnameLine {
 	display: none;

@@ -1,6 +1,6 @@
 @CHARSET "UTF-8";
 
-#phpfmDocNav, #phpfmSettingForm, #privilegeMessage, #phpfmUserMng {
+#phpfmDocNav, #phpfmSettingForm, #permissionMessage, #phpfmUserMng {
 	margin: 15px;
 }
 
@@ -66,10 +66,10 @@ input[type="button"], input[type="submit"] {
 #phpfmUserMng table th.id {
 	width: 30px;
 }
-#phpfmUserMng table th.name {
+#phpfmUserMng table th.username {
 	width: 150px;
 }
-#phpfmUserMng table th.privilege {
+#phpfmUserMng table th.permission {
 	width: 120px;
 }
 #phpfmUserMng table th.operation {

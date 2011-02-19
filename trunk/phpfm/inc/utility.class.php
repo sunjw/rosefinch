@@ -688,8 +688,8 @@ class Utility
 		if(!USERMNG)
 			return true;
 		
-		$modify_privilege = $do;
-		if($modify_privilege == User::$NOBODY)
+		$modify_permission = $do;
+		if($modify_permission == User::$NOBODY)
 			return true;
 			
 		$user_manager = Utility::get_usermng();
@@ -697,7 +697,7 @@ class Utility
 			return false;
 		
 		$user = $user_manager->get_user();
-		if($user->privilege >= $modify_privilege)
+		if($user->permission >= $modify_permission)
 			return true;
 		
 		return false;
