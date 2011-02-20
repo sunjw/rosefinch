@@ -20,19 +20,15 @@ $settings = array();
 $timezone = date_default_timezone_get();
 
 $USERMNG_ARG = "usermng";
-$usermng = 0;
+$DB_ARG = "database";
+$mode = 0;
 $arg = get_query("mode");
-if($arg == $USERMNG_ARG)
-	$usermng = 1;
+if($arg == $DB_ARG)
+	$mode = 1;
+else if($arg == $USERMNG_ARG)
+	$mode = 2;
 
-if($usermng)
-{
-	$settings = array('language' => LOCALE,
-					'rose_browser' => ROSE_BROWSER,
-					'rose_modify' => ROSE_MODIFY,
-					'rose_admin' => ROSE_ADMIN);
-}
-else
+if($mode == 0)
 {
 	$settings = array('root_type' => FILE_POSITION,
 					'root_path' => FILES_DIR,
@@ -45,10 +41,21 @@ else
 					'search' => SEARCH,
 					'usermng' => USERMNG);
 }
+else if($mode == 1)
+{
+	
+}
+else if($mode == 2)
+{
+	$settings = array('language' => LOCALE,
+					'rose_browser' => ROSE_BROWSER,
+					'rose_modify' => ROSE_MODIFY,
+					'rose_admin' => ROSE_ADMIN);
+}
 
 if(isset($_POST['settingsForm']))
 {
-	if(!save_settings($settings, $usermng))
+	if(!save_settings($settings, $mode))
 	{
     	Utility::get_messageboard()->set_message(_("There is something wrong in your settings."), 2);
 	}
@@ -58,11 +65,7 @@ if(isset($_POST['settingsForm']))
 	}
 }
 
-if($usermng)
-{
-	
-}
-else
+if($mode == 0)
 {
 	$settings['root_path'] = str_replace("\\\\", "\\", $settings['root_path']); // 修正显示
 }
@@ -135,32 +138,38 @@ textdomain($domain);
     	</div>
     </div>
     <div id="content">
-    	<?php 
-    	if($settings['usermng'] || ($usermng && USERMNG))
-    	{
-    	?>
     	<div id="phpfmDocNav">
     		<?php 
-    		if($usermng)
+    		if($mode == 0)
+    		{
+    			echo _("Setting"); ?>&nbsp;|&nbsp;<a class="" title="<?php echo _("Database Setting"); ?>" href="setting.php?mode=<?php echo $DB_ARG; ?>"><?php echo _("Database Setting"); ?></a><?php if(USERMNG){?>&nbsp;|&nbsp;<a class="" title="<?php echo _("User Management"); ?>" href="setting.php?mode=<?php echo $USERMNG_ARG; ?>"><?php echo _("User Management"); ?></a><?php }?>
+    		<?php 
+    		}
+    		else if($mode == 1)
     		{
     		?>
-    			<a class="" title="<?php echo _("Setting"); ?>" href="setting.php"><?php echo _("Setting"); ?></a>&nbsp;|&nbsp;<?php echo _("User Management");  ?>
-    		<?php }
-    		else
+    			<a class="" title="<?php echo _("Setting"); ?>" href="setting.php"><?php echo _("Setting"); ?></a>&nbsp;|&nbsp;<?php echo _("Database Setting"); ?><?php if(USERMNG){?>&nbsp;|&nbsp;<a class="" title="<?php echo _("User Management"); ?>" href="setting.php?mode=<?php echo $USERMNG_ARG; ?>"><?php echo _("User Management"); ?></a><?php }?>
+      		<?php 
+      		}
+    		else if($mode == 2 && ($settings['usermng'] || USERMNG))
     		{
-    			echo _("Setting"); ?>&nbsp;|&nbsp;<a class="" title="<?php echo _("User Management"); ?>" href="setting.php?mode=<?php echo $USERMNG_ARG; ?>"><?php echo _("User Management"); ?></a>
-      		<?php } ?>
+    		?>
+    			<a class="" title="<?php echo _("Setting"); ?>" href="setting.php"><?php echo _("Setting"); ?></a>&nbsp;|&nbsp;<a class="" title="<?php echo _("Database Setting"); ?>" href="setting.php?mode=<?php echo $DB_ARG; ?>"><?php echo _("Database Setting"); ?></a><?php if(USERMNG){?>&nbsp;|&nbsp;<?php echo _("User Management");  ?><?php }?>
+      		<?php 
+    		} 
+    		?>
       	</div>
-      	<?php } ?>
     	<div id="phpfmMessage">
     	</div>
     	<?php 
     	if(Utility::allow_to_admin())
     	{
-    		if($usermng)
-				include "usermng.form.php";
-			else
-    			include "settings.form.php";
+    		if($mode == 0)
+				include "settings.form.php";
+			else if($mode == 1)
+    			include "db.form.php";
+			else if($mode == 2)
+    			include "usermng.form.php";
     	} 
     	else
     	{

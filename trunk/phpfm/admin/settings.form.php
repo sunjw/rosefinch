@@ -60,6 +60,10 @@
 	        		</div>
         		</div>
         	</fieldset>
+			<?php 
+			if(!(isset($settings['install']) && $settings['install']))
+			{
+			?>
         	<fieldset>
         		<legend><?php echo _("Search"); ?></legend>
         		<div>
@@ -103,6 +107,9 @@
 	        		</div>
         		</div>
         	</fieldset>
+			<?php 
+			}
+			?>
         	<fieldset>
         		<legend><?php echo _("Others Settings"); ?></legend>
         		<div>
@@ -135,17 +142,6 @@
 	        		<div class="info">
 	        			<?php 
 	        			echo _("Let Rosefinch enable Audio Player for audio files.");
-	        			?>
-	        		</div>
-        		</div>
-        	</fieldset>
-        	<fieldset>
-        		<legend><?php echo _("Database Setting"); ?></legend>
-        		<div>
-        			<a href="database.php"><?php echo _("Database Setting"); ?></a>
-        			<div class="info">
-	        			<?php 
-	        			echo _("If need to use Search and User Management, you have to setup database.");
 	        			?>
 	        		</div>
         		</div>

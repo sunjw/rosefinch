@@ -1,5 +1,7 @@
 <?php
 
+define("INSTALL", 1);
+
 require_once "../inc/common.inc.php";
 require_once "progress.php";
 require_once "../log/log.func.php";
@@ -21,13 +23,15 @@ $settings = array('root_type' => "absolute",
 				'title_name' => "Rosefinch",
 				'lightbox' => 1,
 				'audioPlayer' => 1,
-				'search' => 0);
+				'search' => 0,
+				'usermng' => 0,
+				'install' => 1);
 
 $wrong = false;
 
 if(isset($_POST['settingsForm']))
 {
-	if(save_settings($settings))
+	if(save_settings($settings, 0))
 	{	
 		redirect("../");
 	}

@@ -4,7 +4,7 @@ require_once "common.inc.php";
 
 // DO NOT EDIT
 
-define("VERSION", "1.0.10");
+define("VERSION", "1.0.20");
 
 define("INC_DIR_NAME", "inc"); // include 文件夹
 define("DEBUG", true); // Debug 模式
@@ -56,7 +56,7 @@ if(file_exists($settings))
 		require_once $user_managment;
 	}
 }
-else
+else if(!defined('INSTALL'))
 {
 	// 没有配置文件，跳转至安装
 	redirect("admin/install.php");
