@@ -72,8 +72,7 @@ div.hidden {
 }
 
 #funcDialog label {
-	display: inline;
-	width: 6em;
+	width: 75px;
 	text-align: right;
 	float: left;
 	margin-right: 0.5em;

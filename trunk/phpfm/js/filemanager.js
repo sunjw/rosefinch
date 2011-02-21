@@ -226,7 +226,7 @@ var FileManager = {
 				"oper" : "paste", 
 				"subdir" : subdir, 
 				"return" : returnURL
-			}, function (data) {
+			}, function () {
 				// alert(data);
 				window.location.reload();
 			});
@@ -264,12 +264,11 @@ var FileManager = {
 		
 		$.post("func/post.func.php", {
 				"oper" : "delete", 
-				"items" : itemsStr
-			}, function (data) {
+				"items" : itemsStr,
+				"noredirect" : "noredirect"
+			}, function () {
 				// alert(data);
-				if (data == "ok") {
-					window.location.reload();
-				}
+				window.location.reload();
 			});
 	}, 
 	

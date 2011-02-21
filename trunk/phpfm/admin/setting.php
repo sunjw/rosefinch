@@ -95,26 +95,31 @@ textdomain($domain);
 	<link href="../css/setting.css" rel="stylesheet" type="text/css" />
 	<link href="../css/func.css" rel="stylesheet" type="text/css" />
     <script type="text/javascript" language="javascript" src="../js/jquery-1.4.4.min.js"></script>
+    <script type="text/javascript" language="javascript" src="../js/dialog.min.js"></script>
     <script type="text/javascript" language="javascript" src="../js/setting.js"></script>
     <script type="text/javascript" language="javascript">
   	//<![CDATA[
   		var Strings = new Array();
   		<?php 
-  		echo "Strings['return'] = '".rawurlencode(get_URI())."';\n";
-  		echo "Strings['OK'] = '"._('OK')."';\n";
-  		echo "Strings['Cancel'] = '"._('Cancel')."';\n";
-  		echo "Strings['Never mind...'] = '"._('Never mind...')."';\n";
-  		echo "Strings['Are you sure to logout?'] = '"._('Are you sure to logout?')."';\n";
-  		echo "Strings['User'] = '"._('User')."';\n";
-  		echo "Strings['Username:'] = '"._('Username:')."';\n";
-  		echo "Strings['Password:'] = '"._('Password:')."';\n";
-  		echo "Strings['Permission:'] = '"._('Permission:')."';\n";
-  		echo "Strings['Working...'] = '"._('Working...')."';\n";
-  		echo "Strings['Done'] = '"._('Done')."';\n";
-  		echo "Strings['Add'] = '"._('Add')."';\n";
-  		echo "Strings['Delete'] = '"._('Delete')."';\n";
-  		echo "Strings['Are you sure to delete this user?'] = '"._('Are you sure to delete this user?')."';\n";
-  		echo "Strings['Modify'] = '"._('Modify')."';\n";
+  		echo "Strings['return'] = '".rawurlencode(get_URI())."';";
+  		echo "Strings['OK'] = '"._('OK')."';";
+  		echo "Strings['Cancel'] = '"._('Cancel')."';";
+  		echo "Strings['Never mind...'] = '"._('Never mind...')."';";
+  		echo "Strings['Are you sure to logout?'] = '"._('Are you sure to logout?')."';";
+  		echo "Strings['User'] = '"._('User')."';";
+  		echo "Strings['Username:'] = '"._('Username:')."';";
+  		echo "Strings['Password:'] = '"._('Password:')."';";
+  		echo "Strings['Permission:'] = '"._('Permission:')."';";
+  		echo "Strings['Working...'] = '"._('Working...')."';";
+  		echo "Strings['Done'] = '"._('Done')."';";
+  		echo "Strings['Add'] = '"._('Add')."';";
+  		echo "Strings['Delete'] = '"._('Delete')."';";
+  		echo "Strings['Are you sure to delete this user?'] = '"._('Are you sure to delete this user?')."';";
+  		echo "Strings['Modify'] = '"._('Modify')."';";
+  		echo "Strings['Change Password'] = '"._('Change Password')."';";
+  		echo "Strings['Old:'] = '"._('Old:')."';";
+  		echo "Strings['New:'] = '"._('New:')."';";
+  		echo "Strings['Repeat:'] = '"._('Repeat:')."';";
   		?>
   	//]]>
     </script>

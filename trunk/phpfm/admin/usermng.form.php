@@ -45,6 +45,19 @@
         	</fieldset>
         	<input type="submit" value="<?php echo _("OK"); ?>" />
         </form>
+        <fieldset id="phpfmChangePswd">
+        	<legend><?php echo _("Account Management"); ?></legend>
+        	<div id="divUserMng">
+        		<div>
+        			<input id="changePswd" type="button" value="<?php echo _("Change Password"); ?>" />
+        			<div class="info">
+	        			<?php 
+	        			echo _("Change your account password.");
+	        			?>
+	        		</div>
+        		</div>
+	       	</div>
+       </fieldset>
         <fieldset id="phpfmUserMng">
         	<legend><?php echo _("User Management"); ?></legend>
         	<div id="divUserMng">

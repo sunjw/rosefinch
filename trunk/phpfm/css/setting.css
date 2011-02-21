@@ -1,6 +1,6 @@
 @CHARSET "UTF-8";
 
-#phpfmDocNav, #phpfmSettingForm, #permissionMessage, #phpfmUserMng {
+#phpfmDocNav, #phpfmSettingForm, #permissionMessage, #phpfmUserMng, #phpfmChangePswd {
 	margin: 15px;
 }
 
@@ -43,7 +43,7 @@ form select {
 	width: 10em;
 }
 
-form div.info {
+div.info {
 	display: inline;
 	font-family: Arial;
 	font-size: x-small;

@@ -76,6 +76,9 @@ class Post
 			case "modiuser":
 				$this->modify_user();
 				break;
+			case "changepswd":
+				$this->change_password();
+				break;
 		}
 	}
 	
@@ -176,7 +179,7 @@ class Post
 		
 		$this->messageboard->set_message($message, $stat);
 		
-		echo "ok";
+		Utility::redirct_after_oper(false, 1);
 	}
 	
 	/**
@@ -499,6 +502,31 @@ class Post
 		}
 		
 		$this->messageboard->set_message(_("Modifing user failed."), 2);
+		Utility::redirct_after_oper(false, 1);
+	}
+	
+	private function change_password()
+	{
+		$old = md5(post_query("oldpswd"));
+		$new = md5(post_query("newpswd"));
+		$repeat = md5(post_query("repeat"));
+		if($new == $repeat)
+		{
+			$info = Array('old' => $old, 'new' => $new);
+			if($this->user_manager->change_password($info))
+			{
+				$this->messageboard->set_message(_("Changing password succeed."), 1);
+			}
+			else
+			{
+				$this->messageboard->set_message(_("Changing password failed."), 2);
+			}
+		}
+		else
+		{
+			$this->messageboard->set_message(_("New password and repeat are different."), 2);
+		}
+		
 		Utility::redirct_after_oper(false, 1);
 	}
 

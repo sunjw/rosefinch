@@ -97,7 +97,7 @@ class UserManager
 	}
 	
 	/**
-	 * 得到用户对象
+	 * 得到当前登录的用户对象
 	 * @return 用户对象或者 null
 	 */
 	public function get_user()
@@ -222,6 +222,20 @@ class UserManager
 		$query = "UPDATE `users` SET username='".$info['username']."', permission=".$info['permission']." WHERE id='".$info['id']."' AND username<>'root'";
 		return ($this->db->query($query));
 		//print_r($result);
+	}
+	
+	public function change_password($info)
+	{
+		$current_user = $this->get_user();
+		$id = $current_user->id;
+		$query = "SELECT * FROM `users` WHERE id='$id' AND password='".$info['old']."'";
+		
+		$row = $this->db->get_results($query);
+		if(count($row))
+		{
+			$query = "UPDATE `users` SET password='".$info['new']."' WHERE id='$id'";
+			return ($this->db->query($query));
+		}
 	}
 }
 
