@@ -117,9 +117,8 @@ class UserManager
 		
 		$cert['username'] = $this->db->escape($cert['username']);
 		$cert['password'] = md5($cert['password']);
-		echo $query;
 		$query = "SELECT * FROM `users` WHERE username='".$cert['username']."' AND password='".$cert['password']."'";
-		
+		//echo $query;
 		$row = $this->db->get_results($query);
 		if(count($row) == 1)
 		{

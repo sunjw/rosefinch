@@ -43,7 +43,9 @@ if($mode == 0)
 }
 else if($mode == 1)
 {
-	
+	$settings = array('db_user' => "",
+					'db_name' => "",
+					'db_host' => "");
 }
 else if($mode == 2)
 {
@@ -70,7 +72,10 @@ if($mode == 0)
 	$settings['root_path'] = str_replace("\\\\", "\\", $settings['root_path']); // 修正显示
 }
 
-$locale = $settings['language'];
+if($mode == 0)
+	$locale = $settings['language'];
+else
+	$locale = LOCALE;
 putenv("LANG=" . $locale);
 setlocale(LC_ALL, $locale);
 
@@ -156,7 +161,7 @@ textdomain($domain);
     			<a class="" title="<?php echo _("Setting"); ?>" href="setting.php"><?php echo _("Setting"); ?></a>&nbsp;|&nbsp;<?php echo _("Database Setting"); ?><?php if(USERMNG){?>&nbsp;|&nbsp;<a class="" title="<?php echo _("User Management"); ?>" href="setting.php?mode=<?php echo $USERMNG_ARG; ?>"><?php echo _("User Management"); ?></a><?php }?>
       		<?php 
       		}
-    		else if($mode == 2 && ($settings['usermng'] || USERMNG))
+    		else if($mode == 2 && (USERMNG || $settings['usermng']))
     		{
     		?>
     			<a class="" title="<?php echo _("Setting"); ?>" href="setting.php"><?php echo _("Setting"); ?></a>&nbsp;|&nbsp;<a class="" title="<?php echo _("Database Setting"); ?>" href="setting.php?mode=<?php echo $DB_ARG; ?>"><?php echo _("Database Setting"); ?></a><?php if(USERMNG){?>&nbsp;|&nbsp;<?php echo _("User Management");  ?><?php }?>

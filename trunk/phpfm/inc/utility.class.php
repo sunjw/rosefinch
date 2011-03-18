@@ -709,6 +709,8 @@ class Utility
 	 */
 	public static function allow_to_browser()
 	{
+		if(!defined("ROSE_BROWSER"))
+			return true;
 		return Utility::allow_to(ROSE_BROWSER);
 	}
 	
@@ -718,6 +720,8 @@ class Utility
 	 */
 	public static function allow_to_modify()
 	{
+		if(!defined("ROSE_MODIFY"))
+			return true;
 		return Utility::allow_to(ROSE_MODIFY);
 	}
 	
@@ -727,6 +731,8 @@ class Utility
 	 */
 	public static function allow_to_admin()
 	{
+		if(!defined("ROSE_ADMIN"))
+			return true;
 		return Utility::allow_to(ROSE_ADMIN);
 	}
 	

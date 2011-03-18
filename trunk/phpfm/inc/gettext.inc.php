@@ -6,6 +6,8 @@ require_once "common.inc.php";
 /*
  * 初始化 gettext
  */
+if(!defined("LOCALE"))
+	define("LOCALE", "en-us");
 putenv("LANG=" . LOCALE);
 setlocale(LC_ALL, LOCALE);
 
