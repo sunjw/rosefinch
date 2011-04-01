@@ -61,7 +61,7 @@ div.hidden {
 	padding: 6px 10px;
 }
 
-#funcDialog #divInput form div div {
+#funcDialog #divInput form tr {
 	height: 2em;
 	line-height: 2em;
 }
@@ -71,19 +71,12 @@ div.hidden {
 	line-height: 2em;
 }
 
-#funcDialog label {
-	width: 75px;
-	text-align: right;
-	float: left;
-	margin-right: 0.5em;
-}
-
 #funcDialog input[type="text"], #funcDialog input[type="password"], #funcDialog select {
 	margin: 3px 0;
 }
 
 /* Rename sector */
-#divReqInput div#oldnameLine {
+#divReqInput #oldnameLine {
 	display: none;
 }
 

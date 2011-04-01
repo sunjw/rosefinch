@@ -276,12 +276,12 @@ class FileManager
 	    <link href="css/jquery.lightbox-0.5.css" rel="stylesheet" type="text/css" />
 	    <script type="text/javascript" language="javascript" src="js/jquery-1.4.4.min.js"></script>
 	    <script type="text/javascript" language="javascript" src="js/audio-player.js"></script> 
-	    <script type="text/javascript" language="javascript" src="js/jquery.common.min.js"></script>  
+	    <script type="text/javascript" language="javascript" src="js/jquery.common.min.js"></script> 
+		<script type="text/javascript" language="javascript" src="js/jquery.menu.min.js"></script> 
 <?php 
 		if($debug)
 		{
 ?>
-			<script type="text/javascript" language="javascript" src="js/jquery.menu.js"></script> 
 			<script type="text/javascript" language="javascript" src="js/jquery.lightbox-0.5.plus.js"></script>
 	    	<script type="text/javascript" language="javascript" src="js/filemanager.js"></script>
 <?php 
@@ -289,7 +289,6 @@ class FileManager
 		else
 		{
 ?>
-			<script type="text/javascript" language="javascript" src="js/jquery.menu.min.js"></script> 
 	    	<script type="text/javascript" language="javascript" src="js/jquery.lightbox-0.5.plus.pack.js"></script>
 	    	<script type="text/javascript" language="javascript" src="js/filemanager.min.js"></script>
 <?php 
@@ -1019,14 +1018,16 @@ class FileManager
 					<input type="hidden" id="renamePath" name="renamePath" value="" />
 					<input type="hidden" id="return" name="return" value="<?php echo rawurlencode(get_URI()); ?>" />
 					<div id="divReqInput">
-						<div id="oldnameLine">
-							<label for="oldname"><?php printf("%s&nbsp;", _("Old Name:")); ?></label>
-							<input id="oldname" type="text" name="oldname" value="" size="40" maxlength="128" readonly="readonly"/>
-						</div>
-						<div>
-							<label for="newname"><?php printf("%s&nbsp;", _("New Name:")); ?></label>
-							<input id="newname" type="text" name="newname" value="" size="40" maxlength="128" />
-						</div>
+						<table>
+							<tr id="oldnameLine">
+								<td><label for="oldname"><?php printf("%s&nbsp;", _("Old Name:")); ?></label></td>
+								<td><input id="oldname" type="text" name="oldname" value="" size="40" maxlength="128" readonly="readonly"/></td>
+							</tr>
+							<tr>
+								<td><label for="newname"><?php printf("%s&nbsp;", _("New Name:")); ?></label></td>
+								<td><input id="newname" type="text" name="newname" value="" size="40" maxlength="128" /></td>
+							</tr>
+						</table>
 						<div>
 							<span class="inputRequire"><?php printf(_("There should not have %s in new name"), ".., /, \, *, ?, \", |, &amp;, &lt;, &gt;"); ?></span>
 						</div>
@@ -1041,14 +1042,16 @@ class FileManager
 						</div>
 					</div>
 					<div id="divLogin">
-						<div>
-							<label for="username"><?php printf("%s&nbsp;", _("Username:")); ?></label>
-							<input id="username" type="text" name="username" value="" size="40" maxlength="128"/>
-						</div>
-						<div>
-							<label for="password"><?php printf("%s&nbsp;", _("Password:")); ?></label>
-							<input id="password" type="password" name="password" value="" size="40" maxlength="128" />
-						</div>
+						<table>
+							<tr>
+								<td><label for="username"><?php printf("%s&nbsp;", _("Username:")); ?></label></td>
+								<td><input id="username" type="text" name="username" value="" size="40" maxlength="128"/></td>
+							</tr>
+							<tr>
+								<td><label for="password"><?php printf("%s&nbsp;", _("Password:")); ?></label></td>
+								<td><input id="password" type="password" name="password" value="" size="40" maxlength="128" /></td>
+							</tr>
+						</table>
 					</div>
 					<div id="divLogout">
 						<div class="center"><?php echo _("Are you sure to logout?"); ?></div>
