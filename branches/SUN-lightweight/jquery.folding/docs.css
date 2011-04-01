@@ -1,0 +1,104 @@
+﻿* {
+	padding: 0;
+	margin: 0;
+}
+body {
+	font-family: verdana, Arial, Helvetica, Sans-serif;	
+	line-height: 1.1em;
+}
+.clear {
+	clear: both;
+}
+
+#divHeader {
+	background: #2A4187;
+	box-shadow: 0 0 5px 5px #666;
+	-moz-box-shadow: 0 0 5px 5px #666;
+	-webkit-box-shadow: 0 0 5px 5px #666;
+	color: White;
+	position: fixed;
+	top: 0;
+	left: 0;
+	width: 100%;
+}
+#divHeader h1 {
+	padding: 15px 50px;
+	font-size: x-large;
+	float: left;
+	text-shadow: #444 3px 2px 2px;
+}
+#divWrapper {
+	width: 800px;
+	padding-top: 10px;
+	padding-bottom: 10px;
+	margin-left: auto;
+	margin-right: auto;
+}
+#divWrapper * {
+	margin-left: 10px;
+	margin-right: 10px;
+}
+#divWrapper * * {
+	margin-left: 0;
+	margin-right: 0;
+}
+#divWrapper a {
+	color: black;
+}
+#divWrapper a:hover {
+	color: #32559B;
+}
+#divWrapper #divInfo {
+	font-size: small;
+}
+#divWrapper div.divListwHeader, #divWrapper div.divListwHeader h5 {
+	border-radius: 5px;
+	-moz-border-radius: 5px;
+	-webkit-border-radius: 5px;
+}
+#divWrapper div.divListwHeader {
+	border: 1px solid #CDE6F5;
+	box-shadow: 3px 3px 3px #888;
+	-moz-box-shadow: 3px 3px 3px #888;
+	-webkit-box-shadow: 3px 3px 3px #888;
+	margin-top: 15px;
+	background-color: White;
+	font-family: Georgia;
+}
+#divWrapper div.divListwHeader h5 {
+	border-radius: 5px;
+	-moz-border-radius: 5px;
+	-webkit-border-radius: 5px;
+	color: White;
+	background-color: #3862A9;
+	padding: 5px 0 6px 1em;
+}
+#divWrapper div.divListwHeader h5:hover {
+	cursor: pointer;
+	/*background-color: #111111;*/
+}
+#divWrapper div.divListwHeader .container {
+	margin: 10px 15px;
+}
+#divWrapper div.divListwHeader .container form {
+	margin-left: 12px;
+}
+#divWrapper div.divListwHeader ul {
+	list-style-type: none;
+	
+}
+#divWrapper .container a {
+	display: block;
+	padding: 2px 10px;
+	
+	/*color: #999999;*/
+	text-decoration: none;
+}
+#divWrapper .container a:hover {
+	background-color: #CDE6F5;
+	color: #32559B;
+	text-shadow: white 1px 1px;
+	border-radius: 5px;
+	-moz-border-radius: 5px;
+	-webkit-border-radius: 5px;
+}

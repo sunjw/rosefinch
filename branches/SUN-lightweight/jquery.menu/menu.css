@@ -1,0 +1,75 @@
+﻿.clear
+{
+	clear: both;
+}
+#navigation
+{
+	border: solid 1px black;
+	list-style-type: none;
+	margin: 0;
+	padding: 0 0 0 20px;
+	height: 30px;
+	width: 600px;
+}
+#navigation li.menu
+{
+	float: left;
+	position: relative;
+	height: 30px;
+	line-height: 30px;
+	border-right: 1px dotted black;
+}
+#navigation li.first
+{
+	border-left: 1px dotted black;
+}
+#navigation li.selected
+{
+	border-bottom: 1px solid white;
+}
+#navigation li.menu a
+{
+	display: block;
+	padding: 0 10px;
+	text-decoration: none;
+	color: Black;
+}
+#navigation li.menu a:hover, #navigation li.selected a
+{
+	text-decoration: underline;
+}
+#navigation li.menu .submenu
+{
+	display: none;
+	z-index: 2000;
+	position: absolute;
+	width: 200px;
+	padding: 0 3px 3px 0;
+	background: transparent url('shadow.png') no-repeat right bottom;
+	filter: progid : DXImageTransform.Microsoft.AlphaImageLoader ( 
+      src = 'shadow.png', sizingMethod = 'scale' );
+}
+#navigation li.menu .submenu *
+{
+	margin: 0;
+	padding: 0;
+}
+#navigation li.menu .submenu .submenuContainer
+{
+	background-color: white;
+	border: solid 1px #666666;
+	padding: 1px;
+	max-height: 360px; /* 最大高度 菜单不会太长 IE6 及以下无效 */
+	overflow: auto; /* 溢出就有滚动条 */
+}
+
+#navigation li.menu .submenu li
+{
+	float: none;
+}
+#navigation li.menu .submenu a
+{
+	color: black;
+	display: inline;
+	border: none;
+}

@@ -1,0 +1,66 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>Common</title>
+	<link rel="stylesheet" type="text/css" href="style.css" />
+	<script type="text/javascript" src="../../jquery-1.4.4.min.js"></script>
+	<script type="text/javascript" src="jquery.common.js"></script>
+</head>
+<body>
+	<div id="wrapper">
+		<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+		<form id="aform" method="get">
+			<p>Something1: <input id="something1" name="i1" size="40" type="text" /><span class="something1Check"></span></p>
+			<p>Something2: <input class="something2" name="i2" size="40" type="text" /><span class="something2Check"></span></p>
+			<p>Email: <input id="emaila" name="i3" size="40" type="text" /><span class="emailCheck"></span></p>
+			<p><input type="submit" value="Go!!!" /><span class="formCheck"></span></p>
+		</form>
+		<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+		<form id="bform" method="get">
+			<p>Something1: <input id="something1b" name="n1" size="40" type="text" /><span class="something1Check"></span></p>
+			<p>Something2: <input class="something2" name="n2" size="40" type="text" /><span class="something2Check"></span></p>
+			<p>Custom: <input id="customb" name="n3" size="40" type="text" /><span class="custombCheck"></span></p>
+			<p>Number: <input id="number" name="n4" size="40" type="text" /><span class="numberCheck"></span></p>
+			<p><input type="submit" value="Go!!!" /><span class="formCheck"></span></p>
+		</form>
+		<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+	</div>
+	<script type="text/javascript">
+	//<![CDATA[
+		jqCommon.setFormSubmitHandler(function (formObj, result) {
+			if(!result) {
+				if(formObj.attr("id") == "aform")
+					formObj.find(".formCheck").html("a form somthing wrong");
+				else if(formObj.attr("id") == "bform")
+					formObj.find(".formCheck").html("b form somthing wrong");
+			}
+
+			return result;
+		});
+		
+		jqCommon.setPlaceholder("#aform", "#something1", "Type something here...");
+		jqCommon.setPlaceholder("#aform", ".something2", "More...");
+		jqCommon.setPlaceholder("#aform", "#emaila", "Email...");
+		jqCommon.setVerify("#aform", "#something1", "empty", null, function(){$("#aform .something1Check").html("cannot be empty")});
+		jqCommon.setVerify("#aform", "#emaila", "email", function(){$("#aform .emailCheck").html("right email")}, function(){$("#aform .emailCheck").html("wrong email")});
+		
+		jqCommon.setPlaceholder("#bform", "#something1b", "Type something here...");
+		jqCommon.setPlaceholder("#bform", ".something2", "More...");
+		jqCommon.setPlaceholder("#bform", "#number", "Number...");
+		jqCommon.setPlaceholder("#bform", "#customb", "More than 2 charaters...");
+		
+		jqCommon.setVerify("#bform", ".something2", "empty", null, function(){$("#bform .something2Check").html("cannot be empty")});
+		
+		jqCommon.setCustomRegex("#bform", "#number", /^[0-9]+$/);
+		jqCommon.setVerify("#bform", "#number", "custom", null, function(){$("#bform .numberCheck").html("must be number")});
+		jqCommon.cleanVerify("#bform", "#number");
+		
+		jqCommon.setCustomRegex("#bform", "#customb", /^[a-zA-Z0-9]{2,20}$/);
+		jqCommon.setVerify("#bform", "#customb", "custom", null, function(){$("#bform .custombCheck").html("error")});
+		
+		jqCommon.setVerify("#bform", "#number", "number", null, function(){$("#bform .numberCheck").html("must be number")});
+	//]]>
+	</script>
+</body>
+</html>

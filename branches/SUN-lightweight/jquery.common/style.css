@@ -1,0 +1,20 @@
+﻿body {
+	font-size: 16px;
+	margin: 0;
+	padding: 0;
+	font-family: Arial, san-serif;
+}
+
+.center {
+	text-align: center;
+}
+
+input.jqCommHolder {
+	color: #666;
+}
+
+#wrapper {
+	width: 800px;
+	margin-left: auto;
+	margin-right: auto;
+}
