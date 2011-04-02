@@ -1,0 +1,95 @@
+﻿* {
+	margin: 0;
+	padding: 0;
+}
+body {
+	font-size: 16px;
+	width: 1200px;
+	margin-left: auto;
+	margin-right: auto;
+	background: url('body-bkg.png') top left repeat-x;
+}
+
+.hidden
+{
+	display: none;
+}
+.shown
+{
+	display: block;
+}
+
+#jqTabsNav, #jqTabs {
+	margin: 0;
+	padding: 0 40px;
+}
+
+#jqTabsNav {
+	font-family: Verdana,Arial,Sans-Serif;
+	font-size: 24px;
+	height: 60px;
+	line-height: 60px;
+	background: black;
+}
+
+#jqTabsNav a {
+	padding: 0 15px;
+	display: block;
+	float: left;
+	height: 57px;
+	line-height: 60px;
+	text-decoration: none;
+	color: white;
+	border-bottom: 3px solid black;
+}
+#jqTabsNav a.selected {
+	background: white;
+	color: black;
+	border-bottom: 3px solid white;
+}
+#jqTabsNav a:hover {
+	border-bottom: 3px solid red;
+}
+
+#jqMenuNav {
+	list-style-type: none;
+	float: left;
+	padding: 0;
+	margin: 0;
+	display: none;
+}
+#jqMenuNav li {
+	float: left;
+}
+#jqMenuNav li a {
+	float: left;
+}
+
+#jqTabs {
+	font-family: Verdana,Arial,Sans-Serif;
+}
+#jqTabs * {
+	margin: 16px 0;
+}
+#jqTabs  * * {
+	margin: 10px 0;
+}
+#jqTabs  * * * {
+	margin: 0;
+}
+
+#jqTabs .innerTitle {
+	padding-bottom: 3px;
+	border-bottom: black 1px solid;
+	font-weight: bold;
+}
+#jqTabs .innerContent {
+	padding-bottom: 3px;
+}
+#jqTabs p {
+	margin: 6px 0;
+}
+
+.backTop {
+	text-align: right;
+}

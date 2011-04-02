@@ -1,0 +1,194 @@
+﻿<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>Documentation</title>
+	<link rel="stylesheet" type="text/css" href="style.css" />
+	<script type="text/javascript" src="../jquery-1.4.4.min.js"></script>
+	<script type="text/javascript" src="../jquery.tabs/jquery.tabs.js"></script>
+	<script type="text/javascript" src="../jquery.menu/jquery.menu.js"></script>
+	<script type="text/javascript" src="../jquery.folding/jquery.folding.js"></script>
+	<script type="text/javascript">
+	//<![CDATA[
+		jqTabs.setup({
+				navItemSelector : "Nav #jqMenuNav a",
+				animation : true
+			});
+		$(jqTabs.init);
+		
+		jqMenu.setup({
+				menuItemsSelector : "#jqTabsNav",
+				menuButtonSelector : ".subToggle",
+				subMenuSelector : "#jqMenuNav",
+				hoverOpen : true
+			});
+		$(jqMenu.init);
+		
+		jqFolding.setup({
+				listSelector : ".documentContent",
+				triggerSelector : ".innerTitle",
+				containerSelector : ".innerContent"
+			});
+		$(jqFolding.init);
+	//]]>
+	</script>
+</head>
+<body>
+	<a name="Top"></a>
+	<div id="jqTabsNav">
+		<a href="#" class="subToggle">Navigator &gt;</a>
+		<ul id="jqMenuNav">
+			<li><a title="Common" href="#Common">jquery.common</a></li>
+			<li><a title="Folding" href="#Folding">jquery.folding</a></li>
+			<li><a title="Menu" href="#Menu">jquery.menu</a></li>
+			<li><a title="Tabs" href="#Tabs">jquery.tabs</a></li>
+		</ul>
+    </div>
+    <div id="jqTabs">
+		<div id="jqTabsCommon">
+			<a name="Common" title="jquery.common"></a>
+			<h2>jquery.common</h2>
+			<div class="documentContent">
+				<div class="innerTitle">Introduction</div>
+				<div class="innerContent">
+					<p>jquery.common provides some basic and common parts to developers.</p>
+					<p>You can use it to put some placeholding text in input box and to verify user's input before submit the form. it can check if there is nothing in input box or if the text is an email address or number. Also it can check custom input by providing a regular expression.</p>
+					<p>All selector used in functions can be used as jQuery selector. Like this: <code> jqCommon.setPlaceholder("#aform", "#something1", "Type something here...");</code> means jqCommon will put "Type something here..." into <code>$("form#aform input#something1")</code> as a placeholding string.</p>
+					<div class="backTop"><a href="#Top">Back to Top</a></div>
+				</div>
+			</div>
+			<div class="documentContent">
+				<div class="innerTitle">How to Use It</div>
+				<div class="innerContent">
+					<p>You can learn how to use jquery.common by viewing <a href="../jquery.common/demo.html" target="_blank">this demo</a> and reading its source code.</p>
+					<p>You can also keep on reading this documentation. It will give you details of APIs.</p>
+					<div class="backTop"><a href="#Top">Back to Top</a></div>
+				</div>
+			</div>
+			<div class="documentContent">
+				<div class="innerTitle">jqCommon.stopBubble(e)</div>
+				<div class="innerContent">
+					<p>A function will stop the event bubbles up.</p>
+					<p>When you move mouse on an element, there will be an event bubbling up through DOM tree. Sometimes you don't want it to bubble up to another element, you need to use this function to stop it.</p>
+					<p>Use it like this: </p>
+					<p>
+					<code>
+					&lt;div id="uplevelElem"&gt;<br/>
+					&nbsp;&nbsp;&nbsp;&nbsp;&lt;div id="someElem"&gt;<br/>
+					&nbsp;&nbsp;&nbsp;&nbsp;<br/>
+					&nbsp;&nbsp;&nbsp;&nbsp;&lt;/div&gt;<br/>
+					&lt;/div&gt;<br/>
+					&lt;script type="text/javascript"&gt;<br/>
+					var elem = $("#uplevelElem #someElement");<br/>
+					elem.mouseover(function (e) {<br/>
+					&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;someHandlerFunction();<br/>
+					&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;jqCommon.stopBubble(e);<br/>
+					&nbsp;&nbsp;&nbsp;&nbsp;});<br/>
+					&lt;/script&gt;<br/>
+					</code>
+					</p>
+					<p>After calling <code>jqCommon.stopBubble(e)</code>, the event will never go up to <code>&lt;div id="uplevelElem"&gt;&lt;/div&gt;</code>.</p>
+					<div class="backTop"><a href="#Top">Back to Top</a></div>
+				</div>
+			</div>
+			<div class="documentContent">
+				<div class="innerTitle">jqCommon.setPlaceholder(formSelector, inputSelector, text)</div>
+				<div class="innerContent">
+					<p>A function will put some placeholding string into specified input box.</p>
+					<p><code><em>formSelector</em></code> is a selector of the form which contains the input element. You can use <code>null</code>, then jqCommon will find the input in body element.</p>
+					<p><code><em>inputSelector</em></code> is a selector of the input which will have the placeholding string. This is acturally use <code>$("form" + formSelector).find("input" + inputSelector)</code> to find the input element. </p>
+					<p>Use it like this: </p>
+					<p>
+					<code>
+					&lt;form id="aform"&gt;<br/>
+					&nbsp;&nbsp;&nbsp;&nbsp;&lt;input id="something1" type="text" /&gt;<br/>
+					&lt;/form&gt;<br/>
+					&lt;script type="text/javascript"&gt;<br/>
+					jqCommon.setPlaceholder("#aform", "#something1", "Type something here...");<br/>
+					&lt;/script&gt;<br/>
+					</code>
+					</p>
+					<div class="backTop"><a href="#Top">Back to Top</a></div>
+				</div>
+			</div>
+			<div class="documentContent">
+				<div class="innerTitle">jqCommon.setVerify(formSelector, inputSelector, type, okHandler, errHandler)</div>
+				<div class="innerContent">
+					<p>A function will make verification in specified input box when focus is lost and form is submitting.</p>
+					<p><code><em>formSelector</em></code> is a selector of the form which contains the input element.</p>
+					<p><code><em>inputSelector</em></code> is a selector of the input which will be verified.</p>
+					<p><code><em>type</em></code> tells jqCommon how to verify the input. It now supports <code>"empty", "email", "number"</code> and <code>"custom"</code>. <code>"empty"</code> means the input cannot be empty. <code>"email"</code> means the input can only take an email address. <code>"number"</code> means the input can only take number. <code>"custom"</code> means the input will be verified by specified regular expression. You should set the regular expression by calling <code>jqCommon.setCustomRegex(formSelector, inputSelector, regex)</code>.</p>
+					<p><code><em>okHandler</em></code> is a function to be called if verification is passed. It can be <code>null</code>.</p>
+					<p><code><em>errHandler</em></code> is a function to be called if verification is NOT passed. It can be <code>null</code>.</p>
+					<p>Use it like this: </p>
+					<p>
+					<code>
+					&lt;form id="aform"&gt;<br/>
+					&nbsp;&nbsp;&nbsp;&nbsp;&lt;input id="emptyInput" type="text" /&gt;<br/>
+					&nbsp;&nbsp;&nbsp;&nbsp;&lt;input id="emailInput" type="text" /&gt;<br/>
+					&nbsp;&nbsp;&nbsp;&nbsp;&lt;input id="numberInput" type="text" /&gt;<br/>
+					&nbsp;&nbsp;&nbsp;&nbsp;&lt;input id="customInput" type="text" /&gt;<br/>
+					&lt;/form&gt;<br/>
+					&lt;script type="text/javascript"&gt;<br/>
+					jqCommon.setVerify("#aform", "#emptyInput", "empty", function(){alert("right!")}, function(){alert("wrong!")});<br/>
+					jqCommon.setVerify("#aform", "#emailInput", "email", null, function(){alert("wrong!")});<br/>
+					jqCommon.setVerify("#aform", "#numberInput", "number", function(){alert("right!")}, null);<br/>
+					jqCommon.setCustomRegex("#aform", "#customInput", /^[a-zA-Z0-9]{2,20}$/);<br/>
+					jqCommon.setVerify("#aform", "#customInput", "custom", function(){alert("right!")}, null);<br/>
+					&lt;/script&gt;<br/>
+					</code>
+					</p>
+					<div class="backTop"><a href="#Top">Back to Top</a></div>
+				</div>
+			</div>
+		</div>
+		<div id="jqTabsFolding">
+			<a name="Folding" title="jquery.folding"></a>
+			<h2>jquery.folding</h2>
+			<div>
+				<div class="innerTitle">Inner Title</div>
+				<div class="innerContent">
+					<p>Proin nonummy, lacus eget pulvinar lacinia, pede felis dignissim leo, vitae tristique magna lacus sit amet eros. Nullam ornare. Praesent odio ligula, dapibus sed, tincidunt eget, dictum ac, nibh. Nam quis lacus. Nunc eleifend molestie velit. Morbi lobortis quam eu velit. Donec euismod vestibulum massa. Donec non lectus. Aliquam commodo lacus sit amet nulla. Cras dignissim elit et augue. Nullam non diam. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. In hac habitasse platea dictumst. Aenean vestibulum. Sed lobortis elit quis lectus. Nunc sed lacus at augue bibendum dapibus.</p>
+					<p>Aliquam vehicula sem ut pede. Cras purus lectus, egestas eu, vehicula at, imperdiet sed, nibh. Morbi consectetuer luctus felis. Donec vitae nisi. Aliquam tincidunt feugiat elit. Duis sed elit ut turpis ullamcorper feugiat. Praesent pretium, mauris sed fermentum hendrerit, nulla lorem iaculis magna, pulvinar scelerisque urna tellus a justo. Suspendisse pulvinar massa in metus. Duis quis quam. Proin justo. Curabitur ac sapien. Nam erat. Praesent ut quam.</p>
+					<p>Vivamus commodo, augue et laoreet euismod, sem sapien tempor dolor, ac egestas sem ligula quis lacus. Donec vestibulum tortor ac lacus. Sed posuere vestibulum nisl. Curabitur eleifend fermentum justo. Nullam imperdiet. Integer sit amet mauris imperdiet risus sollicitudin rutrum. Ut vitae turpis. Nulla facilisi. Quisque tortor velit, scelerisque et, facilisis vel, tempor sed, urna. Vivamus nulla elit, vestibulum eget, semper et, scelerisque eget, lacus. Pellentesque viverra purus. Quisque elit. Donec ut dolor.</p>
+					<p>Duis volutpat elit et erat. In at nulla at nisl condimentum aliquet. Quisque elementum pharetra lacus. Nunc gravida arcu eget nunc. Nulla iaculis egestas magna. Aliquam erat volutpat. Sed pellentesque orci. Etiam lacus lorem, iaculis sit amet, pharetra quis, imperdiet sit amet, lectus. Integer quis elit ac mi aliquam pretium. Nullam mauris orci, porttitor eget, sollicitudin non, vulputate id, risus. Donec varius enim nec sem. Nam aliquam lacinia enim. Quisque eget lorem eu purus dignissim ultricies. Fusce porttitor hendrerit ante. Mauris urna diam, cursus id, mattis eget, tempus sit amet, risus. Curabitur eu felis. Sed eu mi. Nullam lectus mauris, luctus a, mattis ac, tempus non, leo. Cras mi nulla, rhoncus id, laoreet ut, ultricies id, odio.</p>
+					<div class="backTop"><a href="#Top">Back to Top</a></div>
+				</div>
+			</div>
+		</div>
+		<div id="jqTabsMenu">
+			<a name="Menu" title="jquery.menu"></a>
+			<h2>jquery.menu</h2>
+			<div>
+				<div class="innerTitle">Inner Title</div>
+				<div class="innerContent">
+					<p>Donec imperdiet. Vestibulum auctor tortor at orci. Integer semper, nisi eget suscipit eleifend, erat nisl hendrerit justo, eget vestibulum lorem justo ac leo. Integer sem velit, pharetra in, fringilla eu, fermentum id, felis. Vestibulum sed felis. In elit. Praesent et pede vel ante dapibus condimentum. Donec magna. Quisque id risus. Mauris vulputate pellentesque leo. Duis vulputate, ligula at venenatis tincidunt, orci nunc interdum leo, ac egestas elit sem ut lacus. Etiam non diam quis arcu egestas commodo. Curabitur nec massa ac massa gravida condimentum. Aenean id libero. Pellentesque vitae tellus. Fusce lectus est, accumsan ac, bibendum sed, porta eget, augue. Etiam faucibus. Quisque tempus purus eu ante.</p>
+					<p>Vestibulum sapien nisl, ornare auctor, consectetuer quis, posuere tristique, odio. Fusce ultrices ullamcorper odio. Ut augue nulla, interdum at, adipiscing non, tristique eget, neque. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Ut pede est, condimentum id, scelerisque ac, malesuada non, quam. Proin eu ligula ac sapien suscipit blandit. Suspendisse euismod. Ut accumsan, neque id gravida luctus, arcu pede sodales felis, vel blandit massa arcu eget ligula. Aenean sed turpis. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Donec sem eros, ornare ut, commodo eu, tempor nec, risus. Donec laoreet dapibus ligula. Praesent orci leo, bibendum nec, ornare et, nonummy in, elit. Donec interdum feugiat leo. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Pellentesque feugiat ullamcorper ipsum. Donec convallis tincidunt urna.</p>
+					<p>Suspendisse et orci et arcu porttitor pellentesque. Sed lacus nunc, fermentum vel, vehicula in, imperdiet eget, urna. Nam consectetuer euismod nunc. Nulla dignissim posuere nulla. Integer iaculis lacinia massa. Nullam sapien augue, condimentum vel, venenatis id, rhoncus pellentesque, sapien. Donec sed ipsum ultrices turpis consectetuer imperdiet. Duis et ipsum ac nisl laoreet commodo. Mauris eu est. Suspendisse id turpis quis orci euismod consequat. Donec tellus mi, luctus sit amet, ultrices a, convallis eu, lorem. Proin faucibus convallis elit. Maecenas rhoncus arcu at arcu. Proin libero. Proin adipiscing. In quis lorem vitae elit consectetuer pretium. Nullam ligula urna, adipiscing nec, iaculis ut, elementum non, turpis. Fusce pulvinar.</p>
+					<div class="backTop"><a href="#Top">Back to Top</a></div>
+				</div>
+				<div class="innerTitle">Inner Title</div>
+				<div class="innerContent">
+					<p>Donec imperdiet. Vestibulum auctor tortor at orci. Integer semper, nisi eget suscipit eleifend, erat nisl hendrerit justo, eget vestibulum lorem justo ac leo. Integer sem velit, pharetra in, fringilla eu, fermentum id, felis. Vestibulum sed felis. In elit. Praesent et pede vel ante dapibus condimentum. Donec magna. Quisque id risus. Mauris vulputate pellentesque leo. Duis vulputate, ligula at venenatis tincidunt, orci nunc interdum leo, ac egestas elit sem ut lacus. Etiam non diam quis arcu egestas commodo. Curabitur nec massa ac massa gravida condimentum. Aenean id libero. Pellentesque vitae tellus. Fusce lectus est, accumsan ac, bibendum sed, porta eget, augue. Etiam faucibus. Quisque tempus purus eu ante.</p>
+					<p>Vestibulum sapien nisl, ornare auctor, consectetuer quis, posuere tristique, odio. Fusce ultrices ullamcorper odio. Ut augue nulla, interdum at, adipiscing non, tristique eget, neque. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Ut pede est, condimentum id, scelerisque ac, malesuada non, quam. Proin eu ligula ac sapien suscipit blandit. Suspendisse euismod. Ut accumsan, neque id gravida luctus, arcu pede sodales felis, vel blandit massa arcu eget ligula. Aenean sed turpis. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Donec sem eros, ornare ut, commodo eu, tempor nec, risus. Donec laoreet dapibus ligula. Praesent orci leo, bibendum nec, ornare et, nonummy in, elit. Donec interdum feugiat leo. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Pellentesque feugiat ullamcorper ipsum. Donec convallis tincidunt urna.</p>
+					<p>Suspendisse et orci et arcu porttitor pellentesque. Sed lacus nunc, fermentum vel, vehicula in, imperdiet eget, urna. Nam consectetuer euismod nunc. Nulla dignissim posuere nulla. Integer iaculis lacinia massa. Nullam sapien augue, condimentum vel, venenatis id, rhoncus pellentesque, sapien. Donec sed ipsum ultrices turpis consectetuer imperdiet. Duis et ipsum ac nisl laoreet commodo. Mauris eu est. Suspendisse id turpis quis orci euismod consequat. Donec tellus mi, luctus sit amet, ultrices a, convallis eu, lorem. Proin faucibus convallis elit. Maecenas rhoncus arcu at arcu. Proin libero. Proin adipiscing. In quis lorem vitae elit consectetuer pretium. Nullam ligula urna, adipiscing nec, iaculis ut, elementum non, turpis. Fusce pulvinar.</p>
+					<div class="backTop"><a href="#Top">Back to Top</a></div>
+				</div>
+			</div>
+		</div>
+		<div id="jqTabsTabs">
+			<a name="Tabs" title="jquery.tabs"></a>
+			<h2>jquery.tabs</h2>
+			<div>
+				<div class="innerTitle">Inner Title</div>
+				<div class="innerContent">
+					<p>Donec imperdiet. Vestibulum auctor tortor at orci. Integer semper, nisi eget suscipit eleifend, erat nisl hendrerit justo, eget vestibulum lorem justo ac leo. Integer sem velit, pharetra in, fringilla eu, fermentum id, felis. Vestibulum sed felis. In elit. Praesent et pede vel ante dapibus condimentum. Donec magna. Quisque id risus. Mauris vulputate pellentesque leo. Duis vulputate, ligula at venenatis tincidunt, orci nunc interdum leo, ac egestas elit sem ut lacus. Etiam non diam quis arcu egestas commodo. Curabitur nec massa ac massa gravida condimentum. Aenean id libero. Pellentesque vitae tellus. Fusce lectus est, accumsan ac, bibendum sed, porta eget, augue. Etiam faucibus. Quisque tempus purus eu ante.</p>
+					<p>Vestibulum sapien nisl, ornare auctor, consectetuer quis, posuere tristique, odio. Fusce ultrices ullamcorper odio. Ut augue nulla, interdum at, adipiscing non, tristique eget, neque. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Ut pede est, condimentum id, scelerisque ac, malesuada non, quam. Proin eu ligula ac sapien suscipit blandit. Suspendisse euismod. Ut accumsan, neque id gravida luctus, arcu pede sodales felis, vel blandit massa arcu eget ligula. Aenean sed turpis. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Donec sem eros, ornare ut, commodo eu, tempor nec, risus. Donec laoreet dapibus ligula. Praesent orci leo, bibendum nec, ornare et, nonummy in, elit. Donec interdum feugiat leo. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Pellentesque feugiat ullamcorper ipsum. Donec convallis tincidunt urna.</p>
+					<p>Suspendisse et orci et arcu porttitor pellentesque. Sed lacus nunc, fermentum vel, vehicula in, imperdiet eget, urna. Nam consectetuer euismod nunc. Nulla dignissim posuere nulla. Integer iaculis lacinia massa. Nullam sapien augue, condimentum vel, venenatis id, rhoncus pellentesque, sapien. Donec sed ipsum ultrices turpis consectetuer imperdiet. Duis et ipsum ac nisl laoreet commodo. Mauris eu est. Suspendisse id turpis quis orci euismod consequat. Donec tellus mi, luctus sit amet, ultrices a, convallis eu, lorem. Proin faucibus convallis elit. Maecenas rhoncus arcu at arcu. Proin libero. Proin adipiscing. In quis lorem vitae elit consectetuer pretium. Nullam ligula urna, adipiscing nec, iaculis ut, elementum non, turpis. Fusce pulvinar.</p>
+					<div class="backTop"><a href="#Top">Back to Top</a></div>
+				</div>
+			</div>
+		</div>
+	</div>
+</body>
+</html>

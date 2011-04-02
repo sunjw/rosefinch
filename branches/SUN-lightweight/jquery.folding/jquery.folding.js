@@ -2,7 +2,7 @@
  * jQuery Folding
  * License: GPL 2.0
  * Author: Sun Junwen
- * Version: 1.3.1
+ * Version: 1.3.2
  */
 var jqFolding = {
 	listSelector : ".foldingList", // 包含 trigger 和 container 块的选择器
@@ -78,7 +78,9 @@ var jqFolding = {
 		//alert(len);
 		for (var i = 0; i < len; i++) {
 			var divListwHeader = $(divListwHeaders[i]);
-			divListwHeader.find(jqFolding.triggerSelector).click(jqFolding.toggle);
+			var trigger = divListwHeader.find(jqFolding.triggerSelector);
+			trigger.click(jqFolding.toggle);
+			trigger.css("cursor", "pointer");
 			// 阻止事件浮升
 			var hrefs = divListwHeader.find(jqFolding.triggerSelector).find("a");
 			var count = hrefs.length;

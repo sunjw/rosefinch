@@ -2,7 +2,7 @@
  * jQuery Tabs
  * License: GPL 2.0
  * Author: Sun Junwen
- * Version: 1.5.1
+ * Version: 1.5.2
  */
 var jqTabs = {
 	prefix : "#jqTabs", // jqTab class 名称的前缀
@@ -13,6 +13,7 @@ var jqTabs = {
 	linkAttr : "href", // 链接属性
 	nameAttr : "name", // 名称属性
 	titleAttr : "title", // 标题属性
+	animation : false,
 	generateNav : false, // 是否自动生成导航栏
 	
 	navs : null,
@@ -32,6 +33,7 @@ var jqTabs = {
 		jqTabs.nameAttr = values.nameAttr || jqTabs.nameAttr;
 		jqTabs.titleAttr = values.titleAttr || jqTabs.titleAttr;
 		jqTabs.generateNav = values.generateNav || jqTabs.generateNav;
+		jqTabs.animation = values.animation || jqTabs.animation;
 	},
 	
 	/**
@@ -40,19 +42,32 @@ var jqTabs = {
 	display : function (name, isAni) {
 		var length = jqTabs.contents.length;
 		var displayed = false;
+		var toDisplay = null;
+		var toDisplayName = "";
+		var matched = false;
 		for (var i = 0; i < length; i++) {
 			var id = jqTabs.prefix + jqTabs.contents[i];
 			var jqObj = $(id);
 			if (name != jqTabs.contents[i]) {
-				jqObj.css("display", "none");
+				if (jqObj.is(":visible") && !matched) {
+					toDisplay = jqObj; // 还没有找到匹配前，就是原来那个
+					toDisplayName = jqTabs.contents[i];
+				}
+				jqObj.hide();
 			} else {
-				if (isAni)
-					jqObj.fadeIn();
-				else
-					jqObj.css("display", "block");
-				
-				displayed = true;
+				matched = true;
+				toDisplay = jqObj;
+				toDisplayName = name;
 			}
+		}
+		
+		if (toDisplay != null) {
+			if (isAni && matched)
+				toDisplay.fadeIn();
+			else
+				toDisplay.show();
+			
+			displayed = true;
 		}
 		
 		if (displayed) {
@@ -60,7 +75,7 @@ var jqTabs = {
 				jqTabs.navs[navName].removeClass("selected");
 			}
 			
-			jqTabs.navs[name].addClass("selected");
+			jqTabs.navs[toDisplayName].addClass("selected");
 		} else {
 			jqTabs.display(jqTabs.contents[0], isAni);
 		}
@@ -111,7 +126,7 @@ var jqTabs = {
 		for (var i = 0; i < length; i++) {
 			var nav = $(navs[i]);
 			nav.click(function () {
-					jqTabs.display($(this).attr(jqTabs.titleAttr), true);
+					jqTabs.display($(this).attr(jqTabs.titleAttr), jqTabs.animation);
 				});
 			jqTabs.navs[nav.attr(jqTabs.titleAttr)] = nav;
 		}
@@ -131,7 +146,7 @@ var jqTabs = {
 		var url = window.location.href;
 		var curTitle = url.split(jqTabs.linkPrefix)[1];
 		
-		jqTabs.display(curTitle, true);
+		jqTabs.display(curTitle, jqTabs.animation);
 	}
 }
  

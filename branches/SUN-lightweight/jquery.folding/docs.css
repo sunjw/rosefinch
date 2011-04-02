@@ -74,8 +74,6 @@ body {
 	padding: 5px 0 6px 1em;
 }
 #divWrapper div.divListwHeader h5:hover {
-	cursor: pointer;
-	/*background-color: #111111;*/
 }
 #divWrapper div.divListwHeader .container {
 	margin: 10px 15px;

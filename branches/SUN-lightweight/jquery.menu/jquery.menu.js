@@ -2,7 +2,7 @@
  * jQuery Menu
  * License: GPL 2.0
  * Author: Sun Junwen
- * Version: 1.7.3
+ * Version: 1.7.4
  */
 var jqMenu = {
 	menuItemsSelector : ".menu",
@@ -70,7 +70,7 @@ var jqMenu = {
 		// $(this).css("background-image",
 		// "url('images/path-arrow-down.gif')");
 		var thisButton = jqMenu.activeButton;
-		if(!jqMenu.hoverOpen)
+		if (!jqMenu.hoverOpen)
 			thisButton = this;
 		if (!thisButton)
 			return ;
@@ -142,9 +142,9 @@ var jqMenu = {
 			// 点击开关
 			for (var i = 0; i < count; i++) {
 				var menuItem = $(menuItems.get(i));
-				menuItem.get(0).onclick = function (e) {
-					jqMenu.stopBubble(e); // 取消事件浮升
-				}
+				menuItem.click(function (e) {
+						jqMenu.stopBubble(e); // 取消事件浮升
+					});
 				var button = menuItem.find(jqMenu.menuButtonSelector);
 				button.get(0).onclick = jqMenu.showSubMenu;
 			}
@@ -154,10 +154,10 @@ var jqMenu = {
 			// hover 开关
 			for (var i = 0; i < count; i++) {
 				var menuItem = $(menuItems.get(i));
-				menuItem.get(0).onmouseover = function (e) {
-					jqMenu.stopBubble(e); // 取消事件浮升
-					clearTimeout(jqMenu.hideTimer);
-				}
+				menuItem.mouseover(function (e) {
+						jqMenu.stopBubble(e); // 取消事件浮升
+						clearTimeout(jqMenu.hideTimer);
+					});
 				var button = menuItem.find(jqMenu.menuButtonSelector);
 				button.get(0).onmouseover = jqMenu.delayShowSubMenu;
 			}
