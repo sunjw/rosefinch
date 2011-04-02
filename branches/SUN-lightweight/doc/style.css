@@ -18,6 +18,9 @@ body {
 {
 	display: block;
 }
+.backTop {
+	text-align: right;
+}
 
 #jqTabsNav, #jqTabs {
 	margin: 0;
@@ -90,6 +93,3 @@ body {
 	margin: 6px 0;
 }
 
-.backTop {
-	text-align: right;
-}

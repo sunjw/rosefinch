@@ -141,11 +141,45 @@
 					<div class="backTop"><a href="#Top">Back to Top</a></div>
 				</div>
 			</div>
+			<div class="documentContent">
+				<div class="innerTitle">jqCommon.setFormSubmitHandler(handler)</div>
+				<div class="innerContent">
+					<p>Give a handler function to jqCommon. After form verification, the function will be called to handle result and form submitting.</p>
+					<p><code><em>handler</em></code> is a function. It should be defined as <code>function (formObj, result) {...}</code>. When this function is called, it will receive to parameters: <code><em>formObj</em></code> and <code><em>result</em></code>. <code><em>formObj</em></code> is a jquery object contains the form which just be verified. <code><em>result</em></code> is result of verification.  It will be <code>true</code> or <code>false</code>, which means the form is passed verification or not.</p>
+					<p>Use it like this: </p>
+					<p>
+					<code>
+					&lt;form id="aform"&gt;<br/>
+					&nbsp;&nbsp;&nbsp;&nbsp;&lt;input type="text" name="something" /&gt;<br/>
+					&nbsp;&nbsp;&nbsp;&nbsp;&lt;div class="formCheck"&gt;&lt;/div&gt;<br/>
+					&lt;/form&gt;<br/>
+					&lt;form id="bform"&gt;<br/>
+					&nbsp;&nbsp;&nbsp;&nbsp;&lt;input type="text" name="something" /&gt;<br/>
+					&nbsp;&nbsp;&nbsp;&nbsp;&lt;div class="formCheck"&gt;&lt;/div&gt;<br/>
+					&lt;/form&gt;<br/>
+					&lt;script type="text/javascript"&gt;<br/>
+					jqCommon.setFormSubmitHandler(function (formObj, result) {<br/>
+					&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;if(!result) {<br/>
+					&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;// Not passed<br/>
+					&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;if(formObj.attr("id") == "aform")<br/>
+					&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;formObj.find(".formCheck").html("a form somthing wrong");<br/>
+					&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;else if(formObj.attr("id") == "bform")<br/>
+					&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;formObj.find(".formCheck").html("b form somthing wrong");<br/>
+					&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}<br/>
+					<br/>
+					&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;return result;<br/>
+					&nbsp;&nbsp;&nbsp;&nbsp;});<br/>
+					&lt;/script&gt;<br/>
+					</code>
+					</p>
+					<div class="backTop"><a href="#Top">Back to Top</a></div>
+				</div>
+			</div>
 		</div>
 		<div id="jqTabsFolding">
 			<a name="Folding" title="jquery.folding"></a>
 			<h2>jquery.folding</h2>
-			<div>
+			<div class="documentContent">
 				<div class="innerTitle">Inner Title</div>
 				<div class="innerContent">
 					<p>Proin nonummy, lacus eget pulvinar lacinia, pede felis dignissim leo, vitae tristique magna lacus sit amet eros. Nullam ornare. Praesent odio ligula, dapibus sed, tincidunt eget, dictum ac, nibh. Nam quis lacus. Nunc eleifend molestie velit. Morbi lobortis quam eu velit. Donec euismod vestibulum massa. Donec non lectus. Aliquam commodo lacus sit amet nulla. Cras dignissim elit et augue. Nullam non diam. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. In hac habitasse platea dictumst. Aenean vestibulum. Sed lobortis elit quis lectus. Nunc sed lacus at augue bibendum dapibus.</p>
@@ -159,7 +193,7 @@
 		<div id="jqTabsMenu">
 			<a name="Menu" title="jquery.menu"></a>
 			<h2>jquery.menu</h2>
-			<div>
+			<div class="documentContent">
 				<div class="innerTitle">Inner Title</div>
 				<div class="innerContent">
 					<p>Donec imperdiet. Vestibulum auctor tortor at orci. Integer semper, nisi eget suscipit eleifend, erat nisl hendrerit justo, eget vestibulum lorem justo ac leo. Integer sem velit, pharetra in, fringilla eu, fermentum id, felis. Vestibulum sed felis. In elit. Praesent et pede vel ante dapibus condimentum. Donec magna. Quisque id risus. Mauris vulputate pellentesque leo. Duis vulputate, ligula at venenatis tincidunt, orci nunc interdum leo, ac egestas elit sem ut lacus. Etiam non diam quis arcu egestas commodo. Curabitur nec massa ac massa gravida condimentum. Aenean id libero. Pellentesque vitae tellus. Fusce lectus est, accumsan ac, bibendum sed, porta eget, augue. Etiam faucibus. Quisque tempus purus eu ante.</p>
@@ -167,6 +201,8 @@
 					<p>Suspendisse et orci et arcu porttitor pellentesque. Sed lacus nunc, fermentum vel, vehicula in, imperdiet eget, urna. Nam consectetuer euismod nunc. Nulla dignissim posuere nulla. Integer iaculis lacinia massa. Nullam sapien augue, condimentum vel, venenatis id, rhoncus pellentesque, sapien. Donec sed ipsum ultrices turpis consectetuer imperdiet. Duis et ipsum ac nisl laoreet commodo. Mauris eu est. Suspendisse id turpis quis orci euismod consequat. Donec tellus mi, luctus sit amet, ultrices a, convallis eu, lorem. Proin faucibus convallis elit. Maecenas rhoncus arcu at arcu. Proin libero. Proin adipiscing. In quis lorem vitae elit consectetuer pretium. Nullam ligula urna, adipiscing nec, iaculis ut, elementum non, turpis. Fusce pulvinar.</p>
 					<div class="backTop"><a href="#Top">Back to Top</a></div>
 				</div>
+			</div>
+			<div class="documentContent">
 				<div class="innerTitle">Inner Title</div>
 				<div class="innerContent">
 					<p>Donec imperdiet. Vestibulum auctor tortor at orci. Integer semper, nisi eget suscipit eleifend, erat nisl hendrerit justo, eget vestibulum lorem justo ac leo. Integer sem velit, pharetra in, fringilla eu, fermentum id, felis. Vestibulum sed felis. In elit. Praesent et pede vel ante dapibus condimentum. Donec magna. Quisque id risus. Mauris vulputate pellentesque leo. Duis vulputate, ligula at venenatis tincidunt, orci nunc interdum leo, ac egestas elit sem ut lacus. Etiam non diam quis arcu egestas commodo. Curabitur nec massa ac massa gravida condimentum. Aenean id libero. Pellentesque vitae tellus. Fusce lectus est, accumsan ac, bibendum sed, porta eget, augue. Etiam faucibus. Quisque tempus purus eu ante.</p>
@@ -179,7 +215,7 @@
 		<div id="jqTabsTabs">
 			<a name="Tabs" title="jquery.tabs"></a>
 			<h2>jquery.tabs</h2>
-			<div>
+			<div class="documentContent">
 				<div class="innerTitle">Inner Title</div>
 				<div class="innerContent">
 					<p>Donec imperdiet. Vestibulum auctor tortor at orci. Integer semper, nisi eget suscipit eleifend, erat nisl hendrerit justo, eget vestibulum lorem justo ac leo. Integer sem velit, pharetra in, fringilla eu, fermentum id, felis. Vestibulum sed felis. In elit. Praesent et pede vel ante dapibus condimentum. Donec magna. Quisque id risus. Mauris vulputate pellentesque leo. Duis vulputate, ligula at venenatis tincidunt, orci nunc interdum leo, ac egestas elit sem ut lacus. Etiam non diam quis arcu egestas commodo. Curabitur nec massa ac massa gravida condimentum. Aenean id libero. Pellentesque vitae tellus. Fusce lectus est, accumsan ac, bibendum sed, porta eget, augue. Etiam faucibus. Quisque tempus purus eu ante.</p>
