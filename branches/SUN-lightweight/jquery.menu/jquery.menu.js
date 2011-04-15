@@ -2,7 +2,7 @@
  * jQuery Menu
  * License: GPL 2.0
  * Author: Sun Junwen
- * Version: 1.7.4
+ * Version: 1.7.5
  */
 var jqMenu = {
 	menuItemsSelector : ".menu",
@@ -110,13 +110,14 @@ var jqMenu = {
 	
 	delayShowSubMenu : function () {
 		jqMenu.activeButton = this;
+		//jqMenu.showSubMenu();
 		if (jqMenu.opened) {
 			// 有菜单打开时，不要 delay，直接打开新菜单
 			jqMenu.showSubMenu();
 		} else {
 			// 没有菜单打开，第一个要 delay
 			clearTimeout(jqMenu.showTimer);
-			jqMenu.showTimer = setTimeout("jqMenu.showSubMenu()", jqMenu.delay * 0.75);
+			jqMenu.showTimer = setTimeout("jqMenu.showSubMenu()", jqMenu.delay);
 		}
 	},
 	
@@ -158,11 +159,15 @@ var jqMenu = {
 						jqMenu.stopBubble(e); // 取消事件浮升
 						clearTimeout(jqMenu.hideTimer);
 					});
+				menuItem.mouseout(function (e) {
+						jqMenu.stopBubble(e); // 取消事件浮升
+						jqMenu.delayHideMenu();
+					});
 				var button = menuItem.find(jqMenu.menuButtonSelector);
 				button.get(0).onmouseover = jqMenu.delayShowSubMenu;
 			}
 			
-			body.onmouseover = jqMenu.delayHideMenu;
+			//body.onmouseover = jqMenu.delayHideMenu;
 		}
 	}
 }
