@@ -117,7 +117,7 @@ var jqMenu = {
 		} else {
 			// 没有菜单打开，第一个要 delay
 			clearTimeout(jqMenu.showTimer);
-			jqMenu.showTimer = setTimeout("jqMenu.showSubMenu()", jqMenu.delay);
+			jqMenu.showTimer = setTimeout("jqMenu.showSubMenu()", jqMenu.delay * 0.75);
 		}
 	},
 	
