@@ -2,7 +2,7 @@
  * jQuery Menu
  * License: GPL 2.0
  * Author: Sun Junwen
- * Version: 1.7.5
+ * Version: 1.7.3
  */
 var jqMenu = {
 	menuItemsSelector : ".menu",
@@ -73,7 +73,7 @@ var jqMenu = {
 		if (!jqMenu.hoverOpen)
 			thisButton = this;
 		if (!thisButton)
-			return ;
+			return;
 		var thisSub = $(thisButton.parentNode).children(jqMenu.subMenuSelector);
 		var subMenus = $(jqMenu.subMenuSelector);
 		for (var i = 0; i < subMenus.length; i++) {
@@ -110,7 +110,6 @@ var jqMenu = {
 	
 	delayShowSubMenu : function () {
 		jqMenu.activeButton = this;
-		//jqMenu.showSubMenu();
 		if (jqMenu.opened) {
 			// 有菜单打开时，不要 delay，直接打开新菜单
 			jqMenu.showSubMenu();
@@ -143,9 +142,9 @@ var jqMenu = {
 			// 点击开关
 			for (var i = 0; i < count; i++) {
 				var menuItem = $(menuItems.get(i));
-				menuItem.click(function (e) {
-						jqMenu.stopBubble(e); // 取消事件浮升
-					});
+				menuItem.get(0).onclick = function (e) {
+					jqMenu.stopBubble(e); // 取消事件浮升
+				}
 				var button = menuItem.find(jqMenu.menuButtonSelector);
 				button.get(0).onclick = jqMenu.showSubMenu;
 			}
@@ -155,19 +154,15 @@ var jqMenu = {
 			// hover 开关
 			for (var i = 0; i < count; i++) {
 				var menuItem = $(menuItems.get(i));
-				menuItem.mouseover(function (e) {
-						jqMenu.stopBubble(e); // 取消事件浮升
-						clearTimeout(jqMenu.hideTimer);
-					});
-				menuItem.mouseout(function (e) {
-						jqMenu.stopBubble(e); // 取消事件浮升
-						jqMenu.delayHideMenu();
-					});
+				menuItem.get(0).onmouseover = function (e) {
+					jqMenu.stopBubble(e); // 取消事件浮升
+					clearTimeout(jqMenu.hideTimer);
+				}
 				var button = menuItem.find(jqMenu.menuButtonSelector);
 				button.get(0).onmouseover = jqMenu.delayShowSubMenu;
 			}
 			
-			//body.onmouseover = jqMenu.delayHideMenu;
+			body.onmouseover = jqMenu.delayHideMenu;
 		}
 	}
 }
