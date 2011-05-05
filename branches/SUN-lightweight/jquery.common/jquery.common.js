@@ -26,7 +26,7 @@ var jqCommon = {
 	},
 	
 	dummy : function () {
-		return ;
+		return;
 	},
 	
 	/**
