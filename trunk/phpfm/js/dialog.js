@@ -6,7 +6,7 @@ var Dialog = {
 	 * 无功能函数
 	 */
 	dummy : function () {
-		return ;
+		return;
 	},
 	
 	/**
@@ -90,7 +90,7 @@ var Dialog = {
 	 */
 	displaySubmit : function () {
 		if (Dialog.funcDialog == null)
-			return ;
+			return;
 		var div = $("<div/>").addClass("rightAlign");
 		div.append($("<input/>").attr("type", "submit").val(Strings['OK']));
 		if (Dialog.funcDialog.hasClass("closable")) {
@@ -106,7 +106,7 @@ var Dialog = {
 	 */
 	displayFuncDialog : function () {
 		if (Dialog.funcBg == null || Dialog.funcDialog == null)
-			return ;
+			return;
 		
 		Dialog.funcBg.css("height", document.documentElement.scrollHeight + "px");
 		Dialog.funcBg.css("display", "block");
@@ -131,5 +131,3 @@ var Dialog = {
 	}
 	
 };
-
- 

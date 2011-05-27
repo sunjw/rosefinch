@@ -99,5 +99,3 @@ var jqFolding = {
 		}
 	}
 };
-
- 

@@ -149,4 +149,3 @@ var jqTabs = {
 		jqTabs.display(curTitle, jqTabs.animation);
 	}
 }
- 

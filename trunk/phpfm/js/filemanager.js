@@ -37,7 +37,7 @@ var FileManager = {
 	 * 什么也不做
 	 */
 	doNothing : function () {
-		return ;
+		return;
 	},
 	
 	getItemCheckbox : function (item) {
@@ -604,7 +604,7 @@ var FileManager = {
 		var mainViewListHeight;
 		
 		if (FileManager.isIE && $.browser.version < 8) {
-			return ;
+			return;
 		} else {
 			mainViewListHeight = windowHeight - mainViewListOffset.top
 				 - footerHeight - 30;
@@ -674,7 +674,6 @@ var FileManager = {
 				if (this.checked)
 					FileManager.selectAll();
 				else
-					
 					FileManager.deselect();
 			});
 		
@@ -863,4 +862,3 @@ FileManager.init = function () {
 
 // $(window).load(init); // 运行准备函数
 $(FileManager.init);
- 

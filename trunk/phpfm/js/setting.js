@@ -106,7 +106,7 @@ var Setting = {
 	 */
 	displayLogout : function () {
 		if (Setting.working)
-			return ;
+			return;
 		
 		var form = Dialog.initFuncDialog(Strings['User'], "logout", true, true, true);
 		form.find("input#return").val("../");
@@ -155,7 +155,7 @@ var Setting = {
 	addUser : function () {
 		//alert("add");
 		if (Setting.working)
-			return ;
+			return;
 		
 		var form = Dialog.initFuncDialog(Strings['Add'], "adduser", true, true, true);
 		var divAddUser = $("<div/>");
@@ -219,7 +219,7 @@ var Setting = {
 	
 	modifyUser : function (id) {
 		if (Setting.working)
-			return ;
+			return;
 		
 		var user = Setting.users[id];
 		var form = Dialog.initFuncDialog(Strings['Modify'], "modiuser", true, true, true);
@@ -286,7 +286,7 @@ var Setting = {
 	
 	deleteUser : function (id) {
 		if (Setting.working)
-			return ;
+			return;
 		
 		var form = Dialog.initFuncDialog(Strings['Delete'], "deluser", true, true, true);
 		var divDelUser = $("<div/>");
@@ -366,7 +366,7 @@ var Setting = {
 		var tableUserMng = $("#tableUserMng");
 		//alert(divUserMng.length);
 		if (tableUserMng.length == 0)
-			return ;
+			return;
 		
 		Setting.oldTable = tableUserMng.html();
 		
@@ -394,4 +394,3 @@ var Setting = {
 };
 
 $(Setting.init);
- 
