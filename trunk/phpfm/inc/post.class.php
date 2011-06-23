@@ -10,7 +10,7 @@ require_once "usermng.class.php";
 require_once "../log/log.func.php";
 
 /**
- * Search Class
+ * Post Class
  * 2009-10-7
  * @author Sun Junwen
  *
