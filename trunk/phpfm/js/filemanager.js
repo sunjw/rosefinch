@@ -254,7 +254,6 @@ var FileManager = {
 		funcDelete.css("display", "none");
 		
 		FileManager.funcBg.get(0).onclick = FileManager.doNothing;
-		
 		FileManager.displayFuncDialog("", "waiting",
 			"waiting", null);
 		
@@ -278,6 +277,16 @@ var FileManager = {
 	clickUpload : function () {
 		FileManager.displayFuncDialog("func/post.func.php", "upload", "upload",
 			null);
+	},
+	
+	funcSubmit : function () {
+		// 准备界面
+		var funcInput = $("div#divInput");
+		funcInput.css("display", "none");
+		
+		FileManager.funcBg.get(0).onclick = FileManager.doNothing;
+		FileManager.displayFuncDialog("", "waiting",
+			"waiting", null);
 	},
 	
 	/*
@@ -486,9 +495,9 @@ var FileManager = {
 	/*
 	 * 显示 Func 输入的半透明背景
 	 */
-	displayFuncBg : function (canClose) {
+	displayFuncBg : function (canClose, closeableBkg) {
 		if (canClose) {
-			FileManager.funcBg.get(0).onclick = FileManager.closeFunc;
+			FileManager.funcBg.get(0).onclick = closeableBkg ? FileManager.closeFunc : FileManager.doNothing;
 			FileManager.funcDialog.header.find(".funcClose").css("display", "block");
 		} else {
 			FileManager.funcBg.get(0).onclick = FileManager.doNothing;
@@ -525,16 +534,18 @@ var FileManager = {
 			operInput.val(oper);
 			var form = divInput.find("form");
 			form.attr("action", action);
-			if (oper == "upload")
-				FileManager.displayInputPart(divInput.find("div#divUpload"));
-			else if (oper == "login")
-				FileManager.displayInputPart(divInput.find("div#divLogin"));
-			else if (oper == "logout")
-				FileManager.displayInputPart(divInput.find("div#divLogout"));
-			else
-				FileManager.displayInputPart(divInput.find("div#divReqInput"));
 			
-			FileManager.displayFuncBg(true);
+			if (oper == "upload") {
+				FileManager.displayInputPart(divInput.find("div#divUpload"));
+			} else if (oper == "login") {
+				FileManager.displayInputPart(divInput.find("div#divLogin"));
+			} else if (oper == "logout") {
+				FileManager.displayInputPart(divInput.find("div#divLogout"));
+			} else {
+				FileManager.displayInputPart(divInput.find("div#divReqInput"));
+			}
+			
+			FileManager.displayFuncBg(true, true);
 			funcDialog.fadeIn();
 			
 			if (oper != "upload" && oper != "login") {
@@ -548,7 +559,7 @@ var FileManager = {
 		case "delete":
 			FileManager.displayFuncPart(divDelete);
 			
-			FileManager.displayFuncBg(true);
+			FileManager.displayFuncBg(true, true);
 			funcDialog.fadeIn();
 			break;
 		case "audio":
@@ -565,13 +576,13 @@ var FileManager = {
 			divLink.html("<a href=\"" + audioLink + "\">"
 				 + data.title + "</a>");
 			
-			FileManager.displayFuncBg(true);
+			FileManager.displayFuncBg(true, false);
 			funcDialog.fadeIn();
 			break;
 		case "waiting":
 			FileManager.displayFuncPart(divWaiting);
 			
-			FileManager.displayFuncBg(false);
+			FileManager.displayFuncBg(false, false);
 			funcDialog.fadeIn();
 			break;
 		}

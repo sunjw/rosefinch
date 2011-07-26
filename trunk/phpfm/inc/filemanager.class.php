@@ -1038,7 +1038,7 @@ class FileManager
 							<input id="uploadFile" type="file" name="uploadFile" size="20"/>
 						</div>
 						<div>
-							<span class="inputRequire"><?php printf("%s%s", _("File cannot be larger than "), "2MB"); ?></span>
+							<span class="inputRequire"><?php printf("%s%s", _("File cannot be larger than "), "50MB"); ?></span>
 						</div>
 					</div>
 					<div id="divLogin">
@@ -1057,7 +1057,7 @@ class FileManager
 						<div class="center"><?php echo _("Are you sure to logout?"); ?></div>
 					</div>
 					<div class="rightAlign">
-						<input type="submit" value="<?php echo _("OK"); ?>"/>
+						<input type="submit" value="<?php echo _("OK"); ?>" onclick="FileManager.funcSubmit()" />
 						<input type="button" value="<?php echo _("Cancel"); ?>" onclick="FileManager.closeFunc()"/>
 					</div>
 				</form>
