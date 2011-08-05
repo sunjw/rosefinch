@@ -335,6 +335,7 @@ class Post
 			$search = new Search();
 		}
 		
+		$used_uploadify = post_query("uploadify") == "uploadify";
 		$sub_dir = rawurldecode(post_query("subdir"));
 		
 		if(isset($_FILES['uploadFile']))
@@ -360,7 +361,10 @@ class Post
 			}
 		}
 
-		Utility::redirct_after_oper(false, 1);
+		if(!$used_uploadify)
+			Utility::redirct_after_oper(false, 1);
+		else
+			echo "ok";
 	}
 	
 	/**

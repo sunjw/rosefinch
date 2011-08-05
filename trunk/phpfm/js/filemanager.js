@@ -19,6 +19,17 @@ var FileManager = {
 		divWaiting : null
 	},
 	
+	hashCookie : function (c_name) {
+		return (new RegExp("(?:^|;\\s*)" + escape(c_name).replace(/[\-\.\+\*]/g, "\\$&") + "\\s*\\=")).test(document.cookie);
+	},
+	
+	getCookie : function (c_name) {
+		if (!c_name || !FileManager.hashCookie(c_name)) {
+			return null;
+		}
+		return unescape(document.cookie.replace(new RegExp("(?:^|.*;\\s*)" + escape(c_name).replace(/[\-\.\+\*]/g, "\\$&") + "\\s*\\=\\s*((?:[^;](?!;))*[^;]?).*"), "$1"));
+	},
+	
 	setCookie : function (c_name, value) {
 		var exdate = new Date();
 		exdate.setDate(exdate.getDate() + 365);
@@ -223,13 +234,13 @@ var FileManager = {
 			"waiting", null);
 		
 		$.post("func/post.func.php", {
-				"oper" : "paste",
-				"subdir" : subdir,
-				"return" : returnURL
-			}, function () {
-				// alert(data);
-				window.location.reload();
-			});
+			"oper" : "paste",
+			"subdir" : subdir,
+			"return" : returnURL
+		}, function () {
+			// alert(data);
+			window.location.reload();
+		});
 		/*
 		 * $.get("func/paste.ajax.php?subdir=" + subdir + "&return=" +
 		 * returnURL, function(data) { // alert(data); window.location.reload();
@@ -262,13 +273,13 @@ var FileManager = {
 		// var subdir = $("input#subdir").val();
 		
 		$.post("func/post.func.php", {
-				"oper" : "delete",
-				"items" : itemsStr,
-				"noredirect" : "noredirect"
-			}, function () {
-				// alert(data);
-				window.location.reload();
-			});
+			"oper" : "delete",
+			"items" : itemsStr,
+			"noredirect" : "noredirect"
+		}, function () {
+			// alert(data);
+			window.location.reload();
+		});
 	},
 	
 	/*
@@ -337,32 +348,32 @@ var FileManager = {
 	 */
 	getMessage : function () {
 		$.get("func/getmessage.ajax.php", function (data) {
-				if (data != "") {
-					var phpfmMessage = $("#phpfmMessage");
-					if (phpfmMessage.length == 1) {
-						var msg;
-						var stat;
-						
-						data = data.split("|PHPFM|");
-						msg = data[0];
-						stat = data[1];
-						
-						phpfmMessage.html(msg);
-						if (stat == 2) {
-							// 错误消息
-							phpfmMessage.addClass("wrong");
-						} else {
-							phpfmMessage.removeClass("wrong");
-						}
-						
-						phpfmMessage.fadeIn();
+			if (data != "") {
+				var phpfmMessage = $("#phpfmMessage");
+				if (phpfmMessage.length == 1) {
+					var msg;
+					var stat;
+					
+					data = data.split("|PHPFM|");
+					msg = data[0];
+					stat = data[1];
+					
+					phpfmMessage.html(msg);
+					if (stat == 2) {
+						// 错误消息
+						phpfmMessage.addClass("wrong");
+					} else {
+						phpfmMessage.removeClass("wrong");
 					}
 					
-					phpfmMessage.click(FileManager.closeMessage);
-					clearTimeout(FileManager.delayID);
-					FileManager.delayID = setTimeout("FileManager.closeMessage()", 10000);
+					phpfmMessage.fadeIn();
 				}
-			});
+				
+				phpfmMessage.click(FileManager.closeMessage);
+				clearTimeout(FileManager.delayID);
+				FileManager.delayID = setTimeout("FileManager.closeMessage()", 10000);
+			}
+		});
 		
 	},
 	
@@ -393,19 +404,19 @@ var FileManager = {
 		// var subdir = $("input#subdir").val();
 		
 		$.post("func/post.func.php", {
-				"oper" : oper,
-				"items" : itemsStr
-			}, function (data) {
-				if (data == "ok" && FileManager.isSearch == false) {
-					FileManager.setButton("toolbarPaste",
-						"images/toolbar-paste.gif", FileManager.clickPaste, "",
-						"disable");
-				} else {
-					FileManager.setButton("toolbarPaste",
-						"images/toolbar-paste-disable.gif",
-						FileManager.doNothing, "disable", "");
-				}
-			});
+			"oper" : oper,
+			"items" : itemsStr
+		}, function (data) {
+			if (data == "ok" && FileManager.isSearch == false) {
+				FileManager.setButton("toolbarPaste",
+					"images/toolbar-paste.gif", FileManager.clickPaste, "",
+					"disable");
+			} else {
+				FileManager.setButton("toolbarPaste",
+					"images/toolbar-paste-disable.gif",
+					FileManager.doNothing, "disable", "");
+			}
+		});
 		
 		setTimeout("FileManager.getMessage()", 500);
 	},
@@ -569,8 +580,8 @@ var FileManager = {
 			
 			// Flash player
 			AudioPlayer.embed("divAudioPlayer", {
-					soundFile : audioLink
-				});
+				soundFile : audioLink
+			});
 			
 			var divLink = divAudio.find("div#link");
 			divLink.html("<a href=\"" + audioLink + "\">"
@@ -652,8 +663,8 @@ var FileManager = {
 		}
 		
 		buttons.filter(".toolbarRefresh").click(function () {
-				window.location.reload(); // 刷新
-			});
+			window.location.reload(); // 刷新
+		});
 		
 		// buttons.filter(".toolbarSelectAll").click(FileManager.selectAll); //
 		// 全选
@@ -682,11 +693,11 @@ var FileManager = {
 			FileManager.toolbarButtonMouseOut); // 按钮 hover 时的效果
 		
 		$("#mainView .header span #checkSelectAll").click(function () {
-				if (this.checked)
-					FileManager.selectAll();
-				else
-					FileManager.deselect();
-			});
+			if (this.checked)
+				FileManager.selectAll();
+			else
+				FileManager.deselect();
+		});
 		
 		// more 按钮
 		var buttonMore = buttons.filter(".toolbarMore");
@@ -695,18 +706,18 @@ var FileManager = {
 			buttonMore.find("img").attr("src", "images/toolbar-arrow-right.gif");
 		}
 		buttonMore.click(function () {
-				var img = $(this).find("img");
-				var part = $(this).parent().find(".toolbarHiddenable");
-				if (part.is(":visible")) {
-					part.fadeOut("fast");
-					img.attr("src", "images/toolbar-arrow-right.gif");
-					FileManager.setCookie("toolbar", "little");
-				} else {
-					part.fadeIn("fast");
-					img.attr("src", "images/toolbar-arrow-left.gif");
-					FileManager.setCookie("toolbar", "full");
-				}
-			});
+			var img = $(this).find("img");
+			var part = $(this).parent().find(".toolbarHiddenable");
+			if (part.is(":visible")) {
+				part.fadeOut("fast");
+				img.attr("src", "images/toolbar-arrow-right.gif");
+				FileManager.setCookie("toolbar", "little");
+			} else {
+				part.fadeIn("fast");
+				img.attr("src", "images/toolbar-arrow-left.gif");
+				FileManager.setCookie("toolbar", "full");
+			}
+		});
 	},
 	
 	/*
@@ -791,31 +802,60 @@ var FileManager = {
 	 */
 	initAudioPlayer : function () {
 		AudioPlayer.setup("images/player.swf", {
-				width : 290,
-				initialvolume : 100
-			});
+			width : 290,
+			initialvolume : 100
+		});
 		
 		$("a.audioPlayer").click(function () {
-				var audioLink = $(this).attr("href");
-				var audioTitle = $(this).attr("title");
-				FileManager.displayFuncDialog("", "audio",
-					"audio", {
-						link : audioLink,
-						title : audioTitle
-					});
-				return false;
+			var audioLink = $(this).attr("href");
+			var audioTitle = $(this).attr("title");
+			FileManager.displayFuncDialog("", "audio",
+				"audio", {
+				link : audioLink,
+				title : audioTitle
 			});
+			return false;
+		});
 	},
 	
 	initMediaPreview : function () {
 		// lightbox
 		$('a.lightboxImg').lightBox({
-				overlayOpacity : 0.5,
-				autoAdapt : true
-			});
+			overlayOpacity : 0.5,
+			autoAdapt : true
+		});
 		
 		// AudioPlayer
 		FileManager.initAudioPlayer();
+	},
+	
+	initUploadify : function () {
+		var playerVersion = swfobject.getFlashPlayerVersion(); // returns a JavaScript object
+		if (playerVersion.major == 0) {
+			return;
+		}
+		var sessionId = FileManager.getCookie('PHPSESSID');
+		var subdir = encodeURIComponent($("input#subdir").attr("value"));
+		var returnURL = encodeURIComponent($("input#return").val());
+		var returnURLdecoded = decodeURIComponent($("input#return").val());
+		$('#uploadFile').uploadify({
+			'uploader' : 'images/uploadify.swf',
+			'script' : 'func/post.func.php',
+			'cancelImg' : 'images/cancel.png',
+			'auto' : true,
+			'multi' : true,
+			'fileDataName' : 'uploadFile',
+			'scriptData' : {
+				'session' : sessionId,
+				'oper' : 'upload',
+				'subdir' : subdir,
+				'return' : returnURL,
+				'uploadify' : 'uploadify'
+			},
+			onAllComplete : function () {
+				window.location.href = returnURLdecoded;
+			}
+		});
 	},
 	
 	/*
@@ -853,11 +893,11 @@ FileManager.init = function () {
 	
 	// FileManager.initFullPath();
 	jqMenu.setup({
-			menuItemsSelector : ".menuContainer",
-			menuButtonSelector : ".menuButton",
-			subMenuSelector : ".subMenu",
-			inlineShadow : "transparent url('images/shadow.png') no-repeat right bottom"
-		});
+		menuItemsSelector : ".menuContainer",
+		menuButtonSelector : ".menuButton",
+		subMenuSelector : ".subMenu",
+		inlineShadow : "transparent url('images/shadow.png') no-repeat right bottom"
+	});
 	jqMenu.init();
 	
 	FileManager.initToolbar();
@@ -866,6 +906,7 @@ FileManager.init = function () {
 	FileManager.initUserMng();
 	FileManager.getMessage();
 	FileManager.initMediaPreview();
+	FileManager.initUploadify();
 	
 	jqCommon.setPlaceholder("#searchForm", "#q", "搜索");
 	jqCommon.setVerify("#searchForm", "#q", "empty", null, null);

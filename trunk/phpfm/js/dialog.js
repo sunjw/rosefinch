@@ -30,10 +30,10 @@ var Dialog = {
 			var form = $("<form/>");
 			var actionUrl = secondaryFolder ? "../func/post.func.php" : "func/post.func.php";
 			form.attr({
-					action : actionUrl,
-					method : "post",
-					enctype : "multipart/form-data"
-				});
+				action : actionUrl,
+				method : "post",
+				enctype : "multipart/form-data"
+			});
 			divInput.append(form);
 			Dialog.funcDialog.append(divInput);
 			$("#content").append(Dialog.funcDialog);
@@ -45,10 +45,10 @@ var Dialog = {
 			Dialog.funcDialog.find(".divHeader").append(
 				$("<a/>").attr("href", "javascript:;").addClass("funcClose").append(
 					$("<img/>").attr({
-							alt : "Close",
-							src : imgSrc,
-							border : "0"
-						})).click(Dialog.closeFunc));
+						alt : "Close",
+						src : imgSrc,
+						border : "0"
+					})).click(Dialog.closeFunc));
 			Dialog.funcDialog.addClass("closable");
 			Dialog.funcBg.click(Dialog.closeFunc);
 		} else {
@@ -59,21 +59,21 @@ var Dialog = {
 		var form = Dialog.funcDialog.find("form");
 		form.html("");
 		form.append($("<input/>").attr({
-					type : "hidden",
-					id : "oper",
-					name : "oper"
-				}).val(oper));
+				type : "hidden",
+				id : "oper",
+				name : "oper"
+			}).val(oper));
 		if (redirect)
 			form.append($("<input/>").attr({
-						type : "hidden",
-						id : "return",
-						name : "return"
-					}).val(Strings['return']));
+					type : "hidden",
+					id : "return",
+					name : "return"
+				}).val(Strings['return']));
 		else
 			form.append($("<input/>").attr({
-						type : "hidden",
-						name : "noredirect"
-					}).val("noredirect"));
+					type : "hidden",
+					name : "noredirect"
+				}).val("noredirect"));
 		
 		form.unbind("submit");
 		
