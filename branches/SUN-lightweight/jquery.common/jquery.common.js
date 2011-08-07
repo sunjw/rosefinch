@@ -146,19 +146,19 @@ var jqCommon = {
 		}
 		
 		input.focus(function () {
-				jqCommon.cleanPlaceholder($(this));
-			});
+			jqCommon.cleanPlaceholder($(this));
+		});
 		input.click(function () {
-				jqCommon.cleanPlaceholder($(this));
-			});
+			jqCommon.cleanPlaceholder($(this));
+		});
 		input.blur(function () {
-				jqCommon.checkPlaceholder($(this), text);
-			});
+			jqCommon.checkPlaceholder($(this), text);
+		});
 		
 		if (!form.hasClass(jqCommon.prefix + "Form")) {
 			form.submit(function () {
-					return jqCommon.formSubmitHandler(form, jqCommon.formSubmit($(this)));
-				});
+				return jqCommon.formSubmitHandler(form, jqCommon.formSubmit($(this)));
+			});
 			form.addClass(jqCommon.prefix + "Form");
 		}
 	},
@@ -178,19 +178,19 @@ var jqCommon = {
 		var inputClass = jqCommon.prefix + type;
 		input.addClass(inputClass);
 		input.blur(function () {
-				if (jqCommon.checkValue($(this))) {
-					// ok
-					okHandler != null ? okHandler() : jqCommon.dummy();
-				} else {
-					// error
-					errHandler != null ? errHandler() : jqCommon.dummy();
-				}
-			});
+			if (jqCommon.checkValue($(this))) {
+				// ok
+				okHandler != null ? okHandler() : jqCommon.dummy();
+			} else {
+				// error
+				errHandler != null ? errHandler() : jqCommon.dummy();
+			}
+		});
 		
 		if (!form.hasClass(jqCommon.prefix + "Form")) {
 			form.submit(function () {
-					return jqCommon.formSubmitHandler(form, jqCommon.formSubmit($(this)));
-				});
+				return jqCommon.formSubmitHandler(form, jqCommon.formSubmit($(this)));
+			});
 			form.addClass(jqCommon.prefix + "Form");
 		}
 	},

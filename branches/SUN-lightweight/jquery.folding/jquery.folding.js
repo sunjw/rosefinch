@@ -50,20 +50,20 @@ var jqFolding = {
 			// 关闭
 			//list.css("display", "none");
 			list.slideUp("fast", function () {
-					list.addClass(jqFolding.classHidden);
-					list.removeClass(jqFolding.classShown);
-					thisNode.addClass(jqFolding.classHeaderHidden);
-					thisNode.removeClass(jqFolding.classHeaderShown);
-				});
+				list.addClass(jqFolding.classHidden);
+				list.removeClass(jqFolding.classShown);
+				thisNode.addClass(jqFolding.classHeaderHidden);
+				thisNode.removeClass(jqFolding.classHeaderShown);
+			});
 		} else {
 			// 显示
 			//list.css("display", "block");
 			list.slideDown("fast", function () {
-					list.addClass(jqFolding.classShown);
-					list.removeClass(jqFolding.classHidden);
-					thisNode.addClass(jqFolding.classHeaderShown);
-					thisNode.removeClass(jqFolding.classHeaderHidden);
-				});
+				list.addClass(jqFolding.classShown);
+				list.removeClass(jqFolding.classHidden);
+				thisNode.addClass(jqFolding.classHeaderShown);
+				thisNode.removeClass(jqFolding.classHeaderHidden);
+			});
 		}
 		
 	},

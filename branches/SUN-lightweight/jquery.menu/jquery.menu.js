@@ -95,12 +95,12 @@ var jqMenu = {
 				thisSub.css("background", "none");
 			}
 			thisSub.fadeIn("fast", function () {
-					if (jqMenu.isIE) {
-						// IE-hack 去掉背景
-						$(this).css("background", jqMenu.inlineShadow);
-					}
-					jqMenu.opened = true;
-				});
+				if (jqMenu.isIE) {
+					// IE-hack 去掉背景
+					$(this).css("background", jqMenu.inlineShadow);
+				}
+				jqMenu.opened = true;
+			});
 		} else if (!jqMenu.hoverOpen) {
 			$(thisButton).removeClass("selected");
 			// thisSub.css("display", "none");

@@ -126,8 +126,8 @@ var jqTabs = {
 		for (var i = 0; i < length; i++) {
 			var nav = $(navs[i]);
 			nav.click(function () {
-					jqTabs.display($(this).attr(jqTabs.titleAttr), jqTabs.animation);
-				});
+				jqTabs.display($(this).attr(jqTabs.titleAttr), jqTabs.animation);
+			});
 			jqTabs.navs[nav.attr(jqTabs.titleAttr)] = nav;
 		}
 	},
