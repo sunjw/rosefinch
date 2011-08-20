@@ -1,11 +1,12 @@
 ﻿/* Global sector */
-input[type="submit"],input[type="button"] {
+/*input[type="submit"],input[type="button"] {
 	padding: 0 4px;
-}
+}*/
 
 #mainView {
 	border: 1px solid #999999;
 	background-color: white;
+	box-shadow: 0 0 3px #cccccc inset;
 }
 
 #mainView a {
@@ -41,18 +42,18 @@ input[type="submit"],input[type="button"] {
 	display: block;
 }
 
-#fullpath a,#fullpath div.pathSlash a.arrow {
-	border: 1px solid white;
-	padding: 1px 1px;
-}
-
-#fullpath a:hover,#fullpath div.pathSlash a.selected,#fullpath div.pathSlash a.arrow:hover
-	{
-	border: 1px solid #B8D1ED;
+#fullpath a, #fullpath div.pathSlash a.selected, #fullpath div.pathSlash a.arrow {
+	border-radius: 2px;
 	-moz-border-radius: 2px;
 	-khtml-border-radius: 2px;
 	-webkit-border-radius: 2px;
-	border-radius: 2px;
+}
+#fullpath a, #fullpath div.pathSlash a.arrow {
+	border: 1px solid white;
+	padding: 1px 1px;
+}
+#fullpath a:hover, #fullpath div.pathSlash a.selected, #fullpath div.pathSlash a.arrow:hover {
+	border: 1px solid #B8D1ED;
 }
 
 #fullpath {

@@ -1,11 +1,12 @@
 ﻿@CHARSET "UTF-8";
 
-#mainView #largeIconView {
+#mainViewList #largeiconView {
 	padding: 2px 0 0 0;
 	margin: 0;
+	display: none;
 }
 
-#mainView #largeiconView div.largeIconItem {
+#mainViewList #largeiconView div.largeIconItem {
 	width: 160px;
 	height: 120px;
 	float: left;
@@ -14,7 +15,7 @@
 	position: relative;
 }
 
-#mainView #largeiconView div.selected {
+#mainViewList #largeiconView div.selected {
 	background: url('../images/largeicon_selected.jpg') top left no-repeat;
 }
 

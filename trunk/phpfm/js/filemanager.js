@@ -626,7 +626,7 @@ var FileManager = {
 		var mainViewListHeight;
 		
 		if (FileManager.isIE && $.browser.version < 8) {
-			return;
+			return; // Largeicon 会溢出来
 		} else {
 			mainViewListHeight = windowHeight - mainViewListOffset.top
 				 - footerHeight - 30;
@@ -752,6 +752,8 @@ var FileManager = {
 					jqCommon.stopBubble(e);
 				};
 			}
+			
+			detailViewItems.fadeIn(1200); // 淡入载入文件
 		} else if (largeiconViewItems.length > 0) {
 			// 是大图标视图
 			var items = largeiconViewItems.children("div.largeIconItem");
@@ -779,6 +781,8 @@ var FileManager = {
 					
 				}
 			}
+			
+			largeiconViewItems.fadeIn(1200); // 淡入载入文件
 		}
 		
 		FileManager.inputChecks = $("input.inputCheck");
@@ -910,6 +914,7 @@ FileManager.init = function () {
 	
 	jqCommon.setPlaceholder("#searchForm", "#q", "搜索");
 	jqCommon.setVerify("#searchForm", "#q", "empty", null, null);
+	
 };
 
 // $(window).load(init); // 运行准备函数

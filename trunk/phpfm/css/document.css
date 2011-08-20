@@ -37,6 +37,7 @@
 #phpfmDoc img {
 	border: 0;
 	margin: 0 10px;
+	box-shadow: 2px 2px 2px #666666;
 }
 
 #phpfmDoc img.helpLeftImg,#phpfmDoc img.helpRightImg {

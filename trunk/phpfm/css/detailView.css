@@ -3,15 +3,12 @@
 #mainView ul.n {
 	background: url('../images/n.jpg') 25px 0 repeat-y;
 }
-
 #mainView ul.s {
 	background: url('../images/s.jpg') 27px 0 repeat-y;
 }
-
 #mainView ul.t {
 	background: url('../images/t.jpg') 27px 0 repeat-y;
 }
-
 #mainView ul.m {
 	background: url('../images/m.jpg') 29px 0 repeat-y;
 }
@@ -20,30 +17,26 @@
 	list-style: none;
 	padding: 2px 0 0 0;
 	margin: 0;
+	display: none;
 }
-
 #mainView #detailView li {
 	margin: 0 0 2px 0;
 	height: 18px;
 	cursor: default;
 }
-
 #mainView #detailView li.selected {
 	background: url('../images/row-hover.jpg') left center no-repeat;
 }
-
 #mainView #detailView li a {
 	text-decoration: none;
 	cursor: pointer; /* IE */
 }
-
 #mainView #detailView li a:hover {
 	color: black;
 }
 #mainView #detailView li a:hover span {
 	text-decoration: underline;
 }
-
 #mainView #detailView li.empty {
 	height: 18px;
 }
@@ -56,27 +49,21 @@
 	line-height: 18px;
 	padding: 0 0 0 5px;
 }
-
 #mainView #detailView span.check {
 	width: 17px;
 }
-
 #mainView #detailView span.icon {
 	width: 20px;
 }
-
 #mainView #detailView span.name {
 	width: 420px;
 }
-
 #mainView #detailView span.size {
 	width: 125px;
 }
-
 #mainView #detailView span.type {
 	width: 120px;
 }
-
 #mainView #detailView span.mtime {
 	width: 100px;
 }
