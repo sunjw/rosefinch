@@ -366,12 +366,12 @@ var FileManager = {
 						phpfmMessage.removeClass("wrong");
 					}
 					
-					phpfmMessage.fadeIn();
+					phpfmMessage.slideToggle();
 				}
 				
 				phpfmMessage.click(FileManager.closeMessage);
 				clearTimeout(FileManager.delayID);
-				FileManager.delayID = setTimeout("FileManager.closeMessage()", 10000);
+				FileManager.delayID = setTimeout("FileManager.closeMessage()", 5000);
 			}
 		});
 		
@@ -381,7 +381,7 @@ var FileManager = {
 	 * 关闭消息
 	 */
 	closeMessage : function () {
-		$("#phpfmMessage").fadeOut();
+		$("#phpfmMessage").slideToggle();
 		clearTimeout(FileManager.delayID);
 	},
 	
