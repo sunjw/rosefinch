@@ -55,13 +55,11 @@ a:hover {
 	font-family: "Times New Roman", Times, serif;
 	color: white;
 }
-
 #header {
 	padding: 10px;
 	height: 80px;
 	font-family: 微软雅黑, "segoe ui", verdana, arial, sans-serif;
 }
-
 #header #mainTitle {
 	float: left;
 	margin-top: 20px;
@@ -69,8 +67,8 @@ a:hover {
 	font-style: italic;
 	font-weight: bold;
 	color: #223355;
+	text-shadow: 2px 2px 2px #aaaaaa;
 }
-
 #header #subTitle {
 	float: left;
 	margin-top: 42px;
@@ -78,7 +76,6 @@ a:hover {
 	font-size: small;
 	color: #003595
 }
-
 #header #loginStatus {
 	float: right;
 	margin-top: 42px;
@@ -88,45 +85,37 @@ a:hover {
 #nav { /*margin-top: 5px;*/
 	position: relative;
 }
-
 #nav ul {
 	list-style-type: none;
 	list-style-image: none;
 	/*margin-left: 200px;*/
 	float: right;
 }
-
 #nav,#nav ul li a,#nav a#phpfmNavHome {
 	font-family: 微软雅黑, "segoe ui", verdana, arial, sans-serif;
 	color: black;
 	text-decoration: none;
 }
-
 #nav ul li a {
 	display: block;
 	padding: 0 1em;
 }
-
 #nav ul,#nav ul li {
 	
 }
-
 #nav ul li {
 	float: left;
 	font-size: 16px;
 	text-align: center;
 	display: block;
 }
-
 #nav ul,#nav ul .li-item {
 	height: 25px;
 	line-height: 25px;
 }
-
 #nav ul .li-item {
 	border-right: 1px dotted #666666;
 }
-
 #nav ul .li-item a {
 	-moz-transition-property: background-color,color;
 	-moz-transition-duration: 0.3s;
@@ -137,7 +126,9 @@ a:hover {
 	-ms-transition-property: background-color,color;
 	-ms-transition-duration: 0.3s;
 }
-
+#nav ul .current {
+	box-shadow: 0 0 5px #666666;
+}
 #nav ul .li-item a:hover,#nav ul .current a {
 	background-color: #666666;
 	color: white;
@@ -152,7 +143,6 @@ a:hover {
 	-ms-transition-property: background-color,color;
 	-ms-transition-duration: 0.3s;
 }
-
 #nav ul .li-current a:hover {
 	
 }

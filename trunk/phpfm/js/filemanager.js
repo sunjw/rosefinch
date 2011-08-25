@@ -19,10 +19,16 @@ var FileManager = {
 		divWaiting : null
 	},
 	
+	/*
+	 * 检测是否有指定名称的 Cookie
+	 */
 	hashCookie : function (c_name) {
 		return (new RegExp("(?:^|;\\s*)" + escape(c_name).replace(/[\-\.\+\*]/g, "\\$&") + "\\s*\\=")).test(document.cookie);
 	},
 	
+	/*
+	 * 得到指定名称的 Cookie 值
+	 */
 	getCookie : function (c_name) {
 		if (!c_name || !FileManager.hashCookie(c_name)) {
 			return null;
@@ -30,6 +36,9 @@ var FileManager = {
 		return unescape(document.cookie.replace(new RegExp("(?:^|.*;\\s*)" + escape(c_name).replace(/[\-\.\+\*]/g, "\\$&") + "\\s*\\=\\s*((?:[^;](?!;))*[^;]?).*"), "$1"));
 	},
 	
+	/*
+	 * 设置指定名称的 Cookie 值
+	 */
 	setCookie : function (c_name, value) {
 		var exdate = new Date();
 		exdate.setDate(exdate.getDate() + 365);
