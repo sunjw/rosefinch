@@ -65,38 +65,7 @@ div.divHeader a.funcClose {
 	margin: 3px 0;
 }
 #funcDialog input[type="submit"], #funcDialog input[type="button"], #funcDialog button {
-	width: 48px;
-	height: 24px;
-	line-height: 22px;
-	background-color: white;
-	border: 1px solid #aaaaaa;
-	border-radius: 2px;
-	box-shadow: 1px 1px 2px #dddddd;
-	
-	-moz-transition-property: border-color;
-	-moz-transition-duration: 0.3s;
-	-webkit-transition-property: border-color;
-	-webkit-transition-duration: 0.3s;
-	-o-transition-property: border-color;
-	-o-transition-duration: 0.3s;
-	-ms-transition-property: border-color;
-	-ms-transition-duration: 0.3s;
-}
-#funcDialog input[type="submit"]:hover, #funcDialog input[type="button"]:hover, #funcDialog button:hover {
-	border-color: black;
-	
-	-moz-transition-property: border-color;
-	-moz-transition-duration: 0.3s;
-	-webkit-transition-property: border-color;
-	-webkit-transition-duration: 0.3s;
-	-o-transition-property: border-color;
-	-o-transition-duration: 0.3s;
-	-ms-transition-property: border-color;
-	-ms-transition-duration: 0.3s;
-}
-#funcDialog input[type="submit"]:active, #funcDialog input[type="button"]:active, #funcDialog button:active {
-	border-color: black;
-	box-shadow: 1px 1px 1px #dddddd inset;
+	margin-left: 8px;
 }
 
 /* Rename sector */

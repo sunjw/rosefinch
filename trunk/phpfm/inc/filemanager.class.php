@@ -1060,16 +1060,14 @@ class FileManager
 						<div class="center"><?php echo _("Are you sure to logout?"); ?></div>
 					</div>
 					<div class="rightAlign">
-						<input type="submit" value="<?php echo _("OK"); ?>" onclick="FileManager.funcSubmit()" />
-						<input type="button" value="<?php echo _("Cancel"); ?>" onclick="FileManager.closeFunc()"/>
+						<input type="submit" value="<?php echo _("OK"); ?>" onclick="FileManager.funcSubmit()" /><input type="button" value="<?php echo _("Cancel"); ?>" onclick="FileManager.closeFunc()"/>
 					</div>
 				</form>
 			</div>
 			<div id="divDelete" class="container">
 				<div class="center"><?php echo _("Are you sure to delete these items?"); ?></div>
 				<div class="rightAlign">
-					<input type="button" value="<?php echo _("OK"); ?>" onclick="FileManager.doDelete()"/>
-					<input type="button" value="<?php echo _("Cancel"); ?>" onclick="FileManager.closeFunc()"/>
+					<input type="button" value="<?php echo _("OK"); ?>" onclick="FileManager.doDelete()"/><input type="button" value="<?php echo _("Cancel"); ?>" onclick="FileManager.closeFunc()"/>
 				</div>
 			</div>
 			<div id="divAudio" class="container center">

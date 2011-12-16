@@ -51,10 +51,6 @@ div.info {
 	overflow: hidden;
 }
 
-input[type="button"], input[type="submit"] {
-	padding: 0 6px;
-}
-
 #phpfmUserMng #divUserMng {
 	height: auto;
 }
