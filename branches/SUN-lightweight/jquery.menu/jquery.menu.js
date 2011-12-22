@@ -101,6 +101,9 @@ var jqMenu = {
 				}
 				jqMenu.opened = true;
 			});
+			if (thisSub.length == 0) {
+				jqMenu.opened = true;
+			}
 		} else if (!jqMenu.hoverOpen) {
 			$(thisButton).removeClass("selected");
 			// thisSub.css("display", "none");
