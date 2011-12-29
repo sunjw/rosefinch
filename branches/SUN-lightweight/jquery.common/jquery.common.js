@@ -2,7 +2,7 @@
  * jQuery Common
  * License: GPL 2.0
  * Author: Sun Junwen
- * Version: 1.0.9
+ * Version: 1.1.0
  */
 var jqCommon = {
 	
@@ -27,6 +27,69 @@ var jqCommon = {
 	
 	dummy : function () {
 		return;
+	},
+	
+	/**
+	 * 检测是否有指定名称的 Cookie
+	 */
+	hasCookie : function (key) {
+		return (new RegExp("(?:^|;\\s*)" + escape(key).replace(/[\-\.\+\*]/g, "\\$&") + "\\s*\\=")).test(document.cookie);
+	},
+	
+	/**
+	 * 得到指定名称的 Cookie 值
+	 */
+	getCookie : function (key) {
+		if (!key || !jqCommon.hasCookie(key)) {
+			return null;
+		}
+		return unescape(
+			document.cookie.replace(
+				new RegExp("(?:^|.*;\\s*)" + escape(key).replace(/[\-\.\+\*]/g, "\\$&") + "\\s*\\=\\s*((?:[^;](?!;))*[^;]?).*"),
+				"$1"));
+	},
+	
+	/**
+	 * 设置指定名称的 Cookie 值
+	 */
+	setCookie : function (key, value) {
+		var exdate = new Date();
+		exdate.setDate(exdate.getDate() + 365);
+		var c_value = escape(value) + "; expires=" + exdate.toUTCString();
+		document.cookie = key + "=" + c_value;
+	},
+	
+	/**
+	 * 获得 uri 的 get 参数
+	 */
+	getQuery : function (key) {
+		var params = window.location.search.split("?");
+		if (params.length > 1) {
+			params = params[1].split("&");
+			var count = params.length;
+			for (var i = 0; i < count; ++i) {
+				var param = params[i];
+				param = param.split("=");
+				if (param[0] == key) {
+					return param[1] ? param[1] : "";
+				}
+			}
+		}
+		return "";
+	},
+	
+	/**
+	 * javascript 跳转
+	 */
+	redirect : function (target) {
+		window.location = target;
+	},
+	
+	/**
+	 * 刷新页面
+	 */
+	refresh : function () {
+		jqCommon.redirect(window.location);
 	},
 	
 	/**

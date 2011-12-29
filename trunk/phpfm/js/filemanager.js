@@ -22,7 +22,7 @@ var FileManager = {
 	/*
 	 * 检测是否有指定名称的 Cookie
 	 */
-	hashCookie : function (c_name) {
+	hasCookie : function (c_name) {
 		return (new RegExp("(?:^|;\\s*)" + escape(c_name).replace(/[\-\.\+\*]/g, "\\$&") + "\\s*\\=")).test(document.cookie);
 	},
 	
@@ -30,7 +30,7 @@ var FileManager = {
 	 * 得到指定名称的 Cookie 值
 	 */
 	getCookie : function (c_name) {
-		if (!c_name || !FileManager.hashCookie(c_name)) {
+		if (!c_name || !FileManager.hasCookie(c_name)) {
 			return null;
 		}
 		return unescape(document.cookie.replace(new RegExp("(?:^|.*;\\s*)" + escape(c_name).replace(/[\-\.\+\*]/g, "\\$&") + "\\s*\\=\\s*((?:[^;](?!;))*[^;]?).*"), "$1"));
