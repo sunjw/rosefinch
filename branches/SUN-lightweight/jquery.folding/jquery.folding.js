@@ -2,13 +2,16 @@
  * jQuery Folding
  * License: GPL 2.0
  * Author: Sun Junwen
- * Version: 1.3.2
+ * Version: 1.4
  */
 var jqFolding = {
 	listSelector : ".foldingList", // 包含 trigger 和 container 块的选择器
 	triggerSelector : ".trigger", // trigger 选择器
 	containerSelector : ".foldingContainer", // container 选择器
 	initState : "show", // 初始状态，show/hide
+	
+	initShownFlag : "initShow", // 一开始要显示的 list, 当 initState == "show" 时, 不起作用
+	initHiddenFlag : "initHidden", // 一开始要隐藏的 list, 当 initState == "hide" 时, 不起作用
 	
 	classShown : "shown",
 	classHidden : "hidden",
@@ -43,7 +46,7 @@ var jqFolding = {
 	 */
 	toggle : function () {
 		//alert("!");
-		var thisNode = $(this);
+		var trigger = $(this);
 		var parent = $(this.parentNode);
 		var list = parent.find(jqFolding.containerSelector);
 		if (list.is(":visible")) {
@@ -52,8 +55,8 @@ var jqFolding = {
 			list.slideUp("fast", function () {
 				list.addClass(jqFolding.classHidden);
 				list.removeClass(jqFolding.classShown);
-				thisNode.addClass(jqFolding.classHeaderHidden);
-				thisNode.removeClass(jqFolding.classHeaderShown);
+				trigger.addClass(jqFolding.classHeaderHidden);
+				trigger.removeClass(jqFolding.classHeaderShown);
 			});
 		} else {
 			// 显示
@@ -61,8 +64,8 @@ var jqFolding = {
 			list.slideDown("fast", function () {
 				list.addClass(jqFolding.classShown);
 				list.removeClass(jqFolding.classHidden);
-				thisNode.addClass(jqFolding.classHeaderShown);
-				thisNode.removeClass(jqFolding.classHeaderHidden);
+				trigger.addClass(jqFolding.classHeaderShown);
+				trigger.removeClass(jqFolding.classHeaderHidden);
 			});
 		}
 		
@@ -90,11 +93,19 @@ var jqFolding = {
 				};
 			
 			if (jqFolding.initState == "hide") {
-				divListwHeader.find(jqFolding.triggerSelector).addClass(jqFolding.classHeaderShown);
+				divListwHeader.find(jqFolding.triggerSelector).addClass(jqFolding.classHeaderHidden);
 				divListwHeader.find(jqFolding.containerSelector).addClass(jqFolding.classHidden);
 			} else {
-				divListwHeader.find(jqFolding.triggerSelector).addClass(jqFolding.classHeaderHidden);
+				divListwHeader.find(jqFolding.triggerSelector).addClass(jqFolding.classHeaderShown);
 				divListwHeader.find(jqFolding.containerSelector).addClass(jqFolding.classShown);
+			}
+			
+			if (divListwHeader.hasClass(jqFolding.initShownFlag)) {
+				divListwHeader.find(jqFolding.triggerSelector).addClass(jqFolding.classHeaderShown);
+				divListwHeader.find(jqFolding.containerSelector).addClass(jqFolding.classShown);
+			} else if (divListwHeader.hasClass(jqFolding.initHiddenFlag)) {
+				divListwHeader.find(jqFolding.triggerSelector).addClass(jqFolding.classHeaderHidden);
+				divListwHeader.find(jqFolding.containerSelector).addClass(jqFolding.classHidden);
 			}
 		}
 	}
