@@ -394,12 +394,46 @@ class Utility
 		return $new_paths;
 	}
 	
+	private static function get_name_part($name_part)
+	{
+		$suffix_len = 0;
+		$suffix = substr($name_part, -1);
+		if(strcmp($suffix, ")") == 0)
+		{
+			$suffix_len = 1;
+			while(1)
+			{
+				$suffix = substr($name_part, -($suffix_len + 1), -1);
+				if(!is_numeric($suffix))
+				{
+					break;
+				}
+				++$suffix_len;
+			}
+			$suffix = substr($name_part, -($suffix_len + 1), 1);
+			if(strcmp($suffix, "(") == 0)
+			{
+				++$suffix_len;
+			}
+			else
+			{
+				$suffix_len = 0;
+			}
+		}
+		if($suffix_len > 0)
+		{
+			$name_part = substr($name_part, 0, -($suffix_len));
+		}
+			
+		return $name_part;
+	}
+	
 	/**
 	 * 处理已有名称
 	 * @param $name 完整路径 (UTF-8)
 	 * @return 新完整路径 (UTF-8)
 	 */
-	public static function deal_same_name($name)
+	public static function deal_same_name($name, $i = 2)
 	{
 		$file_name = get_basename($name);
 		$dir_name = dirname($name);
@@ -413,18 +447,22 @@ class Utility
 		{
 			$name_part = substr($file_name, 0, $dot_pos);
 			$type_part = substr($file_name, $dot_pos + 1, strlen($file_name) - $dot_pos - 1);
-			$name_part .= "(2)";
-			$newname = $name_part . "." . $type_part;
+			
+			$name_part = Utility::get_name_part($name_part);
+			
+			$name_part .= "(".$i.")";
+			$newname = $name_part.".".$type_part;
 		}
 		else
 		{
-			$newname = $file_name . "(2)";
+			$name_part = Utility::get_name_part($file_name);
+			$newname = $name_part."(".$i.")";
 		}
 		
-		$newname = $dir_name . "/" . $newname;
+		$newname = $dir_name."/".$newname;
 		if(file_exists(convert_toplat($newname)))
 		{
-			$newname = Utility::deal_same_name($newname);
+			$newname = Utility::deal_same_name($newname, $i + 1);
 		}
 		
 		return $newname;

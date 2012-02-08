@@ -17,28 +17,28 @@ var Setting = {
 	 */
 	getMessage : function () {
 		$.get("../func/getmessage.ajax.php", function (data) {
-				if (data != "") {
-					var phpfmMessage = $("#phpfmMessage");
-					if (phpfmMessage.length == 1) {
-						var msg;
-						var stat;
-						
-						data = data.split("|PHPFM|");
-						msg = data[0];
-						stat = data[1];
-						
-						phpfmMessage.html(msg);
-						if (stat == 2) {
-							// 错误消息
-							phpfmMessage.addClass("wrong");
-						} else {
-							phpfmMessage.removeClass("wrong");
-						}
-						
-						phpfmMessage.fadeIn();
+			if (data != "") {
+				var phpfmMessage = $("#phpfmMessage");
+				if (phpfmMessage.length == 1) {
+					var msg;
+					var stat;
+					
+					data = data.split("|PHPFM|");
+					msg = data[0];
+					stat = data[1];
+					
+					phpfmMessage.html(msg);
+					if (stat == 2) {
+						// 错误消息
+						phpfmMessage.addClass("wrong");
+					} else {
+						phpfmMessage.removeClass("wrong");
 					}
+					
+					phpfmMessage.fadeIn();
 				}
-			});
+			}
+		});
 		
 	},
 	
@@ -51,13 +51,13 @@ var Setting = {
 		button.attr("disabled", "disabled");
 		
 		$.get("../func/indexfiles.func.php", function (data) {
-				if (data == "ok") {
-					result.html("OK");
-				} else {
-					result.html("Failed");
-				}
-				button.removeAttr("disabled");
-			});
+			if (data == "ok") {
+				result.html("OK");
+			} else {
+				result.html("Failed");
+			}
+			button.removeAttr("disabled");
+		});
 		
 	},
 	
@@ -75,22 +75,22 @@ var Setting = {
 					$("<label/>").attr("for", "username").html(Strings['Username:']))).append(
 				$("<td/>").append(
 					$("<input/>").attr({
-							type : "text",
-							name : "username",
-							size : "40",
-							maxlength : "128"
-						}).val(""))));
+						type : "text",
+						name : "username",
+						size : "40",
+						maxlength : "128"
+					}).val(""))));
 		table.append(
 			$("<tr/>").append(
 				$("<td/>").append(
 					$("<label/>").attr("for", "password").html(Strings['Password:']))).append(
 				$("<td/>").append(
 					$("<input/>").attr({
-							type : "password",
-							name : "password",
-							size : "40",
-							maxlength : "128"
-						}).val(""))));
+						type : "password",
+						name : "password",
+						size : "40",
+						maxlength : "128"
+					}).val(""))));
 		divLogin.append(table);
 		divLogin.append(
 			$("<div/>").append($("<a/>").attr("href", "../").html(Strings['Never mind...'])));
@@ -122,34 +122,34 @@ var Setting = {
 	loadUsers : function (table) {
 		Setting.setStat(true);
 		$.post("../func/post.func.php", {
-				oper : "userlist"
-			}, function (data) {
-				table.html(Setting.oldTable);
-				data = $.parseJSON(data);
-				Setting.users = new Array();
-				var length = data.length;
-				for (var i = 0; i < length; ++i) {
-					var user = data[i];
-					Setting.users[user.id] = user;
-					var row = $("<tr></tr>");
-					if (i % 2) {
-						row.addClass("odd");
-					}
-					row.append($("<td></td>").html(user.id));
-					row.append($("<td></td>").html(user.username));
-					row.append($("<td></td>").html(user.permission));
-					if (user.username == "root")
-						row.append($("<td></td>").html(""));
-					else {
-						var html = "<a href='javascript:Setting.modifyUser(" + user.id + ")'>" + Strings['Modify'] + "</a>";
-						html += "&nbsp;|&nbsp;<a href='javascript:Setting.deleteUser(" + user.id + ")'>" + Strings['Delete'] + "</a>";
-						row.append($("<td></td>").html(html));
-					}
-					
-					table.append(row);
+			oper : "userlist"
+		}, function (data) {
+			table.html(Setting.oldTable);
+			data = $.parseJSON(data);
+			Setting.users = new Array();
+			var length = data.length;
+			for (var i = 0; i < length; ++i) {
+				var user = data[i];
+				Setting.users[user.id] = user;
+				var row = $("<tr></tr>");
+				if (i % 2) {
+					row.addClass("odd");
 				}
-				Setting.setStat(false);
-			});
+				row.append($("<td></td>").html(user.id));
+				row.append($("<td></td>").html(user.username));
+				row.append($("<td></td>").html(user.permission));
+				if (user.username == "root")
+					row.append($("<td></td>").html(""));
+				else {
+					var html = "<a href='javascript:Setting.modifyUser(" + user.id + ")'>" + Strings['Modify'] + "</a>";
+					html += "&nbsp;|&nbsp;<a href='javascript:Setting.deleteUser(" + user.id + ")'>" + Strings['Delete'] + "</a>";
+					row.append($("<td></td>").html(html));
+				}
+				
+				table.append(row);
+			}
+			Setting.setStat(false);
+		});
 	},
 	
 	addUser : function () {
@@ -167,22 +167,22 @@ var Setting = {
 					$("<label/>").attr("for", "username").html(Strings['Username:']))).append(
 				$("<td/>").append(
 					$("<input/>").attr({
-							type : "text",
-							name : "username",
-							size : "40",
-							maxlength : "128"
-						}).val(""))));
+						type : "text",
+						name : "username",
+						size : "40",
+						maxlength : "128"
+					}).val(""))));
 		table.append(
 			$("<tr/>").append(
 				$("<td/>").append(
 					$("<label/>").attr("for", "password").html(Strings['Password:']))).append(
 				$("<td/>").append(
 					$("<input/>").attr({
-							type : "password",
-							name : "password",
-							size : "40",
-							maxlength : "128"
-						}).val(""))));
+						type : "password",
+						name : "password",
+						size : "40",
+						maxlength : "128"
+					}).val(""))));
 		var select = $("<select/>").attr("name", "permission");
 		select.append(
 			$("<option/>").val(25).html("User")).append(
@@ -201,20 +201,20 @@ var Setting = {
 		Dialog.setFocus($("input[name='username']"));
 		
 		form.submit(function () {
-				Dialog.closeFunc();
-				Setting.setStat(true);
-				$.post("../func/post.func.php", {
-						oper : $("input[name='oper']").val(),
-						noredirect : "noredirect",
-						username : $("input[name='username']").val(),
-						password : $("input[name='password']").val(),
-						permission : $("select[name='permission']").val()
-					}, function () {
-						Setting.getMessage();
-						Setting.loadUsers($("#tableUserMng"));
-					});
-				return false;
+			Dialog.closeFunc();
+			Setting.setStat(true);
+			$.post("../func/post.func.php", {
+				oper : $("input[name='oper']").val(),
+				noredirect : "noredirect",
+				username : $("input[name='username']").val(),
+				password : $("input[name='password']").val(),
+				permission : $("select[name='permission']").val()
+			}, function () {
+				Setting.getMessage();
+				Setting.loadUsers($("#tableUserMng"));
 			});
+			return false;
+		});
 	},
 	
 	modifyUser : function (id) {
@@ -232,11 +232,11 @@ var Setting = {
 					$("<label/>").attr("for", "username").html(Strings['Username:']))).append(
 				$("<td/>").append(
 					$("<input/>").attr({
-							type : "text",
-							name : "username",
-							size : "40",
-							maxlength : "128"
-						}).val(user.username))));
+						type : "text",
+						name : "username",
+						size : "40",
+						maxlength : "128"
+					}).val(user.username))));
 		var select = $("<select/>").attr("name", "permission");
 		var option = $("<option/>").val(25).html("User");
 		if (user.permission == "User")
@@ -258,9 +258,9 @@ var Setting = {
 		
 		divModifyUser.append(table);
 		divModifyUser.append($("<input/>").attr({
-					type : "hidden",
-					name : "id"
-				}).val(id));
+				type : "hidden",
+				name : "id"
+			}).val(id));
 		form.append(divModifyUser);
 		Dialog.displaySubmit();
 		
@@ -268,20 +268,20 @@ var Setting = {
 		Dialog.setFocus($("input[name='username']"));
 		
 		form.submit(function () {
-				Dialog.closeFunc();
-				Setting.setStat(true);
-				$.post("../func/post.func.php", {
-						oper : $("input[name='oper']").val(),
-						noredirect : "noredirect",
-						id : $("input[name='id']").val(),
-						username : $("input[name='username']").val(),
-						permission : $("select[name='permission']").val()
-					}, function () {
-						Setting.getMessage();
-						Setting.loadUsers($("#tableUserMng"));
-					});
-				return false;
+			Dialog.closeFunc();
+			Setting.setStat(true);
+			$.post("../func/post.func.php", {
+				oper : $("input[name='oper']").val(),
+				noredirect : "noredirect",
+				id : $("input[name='id']").val(),
+				username : $("input[name='username']").val(),
+				permission : $("select[name='permission']").val()
+			}, function () {
+				Setting.getMessage();
+				Setting.loadUsers($("#tableUserMng"));
 			});
+			return false;
+		});
 	},
 	
 	deleteUser : function (id) {
@@ -293,27 +293,27 @@ var Setting = {
 		divDelUser.attr("id", "divDelUser");
 		divDelUser.append($("<div/>").html(Strings['Are you sure to delete this user?'] + " \"" + Setting.users[id].username + "\"").addClass("center"));
 		divDelUser.append($("<input/>").attr({
-					type : "hidden",
-					name : "id"
-				}).val(id));
+				type : "hidden",
+				name : "id"
+			}).val(id));
 		form.append(divDelUser);
 		Dialog.displaySubmit();
 		
 		Dialog.displayFuncDialog();
 		
 		form.submit(function () {
-				Dialog.closeFunc();
-				Setting.setStat(true);
-				$.post("../func/post.func.php", {
-						oper : $("input[name='oper']").val(),
-						noredirect : "noredirect",
-						id : $("input[name='id']").val()
-					}, function () {
-						Setting.getMessage();
-						Setting.loadUsers($("#tableUserMng"));
-					});
-				return false;
+			Dialog.closeFunc();
+			Setting.setStat(true);
+			$.post("../func/post.func.php", {
+				oper : $("input[name='oper']").val(),
+				noredirect : "noredirect",
+				id : $("input[name='id']").val()
+			}, function () {
+				Setting.getMessage();
+				Setting.loadUsers($("#tableUserMng"));
 			});
+			return false;
+		});
 	},
 	
 	changePswd : function () {
@@ -327,33 +327,33 @@ var Setting = {
 					$("<label/>").attr("for", "oldpswd").html(Strings['Old:']))).append(
 				$("<td/>").append(
 					$("<input/>").attr({
-							type : "password",
-							name : "oldpswd",
-							size : "40",
-							maxlength : "128"
-						}))));
+						type : "password",
+						name : "oldpswd",
+						size : "40",
+						maxlength : "128"
+					}))));
 		table.append(
 			$("<tr/>").append(
 				$("<td/>").append(
 					$("<label/>").attr("for", "newpswd").html(Strings['New:']))).append(
 				$("<td/>").append(
 					$("<input/>").attr({
-							type : "password",
-							name : "newpswd",
-							size : "40",
-							maxlength : "128"
-						}))));
+						type : "password",
+						name : "newpswd",
+						size : "40",
+						maxlength : "128"
+					}))));
 		table.append(
 			$("<tr/>").append(
 				$("<td/>").append(
 					$("<label/>").attr("for", "repeat").html(Strings['Repeat:']))).append(
 				$("<td/>").append(
 					$("<input/>").attr({
-							type : "password",
-							name : "repeat",
-							size : "40",
-							maxlength : "128"
-						}))));
+						type : "password",
+						name : "repeat",
+						size : "40",
+						maxlength : "128"
+					}))));
 		divChangePswd.append(table);
 		form.append(divChangePswd);
 		Dialog.displaySubmit();
