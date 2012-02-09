@@ -13,10 +13,11 @@
 	margin: 4px 5px 5px 8px;
 	padding: 0;
 	position: relative;
+	border: 1px solid white;
 }
 
 #mainViewList #largeiconView div.selected {
-	background: url('../images/largeicon_selected.jpg') top left no-repeat;
+	border: 1px solid #B8D1ED;
 }
 
 div.largeIconItem div.firstLine,div.largeIconItem div.imgLine,div.largeIconItem div.infoLine

@@ -16,7 +16,7 @@
 #mainView,#fullpath,#toolbar { /*
 	 * 设定主界面各个重要元素的共同属性
 	 */ /*width: 880px;*/
-	margin: 1px 0;
+	margin: 2px 0;
 }
 
 /* Fullpath sector */
@@ -26,14 +26,15 @@
 }
 
 #fullpath div.divDir,#fullpath div.divLabel,#fullpath div.pathSlash {
-	height: 22px;
+	height: 28px;
 	float: left;
 	padding: 1px;
 	/*float: left;*/
 }
 
 #fullpath div.divLabel {
-	line-height: 22px;
+	line-height: 28px;
+	cursor: default;
 }
 
 #fullpath a {
@@ -43,14 +44,15 @@
 }
 
 #fullpath a, #fullpath div.pathSlash a.selected, #fullpath div.pathSlash a.arrow {
-	border-radius: 2px;
-	-moz-border-radius: 2px;
-	-khtml-border-radius: 2px;
-	-webkit-border-radius: 2px;
 }
 #fullpath a, #fullpath div.pathSlash a.arrow {
 	border: 1px solid white;
-	padding: 1px 1px;
+}
+#fullpath a {
+	padding: 5px 6px;
+}
+#fullpath div.pathSlash a.arrow {
+	padding: 5px 0;
 }
 #fullpath a:hover, #fullpath div.pathSlash a.selected, #fullpath div.pathSlash a.arrow:hover {
 	border: 1px solid #B8D1ED;
@@ -103,38 +105,39 @@
 
 #fullpath .subMenu li a {
 	display: block;
-	height: 22px;
-	line-height: 22px;
+	height: 28px;
+	line-height: 28px;
 	/*text-indent: 4px;*/
 	overflow: hidden;
 	float: none;
 	text-decoration: none;
-	border: 0;
+	border: solid 1px white;
 	padding: 0 5px;
 }
 
 #fullpath .subMenu li a:hover {
-	text-decoration: underline;
+	border: 1px solid #B8D1ED;
 }
 
 /* Toolbar sector */
 #toolbar {
-	height: 22px;
-	line-height: 22px;
+	height: 30px;
+	line-height: 30px;
 }
-
+/*
 #toolbar .splitRight {
 	border-right: 1px solid #cccccc;
 }
-
 #toolbar .splitLeft {
 	border-left: 1px solid #cccccc;
 }
-
+*/
+#toolbar #leftToolbar,#toolbar #rightToolbar{
+	height: 30px;
+}
 #toolbar #leftToolbar {
 	float: left;
 }
-
 #toolbar #rightToolbar {
 	float: right;
 }
@@ -151,25 +154,30 @@
 #toolbar .toolbarButton,#toolbar .toolbarSmallButton {
 	display: block;
 	float: left;
-	border-bottom: 1px solid white;
+	border: 1px solid white;
+	height: 28px;
 }
-
-#toolbar .toolbarButton img {
-	width: 16px;
-	margin: 0 4px;
+#toolbar .buttonHover {
+	border: 1px solid #B8D1ED;
 }
-
-#toolbar .toolbarSmallButton img {
-	width: 10px;
-	margin: 0 1px;
+#toolbar .toolbarButton {
+	width: 30px;
+}
+#toolbar .toolbarSmallButton {
+	width: 24px;
 }
 
 #toolbar .toolbarButton img,#toolbar .toolbarSmallButton img {
 	border: 0;
-	margin-top: 1px;
 	height: 16px;
-	margin-top: 2px;
-	margin-bottom: 2px;
+}
+#toolbar .toolbarButton img {
+	width: 16px;
+	margin: 6px;
+}
+#toolbar .toolbarSmallButton img {
+	width: 10px;
+	margin: 6px 6px;
 }
 
 #toolbar .subMenu {
@@ -177,10 +185,8 @@
 	z-index: 2000;
 	position: absolute;
 	padding: 0 3px 3px 0;
-	background: transparent url('../images/shadow.png') no-repeat right
-		bottom;
-	filter: progid :   DXImageTransform.Microsoft.AlphaImageLoader (  
-       src =   '../images/shadow.png', sizingMethod =   'scale' );
+	background: transparent url('../images/shadow.png') no-repeat center right bottom;
+	filter: progid : DXImageTransform.Microsoft.AlphaImageLoader(src='../images/shadow.png',sizingMethod='scale');
 	/*
 	-webkit-box-shadow: 2px 2px 2px #888;
 	-moz-box-shadow: 2px 2px 2px #888;
@@ -228,7 +234,8 @@
 
 #toolbar form#searchForm {
 	float: left;
-	height: 20px;
+	height: 30px;
+	line-height: 30px;
 }
 
 #toolbar form#searchForm input {
@@ -237,29 +244,32 @@
 }
 
 #toolbar form#searchForm input[type="text"] {
-	height: 16px;
+	height: 26px;
+	font-size: 16px;
 	color: #999999;
-	margin: 0 2px;
+	margin: 0 4px;
 }
 
 #toolbar form#searchForm input[type="submit"] {
 	font-size: 10px;
-	background: transparent url('../images/toolbar-search.gif') center
-		no-repeat;
+	background: transparent url('../images/toolbar-search.gif') center center no-repeat;
 	border: none;
-	width: 24px;
-	height: 20px;
-	border-bottom: 1px solid white;
+	width: 34px;
+	height: 30px;
+	border: 1px solid white;
 	text-indent: 30px;
 	cursor: pointer;
+	box-shadow: none;
+}
+#toolbar form#searchForm input[type="submit"].buttonHover {
+	border: 1px solid #B8D1ED;
 }
 
 /* View sector */
 #mainView .header {
 	padding: 0;
 	margin: 0;
-	background: white url('../images/header_border_bottom.jpg') bottom left
-		repeat-x;
+	background: white url('../images/header_border_bottom.jpg') bottom left repeat-x;
 	height: 25px;
 }
 
@@ -269,7 +279,7 @@
 	overflow: hidden;
 	height: 23px;
 	line-height: 23px;
-	padding: 0 0 0 5px;
+	padding: 0 0 0 6px;
 }
 
 #mainView .header a {
@@ -280,7 +290,8 @@
 #mainView .header span #checkSelectAll {
 	/*height: 22px;
 	line-height: 22px;*/
-	margin-top: 4px;
+	margin-top: 5px;
+	margin-left: 3px;
 }
 
 #mainView .header span.split {
@@ -289,27 +300,27 @@
 }
 
 #mainView .header span.check {
-	width: 17px;
+	width: 16px;
 }
 
 #mainView .header span.icon {
-	width: 20px;
+	width: 19px;
 }
 
 #mainView .header span.name {
-	width: 420px;
+	width: 419px;
 }
 
 #mainView .header span.size {
-	width: 125px;
+	width: 124px;
 }
 
 #mainView .header span.type {
-	width: 120px;
+	width: 119px;
 }
 
 #mainView .header span.mtime {
-	width: 120px;
+	width: 119px;
 }
 
 #mainView .header span a.sorta {

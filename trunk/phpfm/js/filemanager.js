@@ -648,12 +648,12 @@ var FileManager = {
 	
 	toolbarButtonMouseIn : function () {
 		if (!$(this).hasClass("disable")) {
-			$(this).css("border-bottom", "1px solid #B8D1ED");
+			$(this).addClass("buttonHover");
 		}
 	},
 	
 	toolbarButtonMouseOut : function () {
-		$(this).css("border-bottom", "1px solid white");
+		$(this).removeClass("buttonHover");
 	},
 	
 	/*

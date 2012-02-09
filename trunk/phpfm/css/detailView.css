@@ -1,5 +1,5 @@
 ﻿@CHARSET "UTF-8";
-
+/*
 #mainView ul.n {
 	background: url('../images/n.jpg') 25px 0 repeat-y;
 }
@@ -12,7 +12,7 @@
 #mainView ul.m {
 	background: url('../images/m.jpg') 29px 0 repeat-y;
 }
-
+*/
 #mainView #detailView {
 	list-style: none;
 	padding: 2px 0 0 0;
@@ -20,12 +20,13 @@
 	display: none;
 }
 #mainView #detailView li {
-	margin: 0 0 2px 0;
-	height: 18px;
+	margin: 0 2px 2px 2px;
+	height: 26px;
 	cursor: default;
+	border: 1px solid white;
 }
 #mainView #detailView li.selected {
-	background: url('../images/row-hover.jpg') left center no-repeat;
+	border: 1px solid #B8D1ED;
 }
 #mainView #detailView li a {
 	text-decoration: none;
@@ -35,18 +36,18 @@
 	color: black;
 }
 #mainView #detailView li a:hover span {
-	text-decoration: underline;
+	
 }
 #mainView #detailView li.empty {
-	height: 18px;
+	height: 26px;
 }
 
 #mainView #detailView span {
 	display: block;
 	float: left;
 	overflow: hidden;
-	height: 18px;
-	line-height: 18px;
+	height: 26px;
+	line-height: 26px;
 	padding: 0 0 0 5px;
 }
 #mainView #detailView span.check {
@@ -54,6 +55,9 @@
 }
 #mainView #detailView span.icon {
 	width: 20px;
+}
+#mainView #detailView span.icon img {
+	margin-top: 5px;
 }
 #mainView #detailView span.name {
 	width: 420px;
@@ -69,5 +73,5 @@
 }
 
 #mainView #detailView input.inputCheck {
-	margin-top: 1px;
+	margin-top: 6px;
 }
