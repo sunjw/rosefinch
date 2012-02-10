@@ -4,8 +4,7 @@
 }
 
 body {
-	background: #F5F6F7 url('../images/body_new_apple.jpg') top center
-		repeat-x scroll;
+	background: #F5F6F7 url('../images/body_new_apple.jpg') top center repeat-x scroll;
 	/*width: 900px;*/
 	min-width: 900px;
 	padding-left: 40px;
@@ -29,25 +28,25 @@ a {
 	color: #666666;
 	
 	-moz-transition-property: background,color,border;
-	-moz-transition-duration: 0.3s;
+	-moz-transition-duration: 0.4s;
 	-webkit-transition-property: background,color,border;
-	-webkit-transition-duration: 0.3s;
+	-webkit-transition-duration: 0.4s;
 	-o-transition-property: background,color,border;
-	-o-transition-duration: 0.3s;
+	-o-transition-duration: 0.4s;
 	-ms-transition-property: background,color,border;
-	-ms-transition-duration: 0.3s;
+	-ms-transition-duration: 0.4s;
 }
 a:hover {
 	color: black;
 	
 	-moz-transition-property: background,color,border;
-	-moz-transition-duration: 0.3s;
+	-moz-transition-duration: 0.4s;
 	-webkit-transition-property: background,color,border;
-	-webkit-transition-duration: 0.3s;
+	-webkit-transition-duration: 0.4s;
 	-o-transition-property: background,color,border;
-	-o-transition-duration: 0.3s;
+	-o-transition-duration: 0.4s;
 	-ms-transition-property: background,color,border;
-	-ms-transition-duration: 0.3s;
+	-ms-transition-duration: 0.4s;
 }
 
 input[type="submit"], input[type="button"], button {
@@ -59,25 +58,25 @@ input[type="submit"], input[type="button"], button {
 	box-shadow: 1px 1px 2px #dddddd;
 	
 	-moz-transition-property: border-color;
-	-moz-transition-duration: 0.3s;
+	-moz-transition-duration: 0.4s;
 	-webkit-transition-property: border-color;
-	-webkit-transition-duration: 0.3s;
+	-webkit-transition-duration: 0.4s;
 	-o-transition-property: border-color;
-	-o-transition-duration: 0.3s;
+	-o-transition-duration: 0.4s;
 	-ms-transition-property: border-color;
-	-ms-transition-duration: 0.3s;
+	-ms-transition-duration: 0.4s;
 }
 input[type="submit"]:hover, input[type="button"]:hover, button:hover {
 	border-color: black;
 	
 	-moz-transition-property: border-color;
-	-moz-transition-duration: 0.3s;
+	-moz-transition-duration: 0.4s;
 	-webkit-transition-property: border-color;
-	-webkit-transition-duration: 0.3s;
+	-webkit-transition-duration: 0.4s;
 	-o-transition-property: border-color;
-	-o-transition-duration: 0.3s;
+	-o-transition-duration: 0.4s;
 	-ms-transition-property: border-color;
-	-ms-transition-duration: 0.3s;
+	-ms-transition-duration: 0.4s;
 }
 input[type="submit"]:active, input[type="button"]:active, button:active {
 	border-color: black;
@@ -152,13 +151,13 @@ input[type="submit"]:active, input[type="button"]:active, button:active {
 }
 #nav ul .li-item a {
 	-moz-transition-property: background-color,color;
-	-moz-transition-duration: 0.3s;
+	-moz-transition-duration: 0.4s;
 	-webkit-transition-property: background-color,color;
-	-webkit-transition-duration: 0.3s;
+	-webkit-transition-duration: 0.4s;
 	-o-transition-property: background-color,color;
-	-o-transition-duration: 0.3s;
+	-o-transition-duration: 0.4s;
 	-ms-transition-property: background-color,color;
-	-ms-transition-duration: 0.3s;
+	-ms-transition-duration: 0.4s;
 }
 #nav ul .current {
 	box-shadow: 0 0 5px #666666;
@@ -169,13 +168,13 @@ input[type="submit"]:active, input[type="button"]:active, button:active {
 	/*background: url('../images/nav-hover-bg.jpg') left center repeat-x;*/
 	
 	-moz-transition-property: background-color,color;
-	-moz-transition-duration: 0.3s;
+	-moz-transition-duration: 0.4s;
 	-webkit-transition-property: background-color,color;
-	-webkit-transition-duration: 0.3s;
+	-webkit-transition-duration: 0.4s;
 	-o-transition-property: background-color,color;
-	-o-transition-duration: 0.3s;
+	-o-transition-duration: 0.4s;
 	-ms-transition-property: background-color,color;
-	-ms-transition-duration: 0.3s;
+	-ms-transition-duration: 0.4s;
 }
 #nav ul .li-current a:hover {
 	

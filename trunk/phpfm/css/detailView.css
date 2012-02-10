@@ -24,9 +24,27 @@
 	height: 26px;
 	cursor: default;
 	border: 1px solid white;
+	
+	-moz-transition-property: background,color,border;
+	-moz-transition-duration: 0.4s;
+	-webkit-transition-property: background,color,border;
+	-webkit-transition-duration: 0.4s;
+	-o-transition-property: background,color,border;
+	-o-transition-duration: 0.4s;
+	-ms-transition-property: background,color,border;
+	-ms-transition-duration: 0.4s;
 }
 #mainView #detailView li.selected {
 	border: 1px solid #B8D1ED;
+	
+	-moz-transition-property: background,color,border;
+	-moz-transition-duration: 0.4s;
+	-webkit-transition-property: background,color,border;
+	-webkit-transition-duration: 0.4s;
+	-o-transition-property: background,color,border;
+	-o-transition-duration: 0.4s;
+	-ms-transition-property: background,color,border;
+	-ms-transition-duration: 0.4s;
 }
 #mainView #detailView li a {
 	text-decoration: none;

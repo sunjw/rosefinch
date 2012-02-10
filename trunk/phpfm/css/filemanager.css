@@ -79,14 +79,8 @@
 	position: absolute;
 	/*min-width: 160px;*/
 	padding: 0 3px 3px 0;
-	background: transparent url('../images/shadow.png') no-repeat right
-		bottom;
-	filter: progid :   DXImageTransform.Microsoft.AlphaImageLoader (  
-       src =   '../images/shadow.png', sizingMethod =   'scale' );
-	/*
-	-webkit-box-shadow: 2px 2px 2px #888;
-	-moz-box-shadow: 2px 2px 2px #888;
-	*/
+	background: transparent url('../images/shadow.png') no-repeat right bottom;
+	filter: progid: DXImageTransform.Microsoft.AlphaImageLoader(src='../images/shadow.png',sizingMethod='scale');
 }
 
 #fullpath .subMenu ul {
@@ -187,10 +181,6 @@
 	padding: 0 3px 3px 0;
 	background: transparent url('../images/shadow.png') no-repeat center right bottom;
 	filter: progid : DXImageTransform.Microsoft.AlphaImageLoader(src='../images/shadow.png',sizingMethod='scale');
-	/*
-	-webkit-box-shadow: 2px 2px 2px #888;
-	-moz-box-shadow: 2px 2px 2px #888;
-	*/
 }
 
 #toolbar .subMenu ul {
@@ -269,28 +259,29 @@
 #mainView .header {
 	padding: 0;
 	margin: 0;
-	background: white url('../images/header_border_bottom.jpg') bottom left repeat-x;
-	height: 25px;
+	height: 28px;
+	margin-bottom: 2px;
+	box-shadow: 0 1px 3px #AAAAAA;
 }
 
 #mainView .header span {
 	display: block;
 	float: left;
 	overflow: hidden;
-	height: 23px;
-	line-height: 23px;
+	height: 28px;
+	line-height: 28px;
 	padding: 0 0 0 6px;
 }
 
 #mainView .header a {
 	display: block;
-	line-height: 22px;
+	line-height: 28px;
 }
 
 #mainView .header span #checkSelectAll {
 	/*height: 22px;
 	line-height: 22px;*/
-	margin-top: 5px;
+	margin-top: 8px;
 	margin-left: 3px;
 }
 
@@ -324,9 +315,9 @@
 }
 
 #mainView .header span a.sorta {
-	background: url('../images/order_asc.jpg') center 2px no-repeat;
+	background: url('../images/order_asc.jpg') center 6px no-repeat;
 }
 
 #mainView .header span a.sortd {
-	background: url('../images/order_desc.jpg') center 2px no-repeat;
+	background: url('../images/order_desc.jpg') center 6px no-repeat;
 }
