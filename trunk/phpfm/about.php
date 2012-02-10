@@ -22,17 +22,16 @@ set_response_utf8();
 	<script type="text/javascript" language="javascript" src="js/jquery.tabs.min.js"></script>
 </head>
 <body>
-    <div id="nav">
-        <?php Utility::html_navigation("about"); ?>
-        <div class="clear"></div>
-    </div>
     <div id="header">
-        <div id="mainTitle">
-    		<?php echo _("About"); ?>
-        </div>
-        <div id="subTitle">
-    		
-    	</div>
+	    <div id="nav">
+	        <?php Utility::html_navigation("about"); ?>
+	        <div class="clear"></div>
+	    </div>
+	    <div id="loginStatus">
+	    <?php 
+	    echo Utility::display_user();
+	    ?>
+	    </div>
     </div>
     <div id="content">
         <div id="phpfmDocNav">

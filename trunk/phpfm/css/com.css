@@ -83,36 +83,19 @@ input[type="submit"]:active, input[type="button"]:active, button:active {
 	box-shadow: 1px 1px 1px #dddddd inset;
 }
 
-#header h1 {
-	font-size: xx-large;
-	font-family: "Times New Roman", Times, serif;
-	color: white;
-}
 #header {
-	padding: 10px;
-	height: 80px;
-	font-family: 微软雅黑, "segoe ui", verdana, arial, sans-serif;
-}
-#header #mainTitle {
-	float: left;
-	margin-top: 20px;
-	font-size: xx-large;
-	font-style: italic;
-	font-weight: bold;
-	color: #223355;
-	text-shadow: 2px 2px 2px #aaaaaa;
-}
-#header #subTitle {
-	float: left;
-	margin-top: 42px;
-	margin-left: 20px;
-	font-size: small;
-	color: #003595
+	height: 30px;
+	line-height: 30px;
+	position: relative;
 }
 #header #loginStatus {
-	float: right;
-	margin-top: 42px;
-	font-size: small;
+	padding: 1px;
+}
+#header #loginStatus {
+	position: absolute;
+	top: 0;
+	right: 10px;
+	font-size: 14px;
 }
 
 #nav { /*margin-top: 5px;*/
@@ -122,7 +105,7 @@ input[type="submit"]:active, input[type="button"]:active, button:active {
 	list-style-type: none;
 	list-style-image: none;
 	/*margin-left: 200px;*/
-	float: right;
+	float: left;
 }
 #nav,#nav ul li a,#nav a#phpfmNavHome {
 	font-family: 微软雅黑, "segoe ui", verdana, arial, sans-serif;
@@ -143,11 +126,11 @@ input[type="submit"]:active, input[type="button"]:active, button:active {
 	display: block;
 }
 #nav ul,#nav ul .li-item {
-	height: 25px;
-	line-height: 25px;
+	height: 30px;
+	line-height: 30px;
 }
 #nav ul .li-item {
-	border-right: 1px dotted #666666;
+	border-right: 1px solid #CCCCCC;
 }
 #nav ul .li-item a {
 	-moz-transition-property: background-color,color;
@@ -161,6 +144,8 @@ input[type="submit"]:active, input[type="button"]:active, button:active {
 }
 #nav ul .current {
 	box-shadow: 0 0 5px #666666;
+	border-right: none;
+	margin-right: 1px;
 }
 #nav ul .li-item a:hover,#nav ul .current a {
 	background-color: #666666;
@@ -202,7 +187,7 @@ input[type="submit"]:active, input[type="button"]:active, button:active {
 #content {
 	font-family: 宋体, "Times New Roman", serif;
 	font-size: 14px;
-	padding: 6px 10px;
+	padding-bottom: 6px;
 	background-color: white;
 	border-top: solid #666666 5px;
 	box-shadow: 0 0 10px #cccccc;

@@ -41,17 +41,16 @@ set_response_utf8();
 	</script>
 </head>
 <body>
-    <div id="nav">
-        <?php Utility::html_navigation("help"); ?>
-        <div class="clear"></div>
-    </div>
-    <div id="header">
-        <div id="mainTitle">
-    		<?php echo _("Help"); ?>
-        </div>
-        <div id="subTitle">
-    		
-    	</div>
+	<div id="header">
+	    <div id="nav">
+	        <?php Utility::html_navigation("help"); ?>
+	        <div class="clear"></div>
+	    </div>
+	    <div id="loginStatus">
+	    <?php 
+	    echo Utility::display_user();
+	    ?>
+	    </div>
     </div>
     <div id="content">
         <div id="phpfmDocNav">

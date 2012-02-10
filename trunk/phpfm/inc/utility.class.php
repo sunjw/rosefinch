@@ -800,7 +800,6 @@ class Utility
         if($page == "setting")
         {
         ?>
-        <a href="../index.php" id="phpfmNavHome" class="<?php $page == "index" ? print("current") : print(""); ?>"><?php echo htmlentities_utf8(_(TITLENAME)); ?></a>
         <ul>
         	<li class="li-item"><a href="../"><?php echo htmlentities_utf8(_(TITLENAME)); ?></a></li>
         	<li class="li-item current"><a href="setting.php"><?php echo _("Setting"); ?></a></li>
@@ -812,7 +811,6 @@ class Utility
         else
         {
         ?>
-        <a href="index.php" id="phpfmNavHome" class="<?php $page == "index" ? print("current") : print(""); ?>"><?php echo htmlentities_utf8(_(TITLENAME)); ?></a>
         <ul>
         	<li class="li-item<?php $page == "index" ? print(" current") : print(""); ?>"><a href="index.php"><?php echo htmlentities_utf8(_(TITLENAME)); ?></a></li>
         	<li class="li-item<?php $page == "setting" ? print(" current") : print(""); ?>"><a href="admin/setting.php"><?php echo _("Setting"); ?></a></li>

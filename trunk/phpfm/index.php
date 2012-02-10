@@ -33,29 +33,16 @@ $fileManager = new FileManager($search_mode, "index.php", "index.php");
     <?php echo $fileManager->html_include_files(DEBUG); ?>
 </head>
 <body>
-    <div id="nav">
-        <?php Utility::html_navigation(); ?>
-        <div class="clear"></div>
-    </div>
-    <div id="header">
-    	<div id="mainTitle">
-    		<?php 
-    		if(!$search_mode)
-    			echo $fileManager->get_current_dir();
-    		else
-    			printf(_("Search \"%s\" in \"%s\""), $fileManager->get_search_html(), $fileManager->get_current_dir());
-    		?>
-        </div>
-        <div id="subTitle">
-    		<?php 
-    		//echo " - " . $fileManager->get_current_path(); 
-    		?>
-    	</div>
-    	<div id="loginStatus">
-    		<?php 
-    		echo Utility::display_user();
-    		?>
-    	</div>
+	<div id="header">
+	    <div id="nav">
+	        <?php Utility::html_navigation(); ?>
+	        <div class="clear"></div>
+	    </div>
+	    <div id="loginStatus">
+	    <?php 
+	    echo Utility::display_user();
+	    ?>
+	    </div>
     </div>
     <div id="content">
         <?php 

@@ -130,22 +130,16 @@ textdomain($domain);
     </script>
 </head>
 <body>
-    <div id="nav">
-        <?php Utility::html_navigation("setting"); ?>
-        <div class="clear"></div>
-    </div>
-    <div id="header">
-    	<div id="mainTitle">
-    		<?php echo _("Setting"); ?>
-        </div>
-        <div id="subTitle">
-    		<?php echo _("Set preferences of your Rosefinch."); ?>
-    	</div>
-    	<div id="loginStatus">
-    		<?php 
-    		echo Utility::display_user();
-    		?>
-    	</div>
+	<div id="header">
+	    <div id="nav">
+	        <?php Utility::html_navigation("setting"); ?>
+	        <div class="clear"></div>
+	    </div>
+	    <div id="loginStatus">
+	    <?php 
+	    echo Utility::display_user();
+	    ?>
+	    </div>
     </div>
     <div id="content">
     	<div id="phpfmDocNav">
