@@ -380,7 +380,9 @@ var FileManager = {
 				
 				phpfmMessage.click(FileManager.closeMessage);
 				clearTimeout(FileManager.delayID);
-				FileManager.delayID = setTimeout("FileManager.closeMessage()", 5000);
+				FileManager.delayID = setTimeout(function () {
+						FileManager.closeMessage();
+					}, 5000);
 			}
 		});
 		
@@ -427,7 +429,9 @@ var FileManager = {
 			}
 		});
 		
-		setTimeout("FileManager.getMessage()", 500);
+		setTimeout(function () {
+			FileManager.getMessage();
+		}, 500);
 	},
 	
 	/*
