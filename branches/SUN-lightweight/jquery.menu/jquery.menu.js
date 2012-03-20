@@ -43,10 +43,10 @@ var jqMenu = {
 	 * 关闭所有子菜单
 	 */
 	hideAllSubMenus : function () {
-		$(jqMenu.menuButtonSelector).removeClass("selected");
 		var subMenus = $(jqMenu.subMenuSelector);
 		for (var i = 0; i < subMenus.length; i++) {
 			var subMenu = $(subMenus[i]);
+			subMenu.prev(jqMenu.menuButtonSelector).removeClass("selected");
 			// subMenu.css("display", "none");
 			jqMenu.hideSubMenu(subMenu);
 		}
@@ -74,13 +74,13 @@ var jqMenu = {
 			thisButton = this;
 		if (!thisButton)
 			return;
-		$(jqMenu.menuButtonSelector).removeClass("selected");
 		var thisSub = $(thisButton.parentNode).children(jqMenu.subMenuSelector);
 		var subMenus = $(jqMenu.subMenuSelector);
 		for (var i = 0; i < subMenus.length; i++) {
 			var subMenu = $(subMenus[i]);
 			if (thisSub.get(0) != subMenu.get(0)
 				 && subMenu.is(":visible")) {
+				subMenu.prev(jqMenu.menuButtonSelector).removeClass("selected");
 				// subMenu.css("display", "none");
 				jqMenu.hideSubMenu(subMenu);
 			}
@@ -101,9 +101,6 @@ var jqMenu = {
 				}
 				jqMenu.opened = true;
 			});
-			if (thisSub.length == 0) {
-				jqMenu.opened = true;
-			}
 		} else if (!jqMenu.hoverOpen) {
 			$(thisButton).removeClass("selected");
 			// thisSub.css("display", "none");
@@ -119,7 +116,9 @@ var jqMenu = {
 		} else {
 			// 没有菜单打开，第一个要 delay
 			clearTimeout(jqMenu.showTimer);
-			jqMenu.showTimer = setTimeout("jqMenu.showSubMenu()", jqMenu.delay * 0.75);
+			jqMenu.showTimer = setTimeout(function () {
+					jqMenu.showSubMenu();
+				}, jqMenu.delay * 0.75);
 		}
 	},
 	
@@ -127,7 +126,9 @@ var jqMenu = {
 		clearTimeout(jqMenu.showTimer);
 		if (jqMenu.opened) {
 			clearTimeout(jqMenu.hideTimer);
-			jqMenu.hideTimer = setTimeout("jqMenu.hideAllSubMenus()", jqMenu.delay);
+			jqMenu.hideTimer = setTimeout(function () {
+					jqMenu.hideAllSubMenus();
+				}, jqMenu.delay);
 		}
 	},
 	
@@ -162,8 +163,7 @@ var jqMenu = {
 					clearTimeout(jqMenu.hideTimer);
 				}
 				var button = menuItem.find(jqMenu.menuButtonSelector);
-				if (button.get(0))
-					button.get(0).onmouseover = jqMenu.delayShowSubMenu;
+				button.get(0).onmouseover = jqMenu.delayShowSubMenu;
 			}
 			
 			body.onmouseover = jqMenu.delayHideMenu;
