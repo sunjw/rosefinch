@@ -10,14 +10,14 @@ var jqMenu = {
 	subMenuSelector : ".submenu",
 	inlineShadow : "transparent url('shadow.png') no-repeat right bottom",
 	hoverOpen : false,
-	
+
 	isIE : true,
 	opened : false,
 	delay : 500,
 	showTimer : 0,
 	hideTimer : 0,
 	activeButton : null,
-	
+
 	/**
 	 * 阻止事件浮升
 	 */
@@ -30,7 +30,7 @@ var jqMenu = {
 			e.stopPropagation();
 		}
 	},
-	
+
 	setup : function (values) {
 		jqMenu.menuItemsSelector = values.menuItemsSelector || jqMenu.menuItemsSelector;
 		jqMenu.menuButtonSelector = values.menuButtonSelector || jqMenu.menuButtonSelector;
@@ -38,7 +38,7 @@ var jqMenu = {
 		jqMenu.inlineShadow = values.inlineShadow || jqMenu.inlineShadow;
 		jqMenu.hoverOpen = values.hoverOpen || jqMenu.hoverOpen;
 	},
-	
+
 	/**
 	 * 关闭所有子菜单
 	 */
@@ -52,7 +52,7 @@ var jqMenu = {
 		}
 		jqMenu.opened = false;
 	},
-	
+
 	/**
 	 * 关闭子菜单
 	 */
@@ -62,7 +62,7 @@ var jqMenu = {
 			subMenu.css("background", "none"); // IE-hack 去掉背景
 		subMenu.fadeOut("fast");
 	},
-	
+
 	/**
 	 * 打开菜单
 	 */
@@ -107,7 +107,7 @@ var jqMenu = {
 			jqMenu.hideSubMenu(thisSub);
 		}
 	},
-	
+
 	delayShowSubMenu : function () {
 		jqMenu.activeButton = this;
 		if (jqMenu.opened) {
@@ -121,7 +121,7 @@ var jqMenu = {
 				}, jqMenu.delay * 0.75);
 		}
 	},
-	
+
 	delayHideMenu : function () {
 		clearTimeout(jqMenu.showTimer);
 		if (jqMenu.opened) {
@@ -131,17 +131,17 @@ var jqMenu = {
 				}, jqMenu.delay);
 		}
 	},
-	
+
 	/**
 	 * 初始化菜单
 	 */
 	init : function () {
 		jqMenu.isIE = $.browser.msie ? true : false;
-		
+
 		var body = $("body").get(0);
 		var menuItems = $(jqMenu.menuItemsSelector);
 		var count = menuItems.length;
-		
+
 		if (!jqMenu.hoverOpen) {
 			// 点击开关
 			for (var i = 0; i < count; i++) {
@@ -152,7 +152,7 @@ var jqMenu = {
 				var button = menuItem.find(jqMenu.menuButtonSelector);
 				button.get(0).onclick = jqMenu.showSubMenu;
 			}
-			
+
 			body.onclick = jqMenu.hideAllSubMenus;
 		} else {
 			// hover 开关
@@ -165,7 +165,7 @@ var jqMenu = {
 				var button = menuItem.find(jqMenu.menuButtonSelector);
 				button.get(0).onmouseover = jqMenu.delayShowSubMenu;
 			}
-			
+
 			body.onmouseover = jqMenu.delayHideMenu;
 		}
 	}

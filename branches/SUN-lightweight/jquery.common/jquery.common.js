@@ -5,13 +5,13 @@
  * Version: 1.1.0
  */
 var jqCommon = {
-	
+
 	prefix : "jqComm",
 	placeholderEmpty : "jqCommHolder",
-	
+
 	customRegexArray : new Array(),
 	customRegexIndex : 0,
-	
+
 	/**
 	 * 阻止事件浮升
 	 */
@@ -24,18 +24,18 @@ var jqCommon = {
 			e.stopPropagation();
 		}
 	},
-	
+
 	dummy : function () {
 		return;
 	},
-	
+
 	/**
 	 * 检测是否有指定名称的 Cookie
 	 */
 	hasCookie : function (key) {
 		return (new RegExp("(?:^|;\\s*)" + escape(key).replace(/[\-\.\+\*]/g, "\\$&") + "\\s*\\=")).test(document.cookie);
 	},
-	
+
 	/**
 	 * 得到指定名称的 Cookie 值
 	 */
@@ -48,7 +48,7 @@ var jqCommon = {
 				new RegExp("(?:^|.*;\\s*)" + escape(key).replace(/[\-\.\+\*]/g, "\\$&") + "\\s*\\=\\s*((?:[^;](?!;))*[^;]?).*"),
 				"$1"));
 	},
-	
+
 	/**
 	 * 设置指定名称的 Cookie 值
 	 */
@@ -58,7 +58,7 @@ var jqCommon = {
 		var c_value = escape(value) + "; expires=" + exdate.toUTCString();
 		document.cookie = key + "=" + c_value;
 	},
-	
+
 	/**
 	 * 获得 uri 的 get 参数
 	 */
@@ -77,21 +77,21 @@ var jqCommon = {
 		}
 		return "";
 	},
-	
+
 	/**
 	 * javascript 跳转
 	 */
 	redirect : function (target) {
 		window.location = target;
 	},
-	
+
 	/**
 	 * 刷新页面
 	 */
 	refresh : function () {
 		jqCommon.redirect(window.location);
 	},
-	
+
 	/**
 	 * Dispatch
 	 */
@@ -109,52 +109,52 @@ var jqCommon = {
 			// check custom regular express
 			return jqCommon.checkRegex(jqCommon.customRegexArray[inputObj.attr("cusReg")], inputObj.val());
 		}
-		
+
 		return true;
 	},
-	
+
 	checkEmail : function (text) {
 		var regExp = /^[_a-z0-9-]+(\.[_a-z0-9-]+)*@[a-z0-9-]+(\.[a-z0-9-]+)*(\.[a-z]{2,3})$/;
 		return regExp.exec($.trim(text));
 	},
-	
+
 	checkEmpty : function (text) {
 		return ($.trim(text) != "");
 	},
-	
+
 	checkNumber : function (text) {
 		var regExp = /^[0-9]+$/;
 		return regExp.exec($.trim(text));
 	},
-	
+
 	checkRegex : function (regex, text) {
 		return regex.exec($.trim(text));
 	},
-	
+
 	getForm : function (formSelector) {
 		if (formSelector == null)
 			return $("body");
 		return $("form" + formSelector);
 	},
-	
+
 	getInput : function (formSelector, inputSelector) {
 		return (jqCommon.getForm(formSelector)).find("input" + inputSelector);
 	},
-	
+
 	/**
 	 * 设置自定义表单提交 handler 函数
 	 */
 	setFormSubmitHandler : function (handler) {
 		jqCommon.formSubmitHandler = handler;
 	},
-	
+
 	/**
 	 * 默认表单提交 handler 函数
 	 */
 	formSubmitHandler : function (formObj, result) {
 		return result;
 	},
-	
+
 	/**
 	 * 表单提交时做验证
 	 */
@@ -166,16 +166,16 @@ var jqCommon = {
 			if (input.hasClass(jqCommon.placeholderEmpty)) {
 				input.val("");
 			}
-			
+
 			if (!jqCommon.checkValue(input)) {
 				return false;
 			}
-			
+
 		}
-		
+
 		return true;
 	},
-	
+
 	/**
 	 * 检查 input 是否需要填入 placeholder 文字
 	 */
@@ -186,7 +186,7 @@ var jqCommon = {
 				input.val(text);
 		}
 	},
-	
+
 	/**
 	 * 需要时清空 placeholder 文字
 	 */
@@ -196,7 +196,7 @@ var jqCommon = {
 			input.val("");
 		}
 	},
-	
+
 	/**
 	 * 设置指定表单的指定 input 的 placeholder 文字
 	 */
@@ -207,7 +207,7 @@ var jqCommon = {
 			input.addClass(jqCommon.placeholderEmpty);
 			input.val(text);
 		}
-		
+
 		input.focus(function () {
 			jqCommon.cleanPlaceholder($(this));
 		});
@@ -217,7 +217,7 @@ var jqCommon = {
 		input.blur(function () {
 			jqCommon.checkPlaceholder($(this), text);
 		});
-		
+
 		if (!form.hasClass(jqCommon.prefix + "Form")) {
 			form.submit(function () {
 				return jqCommon.formSubmitHandler(form, jqCommon.formSubmit($(this)));
@@ -225,13 +225,13 @@ var jqCommon = {
 			form.addClass(jqCommon.prefix + "Form");
 		}
 	},
-	
+
 	setCustomRegex : function (formSelector, inputSelector, regex) {
 		var input = jqCommon.getInput(formSelector, inputSelector);
 		input.attr("cusReg", jqCommon.customRegexIndex);
 		jqCommon.customRegexArray[jqCommon.customRegexIndex++] = regex;
 	},
-	
+
 	/**
 	 * 设置验证
 	 */
@@ -249,7 +249,7 @@ var jqCommon = {
 				errHandler != null ? errHandler() : jqCommon.dummy();
 			}
 		});
-		
+
 		if (!form.hasClass(jqCommon.prefix + "Form")) {
 			form.submit(function () {
 				return jqCommon.formSubmitHandler(form, jqCommon.formSubmit($(this)));
@@ -257,7 +257,7 @@ var jqCommon = {
 			form.addClass(jqCommon.prefix + "Form");
 		}
 	},
-	
+
 	/**
 	 * 清除已设置的验证
 	 */
@@ -268,7 +268,7 @@ var jqCommon = {
 		input.removeClass(jqCommon.prefix + "number");
 		input.removeClass(jqCommon.prefix + "custom");
 		input.removeAttr("cusReg");
-		
+
 	}
-	
+
 }

@@ -15,11 +15,11 @@ var jqTabs = {
 	titleAttr : "title", // 标题属性
 	animation : false,
 	generateNav : false, // 是否自动生成导航栏
-	
+
 	navs : null,
 	contents : null,
 	browser : null,
-	
+
 	/**
 	 * 设置参数
 	 */
@@ -35,7 +35,7 @@ var jqTabs = {
 		jqTabs.generateNav = values.generateNav || jqTabs.generateNav;
 		jqTabs.animation = values.animation || jqTabs.animation;
 	},
-	
+
 	/**
 	 * 显示指定 tab
 	 */
@@ -60,34 +60,34 @@ var jqTabs = {
 				toDisplayName = name;
 			}
 		}
-		
+
 		if (toDisplay != null) {
 			if (isAni && matched)
 				toDisplay.fadeIn();
 			else
 				toDisplay.show();
-			
+
 			displayed = true;
 		}
-		
+
 		if (displayed) {
 			for (navName in jqTabs.navs) {
 				jqTabs.navs[navName].removeClass("selected");
 			}
-			
+
 			jqTabs.navs[toDisplayName].addClass("selected");
 		} else {
 			jqTabs.display(jqTabs.contents[0], isAni);
 		}
 	},
-	
+
 	/**
 	 * 初始化内容
 	 */
 	initContents : function () {
 		jqTabs.display(jqTabs.contents[0], false);
 	},
-	
+
 	/**
 	 * 初始化导航栏
 	 */
@@ -107,7 +107,7 @@ var jqTabs = {
 				if (i > 0) {
 					nav.append(jqTabs.splitor);
 				}
-				
+
 				// IE hacks: href is different in old version of IE, so use title
 				var link = $("<a/>").attr(jqTabs.linkAttr, jqTabs.linkPrefix + name).attr(jqTabs.titleAttr, name).text(
 						title);
@@ -116,7 +116,7 @@ var jqTabs = {
 			}
 		}
 	},
-	
+
 	/**
 	 * 初始化按钮
 	 */
@@ -131,21 +131,21 @@ var jqTabs = {
 			jqTabs.navs[nav.attr(jqTabs.titleAttr)] = nav;
 		}
 	},
-	
+
 	/**
 	 * 初始化
 	 */
 	init : function () {
 		jqTabs.contents = new Array();
 		jqTabs.navs = new Array();
-		
+
 		jqTabs.initNav();
 		jqTabs.initClick();
 		jqTabs.initContents();
-		
+
 		var url = window.location.href;
 		var curTitle = url.split(jqTabs.linkPrefix)[1];
-		
+
 		jqTabs.display(curTitle, jqTabs.animation);
 	}
 }

@@ -9,15 +9,15 @@ var jqFolding = {
 	triggerSelector : ".trigger", // trigger 选择器
 	containerSelector : ".foldingContainer", // container 选择器
 	initState : "show", // 初始状态，show/hide
-	
+
 	initShownFlag : "initShow", // 一开始要显示的 list, 当 initState == "show" 时, 不起作用
 	initHiddenFlag : "initHidden", // 一开始要隐藏的 list, 当 initState == "hide" 时, 不起作用
-	
+
 	classShown : "shown",
 	classHidden : "hidden",
 	classHeaderShown : "headerShown",
 	classHeaderHidden : "headerHidden",
-	
+
 	/**
 	 * 阻止事件浮升
 	 */
@@ -30,7 +30,7 @@ var jqFolding = {
 			e.stopPropagation();
 		}
 	},
-	
+
 	/**
 	 * 设置参数
 	 */
@@ -40,7 +40,7 @@ var jqFolding = {
 		jqFolding.containerSelector = values.containerSelector || jqFolding.containerSelector;
 		jqFolding.initState = values.initState || jqFolding.initState;
 	},
-	
+
 	/**
 	 * 开关
 	 */
@@ -68,16 +68,16 @@ var jqFolding = {
 				trigger.removeClass(jqFolding.classHeaderHidden);
 			});
 		}
-		
+
 	},
-	
+
 	/**
 	 * 初始化
 	 */
 	init : function () {
 		var divListwHeaders = $(jqFolding.listSelector);
 		var len = divListwHeaders.length;
-		
+
 		//alert(len);
 		for (var i = 0; i < len; i++) {
 			var divListwHeader = $(divListwHeaders[i]);
@@ -91,7 +91,7 @@ var jqFolding = {
 				hrefs[j].onclick = function (e) {
 					jqFolding.stopBubble(e);
 				};
-			
+
 			if (jqFolding.initState == "hide") {
 				divListwHeader.find(jqFolding.triggerSelector).addClass(jqFolding.classHeaderHidden);
 				divListwHeader.find(jqFolding.containerSelector).addClass(jqFolding.classHidden);
@@ -99,7 +99,7 @@ var jqFolding = {
 				divListwHeader.find(jqFolding.triggerSelector).addClass(jqFolding.classHeaderShown);
 				divListwHeader.find(jqFolding.containerSelector).addClass(jqFolding.classShown);
 			}
-			
+
 			if (divListwHeader.hasClass(jqFolding.initShownFlag)) {
 				divListwHeader.find(jqFolding.triggerSelector).addClass(jqFolding.classHeaderShown);
 				divListwHeader.find(jqFolding.containerSelector).addClass(jqFolding.classShown);
