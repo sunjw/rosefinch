@@ -2,7 +2,7 @@ var Setting = {
 	working : false,
 	users : null,
 	oldTable : "",
-	
+
 	setStat : function (working) {
 		if (working) {
 			$("span#statUserMng").html("&nbsp;|&nbsp;" + Strings['Working...']);
@@ -11,7 +11,7 @@ var Setting = {
 		}
 		Setting.working = working;
 	},
-	
+
 	/**
 	 * 获得消息
 	 */
@@ -22,11 +22,11 @@ var Setting = {
 				if (phpfmMessage.length == 1) {
 					var msg;
 					var stat;
-					
+
 					data = data.split("|PHPFM|");
 					msg = data[0];
 					stat = data[1];
-					
+
 					phpfmMessage.html(msg);
 					if (stat == 2) {
 						// 错误消息
@@ -34,14 +34,14 @@ var Setting = {
 					} else {
 						phpfmMessage.removeClass("wrong");
 					}
-					
+
 					phpfmMessage.fadeIn();
 				}
 			}
 		});
-		
+
 	},
-	
+
 	/**
 	 * 索引文件
 	 */
@@ -49,7 +49,7 @@ var Setting = {
 		var button = $("input#buttonIndexfile");
 		var result = $("div#result");
 		button.attr("disabled", "disabled");
-		
+
 		$.get("../func/indexfiles.func.php", function (data) {
 			if (data == "ok") {
 				result.html("OK");
@@ -58,9 +58,9 @@ var Setting = {
 			}
 			button.removeAttr("disabled");
 		});
-		
+
 	},
-	
+
 	/**
 	 * 显示登录对话框
 	 */
@@ -96,18 +96,18 @@ var Setting = {
 			$("<div/>").append($("<a/>").attr("href", "../").html(Strings['Never mind...'])));
 		form.append(divLogin);
 		Dialog.displaySubmit();
-		
+
 		Dialog.displayFuncDialog();
 		Dialog.setFocus($("input[name='username']"));
 	},
-	
+
 	/**
 	 * 显示登出对话框
 	 */
 	displayLogout : function () {
 		if (Setting.working)
 			return;
-		
+
 		var form = Dialog.initFuncDialog(Strings['User'], "logout", true, true, true);
 		form.find("input#return").val("../");
 		var divLogout = $("<div/>");
@@ -115,10 +115,10 @@ var Setting = {
 		divLogout.append($("<div/>").html(Strings['Are you sure to logout?']).addClass("center"));
 		form.append(divLogout);
 		Dialog.displaySubmit();
-		
+
 		Dialog.displayFuncDialog();
 	},
-	
+
 	loadUsers : function (table) {
 		Setting.setStat(true);
 		$.post("../func/post.func.php", {
@@ -145,18 +145,18 @@ var Setting = {
 					html += "&nbsp;|&nbsp;<a href='javascript:Setting.deleteUser(" + user.id + ")'>" + Strings['Delete'] + "</a>";
 					row.append($("<td></td>").html(html));
 				}
-				
+
 				table.append(row);
 			}
 			Setting.setStat(false);
 		});
 	},
-	
+
 	addUser : function () {
 		//alert("add");
 		if (Setting.working)
 			return;
-		
+
 		var form = Dialog.initFuncDialog(Strings['Add'], "adduser", true, true, true);
 		var divAddUser = $("<div/>");
 		divAddUser.attr("id", "divAddUser");
@@ -196,10 +196,10 @@ var Setting = {
 		divAddUser.append(table);
 		form.append(divAddUser);
 		Dialog.displaySubmit();
-		
+
 		Dialog.displayFuncDialog();
 		Dialog.setFocus($("input[name='username']"));
-		
+
 		form.submit(function () {
 			Dialog.closeFunc();
 			Setting.setStat(true);
@@ -216,11 +216,11 @@ var Setting = {
 			return false;
 		});
 	},
-	
+
 	modifyUser : function (id) {
 		if (Setting.working)
 			return;
-		
+
 		var user = Setting.users[id];
 		var form = Dialog.initFuncDialog(Strings['Modify'], "modiuser", true, true, true);
 		var divModifyUser = $("<div/>");
@@ -255,7 +255,7 @@ var Setting = {
 				$("<td/>").append(
 					$("<label/>").attr("for", "permission").html(Strings['Permission:']))).append(
 				$("<td/>").append(select)));
-		
+
 		divModifyUser.append(table);
 		divModifyUser.append($("<input/>").attr({
 				type : "hidden",
@@ -263,10 +263,10 @@ var Setting = {
 			}).val(id));
 		form.append(divModifyUser);
 		Dialog.displaySubmit();
-		
+
 		Dialog.displayFuncDialog();
 		Dialog.setFocus($("input[name='username']"));
-		
+
 		form.submit(function () {
 			Dialog.closeFunc();
 			Setting.setStat(true);
@@ -283,11 +283,11 @@ var Setting = {
 			return false;
 		});
 	},
-	
+
 	deleteUser : function (id) {
 		if (Setting.working)
 			return;
-		
+
 		var form = Dialog.initFuncDialog(Strings['Delete'], "deluser", true, true, true);
 		var divDelUser = $("<div/>");
 		divDelUser.attr("id", "divDelUser");
@@ -298,9 +298,9 @@ var Setting = {
 			}).val(id));
 		form.append(divDelUser);
 		Dialog.displaySubmit();
-		
+
 		Dialog.displayFuncDialog();
-		
+
 		form.submit(function () {
 			Dialog.closeFunc();
 			Setting.setStat(true);
@@ -315,7 +315,7 @@ var Setting = {
 			return false;
 		});
 	},
-	
+
 	changePswd : function () {
 		var form = Dialog.initFuncDialog(Strings['Change Password'], "changepswd", true, true, true);
 		var divChangePswd = $("<div/>");
@@ -357,24 +357,24 @@ var Setting = {
 		divChangePswd.append(table);
 		form.append(divChangePswd);
 		Dialog.displaySubmit();
-		
+
 		Dialog.displayFuncDialog();
 		Dialog.setFocus($("input[name='oldpswd']"));
 	},
-	
+
 	initUserMng : function () {
 		var tableUserMng = $("#tableUserMng");
 		//alert(divUserMng.length);
 		if (tableUserMng.length == 0)
 			return;
-		
+
 		Setting.oldTable = tableUserMng.html();
-		
+
 		$("input#changePswd").click(Setting.changePswd);
 		$("input#addUser").click(Setting.addUser);
 		Setting.loadUsers(tableUserMng);
 	},
-	
+
 	/**
 	 * 初始化 Setting 部分的 js
 	 */
@@ -382,15 +382,15 @@ var Setting = {
 		var buttonIndex = $("input#buttonIndexfile");
 		buttonIndex.click(Setting.indexfile);
 		buttonIndex.removeAttr("disabled");
-		
+
 		var linkLogout = $("a#linkLogout");
 		linkLogout.click(Setting.displayLogout);
-		
+
 		Setting.initUserMng();
-		
+
 		Setting.getMessage();
 	}
-	
+
 };
 
 $(Setting.init);

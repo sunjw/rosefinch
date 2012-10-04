@@ -1,14 +1,14 @@
 var Dialog = {
 	funcBg : null,
 	funcDialog : null,
-	
+
 	/**
 	 * 无功能函数
 	 */
 	dummy : function () {
 		return;
 	},
-	
+
 	/**
 	 * 准备功能对话框
 	 */
@@ -38,7 +38,7 @@ var Dialog = {
 			Dialog.funcDialog.append(divInput);
 			$("#content").append(Dialog.funcDialog);
 		}
-		
+
 		Dialog.funcDialog.find(".divHeader").html("").append($("<span/>").html(title));
 		var imgSrc = secondaryFolder ? "../images/close.gif" : "images/close.gif";
 		if (closable) {
@@ -55,7 +55,7 @@ var Dialog = {
 			Dialog.funcDialog.removeClass("closable");
 			Dialog.funcBg.click(Dialog.dummy);
 		}
-		
+
 		var form = Dialog.funcDialog.find("form");
 		form.html("");
 		form.append($("<input/>").attr({
@@ -74,17 +74,17 @@ var Dialog = {
 					type : "hidden",
 					name : "noredirect"
 				}).val("noredirect"));
-		
+
 		form.unbind("submit");
-		
+
 		return form;
 	},
-	
+
 	setFocus : function (o) {
 		o.focus();
 		o.get(0).select();
 	},
-	
+
 	/**
 	 * 显示对话框提交部分
 	 */
@@ -100,20 +100,20 @@ var Dialog = {
 		}
 		Dialog.funcDialog.find("form").append(div);
 	},
-	
+
 	/**
 	 * 显示功能对话框
 	 */
 	displayFuncDialog : function () {
 		if (Dialog.funcBg == null || Dialog.funcDialog == null)
 			return;
-		
+
 		Dialog.funcBg.css("height", document.documentElement.scrollHeight + "px");
 		Dialog.funcBg.css("display", "block");
 		Dialog.funcDialog.css("left", (document.documentElement.clientWidth - 420) / 2 + "px");
 		Dialog.funcDialog.fadeIn("fast");
 	},
-	
+
 	/**
 	 * 关闭功能对话框
 	 */
@@ -123,11 +123,11 @@ var Dialog = {
 			AudioPlayer.close("divAudioPlayer"); // IE 9 has a bug on this call
 			//funcAudioPlayer.fadeOut();
 		}
-		
+
 		if (Dialog.funcDialog.is(":visible"))
 			Dialog.funcDialog.fadeOut();
-		
+
 		Dialog.funcBg.css("display", "none");
 	}
-	
+
 };
