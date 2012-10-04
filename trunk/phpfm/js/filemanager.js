@@ -902,6 +902,9 @@ var FileManager = {
  * 初始化
  */
 FileManager.init = function () {
+	// fix Chrome back issue
+	$.ajaxSetup({ cache: false });
+
 	FileManager.isIE = $.browser.msie ? true : false;
 	// alert($.browser.version);
 	var str = "#mainView > .header > span." + FileManager.sortName + " > a";
