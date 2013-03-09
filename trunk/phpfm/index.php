@@ -9,7 +9,7 @@ require_once "log/log.func.php";
 
 @session_start();
 
-log_to_file($_SERVER['REMOTE_ADDR']." visited.");
+log_to_file("index.php visited.");
 
 $search_mode = false;
 if(get_query("q") != "")

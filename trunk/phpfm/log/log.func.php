@@ -20,7 +20,7 @@ function log_to_file($content)
 		{
 			$content .= "\n";
 		}
-		fwrite($log_file, @date("Y-m-d H:i:s").": ".$content);
+		fwrite($log_file, @date("Y-m-d H:i:s")." ".$_SERVER['REMOTE_ADDR'].": ".$content);
 		fclose($log_file);
 	}
 }
