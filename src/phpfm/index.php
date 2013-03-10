@@ -46,8 +46,8 @@ $fileManager = new FileManager($search_mode, "index.php", "index.php");
     </div>
     <div id="content">
         <?php 
+        $fileManager->display_toolbar();
         $fileManager->display_full_path(); // 显示全路径
-	    $fileManager->display_toolbar();
 	    $fileManager->display_main_view();
 		
 	    // 准备部分

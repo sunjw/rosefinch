@@ -142,6 +142,7 @@ class Utility
 	 */
 	public static function get_icon($file_type, $size = 16)
 	{
+		$img_ext = ".png";
 		$file_type = strtolower($file_type);
 		$img_postfix = "";
 		if($size == 32)
@@ -153,31 +154,31 @@ class Utility
 	    case "文件夹":
 	    case "folder":	
 	    case "dir":
-	    	return Utility::generate_img_html("images/folder" . $img_postfix . ".gif", $size, $size, "zip");
+	    	return Utility::generate_img_html("images/folder".$img_postfix.$img_ext, $size, $size, "zip");
 	    case "zip":
 		case "rar":
 		case "tar":
 		case "bz":
 		case "bz2":
 		case "gz":
-			return Utility::generate_img_html("images/compressed" . $img_postfix . ".gif", $size, $size, "zip");
+			return Utility::generate_img_html("images/compressed".$img_postfix.$img_ext, $size, $size, "zip");
 		case "exe":
 		case "com":
-			return Utility::generate_img_html("images/application" . $img_postfix . ".gif", $size, $size, "app");
+			return Utility::generate_img_html("images/binary".$img_postfix.$img_ext, $size, $size, "app");
 		case "mp3":
 		case "wma":
-			return Utility::generate_img_html("images/music" . $img_postfix . ".gif", $size, $size, "music");
+			return Utility::generate_img_html("images/music".$img_postfix.$img_ext, $size, $size, "music");
 		case "html":
 		case "htm":
-			return Utility::generate_img_html("images/html" . $img_postfix . ".gif", $size, $size, "html");
+			return Utility::generate_img_html("images/html".$img_postfix.$img_ext, $size, $size, "html");
 		case "jpg":
 		case "jpeg":
 		case "bmp":
 		case "png":
 		case "gif":
-			return Utility::generate_img_html("images/image" . $img_postfix . ".gif", $size, $size, "image");
+			return Utility::generate_img_html("images/image".$img_postfix.$img_ext, $size, $size, "image");
 		default:
-			return Utility::generate_img_html("images/generic" . $img_postfix . ".gif", $size, $size, "file");
+			return Utility::generate_img_html("images/generic".$img_postfix.$img_ext, $size, $size, "file");
 	    }
 	}
 	

@@ -744,7 +744,6 @@ class FileManager
 ?>
 		<div id="fullpath">
 			<div>
-				<div class="divLabel"><?php echo _("Current path:"); ?>&nbsp;</div>
 			    <div class="divDir"><a href="<?php echo $this->browser_page."?".$this->query_str; ?>">Root</a></div>
 			    <div class="pathSlash menuContainer">
 			    	<a class="arrow menuButton" href="javascript:void(0);">&nbsp;</a>
@@ -873,13 +872,13 @@ class FileManager
 		<div id="toolbar">
 			<div id="leftToolbar">
 				<a href="<?php echo $back_url; ?>" title="<?php echo $button_names['Back']; ?>" class="toolbarButton toolbarBack <?php echo $back_class; ?>">
-					<img alt="<?php echo $button_names['Back']; ?>" src="images/toolbar-back.gif" />
+					<img alt="<?php echo $button_names['Back']; ?>" src="images/toolbar-back.png" />
 				</a>
 				<a href="<?php echo $forward_url; ?>" title="<?php echo $button_names['Forward']; ?>" class="toolbarButton toolbarForward <?php echo $forward_class; ?>">
-					<img alt="<?php echo $button_names['Forward']; ?>" src="images/toolbar-forward.gif" />
+					<img alt="<?php echo $button_names['Forward']; ?>" src="images/toolbar-forward.png" />
 				</a>
 				<div class="toolbarSmallButton menuContainer toolbarHistory splitRight">
-					<img class="menuButton" src="images/toolbar-history.gif" />
+					<img class="menuButton" src="images/toolbar-history.png" />
 					<?php 
 					if($this->history->get_length() > 1)
 					{
@@ -894,7 +893,7 @@ class FileManager
 					?>
 				</div>
 				<div title="<?php echo $button_names['Refresh']; ?>" class="toolbarButton toolbarRefresh">
-					<img alt="<?php echo $button_names['Refresh']; ?>" src="images/toolbar-refresh.gif" />
+					<img alt="<?php echo $button_names['Refresh']; ?>" src="images/toolbar-refresh.png" />
 				</div>
 				<a href="<?php echo $up; ?>" title="<?php echo $button_names['Up']; ?>" class="toolbarButton toolbarUp splitRight">
 					<img alt="<?php echo $button_names['Up']; ?>" src="<?php echo $up_img; ?>" />
@@ -904,7 +903,7 @@ class FileManager
 				{
 				?>
 				<div class="toolbarPart">
-					<div class="toolbarHiddenable">
+					<div>
 						<div title="<?php echo $button_names['Cut']; ?>" class="toolbarButton toolbarCut">
 							<img alt="<?php echo $button_names['Cut']; ?>" src="images/toolbar-cut-disable.gif" />
 						</div>
@@ -927,19 +926,10 @@ class FileManager
 							<img alt="<?php echo $button_names['Upload']; ?>" src="<?php echo $upload_img; ?>" />
 						</div>
 					</div>
-					<div class="toolbarSmallButton toolbarMore <?php echo $more_class; ?>">
-						<img alt="<?php echo _("More..."); ?>" src="<?php echo $more_img_src; ?>" />
-					</div>
 				</div>
 				<?php } ?>
 			</div>
             <div id="rightToolbar">
-				<a href="<?php echo $largeicon_view_url; ?>" title="<?php echo $button_names['Large Icon View']; ?>" class="toolbarButton splitLeft">
-					<img alt="<?php echo $button_names['Large Icon View']; ?>" src="images/view-largeicon.gif" />
-				</a>
-				<a href="<?php echo $detail_view_url; ?>" title="<?php echo $button_names['Detail View']; ?>" class="toolbarButton">
-					<img alt="<?php echo $button_names['Detail View']; ?>" src="images/view-detail.gif" />
-				</a>
 				<?php 
 				if(SEARCH)
 				{
@@ -1092,57 +1082,27 @@ class FileManager
 	 */
 	private function render_main_view($items)
 	{
-		
-		if($this->view_type == "largeicon")
+		// 详细视图
+?>
+		<ul id="detailView" class="<?php echo $this->sort_type; ?>">
+<?php 
+		$i = 0;
+		foreach($items as $item)
 		{
-			// 大图标视图
-?>
-			<div id="largeiconView">
-<?php 	
-			$i = 0;
-			foreach($items as $item)
-			{
-				$this->largeicon_view_item($item['item_path'],
-											$item['a_href'],
-											$item['name'],
-											Utility::get_icon($item['type'], 32),
-											$item['name'],
-											$item['size_str'],
-											$item['type_html'],
-											$item['stat']['mtime']);
-				$i++;
-			}
-			//$this->mark_to_20($i);
-?>
-				<div class="clear"></div>
-			</div>
-<?php 
+			$this->detail_view_item($item['item_path'],
+									$item['a_href'],
+									$item['name'],
+									Utility::get_icon($item['type'], 32),
+									$item['name'],
+									$item['size_str'],
+									$item['type_html'],
+									$item['stat']['mtime']);
+			$i++;
 		}
-		else
-		{
-			// 详细视图
+		//$this->mark_to_20($i);
 ?>
-			<ul id="detailView" class="<?php echo $this->sort_type; ?>">
+        </ul>
 <?php 
-			$i = 0;
-			foreach($items as $item)
-			{
-				$this->detail_view_item($item['item_path'],
-											$item['a_href'],
-											$item['name'],
-											Utility::get_icon($item['type'], 16),
-											$item['name'],
-											$item['size_str'],
-											$item['type_html'],
-											$item['stat']['mtime']);
-				$i++;
-			}
-			//$this->mark_to_20($i);
-?>
-            </ul>
-<?php 
-		}
-
 	}
 	
 	/**
@@ -1429,9 +1389,9 @@ class FileManager
 	{
 		$query_str = $this->query_str;
 		$up = "";
-		$up_img = "images/toolbar-up.gif";
-		$new_folder_img = "images/toolbar-new-folder.gif";
-		$upload_img = "images/toolbar-upload.gif";
+		$up_img = "images/toolbar-up.png";
+		$new_folder_img = "images/toolbar-new-folder.png";
+		$upload_img = "images/toolbar-upload.png";
 		
 		//echo $request_sub_dir;
 		// 设置向上，新建目录和上传按钮状态
@@ -1467,7 +1427,7 @@ class FileManager
 		$paste_class = "disable";
 		if($this->clipboard->have_items() && $this->is_search == false)
 		{
-			$paste_img = "images/toolbar-paste.gif";
+			$paste_img = "images/toolbar-paste.png";
 			$paste_class = "";
 		}
 	}

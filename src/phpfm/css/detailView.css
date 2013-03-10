@@ -21,30 +21,16 @@
 }
 #mainView #detailView li {
 	margin: 0 2px 2px 2px;
-	height: 26px;
+	height: 40px;
 	cursor: default;
 	border: 1px solid white;
-	
-	-moz-transition-property: background,color,border;
-	-moz-transition-duration: 0.4s;
-	-webkit-transition-property: background,color,border;
-	-webkit-transition-duration: 0.4s;
-	-o-transition-property: background,color,border;
-	-o-transition-duration: 0.4s;
-	-ms-transition-property: background,color,border;
-	-ms-transition-duration: 0.4s;
+	transition-property: background,color,border;
+	transition-duration: 0.4s;
 }
 #mainView #detailView li.selected {
 	border: 1px solid #B8D1ED;
-	
-	-moz-transition-property: background,color,border;
-	-moz-transition-duration: 0.4s;
-	-webkit-transition-property: background,color,border;
-	-webkit-transition-duration: 0.4s;
-	-o-transition-property: background,color,border;
-	-o-transition-duration: 0.4s;
-	-ms-transition-property: background,color,border;
-	-ms-transition-duration: 0.4s;
+	transition-property: background,color,border;
+	transition-duration: 0.4s;
 }
 #mainView #detailView li a {
 	text-decoration: none;
@@ -64,18 +50,18 @@
 	display: block;
 	float: left;
 	overflow: hidden;
-	height: 26px;
-	line-height: 26px;
+	height: 38px;
+	line-height: 38px;
 	padding: 0 0 0 5px;
 }
 #mainView #detailView span.check {
 	width: 17px;
 }
 #mainView #detailView span.icon {
-	width: 20px;
+	width: 34px;
 }
 #mainView #detailView span.icon img {
-	margin-top: 5px;
+	margin-top: 2px;
 }
 #mainView #detailView span.name {
 	width: 420px;
@@ -91,5 +77,5 @@
 }
 
 #mainView #detailView input.inputCheck {
-	margin-top: 6px;
+	margin-top: 12px;
 }

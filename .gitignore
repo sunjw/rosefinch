@@ -7,5 +7,6 @@ src/phpfm/admin/database.inc.php
 src/phpfm/admin/settings.inc.php
 src/phpfm/admin/usermng.inc.php
 src/phpfm/images/Thumbs.db
-src/phpfm/images/png/Thumbs.db
+src/phpfm/images/png/
+src/phpfm/images/psd/
 src/phpfm/log/phpfm.log

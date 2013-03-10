@@ -136,15 +136,15 @@ var FileManager = {
 	 * 项目选择改变
 	 */
 	viewItemCheck : function () {
-		FileManager.setButton("toolbarCut", "images/toolbar-cut-disable.gif",
+		FileManager.setButton("toolbarCut", "images/toolbar-cut.png",
 			FileManager.doNothing, "disable", "");
-		FileManager.setButton("toolbarCopy", "images/toolbar-copy-disable.gif",
+		FileManager.setButton("toolbarCopy", "images/toolbar-copy.png",
 			FileManager.doNothing, "disable", "");
 		FileManager.setButton("toolbarRename",
-			"images/toolbar-rename-disable.gif", FileManager.doNothing,
+			"images/toolbar-rename.png", FileManager.doNothing,
 			"disable", "");
 		FileManager.setButton("toolbarDelete",
-			"images/toolbar-delete-disable.gif", FileManager.doNothing,
+			"images/toolbar-delete.png", FileManager.doNothing,
 			"disable", "");
 
 		var count = FileManager.inputChecks.length;
@@ -164,15 +164,15 @@ var FileManager = {
 		}
 
 		if (checkedItemsCount > 0) {
-			FileManager.setButton("toolbarCut", "images/toolbar-cut.gif",
+			FileManager.setButton("toolbarCut", "images/toolbar-cut.png",
 				FileManager.clickCut, "", "disable");
-			FileManager.setButton("toolbarCopy", "images/toolbar-copy.gif",
+			FileManager.setButton("toolbarCopy", "images/toolbar-copy.png",
 				FileManager.clickCopy, "", "disable");
-			FileManager.setButton("toolbarDelete", "images/toolbar-delete.gif",
+			FileManager.setButton("toolbarDelete", "images/toolbar-delete.png",
 				FileManager.clickDelete, "", "disable");
 			if (checkedItemsCount == 1) {
 				FileManager.setButton("toolbarRename",
-					"images/toolbar-rename.gif", FileManager.clickRename,
+					"images/toolbar-rename.png", FileManager.clickRename,
 					"", "disable");
 			}
 		}
@@ -420,11 +420,11 @@ var FileManager = {
 		}, function (data) {
 			if (data == "ok" && FileManager.isSearch == false) {
 				FileManager.setButton("toolbarPaste",
-					"images/toolbar-paste.gif", FileManager.clickPaste, "",
+					"images/toolbar-paste.png", FileManager.clickPaste, "",
 					"disable");
 			} else {
 				FileManager.setButton("toolbarPaste",
-					"images/toolbar-paste-disable.gif",
+					"images/toolbar-paste.png",
 					FileManager.doNothing, "disable", "");
 			}
 		});
@@ -665,15 +665,6 @@ var FileManager = {
 	 */
 	initToolbar : function () {
 		var buttons = $("div#toolbar .toolbarButton").add("div#toolbar .toolbarSmallButton");
-
-		if (buttons.filter(".toolbarBack").hasClass("disable")) { // 后退
-			buttons.filter(".toolbarBack").find("img").attr("src",
-				"images/toolbar-back-disable.gif");
-		}
-		if (buttons.filter(".toolbarForward").hasClass("disable")) { // 前进
-			buttons.filter(".toolbarForward").find("img").attr("src",
-				"images/toolbar-forward-disable.gif");
-		}
 
 		buttons.filter(".toolbarRefresh").click(function () {
 			window.location.reload(); // 刷新

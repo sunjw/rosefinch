@@ -118,8 +118,8 @@
 
 /* Toolbar sector */
 #toolbar {
-	height: 30px;
-	line-height: 30px;
+	height: 46px;
+	line-height: 46px;
 }
 /*
 #toolbar .splitRight {
@@ -130,7 +130,7 @@
 }
 */
 #toolbar #leftToolbar,#toolbar #rightToolbar{
-	height: 30px;
+	height: 44px;
 }
 #toolbar #leftToolbar {
 	float: left;
@@ -152,29 +152,32 @@
 	display: block;
 	float: left;
 	border: 1px solid white;
-	height: 28px;
+	height: 44px;
 }
 #toolbar .buttonHover {
-	border: 1px solid #B8D1ED;
+	border: 1px solid white;
 }
 #toolbar .toolbarButton {
-	width: 30px;
+	width: 44px;
 }
 #toolbar .toolbarSmallButton {
-	width: 24px;
+	width: 32px;
 }
 
 #toolbar .toolbarButton img,#toolbar .toolbarSmallButton img {
 	border: 0;
-	height: 16px;
+	height: 32px;
 }
 #toolbar .toolbarButton img {
-	width: 16px;
+	width: 32px;
 	margin: 6px;
 }
 #toolbar .toolbarSmallButton img {
-	width: 10px;
+	width: 20px;
 	margin: 6px 6px;
+}
+#toolbar .disable {
+	display: none;
 }
 
 #toolbar .subMenu {
@@ -297,7 +300,7 @@
 }
 
 #mainView .header span.icon {
-	width: 19px;
+	width: 33px;
 }
 
 #mainView .header span.name {
