@@ -20,15 +20,15 @@
 	display: none;
 }
 #mainView #detailView li {
-	margin: 0 2px 2px 2px;
+	margin: 0 2px;
 	height: 40px;
 	cursor: default;
-	border: 1px solid white;
+	border-bottom: 1px solid #EAEAEA;
 	transition-property: background,color,border;
 	transition-duration: 0.4s;
 }
 #mainView #detailView li.selected {
-	border: 1px solid #B8D1ED;
+	border-bottom: 1px solid #3399CC;
 	transition-property: background,color,border;
 	transition-duration: 0.4s;
 }
@@ -50,6 +50,7 @@
 	display: block;
 	float: left;
 	overflow: hidden;
+	text-overflow: ellipsis;
 	height: 38px;
 	line-height: 38px;
 	padding: 0 0 0 5px;
@@ -64,7 +65,7 @@
 	margin-top: 2px;
 }
 #mainView #detailView span.name {
-	width: 420px;
+	width: 360px;
 }
 #mainView #detailView span.size {
 	width: 125px;

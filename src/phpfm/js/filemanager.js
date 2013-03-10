@@ -728,9 +728,10 @@ var FileManager = {
 	 * 准备主视图
 	 */
 	initMainView : function () {
-		// changeMainViewHeight();
 		FileManager.changeMainViewListHeight();
-		$(window).resize(FileManager.changeMainViewListHeight);
+		$(window).resize(function () {
+			FileManager.changeMainViewListHeight();
+		});
 
 		var detailViewItems = $("ul#detailView");
 		var largeiconViewItems = $("div#largeiconView");
