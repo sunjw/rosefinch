@@ -275,7 +275,7 @@ class FileManager
 	    <link href="css/func.css" rel="stylesheet" type="text/css" />
 	    <link href="css/jquery.lightbox-0.5.css" rel="stylesheet" type="text/css" />
 	    <link href="css/uploadify.css" rel="stylesheet" type="text/css" />
-	    <script type="text/javascript" language="javascript" src="js/jquery-1.4.4.min.js"></script>
+	    <script type="text/javascript" language="javascript" src="js/jquery-1.8.1.min.js"></script>
 	    <script type="text/javascript" language="javascript" src="js/audio-player.js"></script> 
 	    <script type="text/javascript" language="javascript" src="js/jquery.common.min.js"></script> 
 		<script type="text/javascript" language="javascript" src="js/jquery.menu.min.js"></script>

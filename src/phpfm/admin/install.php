@@ -71,7 +71,7 @@ textdomain($domain);
 	<link href="../css/com.css" rel="stylesheet" type="text/css" />
 	<link href="../css/message.css" rel="stylesheet" type="text/css" />
 	<link href="../css/setting.css" rel="stylesheet" type="text/css" />
-    <script type="text/javascript" language="javascript" src="../js/jquery-1.4.4.min.js"></script>
+    <script type="text/javascript" language="javascript" src="../js/jquery-1.8.1.min.js"></script>
 </head>
 <body>
     <div id="nav">
