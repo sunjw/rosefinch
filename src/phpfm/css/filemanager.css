@@ -6,6 +6,7 @@
 #mainView {
 	background-color: white;
 	color: #484848;
+	border-bottom: 1px solid #EAEAEA;
 }
 
 #mainView a {
