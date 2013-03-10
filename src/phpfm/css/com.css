@@ -8,6 +8,9 @@ body {
 	margin: 0 auto;
 	font-family: 微软雅黑, "segoe ui", verdana, arial, sans-serif;
 }
+input {
+	font-family: 微软雅黑, "segoe ui", verdana, arial, sans-serif;
+}
 
 .hidden {
 	display: none;
@@ -31,6 +34,9 @@ a:hover {
 	color: black;
 	transition-property: background,color,border;
 	transition-duration: 0.4s;
+}
+#lightbox-nav a {
+	transition-property: none;
 }
 
 input[type="submit"], input[type="button"], button {

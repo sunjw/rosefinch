@@ -942,8 +942,8 @@ class FileManager
 	            	if($this->is_search)
 	            	{
 	            	?>
-	            	<a href="<?php echo $clean_search_url; ?>" title="<?php echo $button_names['Clean Search']; ?>" class="toolbarButton">
-						<img alt="<?php echo $button_names['Clean Search']; ?>" src="images/close.gif" />
+	            	<a href="<?php echo $clean_search_url; ?>" title="<?php echo $button_names['Clean Search']; ?>" class="toolbarSmallButton">
+						<img alt="<?php echo $button_names['Clean Search']; ?>" src="images/close.png" />
 					</a>
 	            	<?php 
 	            	}
@@ -1001,7 +1001,7 @@ class FileManager
 			<div class="divHeader">
 				<span><?php echo $multilan_titles; ?></span>
 				<a class="funcClose" href="javascript:;">
-					<img alt="Close" src="images/close.gif" border="0">
+					<img alt="Close" src="images/close.png" border="0">
 				</a>
 			</div>
 			<div id="divInput" class="container">
@@ -1014,11 +1014,11 @@ class FileManager
 						<table>
 							<tr id="oldnameLine">
 								<td><label for="oldname"><?php printf("%s&nbsp;", _("Old Name:")); ?></label></td>
-								<td><input id="oldname" type="text" name="oldname" value="" size="40" maxlength="128" readonly="readonly"/></td>
+								<td><input id="oldname" type="text" name="oldname" value="" maxlength="128" readonly="readonly"/></td>
 							</tr>
 							<tr>
 								<td><label for="newname"><?php printf("%s&nbsp;", _("New Name:")); ?></label></td>
-								<td><input id="newname" type="text" name="newname" value="" size="40" maxlength="128" /></td>
+								<td><input id="newname" type="text" name="newname" value="" maxlength="128" /></td>
 							</tr>
 						</table>
 						<div>
@@ -1028,7 +1028,7 @@ class FileManager
 					<div id="divUpload">
 						<div>
 							<label for="uploadFile"><?php printf("%s&nbsp;", _("Select File:")); ?></label>
-							<input id="uploadFile" type="file" name="uploadFile" size="20"/>
+							<input id="uploadFile" type="file" name="uploadFile"/>
 						</div>
 						<div>
 							<span class="inputRequire"><?php printf("%s%s", _("File cannot be larger than "), "50MB"); ?></span>
@@ -1038,25 +1038,25 @@ class FileManager
 						<table>
 							<tr>
 								<td><label for="username"><?php printf("%s&nbsp;", _("Username:")); ?></label></td>
-								<td><input id="username" type="text" name="username" value="" size="40" maxlength="128"/></td>
+								<td><input id="username" type="text" name="username" value="" maxlength="128"/></td>
 							</tr>
 							<tr>
 								<td><label for="password"><?php printf("%s&nbsp;", _("Password:")); ?></label></td>
-								<td><input id="password" type="password" name="password" value="" size="40" maxlength="128" /></td>
+								<td><input id="password" type="password" name="password" value="" maxlength="128" /></td>
 							</tr>
 						</table>
 					</div>
 					<div id="divLogout">
 						<div class="center"><?php echo _("Are you sure to logout?"); ?></div>
 					</div>
-					<div class="rightAlign">
+					<div class="funcBtnLine">
 						<input type="submit" value="<?php echo _("OK"); ?>" onclick="FileManager.funcSubmit()" /><input type="button" value="<?php echo _("Cancel"); ?>" onclick="FileManager.closeFunc()"/>
 					</div>
 				</form>
 			</div>
 			<div id="divDelete" class="container">
 				<div class="center"><?php echo _("Are you sure to delete these items?"); ?></div>
-				<div class="rightAlign">
+				<div class="funcBtnLine">
 					<input type="button" value="<?php echo _("OK"); ?>" onclick="FileManager.doDelete()"/><input type="button" value="<?php echo _("Cancel"); ?>" onclick="FileManager.closeFunc()"/>
 				</div>
 			</div>
@@ -1410,9 +1410,9 @@ class FileManager
 			
 			$up = "javascript:;";
 			
-			$up_img = "images/toolbar-up-disable.gif";
-			$new_folder_img = "images/toolbar-new-folder-disable.gif";
-			$upload_img = "images/toolbar-upload-disable.gif";
+			$up_img = "images/toolbar-up.png";
+			$new_folder_img = "images/toolbar-new-folder.png";
+			$upload_img = "images/toolbar-upload.png";
 		}
 	}
 	
@@ -1423,7 +1423,7 @@ class FileManager
 	 */
 	private function prepare_paste_func(&$paste_img, &$paste_class)
 	{
-		$paste_img = "images/toolbar-paste-disable.gif";
+		$paste_img = "images/toolbar-paste.png";
 		$paste_class = "disable";
 		if($this->clipboard->have_items() && $this->is_search == false)
 		{

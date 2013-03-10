@@ -254,6 +254,13 @@
 #toolbar form#searchForm input[type="submit"].buttonHover {
 	border: 1px solid white;
 }
+#toolbar form#searchForm .toolbarSmallButton {
+	height: 30px;
+}
+#toolbar form#searchForm .toolbarSmallButton img {
+	width: 18px;
+	height: 18px;
+}
 
 /* View sector */
 #mainView .header {

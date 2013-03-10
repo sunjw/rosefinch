@@ -17,17 +17,17 @@
 }
 
 .inputRequire {
-	color: Red;
+	color: red;
 	font-size: 12px;
 	font-weight: bold;
 }
 
 div.divHeader {
-	background-color: Black;
-	color: White;
+	color: #3399CC;
 	height: 18px;
 	line-height: 18px;
-	padding: 6px 10px;
+	padding: 7px 10px;
+	border-bottom: 1px solid #3399CC;
 }
 div.divHeader span {
 	float: left;
@@ -35,7 +35,7 @@ div.divHeader span {
 }
 div.divHeader a.funcClose {
 	float: right;
-	color: White;
+	color: white;
 }
 
 #funcDialog {
@@ -45,7 +45,7 @@ div.divHeader a.funcClose {
 	position: fixed;
 	top: 150px;
 	width: 420px;
-	border: 1px solid #cccccc;
+	border: 1px solid #EAEAEA;
 	-moz-box-shadow: 0 4px 30px #000000;
 	-webkit-box-shadow: 0 4px 30px #000000;
 	box-shadow: 0 4px 30px #000000;
@@ -54,18 +54,22 @@ div.divHeader a.funcClose {
 	padding: 6px 10px;
 }
 #funcDialog #divInput form tr {
-	height: 2em;
-	line-height: 2em;
+	height: 32px;
+	line-height: 32px;
 }
 #funcDialog #divDelete div, #funcDialog #divAudio div, #funcDialog #divAudio object, #funcDialog #divWaiting div{
-	height: 2em;
-	line-height: 2em;
+	height: 32px;
+	line-height: 32px;
+	font-size: 20px;
 }
 #funcDialog input[type="text"], #funcDialog input[type="password"], #funcDialog select {
 	margin: 3px 0;
+	height: 28px;
+	font-size: 20px;
+	width: 320px;
 }
 #funcDialog input[type="submit"], #funcDialog input[type="button"], #funcDialog button {
-	margin-left: 8px;
+	margin-right: 10px;
 }
 
 /* Rename sector */
@@ -82,6 +86,10 @@ div.divHeader a.funcClose {
 }
 #funcDialog #divAudio a:hover {
 	text-decoration: underline;
+}
+
+#funcDialog .funcBtnLine {
+	margin-top: 8px;
 }
 
 /* Watingsector */
