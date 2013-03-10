@@ -755,7 +755,11 @@ var FileManager = {
 				};
 			}
 
-			detailViewItems.fadeIn(1200); // 淡入载入文件
+			if (!$.browser.msie) {
+				detailViewItems.fadeIn(1200); // 淡入载入文件
+			} else {
+				detailViewItems.show();
+			}
 		} else if (largeiconViewItems.length > 0) {
 			// 是大图标视图
 			var items = largeiconViewItems.children("div.largeIconItem");
@@ -784,7 +788,11 @@ var FileManager = {
 				}
 			}
 
-			largeiconViewItems.fadeIn(1200); // 淡入载入文件
+			if (!$.browser.msie) {
+				largeiconViewItems.fadeIn(1200); // 淡入载入文件
+			} else {
+				largeiconViewItems.show();
+			}
 		}
 
 		FileManager.inputChecks = $("input.inputCheck");
@@ -906,8 +914,8 @@ FileManager.init = function () {
 	jqMenu.setup({
 		menuItemsSelector : ".menuContainer",
 		menuButtonSelector : ".menuButton",
-		subMenuSelector : ".subMenu",
-		inlineShadow : "transparent url('images/shadow.png') no-repeat right bottom"
+		subMenuSelector : ".subMenu"
+		//inlineShadow : "transparent url('images/shadow.png') no-repeat right bottom"
 	});
 	jqMenu.init();
 
