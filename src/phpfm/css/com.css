@@ -4,11 +4,10 @@
 }
 
 body {
-	background: #F5F6F7 url('../images/body_new_apple.jpg') top center repeat-x scroll;
 	/*width: 900px;*/
 	min-width: 900px;
-	padding-left: 40px;
-	padding-right: 40px;
+	padding-left: 80px;
+	padding-right: 80px;
 }
 
 .hidden {
@@ -68,15 +67,8 @@ input[type="submit"], input[type="button"], button {
 }
 input[type="submit"]:hover, input[type="button"]:hover, button:hover {
 	border-color: black;
-	
-	-moz-transition-property: border-color;
-	-moz-transition-duration: 0.4s;
-	-webkit-transition-property: border-color;
-	-webkit-transition-duration: 0.4s;
-	-o-transition-property: border-color;
-	-o-transition-duration: 0.4s;
-	-ms-transition-property: border-color;
-	-ms-transition-duration: 0.4s;
+	transition-property: border-color;
+	transition-duration: 0.4s;
 }
 input[type="submit"]:active, input[type="button"]:active, button:active {
 	border-color: black;
@@ -133,33 +125,18 @@ input[type="submit"]:active, input[type="button"]:active, button:active {
 	border-right: 1px solid #CCCCCC;
 }
 #nav ul .li-item a {
-	-moz-transition-property: background-color,color;
-	-moz-transition-duration: 0.4s;
-	-webkit-transition-property: background-color,color;
-	-webkit-transition-duration: 0.4s;
-	-o-transition-property: background-color,color;
-	-o-transition-duration: 0.4s;
-	-ms-transition-property: background-color,color;
-	-ms-transition-duration: 0.4s;
+	transition-property: background-color,color;
+	transition-duration: 0.4s;
 }
 #nav ul .current {
-	box-shadow: 0 0 5px #666666;
 	border-right: none;
 	margin-right: 1px;
 }
 #nav ul .li-item a:hover,#nav ul .current a {
-	background-color: #666666;
 	color: white;
 	/*background: url('../images/nav-hover-bg.jpg') left center repeat-x;*/
-	
-	-moz-transition-property: background-color,color;
-	-moz-transition-duration: 0.4s;
-	-webkit-transition-property: background-color,color;
-	-webkit-transition-duration: 0.4s;
-	-o-transition-property: background-color,color;
-	-o-transition-duration: 0.4s;
-	-ms-transition-property: background-color,color;
-	-ms-transition-duration: 0.4s;
+	transition-property: background-color,color;
+	transition-duration: 0.4s;
 }
 #nav ul .li-current a:hover {
 	
@@ -189,8 +166,6 @@ input[type="submit"]:active, input[type="button"]:active, button:active {
 	font-size: 14px;
 	padding-bottom: 6px;
 	background-color: white;
-	border-top: solid #666666 5px;
-	box-shadow: 0 0 10px #cccccc;
 }
 
 /*

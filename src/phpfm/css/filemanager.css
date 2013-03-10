@@ -4,24 +4,26 @@
 }*/
 
 #mainView {
-	border: 1px solid #999999;
 	background-color: white;
-	box-shadow: 0 0 3px #cccccc inset;
 }
 
 #mainView a {
 	color: Black;
 }
 
-#mainView,#fullpath,#toolbar { /*
-	 * 设定主界面各个重要元素的共同属性
+#mainView,#fullpath,#toolbar {
+	/* 设定主界面各个重要元素的共同属性
 	 */ /*width: 880px;*/
-	margin: 2px 10px;
+	margin: 1px 10px 2px 10px;
+}
+#fullpath,#toolbar {
+	/* 设定主界面各个重要元素的共同属性*/
+	border-bottom: 1px solid #3399CC;
 }
 
 /* Fullpath sector */
 #fullpath {
-	
+	background-color: white;
 }
 #fullpath ul {
 	list-style-type: none;
@@ -58,11 +60,7 @@
 	padding: 5px 0;
 }
 #fullpath a:hover, #fullpath div.pathSlash a.selected, #fullpath div.pathSlash a.arrow:hover {
-	border: 1px solid #B8D1ED;
-}
-
-#fullpath {
-	background-color: white;
+	border: 1px solid white;
 }
 
 #fullpath div.pathSlash {
@@ -72,7 +70,7 @@
 #fullpath div.pathSlash a.arrow {
 	width: 16px;
 	color: transparent;
-	background: url('../images/arrow-right.gif') center center
+	background: url('../images/arrow-right.png') center center
 		no-repeat;
 }
 
@@ -81,17 +79,15 @@
 	z-index: 2000;
 	position: absolute;
 	/*min-width: 160px;*/
-	padding: 0 3px 3px 0;
-	background: transparent url('../images/shadow.png') no-repeat right bottom;
-	filter: progid: DXImageTransform.Microsoft.AlphaImageLoader(src='../images/shadow.png',sizingMethod='scale');
 }
 
 #fullpath .subMenu ul {
 	background-color: white;
-	border: solid 1px #666666;
+	border: solid 1px #3399CC;
 	padding: 1px;
 	max-height: 360px; /* 最大高度 菜单不会太长 IE6 及以下无效 */
 	overflow: auto; /* 溢出就有滚动条 */
+	box-shadow: 1px 1px 3px #CCCCCC;
 }
 
 #fullpath .subMenu li {
@@ -113,7 +109,7 @@
 }
 
 #fullpath .subMenu li a:hover {
-	border: 1px solid #B8D1ED;
+	border: 1px solid white;
 }
 
 /* Toolbar sector */
@@ -230,8 +226,9 @@
 
 #toolbar form#searchForm {
 	float: left;
-	height: 30px;
-	line-height: 30px;
+	height: 32px;
+	line-height: 32px;
+	margin-top: 6px;
 }
 
 #toolbar form#searchForm input {
@@ -248,7 +245,7 @@
 
 #toolbar form#searchForm input[type="submit"] {
 	font-size: 10px;
-	background: transparent url('../images/toolbar-search.gif') center center no-repeat;
+	background: transparent url('../images/toolbar-search.png') center center no-repeat;
 	border: none;
 	width: 34px;
 	height: 30px;
@@ -258,7 +255,7 @@
 	box-shadow: none;
 }
 #toolbar form#searchForm input[type="submit"].buttonHover {
-	border: 1px solid #B8D1ED;
+	border: 1px solid white;
 }
 
 /* View sector */
@@ -267,7 +264,6 @@
 	margin: 0;
 	height: 28px;
 	margin-bottom: 2px;
-	box-shadow: 0 1px 3px #AAAAAA;
 }
 
 #mainView .header span {
