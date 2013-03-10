@@ -203,7 +203,6 @@ var FileManager = {
 	 */
 	clickRename : function () {
 		FileManager.setOldname();
-
 		FileManager.displayFuncDialog("func/post.func.php", "rename", "rename",
 			null);
 	},
@@ -438,7 +437,6 @@ var FileManager = {
 	 * 设置修改名称时的原名称
 	 */
 	setOldname : function () {
-		$("#oldnameLine").show();
 		var oldPathInput = $("input#renamePath");
 		var oldnameInput = $("input#oldname");
 		var newnameInput = $("input#newname");
@@ -619,7 +617,6 @@ var FileManager = {
 		if (FileManager.funcDialog.body.is(":visible"))
 			FileManager.funcDialog.body.fadeOut();
 
-		FileManager.funcDialog.body.find("#oldnameLine").hide();
 		FileManager.cleanOldname();
 		FileManager.funcBg.css("display", "none");
 
