@@ -166,31 +166,35 @@ function prepare_file_path($request_file)
 	return $file;
 }
 
-$request_file = rawurldecode(get_query("file"));
-log_to_file(join($_GET));
-
-if(substr($request_file, -1) == "\"")
+if(Utility::allow_to_browser())
 {
-	$request_file = substr($request_file, 0, -1);
-}
-$request_file = prepare_file_path($request_file);
-
-if($request_file != false)
-{
-	$test_array[0] = $request_file;
-	$test_array = Utility::filter_paths($test_array);
-	if(count($test_array) > 0)
+	// Need browser permission
+	$request_file = rawurldecode(get_query("file"));
+	log_to_file(join($_GET));
+	
+	if(substr($request_file, -1) == "\"")
 	{
-		log_to_file("Download start");
-		dl_file($request_file);
+		$request_file = substr($request_file, 0, -1);
 	}
-}
-else
-{
-	log_to_file("Download fail");
-	header("HTTP/1.1 404 Not Found");
-	echo "<strong>404 Not Found</strong>";
-    exit;
+	$request_file = prepare_file_path($request_file);
+	
+	if($request_file != false)
+	{
+		$test_array[0] = $request_file;
+		$test_array = Utility::filter_paths($test_array);
+		if(count($test_array) > 0)
+		{
+			log_to_file("Download start");
+			dl_file($request_file);
+		}
+	}
+	else
+	{
+		log_to_file("Download fail");
+		header("HTTP/1.1 404 Not Found");
+		echo "<strong>404 Not Found</strong>";
+	    exit;
+	}
 }
 //
 
