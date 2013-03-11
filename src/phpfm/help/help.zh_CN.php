@@ -19,22 +19,22 @@
 			<a class="lightboxImg" title="help_history_large.png" href="images/help_history_large.png">
 				<img class="helpRightImg" alt="历史" src="images/help_history_large.png" />
 			</a>
-			第一个功能区，历史功能区，包含了前进、后退和历史跳转功能。点击后退图标<img alt="后退" src="images/toolbar-back.gif"/>，就能回退到上一个访问的目录（或搜索）；点击前进图标<img alt="前进" src="images/toolbar-forward.gif"/>，就能前进到后退之前访问的目录（或搜索）；点击历史跳转<img alt="历史跳转" src="images/toolbar-history.gif"/>，通过弹出菜单中可以在之前或之后浏览的目录（或搜索）中导航。
+			第一个功能区，历史功能区，包含了前进、后退和历史跳转功能。点击后退图标<img alt="后退" src="images/toolbar-back.png"/>，就能回退到上一个访问的目录（或搜索）；点击前进图标<img alt="前进" src="images/toolbar-forward.png"/>，就能前进到后退之前访问的目录（或搜索）；点击历史跳转<img alt="历史跳转" src="images/toolbar-history.png"/>，通过弹出菜单中可以在之前或之后浏览的目录（或搜索）中导航。
 		</p>
 		<p>
-			第二个功能区包含刷新和向上。刷新<img alt="刷新" src="images/toolbar-refresh.gif"/>将刷新当前页面，重新请求浏览当前目录。点击向上图标<img alt="向上" src="images/toolbar-up.gif"/>后将回到当前目录的上一层目录。
+			第二个功能区包含刷新和向上。刷新<img alt="刷新" src="images/toolbar-refresh.png"/>将刷新当前页面，重新请求浏览当前目录。点击向上图标<img alt="向上" src="images/toolbar-up.png"/>后将回到当前目录的上一层目录。
 		</p>
 		<p>
-			第三个功能区，剪切、复制和粘贴功能区使您可以复制文件或目录。<a class="lightboxImg" title="help_select.png" href="images/help_select.png">选定需要操作的文件</a>后，点击剪切图标<img alt="剪切" src="images/toolbar-cut.gif"/>或复制图标<img alt="复制" src="images/toolbar-copy.gif"/>，Rosefinch（朱雀）将在剪贴板内容记录要剪切或复制的目录及文件，并<a class="lightboxImg" title="help_notification.png" href="images/help_notification.png">通知您</a>。当您点击了粘贴<img alt="粘贴" src="images/toolbar-paste.gif" />后，Rosefinch（朱雀）将剪贴板内的目录和文件<a class="lightboxImg" title="help_working.png" href="images/help_working.png">粘贴入</a>当前浏览的目录内，完成后<a class="lightboxImg" title="help_notification_pasted.png" href="images/help_notification_pasted.png">通知您</a>。
+			第三个功能区，剪切、复制和粘贴功能区使您可以复制文件或目录。<a class="lightboxImg" title="help_select.png" href="images/help_select.png">选定需要操作的文件</a>后，点击剪切图标<img alt="剪切" src="images/toolbar-cut.png"/>或复制图标<img alt="复制" src="images/toolbar-copy.png"/>，Rosefinch（朱雀）将在剪贴板内容记录要剪切或复制的目录及文件，并<a class="lightboxImg" title="help_notification.png" href="images/help_notification.png">通知您</a>。当您点击了粘贴<img alt="粘贴" src="images/toolbar-paste.png" />后，Rosefinch（朱雀）将剪贴板内的目录和文件<a class="lightboxImg" title="help_working.png" href="images/help_working.png">粘贴入</a>当前浏览的目录内，完成后<a class="lightboxImg" title="help_notification_pasted.png" href="images/help_notification_pasted.png">通知您</a>。
 		</p>
 		<p>
 			<a class="lightboxImg" title="help_upload_large.png" href="images/help_upload_large.png">
 				<img class="helpLeftImg" alt="上传" src="images/help_upload_small.png" />
 			</a>
-			第四个功能区提供新建目录、重命名和删除功能。点击新建目录图标<img alt="新建目录" src="images/toolbar-new-folder.gif"/>，会<a class="lightboxImg" title="help_new_folder.png" href="images/help_new_folder.png">弹出对话框</a>请求输入目录名称，输入并确定后将在当前浏览的目录中建立指定目录。使用重命名功能时，先在文件列表中<strong>选择一个</strong>目录或文件，点击重命名图标<img alt="重命名" src="images/toolbar-rename.gif"/>，会<a class="lightboxImg" title="help_rename.png" href="images/help_rename.png">弹出对话框</a>请求输入新名称，输入并确定后将会把指定目录或文件重命名为新名称。使用删除功能时，先在文件列表中选择需要删除的目录和文件，点击删除图标<img alt="删除" src="images/toolbar-delete.gif"/>，会<a class="lightboxImg" title="help_delete.png" href="images/help_delete.png">弹出对话框</a>确认删除，确定后将删除指定目录和文件。
+			第四个功能区提供新建目录、重命名和删除功能。点击新建目录图标<img alt="新建目录" src="images/toolbar-new-folder.png"/>，会<a class="lightboxImg" title="help_new_folder.png" href="images/help_new_folder.png">弹出对话框</a>请求输入目录名称，输入并确定后将在当前浏览的目录中建立指定目录。使用重命名功能时，先在文件列表中<strong>选择一个</strong>目录或文件，点击重命名图标<img alt="重命名" src="images/toolbar-rename.png"/>，会<a class="lightboxImg" title="help_rename.png" href="images/help_rename.png">弹出对话框</a>请求输入新名称，输入并确定后将会把指定目录或文件重命名为新名称。使用删除功能时，先在文件列表中选择需要删除的目录和文件，点击删除图标<img alt="删除" src="images/toolbar-delete.png"/>，会<a class="lightboxImg" title="help_delete.png" href="images/help_delete.png">弹出对话框</a>确认删除，确定后将删除指定目录和文件。
 		</p>
 		<p>
-			最后，Rosefinch（朱雀）还提供了上传功能，点击上传图标<img alt="上传" src="images/toolbar-upload.gif"/>，在弹出对话框中选择文件，确定后将会<a class="lightboxImg" title="help_working.png" href="images/help_working.png">提示</a>文件正在上传至当前目录，完成后将能在文件列表中看到。
+			最后，Rosefinch（朱雀）还提供了上传功能，点击上传图标<img alt="上传" src="images/toolbar-upload.png"/>，在弹出对话框中选择文件，确定后将会<a class="lightboxImg" title="help_working.png" href="images/help_working.png">提示</a>文件正在上传至当前目录，完成后将能在文件列表中看到。
 		</p>
 		<p>
 			<a href="#Top">回到顶部</a>
@@ -47,10 +47,7 @@
 			工具栏右边提供浏览模式切换和搜索功能（需要启用搜索）。<img alt="工具栏" src="images/help_toolbar_right.png"/>
 		</p>
 		<p>
-			点击“以大图标方式查看”图标<img alt="大图标" src="images/view-largeicon.gif"/>，文件列表将以大图标形式呈现当前目录中的内容。点击“以详细信息方式查看”图标<img alt="详细信息" src="images/view-detail.gif"/>，文件列表将以详细信息列表形式呈现当前目录中的内容。
-		</p>
-		<p>
-			在搜索框中输入需要搜索的关键字，点击搜索图标<img alt="搜索" src="images/toolbar-search.gif"/>后，将在当前目录及其子目录中搜索符合关键字的目录名和文件名，并显示出来。
+			在搜索框中输入需要搜索的关键字，点击搜索图标<img alt="搜索" src="images/toolbar-search.png"/>后，将在当前目录及其子目录中搜索符合关键字的目录名和文件名，并显示出来。
 		</p>
 		<p>
 			<a href="#Top">回到顶部</a>

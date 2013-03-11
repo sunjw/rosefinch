@@ -19,22 +19,22 @@
 			<a class="lightboxImg" title="help_history_large.png" href="images/help_history_large.png">
 				<img class="helpRightImg" alt="History" src="images/help_history_large.png" />
 			</a>
-			First function part: History functions, includes Forward, Back and History Navigator. Clicking Back icon<img alt="Back" src="images/toolbar-back.gif"/>, Rosefinch will go back to last folder you browsed or key word you searched. Clicking Forward icon<img alt="Foward" src="images/toolbar-forward.gif"/>, Rosefinch will go to the folder or search before you clicked Back. Clicking History Navigator<img alt="History Navigator" src="images/toolbar-history.gif"/>, you can go to folder or search in pop-up menu.
+			First function part: History functions, includes Forward, Back and History Navigator. Clicking Back icon<img alt="Back" src="images/toolbar-back.png"/>, Rosefinch will go back to last folder you browsed or key word you searched. Clicking Forward icon<img alt="Foward" src="images/toolbar-forward.png"/>, Rosefinch will go to the folder or search before you clicked Back. Clicking History Navigator<img alt="History Navigator" src="images/toolbar-history.png"/>, you can go to folder or search in pop-up menu.
 		</p>
 		<p>
-			Second function part includes Refresh and Up. Clicking Refresh icon<img alt="Refresh" src="images/toolbar-refresh.gif"/> will refresh current page. Clicking Up icon<img alt="Up" src="images/toolbar-up.gif"/>, Rosefinch will go to upper level folder.
+			Second function part includes Refresh and Up. Clicking Refresh icon<img alt="Refresh" src="images/toolbar-refresh.png"/> will refresh current page. Clicking Up icon<img alt="Up" src="images/toolbar-up.png"/>, Rosefinch will go to upper level folder.
 		</p>
 		<p>
-			Third function part includes Cut, Copy and Paste. After <a class="lightboxImg" title="help_select.png" href="images/help_select.png">selected file you want to operate</a>, you can click Cut<img alt="Cut" src="images/toolbar-cut.gif"/> or Copy<img alt="Copy" src="images/toolbar-copy.gif"/>, then Rosefinch will record these folders and files and <a class="lightboxImg" title="help_notification.png" href="images/help_notification.png">notify you</a>. When you click Paste<img alt="Paste" src="images/toolbar-paste.gif" />, Rosefinch will <a class="lightboxImg" title="help_working.png" href="images/help_working.png">paste</a> folders and files in clipboard into current folder. Rosefinch will <a class="lightboxImg" title="help_notification_pasted.png" href="images/help_notification_pasted.png">notify you</a> after it finished.
+			Third function part includes Cut, Copy and Paste. After <a class="lightboxImg" title="help_select.png" href="images/help_select.png">selected file you want to operate</a>, you can click Cut<img alt="Cut" src="images/toolbar-cut.png"/> or Copy<img alt="Copy" src="images/toolbar-copy.png"/>, then Rosefinch will record these folders and files and <a class="lightboxImg" title="help_notification.png" href="images/help_notification.png">notify you</a>. When you click Paste<img alt="Paste" src="images/toolbar-paste.png" />, Rosefinch will <a class="lightboxImg" title="help_working.png" href="images/help_working.png">paste</a> folders and files in clipboard into current folder. Rosefinch will <a class="lightboxImg" title="help_notification_pasted.png" href="images/help_notification_pasted.png">notify you</a> after it finished.
 		</p>
 		<p>
 			<a class="lightboxImg" title="help_upload_large.png" href="images/help_upload_large.png">
 				<img class="helpLeftImg" alt="Upload" src="images/help_upload_small.png" />
 			</a>
-			Fourth function parts includes New Folder, Rename and Delete. Clicking New Folder icon<img alt="New Folder" src="images/toolbar-new-folder.gif"/>, Rosefinch will <a class="lightboxImg" title="help_new_folder.png" href="images/help_new_folder.png">pop a dialog</a>. After you input new folder's name and click OK, Rosefinch will make a folder in current folder. If you want to rename a folder or file, you need to select <strong>one</strong> item in file list and click Rename icon<img alt="Rename" src="images/toolbar-rename.gif"/>. Rosefinch will <a class="lightboxImg" title="help_rename.png" href="images/help_rename.png">pop a dialog</a>. After you input new name and click OK, Rosefinch will rename the folder or file to new name. If you want to delete folders and files, you need to select them and click Delete icon<img alt="Delete" src="images/toolbar-delete.gif"/>. Rosefinch will <a class="lightboxImg" title="help_delete.png" href="images/help_delete.png">pop a dialog</a> to make sure you want to do this. After you click OK, Rosefinch will delete them.
+			Fourth function parts includes New Folder, Rename and Delete. Clicking New Folder icon<img alt="New Folder" src="images/toolbar-new-folder.png"/>, Rosefinch will <a class="lightboxImg" title="help_new_folder.png" href="images/help_new_folder.png">pop a dialog</a>. After you input new folder's name and click OK, Rosefinch will make a folder in current folder. If you want to rename a folder or file, you need to select <strong>one</strong> item in file list and click Rename icon<img alt="Rename" src="images/toolbar-rename.png"/>. Rosefinch will <a class="lightboxImg" title="help_rename.png" href="images/help_rename.png">pop a dialog</a>. After you input new name and click OK, Rosefinch will rename the folder or file to new name. If you want to delete folders and files, you need to select them and click Delete icon<img alt="Delete" src="images/toolbar-delete.png"/>. Rosefinch will <a class="lightboxImg" title="help_delete.png" href="images/help_delete.png">pop a dialog</a> to make sure you want to do this. After you click OK, Rosefinch will delete them.
 		</p>
 		<p>
-			Last, Rosefinch provides upload function. Clicking Upload icon<img alt="Upload" src="images/toolbar-upload.gif"/>, Rosefinch will pop a dialog for you to choose file. After you click OK, the file will be <a class="lightboxImg" title="help_working.png" href="images/help_working.png">uploaded</a>.
+			Last, Rosefinch provides upload function. Clicking Upload icon<img alt="Upload" src="images/toolbar-upload.png"/>, Rosefinch will pop a dialog for you to choose file. After you click OK, the file will be <a class="lightboxImg" title="help_working.png" href="images/help_working.png">uploaded</a>.
 		</p>
 		<p>
 			<a href="#Top">Back to top</a>
@@ -47,10 +47,7 @@
 			There are View Mode and Search (need to enable search function) at right side of toolbar.<img alt="Toolbar" src="images/help_toolbar_right.png"/>
 		</p>
 		<p>
-			Clicking "Large Icon View"<img alt="Large Icon" src="images/view-largeicon.gif"/>, Rosefinch will display current folder in large icon mode. Clicking "Detail View"<img alt="Detail" src="images/view-detail.gif"/>, Rosefinch will display current folder in detail mode.
-		</p>
-		<p>
-			You can search folder and file using search box. Just input keywords and click Search icon<img alt="Search" src="images/toolbar-search.gif"/>. Then Rosefinch will search them in current folder and display result.
+			You can search folder and file using search box. Just input keywords and click Search icon<img alt="Search" src="images/toolbar-search.png"/>. Then Rosefinch will search them in current folder and display result.
 		</p>
 		<p>
 			<a href="#Top">Back to top</a>

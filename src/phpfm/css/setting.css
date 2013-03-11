@@ -37,7 +37,6 @@ fieldset {
 
 fieldset * {
 	margin-bottom: 10px;
-	height: 30px;
 	line-height: 30px;
 	vertical-align: middle;
 }
@@ -62,11 +61,11 @@ form select {
 }
 
 div.info {
-	display: inline;
 	font-family: Arial;
 	font-size: x-small;
 	color: #666666;
 	overflow: hidden;
+	line-height: 20px;
 }
 
 #phpfmUserMng #divUserMng {
