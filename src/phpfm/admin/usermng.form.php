@@ -45,29 +45,33 @@
         	</fieldset>
         	<input type="submit" value="<?php echo _("OK"); ?>" />
         </form>
-        <fieldset id="phpfmChangePswd">
-        	<legend><?php echo _("Account Management"); ?></legend>
-        	<div id="divUserMng">
-        		<div>
-        			<input id="changePswd" type="button" value="<?php echo _("Change Password"); ?>" />
-        			<div class="info">
-	        			<?php 
-	        			echo _("Change your account password.");
-	        			?>
+        <div id="phpfmChangePswd">
+	        <fieldset>
+	        	<legend><?php echo _("Account Management"); ?></legend>
+	        	<div id="divUserMng">
+	        		<div>
+	        			<input id="changePswd" type="button" value="<?php echo _("Change Password"); ?>" />
+	        			<div class="info">
+		        			<?php 
+		        			echo _("Change your account password.");
+		        			?>
+		        		</div>
 	        		</div>
-        		</div>
-	       	</div>
-       </fieldset>
-        <fieldset id="phpfmUserMng">
-        	<legend><?php echo _("User Management"); ?></legend>
-        	<div id="divUserMng">
-        		<div>
-        			<input id="addUser" type="button" value="<?php echo _("Add User"); ?>" /><span id="statUserMng"></span>
-        		</div>
-		       	<table id="tableUserMng" border="0">
-		       		<tr>
-						<th class="id"><?php echo _("ID"); ?></th><th class="username"><?php echo _("Username"); ?></th><th class="permission"><?php echo _("Permission"); ?></th><th class="operation"><?php echo _("Operation"); ?></th>
-					</tr>
-		       	</table>
-	       	</div>
-       </fieldset>
+		       	</div>
+	       </fieldset>
+       </div>
+       <div  id="phpfmUserMng">
+	       <fieldset>
+	        	<legend><?php echo _("User Management"); ?></legend>
+	        	<div id="divUserMng">
+	        		<div>
+	        			<input id="addUser" type="button" value="<?php echo _("Add User"); ?>" /><span id="statUserMng"></span>
+	        		</div>
+			       	<table id="tableUserMng" border="0">
+			       		<tr>
+							<th class="id"><?php echo _("ID"); ?></th><th class="username"><?php echo _("Username"); ?></th><th class="permission"><?php echo _("Permission"); ?></th><th class="operation"><?php echo _("Operation"); ?></th>
+						</tr>
+			       	</table>
+		       	</div>
+	       </fieldset>
+       </div>

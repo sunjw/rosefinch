@@ -40,7 +40,7 @@ var Dialog = {
 		}
 
 		Dialog.funcDialog.find(".divHeader").html("").append($("<span/>").html(title));
-		var imgSrc = secondaryFolder ? "../images/close.gif" : "images/close.gif";
+		var imgSrc = secondaryFolder ? "../images/close.png" : "images/close.png";
 		if (closable) {
 			Dialog.funcDialog.find(".divHeader").append(
 				$("<a/>").attr("href", "javascript:;").addClass("funcClose").append(
@@ -91,7 +91,7 @@ var Dialog = {
 	displaySubmit : function () {
 		if (Dialog.funcDialog == null)
 			return;
-		var div = $("<div/>").addClass("rightAlign");
+		var div = $("<div/>").addClass("funcBtnLine");
 		div.append($("<input/>").attr("type", "submit").val(Strings['OK']));
 		if (Dialog.funcDialog.hasClass("closable")) {
 			var buttonCancel = $("<input/>").attr("type", "button").val(Strings['Cancel']);

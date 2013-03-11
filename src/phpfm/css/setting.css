@@ -1,12 +1,18 @@
 @CHARSET "UTF-8";
 
-#phpfmDocNav, #phpfmSettingForm, #permissionMessage, #phpfmUserMng, #phpfmChangePswd {
-	margin: 15px;
+#phpfmDocNav {
+	margin: 6px 10px;
+	padding: 5px;
+}
+#phpfmSettingForm, #permissionMessage, #phpfmUserMng, #phpfmChangePswd {
+	margin: 4px 10px;
+	padding: 0;
 }
 
 #phpfmDocNav {
 	font-size: 14px;
 	color: black;
+	border-bottom: 1px solid #3399CC;
 }
 #phpfmDocNav a {
 	color: #666666;
@@ -24,15 +30,27 @@ form#installPrefer {
 }
 
 fieldset {
-	margin: 5px 0;
-	padding: 2px 8px;
+	margin: 5px 0 !important;
+	padding: 5px 10px !important;
+	border: 1px solid #EAEAEA;
 }
 
 fieldset * {
-	margin: 5px 0;
-	line-height: 1.5em;
-	height: 1.5em;
+	margin-bottom: 10px;
+	height: 30px;
+	line-height: 30px;
 	vertical-align: middle;
+}
+fieldset legend {
+	margin: 0 2px 4px 0;
+	height: 24px;
+	line-height: 24px;
+}
+fieldset input, fieldset select {
+	height: 26px;
+	line-height: 26px;
+	font-family: 微软雅黑, "segoe ui", verdana, arial, sans-serif;
+	margin-left: 4px;
 }
 
 fieldset * * {
