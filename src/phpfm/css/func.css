@@ -13,7 +13,7 @@
 	opacity: 0.5;
 	-ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=50)";
 	/* IE */
-	filter: alpha(opacity =     50);
+	filter: alpha(opacity = 50);
 }
 
 .inputRequire {
@@ -66,7 +66,7 @@ div.divHeader a.funcClose {
 	margin: 3px 0;
 	height: 28px;
 	font-size: 20px;
-	width: 320px;
+	width: 300px;
 }
 #funcDialog input[type="submit"], #funcDialog input[type="button"], #funcDialog button {
 	margin-right: 10px;

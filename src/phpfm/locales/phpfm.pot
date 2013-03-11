@@ -27,7 +27,7 @@ msgstr ""
 msgid "Generating time"
 msgstr ""
 
-msgid "Using Tango icon library"
+msgid "Using Google Android icons"
 msgstr ""
 
 msgid "Current path:"

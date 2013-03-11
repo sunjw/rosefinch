@@ -27,8 +27,8 @@ msgstr "注意: 仅支持 IE 7 及其以上版本和其他现代浏览器"
 msgid "Generating time"
 msgstr "生成时间"
 
-msgid "Using Tango icon library"
-msgstr "使用 Tango 图标库"
+msgid "Using Google Android icons"
+msgstr "使用 Google Android 图标库"
 
 msgid "Current path:"
 msgstr "当前路径:"
