@@ -73,7 +73,7 @@ textdomain($domain);
 	<link href="../css/setting.css" rel="stylesheet" type="text/css" />
     <script type="text/javascript" language="javascript" src="../js/jquery-1.8.1.min.js"></script>
 </head>
-<body>
+<body class="install">
     <div id="nav">
         
     </div>
@@ -83,6 +83,14 @@ textdomain($domain);
         </div>
         <div id="subTitle">
     		<?php echo _("Prepare Rosefinch for first time using."); ?>
+			<form id="installPrefer" action="<?php echo $_SERVER['PHP_SELF']; ?>" method="get">
+				<label for="lang">Language for install:&nbsp;</label>
+				<select id="lang" name="lang">
+					<option value="en_US" <?php if($locale == "en_US")print("selected='selected'"); ?>>English</option>
+					<option value="zh_CN" <?php if($locale == "zh_CN")print("selected='selected'"); ?>>简体中文</option>
+				</select>
+				<input type="submit" value="Change"/>
+			</form>
     	</div>
     </div>
     <div id="content">
@@ -91,14 +99,6 @@ textdomain($domain);
     		echo _("There is something wrong in your settings.");
     		?>
     	</div>
-    	<form id="installPrefer" action="<?php echo $_SERVER['PHP_SELF']; ?>" method="get">
-	    	<label for="lang">Language for install:&nbsp;</label>
-	    	<select id="lang" name="lang">
-	    		<option value="en_US" <?php if($locale == "en_US")print("selected='selected'"); ?>>English</option>
-	    		<option value="zh_CN" <?php if($locale == "zh_CN")print("selected='selected'"); ?>>简体中文</option>
-	    	</select>
-	    	<input type="submit" value="Change"/>
-    	</form>
     	<div class="clear"></div>
     	<?php include "settings.form.php"; ?>
     </div>
