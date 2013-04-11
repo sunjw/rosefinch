@@ -932,5 +932,5 @@ FileManager.init = function () {
 
 };
 
-// $(window).load(init); // 运行准备函数
+// 运行准备函数
 $(FileManager.init);
