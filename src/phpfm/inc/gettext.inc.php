@@ -15,7 +15,7 @@ $lang_dir = "locales";
 
 $directory = get_base_dir() . $lang_dir;
 
-if(function_exists(bindtextdomain)) {
+if(function_exists("bindtextdomain")) {
 	bindtextdomain(DOMAIN, $directory);
 	bind_textdomain_codeset(DOMAIN, get_encoding()); // 让 gettext 以 utf-8 读取 mo
 	textdomain(DOMAIN);
