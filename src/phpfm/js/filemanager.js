@@ -299,13 +299,7 @@ var FileManager = {
 	},
 
 	funcSubmit: function () {
-		// 准备界面
-		var funcInput = $("div#divInput");
-		funcInput.css("display", "none");
-
-		FileManager.funcBg.get(0).onclick = FileManager.doNothing;
-		FileManager.displayFuncDialog("", "waiting",
-			"waiting", null);
+		FileManager.displayWaiting();
 	},
 
 	/*
@@ -625,6 +619,15 @@ var FileManager = {
 		}
 	},
 
+	displayWaiting: function () {
+		var funcInput = $("div#divInput");
+		funcInput.css("display", "none");
+
+		FileManager.funcBg.get(0).onclick = FileManager.doNothing;
+		FileManager.displayFuncDialog("", "waiting",
+			"waiting", null);
+	},
+
 	changeMainViewListHeight: function () {
 		// 自适应 mainViewList 高度
 		var mainViewList = $("div#mainViewList");
@@ -892,7 +895,7 @@ var FileManager = {
 			e.preventDefault();
 			var droppedFile = e.dataTransfer.files[0];
 
-			FileManager.funcSubmit();
+			FileManager.displayWaiting();
 
 			var sessionId = FileManager.getCookie('PHPSESSID');
 			var subdir = encodeURIComponent($("input#subdir").attr("value"));
