@@ -877,6 +877,12 @@ var FileManager = {
 		uploadFileInfo.html(infoText);
 		uploadFileInfo.addClass("dropUpload");
 
+		uploadFileInput.change(function () {
+			var filePath = uploadFileInput.val();
+			var fileName = filePath.replace(/^.*[\\\/]/, '')
+			uploadFileInfo.html(fileName);
+		});
+
 		var uploadFileInfoRaw = uploadFileInfo[0];
 		uploadFileInfoRaw.ondragover = function () {
 			uploadFileInfo.addClass("dropFile");
