@@ -866,11 +866,12 @@ var FileManager = {
 	},
 
 	initUploadHtml5: function () {
+		var infoText = "Drop and drop a file here to upload.";
 		var uploadFileInput = $('#uploadFile');
 		uploadFileInput.hide();
 
 		var uploadFileInfo = $('#uploadFileInfo');
-		uploadFileInfo.html("Drop and drop a file here to upload.");
+		uploadFileInfo.html(infoText);
 		uploadFileInfo.addClass("dropUpload");
 
 		var uploadFileInfoRaw = uploadFileInfo[0];
