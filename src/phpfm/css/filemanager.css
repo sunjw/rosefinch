@@ -328,3 +328,14 @@
 #mainView .header span a.sortd {
 	background: url('../images/order_desc.jpg') center 6px no-repeat;
 }
+
+#funcDialog #uploadFileInfo.dropUpload {
+	text-align: center;
+	height: 40px;
+	display: block;
+	border: 1px solid #ccc;
+}
+
+#funcDialog #uploadFileInfo.dropFile {
+	border-color: red !important;
+}

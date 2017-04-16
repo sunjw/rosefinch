@@ -865,6 +865,58 @@ var FileManager = {
 		});
 	},
 
+	initUploadHtml5: function () {
+		var uploadFileInput = $('#uploadFile');
+		uploadFileInput.hide();
+
+		var uploadFileInfo = $('#uploadFileInfo');
+		uploadFileInfo.html("Drop and drop a file here to upload.");
+		uploadFileInfo.addClass("dropUpload");
+
+		var uploadFileInfoRaw = uploadFileInfo[0];
+		uploadFileInfoRaw.ondragover = function () {
+			uploadFileInfo.addClass("dropFile");
+			return false;
+		};
+		uploadFileInfoRaw.ondragleave = function () {
+			uploadFileInfo.removeClass("dropFile");
+			return false;
+		};
+		uploadFileInfoRaw.ondragend = function () {
+			uploadFileInfo.removeClass("dropFile");
+			return false;
+		};
+		uploadFileInfoRaw.ondrop = function (e) {
+			uploadFileInfo.removeClass("dropFile");
+			e.preventDefault();
+			var droppedFile = e.dataTransfer.files[0];
+
+			FileManager.funcSubmit();
+
+			var sessionId = FileManager.getCookie('PHPSESSID');
+			var subdir = encodeURIComponent($("input#subdir").attr("value"));
+			var returnURL = encodeURIComponent($("input#return").val());
+			var returnURLdecoded = decodeURIComponent($("input#return").val());
+
+			var xhrUpload = new XMLHttpRequest();
+			xhrUpload.open('POST', 'func/post.func.php');
+
+			xhrUpload.onload = function () {
+				window.location.href = returnURLdecoded;
+			};
+
+			var form = new FormData();
+			form.append('session', sessionId);
+			form.append('oper', 'upload');
+			form.append('subdir', subdir);
+			form.append('return', returnURL);
+			form.append('uploadFile', droppedFile);
+
+			xhrUpload.send(form);
+		}
+
+	},
+
 	/*
 	 * 点击了登录的操作
 	 */
@@ -918,7 +970,8 @@ FileManager.init = function () {
 	FileManager.initUserMng();
 	FileManager.getMessage();
 	FileManager.initMediaPreview();
-	FileManager.initUploadify();
+	//FileManager.initUploadify();
+	FileManager.initUploadHtml5();
 
 	jqCommon.setPlaceholder("#searchForm", "#q", "搜索");
 	jqCommon.setVerify("#searchForm", "#q", "empty", null, null);
