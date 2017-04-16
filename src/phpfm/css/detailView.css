@@ -66,6 +66,9 @@
 }
 #mainView #detailView span.name {
 	width: 360px;
+	white-space: nowrap;
+	overflow: hidden;
+	text-overflow: "…";
 }
 #mainView #detailView span.size {
 	width: 125px;
