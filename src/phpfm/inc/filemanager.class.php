@@ -276,7 +276,6 @@ class FileManager
 	    <link href="css/jquery.lightbox-0.5.css" rel="stylesheet" type="text/css" />
 	    <link href="css/uploadify.css" rel="stylesheet" type="text/css" />
 	    <script type="text/javascript" language="javascript" src="js/jquery-1.8.1.min.js"></script>
-	    <script type="text/javascript" language="javascript" src="js/audio-player.js"></script> 
 	    <script type="text/javascript" language="javascript" src="js/jquery.common.min.js"></script> 
 		<script type="text/javascript" language="javascript" src="js/jquery.menu.min.js"></script>
     	<script type="text/javascript" language="javascript" src="js/swfobject.js"></script>
@@ -1061,7 +1060,10 @@ class FileManager
 				</div>
 			</div>
 			<div id="divAudio" class="container center">
-				<div id="divAudioPlayer">Audio Player</div>
+				<div id="divAudioPlayer">
+					<audio controls src="">
+					</audio>
+				</div>
 				<div id="link"></div>
 			</div>
 			<div id="divWaiting" class="container center">

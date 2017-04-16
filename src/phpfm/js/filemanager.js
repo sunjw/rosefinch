@@ -589,10 +589,8 @@ var FileManager = {
 
 			var audioLink = data.link;
 
-			// Flash player
-			AudioPlayer.embed("divAudioPlayer", {
-				soundFile: audioLink
-			});
+			var audioControl = divAudio.find("audio");
+			audioControl.attr("src", audioLink);
 
 			var divLink = divAudio.find("div#link");
 			divLink.html("<a href=\"" + audioLink + "\">"
@@ -620,10 +618,10 @@ var FileManager = {
 		FileManager.cleanOldname();
 		FileManager.funcBg.css("display", "none");
 
-		var funcAudioPlayer = $("div#funcAudioPlayer");
-		if (funcAudioPlayer.is(":visible")) {
-			AudioPlayer.close("pAudioPlayer"); // IE 9 has a bug on this call
-			funcAudioPlayer.fadeOut();
+		var divAudioPlayer = $("div#divAudioPlayer");
+		if (divAudioPlayer.is(":visible")) {
+			var audioControl = divAudioPlayer.find("audio");
+			audioControl[0].pause();
 		}
 	},
 
@@ -815,11 +813,6 @@ var FileManager = {
 	 * 准备 AudioPlayer
 	 */
 	initAudioPlayer: function () {
-		AudioPlayer.setup("images/player.swf", {
-			width: 290,
-			initialvolume: 100
-		});
-
 		$("a.audioPlayer").click(function () {
 			var audioLink = $(this).attr("href");
 			var audioTitle = $(this).attr("title");
