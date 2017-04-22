@@ -1,5 +1,6 @@
-tags
+.DS_Store
 *~
+tags
 src/phpfm/.buildpath
 src/phpfm/.project
 src/phpfm/.settings/
