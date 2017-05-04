@@ -335,12 +335,14 @@ class Post
 			$search = new Search();
 		}
 		
-		$used_uploadify = post_query("uploadify") == "uploadify";
-		$sub_dir = rawurldecode(post_query("subdir"));
+		// double rawurldecode to fix strange post bug.
+		$sub_dir = rawurldecode(rawurldecode(post_query("subdir")));
+		//log_to_file("post_query=".$post_subdir);
+		//log_to_file("sub_dir=".$sub_dir);
 		
 		if(isset($_FILES['uploadFile']))
 		{
-			$uploadfile = $this->files_base_dir. $sub_dir.$_FILES['uploadFile']['name'];
+			$uploadfile = $this->files_base_dir.$sub_dir.$_FILES['uploadFile']['name'];
 			
 			if (Utility::phpfm_move_uploaded_file($_FILES['uploadFile']['tmp_name'], $uploadfile)) {
 				$this->messageboard->set_message(
@@ -361,10 +363,7 @@ class Post
 			}
 		}
 
-		if(!$used_uploadify)
-			Utility::redirct_after_oper(false, 1);
-		else
-			echo "ok";
+		Utility::redirct_after_oper(false, 1);
 	}
 	
 	/**
