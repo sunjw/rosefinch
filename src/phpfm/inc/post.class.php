@@ -335,8 +335,8 @@ class Post
 			$search = new Search();
 		}
 		
-		// double rawurldecode to fix strange post bug.
-		$sub_dir = rawurldecode(rawurldecode(post_query("subdir")));
+		$used_ajax = post_query("ajax") == "ajax";
+		$sub_dir = rawurldecode(post_query("subdir"));
 		//log_to_file("post_query=".$post_subdir);
 		//log_to_file("sub_dir=".$sub_dir);
 		
@@ -363,7 +363,10 @@ class Post
 			}
 		}
 
-		Utility::redirct_after_oper(false, 1);
+		if($used_ajax)
+			echo "ok";
+		else
+			Utility::redirct_after_oper(false, 1);
 	}
 	
 	/**

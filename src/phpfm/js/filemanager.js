@@ -860,7 +860,7 @@ var FileManager = {
 				'oper': 'upload',
 				'subdir': subdir,
 				'return': returnURL,
-				'uploadify': 'uploadify'
+				'ajax': 'ajax'
 			},
 			onAllComplete: function () {
 				window.location.href = returnURLdecoded;
@@ -904,8 +904,8 @@ var FileManager = {
 			FileManager.displayWaiting();
 
 			var sessionId = FileManager.getCookie('PHPSESSID');
-			var subdir = encodeURIComponent($("input#subdir").attr("value"));
-			var returnURL = encodeURIComponent($("input#return").val());
+			var subdir = $("input#subdir").attr("value");
+			var returnURL = $("input#return").val();
 			var returnURLdecoded = decodeURIComponent($("input#return").val());
 
 			var xhrUpload = new XMLHttpRequest();
@@ -918,6 +918,7 @@ var FileManager = {
 			var form = new FormData();
 			form.append('session', sessionId);
 			form.append('oper', 'upload');
+			form.append('ajax', 'ajax');
 			form.append('subdir', subdir);
 			form.append('return', returnURL);
 			form.append('uploadFile', droppedFile);
