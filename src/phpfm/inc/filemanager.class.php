@@ -885,6 +885,12 @@ class FileManager
 				?>
 				<div class="toolbarPart">
 					<div>
+						<div title="<?php echo $button_names['Upload']; ?>" class="toolbarButton toolbarUpload splitRight">
+							<img alt="<?php echo $button_names['Upload']; ?>" src="<?php echo $upload_img; ?>" />
+						</div>
+						<div title="<?php echo $button_names['New Folder']; ?>" class="toolbarButton toolbarNewFolder">
+							<img alt="<?php echo $button_names['New Folder']; ?>" src="<?php echo $new_folder_img; ?>" />
+						</div>
 						<div title="<?php echo $button_names['Cut']; ?>" class="toolbarButton toolbarCut">
 							<img alt="<?php echo $button_names['Cut']; ?>" src="images/toolbar-cut.png" />
 						</div>
@@ -894,17 +900,11 @@ class FileManager
 						<div title="<?php echo $button_names['Paste']; ?>" class="toolbarButton toolbarPaste splitRight <?php echo $paste_class; ?>">
 							<img alt="<?php echo $button_names['Paste']; ?>" src="<?php echo $paste_img_src; ?>" />
 						</div>
-						<div title="<?php echo $button_names['New Folder']; ?>" class="toolbarButton toolbarNewFolder">
-							<img alt="<?php echo $button_names['New Folder']; ?>" src="<?php echo $new_folder_img; ?>" />
-						</div>
 						<div title="<?php echo $button_names['Rename']; ?>" class="toolbarButton toolbarRename">
 							<img alt="<?php echo $button_names['Rename']; ?>" src="images/toolbar-rename.png" />
 						</div>
 						<div title="<?php echo $button_names['Delete']; ?>" class="toolbarButton toolbarDelete splitRight" >
 							<img alt="<?php echo $button_names['Delete']; ?>" src="images/toolbar-delete.png" />
-						</div>
-						<div title="<?php echo $button_names['Upload']; ?>" class="toolbarButton toolbarUpload splitRight">
-							<img alt="<?php echo $button_names['Upload']; ?>" src="<?php echo $upload_img; ?>" />
 						</div>
 					</div>
 				</div>
