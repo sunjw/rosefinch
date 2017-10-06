@@ -1076,7 +1076,7 @@ class FileManager
 			$this->detail_view_item($item['item_path'],
 									$item['a_href'],
 									$item['name'],
-									Utility::get_icon($item['type'], 32),
+									Utility::get_icon($item['type'], 36),
 									$item['name'],
 									$item['size_str'],
 									$item['type_html'],

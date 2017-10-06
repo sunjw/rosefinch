@@ -144,11 +144,7 @@ class Utility
 	{
 		$img_ext = ".png";
 		$file_type = strtolower($file_type);
-		$img_postfix = "";
-		if($size == 32)
-		{
-			$img_postfix = "_32";	
-		}
+		$img_postfix = "_32";
 		switch ($file_type)
 		{
 		case "文件夹":
