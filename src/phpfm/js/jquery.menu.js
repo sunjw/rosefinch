@@ -2,7 +2,7 @@
  * jQuery Menu
  * License: GPL 2.0
  * Author: Sun Junwen
- * Version: 1.7.4
+ * Version: 1.7.5
  */
 var jqMenu = {
 	menuItemsSelector: ".menu",

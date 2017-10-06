@@ -2,7 +2,7 @@
  * jQuery Tabs
  * License: GPL 2.0
  * Author: Sun Junwen
- * Version: 1.5.2
+ * Version: 1.5.3
  */
 var jqTabs = {
 	prefix: "#jqTabs", // jqTab class 名称的前缀
