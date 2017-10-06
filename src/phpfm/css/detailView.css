@@ -28,7 +28,7 @@
 	transition-duration: 0.4s;
 }
 #mainView #detailView li.selected {
-	border-bottom: 1px solid #3399CC;
+	border-bottom: 1px solid #ABABAB;
 	transition-property: background,color,border;
 	transition-duration: 0.4s;
 }
@@ -62,10 +62,11 @@
 	margin-top: 22px;
 }
 #mainView #detailView span.icon {
-	width: 34px;
+	width: 44px;
 }
 #mainView #detailView span.icon img {
 	margin-top: 12px;
+	margin-left: 4px;
 }
 #mainView #detailView span.name {
 	width: 400px;
