@@ -4,23 +4,22 @@
 #phpfmMessage {
 	display: none;
 	position: fixed;
-	bottom: 5px;
-	left: 50px;
-	width: 500px;
+	bottom: 0;
+	left: 0;
+	width: 100%;
+	padding: 5px 0;
 	max-height: 300px;
 	overflow: auto;
 	background-color: #CCFF99;
-	border: 1px #339900 solid;
+	border-top: 1px #339900 solid;
 	font-size: small;
+	text-align: center;
 	color: #339900;
-	padding: 5px;
 	
 	opacity: 0.9; /* 透明 firefox */
 	-ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=90)";
 	/* IE */
 	filter: alpha(opacity = 90);
-	
-	box-shadow: 0 0 10px #000000;
 }
 
 #phpfmMessage.wrong {
