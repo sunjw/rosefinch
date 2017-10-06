@@ -756,11 +756,7 @@ var FileManager = {
 				};
 			}
 
-			if (!$.browser.msie) {
-				detailViewItems.fadeIn(1200); // 淡入载入文件
-			} else {
-				detailViewItems.show();
-			}
+			detailViewItems.show();
 		} else if (largeiconViewItems.length > 0) {
 			// 是大图标视图
 			var items = largeiconViewItems.children("div.largeIconItem");
