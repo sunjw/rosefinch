@@ -142,29 +142,29 @@ class Search
 		if ($handle = @opendir($path)) 
 		{
 			//echo "List of dirs:<br />";
-		    while (false !== ($dir_name = @readdir($handle))) 
-		    {
-		        //echo convert_toutf8($file) . "<br />";
-		        if($dir_name != "." && $dir_name != "..") // 过滤掉 . 和 ..
-		        {
-			        $full_dir_path = $path . $dir_name;
-			        if(is_dir($full_dir_path))
-			        {
-			        	//echo convert_toutf8($full_dir_path) . "<br />";
-			        	$dstat = stat($full_dir_path);
-			        	$dir = array();
-			        	$dir['name'] = convert_toutf8($dir_name);
-			        	$dir['path'] = convert_toutf8($full_dir_path);
-			        	$dir['stat'] = $dstat;
-			        	$dir['type'] = "dir";
-			        	
-			        	if($this->filte($dir))
+			while (false !== ($dir_name = @readdir($handle))) 
+			{
+				//echo convert_toutf8($file) . "<br />";
+				if($dir_name != "." && $dir_name != "..") // 过滤掉 . 和 ..
+				{
+					$full_dir_path = $path . $dir_name;
+					if(is_dir($full_dir_path))
+					{
+						//echo convert_toutf8($full_dir_path) . "<br />";
+						$dstat = stat($full_dir_path);
+						$dir = array();
+						$dir['name'] = convert_toutf8($dir_name);
+						$dir['path'] = convert_toutf8($full_dir_path);
+						$dir['stat'] = $dstat;
+						$dir['type'] = "dir";
+						
+						if($this->filte($dir))
 							continue;
 									
 						$item_path = convert_toutf8($subdir) . $dir['name'];
 						$dir['item_path'] = $item_path;
 						$dir['hash'] = md5($dir['item_path']);
-			        	
+						
 						// 信息收集完成
 						// 写入数据库
 						$query = "INSERT INTO fileindex VALUES ('".$dir['hash']."',".
@@ -194,11 +194,11 @@ class Search
 							//echo $rows;
 						}
 						
-			        	array_push($dirs, $dir);
-			        }
-		        }
-		    }
-		    closedir($handle);
+						array_push($dirs, $dir);
+					}
+				}
+			}
+			closedir($handle);
 		}
 		//print_r($dirs);
 		// 处理目录 完成
@@ -209,24 +209,24 @@ class Search
 		{
 			//echo "List of files:<br />";
 			
-		    while (false !== ($file_name = @readdir($handle))) 
-		    {
-		        //echo convert_toutf8($file) . "<br />";
-		        
-		        $full_file_path = $path . $file_name;
-		        if(!is_dir($full_file_path))
-		        {
-		        	//echo convert_toutf8($full_file_path) . "<br />";
-		        	$fstat = stat($full_file_path);
+			while (false !== ($file_name = @readdir($handle))) 
+			{
+				//echo convert_toutf8($file) . "<br />";
+				
+				$full_file_path = $path . $file_name;
+				if(!is_dir($full_file_path))
+				{
+					//echo convert_toutf8($full_file_path) . "<br />";
+					$fstat = stat($full_file_path);
 					$type = Utility::get_file_ext($file_name);
 					
-		        	$file = array();
-		        	$file['name'] = convert_toutf8($file_name);
-		        	$file['path'] = convert_toutf8($full_file_path);
-		        	$file['type'] = convert_toutf8($type);
-		        	$file['stat'] = $fstat;
-		        	
-		        	if($this->filte($file))
+					$file = array();
+					$file['name'] = convert_toutf8($file_name);
+					$file['path'] = convert_toutf8($full_file_path);
+					$file['type'] = convert_toutf8($type);
+					$file['stat'] = $fstat;
+					
+					if($this->filte($file))
 						continue;
 					
 					if($file['type'] == "")
@@ -237,7 +237,7 @@ class Search
 					
 					$file['hash'] = md5($file['item_path']);
 					
-		        	// 信息收集完成
+					// 信息收集完成
 					// 写入数据库
 					$query = "INSERT INTO fileindex VALUES ('".$file['hash']."',".
 						"'".$file['item_path']."',".
@@ -265,12 +265,12 @@ class Search
 						$rows = $this->db->query($query);
 						//echo $rows;
 					}
-		        	
-		        	array_push($files, $file);
-		        }
-		    }
+					
+					array_push($files, $file);
+				}
+			}
 		
-		    closedir($handle);
+			closedir($handle);
 		}
 		//print_r($files);
 		// 处理文件 完成

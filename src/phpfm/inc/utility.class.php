@@ -150,12 +150,12 @@ class Utility
 			$img_postfix = "_32";	
 		}
 		switch ($file_type)
-	    {
-	    case "文件夹":
-	    case "folder":	
-	    case "dir":
-	    	return Utility::generate_img_html("images/folder".$img_postfix.$img_ext, $size, $size, "zip");
-	    case "zip":
+		{
+		case "文件夹":
+		case "folder":	
+		case "dir":
+			return Utility::generate_img_html("images/folder".$img_postfix.$img_ext, $size, $size, "zip");
+		case "zip":
 		case "rar":
 		case "tar":
 		case "bz":
@@ -179,7 +179,7 @@ class Utility
 			return Utility::generate_img_html("images/image".$img_postfix.$img_ext, $size, $size, "image");
 		default:
 			return Utility::generate_img_html("images/generic".$img_postfix.$img_ext, $size, $size, "file");
-	    }
+		}
 	}
 	
 	/**
@@ -192,8 +192,8 @@ class Utility
 	 */
 	private static function generate_img_html($src, $width, $height, $alt)
 	{
-	    $imagehtml = '<img src="' . $src . '" alt="' . $alt . '" width="' . $width . '" height="' . $height . '" border="0" />';
-	    return $imagehtml;
+		$imagehtml = '<img src="' . $src . '" alt="' . $alt . '" width="' . $width . '" height="' . $height . '" border="0" />';
+		return $imagehtml;
 	}
 	
 	/**
@@ -204,144 +204,144 @@ class Utility
 	public static function get_mime_type($file_extension)
 	{
 		$mimetypes = array(
-		     "ez" => "application/andrew-inset",
-		     "hqx" => "application/mac-binhex40",
-		     "cpt" => "application/mac-compactpro",
-		     "doc" => "application/msword",
-		     "bin" => "application/octet-stream",
-		     "dms" => "application/octet-stream",
-		     "lha" => "application/octet-stream",
-		     "lzh" => "application/octet-stream",
-		     "exe" => "application/octet-stream",
-		     "class" => "application/octet-stream",
-		     "so" => "application/octet-stream",
-		     "dll" => "application/octet-stream",
-		     "oda" => "application/oda",
-		     "pdf" => "application/pdf",
-		     "ai" => "application/postscript",
-		     "eps" => "application/postscript",
-		     "ps" => "application/postscript",
-		     "smi" => "application/smil",
-		     "smil" => "application/smil",
-		     "wbxml" => "application/vnd.wap.wbxml",
-		     "wmlc" => "application/vnd.wap.wmlc",
-		     "wmlsc" => "application/vnd.wap.wmlscriptc",
-		     "bcpio" => "application/x-bcpio",
-		     "vcd" => "application/x-cdlink",
-		     "pgn" => "application/x-chess-pgn",
-		     "cpio" => "application/x-cpio",
-		     "csh" => "application/x-csh",
-		     "dcr" => "application/x-director",
-		     "dir" => "application/x-director",
-		     "dxr" => "application/x-director",
-		     "dvi" => "application/x-dvi",
-		     "spl" => "application/x-futuresplash",
-		     "gtar" => "application/x-gtar",
-		     "hdf" => "application/x-hdf",
-		     "js" => "application/x-javascript",
-		     "skp" => "application/x-koan",
-		     "skd" => "application/x-koan",
-		     "skt" => "application/x-koan",
-		     "skm" => "application/x-koan",
-		     "latex" => "application/x-latex",
-		     "nc" => "application/x-netcdf",
-		     "cdf" => "application/x-netcdf",
-		     "sh" => "application/x-sh",
-		     "shar" => "application/x-shar",
-		     "swf" => "application/x-shockwave-flash",
-		     "sit" => "application/x-stuffit",
-		     "sv4cpio" => "application/x-sv4cpio",
-		     "sv4crc" => "application/x-sv4crc",
-		     "tar" => "application/x-tar",
-		     "tcl" => "application/x-tcl",
-		     "tex" => "application/x-tex",
-		     "texinfo" => "application/x-texinfo",
-		     "texi" => "application/x-texinfo",
-		     "t" => "application/x-troff",
-		     "tr" => "application/x-troff",
-		     "roff" => "application/x-troff",
-		     "man" => "application/x-troff-man",
-		     "me" => "application/x-troff-me",
-		     "ms" => "application/x-troff-ms",
-		     "ustar" => "application/x-ustar",
-		     "src" => "application/x-wais-source",
-		     "xhtml" => "application/xhtml+xml",
-		     "xht" => "application/xhtml+xml",
-		     "zip" => "application/zip",
-		     "au" => "audio/basic",
-		     "snd" => "audio/basic",
-		     "mid" => "audio/midi",
-		     "midi" => "audio/midi",
-		     "kar" => "audio/midi",
-		     "mpga" => "audio/mpeg",
-		     "mp2" => "audio/mpeg",
-		     "mp3" => "audio/mpeg",
-		     "aif" => "audio/x-aiff",
-		     "aiff" => "audio/x-aiff",
-		     "aifc" => "audio/x-aiff",
-		     "m3u" => "audio/x-mpegurl",
-		     "ram" => "audio/x-pn-realaudio",
-		     "rm" => "audio/x-pn-realaudio",
-		     "rpm" => "audio/x-pn-realaudio-plugin",
-		     "ra" => "audio/x-realaudio",
-		     "wav" => "audio/x-wav",
-		     "pdb" => "chemical/x-pdb",
-		     "xyz" => "chemical/x-xyz",
-		     "bmp" => "image/bmp",
-		     "gif" => "image/gif",
-		     "ief" => "image/ief",
-		     "jpe" => "image/jpeg",
-		     "jpeg" => "image/jpeg",
-		     "jpg" => "image/jpeg",
-		     "png" => "image/png",
-		     "tiff" => "image/tiff",
-		     "tif" => "image/tif",
-		     "djvu" => "image/vnd.djvu",
-		     "djv" => "image/vnd.djvu",
-		     "wbmp" => "image/vnd.wap.wbmp",
-		     "ras" => "image/x-cmu-raster",
-		     "pnm" => "image/x-portable-anymap",
-		     "pbm" => "image/x-portable-bitmap",
-		     "pgm" => "image/x-portable-graymap",
-		     "ppm" => "image/x-portable-pixmap",
-		     "rgb" => "image/x-rgb",
-		     "xbm" => "image/x-xbitmap",
-		     "xpm" => "image/x-xpixmap",
-		     "xwd" => "image/x-windowdump",
-		     "igs" => "model/iges",
-		     "iges" => "model/iges",
-		     "msh" => "model/mesh",
-		     "mesh" => "model/mesh",
-		     "silo" => "model/mesh",
-		     "wrl" => "model/vrml",
-		     "vrml" => "model/vrml",
-		     "css" => "text/css",
-		     "html" => "text/html",
-		     "htm" => "text/html",
-		     "asc" => "text/plain",
-		     "txt" => "text/plain",
-		     "rtx" => "text/richtext",
-		     "rtf" => "text/rtf",
-		     "sgml" => "text/sgml",
-		     "sgm" => "text/sgml",
-		     "tsv" => "text/tab-seperated-values",
-		     "wml" => "text/vnd.wap.wml",
-		     "wmls" => "text/vnd.wap.wmlscript",
-		     "etx" => "text/x-setext",
-		     "xml" => "text/xml",
-		     "xsl" => "text/xml",
-		     "mpeg" => "video/mpeg",
-		     "mpg" => "video/mpeg",
-		     "mpe" => "video/mpeg",
-		     "qt" => "video/quicktime",
-		     "mov" => "video/quicktime",
-		     "mxu" => "video/vnd.mpegurl",
-		     "avi" => "video/x-msvideo",
-		     "movie" => "video/x-sgi-movie",
-		     "ice" => "x-conference-xcooltalk",
-		     "wmv"=>"video/x-ms-wmv",
-		     "wma"=>"audio/x-ms-wma",
-		     "asf"=>"video/x-msvideo"
+			"ez" => "application/andrew-inset",
+			"hqx" => "application/mac-binhex40",
+			"cpt" => "application/mac-compactpro",
+			"doc" => "application/msword",
+			"bin" => "application/octet-stream",
+			"dms" => "application/octet-stream",
+			"lha" => "application/octet-stream",
+			"lzh" => "application/octet-stream",
+			"exe" => "application/octet-stream",
+			"class" => "application/octet-stream",
+			"so" => "application/octet-stream",
+			"dll" => "application/octet-stream",
+			"oda" => "application/oda",
+			"pdf" => "application/pdf",
+			"ai" => "application/postscript",
+			"eps" => "application/postscript",
+			"ps" => "application/postscript",
+			"smi" => "application/smil",
+			"smil" => "application/smil",
+			"wbxml" => "application/vnd.wap.wbxml",
+			"wmlc" => "application/vnd.wap.wmlc",
+			"wmlsc" => "application/vnd.wap.wmlscriptc",
+			"bcpio" => "application/x-bcpio",
+			"vcd" => "application/x-cdlink",
+			"pgn" => "application/x-chess-pgn",
+			"cpio" => "application/x-cpio",
+			"csh" => "application/x-csh",
+			"dcr" => "application/x-director",
+			"dir" => "application/x-director",
+			"dxr" => "application/x-director",
+			"dvi" => "application/x-dvi",
+			"spl" => "application/x-futuresplash",
+			"gtar" => "application/x-gtar",
+			"hdf" => "application/x-hdf",
+			"js" => "application/x-javascript",
+			"skp" => "application/x-koan",
+			"skd" => "application/x-koan",
+			"skt" => "application/x-koan",
+			"skm" => "application/x-koan",
+			"latex" => "application/x-latex",
+			"nc" => "application/x-netcdf",
+			"cdf" => "application/x-netcdf",
+			"sh" => "application/x-sh",
+			"shar" => "application/x-shar",
+			"swf" => "application/x-shockwave-flash",
+			"sit" => "application/x-stuffit",
+			"sv4cpio" => "application/x-sv4cpio",
+			"sv4crc" => "application/x-sv4crc",
+			"tar" => "application/x-tar",
+			"tcl" => "application/x-tcl",
+			"tex" => "application/x-tex",
+			"texinfo" => "application/x-texinfo",
+			"texi" => "application/x-texinfo",
+			"t" => "application/x-troff",
+			"tr" => "application/x-troff",
+			"roff" => "application/x-troff",
+			"man" => "application/x-troff-man",
+			"me" => "application/x-troff-me",
+			"ms" => "application/x-troff-ms",
+			"ustar" => "application/x-ustar",
+			"src" => "application/x-wais-source",
+			"xhtml" => "application/xhtml+xml",
+			"xht" => "application/xhtml+xml",
+			"zip" => "application/zip",
+			"au" => "audio/basic",
+			"snd" => "audio/basic",
+			"mid" => "audio/midi",
+			"midi" => "audio/midi",
+			"kar" => "audio/midi",
+			"mpga" => "audio/mpeg",
+			"mp2" => "audio/mpeg",
+			"mp3" => "audio/mpeg",
+			"aif" => "audio/x-aiff",
+			"aiff" => "audio/x-aiff",
+			"aifc" => "audio/x-aiff",
+			"m3u" => "audio/x-mpegurl",
+			"ram" => "audio/x-pn-realaudio",
+			"rm" => "audio/x-pn-realaudio",
+			"rpm" => "audio/x-pn-realaudio-plugin",
+			"ra" => "audio/x-realaudio",
+			"wav" => "audio/x-wav",
+			"pdb" => "chemical/x-pdb",
+			"xyz" => "chemical/x-xyz",
+			"bmp" => "image/bmp",
+			"gif" => "image/gif",
+			"ief" => "image/ief",
+			"jpe" => "image/jpeg",
+			"jpeg" => "image/jpeg",
+			"jpg" => "image/jpeg",
+			"png" => "image/png",
+			"tiff" => "image/tiff",
+			"tif" => "image/tif",
+			"djvu" => "image/vnd.djvu",
+			"djv" => "image/vnd.djvu",
+			"wbmp" => "image/vnd.wap.wbmp",
+			"ras" => "image/x-cmu-raster",
+			"pnm" => "image/x-portable-anymap",
+			"pbm" => "image/x-portable-bitmap",
+			"pgm" => "image/x-portable-graymap",
+			"ppm" => "image/x-portable-pixmap",
+			"rgb" => "image/x-rgb",
+			"xbm" => "image/x-xbitmap",
+			"xpm" => "image/x-xpixmap",
+			"xwd" => "image/x-windowdump",
+			"igs" => "model/iges",
+			"iges" => "model/iges",
+			"msh" => "model/mesh",
+			"mesh" => "model/mesh",
+			"silo" => "model/mesh",
+			"wrl" => "model/vrml",
+			"vrml" => "model/vrml",
+			"css" => "text/css",
+			"html" => "text/html",
+			"htm" => "text/html",
+			"asc" => "text/plain",
+			"txt" => "text/plain",
+			"rtx" => "text/richtext",
+			"rtf" => "text/rtf",
+			"sgml" => "text/sgml",
+			"sgm" => "text/sgml",
+			"tsv" => "text/tab-seperated-values",
+			"wml" => "text/vnd.wap.wml",
+			"wmls" => "text/vnd.wap.wmlscript",
+			"etx" => "text/x-setext",
+			"xml" => "text/xml",
+			"xsl" => "text/xml",
+			"mpeg" => "video/mpeg",
+			"mpg" => "video/mpeg",
+			"mpe" => "video/mpeg",
+			"qt" => "video/quicktime",
+			"mov" => "video/quicktime",
+			"mxu" => "video/vnd.mpegurl",
+			"avi" => "video/x-msvideo",
+			"movie" => "video/x-sgi-movie",
+			"ice" => "x-conference-xcooltalk",
+			"wmv"=>"video/x-ms-wmv",
+			"wma"=>"audio/x-ms-wma",
+			"asf"=>"video/x-msvideo"
 		);
 		
 		if(isset($mimetypes[$file_extension]))
@@ -783,14 +783,14 @@ class Utility
 		if(!USERMNG)
 			return '';
 		$user = Utility::get_usermng()->get_user();
-    	if($user == null)
-    	{
+		if($user == null)
+		{
 			echo _("Welcome").' '._("Guest").'&nbsp;|&nbsp;<a id="linkLogin" href="javascript:;">'._("Login").'</a>';
-    	}
-    	else
-    	{
-    		echo _("Welcome").' '.$user->name.'&nbsp;|&nbsp;<a id="linkLogout" href="javascript:;">'._("Logout").'</a>';;
-    	}
+		}
+		else
+		{
+			echo _("Welcome").' '.$user->name.'&nbsp;|&nbsp;<a id="linkLogout" href="javascript:;">'._("Logout").'</a>';;
+		}
 	}
 	
 	/**
@@ -798,30 +798,30 @@ class Utility
 	 */
 	public static function html_navigation($page = "index")
 	{
-        if($page == "setting")
-        {
-        ?>
-        <ul>
-        	<li class="li-item"><a href="../"><?php echo htmlentities_utf8(_(TITLENAME)); ?></a></li>
-        	<li class="li-item current"><a href="setting.php"><?php echo _("Setting"); ?></a></li>
-        	<li class="li-item"><a href="../help.php"><?php echo _("Help"); ?></a></li>
-            <li class="li-item"><a href="../about.php"><?php echo _("About"); ?></a></li>
-        </ul>
-        <?php 
-        }
-        else
-        {
-        ?>
-        <ul>
-        	<li class="li-item<?php $page == "index" ? print(" current") : print(""); ?>"><a href="index.php"><?php echo htmlentities_utf8(_(TITLENAME)); ?></a></li>
-        	<li class="li-item<?php $page == "setting" ? print(" current") : print(""); ?>"><a href="admin/setting.php"><?php echo _("Setting"); ?></a></li>
-        	<li class="li-item<?php $page == "help" ? print(" current") : print(""); ?>"><a href="help.php"><?php echo _("Help"); ?></a></li>
-            <li class="li-item<?php $page == "about" ? print(" current") : print(""); ?>"><a href="about.php"><?php echo _("About"); ?></a></li>
-        </ul>
-        <?php 
-        }
-        ?>	
-        
+		if($page == "setting")
+		{
+		?>
+		<ul>
+			<li class="li-item"><a href="../"><?php echo htmlentities_utf8(_(TITLENAME)); ?></a></li>
+			<li class="li-item current"><a href="setting.php"><?php echo _("Setting"); ?></a></li>
+			<li class="li-item"><a href="../help.php"><?php echo _("Help"); ?></a></li>
+			<li class="li-item"><a href="../about.php"><?php echo _("About"); ?></a></li>
+		</ul>
+		<?php 
+		}
+		else
+		{
+		?>
+		<ul>
+			<li class="li-item<?php $page == "index" ? print(" current") : print(""); ?>"><a href="index.php"><?php echo htmlentities_utf8(_(TITLENAME)); ?></a></li>
+			<li class="li-item<?php $page == "setting" ? print(" current") : print(""); ?>"><a href="admin/setting.php"><?php echo _("Setting"); ?></a></li>
+			<li class="li-item<?php $page == "help" ? print(" current") : print(""); ?>"><a href="help.php"><?php echo _("Help"); ?></a></li>
+			<li class="li-item<?php $page == "about" ? print(" current") : print(""); ?>"><a href="about.php"><?php echo _("About"); ?></a></li>
+		</ul>
+		<?php 
+		}
+		?>	
+		
 <?php 
 	}
 	
@@ -832,9 +832,9 @@ class Utility
 	{
 ?>
 		<div id="copyright">
-        	<div><?php echo _("Notice: Rosefinch only supports IE 7 or newer versions and other modern browser"); ?>&nbsp;|&nbsp;<?php echo _("Generating time"); ?>&nbsp;<?php echo (microtime(true) - $begin_time) . "s"; ?></div>
-            <div><?php printf("Rosefinch - %s - PHPFM %s&nbsp;|&nbsp;SUN Junwen&nbsp;|&nbsp;%s", _("Rosefinch"), VERSION, _("Using Google Android icons")); ?></div>
-        </div>
+			<div><?php echo _("Notice: Rosefinch only supports IE 7 or newer versions and other modern browser"); ?>&nbsp;|&nbsp;<?php echo _("Generating time"); ?>&nbsp;<?php echo (microtime(true) - $begin_time) . "s"; ?></div>
+			<div><?php printf("Rosefinch - %s - PHPFM %s&nbsp;|&nbsp;SUN Junwen&nbsp;|&nbsp;%s", _("Rosefinch"), VERSION, _("Using Google Android icons")); ?></div>
+		</div>
 <?php 	
 	}
 	

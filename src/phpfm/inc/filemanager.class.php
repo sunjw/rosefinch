@@ -270,29 +270,29 @@ class FileManager
 ?>
 		<link href="css/filemanager.css" rel="stylesheet" type="text/css" />
 		<link href="css/message.css" rel="stylesheet" type="text/css" />
-	    <link href="css/detailView.css" rel="stylesheet" type="text/css" />
-	    <link href="css/largeiconView.css" rel="stylesheet" type="text/css" />
-	    <link href="css/func.css" rel="stylesheet" type="text/css" />
-	    <link href="css/jquery.lightbox-0.5.css" rel="stylesheet" type="text/css" />
-	    <link href="css/uploadify.css" rel="stylesheet" type="text/css" />
-	    <script type="text/javascript" language="javascript" src="js/jquery-1.8.1.min.js"></script>
-	    <script type="text/javascript" language="javascript" src="js/jquery.common.min.js"></script> 
+		<link href="css/detailView.css" rel="stylesheet" type="text/css" />
+		<link href="css/largeiconView.css" rel="stylesheet" type="text/css" />
+		<link href="css/func.css" rel="stylesheet" type="text/css" />
+		<link href="css/jquery.lightbox-0.5.css" rel="stylesheet" type="text/css" />
+		<link href="css/uploadify.css" rel="stylesheet" type="text/css" />
+		<script type="text/javascript" language="javascript" src="js/jquery-1.8.1.min.js"></script>
+		<script type="text/javascript" language="javascript" src="js/jquery.common.min.js"></script> 
 		<script type="text/javascript" language="javascript" src="js/jquery.menu.min.js"></script>
-    	<script type="text/javascript" language="javascript" src="js/swfobject.js"></script>
-    	<script type="text/javascript" language="javascript" src="js/jquery.uploadify.v2.1.4.min.js"></script>
+		<script type="text/javascript" language="javascript" src="js/swfobject.js"></script>
+		<script type="text/javascript" language="javascript" src="js/jquery.uploadify.v2.1.4.min.js"></script>
 <?php 
 		if($debug)
 		{
 ?>
 			<script type="text/javascript" language="javascript" src="js/jquery.lightbox-0.5.plus.js"></script>
-	    	<script type="text/javascript" language="javascript" src="js/filemanager.js"></script>
+			<script type="text/javascript" language="javascript" src="js/filemanager.js"></script>
 <?php 
 		}
 		else
 		{
 ?>
-	    	<script type="text/javascript" language="javascript" src="js/jquery.lightbox-0.5.plus.pack.js"></script>
-	    	<script type="text/javascript" language="javascript" src="js/filemanager.min.js"></script>
+			<script type="text/javascript" language="javascript" src="js/jquery.lightbox-0.5.plus.pack.js"></script>
+			<script type="text/javascript" language="javascript" src="js/filemanager.min.js"></script>
 <?php 
 		}
 	}
@@ -425,23 +425,23 @@ class FileManager
 		if ($handle = @opendir($path)) {
 			//echo "List of files:<br />";
 			
-		    while (false !== ($file_name = @readdir($handle))) {
-		        //echo convert_toutf8($file)."<br />";
-		        
-		        $full_file_path = $path.$file_name;
-		        if(!is_dir($full_file_path))
-		        {
-		        	//echo convert_toutf8($full_file_path)."<br />";
-		        	$fstat = stat($full_file_path);
+			while (false !== ($file_name = @readdir($handle))) {
+				//echo convert_toutf8($file)."<br />";
+				
+				$full_file_path = $path.$file_name;
+				if(!is_dir($full_file_path))
+				{
+					//echo convert_toutf8($full_file_path)."<br />";
+					$fstat = stat($full_file_path);
 					$type = Utility::get_file_ext($file_name);
 					
-		        	$file = array();
-		        	$file['name'] = htmlspecialchars(convert_toutf8($file_name));
-		        	$file['path'] = convert_toutf8($full_file_path);
-		        	$file['type'] = convert_toutf8($type);
-		        	$file['stat'] = $fstat;
-		        	
-		        	if($this->filte($file))
+					$file = array();
+					$file['name'] = htmlspecialchars(convert_toutf8($file_name));
+					$file['path'] = convert_toutf8($full_file_path);
+					$file['type'] = convert_toutf8($type);
+					$file['stat'] = $fstat;
+					
+					if($this->filte($file))
 						continue;
 					
 					// 处理大小
@@ -463,43 +463,43 @@ class FileManager
 					$file['type_html'] = $type_html;
 					$file['a_href'] = $a_href;
 					$file['item_path'] = $item_path;
-		        	
-		        	array_push($files, $file);
-		        }
-		    }
+					
+					array_push($files, $file);
+				}
+			}
 		
-		    closedir($handle);
-		    
-		    // 排序
-		    $cmp_function = "cmp_name";
-		    switch($sort)
-		    {
-		    case 1:
-		    	$cmp_function = "cmp_name";
-		    	break;
-		    case 2:
-		    	$cmp_function = "cmp_size";
-		    	break;
-		   	case 3:
-		    	$cmp_function = "cmp_type";
-		    	break;
-		    case 4:
-		    	$cmp_function = "cmp_mtime";
-		    	break;
-		    case -1:
-		    	$cmp_function = "rcmp_name";
-		    	break;
-		    case -2:
-		    	$cmp_function = "rcmp_size";
-		    	break;
-		    case -3:
-		    	$cmp_function = "rcmp_type";
-		    	break;
-		    case -4:
-		    	$cmp_function = "rcmp_mtime";
-		    	break;
-		    }
-		    usort($files, $cmp_function);
+			closedir($handle);
+			
+			// 排序
+			$cmp_function = "cmp_name";
+			switch($sort)
+			{
+			case 1:
+				$cmp_function = "cmp_name";
+				break;
+			case 2:
+				$cmp_function = "cmp_size";
+				break;
+			case 3:
+				$cmp_function = "cmp_type";
+				break;
+			case 4:
+				$cmp_function = "cmp_mtime";
+				break;
+			case -1:
+				$cmp_function = "rcmp_name";
+				break;
+			case -2:
+				$cmp_function = "rcmp_size";
+				break;
+			case -3:
+				$cmp_function = "rcmp_type";
+				break;
+			case -4:
+				$cmp_function = "rcmp_mtime";
+				break;
+			}
+			usort($files, $cmp_function);
 		}
 		return $files;
 	}
@@ -519,24 +519,24 @@ class FileManager
 		$dirs = array();
 		if ($handle = @opendir($path)) {
 			//echo "List of dirs:<br />";
-		    while (false !== ($dir_name = @readdir($handle))) {
-		        //echo convert_toutf8($file)."<br />";
-		        if($dir_name != "." && $dir_name != "..") // 过滤掉.和 ..
-		        {
-			        $full_dir_path = $path.$dir_name;
-			        if(is_dir($full_dir_path))
-			        {
-			        	//echo convert_toutf8($full_dir_path)."<br />";
-			        	$dstat = stat($full_dir_path);
-			        	$dir = array();
-			        	$dir['name'] = htmlspecialchars(convert_toutf8($dir_name));
-			        	$dir['path'] = convert_toutf8($full_dir_path);
-			        	$dir['stat'] = $dstat;
-			        	$dir['type'] = "dir";
-			        	
-			        	if($this->filte($dir))
+			while (false !== ($dir_name = @readdir($handle))) {
+				//echo convert_toutf8($file)."<br />";
+				if($dir_name != "." && $dir_name != "..") // 过滤掉.和 ..
+				{
+					$full_dir_path = $path.$dir_name;
+					if(is_dir($full_dir_path))
+					{
+						//echo convert_toutf8($full_dir_path)."<br />";
+						$dstat = stat($full_dir_path);
+						$dir = array();
+						$dir['name'] = htmlspecialchars(convert_toutf8($dir_name));
+						$dir['path'] = convert_toutf8($full_dir_path);
+						$dir['stat'] = $dstat;
+						$dir['type'] = "dir";
+						
+						if($this->filte($dir))
 							continue;
-			
+
 						$a_href = $this->browser_page."?".
 									$this->query_str."&dir=". 
 									rawurlencode($this->request_sub_dir. 
@@ -548,32 +548,32 @@ class FileManager
 						$dir['type_html'] = _("Folder");
 						$dir['a_href'] = $a_href;
 						$dir['item_path'] = $item_path;
-			        	
-			        	array_push($dirs, $dir);
-			        }
-		        }
-		    }
-		
-		    closedir($handle);
-		    
-		    // 排序
+						
+						array_push($dirs, $dir);
+					}
+				}
+			}
+
+			closedir($handle);
+			
+			// 排序
 			$cmp_function = "cmp_name";
-		    switch($sort)
-		    {
-		    case 1:
-		    	$cmp_function = "cmp_name";
-		    	break;
-		    case 2:
-		    	$cmp_function = "cmp_mtime";
-		    	break;
-		    case -1:
-		    	$cmp_function = "rcmp_name";
-		    	break;
-		    case -2:
-		    	$cmp_function = "rcmp_mtime";
-		    	break;
-		    }
-		    usort($dirs, $cmp_function);
+			switch($sort)
+			{
+			case 1:
+				$cmp_function = "cmp_name";
+				break;
+			case 2:
+				$cmp_function = "cmp_mtime";
+				break;
+			case -1:
+				$cmp_function = "rcmp_name";
+				break;
+			case -2:
+				$cmp_function = "rcmp_mtime";
+				break;
+			}
+			usort($dirs, $cmp_function);
 		}
 		return $dirs;
 	}
@@ -592,8 +592,8 @@ class FileManager
 				{
 					$dir = array();
 					$dir['name'] = $row->name;
-				    $dir['stat']['mtime'] = timestrtotime($row->modified);
-				    $dir['type'] = "dir";
+					$dir['stat']['mtime'] = timestrtotime($row->modified);
+					$dir['type'] = "dir";
 				
 					$a_href = $this->browser_page."?".
 						$this->query_str."&dir=". 
@@ -603,16 +603,16 @@ class FileManager
 					$dir['type_html'] = _("Folder");
 					$dir['a_href'] = $a_href;
 					$dir['item_path'] = $row->path;
-				        	
-				    array_push($dirs, $dir);
+							
+					array_push($dirs, $dir);
 				}
 				else
 				{
 					$file = array();
-			        $file['name'] = $row->name;
-			        $file['type'] = $row->type;
-			        $file['stat']['mtime'] = timestrtotime($row->modified);
-			        $file['stat']['size'] = $row->size;
+					$file['name'] = $row->name;
+					$file['type'] = $row->type;
+					$file['stat']['mtime'] = timestrtotime($row->modified);
+					$file['stat']['size'] = $row->size;
 						
 					// 处理大小
 					$size = $file['stat']['size'];
@@ -631,8 +631,8 @@ class FileManager
 					$file['type_html'] = $type_html;
 					$file['a_href'] = $a_href;
 					$file['item_path'] = $row->path;
-			        	
-			        array_push($files, $file);
+						
+					array_push($files, $file);
 				}
 			}
 		}
@@ -743,45 +743,45 @@ class FileManager
 ?>
 		<div id="fullpath">
 			<div>
-			    <div class="divDir"><a href="<?php echo $this->browser_page."?".$this->query_str; ?>">Root</a></div>
-			    <div class="pathSlash menuContainer">
-			    	<a class="arrow menuButton" href="javascript:void(0);">&nbsp;</a>
-			        	
+				<div class="divDir"><a href="<?php echo $this->browser_page."?".$this->query_str; ?>">Root</a></div>
+				<div class="pathSlash menuContainer">
+					<a class="arrow menuButton" href="javascript:void(0);">&nbsp;</a>
+						
 <?php 
 					$sub_dirs = explode("/", $this->request_sub_dir);
 					$dir_str = "";
 					$this->display_sub_menus($dir_str, $sub_dirs[0]);
 ?>
-			    </div>
+				</div>
 <?php 
-			        //print_r($sub_dirs);
-			        $len = count($sub_dirs);
-			        $sub_dirs[$len] = "";
-			        for($i = 0; $i < $len - 1; $i++)
-			        {
-			        	$sub_dir = $sub_dirs[$i];
-			        	$dir_str .= $sub_dir;
+					//print_r($sub_dirs);
+					$len = count($sub_dirs);
+					$sub_dirs[$len] = "";
+					for($i = 0; $i < $len - 1; $i++)
+					{
+						$sub_dir = $sub_dirs[$i];
+						$dir_str .= $sub_dir;
 ?>
-			    <div class="divDir">
-			        <a href="<?php echo $this->browser_page."?".$this->query_str; ?>&dir=<?php echo rawurlencode($dir_str); ?>">
-			        	<?php echo str_replace(" ", "&nbsp;", $sub_dir); ?>
-			        </a>
-			    </div>
-			    <div class="pathSlash menuContainer">
-			    	<a class="arrow menuButton" href="javascript:void(0);">&nbsp;</a>
+				<div class="divDir">
+					<a href="<?php echo $this->browser_page."?".$this->query_str; ?>&dir=<?php echo rawurlencode($dir_str); ?>">
+						<?php echo str_replace(" ", "&nbsp;", $sub_dir); ?>
+					</a>
+				</div>
+				<div class="pathSlash menuContainer">
+					<a class="arrow menuButton" href="javascript:void(0);">&nbsp;</a>
 <?php 
 						$dir_str .= "/";
 						$this->display_sub_menus($dir_str, $sub_dirs[$i + 1]);
 						
 ?>
-			    </div>
+				</div>
 <?php 
-				    }
+					}
 ?>
 			</div>
 			<div class="clear"></div>
 
-	    </div>
+		</div>
 <?php 
 	}
 	
@@ -928,31 +928,31 @@ class FileManager
 				</div>
 				<?php } ?>
 			</div>
-            <div id="rightToolbar">
+			<div id="rightToolbar">
 				<?php 
 				if(SEARCH)
 				{
 				?>
 				<form id="searchForm" action="<?php echo $this->search_page ?>" method="get" class="splitLeft">
-            		<input id="q" name="q" type="text" value="<?php echo $this->search_query; ?>" maxlength="255" size="10" />
-            		<input type="hidden" name="dir" value="<?php echo $this->request_sub_dir; ?>" />
-            		<input type="submit" value="<?php echo _("Search"); ?>" title="<?php echo _("Search"); ?>" />
-            		<?php 
-	            	if($this->is_search)
-	            	{
-	            	?>
-	            	<a href="<?php echo $clean_search_url; ?>" title="<?php echo $button_names['Clean Search']; ?>" class="toolbarSmallButton">
+					<input id="q" name="q" type="text" value="<?php echo $this->search_query; ?>" maxlength="255" size="10" />
+					<input type="hidden" name="dir" value="<?php echo $this->request_sub_dir; ?>" />
+					<input type="submit" value="<?php echo _("Search"); ?>" title="<?php echo _("Search"); ?>" />
+					<?php 
+					if($this->is_search)
+					{
+					?>
+					<a href="<?php echo $clean_search_url; ?>" title="<?php echo $button_names['Clean Search']; ?>" class="toolbarSmallButton">
 						<img alt="<?php echo $button_names['Clean Search']; ?>" src="images/close.png" />
 					</a>
-	            	<?php 
-	            	}
-	            	?>
-            	</form>
-            	<?php 
+					<?php 
+					}
+					?>
+				</form>
+				<?php 
 				}
 				?>
-            </div>
-        </div>
+			</div>
+		</div>
 <?php 
 	}
 	
@@ -976,7 +976,7 @@ class FileManager
 			$this->render_main_view($items);
 			?>
 			</div>
-        </div>
+		</div>
 <?php 
 	}
 	
@@ -1074,8 +1074,8 @@ class FileManager
 		</div>
 		
 		<div id="phpfmMessage">
-    	
-    	</div>
+		
+		</div>
 <?php 
 	}
 	
@@ -1103,7 +1103,7 @@ class FileManager
 		}
 		//$this->mark_to_20($i);
 ?>
-        </ul>
+		</ul>
 <?php 
 	}
 	
