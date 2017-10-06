@@ -66,23 +66,23 @@ textdomain($domain);
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
-    <title><?php echo _("Install"); ?></title>
+	<title><?php echo _("Install"); ?></title>
 	<meta http-equiv="Content-type" content="text/html;charset=UTF-8" />
 	<link href="../css/com.css" rel="stylesheet" type="text/css" />
 	<link href="../css/message.css" rel="stylesheet" type="text/css" />
 	<link href="../css/setting.css" rel="stylesheet" type="text/css" />
-    <script type="text/javascript" language="javascript" src="../js/jquery-1.8.1.min.js"></script>
+	<script type="text/javascript" language="javascript" src="../js/jquery-1.8.1.min.js"></script>
 </head>
 <body class="install">
-    <div id="nav">
-        
-    </div>
-    <div id="header">
-    	<div id="mainTitle">
-    		<?php echo _("Install"); ?>
-        </div>
-        <div id="subTitle">
-    		<?php echo _("Prepare Rosefinch for first time using."); ?>
+	<div id="nav">
+		
+	</div>
+	<div id="header">
+		<div id="mainTitle">
+			<?php echo _("Install"); ?>
+		</div>
+		<div id="subTitle">
+			<?php echo _("Prepare Rosefinch for first time using."); ?>
 			<form id="installPrefer" action="<?php echo $_SERVER['PHP_SELF']; ?>" method="get">
 				<label for="lang">Language for install:&nbsp;</label>
 				<select id="lang" name="lang">
@@ -91,19 +91,19 @@ textdomain($domain);
 				</select>
 				<input type="submit" value="Change"/>
 			</form>
-    	</div>
-    </div>
-    <div id="content">
-    	<div id="phpfmMessage" <?php if($wrong)print("style='display:block' class='wrong'"); ?>>
-    		<?php 
-    		echo _("There is something wrong in your settings.");
-    		?>
-    	</div>
-    	<div class="clear"></div>
-    	<?php include "settings.form.php"; ?>
-    </div>
-    <div id="footer">
-        
-    </div>
+		</div>
+	</div>
+	<div id="content">
+		<div id="phpfmMessage" <?php if($wrong)print("style='display:block' class='wrong'"); ?>>
+			<?php 
+			echo _("There is something wrong in your settings.");
+			?>
+		</div>
+		<div class="clear"></div>
+		<?php include "settings.form.php"; ?>
+	</div>
+	<div id="footer">
+		
+	</div>
 </body>
 </html>

@@ -1,6 +1,6 @@
 <div id="phpfmDoc">
 	<div id="phpfmDocReadme">
-	   	<a name="Readme" title="<?php echo _("Readme"); ?>"></a>
+		<a name="Readme" title="<?php echo _("Readme"); ?>"></a>
 		<h4>Rosefinch is a web file manager written in php.</h4>
 		<p>It provides features that you can manage files on local or remote computer. You can cut, copy, paste, rename and delete files or directories, and even make a new directory and upload a file (need higher user right). Of course, you can downlaod file from Rosefinch. Rosefich can provide search feature if there is a database server.</p>
 		<h4>Rosefinch is platform independence and has multi-language feature.</h4>
@@ -19,8 +19,8 @@
 		<p>Please contact author for other licenses.</p>
 	</div>
 	<div id="phpfmDocAbout">
-	   	<a name="About" title="<?php echo _("About"); ?>"></a>
-	   	<h4>About</h4>
+		<a name="About" title="<?php echo _("About"); ?>"></a>
+		<h4>About</h4>
 		<?php printf("<p>Rosefinch - %s - PHPFM %s</p><p>%s</p>", _("Rosefinch"), VERSION, _("Using Google Android icons")); ?>
 		<h4>Author</h4>
 		<p>Sun Junwen</p>

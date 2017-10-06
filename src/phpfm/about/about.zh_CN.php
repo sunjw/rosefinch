@@ -1,6 +1,6 @@
 <div id="phpfmDoc">
 	<div id="phpfmDocReadme">
-	   	<a name="Readme" title="<?php echo _("Readme"); ?>"></a>
+		<a name="Readme" title="<?php echo _("Readme"); ?>"></a>
 		<h4>Rosefinch (朱雀) 是一个用 php 编写的 Web 文件管理程序。</h4>
 		<p>它提供了对于远程服务器或本地文件的管理能力，可以对文件或目录进行剪切、复制、粘贴、重命名和删除操作，还可以新建目录以及上传文件 (以上操作均需要对服务器端文件操作权限进行适当的设置)。当然，也可以下载文件，并且支持断点续传或客户端多线程下载。它还可以在数据库的支持下提供搜索文件的功能。</p>
 		<h4>Rosefinch (朱雀) 拥有跨平台、多语言的特性。</h4>
@@ -19,8 +19,8 @@
 		<p>其他授权，请联系作者。</p>
 	</div>
 	<div id="phpfmDocAbout">
-	   	<a name="About" title="<?php echo _("About"); ?>"></a>
-	   	<h4>关于</h4>
+		<a name="About" title="<?php echo _("About"); ?>"></a>
+		<h4>关于</h4>
 		<?php printf("<p>Rosefinch - %s - PHPFM %s</p><p>%s</p>", _("Rosefinch"), VERSION, _("Using Google Android icons")); ?>
 		<h4>作者</h4>
 		<p>Sun Junwen</p>

@@ -154,81 +154,81 @@ if(isset($_POST['settingsForm']))
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
-    <title><?php echo _("Database Setting"); ?></title>
+	<title><?php echo _("Database Setting"); ?></title>
 	<meta http-equiv="Content-type" content="text/html;charset=UTF-8" />
 	<link href="../css/com.css" rel="stylesheet" type="text/css" />
 	<link href="../css/message.css" rel="stylesheet" type="text/css" />
 	<link href="../css/setting.css" rel="stylesheet" type="text/css" />
-    <script type="text/javascript" language="javascript" src="../js/jquery-1.8.1.min.js"></script>
-    <script type="text/javascript" language="javascript" src="../js/setting.js"></script>
+	<script type="text/javascript" language="javascript" src="../js/jquery-1.8.1.min.js"></script>
+	<script type="text/javascript" language="javascript" src="../js/setting.js"></script>
 </head>
 <body>
-    <div id="nav">
-        <?php Utility::html_navigation("setting"); ?>
-        <div class="clear"></div>
-    </div>
-    <div id="header">
-    	<div id="mainTitle">
-    		<?php echo _("Database Setting"); ?>
-        </div>
-        <div id="subTitle">
-    		<?php echo _("Set database parameters"); ?>
-    	</div>
-    </div>
-    <div id="content">
-    	<div id="phpfmMessage" <?php if($display_msg)print("style='display:block' "); if($wrong)print("class='wrong' "); ?>>
-    		<?php 
-    		if(!$ok)
-    			echo _("There is something wrong in your settings.");
-    		else
-    			echo "!!!!!";
-    		?>
-    	</div>
-    	<form id="phpfmDatabaseForm" action="<?php echo get_URI(); ?>" method="post">
-        	<input type="hidden" name="settingsForm" value="settingsForm" />
-        	<fieldset>
-        		<legend><?php echo _("Basic Settings"); ?></legend>
-        		<div>
-	        		<label for="dbUser"><?php echo _("Database user name:"); ?></label>
-	        		<input id="dbUser" type="text" maxlength="256" value="<?php echo $settings['db_user']; ?>" name="dbUser"/>
-	        		<div class="info">
-	        			
-	        		</div>
-        		</div>
-        		<div>
-	        		<label for="dbPswd"><?php echo _("Database user password:"); ?></label>
-	        		<input id="dbPswd" type="password" maxlength="256" value="" name="dbPswd"/>
-	        		<div class="info">
-	        			
-	        		</div>
-        		</div>
-        		<div>
-	        		<label for="dbName"><?php echo _("Database name:"); ?></label>
-	        		<input id="dbName" type="text" maxlength="256" value="<?php echo $settings['db_name']; ?>" name="dbName"/>
-	        		<div class="info">
-	        			
-	        		</div>
-        		</div>
-        		<div>
-	        		<label for="dbHost"><?php echo _("Database host:"); ?></label>
-	        		<input id="dbHost" type="text" maxlength="256" value="<?php echo $settings['db_host']; ?>" name="dbHost"/>
-	        		<div class="info">
-	        			
-	        		</div>
-        		</div>
-        		<div>
-	        		<label for="rootPassword"><?php echo _("Root user password:"); ?></label>
-	        		<input id="rootPassword" type="password" maxlength="256" value="" name="rootPassword"/>
-	        		<div class="info">
-	        			
-	        		</div>
-        		</div>
-        	</fieldset>
-        	<input type="submit" value="<?php echo _("OK"); ?>" />
-        </form>
-    </div>
-    <div id="footer">
-        <?php Utility::html_copyright_info($begin_time); ?>
-    </div>
+	<div id="nav">
+		<?php Utility::html_navigation("setting"); ?>
+		<div class="clear"></div>
+	</div>
+	<div id="header">
+		<div id="mainTitle">
+			<?php echo _("Database Setting"); ?>
+		</div>
+		<div id="subTitle">
+			<?php echo _("Set database parameters"); ?>
+		</div>
+	</div>
+	<div id="content">
+		<div id="phpfmMessage" <?php if($display_msg)print("style='display:block' "); if($wrong)print("class='wrong' "); ?>>
+			<?php 
+			if(!$ok)
+				echo _("There is something wrong in your settings.");
+			else
+				echo "!!!!!";
+			?>
+		</div>
+		<form id="phpfmDatabaseForm" action="<?php echo get_URI(); ?>" method="post">
+			<input type="hidden" name="settingsForm" value="settingsForm" />
+			<fieldset>
+				<legend><?php echo _("Basic Settings"); ?></legend>
+				<div>
+					<label for="dbUser"><?php echo _("Database user name:"); ?></label>
+					<input id="dbUser" type="text" maxlength="256" value="<?php echo $settings['db_user']; ?>" name="dbUser"/>
+					<div class="info">
+						
+					</div>
+				</div>
+				<div>
+					<label for="dbPswd"><?php echo _("Database user password:"); ?></label>
+					<input id="dbPswd" type="password" maxlength="256" value="" name="dbPswd"/>
+					<div class="info">
+						
+					</div>
+				</div>
+				<div>
+					<label for="dbName"><?php echo _("Database name:"); ?></label>
+					<input id="dbName" type="text" maxlength="256" value="<?php echo $settings['db_name']; ?>" name="dbName"/>
+					<div class="info">
+						
+					</div>
+				</div>
+				<div>
+					<label for="dbHost"><?php echo _("Database host:"); ?></label>
+					<input id="dbHost" type="text" maxlength="256" value="<?php echo $settings['db_host']; ?>" name="dbHost"/>
+					<div class="info">
+						
+					</div>
+				</div>
+				<div>
+					<label for="rootPassword"><?php echo _("Root user password:"); ?></label>
+					<input id="rootPassword" type="password" maxlength="256" value="" name="rootPassword"/>
+					<div class="info">
+						
+					</div>
+				</div>
+			</fieldset>
+			<input type="submit" value="<?php echo _("OK"); ?>" />
+		</form>
+	</div>
+	<div id="footer">
+		<?php Utility::html_copyright_info($begin_time); ?>
+	</div>
 </body>
 </html>
