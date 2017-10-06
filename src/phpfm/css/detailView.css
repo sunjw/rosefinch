@@ -21,7 +21,7 @@
 }
 #mainView #detailView li {
 	margin: 0 2px;
-	height: 40px;
+	height: 60px;
 	cursor: default;
 	border-bottom: 1px solid #EAEAEA;
 	transition-property: background,color,border;
@@ -51,21 +51,24 @@
 	float: left;
 	overflow: hidden;
 	text-overflow: ellipsis;
-	height: 38px;
-	line-height: 38px;
+	height: 58px;
+	line-height: 58px;
 	padding: 0 0 0 5px;
 }
 #mainView #detailView span.check {
 	width: 17px;
 }
+#mainView #detailView span.check input.inputCheck {
+	margin-top: 22px;
+}
 #mainView #detailView span.icon {
 	width: 34px;
 }
 #mainView #detailView span.icon img {
-	margin-top: 2px;
+	margin-top: 12px;
 }
 #mainView #detailView span.name {
-	width: 360px;
+	width: 400px;
 	white-space: nowrap;
 	overflow: hidden;
 	text-overflow: "…";
@@ -77,9 +80,5 @@
 	width: 120px;
 }
 #mainView #detailView span.mtime {
-	width: 100px;
-}
-
-#mainView #detailView input.inputCheck {
-	margin-top: 12px;
+	width: 150px;
 }

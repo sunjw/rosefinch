@@ -306,7 +306,7 @@
 }
 
 #mainView .header span.name {
-	width: 359px;
+	width: 399px;
 }
 
 #mainView .header span.size {
@@ -318,7 +318,7 @@
 }
 
 #mainView .header span.mtime {
-	width: 119px;
+	width: 160px;
 }
 
 #mainView .header span a.sorta {
