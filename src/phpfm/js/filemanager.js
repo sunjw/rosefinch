@@ -99,40 +99,6 @@ var FileManager = {
 	},
 
 	/*
-	 * 大图标模式时，当鼠标移到项目上的操作
-	 */
-	largeiconViewItemOver: function (item) {
-		var largeiconViewItem = $(item);
-		largeiconViewItem.addClass("selected");
-	},
-
-	/*
-	 * 大图标模式时，当鼠标移出项目的操作
-	 */
-	largeiconViewItemOut: function (item) {
-		var largeiconViewItem = $(item);
-		var checkBox = FileManager.getItemCheckbox(largeiconViewItem);
-		if (checkBox.checked != true) {
-			largeiconViewItem.removeClass("selected");
-		}
-	},
-
-	/*
-	 * 大图标模式时，当鼠标点击项目的操作
-	 */
-	largeiconViewItemClicked: function (item) {
-		var largeiconViewItem = $(item);
-		var checkBox = FileManager.getItemCheckbox(largeiconViewItem);
-		if (checkBox.checked) {
-			$(checkBox).removeAttr("checked");
-		} else {
-			$(checkBox).attr("checked", "checked");
-			largeiconViewItem.addClass("selected");
-		}
-		FileManager.viewItemCheck();
-	},
-
-	/*
 	 * 项目选择改变
 	 */
 	viewItemCheck: function () {
@@ -637,7 +603,7 @@ var FileManager = {
 		var mainViewListHeight;
 
 		if (FileManager.isIE && $.browser.version < 8) {
-			return; // Largeicon 会溢出来
+			return;
 		} else {
 			mainViewListHeight = windowHeight - mainViewListOffset.top
 				 - footerHeight - 30;
@@ -732,7 +698,6 @@ var FileManager = {
 		});
 
 		var detailViewItems = $("ul#detailView");
-		var largeiconViewItems = $("div#largeiconView");
 		if (detailViewItems.length > 0) {
 			// 是详细视图
 			var items = detailViewItems.children("li");
@@ -757,39 +722,6 @@ var FileManager = {
 			}
 
 			detailViewItems.show();
-		} else if (largeiconViewItems.length > 0) {
-			// 是大图标视图
-			var items = largeiconViewItems.children("div.largeIconItem");
-			var count = items.length;
-			for (var i = 0; i < count; i++) {
-				var item = $(items.get(i));
-				if (!item.hasClass("empty")) {
-					var jsObj = item.get(0);
-					jsObj.onmouseover = function () {
-						FileManager.largeiconViewItemOver(this);
-					};
-					jsObj.onmouseout = function () {
-						FileManager.largeiconViewItemOut(this);
-					};
-					jsObj.onclick = function () {
-						FileManager.largeiconViewItemClicked(this);
-					};
-					var as = jsObj.getElementsByTagName("a");
-					for (var j = 0; j < as.length; j++) {
-						var a = as[j];
-						a.onclick = function (e) {
-							jqCommon.stopBubble(e);
-						};
-					}
-
-				}
-			}
-
-			if (!$.browser.msie) {
-				largeiconViewItems.fadeIn(1200); // 淡入载入文件
-			} else {
-				largeiconViewItems.show();
-			}
 		}
 
 		FileManager.inputChecks = $("input.inputCheck");
