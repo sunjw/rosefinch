@@ -876,27 +876,9 @@ class FileManager
 				<a href="<?php echo $forward_url; ?>" title="<?php echo $button_names['Forward']; ?>" class="toolbarButton toolbarForward <?php echo $forward_class; ?>">
 					<img alt="<?php echo $button_names['Forward']; ?>" src="images/toolbar-forward.png" />
 				</a>
-				<div class="toolbarSmallButton menuContainer toolbarHistory splitRight">
-					<img class="menuButton" src="images/toolbar-history.png" />
-					<?php 
-					if($this->history->get_length() > 1)
-					{
-					?>
-					<div class="subMenu">
-						<ul class="menuSpace">
-							<?php echo $history_items; ?>
-						</ul>
-					</div>
-					<?php 
-					}
-					?>
-				</div>
 				<div title="<?php echo $button_names['Refresh']; ?>" class="toolbarButton toolbarRefresh">
 					<img alt="<?php echo $button_names['Refresh']; ?>" src="images/toolbar-refresh.png" />
 				</div>
-				<a href="<?php echo $up; ?>" title="<?php echo $button_names['Up']; ?>" class="toolbarButton toolbarUp splitRight">
-					<img alt="<?php echo $button_names['Up']; ?>" src="<?php echo $up_img; ?>" />
-				</a>
 				<?php 
 				if(Utility::allow_to_modify())
 				{
