@@ -880,7 +880,7 @@ var FileManager = {
 		uploadFileInput.change(function () {
 			var filePath = uploadFileInput.val();
 			var fileName = filePath.replace(/^.*[\\\/]/, '')
-			uploadFileInfo.html(fileName);
+				uploadFileInfo.html(fileName);
 		});
 
 		var uploadFileInfoRaw = uploadFileInfo[0];

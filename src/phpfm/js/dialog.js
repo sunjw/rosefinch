@@ -1,18 +1,18 @@
 var Dialog = {
-	funcBg : null,
-	funcDialog : null,
+	funcBg: null,
+	funcDialog: null,
 
 	/**
 	 * 无功能函数
 	 */
-	dummy : function () {
+	dummy: function () {
 		return;
 	},
 
 	/**
 	 * 准备功能对话框
 	 */
-	initFuncDialog : function (title, oper, redirect, closable, secondaryFolder) {
+	initFuncDialog: function (title, oper, redirect, closable, secondaryFolder) {
 		if (Dialog.funcBg == null) {
 			Dialog.funcBg = $("<div/>");
 			Dialog.funcBg.attr("id", "funcBg");
@@ -30,9 +30,9 @@ var Dialog = {
 			var form = $("<form/>");
 			var actionUrl = secondaryFolder ? "../func/post.func.php" : "func/post.func.php";
 			form.attr({
-				action : actionUrl,
-				method : "post",
-				enctype : "multipart/form-data"
+				action: actionUrl,
+				method: "post",
+				enctype: "multipart/form-data"
 			});
 			divInput.append(form);
 			Dialog.funcDialog.append(divInput);
@@ -45,9 +45,9 @@ var Dialog = {
 			Dialog.funcDialog.find(".divHeader").append(
 				$("<a/>").attr("href", "javascript:;").addClass("funcClose").append(
 					$("<img/>").attr({
-						alt : "Close",
-						src : imgSrc,
-						border : "0"
+						alt: "Close",
+						src: imgSrc,
+						border: "0"
 					})).click(Dialog.closeFunc));
 			Dialog.funcDialog.addClass("closable");
 			Dialog.funcBg.click(Dialog.closeFunc);
@@ -59,20 +59,20 @@ var Dialog = {
 		var form = Dialog.funcDialog.find("form");
 		form.html("");
 		form.append($("<input/>").attr({
-				type : "hidden",
-				id : "oper",
-				name : "oper"
+				type: "hidden",
+				id: "oper",
+				name: "oper"
 			}).val(oper));
 		if (redirect)
 			form.append($("<input/>").attr({
-					type : "hidden",
-					id : "return",
-					name : "return"
+					type: "hidden",
+					id: "return",
+					name: "return"
 				}).val(Strings['return']));
 		else
 			form.append($("<input/>").attr({
-					type : "hidden",
-					name : "noredirect"
+					type: "hidden",
+					name: "noredirect"
 				}).val("noredirect"));
 
 		form.unbind("submit");
@@ -80,7 +80,7 @@ var Dialog = {
 		return form;
 	},
 
-	setFocus : function (o) {
+	setFocus: function (o) {
 		o.focus();
 		o.get(0).select();
 	},
@@ -88,7 +88,7 @@ var Dialog = {
 	/**
 	 * 显示对话框提交部分
 	 */
-	displaySubmit : function () {
+	displaySubmit: function () {
 		if (Dialog.funcDialog == null)
 			return;
 		var div = $("<div/>").addClass("funcBtnLine");
@@ -104,7 +104,7 @@ var Dialog = {
 	/**
 	 * 显示功能对话框
 	 */
-	displayFuncDialog : function () {
+	displayFuncDialog: function () {
 		if (Dialog.funcBg == null || Dialog.funcDialog == null)
 			return;
 
@@ -117,7 +117,7 @@ var Dialog = {
 	/**
 	 * 关闭功能对话框
 	 */
-	closeFunc : function () {
+	closeFunc: function () {
 		var funcAudioPlayer = Dialog.funcDialog.find("div#funcAudioPlayer");
 		if (funcAudioPlayer.length && funcAudioPlayer.is(":visible")) {
 			AudioPlayer.close("divAudioPlayer"); // IE 9 has a bug on this call

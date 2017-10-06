@@ -5,25 +5,25 @@
  * Version: 1.5.2
  */
 var jqTabs = {
-	prefix : "#jqTabs", // jqTab class 名称的前缀
-	splitor : "", // 分隔符
-	navSelector : "Nav", // 导航栏选择器
-	navItemSelector : "Nav > a", // 导航栏内项目选择器
-	linkPrefix : "#", // 链接名称前缀
-	linkAttr : "href", // 链接属性
-	nameAttr : "name", // 名称属性
-	titleAttr : "title", // 标题属性
-	animation : false,
-	generateNav : false, // 是否自动生成导航栏
+	prefix: "#jqTabs", // jqTab class 名称的前缀
+	splitor: "", // 分隔符
+	navSelector: "Nav", // 导航栏选择器
+	navItemSelector: "Nav > a", // 导航栏内项目选择器
+	linkPrefix: "#", // 链接名称前缀
+	linkAttr: "href", // 链接属性
+	nameAttr: "name", // 名称属性
+	titleAttr: "title", // 标题属性
+	animation: false,
+	generateNav: false, // 是否自动生成导航栏
 
-	navs : null,
-	contents : null,
-	browser : null,
+	navs: null,
+	contents: null,
+	browser: null,
 
 	/**
 	 * 设置参数
 	 */
-	setup : function (values) {
+	setup: function (values) {
 		jqTabs.prefix = values.prefix || jqTabs.prefix;
 		jqTabs.splitor = values.splitor || jqTabs.splitor;
 		jqTabs.navSelector = values.navSelector || jqTabs.navSelector;
@@ -39,7 +39,7 @@ var jqTabs = {
 	/**
 	 * 显示指定 tab
 	 */
-	display : function (name, isAni) {
+	display: function (name, isAni) {
 		var length = jqTabs.contents.length;
 		var displayed = false;
 		var toDisplay = null;
@@ -84,14 +84,14 @@ var jqTabs = {
 	/**
 	 * 初始化内容
 	 */
-	initContents : function () {
+	initContents: function () {
 		jqTabs.display(jqTabs.contents[0], false);
 	},
 
 	/**
 	 * 初始化导航栏
 	 */
-	initNav : function () {
+	initNav: function () {
 		var nav = $(jqTabs.prefix + jqTabs.navSelector); // 导航部分
 		var navHTML = "";
 		var doc = $(jqTabs.prefix); // 主体部分
@@ -120,7 +120,7 @@ var jqTabs = {
 	/**
 	 * 初始化按钮
 	 */
-	initClick : function () {
+	initClick: function () {
 		var navs = $(jqTabs.prefix + jqTabs.navItemSelector);
 		var length = navs.length;
 		for (var i = 0; i < length; i++) {
@@ -135,7 +135,7 @@ var jqTabs = {
 	/**
 	 * 初始化
 	 */
-	init : function () {
+	init: function () {
 		jqTabs.contents = new Array();
 		jqTabs.navs = new Array();
 

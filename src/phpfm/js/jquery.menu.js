@@ -5,23 +5,23 @@
  * Version: 1.7.4
  */
 var jqMenu = {
-	menuItemsSelector : ".menu",
-	menuButtonSelector : ".subToggle",
-	subMenuSelector : ".submenu",
-	inlineShadow : "transparent url('shadow.png') no-repeat right bottom",
-	hoverOpen : false,
+	menuItemsSelector: ".menu",
+	menuButtonSelector: ".subToggle",
+	subMenuSelector: ".submenu",
+	inlineShadow: "transparent url('shadow.png') no-repeat right bottom",
+	hoverOpen: false,
 
-	isIE : true,
-	opened : false,
-	delay : 500,
-	showTimer : 0,
-	hideTimer : 0,
-	activeButton : null,
+	isIE: true,
+	opened: false,
+	delay: 500,
+	showTimer: 0,
+	hideTimer: 0,
+	activeButton: null,
 
 	/**
 	 * 阻止事件浮升
 	 */
-	stopBubble : function (e) {
+	stopBubble: function (e) {
 		var e = e ? e : window.event;
 		if (window.event) { // IE
 			e.cancelBubble = true;
@@ -31,7 +31,7 @@ var jqMenu = {
 		}
 	},
 
-	setup : function (values) {
+	setup: function (values) {
 		jqMenu.menuItemsSelector = values.menuItemsSelector || jqMenu.menuItemsSelector;
 		jqMenu.menuButtonSelector = values.menuButtonSelector || jqMenu.menuButtonSelector;
 		jqMenu.subMenuSelector = values.subMenuSelector || jqMenu.subMenuSelector;
@@ -42,7 +42,7 @@ var jqMenu = {
 	/**
 	 * 关闭所有子菜单
 	 */
-	hideAllSubMenus : function () {
+	hideAllSubMenus: function () {
 		var subMenus = $(jqMenu.subMenuSelector);
 		for (var i = 0; i < subMenus.length; i++) {
 			var subMenu = $(subMenus[i]);
@@ -56,7 +56,7 @@ var jqMenu = {
 	/**
 	 * 关闭子菜单
 	 */
-	hideSubMenu : function (subMenu) {
+	hideSubMenu: function (subMenu) {
 		// subMenu.css("display", "none");
 		if (jqMenu.isIE)
 			subMenu.css("background", "none"); // IE-hack 去掉背景
@@ -66,7 +66,7 @@ var jqMenu = {
 	/**
 	 * 打开菜单
 	 */
-	showSubMenu : function () {
+	showSubMenu: function () {
 		// $(this).css("background-image",
 		// "url('images/path-arrow-down.gif')");
 		var thisButton = jqMenu.activeButton;
@@ -108,7 +108,7 @@ var jqMenu = {
 		}
 	},
 
-	delayShowSubMenu : function () {
+	delayShowSubMenu: function () {
 		jqMenu.activeButton = this;
 		if (jqMenu.opened) {
 			// 有菜单打开时，不要 delay，直接打开新菜单
@@ -122,7 +122,7 @@ var jqMenu = {
 		}
 	},
 
-	delayHideMenu : function () {
+	delayHideMenu: function () {
 		clearTimeout(jqMenu.showTimer);
 		if (jqMenu.opened) {
 			clearTimeout(jqMenu.hideTimer);
@@ -135,7 +135,7 @@ var jqMenu = {
 	/**
 	 * 初始化菜单
 	 */
-	init : function () {
+	init: function () {
 		jqMenu.isIE = $.browser.msie ? true : false;
 
 		var body = $("body").get(0);
