@@ -57,10 +57,14 @@ div.divHeader a.funcClose {
 	height: 32px;
 	line-height: 32px;
 }
-#funcDialog #divDelete div, #funcDialog #divAudio div, #funcDialog #divAudio object, #funcDialog #divWaiting div{
+#funcDialog #divDelete div, #funcDialog #divAudio div, #funcDialog #divAudio object, #funcDialog #divWaiting div {
 	height: 32px;
 	line-height: 32px;
 	font-size: 20px;
+}
+#funcDialog #divAudio div {
+	height: 42px;
+	line-height: 42px;
 }
 #funcDialog input[type="text"], #funcDialog input[type="password"], #funcDialog select {
 	margin: 3px 0;
