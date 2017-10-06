@@ -833,7 +833,7 @@ class Utility
 ?>
 		<div id="copyright">
 			<div><?php echo _("Notice: Rosefinch only supports IE 7 or newer versions and other modern browser"); ?>&nbsp;|&nbsp;<?php echo _("Generating time"); ?>&nbsp;<?php echo (microtime(true) - $begin_time) . "s"; ?></div>
-			<div><?php printf("Rosefinch - %s - PHPFM %s&nbsp;|&nbsp;SUN Junwen&nbsp;|&nbsp;%s", _("Rosefinch"), VERSION, _("Using Google Android icons")); ?></div>
+			<div><?php printf("Rosefinch - %s - PHPFM %s&nbsp;|&nbsp;SUN Junwen&nbsp;|&nbsp;<a target=\"_blank\" href=\"https://material.io/icons/\">%s</a>", _("Rosefinch"), VERSION, _("Using Google Material icons")); ?></div>
 		</div>
 <?php 	
 	}
