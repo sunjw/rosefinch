@@ -27,6 +27,9 @@
 	transition-property: background,color,border;
 	transition-duration: 0.4s;
 }
+.mobile #mainView #detailView li {
+	height: 72px;
+}
 #mainView #detailView li.selected {
 	border-bottom: 1px solid #ABABAB;
 	transition-property: background,color,border;
@@ -55,11 +58,23 @@
 	line-height: 58px;
 	padding: 0 0 0 5px;
 }
+.mobile #mainView #detailView span {
+	height: 70px;
+	line-height: 70px;
+}
 #mainView #detailView span.check {
 	width: 17px;
 }
+.mobile #mainView #detailView span.check {
+	width: 32px;
+}
 #mainView #detailView span.check input.inputCheck {
 	margin-top: 22px;
+}
+.mobile #mainView #detailView span.check input.inputCheck {
+	margin-top: 24px;
+	width: 22px;
+	height: 22px;
 }
 #mainView #detailView span.icon {
 	width: 44px;
@@ -67,6 +82,9 @@
 #mainView #detailView span.icon img {
 	margin-top: 10px;
 	margin-left: 2px;
+}
+.mobile #mainView #detailView span.icon img {
+	margin-top: 16px;
 }
 #mainView #detailView span.name {
 	width: 400px;
@@ -76,12 +94,13 @@
 }
 .mobile #mainView #detailView span.name {
 	width: 320px;
+	font-size: 24px;
 }
 #mainView #detailView span.size {
 	width: 125px;
 }
 .mobile #mainView #detailView span.size {
-	width: 105px;
+	width: 90px;
 }
 #mainView #detailView span.type {
 	width: 120px;

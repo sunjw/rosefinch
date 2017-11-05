@@ -299,6 +299,9 @@
 #mainView .header span.check {
 	width: 16px;
 }
+.mobile #mainView .header span.check {
+	width: 31px;
+}
 #mainView .header span.icon {
 	width: 43px;
 }
@@ -312,7 +315,7 @@
 	width: 124px;
 }
 .mobile #mainView .header span.size {
-	width: 104px;
+	width: 89px;
 }
 #mainView .header span.type {
 	width: 119px;
