@@ -27,6 +27,7 @@ class FileManager
 	private $order; // 排序方向
 	private $view_type; // 视图模式
 	private $toolbar_type;
+	private $is_mobile;
 	
 	private $sort; // 文件排序代号
 	private $dsort;
@@ -52,6 +53,8 @@ class FileManager
 		 */
 		set_response_utf8();
 		
+		$this->is_mobile = is_mobile_browser();
+
 		$this->clipboard = Utility::get_clipboard();
 		$this->messageboard = Utility::get_messageboard();
 		$this->history = Utility::get_history();
@@ -1139,6 +1142,10 @@ class FileManager
 				$request_sub_dir."&s=s" .
 				"&o=".$sorder; ?>"><?php echo _("Size"); ?></a>
 			</span>
+<?php
+		if(!$this->is_mobile)
+		{
+?>
 			<span class="type split">
 				<a href="<?php echo $this_page."?q=".
 				$this->search_query."&dir=".
@@ -1151,6 +1158,9 @@ class FileManager
 				$request_sub_dir."&s=m" .
 				"&o=".$morder; ?>"><?php echo _("Modified Time"); ?></a>
 			</span>
+<?php
+		}
+?>
 		</div>
 <?php 
 		$javascript_call_arg = "name";
@@ -1243,8 +1253,15 @@ class FileManager
 					<span class="name"><?php echo str_replace(" ", "&nbsp;", $name); ?></span>
 				</a>
 				<span class="size"><?php echo $size; ?></span>
+<?php
+		if(!$this->is_mobile)
+		{
+?>
 				<span class="type"><?php echo $type; ?></span>
 				<span class="mtime"><?php echo date("Y-n-j H:i", $mtime); ?></span>
+<?php
+		}
+?>
 			</li>
 <?php 
 	}
