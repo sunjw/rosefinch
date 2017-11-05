@@ -8,6 +8,10 @@ body {
 	margin: 0 auto;
 	font-family: 微软雅黑, "segoe ui", verdana, arial, sans-serif;
 }
+body.mobile {
+	width: 540px;
+}
+
 input {
 	font-family: 微软雅黑, "segoe ui", verdana, arial, sans-serif;
 }

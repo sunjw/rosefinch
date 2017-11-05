@@ -29,7 +29,7 @@ $fileManager = new FileManager($search_mode, "index.php", "index.php");
 		?>
 	</title>
 	<meta http-equiv="Content-type" content="text/html;charset=UTF-8" />
-	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta name="viewport" content="width=540" />
 	<link href="css/com.css" rel="stylesheet" type="text/css" />
 	<?php echo $fileManager->html_include_files(DEBUG); ?>
 </head>

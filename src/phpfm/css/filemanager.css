@@ -296,27 +296,27 @@
 #mainView .header span.split {
 	background: transparent url('../images/header_split.jpg') top left no-repeat;
 }
-
 #mainView .header span.check {
 	width: 16px;
 }
-
 #mainView .header span.icon {
 	width: 43px;
 }
-
 #mainView .header span.name {
 	width: 399px;
 }
-
+.mobile #mainView .header span.name {
+	width: 319px;
+}
 #mainView .header span.size {
 	width: 124px;
 }
-
+.mobile #mainView .header span.size {
+	width: 104px;
+}
 #mainView .header span.type {
 	width: 119px;
 }
-
 #mainView .header span.mtime {
 	width: 160px;
 }

@@ -74,8 +74,14 @@
 	overflow: hidden;
 	text-overflow: "…";
 }
+.mobile #mainView #detailView span.name {
+	width: 320px;
+}
 #mainView #detailView span.size {
 	width: 125px;
+}
+.mobile #mainView #detailView span.size {
+	width: 105px;
 }
 #mainView #detailView span.type {
 	width: 120px;
