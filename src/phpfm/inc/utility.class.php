@@ -776,7 +776,7 @@ class Utility
 	 */
 	public static function display_user()
 	{
-		if(!USERMNG)
+		if(is_mobile_browser() || !USERMNG)
 			return '';
 		$user = Utility::get_usermng()->get_user();
 		if($user == null)
@@ -794,31 +794,39 @@ class Utility
 	 */
 	public static function html_navigation($page = "index")
 	{
-		if($page == "setting")
+		if(!is_mobile_browser())
 		{
-		?>
-		<ul>
-			<li class="li-item"><a href="../"><?php echo htmlentities_utf8(_(TITLENAME)); ?></a></li>
-			<li class="li-item current"><a href="setting.php"><?php echo _("Setting"); ?></a></li>
-			<li class="li-item"><a href="../help.php"><?php echo _("Help"); ?></a></li>
-			<li class="li-item"><a href="../about.php"><?php echo _("About"); ?></a></li>
-		</ul>
-		<?php 
+			if($page == "setting")
+			{
+			?>
+			<ul>
+				<li class="li-item"><a href="../"><?php echo htmlentities_utf8(_(TITLENAME)); ?></a></li>
+				<li class="li-item current"><a href="setting.php"><?php echo _("Setting"); ?></a></li>
+				<li class="li-item"><a href="../help.php"><?php echo _("Help"); ?></a></li>
+				<li class="li-item"><a href="../about.php"><?php echo _("About"); ?></a></li>
+			</ul>
+			<?php 
+			}
+			else
+			{
+			?>
+			<ul>
+				<li class="li-item<?php $page == "index" ? print(" current") : print(""); ?>"><a href="index.php"><?php echo htmlentities_utf8(_(TITLENAME)); ?></a></li>
+				<li class="li-item<?php $page == "setting" ? print(" current") : print(""); ?>"><a href="admin/setting.php"><?php echo _("Setting"); ?></a></li>
+				<li class="li-item<?php $page == "help" ? print(" current") : print(""); ?>"><a href="help.php"><?php echo _("Help"); ?></a></li>
+				<li class="li-item<?php $page == "about" ? print(" current") : print(""); ?>"><a href="about.php"><?php echo _("About"); ?></a></li>
+			</ul>
+			<?php 
+			}
 		}
 		else
 		{
-		?>
-		<ul>
-			<li class="li-item<?php $page == "index" ? print(" current") : print(""); ?>"><a href="index.php"><?php echo htmlentities_utf8(_(TITLENAME)); ?></a></li>
-			<li class="li-item<?php $page == "setting" ? print(" current") : print(""); ?>"><a href="admin/setting.php"><?php echo _("Setting"); ?></a></li>
-			<li class="li-item<?php $page == "help" ? print(" current") : print(""); ?>"><a href="help.php"><?php echo _("Help"); ?></a></li>
-			<li class="li-item<?php $page == "about" ? print(" current") : print(""); ?>"><a href="about.php"><?php echo _("About"); ?></a></li>
-		</ul>
-		<?php 
+			?>
+			<ul>
+				<li class="li-item<?php $page == "index" ? print(" current") : print(""); ?>"><a href="index.php"><?php echo htmlentities_utf8(_(TITLENAME)); ?></a></li>
+			</ul>
+			<?php 
 		}
-		?>	
-		
-<?php 
 	}
 	
 	/**
