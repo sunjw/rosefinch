@@ -270,6 +270,9 @@
 	height: 28px;
 	border-bottom: 1px solid #EAEAEA;
 }
+.mobile #mainView .header {
+	height: 36px;
+}
 
 #mainView .header span {
 	display: block;
@@ -279,20 +282,27 @@
 	line-height: 28px;
 	padding: 0 0 0 6px;
 }
-
+.mobile #mainView .header span {
+	height: 36px;
+	line-height: 36px;
+}
 #mainView .header a {
 	display: block;
 	line-height: 28px;
 	transition-property: none;
 }
-
+.mobile #mainView .header a {
+	line-height: 36px;
+}
 #mainView .header span #checkSelectAll {
-	/*height: 22px;
-	line-height: 22px;*/
 	margin-top: 8px;
 	margin-left: 1px;
 }
-
+.mobile #mainView .header span #checkSelectAll {
+	margin-top: 6px;
+	width: 22px;
+	height: 22px;
+}
 #mainView .header span.split {
 	background: transparent url('../images/header_split.jpg') top left no-repeat;
 }
