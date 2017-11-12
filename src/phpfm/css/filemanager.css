@@ -34,27 +34,30 @@
 	padding: 1px;
 	/*float: left;*/
 }
+.mobile #fullpath div.divDir,.mobile #fullpath div.divLabel,.mobile #fullpath div.pathSlash {
+	height: 36px;
+}
 
 #fullpath a {
 	color: #484848;
 	text-decoration: none;
 	display: block;
 }
-#fullpath a,#fullpath div.pathSlash a.arrow {
-	border: 1px solid white;
-}
 #fullpath a {
-	padding: 5px 6px;
+	padding: 6px 6px;
 }
-#fullpath a:hover,#fullpath div.pathSlash a.selected,#fullpath div.pathSlash a.arrow:hover {
-	border: 1px solid white;
+.mobile #fullpath a {
+	line-height: 36px;
+	padding: 0 6px;
 }
 #fullpath div.pathSlash a.arrow {
-	padding: 5px 0;
+	padding: 6px 0;
 	width: 16px;
 	color: transparent;
-	background: url('../images/arrow-right.png') center center
-		no-repeat;
+	background: url('../images/arrow-right.png') center center no-repeat;
+}
+.mobile #fullpath div.pathSlash a.arrow {
+	padding: 0;
 }
 
 #fullpath .subMenu {
