@@ -106,16 +106,15 @@
 	line-height: 43px;
 	border-bottom: 1px solid #3399CC;
 }
-/*
-#toolbar .splitRight {
-	border-right: 1px solid #cccccc;
+.mobile #toolbar {
+	height: 51px;
+	line-height: 51px;
 }
-#toolbar .splitLeft {
-	border-left: 1px solid #cccccc;
-}
-*/
 #toolbar #leftToolbar,#toolbar #rightToolbar{
 	height: 40px;
+}
+.mobile #toolbar #leftToolbar,.mobile #toolbar #rightToolbar{
+	height: 48px;
 }
 #toolbar #leftToolbar {
 	float: left;
@@ -139,11 +138,17 @@
 	border: 1px solid white;
 	height: 40px;
 }
+.mobile #toolbar .toolbarButton,.mobile #toolbar .toolbarSmallButton {
+	height: 48px;
+}
 #toolbar .buttonHover {
 	border: 1px solid white;
 }
 #toolbar .toolbarButton {
 	width: 40px;
+}
+.mobile #toolbar .toolbarButton {
+	width: 48px;
 }
 #toolbar .toolbarSmallButton {
 	width: 32px;
@@ -156,6 +161,10 @@
 	width: 28px;
 	height: 28px;
 	margin: 6px;
+}
+.mobile #toolbar .toolbarButton img {
+	width: 36px;
+	height: 36px;
 }
 #toolbar .toolbarSmallButton img {
 	width: 20px;
