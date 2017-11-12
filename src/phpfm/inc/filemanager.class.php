@@ -753,7 +753,10 @@ class FileManager
 <?php 
 					$sub_dirs = explode("/", $this->request_sub_dir);
 					$dir_str = "";
-					$this->display_sub_menus($dir_str, $sub_dirs[0]);
+					if(!$this->is_mobile)
+					{
+						$this->display_sub_menus($dir_str, $sub_dirs[0]);
+					}
 ?>
 				</div>
 <?php 
@@ -774,7 +777,10 @@ class FileManager
 					<a class="arrow menuButton" href="javascript:void(0);">&nbsp;</a>
 <?php 
 						$dir_str .= "/";
-						$this->display_sub_menus($dir_str, $sub_dirs[$i + 1]);
+						if(!$this->is_mobile)
+						{
+							$this->display_sub_menus($dir_str, $sub_dirs[$i + 1]);
+						}
 						
 ?>
 				</div>
