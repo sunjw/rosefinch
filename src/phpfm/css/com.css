@@ -68,6 +68,10 @@ input[type="submit"]:active, input[type="button"]:active, button:active {
 	line-height: 30px;
 	position: relative;
 }
+.mobile #header {
+	height: 42px;
+	line-height: 42px;
+}
 #header #loginStatus {
 	padding: 1px;
 }
@@ -100,18 +104,22 @@ input[type="submit"]:active, input[type="button"]:active, button:active {
 	display: block;
 	padding: 0 1em;
 }
-#nav ul,#nav ul li {
-	
-}
 #nav ul li {
 	float: left;
 	font-size: 16px;
 	text-align: center;
 	display: block;
 }
+.mobile #nav ul li {
+	font-size: 24px;
+}
 #nav ul,#nav ul .li-item {
 	height: 30px;
 	line-height: 30px;
+}
+.mobile #nav ul,.mobile #nav ul .li-item {
+	height: 42px;
+	line-height: 42px;
 }
 #nav ul .li-item {
 	border-right: 1px solid #CCCCCC;
