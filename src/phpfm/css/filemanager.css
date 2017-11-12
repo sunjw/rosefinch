@@ -44,14 +44,16 @@
 	display: block;
 }
 #fullpath a {
-	padding: 6px 6px;
+	padding: 0 6px;
+	line-height: 32px;
 }
 .mobile #fullpath a {
-	line-height: 36px;
 	padding: 0 6px;
+	line-height: 36px;
+	font-size: 18px;
 }
 #fullpath div.pathSlash a.arrow {
-	padding: 6px 0;
+	padding: 0;
 	width: 16px;
 	color: transparent;
 	background: url('../images/arrow-right.png') center center no-repeat;
