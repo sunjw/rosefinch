@@ -35,7 +35,7 @@
 	/*float: left;*/
 }
 .mobile #fullpath div.divDir,.mobile #fullpath div.divLabel,.mobile #fullpath div.pathSlash {
-	height: 36px;
+	height: 42px;
 }
 
 #fullpath a {
@@ -49,8 +49,8 @@
 }
 .mobile #fullpath a {
 	padding: 0 6px;
-	line-height: 36px;
-	font-size: 18px;
+	line-height: 42px;
+	font-size: 24px;
 }
 #fullpath div.pathSlash a.arrow {
 	padding: 0;
