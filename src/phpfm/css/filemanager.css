@@ -35,37 +35,22 @@
 	/*float: left;*/
 }
 
-#fullpath div.divLabel {
-	line-height: 28px;
-	cursor: default;
-}
-
 #fullpath a {
 	color: #484848;
 	text-decoration: none;
 	display: block;
 }
-
-#fullpath a, #fullpath div.pathSlash a.selected, #fullpath div.pathSlash a.arrow {
-}
-#fullpath a, #fullpath div.pathSlash a.arrow {
+#fullpath a,#fullpath div.pathSlash a.arrow {
 	border: 1px solid white;
 }
 #fullpath a {
 	padding: 5px 6px;
 }
-#fullpath div.pathSlash a.arrow {
-	padding: 5px 0;
-}
-#fullpath a:hover, #fullpath div.pathSlash a.selected, #fullpath div.pathSlash a.arrow:hover {
+#fullpath a:hover,#fullpath div.pathSlash a.selected,#fullpath div.pathSlash a.arrow:hover {
 	border: 1px solid white;
 }
-
-#fullpath div.pathSlash {
-	
-}
-
 #fullpath div.pathSlash a.arrow {
+	padding: 5px 0;
 	width: 16px;
 	color: transparent;
 	background: url('../images/arrow-right.png') center center
