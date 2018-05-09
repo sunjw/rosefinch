@@ -6,7 +6,7 @@ require_once "../inc/common.inc.php";
 require_once "../inc/gettext.inc.php";
 require_once "../inc/utility.class.php";
 require_once "../inc/ez_sql_core.php"; // Include ezSQL core
-require_once "../inc/ez_sql_mysql.php"; // Include ezSQL database specific component
+require_once "../inc/ez_sql_mysqli.php"; // Include ezSQL database specific component
 require_once "../log/log.func.php";
 
 @session_start();
