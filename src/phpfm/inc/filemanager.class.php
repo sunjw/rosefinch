@@ -956,8 +956,11 @@ class FileManager
 ?>
 		<div id="mainView">
 			<?php 
-			// 显示列表头
-			$this->display_header();
+			if(!$this->is_mobile)
+			{
+				// 显示列表头
+				$this->display_header();
+			}
 			
 			$items = array_merge($this->dstats, $this->fstats);
 			
