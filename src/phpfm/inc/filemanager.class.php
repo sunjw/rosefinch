@@ -280,7 +280,7 @@ class FileManager
 		<link href="css/message.css" rel="stylesheet" type="text/css" />
 		<link href="css/detailView.css<?php echo($debug_rand); ?>" rel="stylesheet" type="text/css" />
 		<link href="css/largeiconView.css" rel="stylesheet" type="text/css" />
-		<link href="css/func.css" rel="stylesheet" type="text/css" />
+		<link href="css/func.css<?php echo($debug_rand); ?>" rel="stylesheet" type="text/css" />
 		<link href="css/jquery.lightbox-0.5.css" rel="stylesheet" type="text/css" />
 		<link href="css/uploadify.css" rel="stylesheet" type="text/css" />
 		<script type="text/javascript" language="javascript" src="js/jquery-1.8.1.min.js"></script>
