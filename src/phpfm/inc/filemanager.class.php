@@ -1025,7 +1025,7 @@ class FileManager
 					</div>
 					<div id="divUpload">
 						<div>
-							<label id="uploadFileInfo" for="uploadFile"><?php printf("%s&nbsp;", _("Select File:")); ?></label>
+							<label id="uploadFileInfo" for="uploadFile"><?php printf("%s&nbsp;", _("Drag and drop a file here to upload.")); ?></label>
 							<input id="uploadFile" type="file" name="uploadFile"/>
 						</div>
 						<div>
