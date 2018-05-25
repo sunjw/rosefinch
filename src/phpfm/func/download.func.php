@@ -53,7 +53,9 @@ function dl_file($file)
 		{
 			//multiple ranges could be specified at the same time, but for simplicity only serve the first range
 			//http://tools.ietf.org/id/draft-ietf-http-range-retrieval-00.txt
-			list($range, $extra_ranges) = explode(',', $range_orig, 2);
+			//list($range, $extra_ranges) = explode(',', $range_orig, 2);
+			$ranges = explode(',', $range_orig, 2);
+			$range = $ranges[0];
 		}
 		else
 		{
