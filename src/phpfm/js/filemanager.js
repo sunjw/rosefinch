@@ -479,6 +479,10 @@ var FileManager = {
 	 * 显示 Func 输入的半透明背景
 	 */
 	displayFuncBg: function (canClose, closeableBkg) {
+		if (FileManager.isMobile) {
+			return;
+		}
+
 		if (canClose) {
 			FileManager.funcBg.get(0).onclick = closeableBkg ? FileManager.closeFunc : FileManager.doNothing;
 			FileManager.funcDialog.header.find(".funcClose").css("display", "block");
@@ -503,7 +507,11 @@ var FileManager = {
 
 		var titleSpan = divHeader.find("span");
 		titleSpan.html(FileManager.multilanTitles[title]);
-		funcDialog.css("left", FileManager.getLeftMargin() + "px");
+		var funDialogLeft = FileManager.getLeftMargin();
+		if (FileManager.isMobile) {
+			funDialogLeft = 0;
+		}
+		funcDialog.css("left", funDialogLeft + "px");
 
 		switch (oper) {
 		case "newfolder":
