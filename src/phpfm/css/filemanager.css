@@ -29,13 +29,12 @@
 }
 
 #fullpath div.divDir,#fullpath div.divLabel,#fullpath div.pathSlash {
-	height: 32px;
 	float: left;
+	height: 32px;
 	padding: 1px;
-	/*float: left;*/
 }
 .mobile #fullpath div.divDir,.mobile #fullpath div.divLabel,.mobile #fullpath div.pathSlash {
-	height: 42px;
+	height: 48px;
 }
 
 #fullpath a {
@@ -49,8 +48,8 @@
 }
 .mobile #fullpath a {
 	padding: 0 6px;
-	line-height: 42px;
-	font-size: 24px;
+	line-height: 48px;
+	font-size: 30px;
 }
 #fullpath div.pathSlash a.arrow {
 	padding: 0;
