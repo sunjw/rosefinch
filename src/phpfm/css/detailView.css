@@ -40,7 +40,8 @@
 	cursor: pointer; /* IE */
 }
 .mobile #mainView #detailView li a {
-	display: inline-block;
+	display: block;
+	float: left;
 	width: 365px;
 	height: 75px;
 }
@@ -61,10 +62,9 @@
 	padding: 0 0 0 5px;
 }
 .mobile #mainView #detailView span {
-	display: inline-block;
-	float: none;
 	height: 75px;
 	line-height: 75px;
+	padding-left: 8px;
 }
 #mainView #detailView span.check {
 	width: 17px;
