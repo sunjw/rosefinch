@@ -55,8 +55,15 @@ $fileManager = new FileManager($search_mode, "index.php", "index.php");
 		$fileManager->display_func_pre();
 		?>
 	</div>
+	<?php
+	if(!is_mobile_browser())
+	{
+	?>
 	<div id="footer">
 		<?php Utility::html_copyright_info($begin_time); ?>
 	</div>
+	<?php
+	}
+	?>
 </body>
 </html>

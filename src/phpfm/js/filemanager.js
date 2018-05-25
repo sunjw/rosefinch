@@ -606,8 +606,12 @@ var FileManager = {
 		if (FileManager.isIE && $.browser.version < 8) {
 			return;
 		} else {
+			var mainViewListMarginBottom = 30;
+			if (FileManager.isMobile) {
+				mainViewListMarginBottom = 2;
+			}
 			mainViewListHeight = windowHeight - mainViewListOffset.top
-				 - footerHeight - 30;
+				 - footerHeight - mainViewListMarginBottom;
 			mainViewListHeight = mainViewListHeight > FileManager.miniMainViewHeight ? mainViewListHeight
 				 : FileManager.miniMainViewHeight;
 			mainViewList.css("height", mainViewListHeight + "px");
