@@ -13,8 +13,7 @@
 }
 
 #mainView,#fullpath,#toolbar {
-	/* 设定主界面各个重要元素的共同属性
-	 */ /*width: 880px;*/
+	/* 设定主界面各个重要元素的共同属性 */
 	margin: 1px 10px 2px 10px;
 }
 
@@ -22,6 +21,10 @@
 #fullpath {
 	background-color: white;
 	border-bottom: 1px solid #EAEAEA;
+}
+.mobile #fullpath {
+	margin-top: 4px;
+	padding-bottom: 4px;
 }
 #fullpath ul {
 	list-style-type: none;
