@@ -802,7 +802,7 @@ var FileManager = {
 	},
 
 	initUploadHtml5: function () {
-		var infoText = "Drop and drop a file here to upload.";
+		var infoText = "Drap and drop a file here to upload.";
 		var uploadFileInput = $('#uploadFile');
 		uploadFileInput.hide();
 
