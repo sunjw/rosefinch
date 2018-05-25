@@ -270,10 +270,15 @@ class FileManager
 	 */
 	public function html_include_files($debug = false)
 	{
+		$debug_rand = "";
+		if($debug)
+		{
+			$debug_rand = "?rand=".rand(1, 1000);
+		}
 ?>
 		<link href="css/filemanager.css" rel="stylesheet" type="text/css" />
 		<link href="css/message.css" rel="stylesheet" type="text/css" />
-		<link href="css/detailView.css" rel="stylesheet" type="text/css" />
+		<link href="css/detailView.css<?php echo($debug_rand); ?>" rel="stylesheet" type="text/css" />
 		<link href="css/largeiconView.css" rel="stylesheet" type="text/css" />
 		<link href="css/func.css" rel="stylesheet" type="text/css" />
 		<link href="css/jquery.lightbox-0.5.css" rel="stylesheet" type="text/css" />
@@ -288,7 +293,7 @@ class FileManager
 		{
 ?>
 			<script type="text/javascript" language="javascript" src="js/jquery.lightbox-0.5.plus.js"></script>
-			<script type="text/javascript" language="javascript" src="js/filemanager.js"></script>
+			<script type="text/javascript" language="javascript" src="js/filemanager.js<?php echo($debug_rand); ?>"></script>
 <?php 
 		}
 		else
