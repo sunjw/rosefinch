@@ -276,7 +276,7 @@ class FileManager
 			$debug_rand = "?rand=".rand(1, 1000);
 		}
 ?>
-		<link href="css/filemanager.css" rel="stylesheet" type="text/css" />
+		<link href="css/filemanager.css<?php echo($debug_rand); ?>" rel="stylesheet" type="text/css" />
 		<link href="css/message.css" rel="stylesheet" type="text/css" />
 		<link href="css/detailView.css<?php echo($debug_rand); ?>" rel="stylesheet" type="text/css" />
 		<link href="css/largeiconView.css" rel="stylesheet" type="text/css" />
