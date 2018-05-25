@@ -39,6 +39,11 @@
 	text-decoration: none;
 	cursor: pointer; /* IE */
 }
+.mobile #mainView #detailView li a {
+	display: inline-block;
+	width: 365px;
+	height: 75px;
+}
 #mainView #detailView li a:hover {
 	color: black;
 }
@@ -56,6 +61,8 @@
 	padding: 0 0 0 5px;
 }
 .mobile #mainView #detailView span {
+	display: inline-block;
+	float: none;
 	height: 75px;
 	line-height: 75px;
 }
@@ -90,7 +97,7 @@
 	text-overflow: "…";
 }
 .mobile #mainView #detailView span.name {
-	width: 320px;
+	width: 300px;
 	font-size: 30px;
 }
 #mainView #detailView span.size {
