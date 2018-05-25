@@ -776,8 +776,10 @@ var FileManager = {
 			autoAdapt: true
 		});
 
-		// AudioPlayer
-		FileManager.initAudioPlayer();
+		if (!FileManager.isMobile) {
+			// AudioPlayer
+			FileManager.initAudioPlayer();
+		}
 	},
 
 	initUploadify: function () {
