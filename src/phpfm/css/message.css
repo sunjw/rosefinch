@@ -22,6 +22,10 @@
 	filter: alpha(opacity = 90);
 }
 
+.mobile #phpfmMessage {
+	font-size: 20px;
+}
+
 #phpfmMessage.wrong {
 	border-color: red;
 	background-color: #ffddd5;
