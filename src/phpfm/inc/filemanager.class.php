@@ -1070,7 +1070,7 @@ class FileManager
 					<audio controls src="">
 					</audio>
 				</div>
-				<div id="link"></div>
+				<div id="link"><?php echo _("Download:"); ?>&nbsp;</div>
 				<?php
 				if($this->is_mobile)
 				{

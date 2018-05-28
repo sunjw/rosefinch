@@ -8,6 +8,7 @@ var FileManager = {
 	isSearch: null,
 	delayID: 0,
 	miniMainViewHeight: 120,
+	downloadText: null,
 	isIE: null,
 	isMobile: null,
 
@@ -562,7 +563,10 @@ var FileManager = {
 			audioControl.attr("src", audioLink);
 
 			var divLink = divAudio.find("div#link");
-			divLink.html("Download: <a href=\"" + audioLink + "\">"
+			if (FileManager.downloadText == null) {
+				FileManager.downloadText = divLink.html();
+			}
+			divLink.html(FileManager.downloadText + "<a href=\"" + audioLink + "\">"
 				 + data.title + "</a>");
 
 			FileManager.displayFuncBg(true, false);

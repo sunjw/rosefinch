@@ -397,3 +397,6 @@ msgstr "点击上传一个文件。"
 
 msgid "Close"
 msgstr "关闭"
+
+msgid "Download:"
+msgstr "下载:"
