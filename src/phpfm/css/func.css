@@ -41,6 +41,9 @@ div.divHeader span {
 	float: left;
 	width: 150px;
 }
+.mobile div.divHeader span {
+	width: 300px;
+}
 
 div.divHeader a.funcClose {
 	float: right;
