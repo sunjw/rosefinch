@@ -537,7 +537,7 @@ var FileManager = {
 			}
 
 			FileManager.displayFuncBg(true, true);
-			funcDialog.fadeIn();
+			FileManager.displayFuncDialogInternal(funcDialog);
 
 			if (oper != "upload" && oper != "login") {
 				divInput.find("input#newname").focus();
@@ -551,7 +551,7 @@ var FileManager = {
 			FileManager.displayFuncPart(divDelete);
 
 			FileManager.displayFuncBg(true, true);
-			funcDialog.fadeIn();
+			FileManager.displayFuncDialogInternal(funcDialog);
 			break;
 		case "audio":
 			FileManager.displayFuncPart(divAudio);
@@ -566,13 +566,13 @@ var FileManager = {
 				 + data.title + "</a>");
 
 			FileManager.displayFuncBg(true, false);
-			funcDialog.fadeIn();
+			FileManager.displayFuncDialogInternal(funcDialog);
 			break;
 		case "waiting":
 			FileManager.displayFuncPart(divWaiting);
 
 			FileManager.displayFuncBg(false, false);
-			funcDialog.fadeIn();
+			FileManager.displayFuncDialogInternal(funcDialog);
 			break;
 		}
 	},
@@ -581,8 +581,9 @@ var FileManager = {
 	 * 关闭 Func 部分
 	 */
 	closeFunc: function () {
-		if (FileManager.funcDialog.body.is(":visible"))
-			FileManager.funcDialog.body.fadeOut();
+		if (FileManager.funcDialog.body.is(":visible")) {
+			FileManager.closeFuncDialogInternal(FileManager.funcDialog.body);
+		}
 
 		FileManager.cleanOldname();
 		FileManager.funcBg.css("display", "none");
@@ -591,6 +592,22 @@ var FileManager = {
 		if (divAudioPlayer.is(":visible")) {
 			var audioControl = divAudioPlayer.find("audio");
 			audioControl[0].pause();
+		}
+	},
+
+	displayFuncDialogInternal: function (funcDialog) {
+		if (!FileManager.isMobile) {
+			funcDialog.fadeIn();
+		} else {
+			funcDialog.show();
+		}
+	},
+
+	closeFuncDialogInternal: function (funcDialogBody) {
+		if (!FileManager.isMobile) {
+			funcDialogBody.fadeOut();
+		} else {
+			funcDialogBody.hide();
 		}
 	},
 
