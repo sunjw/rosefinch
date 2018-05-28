@@ -18,6 +18,7 @@ var FileManager = {
 		divInput: null,
 		divDelete: null,
 		divAudio: null,
+		divImg: null,
 		divWaiting: null
 	},
 
@@ -430,6 +431,7 @@ var FileManager = {
 		FileManager.funcDialog.divInput = FileManager.funcDialog.body.children("div#divInput");
 		FileManager.funcDialog.divDelete = FileManager.funcDialog.body.children("div#divDelete");
 		FileManager.funcDialog.divAudio = FileManager.funcDialog.body.children("div#divAudio");
+		FileManager.funcDialog.divImg = FileManager.funcDialog.body.children("div#divImg");
 		FileManager.funcDialog.divWaiting = FileManager.funcDialog.body.children("div#divWaiting");
 
 		// 准备标题字符串
@@ -438,7 +440,7 @@ var FileManager = {
 		rawTitles = rawTitles.html();
 		rawTitles = rawTitles.split("|");
 
-		FileManager.multilanTitles = new Array();
+		FileManager.multilanTitles = {};
 		var count = rawTitles.length;
 		var rawTitle,
 		key,
@@ -462,6 +464,7 @@ var FileManager = {
 		FileManager.funcDialog.divInput.addClass("hidden");
 		FileManager.funcDialog.divDelete.addClass("hidden");
 		FileManager.funcDialog.divAudio.addClass("hidden");
+		FileManager.funcDialog.divImg.addClass("hidden");
 		FileManager.funcDialog.divWaiting.addClass("hidden");
 
 		part.removeClass("hidden");
@@ -504,10 +507,15 @@ var FileManager = {
 		var divInput = FileManager.funcDialog.divInput;
 		var divDelete = FileManager.funcDialog.divDelete;
 		var divAudio = FileManager.funcDialog.divAudio;
+		var divImg = FileManager.funcDialog.divImg;
 		var divWaiting = FileManager.funcDialog.divWaiting;
 
 		var titleSpan = divHeader.find("span");
-		titleSpan.html(FileManager.multilanTitles[title]);
+		var titleHtml = title;
+		if (title in FileManager.multilanTitles) {
+			titleHtml = FileManager.multilanTitles[title];
+		}
+		titleSpan.html(titleHtml);
 		var funDialogLeft = FileManager.getLeftMargin();
 		if (FileManager.isMobile) {
 			funDialogLeft = 0;
@@ -568,6 +576,24 @@ var FileManager = {
 			}
 			divLink.html(FileManager.downloadText + "<a href=\"" + audioLink + "\">"
 				 + data.title + "</a>");
+
+			FileManager.displayFuncBg(true, false);
+			FileManager.displayFuncDialogInternal(funcDialog);
+			break;
+		case "img":
+			FileManager.displayFuncPart(divImg);
+
+			var imgLink = data.link;
+
+			//var audioControl = divAudio.find("audio");
+			//audioControl.attr("src", audioLink);
+
+			var divLink = divImg.find("div#link");
+			if (FileManager.downloadText == null) {
+				FileManager.downloadText = divLink.html();
+			}
+			divLink.html(FileManager.downloadText + "<a href=\"" + imgLink + "\">"
+				+ data.title + "</a>");
 
 			FileManager.displayFuncBg(true, false);
 			FileManager.displayFuncDialogInternal(funcDialog);
@@ -774,6 +800,27 @@ var FileManager = {
 		FileManager.viewItemCheck();
 	},
 
+	initImgPreview: function () {
+		if (!FileManager.isMobile) {
+			// lightbox
+			$('a.lightboxImg').lightBox({
+				overlayOpacity: 0.5,
+				autoAdapt: true
+			});
+		} else {
+			$("a.lightboxImg").click(function () {
+				var imgLink = $(this).attr("href");
+				var imgTitle = $(this).attr("title");
+				FileManager.displayFuncDialog("", "img",
+					"image", {
+					link: imgLink,
+					title: imgTitle
+				});
+				return false;
+			});
+		}
+	},
+
 	/*
 	 * 准备 AudioPlayer
 	 */
@@ -791,13 +838,7 @@ var FileManager = {
 	},
 
 	initMediaPreview: function () {
-		// lightbox
-		$('a.lightboxImg').lightBox({
-			overlayOpacity: 0.5,
-			autoAdapt: true
-		});
-
-		// AudioPlayer
+		FileManager.initImgPreview();
 		FileManager.initAudioPlayer();
 	},
 

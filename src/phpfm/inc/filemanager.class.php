@@ -1082,6 +1082,12 @@ class FileManager
 				}
 				?>
 			</div>
+			<div id="divImg" class="container">
+				<div id="link"><?php echo _("Download:"); ?>&nbsp;</div>
+				<div class="funcBtnLine">
+					<input type="button" value="<?php echo _("Close"); ?>" onclick="FileManager.closeFunc()"/>
+				</div>
+			</div>
 			<div id="divWaiting" class="container center">
 				<div class="wating">
 					<img alt="wating" src="images/loadingAnimation.gif" border="0">

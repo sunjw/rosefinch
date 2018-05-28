@@ -87,7 +87,7 @@ div.divHeader a.funcClose {
 	line-height: 32px;
 	font-size: 20px;
 }
-.mobile #funcDialog #divDelete div,.mobile #funcDialog #divAudio div,.mobile #funcDialog #divAudio object,.mobile #funcDialog #divWaiting div {
+.mobile #funcDialog #divDelete div,.mobile #funcDialog #divAudio div,.mobile #funcDialog #divImg div,.mobile #funcDialog #divWaiting div {
 	height: 48px;
 	line-height: 48px;
 	font-size: 24px;
@@ -102,6 +102,9 @@ div.divHeader a.funcClose {
 }
 .mobile #funcDialog #divAudio .funcBtnLine {
 	text-align: left;
+}
+.mobile #funcDialog #divImg #link {
+	height: auto;
 }
 
 #funcDialog input[type="text"], #funcDialog input[type="password"], #funcDialog select {
