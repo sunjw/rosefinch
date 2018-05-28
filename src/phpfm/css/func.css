@@ -103,7 +103,7 @@ div.divHeader a.funcClose {
 .mobile #funcDialog #divAudio .funcBtnLine {
 	text-align: left;
 }
-.mobile #funcDialog #divImg #link {
+.mobile #funcDialog #divImg #divImgPreview,.mobile #funcDialog #divImg #link {
 	height: auto;
 }
 

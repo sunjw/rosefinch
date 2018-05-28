@@ -1083,6 +1083,9 @@ class FileManager
 				?>
 			</div>
 			<div id="divImg" class="container">
+				<div id="divImgPreview" class="center">
+					<img id="imgPreview" src="images/lightbox-ico-loading.gif" />
+				</div>
 				<div id="link"><?php echo _("Download:"); ?>&nbsp;</div>
 				<div class="funcBtnLine">
 					<input type="button" value="<?php echo _("Close"); ?>" onclick="FileManager.closeFunc()"/>

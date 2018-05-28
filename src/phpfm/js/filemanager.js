@@ -9,6 +9,7 @@ var FileManager = {
 	delayID: 0,
 	miniMainViewHeight: 120,
 	downloadText: null,
+	imgPreviewLoading: "images/lightbox-ico-loading.gif",
 	isIE: null,
 	isMobile: null,
 
@@ -581,12 +582,44 @@ var FileManager = {
 			FileManager.displayFuncDialogInternal(funcDialog);
 			break;
 		case "img":
+			var imgPreview = divImg.find("#imgPreview");
+
+			// Loading...
+			imgPreview.attr("src", FileManager.imgPreviewLoading);
+			imgPreview.css({
+				"width": "32px",
+				"height": "32px"
+			});
+
 			FileManager.displayFuncPart(divImg);
 
 			var imgLink = data.link;
+			var imgObj = new Image();
+			imgObj.onload = function () {
+				var imgWidth = imgObj.width;
+				var imgHeight = imgObj.height;
+				var imgRatio = imgWidth / imgHeight;
 
-			//var audioControl = divAudio.find("audio");
-			//audioControl.attr("src", audioLink);
+				var imgPreviewWidth = funcDialog.width() - 20;
+				var imgPreviewHeight = funcDialog.height() - 280;
+				var imgPreviewRadio = imgPreviewWidth / imgPreviewHeight;
+
+				if (imgRatio >= imgPreviewRadio) {
+					imgPreviewHeight = imgPreviewWidth / imgRatio;
+				} else {
+					imgPreviewWidth = imgPreviewHeight * imgRatio;
+				}
+
+				imgPreview.attr("src", "");
+				imgPreview.css({
+					"width": imgPreviewWidth + "px",
+					"height": imgPreviewHeight + "px"
+				});
+				imgPreview.attr("src", imgLink);
+
+				imgObj.onload = function () {};
+			};
+			imgObj.src = imgLink;
 
 			var divLink = divImg.find("div#link");
 			if (FileManager.downloadText == null) {
@@ -997,6 +1030,9 @@ FileManager.init = function () {
 	jqCommon.setPlaceholder("#searchForm", "#q", "搜索");
 	jqCommon.setVerify("#searchForm", "#q", "empty", null, null);
 
+	// Pre-load some images
+	var imgPreload = new Image();
+	imgPreload.src = FileManager.imgPreviewLoading;
 };
 
 // 运行准备函数
