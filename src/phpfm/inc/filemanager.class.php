@@ -997,6 +997,7 @@ class FileManager
 		$multilan_titles .= ("upload:"._("Upload")."|");
 		$multilan_titles .= ("delete:"._("Confirm")."|");
 		$multilan_titles .= ("audio:"._("Audio Player")."|");
+		$multilan_titles .= ("image:"._("Image Preview")."|");
 		$multilan_titles .= ("user:"._("User")."|");
 		$multilan_titles .= ("waiting:"._("Working...")."|");
 ?>
