@@ -1071,6 +1071,16 @@ class FileManager
 					</audio>
 				</div>
 				<div id="link"></div>
+				<?php
+				if($this->is_mobile)
+				{
+				?>
+				<div class="funcBtnLine">
+					<input type="button" value="<?php echo _("Close"); ?>" onclick="FileManager.closeFunc()"/>
+				</div>
+				<?php
+				}
+				?>
 			</div>
 			<div id="divWaiting" class="container center">
 				<div class="wating">

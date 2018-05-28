@@ -96,6 +96,14 @@ div.divHeader a.funcClose {
 	height: 42px;
 	line-height: 42px;
 }
+.mobile #funcDialog #divAudio #divAudioPlayer {
+	height: 64px;
+	line-height: 64px;
+}
+.mobile #funcDialog #divAudio .funcBtnLine {
+	text-align: left;
+}
+
 #funcDialog input[type="text"], #funcDialog input[type="password"], #funcDialog select {
 	margin: 3px 0;
 	height: 28px;

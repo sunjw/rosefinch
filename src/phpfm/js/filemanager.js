@@ -562,7 +562,7 @@ var FileManager = {
 			audioControl.attr("src", audioLink);
 
 			var divLink = divAudio.find("div#link");
-			divLink.html("<a href=\"" + audioLink + "\">"
+			divLink.html("Download: <a href=\"" + audioLink + "\">"
 				 + data.title + "</a>");
 
 			FileManager.displayFuncBg(true, false);
@@ -581,18 +581,18 @@ var FileManager = {
 	 * 关闭 Func 部分
 	 */
 	closeFunc: function () {
+		var divAudioPlayer = $("div#divAudioPlayer");
+		if (divAudioPlayer.is(":visible")) {
+			var audioControl = divAudioPlayer.find("audio");
+			audioControl[0].pause();
+		}
+
 		if (FileManager.funcDialog.body.is(":visible")) {
 			FileManager.closeFuncDialogInternal(FileManager.funcDialog.body);
 		}
 
 		FileManager.cleanOldname();
 		FileManager.funcBg.css("display", "none");
-
-		var divAudioPlayer = $("div#divAudioPlayer");
-		if (divAudioPlayer.is(":visible")) {
-			var audioControl = divAudioPlayer.find("audio");
-			audioControl[0].pause();
-		}
 	},
 
 	displayFuncDialogInternal: function (funcDialog) {
@@ -793,10 +793,8 @@ var FileManager = {
 			autoAdapt: true
 		});
 
-		if (!FileManager.isMobile) {
-			// AudioPlayer
-			FileManager.initAudioPlayer();
-		}
+		// AudioPlayer
+		FileManager.initAudioPlayer();
 	},
 
 	initUploadify: function () {
