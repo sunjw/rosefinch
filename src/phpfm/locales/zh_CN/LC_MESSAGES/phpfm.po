@@ -394,3 +394,6 @@ msgstr "拖放上传一个文件。"
 
 msgid "Click here to upload."
 msgstr "点击上传一个文件。"
+
+msgid "Close"
+msgstr "关闭"
