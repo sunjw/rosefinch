@@ -92,24 +92,22 @@ div.divHeader a.funcClose {
 	line-height: 48px;
 	font-size: 24px;
 }
-#funcDialog #divAudio div {
-	height: 42px;
-	line-height: 42px;
-}
-.mobile #funcDialog #divAudio #divAudioPlayer {
-	height: 64px;
-	line-height: 64px;
-}
-.mobile #funcDialog #divAudio .funcBtnLine {
-	text-align: left;
-}
-.mobile #funcDialog #divImg #divImgPreview {
-	height: auto;
-}
-.mobile #funcDialog #divImg #link,.mobile #funcDialog #divImg #link a {
+
+#funcDialog #link,#funcDialog #link a {
 	overflow: hidden;
 	text-overflow: ellipsis;
 	white-space: nowrap;
+}
+
+#funcDialog #link a {
+	color: #3399CC;
+	text-decoration: none;
+}
+#funcDialog #link a:hover {
+	text-decoration: underline;
+}
+.mobile #funcDialog #link a {
+	text-decoration: underline;
 }
 
 #funcDialog input[type="text"], #funcDialog input[type="password"], #funcDialog select {
@@ -143,12 +141,21 @@ div.divHeader a.funcClose {
 /* Delete sector */
 
 /* Audio Player sector*/
-#funcDialog #divAudio a {
-	color: #0099FF;
-	text-decoration: none;
+#funcDialog #divAudio div {
+	height: 42px;
+	line-height: 42px;
 }
-#funcDialog #divAudio a:hover {
-	text-decoration: underline;
+.mobile #funcDialog #divAudio #divAudioPlayer {
+	height: 64px;
+	line-height: 64px;
+}
+.mobile #funcDialog #divAudio .funcBtnLine {
+	text-align: left;
+}
+
+/* Image Preivew sector */
+.mobile #funcDialog #divImg #divImgPreview {
+	height: auto;
 }
 
 #funcDialog #uploadFileInfo.dropUpload {
