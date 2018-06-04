@@ -989,6 +989,10 @@ var FileManager = {
  * 初始化
  */
 FileManager.init = function () {
+	// Pre-load some images
+	var imgPreload = new Image();
+	imgPreload.src = FileManager.imgPreviewLoading;
+
 	// fix Chrome back issue
 	$.ajaxSetup({
 		cache: false
@@ -1030,9 +1034,6 @@ FileManager.init = function () {
 	jqCommon.setPlaceholder("#searchForm", "#q", "搜索");
 	jqCommon.setVerify("#searchForm", "#q", "empty", null, null);
 
-	// Pre-load some images
-	var imgPreload = new Image();
-	imgPreload.src = FileManager.imgPreviewLoading;
 };
 
 // 运行准备函数
