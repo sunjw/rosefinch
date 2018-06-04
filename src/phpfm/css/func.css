@@ -103,8 +103,13 @@ div.divHeader a.funcClose {
 .mobile #funcDialog #divAudio .funcBtnLine {
 	text-align: left;
 }
-.mobile #funcDialog #divImg #divImgPreview,.mobile #funcDialog #divImg #link {
+.mobile #funcDialog #divImg #divImgPreview {
 	height: auto;
+}
+.mobile #funcDialog #divImg #link,.mobile #funcDialog #divImg #link a {
+	overflow: hidden;
+	text-overflow: ellipsis;
+	white-space: nowrap;
 }
 
 #funcDialog input[type="text"], #funcDialog input[type="password"], #funcDialog select {
