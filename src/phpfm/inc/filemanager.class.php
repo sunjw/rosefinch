@@ -1066,8 +1066,8 @@ class FileManager
 					<input type="button" value="<?php echo _("OK"); ?>" onclick="FileManager.doDelete()"/><input type="button" value="<?php echo _("Cancel"); ?>" onclick="FileManager.closeFunc()"/>
 				</div>
 			</div>
-			<div id="divAudio" class="container center">
-				<div id="divAudioPlayer">
+			<div id="divAudio" class="container">
+				<div id="divAudioPlayer" class="center">
 					<audio controls src="">
 					</audio>
 				</div>

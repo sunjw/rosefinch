@@ -85,7 +85,6 @@ div.divHeader a.funcClose {
 #funcDialog #divDelete div, #funcDialog #divAudio div, #funcDialog #divAudio object, #funcDialog #divWaiting div {
 	height: 32px;
 	line-height: 32px;
-	font-size: 20px;
 }
 .mobile #funcDialog #divDelete div,.mobile #funcDialog #divAudio div,.mobile #funcDialog #divImg div,.mobile #funcDialog #divWaiting div {
 	height: 48px;
