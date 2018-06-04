@@ -1065,23 +1065,20 @@ class FileManager
 					<input type="button" value="<?php echo _("OK"); ?>" onclick="FileManager.doDelete()"/><input type="button" value="<?php echo _("Cancel"); ?>" onclick="FileManager.closeFunc()"/>
 				</div>
 			</div>
-			<div id="divAudio" class="container">
-				<div id="divAudioPlayer" class="center">
-					<audio controls src="">
-					</audio>
-				</div>
-				<div id="link"><?php echo _("Download:"); ?>&nbsp;</div>
-				<div class="funcBtnLine">
-					<input type="button" value="<?php echo _("Close"); ?>" onclick="FileManager.closeFunc()"/>
-				</div>
-			</div>
 			<div id="divPreview" class="container">
-				<div id="divPreviewContent" class="center">
+				<div id="divPreviewContent">
 				</div>
 				<div id="link"><?php echo _("Download:"); ?>&nbsp;</div>
+				<?php
+				if($this->is_mobile)
+				{
+				?>
 				<div class="funcBtnLine">
 					<input type="button" value="<?php echo _("Close"); ?>" onclick="FileManager.closeFunc()"/>
 				</div>
+				<?php
+				}
+				?>
 			</div>
 			<div id="divWaiting" class="container center">
 				<div class="wating">

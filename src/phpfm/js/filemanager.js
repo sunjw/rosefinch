@@ -18,7 +18,6 @@ var FileManager = {
 		header: null,
 		divInput: null,
 		divDelete: null,
-		divAudio: null,
 		divPreview: null,
 		divWaiting: null
 	},
@@ -431,7 +430,6 @@ var FileManager = {
 		FileManager.funcDialog.header = FileManager.funcDialog.body.children("div.divHeader");
 		FileManager.funcDialog.divInput = FileManager.funcDialog.body.children("div#divInput");
 		FileManager.funcDialog.divDelete = FileManager.funcDialog.body.children("div#divDelete");
-		FileManager.funcDialog.divAudio = FileManager.funcDialog.body.children("div#divAudio");
 		FileManager.funcDialog.divPreview = FileManager.funcDialog.body.children("div#divPreview");
 		FileManager.funcDialog.divWaiting = FileManager.funcDialog.body.children("div#divWaiting");
 
@@ -464,7 +462,6 @@ var FileManager = {
 	displayFuncPart: function (part) {
 		FileManager.funcDialog.divInput.addClass("hidden");
 		FileManager.funcDialog.divDelete.addClass("hidden");
-		FileManager.funcDialog.divAudio.addClass("hidden");
 		FileManager.funcDialog.divPreview.addClass("hidden");
 		FileManager.funcDialog.divWaiting.addClass("hidden");
 
@@ -507,7 +504,6 @@ var FileManager = {
 		var divHeader = FileManager.funcDialog.header;
 		var divInput = FileManager.funcDialog.divInput;
 		var divDelete = FileManager.funcDialog.divDelete;
-		var divAudio = FileManager.funcDialog.divAudio;
 		var divPreview = FileManager.funcDialog.divPreview;
 		var divWaiting = FileManager.funcDialog.divWaiting;
 
@@ -565,39 +561,37 @@ var FileManager = {
 			break;
 		case "preview":
 			var previewType = data.type;
+			var previewLink = data.link;
+			var previewTitle = data.title;
+
+			var previewContent = divPreview.find("#divPreviewContent");
+			FileManager.clearPreviewContent(previewContent);
+			var previewContentInner = null;
+
 			if (previewType == "audio") {
-				FileManager.displayFuncPart(divAudio);
-
-				var audioLink = data.link;
-
-				var audioControl = divAudio.find("audio");
-				audioControl.attr("src", audioLink);
-
-				var divLink = divAudio.find("div#link");
-				if (FileManager.downloadText == null) {
-					FileManager.downloadText = divLink.html();
-				}
-				divLink.html(FileManager.downloadText + "<a href=\"" + audioLink + "\">"
-					+ data.title + "</a>");
-
-				FileManager.displayFuncBg(true, false);
-				FileManager.displayFuncDialogInternal(funcDialog);
-			} else if (previewType == "img") {
-				var previewContent = divPreview.find("#divPreviewContent");
-				previewContent.empty();
-				var imgPreview = $("<img/>");
-				previewContent.append(imgPreview);
+				previewContentInner = $("<audio controls />");
+				previewContent.addClass("previewAudio");
+				previewContent.append(previewContentInner);
+			}
+			if (previewType == "img") {
+				previewContentInner = $("<img/>");
+				previewContent.addClass("previewImage");
+				previewContent.append(previewContentInner);
 
 				// Loading...
-				imgPreview.attr("src", FileManager.imgPreviewLoading);
-				imgPreview.css({
+				previewContentInner.attr("src", FileManager.imgPreviewLoading);
+				previewContentInner.css({
 					"width": "32px",
 					"height": "32px"
 				});
+			}
 
-				FileManager.displayFuncPart(divPreview);
+			FileManager.displayFuncPart(divPreview);
 
-				var imgLink = data.link;
+			if (previewType == "audio") {
+				previewContentInner.attr("src", previewLink);
+			}
+			if (previewType == "img") {
 				var imgObj = new Image();
 				imgObj.onload = function () {
 					var imgWidth = imgObj.width;
@@ -614,27 +608,27 @@ var FileManager = {
 						imgPreviewWidth = imgPreviewHeight * imgRatio;
 					}
 
-					imgPreview.attr("src", "");
-					imgPreview.css({
+					previewContentInner.attr("src", "");
+					previewContentInner.css({
 						"width": imgPreviewWidth + "px",
 						"height": imgPreviewHeight + "px"
 					});
-					imgPreview.attr("src", imgLink);
+					previewContentInner.attr("src", previewLink);
 
 					imgObj.onload = function () {};
 				};
-				imgObj.src = imgLink;
-
-				var divLink = divPreview.find("div#link");
-				if (FileManager.downloadText == null) {
-					FileManager.downloadText = divLink.html();
-				}
-				divLink.html(FileManager.downloadText + "<a href=\"" + imgLink + "\">"
-					+ data.title + "</a>");
-
-				FileManager.displayFuncBg(true, false);
-				FileManager.displayFuncDialogInternal(funcDialog);
+				imgObj.src = previewLink;
 			}
+
+			var divLink = divPreview.find("div#link");
+			if (FileManager.downloadText == null) {
+				FileManager.downloadText = divLink.html();
+			}
+			divLink.html(FileManager.downloadText + "<a href=\"" + previewLink + "\">"
+				+ previewTitle + "</a>");
+
+			FileManager.displayFuncBg(true, false);
+			FileManager.displayFuncDialogInternal(funcDialog);
 			break;
 		case "waiting":
 			FileManager.displayFuncPart(divWaiting);
@@ -645,14 +639,22 @@ var FileManager = {
 		}
 	},
 
+	clearPreviewContent: function (previewContent) {
+		previewContent.empty();
+		previewContent.removeClass();
+		previewContent.addClass("center");
+	},
+
 	/*
 	 * 关闭 Func 部分
 	 */
 	closeFunc: function () {
-		var divAudioPlayer = $("div#divAudioPlayer");
-		if (divAudioPlayer.is(":visible")) {
-			var audioControl = divAudioPlayer.find("audio");
-			audioControl[0].pause();
+		var divPreviewContent = $("#divPreviewContent");
+		if (divPreviewContent.is(":visible")) {
+			var audioControl = divPreviewContent.find("audio");
+			if (audioControl.length > 0) {
+				audioControl[0].pause();
+			}
 		}
 
 		if (FileManager.funcDialog.body.is(":visible")) {
@@ -661,6 +663,7 @@ var FileManager = {
 
 		FileManager.cleanOldname();
 		FileManager.funcBg.css("display", "none");
+		FileManager.clearPreviewContent(divPreviewContent);
 	},
 
 	displayFuncDialogInternal: function (funcDialog) {

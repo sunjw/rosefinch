@@ -82,11 +82,11 @@ div.divHeader a.funcClose {
 	height: 52px;
 	line-height: 52px;
 }
-#funcDialog #divDelete div, #funcDialog #divAudio div, #funcDialog #divAudio object, #funcDialog #divWaiting div {
+#funcDialog #divDelete div,#funcDialog #divPreview div,#funcDialog #divWaiting div {
 	height: 32px;
 	line-height: 32px;
 }
-.mobile #funcDialog #divDelete div,.mobile #funcDialog #divAudio div,.mobile #funcDialog #divPreview div,.mobile #funcDialog #divWaiting div {
+.mobile #funcDialog #divDelete div,.mobile #funcDialog #divPreview div,.mobile #funcDialog #divWaiting div {
 	height: 48px;
 	line-height: 48px;
 	font-size: 24px;
@@ -139,21 +139,16 @@ div.divHeader a.funcClose {
 
 /* Delete sector */
 
-/* Audio Player sector*/
-#funcDialog #divAudio div {
+/* Preivew sector */
+#funcDialog #divPreview div {
 	height: 42px;
 	line-height: 42px;
 }
-.mobile #funcDialog #divAudio #divAudioPlayer {
+.mobile #funcDialog #divPreview #divPreviewContent.previewAudio {
 	height: 64px;
 	line-height: 64px;
 }
-.mobile #funcDialog #divAudio .funcBtnLine {
-	text-align: left;
-}
-
-/* Preivew sector */
-.mobile #funcDialog #divPreview #divPreviewContent {
+.mobile #funcDialog #divPreview #divPreviewContent.previewImage {
 	height: auto;
 }
 
