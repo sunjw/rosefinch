@@ -19,7 +19,7 @@ var FileManager = {
 		divInput: null,
 		divDelete: null,
 		divAudio: null,
-		divImg: null,
+		divPreview: null,
 		divWaiting: null
 	},
 
@@ -432,7 +432,7 @@ var FileManager = {
 		FileManager.funcDialog.divInput = FileManager.funcDialog.body.children("div#divInput");
 		FileManager.funcDialog.divDelete = FileManager.funcDialog.body.children("div#divDelete");
 		FileManager.funcDialog.divAudio = FileManager.funcDialog.body.children("div#divAudio");
-		FileManager.funcDialog.divImg = FileManager.funcDialog.body.children("div#divImg");
+		FileManager.funcDialog.divPreview = FileManager.funcDialog.body.children("div#divPreview");
 		FileManager.funcDialog.divWaiting = FileManager.funcDialog.body.children("div#divWaiting");
 
 		// 准备标题字符串
@@ -465,7 +465,7 @@ var FileManager = {
 		FileManager.funcDialog.divInput.addClass("hidden");
 		FileManager.funcDialog.divDelete.addClass("hidden");
 		FileManager.funcDialog.divAudio.addClass("hidden");
-		FileManager.funcDialog.divImg.addClass("hidden");
+		FileManager.funcDialog.divPreview.addClass("hidden");
 		FileManager.funcDialog.divWaiting.addClass("hidden");
 
 		part.removeClass("hidden");
@@ -508,7 +508,7 @@ var FileManager = {
 		var divInput = FileManager.funcDialog.divInput;
 		var divDelete = FileManager.funcDialog.divDelete;
 		var divAudio = FileManager.funcDialog.divAudio;
-		var divImg = FileManager.funcDialog.divImg;
+		var divPreview = FileManager.funcDialog.divPreview;
 		var divWaiting = FileManager.funcDialog.divWaiting;
 
 		var titleSpan = divHeader.find("span");
@@ -563,73 +563,78 @@ var FileManager = {
 			FileManager.displayFuncBg(true, true);
 			FileManager.displayFuncDialogInternal(funcDialog);
 			break;
-		case "audio":
-			FileManager.displayFuncPart(divAudio);
+		case "preview":
+			var previewType = data.type;
+			if (previewType == "audio") {
+				FileManager.displayFuncPart(divAudio);
 
-			var audioLink = data.link;
+				var audioLink = data.link;
 
-			var audioControl = divAudio.find("audio");
-			audioControl.attr("src", audioLink);
+				var audioControl = divAudio.find("audio");
+				audioControl.attr("src", audioLink);
 
-			var divLink = divAudio.find("div#link");
-			if (FileManager.downloadText == null) {
-				FileManager.downloadText = divLink.html();
-			}
-			divLink.html(FileManager.downloadText + "<a href=\"" + audioLink + "\">"
-				 + data.title + "</a>");
-
-			FileManager.displayFuncBg(true, false);
-			FileManager.displayFuncDialogInternal(funcDialog);
-			break;
-		case "img":
-			var imgPreview = divImg.find("#imgPreview");
-
-			// Loading...
-			imgPreview.attr("src", FileManager.imgPreviewLoading);
-			imgPreview.css({
-				"width": "32px",
-				"height": "32px"
-			});
-
-			FileManager.displayFuncPart(divImg);
-
-			var imgLink = data.link;
-			var imgObj = new Image();
-			imgObj.onload = function () {
-				var imgWidth = imgObj.width;
-				var imgHeight = imgObj.height;
-				var imgRatio = imgWidth / imgHeight;
-
-				var imgPreviewWidth = funcDialog.width() - 20;
-				var imgPreviewHeight = funcDialog.height() - 280;
-				var imgPreviewRadio = imgPreviewWidth / imgPreviewHeight;
-
-				if (imgRatio >= imgPreviewRadio) {
-					imgPreviewHeight = imgPreviewWidth / imgRatio;
-				} else {
-					imgPreviewWidth = imgPreviewHeight * imgRatio;
+				var divLink = divAudio.find("div#link");
+				if (FileManager.downloadText == null) {
+					FileManager.downloadText = divLink.html();
 				}
+				divLink.html(FileManager.downloadText + "<a href=\"" + audioLink + "\">"
+					+ data.title + "</a>");
 
-				imgPreview.attr("src", "");
+				FileManager.displayFuncBg(true, false);
+				FileManager.displayFuncDialogInternal(funcDialog);
+			} else if (previewType == "img") {
+				var previewContent = divPreview.find("#divPreviewContent");
+				previewContent.empty();
+				var imgPreview = $("<img/>");
+				previewContent.append(imgPreview);
+
+				// Loading...
+				imgPreview.attr("src", FileManager.imgPreviewLoading);
 				imgPreview.css({
-					"width": imgPreviewWidth + "px",
-					"height": imgPreviewHeight + "px"
+					"width": "32px",
+					"height": "32px"
 				});
-				imgPreview.attr("src", imgLink);
 
-				imgObj.onload = function () {};
-			};
-			imgObj.src = imgLink;
+				FileManager.displayFuncPart(divPreview);
 
-			var divLink = divImg.find("div#link");
-			if (FileManager.downloadText == null) {
-				FileManager.downloadText = divLink.html();
+				var imgLink = data.link;
+				var imgObj = new Image();
+				imgObj.onload = function () {
+					var imgWidth = imgObj.width;
+					var imgHeight = imgObj.height;
+					var imgRatio = imgWidth / imgHeight;
+
+					var imgPreviewWidth = funcDialog.width() - 20;
+					var imgPreviewHeight = funcDialog.height() - 280;
+					var imgPreviewRadio = imgPreviewWidth / imgPreviewHeight;
+
+					if (imgRatio >= imgPreviewRadio) {
+						imgPreviewHeight = imgPreviewWidth / imgRatio;
+					} else {
+						imgPreviewWidth = imgPreviewHeight * imgRatio;
+					}
+
+					imgPreview.attr("src", "");
+					imgPreview.css({
+						"width": imgPreviewWidth + "px",
+						"height": imgPreviewHeight + "px"
+					});
+					imgPreview.attr("src", imgLink);
+
+					imgObj.onload = function () {};
+				};
+				imgObj.src = imgLink;
+
+				var divLink = divPreview.find("div#link");
+				if (FileManager.downloadText == null) {
+					FileManager.downloadText = divLink.html();
+				}
+				divLink.html(FileManager.downloadText + "<a href=\"" + imgLink + "\">"
+					+ data.title + "</a>");
+
+				FileManager.displayFuncBg(true, false);
+				FileManager.displayFuncDialogInternal(funcDialog);
 			}
-			divLink.html(FileManager.downloadText + "<a href=\"" + imgLink + "\">"
-				+ data.title + "</a>");
-
-			FileManager.displayFuncBg(true, false);
-			FileManager.displayFuncDialogInternal(funcDialog);
 			break;
 		case "waiting":
 			FileManager.displayFuncPart(divWaiting);
@@ -844,8 +849,9 @@ var FileManager = {
 			$("a.lightboxImg").click(function () {
 				var imgLink = $(this).attr("href");
 				var imgTitle = $(this).attr("title");
-				FileManager.displayFuncDialog("", "img",
+				FileManager.displayFuncDialog("", "preview",
 					"preview", {
+					type: "img",
 					link: imgLink,
 					title: imgTitle
 				});
@@ -861,8 +867,9 @@ var FileManager = {
 		$("a.audioPlayer").click(function () {
 			var audioLink = $(this).attr("href");
 			var audioTitle = $(this).attr("title");
-			FileManager.displayFuncDialog("", "audio",
+			FileManager.displayFuncDialog("", "preview",
 				"preview", {
+				type: "audio",
 				link: audioLink,
 				title: audioTitle
 			});

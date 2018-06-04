@@ -1071,20 +1071,12 @@ class FileManager
 					</audio>
 				</div>
 				<div id="link"><?php echo _("Download:"); ?>&nbsp;</div>
-				<?php
-				if($this->is_mobile)
-				{
-				?>
 				<div class="funcBtnLine">
 					<input type="button" value="<?php echo _("Close"); ?>" onclick="FileManager.closeFunc()"/>
 				</div>
-				<?php
-				}
-				?>
 			</div>
-			<div id="divImg" class="container">
-				<div id="divImgPreview" class="center">
-					<img id="imgPreview" src="images/lightbox-ico-loading.gif" />
+			<div id="divPreview" class="container">
+				<div id="divPreviewContent" class="center">
 				</div>
 				<div id="link"><?php echo _("Download:"); ?>&nbsp;</div>
 				<div class="funcBtnLine">

@@ -86,7 +86,7 @@ div.divHeader a.funcClose {
 	height: 32px;
 	line-height: 32px;
 }
-.mobile #funcDialog #divDelete div,.mobile #funcDialog #divAudio div,.mobile #funcDialog #divImg div,.mobile #funcDialog #divWaiting div {
+.mobile #funcDialog #divDelete div,.mobile #funcDialog #divAudio div,.mobile #funcDialog #divPreview div,.mobile #funcDialog #divWaiting div {
 	height: 48px;
 	line-height: 48px;
 	font-size: 24px;
@@ -152,8 +152,8 @@ div.divHeader a.funcClose {
 	text-align: left;
 }
 
-/* Image Preivew sector */
-.mobile #funcDialog #divImg #divImgPreview {
+/* Preivew sector */
+.mobile #funcDialog #divPreview #divPreviewContent {
 	height: auto;
 }
 
