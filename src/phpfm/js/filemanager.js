@@ -845,7 +845,7 @@ var FileManager = {
 				var imgLink = $(this).attr("href");
 				var imgTitle = $(this).attr("title");
 				FileManager.displayFuncDialog("", "img",
-					"image", {
+					"preview", {
 					link: imgLink,
 					title: imgTitle
 				});
@@ -862,7 +862,7 @@ var FileManager = {
 			var audioLink = $(this).attr("href");
 			var audioTitle = $(this).attr("title");
 			FileManager.displayFuncDialog("", "audio",
-				"audio", {
+				"preview", {
 				link: audioLink,
 				title: audioTitle
 			});

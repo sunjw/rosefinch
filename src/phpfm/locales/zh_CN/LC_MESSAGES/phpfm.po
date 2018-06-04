@@ -401,8 +401,5 @@ msgstr "关闭"
 msgid "Download:"
 msgstr "下载:"
 
-msgid "Audio Player"
-msgstr "音频播放"
-
-msgid "Image Preview"
-msgstr "图像预览"
+msgid "Preview"
+msgstr "预览"
