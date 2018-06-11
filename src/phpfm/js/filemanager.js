@@ -594,6 +594,7 @@ var FileManager = {
 			if (previewType == "img") {
 				var imgObj = new Image();
 				imgObj.onload = function () {
+					// Load finished
 					var imgWidth = imgObj.width;
 					var imgHeight = imgObj.height;
 					var imgRatio = imgWidth / imgHeight;
@@ -614,6 +615,10 @@ var FileManager = {
 						"height": imgPreviewHeight + "px"
 					});
 					previewContentInner.attr("src", previewLink);
+					previewContentInner.attr("alt", previewTitle);
+					previewContentInner.click(function() {
+						window.location.href = previewLink;
+					});
 
 					imgObj.onload = function () {};
 				};

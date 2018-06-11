@@ -148,8 +148,11 @@ div.divHeader a.funcClose {
 	height: 64px;
 	line-height: 64px;
 }
-.mobile #funcDialog #divPreview #divPreviewContent.previewImage {
+#funcDialog #divPreview #divPreviewContent.previewImage {
 	height: auto;
+}
+#funcDialog #divPreview #divPreviewContent.previewImage img {
+	cursor: pointer;
 }
 
 #funcDialog #uploadFileInfo.dropUpload {
