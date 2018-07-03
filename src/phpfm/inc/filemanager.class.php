@@ -1033,7 +1033,7 @@ class FileManager
 					<div id="divUpload">
 						<div>
 							<label id="uploadFileInfo" for="uploadFile"><?php printf("%s&nbsp;", ($this->is_mobile ? _("Click here to upload.") : _("Drag and drop a file here to upload."))); ?></label>
-							<input id="uploadFile" type="file" name="uploadFile"/>
+							<input id="uploadFile" type="file" name="uploadFile[]" multiple />
 						</div>
 						<div>
 							<span class="inputRequire"><?php printf("%s%s", _("File cannot be larger than "), "50MB"); ?></span>

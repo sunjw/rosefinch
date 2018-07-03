@@ -340,26 +340,54 @@ class Post
 		//log_to_file("post_query=".$post_subdir);
 		//log_to_file("sub_dir=".$sub_dir);
 		
-		if(isset($_FILES['uploadFile']))
-		{
-			$uploadfile = $this->files_base_dir.$sub_dir.$_FILES['uploadFile']['name'];
-			
-			if (Utility::phpfm_move_uploaded_file($_FILES['uploadFile']['tmp_name'], $uploadfile)) {
-				$this->messageboard->set_message(
-					_("Upload").":&nbsp;".$_FILES['uploadFile']['name']."&nbsp;"._("succeed"),
-					1);
-				log_to_file("upload success: ".$uploadfile);
-				
-				if(SEARCH)
-				{
+		if (isset($_FILES['uploadFile'])) {
+			if (is_array($_FILES['uploadFile']['name'])) {
+				// multi upload
+				$upload_files = $_FILES['uploadFile'];
+				$files_count = count($upload_files['name']);
+				$multi_result = true;
+				for ($i = 0; $i < $files_count; ++$i) {
+					$uploadfile = $this->files_base_dir.$sub_dir.$upload_files['name'][$i];
+					if (Utility::phpfm_move_uploaded_file($upload_files['tmp_name'][$i], $uploadfile)) {
+						log_to_file("upload success: ".$uploadfile);
+					} else {
+						$multi_result = false;
+						log_to_file("upload failed: ".$uploadfile);
+					}
+				}
+
+				if (SEARCH) {
 					$search->create_index($sub_dir);
 				}
-				
+
+				if ($multi_result) {
+					$this->messageboard->set_message(
+						_("Upload").":&nbsp;files&nbsp;"._("succeed"),
+						1);
+				} else {
+					$this->messageboard->set_message(
+						_("Upload").":&nbsp;some files <strong>"._("failed")."<strong>",
+						2);
+				}
 			} else {
-				$this->messageboard->set_message(
-					_("Upload").":&nbsp;".$_FILES['uploadFile']['name']." <strong>"._("failed")."<strong>",
-					2);
-				log_to_file("upload failed: ".$uploadfile);
+				// single upload
+				$uploadfile = $this->files_base_dir.$sub_dir.$_FILES['uploadFile']['name'];
+
+				if (Utility::phpfm_move_uploaded_file($_FILES['uploadFile']['tmp_name'], $uploadfile)) {
+					$this->messageboard->set_message(
+						_("Upload").":&nbsp;".$_FILES['uploadFile']['name']."&nbsp;"._("succeed"),
+						1);
+					log_to_file("upload success: ".$uploadfile);
+
+					if (SEARCH) {
+						$search->create_index($sub_dir);
+					}
+				} else {
+					$this->messageboard->set_message(
+						_("Upload").":&nbsp;".$_FILES['uploadFile']['name']." <strong>"._("failed")."<strong>",
+						2);
+					log_to_file("upload failed: ".$uploadfile);
+				}
 			}
 		}
 
