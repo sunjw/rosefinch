@@ -362,11 +362,11 @@ class Post
 
 				if ($multi_result) {
 					$this->messageboard->set_message(
-						_("Upload").":&nbsp;files&nbsp;"._("succeed"),
+						_("Upload files")." "._("succeed"),
 						1);
 				} else {
 					$this->messageboard->set_message(
-						_("Upload").":&nbsp;some files <strong>"._("failed")."<strong>",
+						_("Upload some files")." <strong>"._("failed")."<strong>",
 						2);
 				}
 			} else {
