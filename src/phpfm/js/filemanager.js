@@ -954,7 +954,6 @@ var FileManager = {
 		uploadFileInfoRaw.ondrop = function (e) {
 			uploadFileInfo.removeClass("dropFile");
 			e.preventDefault();
-			var droppedFile = e.dataTransfer.files[0];
 
 			FileManager.displayWaiting();
 
@@ -976,7 +975,12 @@ var FileManager = {
 			form.append('ajax', 'ajax');
 			form.append('subdir', subdir);
 			form.append('return', returnURL);
-			form.append('uploadFile', droppedFile);
+
+			// multi files
+			filesCount = e.dataTransfer.files.length;
+			for (var i = 0; i < filesCount; ++i) {
+				form.append('uploadFile[]', e.dataTransfer.files[i]);
+			}
 
 			xhrUpload.send(form);
 		}
