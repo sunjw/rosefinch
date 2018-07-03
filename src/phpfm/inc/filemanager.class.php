@@ -1032,7 +1032,7 @@ class FileManager
 					</div>
 					<div id="divUpload">
 						<div>
-							<label id="uploadFileInfo" for="uploadFile"><?php printf("%s&nbsp;", ($this->is_mobile ? _("Click here to upload.") : _("Drag and drop a file here to upload."))); ?></label>
+							<label id="uploadFileInfo" for="uploadFile"><?php printf("%s&nbsp;", ($this->is_mobile ? _("Click here to upload.") : _("Drag and drop files here to upload."))); ?></label>
 							<input id="uploadFile" type="file" name="uploadFile[]" multiple="multiple" />
 						</div>
 						<div>
