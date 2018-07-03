@@ -927,9 +927,15 @@ var FileManager = {
 		uploadFileInfo.addClass("dropUpload");
 
 		uploadFileInput.change(function () {
-			var filePath = uploadFileInput.val();
-			var fileName = filePath.replace(/^.*[\\\/]/, '')
+			var fileList = uploadFileInput.prop("files");
+			if (fileList.length > 0) {
+				var fileName = fileList[0].name;
+				if (fileList.length > 1) {
+					// multi files
+					fileName = fileName + ", ... " + fileList.length + " files";
+				}
 				uploadFileInfo.html(fileName);
+			}
 		});
 
 		var uploadFileInfoRaw = uploadFileInfo[0];
