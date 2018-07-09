@@ -576,7 +576,7 @@ var FileManager = {
 			if (previewType == "img") {
 				if (!FileManager.isMobile) {
 					// Desktop css fix
-					funcDialog.css("top", 25 + "px");
+					funcDialog.css("top", 30 + "px");
 					funcDialog.css("left", 100 + "px");
 					var browserWidth = window.innerWidth || document.body.clientWidth;
 					var browserHeight = window.innerHeight || document.body.clientHeight;
