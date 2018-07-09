@@ -655,6 +655,8 @@ var FileManager = {
 				FileManager.displayFuncBg(true, true);
 			}
 			FileManager.displayFuncDialogInternal(funcDialog);
+
+			FileManager.afterPreviewOpen(previewType, previewTitle);
 			break;
 		case "waiting":
 			FileManager.displayFuncPart(divWaiting);
@@ -675,8 +677,10 @@ var FileManager = {
 	 * 关闭 Func 部分
 	 */
 	closeFunc: function () {
+		var isPreview = false;
 		var divPreviewContent = $("#divPreviewContent");
 		if (divPreviewContent.is(":visible")) {
+			isPreview = true;
 			var audioControl = divPreviewContent.find("audio");
 			if (audioControl.length > 0) {
 				audioControl[0].pause();
@@ -690,6 +694,10 @@ var FileManager = {
 		FileManager.cleanOldname();
 		FileManager.funcBg.css("display", "none");
 		FileManager.clearPreviewContent(divPreviewContent);
+
+		if (isPreview) {
+			FileManager.afterPreviewClose();
+		}
 	},
 
 	displayFuncDialogInternal: function (funcDialog) {
@@ -906,6 +914,13 @@ var FileManager = {
 	initMediaPreview: function () {
 		FileManager.initImgPreview();
 		FileManager.initAudioPlayer();
+		FileManager.afterPreviewOpen = function (type, title) {
+			// Change url hash
+			window.location.hash = "preview_" + type + "_" + encodeURIComponent(title);
+		}
+		FileManager.afterPreviewClose = function () {
+			history.replaceState("", document.title, window.location.pathname + window.location.search);
+		}
 	},
 
 	initUploadHtml5: function () {
