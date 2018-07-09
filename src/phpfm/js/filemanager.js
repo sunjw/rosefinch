@@ -574,6 +574,16 @@ var FileManager = {
 				previewContent.append(previewContentInner);
 			}
 			if (previewType == "img") {
+				if (!FileManager.isMobile) {
+					// Desktop css fix
+					funcDialog.css("top", 25 + "px");
+					funcDialog.css("left", 100 + "px");
+					var browserWidth = window.innerWidth || document.body.clientWidth;
+					var browserHeight = window.innerHeight || document.body.clientHeight;
+					funcDialog.css("width", (browserWidth - 200) + "px");
+					funcDialog.css("height", (browserHeight - 100) + "px");
+				}
+
 				previewContentInner = $("<img/>");
 				previewContent.addClass("previewImage");
 				previewContent.append(previewContentInner);
@@ -600,7 +610,12 @@ var FileManager = {
 					var imgRatio = imgWidth / imgHeight;
 
 					var imgPreviewWidth = funcDialog.width() - 20;
-					var imgPreviewHeight = funcDialog.height() - 280;
+					var imgPreviewHeight;
+					if (!FileManager.isMobile) {
+						imgPreviewHeight = funcDialog.height() - 90;
+					} else {
+						imgPreviewHeight = funcDialog.height() - 280;
+					}
 					var imgPreviewRadio = imgPreviewWidth / imgPreviewHeight;
 
 					if (imgRatio >= imgPreviewRadio) {
@@ -681,7 +696,12 @@ var FileManager = {
 
 	closeFuncDialogInternal: function (funcDialogBody) {
 		if (!FileManager.isMobile) {
-			funcDialogBody.fadeOut();
+			funcDialogBody.fadeOut(function() {
+				funcDialogBody.css("top", "");
+				funcDialogBody.css("left", "");
+				funcDialogBody.css("width", "");
+				funcDialogBody.css("height", "");
+			});
 		} else {
 			funcDialogBody.hide();
 		}
@@ -847,25 +867,17 @@ var FileManager = {
 	},
 
 	initImgPreview: function () {
-		if (!FileManager.isMobile) {
-			// lightbox
-			$('a.lightboxImg').lightBox({
-				overlayOpacity: 0.5,
-				autoAdapt: true
+		$("a.lightboxImg").click(function () {
+			var imgLink = $(this).attr("href");
+			var imgTitle = $(this).attr("title");
+			FileManager.displayFuncDialog("", "preview",
+				"preview", {
+				type: "img",
+				link: imgLink,
+				title: imgTitle
 			});
-		} else {
-			$("a.lightboxImg").click(function () {
-				var imgLink = $(this).attr("href");
-				var imgTitle = $(this).attr("title");
-				FileManager.displayFuncDialog("", "preview",
-					"preview", {
-					type: "img",
-					link: imgLink,
-					title: imgTitle
-				});
-				return false;
-			});
-		}
+			return false;
+		});
 	},
 
 	/*
