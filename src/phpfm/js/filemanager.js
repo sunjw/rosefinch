@@ -596,6 +596,7 @@ var FileManager = {
 				});
 			}
 
+			// Display main part and loading image
 			FileManager.displayFuncPart(divPreview);
 
 			if (previewType == "audio") {
