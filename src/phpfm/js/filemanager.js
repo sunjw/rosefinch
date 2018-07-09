@@ -647,7 +647,12 @@ var FileManager = {
 			divLink.html(FileManager.downloadText + "<a href=\"" + previewLink + "\">"
 				+ previewTitle + "</a>");
 
-			FileManager.displayFuncBg(true, false);
+			if (FileManager.isMobile || previewType == "audio") {
+				FileManager.displayFuncBg(true, false);
+			} else {
+				// Closeable
+				FileManager.displayFuncBg(true, true);
+			}
 			FileManager.displayFuncDialogInternal(funcDialog);
 			break;
 		case "waiting":
