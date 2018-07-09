@@ -667,6 +667,11 @@ var FileManager = {
 		}
 	},
 
+	isPreviewContentVisible: function () {
+		var divPreviewContent = $("#divPreviewContent");
+		return divPreviewContent.is(":visible");
+	},
+
 	clearPreviewContent: function (previewContent) {
 		previewContent.empty();
 		previewContent.removeClass();
@@ -677,10 +682,8 @@ var FileManager = {
 	 * 关闭 Func 部分
 	 */
 	closeFunc: function () {
-		var isPreview = false;
 		var divPreviewContent = $("#divPreviewContent");
-		if (divPreviewContent.is(":visible")) {
-			isPreview = true;
+		if (FileManager.isPreviewContentVisible()) {
 			var audioControl = divPreviewContent.find("audio");
 			if (audioControl.length > 0) {
 				audioControl[0].pause();
@@ -694,10 +697,6 @@ var FileManager = {
 		FileManager.cleanOldname();
 		FileManager.funcBg.css("display", "none");
 		FileManager.clearPreviewContent(divPreviewContent);
-
-		if (isPreview) {
-			FileManager.afterPreviewClose();
-		}
 	},
 
 	displayFuncDialogInternal: function (funcDialog) {
@@ -709,15 +708,25 @@ var FileManager = {
 	},
 
 	closeFuncDialogInternal: function (funcDialogBody) {
+		var isPreview = false;
+		if (FileManager.isPreviewContentVisible()) {
+			isPreview = true;
+		}
 		if (!FileManager.isMobile) {
 			funcDialogBody.fadeOut(function() {
 				funcDialogBody.css("top", "");
 				funcDialogBody.css("left", "");
 				funcDialogBody.css("width", "");
 				funcDialogBody.css("height", "");
+				if (isPreview) {
+					FileManager.afterPreviewClose();
+				}
 			});
 		} else {
 			funcDialogBody.hide();
+			if (isPreview) {
+				FileManager.afterPreviewClose();
+			}
 		}
 	},
 
@@ -917,10 +926,24 @@ var FileManager = {
 		FileManager.afterPreviewOpen = function (type, title) {
 			// Change url hash
 			window.location.hash = "preview_" + type + "_" + encodeURIComponent(title);
-		}
+		};
 		FileManager.afterPreviewClose = function () {
-			history.replaceState("", document.title, window.location.pathname + window.location.search);
-		}
+			var curHash = window.location.hash;
+			if (curHash && 
+				(curHash.startsWith("#preview_") || curHash.startsWith("preview_"))) {
+				history.back();
+			}
+		};
+		window.onpopstate = function(event) {
+			if (!FileManager.isPreviewContentVisible()) {
+				var curHash = window.location.hash;
+				if (curHash &&
+					(curHash.startsWith("#preview_") || curHash.startsWith("preview_"))) {
+					// still some bug?
+					history.replaceState("", document.title, window.location.pathname + window.location.search);
+				}
+			}
+		};
 	},
 
 	initUploadHtml5: function () {
