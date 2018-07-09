@@ -931,19 +931,31 @@ var FileManager = {
 			var curHash = window.location.hash;
 			if (curHash && 
 				(curHash.startsWith("#preview_") || curHash.startsWith("preview_"))) {
+				// Browser push a history with hash changed when preview open
 				history.back();
 			}
 		};
 		window.onpopstate = function(event) {
-			if (!FileManager.isPreviewContentVisible()) {
-				var curHash = window.location.hash;
+			var curHash = window.location.hash;
+			if (FileManager.isPreviewContentVisible()) {
+				if (curHash == "" || curHash == "#") {
+					// Still in preview
+					FileManager.closeFunc();
+				}
+			} else {
 				if (curHash &&
 					(curHash.startsWith("#preview_") || curHash.startsWith("preview_"))) {
-					// still some bug?
+					// Still preview url?
 					history.replaceState("", document.title, window.location.pathname + window.location.search);
 				}
 			}
 		};
+		var curHash = window.location.hash;
+		if (curHash &&
+			(curHash.startsWith("#preview_") || curHash.startsWith("preview_"))) {
+			// Fix hash on load with preview url
+			history.replaceState("", document.title, window.location.pathname + window.location.search);
+		}
 	},
 
 	initUploadHtml5: function () {
