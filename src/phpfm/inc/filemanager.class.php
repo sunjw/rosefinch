@@ -282,12 +282,9 @@ class FileManager
 		<link href="css/largeiconView.css" rel="stylesheet" type="text/css" />
 		<link href="css/func.css<?php echo($debug_rand); ?>" rel="stylesheet" type="text/css" />
 		<link href="css/jquery.lightbox-0.5.css" rel="stylesheet" type="text/css" />
-		<link href="css/uploadify.css" rel="stylesheet" type="text/css" />
 		<script type="text/javascript" language="javascript" src="js/jquery-1.8.1.min.js"></script>
 		<script type="text/javascript" language="javascript" src="js/jquery.common.min.js"></script> 
 		<script type="text/javascript" language="javascript" src="js/jquery.menu.min.js"></script>
-		<script type="text/javascript" language="javascript" src="js/swfobject.js"></script>
-		<script type="text/javascript" language="javascript" src="js/jquery.uploadify.v2.1.4.min.js"></script>
 <?php 
 		if($debug)
 		{

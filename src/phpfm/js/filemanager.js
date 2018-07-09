@@ -890,35 +890,6 @@ var FileManager = {
 		FileManager.initAudioPlayer();
 	},
 
-	initUploadify: function () {
-		var playerVersion = swfobject.getFlashPlayerVersion(); // returns a JavaScript object
-		if (playerVersion.major == 0) {
-			return;
-		}
-		var sessionId = FileManager.getCookie('PHPSESSID');
-		var subdir = encodeURIComponent($("input#subdir").attr("value"));
-		var returnURL = encodeURIComponent($("input#return").val());
-		var returnURLdecoded = decodeURIComponent($("input#return").val());
-		$('#uploadFile').uploadify({
-			'uploader': 'images/uploadify.swf',
-			'script': 'func/post.func.php',
-			'cancelImg': 'images/cancel.png',
-			'auto': true,
-			'multi': true,
-			'fileDataName': 'uploadFile',
-			'scriptData': {
-				'session': sessionId,
-				'oper': 'upload',
-				'subdir': subdir,
-				'return': returnURL,
-				'ajax': 'ajax'
-			},
-			onAllComplete: function () {
-				window.location.href = returnURLdecoded;
-			}
-		});
-	},
-
 	initUploadHtml5: function () {
 		var uploadFileInput = $('#uploadFile');
 		uploadFileInput.hide();
@@ -1053,7 +1024,6 @@ FileManager.init = function () {
 	FileManager.initUserMng();
 	FileManager.getMessage();
 	FileManager.initMediaPreview();
-	//FileManager.initUploadify();
 	FileManager.initUploadHtml5();
 
 	jqCommon.setPlaceholder("#searchForm", "#q", "搜索");
