@@ -576,14 +576,15 @@ var FileManager = {
 			if (previewType == "img") {
 				var browserWidth = window.innerWidth || document.body.clientWidth;
 				var browserHeight = window.innerHeight || document.body.clientHeight;
-				var preivewLoadingWidth = 400;
+				var previewLoadingWidth = 400;
+				var previewLoadingHeight = 400;
 				if (!FileManager.isMobile) {
 					// Desktop css fix
 					funcDialog.css({
 						"top": 30 + "px",
-						"left": ((browserWidth - preivewLoadingWidth) / 2) + "px",
-						"width": preivewLoadingWidth + "px",
-						"height": (browserHeight - 100) + "px"
+						"left": ((browserWidth - previewLoadingWidth) / 2) + "px",
+						"width": previewLoadingWidth + "px",
+						"height": previewLoadingHeight + "px"
 					});
 				}
 
@@ -617,7 +618,7 @@ var FileManager = {
 					var imgPreviewHeight;
 					if (!FileManager.isMobile) {
 						imgPreviewWidth  = 960; // 1000 - 40
-						imgPreviewHeight = funcDialog.height() - 90;
+						imgPreviewHeight = browserHeight - 200;
 					 } else {
 						imgPreviewWidth  = funcDialog.width() - 20;
 						imgPreviewHeight = funcDialog.height() - 280;
@@ -632,11 +633,13 @@ var FileManager = {
 
 					if (!FileManager.isMobile) {
 						// Desktop css fix again
-						var preivewWidth = imgPreviewWidth + 20;
-						preivewWidth = (preivewWidth > preivewLoadingWidth) ? preivewWidth : preivewLoadingWidth;
+						var previewWidth = imgPreviewWidth + 20;
+						var previewHeight = imgPreviewHeight + 90;
+						previewWidth = (previewWidth > previewLoadingWidth) ? previewWidth : previewLoadingWidth;
 						funcDialog.css({
-							"left": ((browserWidth - preivewWidth) / 2) + "px",
-							"width": preivewWidth + "px"
+							"left": ((browserWidth - previewWidth) / 2) + "px",
+							"width": previewWidth + "px",
+							"height": previewHeight + "px"
 						});
 					}
 					previewContentInner.attr("src", "");
