@@ -614,15 +614,12 @@ var FileManager = {
 					var imgRatio = imgWidth / imgHeight;
 
 					var imgPreviewWidth;
-					if (!FileManager.isMobile) {
-						imgPreviewWidth  = 960; // 1000 - 40
-					 } else {
-						imgPreviewWidth  = funcDialog.width() - 20;
-					 }
 					var imgPreviewHeight;
 					if (!FileManager.isMobile) {
+						imgPreviewWidth  = 960; // 1000 - 40
 						imgPreviewHeight = funcDialog.height() - 90;
-					} else {
+					 } else {
+						imgPreviewWidth  = funcDialog.width() - 20;
 						imgPreviewHeight = funcDialog.height() - 280;
 					}
 					var imgPreviewRadio = imgPreviewWidth / imgPreviewHeight;
