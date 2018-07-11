@@ -619,7 +619,7 @@ var FileManager = {
 					if (!FileManager.isMobile) {
 						imgPreviewWidth  = 960; // 1000 - 40
 						imgPreviewHeight = browserHeight - 200;
-					 } else {
+					} else {
 						imgPreviewWidth  = funcDialog.width() - 20;
 						imgPreviewHeight = funcDialog.height() - 280;
 					}
