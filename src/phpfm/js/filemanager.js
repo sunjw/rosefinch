@@ -976,6 +976,14 @@ var FileManager = {
 	},
 
 	initUploadHtml5: function () {
+		var body = $("body");
+		body = body[0];
+		body.ondragover = function () {
+			if (!FileManager.funcDialog.body.is(":visible")) {
+				FileManager.clickUpload();
+			}
+		};
+
 		var uploadFileInput = $('#uploadFile');
 		uploadFileInput.hide();
 
