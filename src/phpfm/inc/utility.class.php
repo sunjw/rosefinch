@@ -665,7 +665,7 @@ class Utility
 		// at the same time - db_user / db_password / db_name / db_host
 		if(!defined('DB_USER') || !defined('DB_PSWD') || !defined('DB_NAME') ||!defined('DB_HOST'))
 			return null;
-		$db = new ezSQL_mysql(DB_USER, DB_PSWD, DB_NAME, DB_HOST);
+		$db = new ezSQL_mysqli(DB_USER, DB_PSWD, DB_NAME, DB_HOST);
 		
 		$db->hide_errors();
 		

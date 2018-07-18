@@ -58,7 +58,7 @@ function save_settings(&$settings)
 	
 	// Initialise database object and establish a connection
 	// at the same time - db_user / db_password / db_name / db_host
-	$db = new ezSQL_mysql($settings['db_user'], $settings['db_pswd'], $settings['db_name'], $settings['db_host']);
+	$db = new ezSQL_mysqli($settings['db_user'], $settings['db_pswd'], $settings['db_name'], $settings['db_host']);
 	
 	$db->hide_errors();
 	
