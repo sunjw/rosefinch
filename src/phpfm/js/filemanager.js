@@ -343,8 +343,8 @@ var FileManager = {
 				phpfmMessage.click(FileManager.closeMessage);
 				clearTimeout(FileManager.delayID);
 				FileManager.delayID = setTimeout(function () {
-						FileManager.closeMessage();
-					}, 5000);
+					FileManager.closeMessage();
+				}, 5000);
 			}
 		});
 
@@ -617,10 +617,10 @@ var FileManager = {
 					var imgPreviewWidth;
 					var imgPreviewHeight;
 					if (!FileManager.isMobile) {
-						imgPreviewWidth  = 960; // 1000 - 40
+						imgPreviewWidth = 960; // 1000 - 40
 						imgPreviewHeight = browserHeight - 200;
 					} else {
-						imgPreviewWidth  = funcDialog.width() - 20;
+						imgPreviewWidth = funcDialog.width() - 20;
 						imgPreviewHeight = funcDialog.height() - 280;
 					}
 					var imgPreviewRadio = imgPreviewWidth / imgPreviewHeight;
@@ -649,7 +649,7 @@ var FileManager = {
 					});
 					previewContentInner.attr("src", previewLink);
 					previewContentInner.attr("alt", previewTitle);
-					previewContentInner.click(function() {
+					previewContentInner.click(function () {
 						window.location.href = previewLink;
 					});
 
@@ -663,7 +663,7 @@ var FileManager = {
 				FileManager.downloadText = divLink.html();
 			}
 			divLink.html(FileManager.downloadText + "<a href=\"" + previewLink + "\">"
-				+ previewTitle + "</a>");
+				 + previewTitle + "</a>");
 
 			if (FileManager.isMobile || previewType == "audio") {
 				FileManager.displayFuncBg(true, false);
@@ -730,7 +730,7 @@ var FileManager = {
 			isPreview = true;
 		}
 		if (!FileManager.isMobile) {
-			funcDialogBody.fadeOut(function() {
+			funcDialogBody.fadeOut(function () {
 				funcDialogBody.css("top", "");
 				funcDialogBody.css("left", "");
 				funcDialogBody.css("width", "");
@@ -946,13 +946,13 @@ var FileManager = {
 		};
 		FileManager.afterPreviewClose = function () {
 			var curHash = window.location.hash;
-			if (curHash && 
+			if (curHash &&
 				(curHash.startsWith("#preview_") || curHash.startsWith("preview_"))) {
 				// Browser push a history with hash changed when preview open
 				history.back();
 			}
 		};
-		window.onpopstate = function(event) {
+		window.onpopstate = function (event) {
 			var curHash = window.location.hash;
 			if (FileManager.isPreviewContentVisible()) {
 				if (curHash == "" || curHash == "#") {
@@ -1021,34 +1021,39 @@ var FileManager = {
 
 			FileManager.displayWaiting();
 
-			var sessionId = FileManager.getCookie('PHPSESSID');
-			var subdir = $("input#subdir").attr("value");
-			var returnURL = $("input#return").val();
-			var returnURLdecoded = decodeURIComponent($("input#return").val());
-
-			var xhrUpload = new XMLHttpRequest();
-			xhrUpload.open('POST', 'func/post.func.php');
-
-			xhrUpload.onload = function () {
-				window.location.href = returnURLdecoded;
-			};
-
-			var form = new FormData();
-			form.append('session', sessionId);
-			form.append('oper', 'upload');
-			form.append('ajax', 'ajax');
-			form.append('subdir', subdir);
-			form.append('return', returnURL);
-
-			// multi files
-			filesCount = e.dataTransfer.files.length;
-			for (var i = 0; i < filesCount; ++i) {
-				form.append('uploadFile[]', e.dataTransfer.files[i]);
-			}
-
-			xhrUpload.send(form);
+			FileManager.uploadHtml5Files(e);
 		}
 
+	},
+
+	uploadHtml5Files: function (dropEvent) {
+		var sessionId = FileManager.getCookie('PHPSESSID');
+		var subdir = $("input#subdir").attr("value");
+		var returnURL = $("input#return").val();
+		var returnURLdecoded = decodeURIComponent($("input#return").val());
+
+		var xhrUpload = new XMLHttpRequest();
+		xhrUpload.open('POST', 'func/post.func.php');
+
+		xhrUpload.onload = function () {
+			window.location.href = returnURLdecoded;
+		};
+
+		var form = new FormData();
+		form.append('session', sessionId);
+		form.append('oper', 'upload');
+		form.append('ajax', 'ajax');
+		form.append('subdir', subdir);
+		form.append('return', returnURL);
+
+		// multi files
+		var dropFiles = dropEvent.dataTransfer.files;
+		filesCount = dropFiles.length;
+		for (var i = 0; i < filesCount; ++i) {
+			form.append('uploadFile[]', dropFiles[i]);
+		}
+
+		xhrUpload.send(form);
 	},
 
 	/*
