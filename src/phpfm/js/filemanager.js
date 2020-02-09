@@ -978,17 +978,18 @@ var FileManager = {
 	initUploadHtml5: function () {
 		var body = $("body");
 		body = body[0];
+
 		body.ondragover = function () {
 			if (!FileManager.funcDialog.body.is(":visible")) {
 				FileManager.clickUpload();
 			}
 		};
 
-		var uploadFileInput = $('#uploadFile');
-		uploadFileInput.hide();
-
 		var uploadFileInfo = $('#uploadFileInfo');
 		uploadFileInfo.addClass("dropUpload");
+
+		var uploadFileInput = $('#uploadFile');
+		uploadFileInput.hide();
 
 		uploadFileInput.change(function () {
 			var fileList = uploadFileInput.prop("files");
@@ -1018,11 +1019,36 @@ var FileManager = {
 		uploadFileInfoRaw.ondrop = function (e) {
 			uploadFileInfo.removeClass("dropFile");
 			e.preventDefault();
-
 			FileManager.displayWaiting();
-
 			FileManager.uploadHtml5Files(e);
-		}
+		};
+
+		var divUpload = FileManager.funcDialog.divInput.find("div#divUpload");
+		var funcBgRaw = FileManager.funcBg.get(0);
+		funcBgRaw.ondragover = function (e) {
+			if (!divUpload.is(":visible")) {
+				return;
+			}
+			uploadFileInfo.addClass("dropFile");
+			return false;
+		};
+		funcBgRaw.ondragleave = function (e) {
+			uploadFileInfo.removeClass("dropFile");
+			return false;
+		};
+		funcBgRaw.ondragend = function (e) {
+			uploadFileInfo.removeClass("dropFile");
+			return false;
+		};
+		funcBgRaw.ondrop = function (e) {
+			if (!divUpload.is(":visible")) {
+				return;
+			}
+			uploadFileInfo.removeClass("dropFile");
+			e.preventDefault();
+			FileManager.displayWaiting();
+			FileManager.uploadHtml5Files(e);
+		};
 
 	},
 
