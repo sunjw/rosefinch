@@ -1,3 +1,1 @@
-不能用记事本编辑，会出现乱码，导致下载数据出错
-$_SERVER['HTTP_RANGE'] 只在 Apache 上有
-IE 9 Audio Player 通过 js 控制 flash 有问题
+ * $_SERVER['HTTP_RANGE'] 只在 Apache 上有
