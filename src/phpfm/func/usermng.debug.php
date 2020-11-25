@@ -7,13 +7,10 @@ require_once "../inc/utility.class.php";
 @session_start();
 
 $user_manager = Utility::get_usermng(false);
-if($user_manager != null)
-{	
-	$user_manager->debug();
-}
-else
-{
-	echo "NULL";
+if ($user_manager != null) {
+    $user_manager->debug();
+} else {
+    echo "NULL";
 }
 
 ?>

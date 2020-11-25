@@ -12,23 +12,21 @@ require_once "../log/log.func.php";
  */
 function dl_file($file)
 {
-	//Gather relevent info about file
-	$size = filesize($file);
-	$fileinfo['basename'] = get_basename($file);
+    //Gather relevent info about file
+    $size = filesize($file);
+    $fileinfo['basename'] = get_basename($file);
 
-	$fileinfo['extension'] = Utility::get_file_ext($file);
-	//workaround for IE filename bug with multiple periods / multiple dots in filename
-	//that adds square brackets to filename - eg. setup.abc.exe becomes setup[1].abc.exe
-	if(isset($_SERVER['HTTP_USER_AGENT']))
-	{
-		$filename = (strstr($_SERVER['HTTP_USER_AGENT'], 'MSIE')) ?
-					  preg_replace('/\./', '%2e', $fileinfo['basename'], substr_count($fileinfo['basename'], '.') - 1) :
-					  $fileinfo['basename'];
-	}
-	else
-		$filename = $fileinfo['basename'];
+    $fileinfo['extension'] = Utility::get_file_ext($file);
+    //workaround for IE filename bug with multiple periods / multiple dots in filename
+    //that adds square brackets to filename - eg. setup.abc.exe becomes setup[1].abc.exe
+    if (isset($_SERVER['HTTP_USER_AGENT'])) {
+        $filename = (strstr($_SERVER['HTTP_USER_AGENT'], 'MSIE')) ?
+            preg_replace('/\./', '%2e', $fileinfo['basename'], substr_count($fileinfo['basename'], '.') - 1) :
+            $fileinfo['basename'];
+    } else
+        $filename = $fileinfo['basename'];
 
-	$file_extension = strtolower($fileinfo['extension']);
+    $file_extension = strtolower($fileinfo['extension']);
 
 //	switch($file_extension)
 //	{
@@ -39,82 +37,74 @@ function dl_file($file)
 //		case 'avi': $ctype='video/x-msvideo'; break;
 //		default: $ctype='application/force-download';
 //	}
-	$ctype = Utility::get_mime_type($file_extension);
-	//log_to_file($ctype);
-	//echo $ctype;
-	//check if http_range is sent by browser (or download manager)
-	
-	$range = '';
-	if(isset($_SERVER['HTTP_RANGE']))
-	{
-		list($size_unit, $range_orig) = explode('=', $_SERVER['HTTP_RANGE'], 2);
-		
-		if ($size_unit == 'bytes')
-		{
-			//multiple ranges could be specified at the same time, but for simplicity only serve the first range
-			//http://tools.ietf.org/id/draft-ietf-http-range-retrieval-00.txt
-			//list($range, $extra_ranges) = explode(',', $range_orig, 2);
-			$ranges = explode(',', $range_orig, 2);
-			$range = $ranges[0];
-		}
-		else
-		{
-			$range = '';
-		}
-	}
-	else
-	{
-		$range = '';
-	}
+    $ctype = Utility::get_mime_type($file_extension);
+    //log_to_file($ctype);
+    //echo $ctype;
+    //check if http_range is sent by browser (or download manager)
 
-	//figure out download piece from range (if set)
-	if($range != '')
-		list($seek_start, $seek_end) = explode('-', $range, 2);
+    $range = '';
+    if (isset($_SERVER['HTTP_RANGE'])) {
+        list($size_unit, $range_orig) = explode('=', $_SERVER['HTTP_RANGE'], 2);
 
-	//set start and end based on range (if set), else set defaults
-	//also check for invalid ranges.
-	$seek_end = (empty($seek_end)) ? ($size - 1) : min(abs(intval($seek_end)),($size - 1));
-	$seek_start = (empty($seek_start) || $seek_end < abs(intval($seek_start))) ? 0 : max(abs(intval($seek_start)),0);
+        if ($size_unit == 'bytes') {
+            //multiple ranges could be specified at the same time, but for simplicity only serve the first range
+            //http://tools.ietf.org/id/draft-ietf-http-range-retrieval-00.txt
+            //list($range, $extra_ranges) = explode(',', $range_orig, 2);
+            $ranges = explode(',', $range_orig, 2);
+            $range = $ranges[0];
+        } else {
+            $range = '';
+        }
+    } else {
+        $range = '';
+    }
 
-	//add headers if resumable
-	//if ($is_resume)
-	//{
-		//Only send partial content header if downloading a piece of the file (IE workaround)
-	if ($seek_start > 0 || $seek_end < ($size - 1))
-	{
-		header('HTTP/1.1 206 Partial Content');
-	}
+    //figure out download piece from range (if set)
+    if ($range != '')
+        list($seek_start, $seek_end) = explode('-', $range, 2);
 
-	header('Accept-Ranges: bytes');
-	header('Content-Range: bytes '.$seek_start.'-'.$seek_end.'/'.$size);
-	//}
+    //set start and end based on range (if set), else set defaults
+    //also check for invalid ranges.
+    $seek_end = (empty($seek_end)) ? ($size - 1) : min(abs(intval($seek_end)), ($size - 1));
+    $seek_start = (empty($seek_start) || $seek_end < abs(intval($seek_start))) ? 0 : max(abs(intval($seek_start)), 0);
 
-	//headers for IE Bugs (is this necessary?)
-	//header("Cache-Control: cache, must-revalidate");  
-	//header("Pragma: public");
+    //add headers if resumable
+    //if ($is_resume)
+    //{
+    //Only send partial content header if downloading a piece of the file (IE workaround)
+    if ($seek_start > 0 || $seek_end < ($size - 1)) {
+        header('HTTP/1.1 206 Partial Content');
+    }
 
-	header('Content-Type: ' . $ctype);
-	header('Content-Disposition: attachment; filename="' . $filename . '"');
-	header('Content-Length: '.($seek_end - $seek_start + 1));
+    header('Accept-Ranges: bytes');
+    header('Content-Range: bytes ' . $seek_start . '-' . $seek_end . '/' . $size);
+    //}
 
-	//open the file
-	$fp = fopen($file, 'rb');
-	//seek to start of missing part
-	fseek($fp, $seek_start);
+    //headers for IE Bugs (is this necessary?)
+    //header("Cache-Control: cache, must-revalidate");
+    //header("Pragma: public");
 
-	//start buffered download
-	while(!feof($fp))
-	{
-		//reset time limit for big files
-		set_time_limit(0);
-		print(fread($fp, 1024*8));
-		flush();
-		ob_flush();
-	}
+    header('Content-Type: ' . $ctype);
+    header('Content-Disposition: attachment; filename="' . $filename . '"');
+    header('Content-Length: ' . ($seek_end - $seek_start + 1));
 
-	fclose($fp);
-	exit;
-	
+    //open the file
+    $fp = fopen($file, 'rb');
+    //seek to start of missing part
+    fseek($fp, $seek_start);
+
+    //start buffered download
+    while (!feof($fp)) {
+        //reset time limit for big files
+        set_time_limit(0);
+        print(fread($fp, 1024 * 8));
+        flush();
+        ob_flush();
+    }
+
+    fclose($fp);
+    exit;
+
 }
 
 /**
@@ -125,78 +115,61 @@ function dl_file($file)
  */
 function prepare_file_path($request_file)
 {
-	$files_base_dir = Utility::get_file_base_dir();
-	$files_base_dir_plat = convert_toplat($files_base_dir);
-	$file = $files_base_dir_plat . $request_file; // 获得文件路径
-	if(PLAT_CHARSET != "UTF-8")
-	{
-		//log_to_file("file1:$file");
-		if(!is_file($file))
-		{
-			// 不存在，试试转化成本地编码
-			$file = $files_base_dir_plat . convert_toplat($request_file); // Windows 上可能要转换成 gb2312
-			//log_to_file("file2:$file");
-			if(!is_file($file))
-			{
-				$file = false; // 没有这个文件
-			}
-		}
-		else
-		{
-			 // 存在说明就是 gb2312 编码的，要换成 utf-8
-			//$request_sub_dir = convert_gbtoutf8($request_sub_dir);
-		}
-	}
-	else if(PLAT_CHARSET == "UTF-8")
-	{
-		if(!is_file($file))
-		{
-			// 不存在，试试转化成 UTF-8  编码
-			$file = $files_base_dir_plat . convert_gbtoutf8($request_file); // Linux 上可能要转换成 utf-8
-			if(!is_file($file))
-			{
-				$file = false; // 没有这个文件
-				//$request_sub_dir = "";
-			}
-		}
-		else
-		{
-			// 存在说明就是 utf-8 编码的，什么都不用做
-		}
-	}
-	
-	return $file;
+    $files_base_dir = Utility::get_file_base_dir();
+    $files_base_dir_plat = convert_toplat($files_base_dir);
+    $file = $files_base_dir_plat . $request_file; // 获得文件路径
+    if (PLAT_CHARSET != "UTF-8") {
+        //log_to_file("file1:$file");
+        if (!is_file($file)) {
+            // 不存在，试试转化成本地编码
+            $file = $files_base_dir_plat . convert_toplat($request_file); // Windows 上可能要转换成 gb2312
+            //log_to_file("file2:$file");
+            if (!is_file($file)) {
+                $file = false; // 没有这个文件
+            }
+        } else {
+            // 存在说明就是 gb2312 编码的，要换成 utf-8
+            //$request_sub_dir = convert_gbtoutf8($request_sub_dir);
+        }
+    } else if (PLAT_CHARSET == "UTF-8") {
+        if (!is_file($file)) {
+            // 不存在，试试转化成 UTF-8  编码
+            $file = $files_base_dir_plat . convert_gbtoutf8($request_file); // Linux 上可能要转换成 utf-8
+            if (!is_file($file)) {
+                $file = false; // 没有这个文件
+                //$request_sub_dir = "";
+            }
+        } else {
+            // 存在说明就是 utf-8 编码的，什么都不用做
+        }
+    }
+
+    return $file;
 }
 
-if(Utility::allow_to_browser())
-{
-	// Need browser permission
-	$request_file = rawurldecode(get_query("file"));
-	log_to_file(join($_GET));
-	
-	if(substr($request_file, -1) == "\"")
-	{
-		$request_file = substr($request_file, 0, -1);
-	}
-	$request_file = prepare_file_path($request_file);
-	
-	if($request_file != false)
-	{
-		$test_array[0] = $request_file;
-		$test_array = Utility::filter_paths($test_array);
-		if(count($test_array) > 0)
-		{
-			log_to_file("Download start");
-			dl_file($request_file);
-		}
-	}
-	else
-	{
-		log_to_file("Download fail");
-		header("HTTP/1.1 404 Not Found");
-		echo "<strong>404 Not Found</strong>";
-		exit;
-	}
+if (Utility::allow_to_browser()) {
+    // Need browser permission
+    $request_file = rawurldecode(get_query("file"));
+    log_to_file(join($_GET));
+
+    if (substr($request_file, -1) == "\"") {
+        $request_file = substr($request_file, 0, -1);
+    }
+    $request_file = prepare_file_path($request_file);
+
+    if ($request_file != false) {
+        $test_array[0] = $request_file;
+        $test_array = Utility::filter_paths($test_array);
+        if (count($test_array) > 0) {
+            log_to_file("Download start");
+            dl_file($request_file);
+        }
+    } else {
+        log_to_file("Download fail");
+        header("HTTP/1.1 404 Not Found");
+        echo "<strong>404 Not Found</strong>";
+        exit;
+    }
 }
 //
 

@@ -7,13 +7,10 @@ require_once "../log/log.func.php";
 @session_start();
 
 $clipboard = Utility::get_clipboard(false);
-if($clipboard != null)
-{
-	$clipboard->debug();
-}
-else
-{
-	echo "NULL";
+if ($clipboard != null) {
+    $clipboard->debug();
+} else {
+    echo "NULL";
 }
 
 ?>

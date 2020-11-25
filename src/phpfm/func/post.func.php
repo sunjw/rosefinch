@@ -4,8 +4,8 @@ require_once "../inc/common.inc.php";
 require_once "../inc/post.class.php";
 
 // For uploadify
-if(isset($_REQUEST['session']) && $_REQUEST['session']) 
-	@session_id($_REQUEST['session']);
+if (isset($_REQUEST['session']) && $_REQUEST['session'])
+    @session_id($_REQUEST['session']);
 
 @session_start();
 

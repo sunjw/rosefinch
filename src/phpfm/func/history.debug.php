@@ -7,16 +7,13 @@ require_once "../inc/utility.class.php";
 @session_start();
 
 $history = Utility::get_history(false);
-if($history != null)
-{
-	if(isset($_GET['clear']))
-		$history->clear();
-		
-	$history->debug();
-}
-else
-{
-	echo "NULL";
+if ($history != null) {
+    if (isset($_GET['clear']))
+        $history->clear();
+
+    $history->debug();
+} else {
+    echo "NULL";
 }
 
 ?>

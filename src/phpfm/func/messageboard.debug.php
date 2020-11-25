@@ -7,8 +7,7 @@ require_once "../log/log.func.php";
 @session_start();
 
 $messageboard = isset($_SESSION['messageboard']) ? $_SESSION['messageboard'] : null;
-if($messageboard != null)
-{
-	$messageboard->debug();
+if ($messageboard != null) {
+    $messageboard->debug();
 }
 ?>
