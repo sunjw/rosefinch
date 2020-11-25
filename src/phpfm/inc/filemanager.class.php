@@ -445,7 +445,7 @@ class FileManager
 					$file['type'] = convert_toutf8($type);
 					$file['stat'] = $fstat;
 					
-					if($this->filte($file))
+					if($this->filter_item($file))
 						continue;
 					
 					// 处理大小
@@ -538,7 +538,7 @@ class FileManager
 						$dir['stat'] = $dstat;
 						$dir['type'] = "dir";
 						
-						if($this->filte($dir))
+						if($this->filter_item($dir))
 							continue;
 
 						$a_href = $this->browser_page."?".
@@ -698,7 +698,7 @@ class FileManager
 	 * @param $item 项目(目录或文件)
 	 * @return true 需要过滤，false 无需过滤
 	 */
-	private function filte($item)
+	private function filter_item($item)
 	{
 		// 过滤隐藏文件
 		if(substr($item['name'], 0, 1) == '.') // linux 风格
@@ -815,7 +815,7 @@ class FileManager
 <?php 
 				foreach($sub_dstats as $sub_dstat)
 				{
-					if(!$this->filte($sub_dstat))
+					if(!$this->filter_item($sub_dstat))
 					{
 ?>
 					<li>
