@@ -316,6 +316,7 @@ class Post
                 $multi_result = true;
                 for ($i = 0; $i < $files_count; ++$i) {
                     $uploadfile = $this->files_base_dir . $sub_dir . $upload_files['name'][$i];
+                    //print_r($upload_files['tmp_name']);
                     if (Utility::phpfm_move_uploaded_file($upload_files['tmp_name'][$i], $uploadfile)) {
                         log_to_file("upload success: " . $uploadfile);
                     } else {

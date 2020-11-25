@@ -540,7 +540,9 @@ class Utility
             $plat_destination = convert_toplat(Utility::deal_same_name($destination));
         }
 
-        return move_uploaded_file(convert_toplat($filename), $plat_destination);
+        $uploaded_file_src = convert_toplat($filename);
+        //print_r($uploaded_file_src . " -> " . $plat_destination);
+        return move_uploaded_file($uploaded_file_src, $plat_destination);
     }
 
     /**
@@ -551,12 +553,15 @@ class Utility
      */
     public static function redirct_after_oper($is_from_get = true, $sub_dir_level = 0)
     {
-        if (post_query("noredirect") != "")
+        if (post_query("noredirect") != "") {
             return;
-        if ($is_from_get)
+        }
+
+        if ($is_from_get) {
             $returnURL = rawurldecode(get_query("return"));
-        else
+        } else {
             $returnURL = rawurldecode(post_query("return"));
+        }
 
         if ($returnURL == "") {
             $prefix = "";
