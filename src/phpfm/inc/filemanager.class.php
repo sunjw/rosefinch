@@ -434,8 +434,7 @@ class FileManager
 				//echo convert_toutf8($file)."<br />";
 				
 				$full_file_path = $path.$file_name;
-				if(!is_dir($full_file_path))
-				{
+				if (!is_dir($full_file_path)) {
 					//echo convert_toutf8($full_file_path)."<br />";
 					$fstat = stat($full_file_path);
 					$type = Utility::get_file_ext($file_name);
