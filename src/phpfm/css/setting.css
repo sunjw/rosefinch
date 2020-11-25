@@ -1,93 +1,93 @@
 @CHARSET "UTF-8";
 
 #phpfmDocNav {
-	margin: 6px 10px;
-	padding: 5px;
+    margin: 6px 10px;
+    padding: 5px;
 }
 #phpfmSettingForm, #permissionMessage, #phpfmUserMng, #phpfmChangePswd {
-	margin: 4px 10px;
-	padding: 0;
+    margin: 4px 10px;
+    padding: 0;
 }
 
 #phpfmDocNav {
-	font-size: 14px;
-	color: black;
-	border-bottom: 1px solid #3399CC;
+    font-size: 14px;
+    color: black;
+    border-bottom: 1px solid #3399CC;
 }
 #phpfmDocNav a {
-	color: #666666;
+    color: #666666;
 }
 #phpfmDocNav a.selected {
-	color: black;
-	text-decoration: none;
+    color: black;
+    text-decoration: none;
 }
 #phpfmDocNav a:hover {
-	color: black;
+    color: black;
 }
 
 form#installPrefer {
-	float: right;
+    float: right;
 }
 
 fieldset {
-	margin: 5px 0 !important;
-	padding: 5px 10px !important;
-	border: 1px solid #EAEAEA;
+    margin: 5px 0 !important;
+    padding: 5px 10px !important;
+    border: 1px solid #EAEAEA;
 }
 
 fieldset * {
-	margin-bottom: 10px;
-	line-height: 30px;
-	vertical-align: middle;
+    margin-bottom: 10px;
+    line-height: 30px;
+    vertical-align: middle;
 }
 fieldset legend {
-	margin: 0 2px 4px 0;
-	height: 24px;
-	line-height: 24px;
+    margin: 0 2px 4px 0;
+    height: 24px;
+    line-height: 24px;
 }
 fieldset input, fieldset select {
-	height: 26px;
-	line-height: 26px;
-	font-family: 微软雅黑, "segoe ui", verdana, arial, sans-serif;
-	margin-left: 4px;
+    height: 26px;
+    line-height: 26px;
+    font-family: 微软雅黑, "segoe ui", verdana, arial, sans-serif;
+    margin-left: 4px;
 }
 
 fieldset * * {
-	margin: 0;
+    margin: 0;
 }
 
 form select {
-	width: 10em;
+    width: 10em;
 }
 
 div.info {
-	font-family: Arial;
-	font-size: x-small;
-	color: #666666;
-	overflow: hidden;
-	line-height: 20px;
+    font-family: Arial;
+    font-size: x-small;
+    color: #666666;
+    overflow: hidden;
+    line-height: 20px;
 }
 
 #phpfmUserMng #divUserMng {
-	height: auto;
+    height: auto;
 }
 
 #phpfmUserMng table th {
-	font-weight: normal;
-	text-align: left;
+    font-weight: normal;
+    text-align: left;
 }
 #phpfmUserMng table th.id {
-	width: 30px;
+    width: 30px;
 }
 #phpfmUserMng table th.username {
-	width: 150px;
+    width: 150px;
 }
 #phpfmUserMng table th.permission {
-	width: 120px;
+    width: 120px;
 }
 #phpfmUserMng table th.operation {
-	width: 100px;
+    width: 100px;
 }
 #phpfmUserMng table td {
-	border-bottom: #ccc solid 1px;
+    border-bottom: #ccc solid 1px;
 }

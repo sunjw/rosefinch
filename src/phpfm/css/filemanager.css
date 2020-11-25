@@ -1,344 +1,344 @@
 ﻿/* Global sector */
 /*input[type="submit"],input[type="button"] {
-	padding: 0 4px;
+    padding: 0 4px;
 }*/
 
 #mainView {
-	background-color: white;
-	color: #484848;
+    background-color: white;
+    color: #484848;
 }
 
 #mainView a {
-	color: #484848;
+    color: #484848;
 }
 
 #mainView,#fullpath,#toolbar {
-	/* 设定主界面各个重要元素的共同属性 */
-	margin: 1px 10px 2px 10px;
+    /* 设定主界面各个重要元素的共同属性 */
+    margin: 1px 10px 2px 10px;
 }
 
 /* Fullpath sector */
 #fullpath {
-	background-color: white;
-	border-bottom: 1px solid #EAEAEA;
+    background-color: white;
+    border-bottom: 1px solid #EAEAEA;
 }
 .mobile #fullpath {
-	margin-top: 4px;
-	padding-bottom: 4px;
+    margin-top: 4px;
+    padding-bottom: 4px;
 }
 #fullpath ul {
-	list-style-type: none;
-	list-style-image: none;
+    list-style-type: none;
+    list-style-image: none;
 }
 
 #fullpath div.divDir,#fullpath div.divLabel,#fullpath div.pathSlash {
-	float: left;
-	height: 32px;
-	padding: 1px;
+    float: left;
+    height: 32px;
+    padding: 1px;
 }
 .mobile #fullpath div.divDir,.mobile #fullpath div.divLabel,.mobile #fullpath div.pathSlash {
-	height: 48px;
+    height: 48px;
 }
 
 #fullpath a {
-	color: #484848;
-	text-decoration: none;
-	display: block;
+    color: #484848;
+    text-decoration: none;
+    display: block;
 }
 #fullpath a {
-	padding: 0 6px;
-	line-height: 32px;
+    padding: 0 6px;
+    line-height: 32px;
 }
 .mobile #fullpath a {
-	padding: 0 6px;
-	line-height: 48px;
-	font-size: 30px;
+    padding: 0 6px;
+    line-height: 48px;
+    font-size: 30px;
 }
 #fullpath div.pathSlash a.arrow {
-	padding: 0;
-	width: 16px;
-	color: transparent;
-	background: url('../images/arrow-right.png') center center no-repeat;
+    padding: 0;
+    width: 16px;
+    color: transparent;
+    background: url('../images/arrow-right.png') center center no-repeat;
 }
 .mobile #fullpath div.pathSlash a.arrow {
-	padding: 0;
+    padding: 0;
 }
 
 #fullpath .subMenu {
-	display: none;
-	z-index: 2000;
-	position: absolute;
-	/*min-width: 160px;*/
+    display: none;
+    z-index: 2000;
+    position: absolute;
+    /*min-width: 160px;*/
 }
 
 #fullpath .subMenu ul {
-	background-color: white;
-	border: solid 1px #EAEAEA;
-	padding: 1px;
-	max-height: 360px; /* 最大高度 菜单不会太长 IE6 及以下无效 */
-	overflow: auto; /* 溢出就有滚动条 */
+    background-color: white;
+    border: solid 1px #EAEAEA;
+    padding: 1px;
+    max-height: 360px; /* 最大高度 菜单不会太长 IE6 及以下无效 */
+    overflow: auto; /* 溢出就有滚动条 */
 }
 
 #fullpath .subMenu li {
-	float: none;
-	padding-top: 0;
-	border: 0;
+    float: none;
+    padding-top: 0;
+    border: 0;
 }
 
 #fullpath .subMenu li a {
-	display: block;
-	height: 28px;
-	line-height: 28px;
-	/*text-indent: 4px;*/
-	overflow: hidden;
-	float: none;
-	text-decoration: none;
-	border: solid 1px white;
-	padding: 0 10px;
+    display: block;
+    height: 28px;
+    line-height: 28px;
+    /*text-indent: 4px;*/
+    overflow: hidden;
+    float: none;
+    text-decoration: none;
+    border: solid 1px white;
+    padding: 0 10px;
 }
 
 #fullpath .subMenu li a:hover {
-	color: #3399CC;
-	border: 1px solid white;
+    color: #3399CC;
+    border: 1px solid white;
 }
 
 /* Toolbar sector */
 #toolbar {
-	height: 43px;
-	line-height: 43px;
-	border-bottom: 1px solid #3399CC;
+    height: 43px;
+    line-height: 43px;
+    border-bottom: 1px solid #3399CC;
 }
 .mobile #toolbar {
-	height: 55px;
-	line-height: 55px;
+    height: 55px;
+    line-height: 55px;
 }
 #toolbar #leftToolbar,#toolbar #rightToolbar{
-	height: 40px;
+    height: 40px;
 }
 .mobile #toolbar #leftToolbar,.mobile #toolbar #rightToolbar{
-	height: 55px;
+    height: 55px;
 }
 #toolbar #leftToolbar {
-	float: left;
+    float: left;
 }
 #toolbar #rightToolbar {
-	float: right;
+    float: right;
 }
 
 #toolbar .toolbarButton,#toolbar .toolbarButton:hover,#toolbar .toolbarSmallButton,#toolbar .toolbarSmallButton:hover,#toolbar .disable,#toolbar .disable:hover
 {
-	cursor: pointer;
+    cursor: pointer;
 }
 
 #toolbar .toolbarPart, #toolbar .toolbarHiddenable {
-	float: left;
+    float: left;
 }
 
 #toolbar .toolbarButton,#toolbar .toolbarSmallButton {
-	display: block;
-	float: left;
-	border: 1px solid white;
-	height: 40px;
+    display: block;
+    float: left;
+    border: 1px solid white;
+    height: 40px;
 }
 .mobile #toolbar .toolbarButton,.mobile #toolbar .toolbarSmallButton {
-	height: 52px;
+    height: 52px;
 }
 #toolbar .buttonHover {
-	border: 1px solid white;
+    border: 1px solid white;
 }
 #toolbar .toolbarButton {
-	width: 40px;
+    width: 40px;
 }
 .mobile #toolbar .toolbarButton {
-	width: 52px;
+    width: 52px;
 }
 #toolbar .toolbarSmallButton {
-	width: 32px;
+    width: 32px;
 }
 
 #toolbar .toolbarButton img,#toolbar .toolbarSmallButton img {
-	border: 0;
+    border: 0;
 }
 #toolbar .toolbarButton img {
-	width: 28px;
-	height: 28px;
-	margin: 6px;
+    width: 28px;
+    height: 28px;
+    margin: 6px;
 }
 .mobile #toolbar .toolbarButton img {
-	width: 40px;
-	height: 40px;
+    width: 40px;
+    height: 40px;
 }
 #toolbar .toolbarSmallButton img {
-	width: 20px;
-	height: 32px;
-	margin: 6px 6px;
+    width: 20px;
+    height: 32px;
+    margin: 6px 6px;
 }
 #toolbar .disable {
-	display: none;
+    display: none;
 }
 
 #toolbar .subMenu {
-	display: none;
-	z-index: 2000;
-	position: absolute;
-	padding: 0 3px 3px 0;
+    display: none;
+    z-index: 2000;
+    position: absolute;
+    padding: 0 3px 3px 0;
 }
 
 #toolbar .subMenu ul {
-	background-color: white;
-	border: solid 1px #EAEAEA;
-	padding: 1px;
-	list-style-type: none;
-	list-style-image: none;
+    background-color: white;
+    border: solid 1px #EAEAEA;
+    padding: 1px;
+    list-style-type: none;
+    list-style-image: none;
 }
 
 #toolbar .subMenu li {
-	float: none;
-	padding-top: 0;
-	border: 0;
+    float: none;
+    padding-top: 0;
+    border: 0;
 }
 
 #toolbar .subMenu li {
-	display: block;
-	height: 28px;
-	line-height: 28px;
-	overflow: hidden;
-	text-decoration: none;
-	border: 0;
-	padding: 0 10px;
-	color: black;
+    display: block;
+    height: 28px;
+    line-height: 28px;
+    overflow: hidden;
+    text-decoration: none;
+    border: 0;
+    padding: 0 10px;
+    color: black;
 }
 
 #toolbar .subMenu li a {
-	text-decoration: none;
-	color: #484848;
-	display: block;
+    text-decoration: none;
+    color: #484848;
+    display: block;
 }
 
 #toolbar .subMenu li a:hover {
-	color: #3399CC;
+    color: #3399CC;
 }
 
 #toolbar .toolbarHistory li.current {
-	font-weight: bold;
+    font-weight: bold;
 }
 
 #toolbar form#searchForm {
-	float: left;
-	height: 32px;
-	line-height: 32px;
-	margin-top: 6px;
+    float: left;
+    height: 32px;
+    line-height: 32px;
+    margin-top: 6px;
 }
 
 #toolbar form#searchForm input {
-	vertical-align: top;
-	float: left;
+    vertical-align: top;
+    float: left;
 }
 
 #toolbar form#searchForm input[type="text"] {
-	height: 26px;
-	font-size: 16px;
-	color: #999999;
-	margin: 0 4px;
+    height: 26px;
+    font-size: 16px;
+    color: #999999;
+    margin: 0 4px;
 }
 
 #toolbar form#searchForm input[type="submit"] {
-	font-size: 10px;
-	background: transparent url('../images/toolbar-search.png') center center no-repeat;
-	border: none;
-	width: 34px;
-	height: 30px;
-	border: 1px solid white;
-	text-indent: 30px;
-	cursor: pointer;
-	box-shadow: none;
+    font-size: 10px;
+    background: transparent url('../images/toolbar-search.png') center center no-repeat;
+    border: none;
+    width: 34px;
+    height: 30px;
+    border: 1px solid white;
+    text-indent: 30px;
+    cursor: pointer;
+    box-shadow: none;
 }
 #toolbar form#searchForm input[type="submit"].buttonHover {
-	border: 1px solid white;
+    border: 1px solid white;
 }
 #toolbar form#searchForm .toolbarSmallButton {
-	height: 30px;
+    height: 30px;
 }
 #toolbar form#searchForm .toolbarSmallButton img {
-	width: 18px;
-	height: 18px;
+    width: 18px;
+    height: 18px;
 }
 
 /* View sector */
 #mainView .header {
-	padding: 0;
-	margin: 0;
-	height: 28px;
-	border-bottom: 1px solid #EAEAEA;
+    padding: 0;
+    margin: 0;
+    height: 28px;
+    border-bottom: 1px solid #EAEAEA;
 }
 .mobile #mainView .header {
-	height: 36px;
+    height: 36px;
 }
 
 #mainView .header span {
-	display: block;
-	float: left;
-	overflow: hidden;
-	height: 28px;
-	line-height: 28px;
-	padding: 0 0 0 6px;
+    display: block;
+    float: left;
+    overflow: hidden;
+    height: 28px;
+    line-height: 28px;
+    padding: 0 0 0 6px;
 }
 .mobile #mainView .header span {
-	height: 36px;
-	line-height: 36px;
+    height: 36px;
+    line-height: 36px;
 }
 #mainView .header a {
-	display: block;
-	line-height: 28px;
-	transition-property: none;
+    display: block;
+    line-height: 28px;
+    transition-property: none;
 }
 .mobile #mainView .header a {
-	line-height: 36px;
+    line-height: 36px;
 }
 #mainView .header span #checkSelectAll {
-	margin-top: 8px;
-	margin-left: 1px;
+    margin-top: 8px;
+    margin-left: 1px;
 }
 .mobile #mainView .header span #checkSelectAll {
-	margin-top: 6px;
-	width: 22px;
-	height: 22px;
+    margin-top: 6px;
+    width: 22px;
+    height: 22px;
 }
 #mainView .header span.split {
-	background: transparent url('../images/header_split.jpg') top left no-repeat;
+    background: transparent url('../images/header_split.jpg') top left no-repeat;
 }
 #mainView .header span.check {
-	width: 16px;
+    width: 16px;
 }
 .mobile #mainView .header span.check {
-	width: 31px;
+    width: 31px;
 }
 #mainView .header span.icon {
-	width: 43px;
+    width: 43px;
 }
 #mainView .header span.name {
-	width: 399px;
+    width: 399px;
 }
 .mobile #mainView .header span.name {
-	width: 319px;
+    width: 319px;
 }
 #mainView .header span.size {
-	width: 124px;
+    width: 124px;
 }
 .mobile #mainView .header span.size {
-	width: 89px;
+    width: 89px;
 }
 #mainView .header span.type {
-	width: 119px;
+    width: 119px;
 }
 #mainView .header span.mtime {
-	width: 160px;
+    width: 160px;
 }
 
 #mainView .header span a.sorta {
-	background: url('../images/order_asc.jpg') center 6px no-repeat;
+    background: url('../images/order_asc.jpg') center 6px no-repeat;
 }
 
 #mainView .header span a.sortd {
-	background: url('../images/order_desc.jpg') center 6px no-repeat;
+    background: url('../images/order_desc.jpg') center 6px no-repeat;
 }

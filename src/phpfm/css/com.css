@@ -1,200 +1,200 @@
 ﻿* {
-	margin: 0px;
-	padding: 0px;
+    margin: 0px;
+    padding: 0px;
 }
 
 body {
-	width: 1000px;
-	margin: 0 auto;
-	font-family: 微软雅黑, "segoe ui", verdana, arial, sans-serif;
+    width: 1000px;
+    margin: 0 auto;
+    font-family: 微软雅黑, "segoe ui", verdana, arial, sans-serif;
 }
 body.mobile {
-	width: 540px;
+    width: 540px;
 }
 
 input {
-	font-family: 微软雅黑, "segoe ui", verdana, arial, sans-serif;
+    font-family: 微软雅黑, "segoe ui", verdana, arial, sans-serif;
 }
 
 .hidden {
-	display: none;
+    display: none;
 }
 .clear {
-	clear: both;
+    clear: both;
 }
 .center {
-	text-align: center;
+    text-align: center;
 }
 .rightAlign {
-	text-align: right;
+    text-align: right;
 }
 
 a {
-	color: #666666;
-	transition-property: background,color,border;
-	transition-duration: 0.4s;
+    color: #666666;
+    transition-property: background,color,border;
+    transition-duration: 0.4s;
 }
 a:hover {
-	color: black;
-	transition-property: background,color,border;
-	transition-duration: 0.4s;
+    color: black;
+    transition-property: background,color,border;
+    transition-duration: 0.4s;
 }
 #lightbox-nav a {
-	transition-property: none;
+    transition-property: none;
 }
 
 input[type="submit"], input[type="button"], button {
-	height: 28px;
-	line-height: 28px;
-	background-color: white;
-	padding: 0 10px;
-	border: 1px solid #aaaaaa;
-	box-shadow: 1px 1px 2px #dddddd;
-	transition-property: border-color;
-	transition-duration: 0.4s;
+    height: 28px;
+    line-height: 28px;
+    background-color: white;
+    padding: 0 10px;
+    border: 1px solid #aaaaaa;
+    box-shadow: 1px 1px 2px #dddddd;
+    transition-property: border-color;
+    transition-duration: 0.4s;
 }
 input[type="submit"]:hover, input[type="button"]:hover, button:hover {
-	border-color: black;
-	transition-property: border-color;
-	transition-duration: 0.4s;
+    border-color: black;
+    transition-property: border-color;
+    transition-duration: 0.4s;
 }
 input[type="submit"]:active, input[type="button"]:active, button:active {
-	border-color: black;
-	box-shadow: 1px 1px 1px #dddddd inset;
+    border-color: black;
+    box-shadow: 1px 1px 1px #dddddd inset;
 }
 
 #header {
-	height: 30px;
-	line-height: 30px;
-	position: relative;
+    height: 30px;
+    line-height: 30px;
+    position: relative;
 }
 .mobile #header {
-	height: 42px;
-	line-height: 42px;
+    height: 42px;
+    line-height: 42px;
 }
 #header #loginStatus {
-	padding: 1px;
+    padding: 1px;
 }
 #header #loginStatus {
-	position: absolute;
-	top: 0;
-	right: 10px;
-	font-size: 14px;
+    position: absolute;
+    top: 0;
+    right: 10px;
+    font-size: 14px;
 }
 .install #header {
-	margin: 6px 10px;
+    margin: 6px 10px;
 }
 
 #nav { /*margin-top: 5px;*/
-	position: relative;
-	margin-left: 10px;
+    position: relative;
+    margin-left: 10px;
 }
 #nav ul {
-	list-style-type: none;
-	list-style-image: none;
-	/*margin-left: 200px;*/
-	float: left;
-	border-left: 1px solid #CCCCCC;
+    list-style-type: none;
+    list-style-image: none;
+    /*margin-left: 200px;*/
+    float: left;
+    border-left: 1px solid #CCCCCC;
 }
 #nav,#nav ul li a,#nav a#phpfmNavHome {
-	color: black;
-	text-decoration: none;
+    color: black;
+    text-decoration: none;
 }
 #nav ul li a {
-	display: block;
-	padding: 0 1em;
+    display: block;
+    padding: 0 1em;
 }
 #nav ul li {
-	float: left;
-	font-size: 16px;
-	text-align: center;
-	display: block;
+    float: left;
+    font-size: 16px;
+    text-align: center;
+    display: block;
 }
 .mobile #nav ul li {
-	font-size: 24px;
+    font-size: 24px;
 }
 #nav ul,#nav ul .li-item {
-	height: 30px;
-	line-height: 30px;
+    height: 30px;
+    line-height: 30px;
 }
 .mobile #nav ul,.mobile #nav ul .li-item {
-	height: 42px;
-	line-height: 42px;
+    height: 42px;
+    line-height: 42px;
 }
 #nav ul .li-item {
-	border-right: 1px solid #CCCCCC;
+    border-right: 1px solid #CCCCCC;
 }
 #nav ul .li-item a {
-	transition-property: background-color,color;
-	transition-duration: 0.4s;
+    transition-property: background-color,color;
+    transition-duration: 0.4s;
 }
 #nav ul .current {
-	border-right: none;
-	margin-right: 1px;
-	background-color: #3399CC;
+    border-right: none;
+    margin-right: 1px;
+    background-color: #3399CC;
 }
 #nav ul .li-item a:hover {
-	color: #3399CC;
-	/*background: url('../images/nav-hover-bg.jpg') left center repeat-x;*/
-	transition-property: background-color,color;
-	transition-duration: 0.4s;
+    color: #3399CC;
+    /*background: url('../images/nav-hover-bg.jpg') left center repeat-x;*/
+    transition-property: background-color,color;
+    transition-duration: 0.4s;
 }
 #nav ul .current a {
-	color: white;
+    color: white;
 }
 #nav ul .current a:hover {
-	color: white;
+    color: white;
 }
 
 /* Rosefinch 主页按钮 */
 #nav a#phpfmNavHome {
-	display: block;
-	height: 35px;
-	line-height: 35px;
-	width: 200px;
-	text-align: center;
-	color: white;
-	background: transparent url('../images/nav-home-bg-reverse.gif') left
-		center repeat-x;
-	position: absolute;
-	top: -1px;
+    display: block;
+    height: 35px;
+    line-height: 35px;
+    width: 200px;
+    text-align: center;
+    color: white;
+    background: transparent url('../images/nav-home-bg-reverse.gif') left
+        center repeat-x;
+    position: absolute;
+    top: -1px;
 }
 
 #nav a#phpfmNavHome :hover,#nav a#phpfmNavHome.current {
-	background: transparent url('../images/nav-home-current-bg-reverse.gif')
-		left center repeat-x;
+    background: transparent url('../images/nav-home-current-bg-reverse.gif')
+        left center repeat-x;
 }
 
 #content {
-	font-size: 14px;
-	padding-bottom: 6px;
-	background-color: white;
+    font-size: 14px;
+    padding-bottom: 6px;
+    background-color: white;
 }
 
 /*
 a:active, a:link, a:visited
 {
-	font-family: 宋体, Arial, Helvetica, sans-serif;
-	color: Black;
+    font-family: 宋体, Arial, Helvetica, sans-serif;
+    color: Black;
 }
 a:hover
 {
-	font-family: 宋体, Arial, Helvetica, sans-serif;
-	color: White;
+    font-family: 宋体, Arial, Helvetica, sans-serif;
+    color: White;
 }
 */
 #footer {
-	margin-bottom: 10px;
-	background-color: White;
-	font-size: x-small;
-	color: #666666;
-	padding: 0 10px 10px 10px;
+    margin-bottom: 10px;
+    background-color: White;
+    font-size: x-small;
+    color: #666666;
+    padding: 0 10px 10px 10px;
 }
 
 #footer #copyright {
-	text-align: right;
+    text-align: right;
 }
 
 .select {
-	font-size: large;
+    font-size: large;
 }
