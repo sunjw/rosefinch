@@ -14,7 +14,7 @@
  */
 function cmp_name($a, $b)
 {
-	return strcmp($a['name'], $b['name']);
+    return strcmp($a['name'], $b['name']);
 }
 
 /**
@@ -25,7 +25,7 @@ function cmp_name($a, $b)
  */
 function rcmp_name($a, $b)
 {
-	return strcmp($b['name'], $a['name']);
+    return strcmp($b['name'], $a['name']);
 }
 
 /**
@@ -36,18 +36,13 @@ function rcmp_name($a, $b)
  */
 function cmp_size($a, $b)
 {
-	if($a['stat']['size'] == $b['stat']['size'])
-	{
-		return 0;
-	}
-	else if($a['stat']['size'] > $b['stat']['size'])
-	{
-		return 1;
-	}
-	else
-	{
-		return -1;
-	}
+    if ($a['stat']['size'] == $b['stat']['size']) {
+        return 0;
+    } else if ($a['stat']['size'] > $b['stat']['size']) {
+        return 1;
+    } else {
+        return -1;
+    }
 }
 
 /**
@@ -58,7 +53,7 @@ function cmp_size($a, $b)
  */
 function rcmp_size($a, $b)
 {
-	return 0 - cmp_size($a, $b);
+    return 0 - cmp_size($a, $b);
 }
 
 /**
@@ -69,18 +64,13 @@ function rcmp_size($a, $b)
  */
 function cmp_mtime($a, $b)
 {
-	if($a['stat']['mtime'] == $b['stat']['mtime'])
-	{
-		return 0;
-	}
-	else if($a['stat']['mtime'] > $b['stat']['mtime'])
-	{
-		return 1;
-	}
-	else
-	{
-		return -1;
-	}
+    if ($a['stat']['mtime'] == $b['stat']['mtime']) {
+        return 0;
+    } else if ($a['stat']['mtime'] > $b['stat']['mtime']) {
+        return 1;
+    } else {
+        return -1;
+    }
 }
 
 /**
@@ -91,7 +81,7 @@ function cmp_mtime($a, $b)
  */
 function rcmp_mtime($a, $b)
 {
-	return 0 - cmp_mtime($a, $b);
+    return 0 - cmp_mtime($a, $b);
 }
 
 /**
@@ -102,24 +92,22 @@ function rcmp_mtime($a, $b)
  */
 function cmp_type($a, $b)
 {
-	$a_name = $a['name'];
-	$a_dot_pos = strrpos($a_name, ".");
-	$a_type = "";
-	if($a_dot_pos !== false)
-	{
-		$a_type = substr($a_name, $a_dot_pos + 1, strlen($a_name) - $a_dot_pos - 1);
-	}
+    $a_name = $a['name'];
+    $a_dot_pos = strrpos($a_name, ".");
+    $a_type = "";
+    if ($a_dot_pos !== false) {
+        $a_type = substr($a_name, $a_dot_pos + 1, strlen($a_name) - $a_dot_pos - 1);
+    }
 
-	$b_name = $b['name'];
-	$b_dot_pos = strrpos($b_name, ".");
-	$b_type = "";
-	if($b_dot_pos !== false)
-	{
-		$b_type = substr($b_name, $b_dot_pos + 1, strlen($b_name) - $b_dot_pos - 1);
-	}
-	//echo "$a_type, $b_type\n";
+    $b_name = $b['name'];
+    $b_dot_pos = strrpos($b_name, ".");
+    $b_type = "";
+    if ($b_dot_pos !== false) {
+        $b_type = substr($b_name, $b_dot_pos + 1, strlen($b_name) - $b_dot_pos - 1);
+    }
+    //echo "$a_type, $b_type\n";
 
-	return strcmp($a_type, $b_type);
+    return strcmp($a_type, $b_type);
 }
 
 /**
@@ -130,6 +118,7 @@ function cmp_type($a, $b)
  */
 function rcmp_type($a, $b)
 {
-	return 0 - cmp_type($a, $b);
+    return 0 - cmp_type($a, $b);
 }
+
 ?>
