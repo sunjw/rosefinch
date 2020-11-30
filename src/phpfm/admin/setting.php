@@ -23,10 +23,11 @@ $USERMNG_ARG = "usermng";
 $DB_ARG = "database";
 $mode = 0;
 $arg = get_query("mode");
-if ($arg == $DB_ARG)
+if ($arg == $DB_ARG) {
     $mode = 1;
-else if ($arg == $USERMNG_ARG)
+} else if ($arg == $USERMNG_ARG) {
     $mode = 2;
+}
 
 if ($mode == 0) {
     $settings = array('root_type' => FILE_POSITION,
@@ -135,24 +136,13 @@ textdomain($domain);
     <div id="phpfmDocNav">
         <?php
         if ($mode == 0) {
-            echo _("Setting"); ?>&nbsp;|&nbsp;<a class="" title="<?php echo _("Database Setting"); ?>"
-                                                 href="setting.php?mode=<?php echo $DB_ARG; ?>"><?php echo _("Database Setting"); ?></a><?php if (USERMNG) { ?>&nbsp;|&nbsp;
-                <a class="" title="<?php echo _("User Management"); ?>"
-                   href="setting.php?mode=<?php echo $USERMNG_ARG; ?>"><?php echo _("User Management"); ?></a><?php } ?>
-            <?php
-        } else if ($mode == 1) {
-            ?>
-            <a class="" title="<?php echo _("Setting"); ?>"
-               href="setting.php"><?php echo _("Setting"); ?></a>&nbsp;|&nbsp;<?php echo _("Database Setting"); ?><?php if (USERMNG) { ?>&nbsp;|&nbsp;
+            echo _("Setting"); ?><?php if (USERMNG) { ?>&nbsp;|&nbsp;
                 <a class="" title="<?php echo _("User Management"); ?>"
                    href="setting.php?mode=<?php echo $USERMNG_ARG; ?>"><?php echo _("User Management"); ?></a><?php } ?>
             <?php
         } else if ($mode == 2 && (USERMNG || $settings['usermng'])) {
             ?>
-            <a class="" title="<?php echo _("Setting"); ?>"
-               href="setting.php"><?php echo _("Setting"); ?></a>&nbsp;|&nbsp;<a class=""
-                                                                                 title="<?php echo _("Database Setting"); ?>"
-                                                                                 href="setting.php?mode=<?php echo $DB_ARG; ?>"><?php echo _("Database Setting"); ?></a><?php if (USERMNG) { ?>&nbsp;|&nbsp;<?php echo _("User Management"); ?><?php } ?>
+            <a class="" title="<?php echo _("Setting"); ?>" href="setting.php"><?php echo _("Setting"); ?></a><?php if (USERMNG) { ?>&nbsp;|&nbsp;<?php echo _("User Management"); ?><?php } ?>
             <?php
         }
         ?>
@@ -161,12 +151,11 @@ textdomain($domain);
     </div>
     <?php
     if (Utility::allow_to_admin()) {
-        if ($mode == 0)
+        if ($mode == 0) {
             include "settings.form.php";
-        else if ($mode == 1)
-            include "db.form.php";
-        else if ($mode == 2)
+        } else if ($mode == 2) {
             include "usermng.form.php";
+        }
     } else {
         ?>
         <script type="text/javascript">
