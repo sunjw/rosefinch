@@ -38,7 +38,7 @@ function dl_file($file)
 //		default: $ctype='application/force-download';
 //	}
     $ctype = Utility::get_mime_type($file_extension);
-    //log_to_file($ctype);
+    //get_logger()->info($ctype);
     //echo $ctype;
     //check if http_range is sent by browser (or download manager)
 
@@ -119,11 +119,11 @@ function prepare_file_path($request_file)
     $files_base_dir_plat = convert_toplat($files_base_dir);
     $file = $files_base_dir_plat . $request_file; // 获得文件路径
     if (PLAT_CHARSET != "UTF-8") {
-        //log_to_file("file1:$file");
+        //get_logger()->info("file1:$file");
         if (!is_file($file)) {
             // 不存在，试试转化成本地编码
             $file = $files_base_dir_plat . convert_toplat($request_file); // Windows 上可能要转换成 gb2312
-            //log_to_file("file2:$file");
+            //get_logger()->info("file2:$file");
             if (!is_file($file)) {
                 $file = false; // 没有这个文件
             }
@@ -150,7 +150,7 @@ function prepare_file_path($request_file)
 if (Utility::allow_to_browser()) {
     // Need browser permission
     $request_file = rawurldecode(get_query("file"));
-    log_to_file(join($_GET));
+    get_logger()->info(join($_GET));
 
     if (substr($request_file, -1) == "\"") {
         $request_file = substr($request_file, 0, -1);
@@ -161,11 +161,11 @@ if (Utility::allow_to_browser()) {
         $test_array[0] = $request_file;
         $test_array = Utility::filter_paths($test_array);
         if (count($test_array) > 0) {
-            log_to_file("Download start");
+            get_logger()->info("Download start");
             dl_file($request_file);
         }
     } else {
-        log_to_file("Download fail");
+        get_logger()->info("Download fail");
         header("HTTP/1.1 404 Not Found");
         echo "<strong>404 Not Found</strong>";
         exit;

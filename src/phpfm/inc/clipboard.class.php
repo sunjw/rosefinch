@@ -70,7 +70,7 @@ class ClipBoard
             $oldname = $files_base_dir . $item;
             $basename = get_basename($item);
             $newname = $new_dir . $basename;
-            log_to_file($this->oper . ": " . $oldname . " to " . $newname);
+            get_logger()->info($this->oper . ": " . $oldname . " to " . $newname);
 
             // 处理重名
             $success = false;

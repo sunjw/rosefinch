@@ -139,7 +139,7 @@ class Post
             $item = $items[$i];
             $sub_dir = dirname($item);
             $path = $this->files_base_dir . $item;
-            log_to_file("try to delete: $path");
+            get_logger()->info("try to delete: $path");
             $message .= (_("Delete") . " " . htmlentities_utf8($item) . " ");//("删除 $item ");
             $path = convert_toplat($path);
             if (file_exists($path)) {
@@ -210,7 +210,7 @@ class Post
         if (false === strpos($sub_dir, "..") && Utility::check_name($name)) // 过滤
         {
             $name = $this->files_base_dir . $sub_dir . $name;
-            log_to_file("mkdir: $name");
+            get_logger()->info("mkdir: $name");
             $name = convert_toplat($name);
             if (!file_exists($name))
                 $success = @mkdir($name);
@@ -266,7 +266,7 @@ class Post
             $oldname = $this->files_base_dir . $sub_dir . $oldname;
             $newname = $this->files_base_dir . $sub_dir . $newname;
 
-            log_to_file("Try to rename: $oldname to $newname");
+            get_logger()->info("Try to rename: $oldname to $newname");
 
             $success = Utility::phpfm_rename($oldname, $newname, false);
 
@@ -305,8 +305,8 @@ class Post
 
         $used_ajax = post_query("ajax") == "ajax";
         $sub_dir = rawurldecode(post_query("subdir"));
-        //log_to_file("post_query=".$post_subdir);
-        //log_to_file("sub_dir=".$sub_dir);
+        //get_logger()->info("post_query=".$post_subdir);
+        //get_logger()->info("sub_dir=".$sub_dir);
 
         if (isset($_FILES['uploadFile'])) {
             if (is_array($_FILES['uploadFile']['name'])) {
@@ -318,10 +318,10 @@ class Post
                     $uploadfile = $this->files_base_dir . $sub_dir . $upload_files['name'][$i];
                     //print_r($upload_files['tmp_name']);
                     if (Utility::phpfm_move_uploaded_file($upload_files['tmp_name'][$i], $uploadfile)) {
-                        log_to_file("upload success: " . $uploadfile);
+                        get_logger()->info("upload success: " . $uploadfile);
                     } else {
                         $multi_result = false;
-                        log_to_file("upload failed: " . $uploadfile);
+                        get_logger()->info("upload failed: " . $uploadfile);
                     }
                 }
 
@@ -346,7 +346,7 @@ class Post
                     $this->messageboard->set_message(
                         _("Upload") . ":&nbsp;" . $_FILES['uploadFile']['name'] . "&nbsp;" . _("succeed"),
                         1);
-                    log_to_file("upload success: " . $uploadfile);
+                    get_logger()->info("upload success: " . $uploadfile);
 
                     if (SEARCH) {
                         $search->create_index($sub_dir);
@@ -355,7 +355,7 @@ class Post
                     $this->messageboard->set_message(
                         _("Upload") . ":&nbsp;" . $_FILES['uploadFile']['name'] . " <strong>" . _("failed") . "<strong>",
                         2);
-                    log_to_file("upload failed: " . $uploadfile);
+                    get_logger()->info("upload failed: " . $uploadfile);
                 }
             }
         }

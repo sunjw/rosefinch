@@ -11,7 +11,7 @@ require_once "../log/log.func.php";
 
 set_response_utf8();
 
-log_to_file("setting...");
+get_logger()->info("setting...");
 
 //print_r($_GET);
 //print_r($_POST);
