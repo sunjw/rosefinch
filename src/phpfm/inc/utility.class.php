@@ -4,8 +4,6 @@ require_once "common.inc.php";
 require_once "clipboard.class.php";
 require_once "messageboard.class.php";
 require_once "history.class.php";
-require_once "ez_sql_core.php"; // Include ezSQL core
-require_once "ez_sql_mysqli.php"; // Include ezSQL database specific component
 require_once "usermng.class.php";
 
 /**
@@ -17,8 +15,8 @@ require_once "usermng.class.php";
 class Utility
 {
     /**
-     * 获得储存文件目录的基路径
-     * @return 储存文件目录的基路径
+     * Get base directory path.
+     * @return string base directory path
      */
     public static function get_file_base_dir()
     {
@@ -33,9 +31,9 @@ class Utility
     }
 
     /**
-     * 格式化大小字符串
-     * @param $size 以字节计的大小
-     * @return 格式化的字符串
+     * Format size string.
+     * @param number $size size in bytes
+     * @return string formatted size string
      */
     public static function format_size($size)
     {
@@ -57,9 +55,9 @@ class Utility
     }
 
     /**
-     * 获得文件扩展名
-     * @param $file 文件名或路径
-     * @return 文件扩展名 (不包括'.')
+     * Get file ext.
+     * @param string $file file path
+     * @return string ext (exclude .)
      */
     public static function get_file_ext($file)
     {
@@ -72,9 +70,9 @@ class Utility
     }
 
     /**
-     * 检查文件名是否符合要求
-     * @param $name
-     * @return 符合要求 true, 不符合 false
+     * Check file name.
+     * @param string $name
+     * @return bool
      */
     public static function check_name($name)
     {
@@ -98,9 +96,9 @@ class Utility
     }
 
     /**
-     * 检查路径是否符合要求
-     * @param $path
-     * @return 符合要求 true, 不符合 false
+     * Check path.
+     * @param string $path
+     * @return bool
      */
     public static function check_path($path)
     {
@@ -122,9 +120,9 @@ class Utility
     }
 
     /**
-     * 根据文件扩展名生成图标图片的 html 代码
-     * @param $file_type 文件扩展名
-     * @return 图标图片的 html 代码
+     * Generate icon html by file type.
+     * @param string $file_type file type
+     * @return string icon HTML
      */
     public static function get_icon($file_type, $size = 16)
     {
@@ -164,12 +162,12 @@ class Utility
     }
 
     /**
-     * 生成 <img/> 的 html 代码
-     * @param $src 图片路径
-     * @param $width width
-     * @param $height height
-     * @param $alt alt 字符串
-     * @return 图标图片的 html 代码
+     * Generate image HTML.
+     * @param string $src image path
+     * @param number $width
+     * @param number $height
+     * @param string $alt alt string
+     * @return string image HTML
      */
     private static function generate_img_html($src, $width, $height, $alt)
     {
@@ -178,9 +176,9 @@ class Utility
     }
 
     /**
-     * 根据文件后缀名获得 MIME 类型
-     * @param $file_extension 文件后缀名
-     * @return MIME 类型
+     * Get MIME by file ext.
+     * @param string $file_extension file ext
+     * @return string MIME
      */
     public static function get_mime_type($file_extension)
     {
@@ -325,20 +323,19 @@ class Utility
             "asf" => "video/x-msvideo"
         );
 
-        if (isset($mimetypes[$file_extension]))
+        if (isset($mimetypes[$file_extension])) {
             $type = $mimetypes[$file_extension];
-        else
+        } else {
             $type = 'application/force-download';
-
+        }
 
         return $type;
     }
 
     /**
-     * 过滤文件名
-     * 去掉各种非法字符
-     * @param $files 文件名数组
-     * @return 过滤过的文件名数组
+     * Filter illegal file name.
+     * @param array $files file names
+     * @return array filtered file names
      */
     public static function filter_files($files)
     {
@@ -354,10 +351,9 @@ class Utility
     }
 
     /**
-     * 过滤路径
-     * 去掉各种非法字符
-     * @param $paths 路径数组
-     * @return 过滤过的路径数组
+     * Filter illegal paths.
+     * @param array $paths paths
+     * @return array filtered paths
      */
     public static function filter_paths($paths)
     {
@@ -400,9 +396,9 @@ class Utility
     }
 
     /**
-     * 处理已有名称
-     * @param $name 完整路径 (UTF-8)
-     * @return 新完整路径 (UTF-8)
+     * Deal with the same name.
+     * @param string $name full path (UTF-8)
+     * @return string new full path (UTF-8)
      */
     public static function deal_same_name($name, $i = 2)
     {
@@ -436,33 +432,35 @@ class Utility
     }
 
     /**
-     * 重名的 rename
-     * @param $oldname 原路径 (UTF-8)
-     * @param $newname 新路径 (UTF-8)
-     * @param $deal_same_name 是否处理重名, 默认不处理
-     * @return 完成 TRUE, 失败 FALSE
+     * Rename.
+     * @param string $oldname old full path (UTF-8)
+     * @param string $newname new full path (UTF-8)
+     * @param bool $deal_same_name need deal with the same name
+     * @return bool
      */
     public static function phpfm_rename($oldname, $newname, $deal_same_name = false)
     {
         $newname_dir_part = dirname($newname);
-        if ($newname_dir_part == $oldname)
-            return FALSE;
+        if ($newname_dir_part == $oldname) {
+            return false;
+        }
 
         $plat_oldname = convert_toplat($oldname);
         $plat_newname = convert_toplat($newname);
-        if ($plat_oldname == $plat_newname)
-            return TRUE;
+        if ($plat_oldname == $plat_newname) {
+            return true;
+        }
 
-        // 处理文件重名
+        // The same name.
         if (file_exists($plat_oldname)) {
             if (file_exists($plat_newname)) {
                 if ($deal_same_name)
                     $newname = Utility::deal_same_name($newname);
                 else
-                    return FALSE;
+                    return false;
             }
         } else {
-            return FALSE;
+            return false;
         }
 
         $plat_newname = convert_toplat($newname);
@@ -470,17 +468,17 @@ class Utility
     }
 
     /**
-     * 处理过重名的 copy
-     * 可以拷贝目录
-     * @param $oldname 原路径 (UTF-8)
-     * @param $newname 新路径 (UTF-8)
-     * @return 完成 TRUE, 失败 FALSE
+     * Copy, deal with the same name, support directory.
+     * @param string $oldname old path (UTF-8)
+     * @param string $newname new path (UTF-8)
+     * @return bool
      */
     public static function phpfm_copy($oldname, $newname)
     {
         $newname_dir_part = dirname($newname);
-        if ($newname_dir_part == $oldname)
-            return FALSE;
+        if ($newname_dir_part == $oldname) {
+            return false;
+        }
 
         $plat_oldname = convert_toplat($oldname);
         $plat_newname = convert_toplat($newname);
@@ -491,24 +489,24 @@ class Utility
         $plat_newname = convert_toplat($newname);
 
         if (is_dir($plat_oldname)) {
-            return xcopy($plat_oldname, $plat_newname); // 目录使用 xcopy
+            return xcopy($plat_oldname, $plat_newname); // xcopy for directory.
         } else {
             return @copy($plat_oldname, $plat_newname);
         }
     }
 
     /**
-     * 处理过删除文件夹
-     * 可以直接删除文件夹
-     * @param $path
-     * @return bool 完成 TRUE, 失败 FALSE
+     * Remove directory.
+     * @param string $path
+     * @return bool
      */
     public static function phpfm_rmdir($path)
     {
-        if (!$dh = @opendir($path))
-            return FALSE;
+        if (!$dh = @opendir($path)) {
+            return false;
+        }
 
-        $success = TRUE;
+        $success = true;
         while (false !== ($item = readdir($dh))) {
             if ($item != '.' && $item != '..') {
                 $folder_content = $path . '/' . $item;
@@ -528,10 +526,10 @@ class Utility
     }
 
     /**
-     * 处理过重名的 move_uploaded_file
-     * @param $filename (UTF-8)
-     * @param $destination (UTF-8)
-     * @return 与 move_uploaded_file 相同
+     * Better move_uploaded_file.
+     * @param string $filename (UTF-8)
+     * @param string $destination (UTF-8)
+     * @return bool the same to move_uploaded_file
      */
     public static function phpfm_move_uploaded_file($filename, $destination)
     {
@@ -546,10 +544,10 @@ class Utility
     }
 
     /**
-     * 功能完成后跳转
-     * 读取请求的 <strong>return</strong> 参数值，rawurldecode 后，跳转
-     * @param $is_from_get return 参数是否来自 get，默认 true
-     * @param $sub_dir_level 子文件夹层数，默认0
+     * Redirect after operation.<br/>
+     * Read "return" from request, rawurldecode and jump.
+     * @param bool $is_from_get read "return" from GET, default is true
+     * @param number $sub_dir_level sub directory level, default is 0
      */
     public static function redirct_after_oper($is_from_get = true, $sub_dir_level = 0)
     {
@@ -575,15 +573,15 @@ class Utility
     }
 
     /**
-     * 从 SESSION 中获得当前 MessageBoard 对象，并存入 SESSION
-     * @param $need_new 不存在是否要新建，默认 true
-     * @return MessageBoard 对象或 null
+     * Read MessageBoard from SESSION.
+     * @param bool $need_new create new when not exists, default is true
+     * @return MessageBoard message board or null
      */
     public static function get_messageboard($need_new = true)
     {
         if ($need_new) {
             $messageboard = isset($_SESSION['messageboard']) ? $_SESSION['messageboard'] : new MessageBoard();
-            $_SESSION['messageboard'] = $messageboard; // 将消息板存入 SESSION
+            $_SESSION['messageboard'] = $messageboard; // put MessageBoard into SESSION.
         } else {
             $messageboard = isset($_SESSION['messageboard']) ? $_SESSION['messageboard'] : null;
         }
@@ -592,15 +590,15 @@ class Utility
     }
 
     /**
-     * 从 SESSION 中获得当前 ClipBoard 对象，并存入 SESSION
-     * @param $need_new 不存在是否要新建，默认 true
-     * @return ClipBoard 对象或 null
+     * Read ClipBoard from SESSION.
+     * @param bool $need_new create new when not exists, default is true
+     * @return ClipBoard clipboard or null
      */
     public static function get_clipboard($need_new = true)
     {
         if ($need_new) {
             $clipboard = isset($_SESSION['clipboard']) ? $_SESSION['clipboard'] : new ClipBoard();
-            $_SESSION['clipboard'] = $clipboard; // 将剪贴板存入 SESSION
+            $_SESSION['clipboard'] = $clipboard; // put ClipBoard into SESSION.
         } else {
             $clipboard = isset($_SESSION['clipboard']) ? $_SESSION['clipboard'] : null;
         }
@@ -633,14 +631,14 @@ class Utility
 
     /**
      * Read History from SESSION.
-     * @param bool $need_new create new when not exists
+     * @param bool $need_new create new when not exists, default is true
      * @return History history or null
      */
     public static function get_history($need_new = true)
     {
         if ($need_new) {
             $history = isset($_SESSION['history']) ? $_SESSION['history'] : new History();
-            $_SESSION['history'] = $history; // 将剪贴板存入 SESSION
+            $_SESSION['history'] = $history; // put History into SESSION.
         } else {
             $history = isset($_SESSION['history']) ? $_SESSION['history'] : null;
         }
@@ -650,14 +648,14 @@ class Utility
 
     /**
      * Read UserManager from SESSION.
-     * @param bool $need_new create new when not exists
+     * @param bool $need_new create new when not exists, default is true
      * @return UserManager user or null
      */
     public static function get_usermng($need_new = true)
     {
         if ($need_new) {
             $usermgn = isset($_SESSION['usermgn']) ? $_SESSION['usermgn'] : new UserManager();
-            $_SESSION['usermgn'] = $usermgn; // 将剪贴板存入 SESSION
+            $_SESSION['usermgn'] = $usermgn; // put UserManager into SESSION.
         } else {
             $usermgn = isset($_SESSION['usermgn']) ? $_SESSION['usermgn'] : null;
         }
@@ -671,16 +669,19 @@ class Utility
             return true;
 
         $modify_permission = $do;
-        if ($modify_permission == User::$NOBODY)
+        if ($modify_permission == User::$NOBODY) {
             return true;
+        }
 
         $user_manager = Utility::get_usermng();
-        if (!$user_manager->is_logged())
+        if (!$user_manager->is_logged()) {
             return false;
+        }
 
         $user = $user_manager->get_user();
-        if ($user->permission >= $modify_permission)
+        if ($user->permission >= $modify_permission) {
             return true;
+        }
 
         return false;
     }
@@ -691,8 +692,9 @@ class Utility
      */
     public static function allow_to_browser()
     {
-        if (!defined("ROSE_BROWSER"))
+        if (!defined("ROSE_BROWSER")) {
             return true;
+        }
         return Utility::allow_to(ROSE_BROWSER);
     }
 
@@ -702,8 +704,9 @@ class Utility
      */
     public static function allow_to_modify()
     {
-        if (!defined("ROSE_MODIFY"))
+        if (!defined("ROSE_MODIFY")) {
             return true;
+        }
         return Utility::allow_to(ROSE_MODIFY);
     }
 
@@ -713,8 +716,9 @@ class Utility
      */
     public static function allow_to_admin()
     {
-        if (!defined("ROSE_ADMIN"))
+        if (!defined("ROSE_ADMIN")) {
             return true;
+        }
         return Utility::allow_to(ROSE_ADMIN);
     }
 
@@ -723,8 +727,9 @@ class Utility
      */
     public static function display_user()
     {
-        if (is_mobile_browser() || !USERMNG)
+        if (is_mobile_browser() || !USERMNG) {
             return '';
+        }
         $user = Utility::get_usermng()->get_user();
         if ($user == null) {
             echo _("Welcome") . ' ' . _("Guest") . '&nbsp;|&nbsp;<a id="linkLogin" href="javascript:;">' . _("Login") . '</a>';

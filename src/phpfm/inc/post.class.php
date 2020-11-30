@@ -149,7 +149,7 @@ class Post
                     $success = @unlink($path);
                 }
             }
-            if ($success === TRUE) {
+            if ($success === true) {
                 $message .= (_("succeed") . "<br />");
                 $stat = 1;
 
@@ -216,7 +216,7 @@ class Post
                 $success = @mkdir($name);
         }
 
-        if ($success === TRUE) {
+        if ($success === true) {
             $this->messageboard->set_message(
                 _("Make new folder:") . "&nbsp;" . htmlentities_utf8(post_query("newname")) . "&nbsp;" . _("succeed"),
                 1);
@@ -271,7 +271,7 @@ class Post
             $success = Utility::phpfm_rename($oldname, $newname, false);
 
         }
-        if ($success === TRUE) {
+        if ($success === true) {
             $this->messageboard->set_message(
                 sprintf(_("Rename %s to %s ") . _("succeed"), htmlentities_utf8(post_query("oldname")), htmlentities_utf8(post_query("newname"))),
                 1);
