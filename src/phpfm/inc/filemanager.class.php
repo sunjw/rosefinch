@@ -7,7 +7,6 @@ require_once "sort.inc.php";
 require_once "clipboard.class.php";
 require_once "messageboard.class.php";
 require_once "history.class.php";
-require_once "usermng.class.php";
 require_once "utility.class.php";
 
 @session_start();
@@ -40,7 +39,6 @@ class FileManager
     private $clipboard;
     private $messageboard;
     private $history;
-    private $user_manager;
 
     function __construct($browser_page = "index.php")
     {
@@ -54,7 +52,6 @@ class FileManager
         $this->clipboard = Utility::get_clipboard();
         $this->messageboard = Utility::get_messageboard();
         $this->history = Utility::get_history();
-        $this->user_manager = Utility::get_usermng();
 
         $this->browser_page = $browser_page;
 
@@ -1189,24 +1186,6 @@ class FileManager
         $button_names['Clean Search'] = _("Clean Search");
 
         return $button_names;
-    }
-
-    /**
-     * Is user log in.
-     * Call UserManager->is_logged().
-     */
-    private function is_logged()
-    {
-        return $this->user_manager->is_logged();
-    }
-
-    /**
-     * Get user.
-     * Call UserManager->get_user()
-     */
-    private function get_user()
-    {
-        return $this->user_manager->get_user();
     }
 }
 

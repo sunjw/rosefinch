@@ -51,39 +51,16 @@ class User
  */
 class UserManager
 {
-    private $db;
-
     function __construct()
     {
-        if (!isset($_SESSION['user']))
+        if (!isset($_SESSION['user'])) {
             $_SESSION['user'] = null;
-
-        $this->db = Utility::get_ezMysql();
+        }
     }
 
     public function debug()
     {
         $this->is_logged() ? print_r($_SESSION['user']) : print_r("Nobody");
-    }
-
-    private function check_db()
-    {
-        if ($this->db == null)
-            return false;
-
-        $query = "SHOW TABLES";
-        $rows = $this->db->get_results($query, ARRAY_N);
-        //print_r($rows);
-        if ($rows == null)
-            return false;
-
-        foreach ($rows as $row) {
-            //echo $row[0];
-            if ($row[0] == "users")
-                return true;
-        }
-
-        return false;
     }
 
     /**
@@ -111,22 +88,17 @@ class UserManager
      */
     public function login($cert)
     {
-        if (!$this->check_db())
-            return null;
-
         $cert['username'] = $this->db->escape($cert['username']);
         $cert['password'] = md5($cert['password']);
-        $query = "SELECT * FROM `users` WHERE username='" . $cert['username'] . "' AND password='" . $cert['password'] . "'";
-        //echo $query;
-        $row = $this->db->get_results($query);
-        if (count($row) == 1) {
-            $row = $row[0];
-            $user = new User();
-            $user->id = $row->id;
-            $user->name = $row->username;
-            $user->permission = $row->permission;
-            $_SESSION['user'] = $user;
-        }
+
+//        if (count($row) == 1) {
+//            $row = $row[0];
+//            $user = new User();
+//            $user->id = $row->id;
+//            $user->name = $row->username;
+//            $user->permission = $row->permission;
+//            $_SESSION['user'] = $user;
+//        }
 
         return $this->get_user();
     }
@@ -138,50 +110,44 @@ class UserManager
 
     public function get_users_by_permission($permission, $permission_str = false)
     {
-        if (!is_numeric($permission))
+        if (!is_numeric($permission)) {
             return null;
-
-        $query = "SELECT id, username, permission FROM `users` WHERE permission<='" . $permission . "'";
-        //echo $query;
-        $rows = $this->db->get_results($query);
-
-        if ($permission_str) {
-            foreach ($rows as $row) {
-                if ($row->permission == User::$ROOT)
-                    $row->permission = "Root";
-                else if ($row->permission == User::$ADMIN)
-                    $row->permission = "Administrator";
-                else if ($row->permission == User::$USER)
-                    $row->permission = "User";
-                else if ($row->permission == User::$NOBODY)
-                    $row->permission = "Everyone";
-            }
         }
 
-        return $rows;
+//        if ($permission_str) {
+//            foreach ($rows as $row) {
+//                if ($row->permission == User::$ROOT)
+//                    $row->permission = "Root";
+//                else if ($row->permission == User::$ADMIN)
+//                    $row->permission = "Administrator";
+//                else if ($row->permission == User::$USER)
+//                    $row->permission = "User";
+//                else if ($row->permission == User::$NOBODY)
+//                    $row->permission = "Everyone";
+//            }
+//        }
+
+        return null; //$rows;
     }
 
     public function get_user_by_id($id, $permission_str = false)
     {
-        if (!is_numeric($id))
+        if (!is_numeric($id)) {
             return null;
-
-        $query = "SELECT id, username, permission FROM `users` WHERE id='" . $id . "'";
-        //echo $query;
-        $row = $this->db->get_results($query);
-
-        if ($permission_str) {
-            if ($row->permission == User::$ROOT)
-                $row->permission = "Root";
-            else if ($row->permission == User::$ADMIN)
-                $row->permission = "Administrator";
-            else if ($row->permission == User::$USER)
-                $row->permission = "User";
-            else if ($row->permission == User::$NOBODY)
-                $row->permission = "Everyone";
         }
 
-        return $row;
+//        if ($permission_str) {
+//            if ($row->permission == User::$ROOT)
+//                $row->permission = "Root";
+//            else if ($row->permission == User::$ADMIN)
+//                $row->permission = "Administrator";
+//            else if ($row->permission == User::$USER)
+//                $row->permission = "User";
+//            else if ($row->permission == User::$NOBODY)
+//                $row->permission = "Everyone";
+//        }
+
+        return null; //$row;
     }
 
     public function add_user($info)

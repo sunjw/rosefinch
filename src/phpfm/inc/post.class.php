@@ -5,7 +5,6 @@ require_once "gettext.inc.php";
 require_once "utility.class.php";
 require_once "clipboard.class.php";
 require_once "messageboard.class.php";
-require_once "usermng.class.php";
 require_once "../log/log.func.php";
 
 /**
@@ -19,7 +18,6 @@ class Post
     private $files_base_dir;
     private $messageboard;
     private $clipboard;
-    private $user_manager;
     private $oper;
 
     function __construct($oper)
@@ -27,7 +25,6 @@ class Post
         $this->files_base_dir = Utility::get_file_base_dir();//$_SESSION['base_dir'];
         $this->messageboard = Utility::get_messageboard();
         $this->clipboard = Utility::get_clipboard(false);
-        $this->user_manager = Utility::get_usermng();
         $this->oper = $oper;
     }
 
@@ -55,27 +52,6 @@ class Post
                 break;
             case "upload":
                 $this->post_upload();
-                break;
-            case "login":
-                $this->post_login();
-                break;
-            case "logout":
-                $this->post_logout();
-                break;
-            case "userlist":
-                $this->user_list();
-                break;
-            case "adduser":
-                $this->add_user();
-                break;
-            case "deluser":
-                $this->delete_user();
-                break;
-            case "modiuser":
-                $this->modify_user();
-                break;
-            case "changepswd":
-                $this->change_password();
                 break;
         }
     }
@@ -363,153 +339,6 @@ class Post
             echo "ok";
         else
             Utility::redirct_after_oper(false, 1);
-    }
-
-    /**
-     * 登录
-     */
-    private function post_login()
-    {
-        $cert = array();
-        $cert['username'] = post_query('username');
-        $cert['password'] = post_query('password');
-        $this->user_manager->login($cert);
-
-        if ($this->user_manager->is_logged())
-            $this->messageboard->set_message(_("Login succeed."), 1);
-        else
-            $this->messageboard->set_message(_("Login failed."), 2);
-
-        Utility::redirct_after_oper(false, 1);
-    }
-
-    /**
-     * 登出
-     */
-    private function post_logout()
-    {
-        $this->user_manager->logout();
-        $this->messageboard->set_message(_("Logout."), 1);
-
-        Utility::redirct_after_oper(false, 1);
-    }
-
-    private function check_permission($target_permission)
-    {
-        $user = $this->user_manager->get_user();
-        $permission = $user->permission;
-        return (is_numeric($target_permission) && $permission >= $target_permission);
-    }
-
-    /**
-     * 列出用户
-     * 当前用户必须是可管理的，并且只列出当前级别或更低的用户
-     */
-    private function user_list()
-    {
-        $ret = array();
-
-        if (Utility::allow_to_admin()) {
-            $user = $this->user_manager->get_user();
-            $permission = $user->permission;
-            //print_r($user);
-
-            $ret = $this->user_manager->get_users_by_permission($permission, true);
-        }
-
-        echo json_encode($ret);
-    }
-
-    /**
-     * 添加用户
-     * 只能添加比当前用户级别同等或更低的
-     */
-    private function add_user()
-    {
-        if (Utility::allow_to_admin() && $this->check_permission(post_query("permission"))) {
-            $info = array('username' => post_query("username"),
-                'password' => md5(post_query("password")),
-                'permission' => post_query("permission"));
-            $result = $this->user_manager->add_user($info);
-            if ($result) {
-                $this->messageboard->set_message(_("Adding user succeed."), 1);
-            } else {
-                $this->messageboard->set_message(_("Adding user failed."), 2);
-            }
-        } else
-            $this->messageboard->set_message(_("Adding user failed."), 2);
-
-        Utility::redirct_after_oper(false, 1);
-    }
-
-    /**
-     * 删除用户
-     * 只能删除比当前用户级别同等或更低的
-     */
-    private function delete_user()
-    {
-        if (Utility::allow_to_admin()) {
-            $del_id = post_query("id");
-            if (is_numeric($del_id)) {
-                $user = $this->user_manager->get_user_by_id($del_id);
-                //print_r($user[0]);
-                if ($this->check_permission($user[0]->permission)) {
-                    if ($this->user_manager->delete_user($del_id)) {
-                        $this->messageboard->set_message(_("Deleting user succeed."), 1);
-                        Utility::redirct_after_oper(false, 1);
-                        return;
-                    }
-                }
-            }
-        }
-
-        $this->messageboard->set_message(_("Deleting user failed."), 2);
-        Utility::redirct_after_oper(false, 1);
-    }
-
-    /**
-     * 修改用户
-     * 只能修改比当前用户级别同等或更低的
-     */
-    private function modify_user()
-    {
-        if (Utility::allow_to_admin()) {
-            $modify_id = post_query("id");
-            if (is_numeric($modify_id)) {
-                if ($this->check_permission(post_query("permission"))) {
-                    $info = array('id' => $modify_id,
-                        'username' => post_query("username"),
-                        'permission' => post_query("permission"));
-                    if ($this->user_manager->modify_user($info)) {
-                        $this->messageboard->set_message(_("Modifing user succeed."), 1);
-                        Utility::redirct_after_oper(false, 1);
-                        return;
-                    }
-                }
-            }
-        }
-
-        $this->messageboard->set_message(_("Modifing user failed."), 2);
-        Utility::redirct_after_oper(false, 1);
-    }
-
-    private function change_password()
-    {
-        $old = md5(post_query("oldpswd"));
-        $new = md5(post_query("newpswd"));
-        $repeat = md5(post_query("repeat"));
-        if ($new == $repeat) {
-            $info = array('old' => $old, 'new' => $new);
-            if ($this->user_manager->change_password($info)) {
-                $this->messageboard->set_message(_("Changing password succeed."), 1);
-            } else {
-                $this->messageboard->set_message(_("Changing password failed."), 2);
-            }
-        } else {
-            $this->messageboard->set_message(_("New password and repeat are different."), 2);
-        }
-
-        Utility::redirct_after_oper(false, 1);
     }
 
 }

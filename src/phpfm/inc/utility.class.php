@@ -4,7 +4,6 @@ require_once "common.inc.php";
 require_once "clipboard.class.php";
 require_once "messageboard.class.php";
 require_once "history.class.php";
-require_once "usermng.class.php";
 
 /**
  * Utility Class
@@ -623,40 +622,14 @@ class Utility
         return $history;
     }
 
-    /**
-     * Read UserManager from SESSION.
-     * @param bool $need_new create new when not exists, default is true
-     * @return UserManager user or null
-     */
-    public static function get_usermng($need_new = true)
-    {
-        if ($need_new) {
-            $usermgn = isset($_SESSION['usermgn']) ? $_SESSION['usermgn'] : new UserManager();
-            $_SESSION['usermgn'] = $usermgn; // put UserManager into SESSION.
-        } else {
-            $usermgn = isset($_SESSION['usermgn']) ? $_SESSION['usermgn'] : null;
-        }
-
-        return $usermgn;
-    }
-
     private static function allow_to($do)
     {
-        if (!USERMNG)
+        if (!USERMNG) {
             return true;
+        }
 
         $modify_permission = $do;
         if ($modify_permission == User::$NOBODY) {
-            return true;
-        }
-
-        $user_manager = Utility::get_usermng();
-        if (!$user_manager->is_logged()) {
-            return false;
-        }
-
-        $user = $user_manager->get_user();
-        if ($user->permission >= $modify_permission) {
             return true;
         }
 
@@ -706,12 +679,6 @@ class Utility
     {
         if (is_mobile_browser() || !USERMNG) {
             return '';
-        }
-        $user = Utility::get_usermng()->get_user();
-        if ($user == null) {
-            echo _("Welcome") . ' ' . _("Guest") . '&nbsp;|&nbsp;<a id="linkLogin" href="javascript:;">' . _("Login") . '</a>';
-        } else {
-            echo _("Welcome") . ' ' . $user->name . '&nbsp;|&nbsp;<a id="linkLogout" href="javascript:;">' . _("Logout") . '</a>';;
         }
     }
 
