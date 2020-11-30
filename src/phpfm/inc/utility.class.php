@@ -743,7 +743,6 @@ class Utility
                 <ul>
                     <li class="li-item"><a href="../"><?php echo htmlentities_utf8(_(TITLENAME)); ?></a></li>
                     <li class="li-item current"><a href="setting.php"><?php echo _("Setting"); ?></a></li>
-                    <li class="li-item"><a href="../help.php"><?php echo _("Help"); ?></a></li>
                     <li class="li-item"><a href="../about.php"><?php echo _("About"); ?></a></li>
                 </ul>
                 <?php
@@ -754,8 +753,6 @@ class Utility
                                 href="index.php"><?php echo htmlentities_utf8(_(TITLENAME)); ?></a></li>
                     <li class="li-item<?php $page == "setting" ? print(" current") : print(""); ?>"><a
                                 href="admin/setting.php"><?php echo _("Setting"); ?></a></li>
-                    <li class="li-item<?php $page == "help" ? print(" current") : print(""); ?>"><a
-                                href="help.php"><?php echo _("Help"); ?></a></li>
                     <li class="li-item<?php $page == "about" ? print(" current") : print(""); ?>"><a
                                 href="about.php"><?php echo _("About"); ?></a></li>
                 </ul>
