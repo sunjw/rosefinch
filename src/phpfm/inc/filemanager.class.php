@@ -7,7 +7,6 @@ require_once "sort.inc.php";
 require_once "clipboard.class.php";
 require_once "messageboard.class.php";
 require_once "history.class.php";
-require_once "search.class.php";
 require_once "usermng.class.php";
 require_once "utility.class.php";
 

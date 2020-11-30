@@ -607,29 +607,6 @@ class Utility
     }
 
     /**
-     * Get db connection.
-     * @return ezSQL_mysql db object
-     */
-    public static function get_ezMysql()
-    {
-        // Initialise database object and establish a connection
-        // at the same time - db_user / db_password / db_name / db_host
-        if (!defined('DB_USER') || !defined('DB_PSWD') || !defined('DB_NAME') || !defined('DB_HOST')) {
-            return null;
-        }
-        $db = new ezSQL_mysqli(DB_USER, DB_PSWD, DB_NAME, DB_HOST);
-
-        $db->hide_errors();
-
-        $ret = $db->query("set names 'utf8'");
-        if ((!is_numeric($ret) && !$ret)) {
-            return null;
-        }
-
-        return $db;
-    }
-
-    /**
      * Read History from SESSION.
      * @param bool $need_new create new when not exists, default is true
      * @return History history or null

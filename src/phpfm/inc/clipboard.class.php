@@ -5,7 +5,6 @@ require_once "common.inc.php";
 require_once "gettext.inc.php";
 require_once "messageboard.class.php";
 require_once "utility.class.php";
-require_once "search.class.php";
 
 //@session_start();
 
