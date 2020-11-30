@@ -1,5 +1,5 @@
 <?php
-require_once dirname(__FILE__) . '\..\vendor\autoload.php'; // absolute path.
+require_once dirname(__FILE__) . '/../vendor/autoload.php'; // absolute path.
 
 use Monolog\Logger;
 use Monolog\Handler\StreamHandler;
