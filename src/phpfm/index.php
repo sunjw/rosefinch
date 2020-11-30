@@ -11,22 +11,14 @@ require_once "log/log.func.php";
 
 get_logger()->info("index.php visited.");
 
-$search_mode = false;
-if (get_query("q") != "") {
-    $search_mode = true;
-}
-
-$fileManager = new FileManager($search_mode, "index.php", "index.php");
+$fileManager = new FileManager("index.php", "index.php");
 ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
     <title>
         <?php
-        if(!$search_mode)
-            echo $fileManager->title()." - ".$fileManager->get_current_dir();
-        else
-            echo $fileManager->title()." - "._("Search")." - ".$fileManager->get_search();
+        echo $fileManager->title()." - ".$fileManager->get_current_dir();
         ?>
     </title>
     <meta http-equiv="Content-type" content="text/html;charset=UTF-8" />
@@ -49,7 +41,7 @@ $fileManager = new FileManager($search_mode, "index.php", "index.php");
     <div id="content">
         <?php
         $fileManager->display_toolbar();
-        $fileManager->display_full_path(); // 显示全路径
+        $fileManager->display_full_path(); // display full path.
         $fileManager->display_main_view();
 
         // 准备部分

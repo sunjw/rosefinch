@@ -18,9 +18,6 @@ define("TOOLBAR_PARAM", "toolbar"); // 视图模式的查询参数
 // 定义 gettext 参数
 define("DOMAIN", "phpfm"); // 不要修改
 
-// 定义搜索状态
-define("SEARCH_PARAM", "q");
-
 /**
  * 将指定字符串从<strong>定义的平台字符串</strong>转换成 UTF-8
  * @param $str 目标字符串

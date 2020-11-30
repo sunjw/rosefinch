@@ -21,35 +21,32 @@ require_once "utility.class.php";
  */
 class FileManager
 {
-    private $request_sub_dir; // 请求的子目录，一直是 UTF-8
-    private $request_dir; // 请求目录对应的系统绝对路径
-    private $sort_type; // 排序方式
-    private $order; // 排序方向
-    private $view_type; // 视图模式
+    private $request_sub_dir; // request sub directory path, UTF-8.
+    private $request_dir; // request directory absolute path.
+    private $sort_type; // sort.
+    private $order; // order.
+    private $view_type; // view type.
     private $toolbar_type;
     private $is_mobile;
 
-    private $sort; // 文件排序代号
+    private $sort; // sort by.
     private $dsort;
     private $query_str;
 
     private $fstats;
     private $dstats;
 
-    private $is_search;
-    private $browser_page; // 浏览页面名称 默认为 index.php
-    private $search_page; // 搜索页面名称 默认为 search.php
-    private $search_query;
+    private $browser_page; // browser page, default is index.php
 
     private $clipboard;
     private $messageboard;
     private $history;
     private $user_manager;
 
-    function __construct($is_search = false, $browser_page = "index.php", $search_page = "search.php")
+    function __construct($browser_page = "index.php", $search_page = "search.php")
     {
         /*
-         * 内部字符串全部使用 UTF-8 编码
+         * all string are UTF-8!!!
          */
         set_response_utf8();
 
@@ -60,7 +57,6 @@ class FileManager
         $this->history = Utility::get_history();
         $this->user_manager = Utility::get_usermng();
 
-        $this->is_search = $is_search;
         $this->browser_page = $browser_page;
         $this->search_page = $search_page;
         $this->search_query = "";
@@ -75,10 +71,11 @@ class FileManager
         //echo $this->request_sub_dir;
 
         $this->request_dir = $this->prepare_request_dir($files_base_dir, $this->request_sub_dir);
-        if (strlen(convert_toutf8($this->request_dir)) == strlen($files_base_dir))
+        if (strlen(convert_toutf8($this->request_dir)) == strlen($files_base_dir)) {
             $this->request_sub_dir = "";
-        else
+        } else {
             $this->request_sub_dir = substr(convert_toutf8($this->request_dir), strlen($files_base_dir));
+        }
         //echo $this->request_sub_dir;
 
         $this->sort_type = get_query(SORT_PARAM);
@@ -144,24 +141,16 @@ class FileManager
 
         $this->query_str = "s=" . $this->sort_type . "&o=" . $this->order . "&view=" . $this->view_type;
 
-        if (!$this->is_search) {
-            $this->init_browser();
-        } else {
-            $this->init_search();
-        }
+        $this->init_browser();
 
-        if (!isset($_GET['h'])) // 如果有 h，表示是后退或前进来的
-        {
-            if (!$this->is_search) {
-                $this->history->push($this->request_sub_dir);
-            } else {
-                $this->history->push($this->request_sub_dir, $this->search_query);
-            }
+        if (!isset($_GET['h'])) {
+            // h means visit by back/forward.
+            $this->history->push($this->request_sub_dir);
         }
     }
 
     /**
-     * 初始化浏览页面
+     * Init browser page.
      */
     private function init_browser()
     {
@@ -174,31 +163,8 @@ class FileManager
     }
 
     /**
-     * 初始化搜索页面
-     */
-    private function init_search()
-    {
-        if (!Utility::allow_to_browser()) {
-            $this->messageboard->set_message(_("Please login to search files."), 2);
-            return;
-        }
-        $this->search_query = $this->get_search_query();
-        if ($this->search_query == "") {
-            redirect($this->browser_page . "?dir=" . $this->request_sub_dir);
-        }
-
-        $search = new Search();
-
-        $rows = $search->query($this->search_query, $this->request_sub_dir, $this->sort_type);
-        //print_r($rows);
-
-        $this->prepare_search_rows($rows);
-
-    }
-
-    /**
-     * title 部分
-     * @return title 字符串
+     * Title string.
+     * @return string title string
      */
     public function title()
     {
@@ -206,8 +172,8 @@ class FileManager
     }
 
     /**
-     * title 部分的 HTML
-     * @return title 字符串
+     * Title HTML.
+     * @return string title HTML
      */
     public function title_html()
     {
@@ -215,25 +181,7 @@ class FileManager
     }
 
     /**
-     * 返回搜索关键字
-     * @return 字符串
-     */
-    public function get_search()
-    {
-        return $this->search_query;
-    }
-
-    /**
-     * 返回搜索关键字的 HTML
-     * @return 字符串
-     */
-    public function get_search_html()
-    {
-        return htmlentities_utf8($this->get_search());
-    }
-
-    /**
-     * 需要载入的 css 和 js 文件 HTML 代码
+     * HTML include, css and js.
      */
     public function html_include_files($debug = false)
     {
@@ -267,8 +215,8 @@ class FileManager
     }
 
     /**
-     * 获得当前路径
-     * @return 当前路径
+     * Get current path.
+     * @return string current path
      */
     public function get_current_path()
     {
@@ -276,8 +224,8 @@ class FileManager
     }
 
     /**
-     * 获得当前目录
-     * @return 当前目录
+     * Get current directory.
+     * @return string current directory
      */
     public function get_current_dir()
     {
@@ -285,24 +233,25 @@ class FileManager
         $temp = $this->request_sub_dir;
         $temp = erase_last_slash($this->request_sub_dir);
 
-        if ($temp == "")
+        if ($temp == "") {
             $current_dir = "Root";
-        else
+        } else {
             $current_dir = get_basename($temp);
+        }
 
         return $current_dir;
     }
 
     /**
-     * 在 $_GET 中获得所请求的子目录，并适当的整理格式
-     * @return $request_sub_dir
+     * Get request sub directory in $_GET.
+     * @return string requested sub directory
      */
     private function get_request_subdir()
     {
         $request_sub_dir = rawurldecode(get_query(DIR_PARAM));
 
-        if (false !== strpos($request_sub_dir, "..")) // 过滤 ".."
-        {
+        if (false !== strpos($request_sub_dir, "..")) {
+            // filter '..'
             $request_sub_dir = "";
         }
 
@@ -316,39 +265,39 @@ class FileManager
     }
 
     /**
-     * 准备 $request_dir
-     * @param $files_base_dir 文件基路径，<strong>以 UTF-8 传入</strong>
-     * @param $request_sub_dir 请求的子目录，<strong>该字符串会被转换成 UTF-8 编码</strong>
-     * @return $request_dir
+     * Prepare $request_dir.
+     * @param string $files_base_dir file base directory, by UTF-8.
+     * @param string $request_sub_dir request sub directory, by UTF-8.
+     * @return string $request_dir
      */
     private function prepare_request_dir($files_base_dir, $request_sub_dir)
     {
         //echo $request_sub_dir;
         $files_base_dir_plat = convert_toplat($files_base_dir);
-        $request_dir = $files_base_dir_plat . $request_sub_dir; // 获得请求目录路径
+        $request_dir = $files_base_dir_plat . $request_sub_dir; // get request directory.
         if (PLAT_CHARSET != "UTF-8") {
             if (!file_exists($request_dir)) {
-                // 不存在，试试转化成本地编码
-                $request_dir = $files_base_dir_plat . convert_toplat($request_sub_dir); // Windows 上可能要转换成 gb2312
+                // not exists, try to convert to platform encoding.
+                $request_dir = $files_base_dir_plat . convert_toplat($request_sub_dir); // maybe GB2312 on Windows.
                 if (!file_exists($request_dir)) {
                     $request_dir = $files_base_dir_plat;
                     //$request_sub_dir = "";
                 }
             } else {
-                // 存在说明就是 gb2312 编码的，要换成 utf-8
+                // exits, means GB2312, need convert to UTF-8.
                 //$request_sub_dir = convert_gbtoutf8($request_sub_dir);
             }
         } else if (PLAT_CHARSET == "UTF-8") {
             if (!file_exists($request_dir)) {
-                // 不存在，试试转化成 UTF-8  编码
+                // not exists, try to convert to UTF-8.
                 $request_sub_dir = convert_gbtoutf8($request_sub_dir);
-                $request_dir = $files_base_dir_plat . $request_sub_dir; // Linux 上可能要转换成 utf-8
+                $request_dir = $files_base_dir_plat . $request_sub_dir; // maybe UTF-8 on Unix.
                 if (!file_exists($request_dir)) {
                     $request_dir = $files_base_dir_plat;
                     //$request_sub_dir = "";
                 }
             } else {
-                // 存在说明就是 utf-8 编码的，什么都不用做
+                // exits, means UTF-8, done.
             }
         }
 
@@ -356,15 +305,10 @@ class FileManager
         return $request_dir;
     }
 
-    private function get_search_query()
-    {
-        return get_query(SEARCH_PARAM);
-    }
-
     /**
-     * Get sorted  file list of path.
-     * @param $path path
-     * @param $sort sort order<br />
+     * Get sorted file list of path.
+     * @param string $path path
+     * @param number $sort sort order<br />
      * 1 filename<br />
      * 2 size<br />
      * 3 type<br />
@@ -464,14 +408,14 @@ class FileManager
     }
 
     /**
-     * 获得指定路径的已排序文件夹列表
-     * @param $path 路径
-     * @param $sort 排序方式<br />
-     * 1 按文件夹名<br />
-     * 2 按修改时间<br />
-     * -1 按文件夹名逆序<br />
-     * -2 按修改时间逆序
-     * @return array 文件夹信息数组
+     * Get sorted directory list.
+     * @param string $path path
+     * @param number $sort sort order<br />
+     * 1 filename<br />
+     * 2 modified time<br />
+     * -1 filename reverse<br />
+     * -2 modified time reverse
+     * @return array directory info array
      */
     private function get_dirs_list($path, $sort = 1)
     {
@@ -480,41 +424,44 @@ class FileManager
             //echo "List of dirs:<br />";
             while (false !== ($dir_name = @readdir($handle))) {
                 //echo convert_toutf8($file)."<br />";
-                if ($dir_name != "." && $dir_name != "..") // 过滤掉.和 ..
-                {
-                    $full_dir_path = $path . $dir_name;
-                    if (is_dir($full_dir_path)) {
-                        //echo convert_toutf8($full_dir_path)."<br />";
-                        $dstat = stat($full_dir_path);
-                        $dir = array();
-                        $dir['name'] = htmlspecialchars(convert_toutf8($dir_name));
-                        $dir['path'] = convert_toutf8($full_dir_path);
-                        $dir['stat'] = $dstat;
-                        $dir['type'] = "dir";
+                if ($dir_name == "." || $dir_name == "..") {
+                    // filter "." and "..".
+                    continue;
+                }
 
-                        if ($this->filter_item($dir))
-                            continue;
+                $full_dir_path = $path . $dir_name;
+                if (is_dir($full_dir_path)) {
+                    //echo convert_toutf8($full_dir_path)."<br />";
+                    $dstat = stat($full_dir_path);
+                    $dir = array();
+                    $dir['name'] = htmlspecialchars(convert_toutf8($dir_name));
+                    $dir['path'] = convert_toutf8($full_dir_path);
+                    $dir['stat'] = $dstat;
+                    $dir['type'] = "dir";
 
-                        $a_href = $this->browser_page . "?" .
-                            $this->query_str . "&dir=" .
-                            rawurlencode($this->request_sub_dir .
-                                $dir['name']);
-
-                        $item_path = $this->request_sub_dir . $dir['name'];
-
-                        $dir['size_str'] = "&nbsp;";
-                        $dir['type_html'] = _("Folder");
-                        $dir['a_href'] = $a_href;
-                        $dir['item_path'] = $item_path;
-
-                        array_push($dirs, $dir);
+                    if ($this->filter_item($dir)) {
+                        continue;
                     }
+
+                    $a_href = $this->browser_page . "?" .
+                        $this->query_str . "&dir=" .
+                        rawurlencode($this->request_sub_dir .
+                            $dir['name']);
+
+                    $item_path = $this->request_sub_dir . $dir['name'];
+
+                    $dir['size_str'] = "&nbsp;";
+                    $dir['type_html'] = _("Folder");
+                    $dir['a_href'] = $a_href;
+                    $dir['item_path'] = $item_path;
+
+                    array_push($dirs, $dir);
                 }
             }
 
             closedir($handle);
 
-            // 排序
+            // sort.
             $cmp_function = "cmp_name";
             switch ($sort) {
                 case 1:
@@ -535,130 +482,28 @@ class FileManager
         return $dirs;
     }
 
-    private function prepare_search_rows($rows)
-    {
-        $dirs = array();
-        $files = array();
-
-        if ($rows != null) {
-
-            foreach ($rows as $row) {
-                if ($row->type == "dir") {
-                    $dir = array();
-                    $dir['name'] = $row->name;
-                    $dir['stat']['mtime'] = timestrtotime($row->modified);
-                    $dir['type'] = "dir";
-
-                    $a_href = $this->browser_page . "?" .
-                        $this->query_str . "&dir=" .
-                        rawurlencode($row->path);
-
-                    $dir['size_str'] = "&nbsp;";
-                    $dir['type_html'] = _("Folder");
-                    $dir['a_href'] = $a_href;
-                    $dir['item_path'] = $row->path;
-
-                    array_push($dirs, $dir);
-                } else {
-                    $file = array();
-                    $file['name'] = $row->name;
-                    $file['type'] = $row->type;
-                    $file['stat']['mtime'] = timestrtotime($row->modified);
-                    $file['stat']['size'] = $row->size;
-
-                    // 处理大小
-                    $size = $file['stat']['size'];
-                    $size = Utility::format_size($size);
-                    //echo $request_sub_dir;
-
-                    //$a_href = FILES_DIR."/".$this->request_sub_dir.$file['name'];
-                    $a_href = "func/download.func.php?file=" . rawurlencode($row->path);
-                    $type_html = "";
-                    if ($file['type'] == "")
-                        $type_html = _("File");
-                    else
-                        $type_html = $file['type'];
-
-                    $file['size_str'] = $size;
-                    $file['type_html'] = $type_html;
-                    $file['a_href'] = $a_href;
-                    $file['item_path'] = $row->path;
-
-                    array_push($files, $file);
-                }
-            }
-        }
-
-        // 排序
-        $cmp_function = "cmp_name";
-        switch ($this->dsort) {
-            case 1:
-                $cmp_function = "cmp_name";
-                break;
-            case 2:
-                $cmp_function = "cmp_mtime";
-                break;
-            case -1:
-                $cmp_function = "rcmp_name";
-                break;
-            case -2:
-                $cmp_function = "rcmp_mtime";
-                break;
-        }
-        usort($dirs, $cmp_function);
-
-        switch ($this->sort) {
-            case 1:
-                $cmp_function = "cmp_name";
-                break;
-            case 2:
-                $cmp_function = "cmp_size";
-                break;
-            case 3:
-                $cmp_function = "cmp_type";
-                break;
-            case 4:
-                $cmp_function = "cmp_mtime";
-                break;
-            case -1:
-                $cmp_function = "rcmp_name";
-                break;
-            case -2:
-                $cmp_function = "rcmp_size";
-                break;
-            case -3:
-                $cmp_function = "rcmp_type";
-                break;
-            case -4:
-                $cmp_function = "rcmp_mtime";
-                break;
-        }
-        usort($files, $cmp_function);
-
-        $this->dstats = $dirs;
-        $this->fstats = $files;
-    }
-
     /**
-     * 判断项目是否应被过滤
-     * @param $item 项目(目录或文件)
-     * @return true 需要过滤，false 无需过滤
+     * Filter item.
+     * @param item $item
+     * @return bool true to filter，false not
      */
     private function filter_item($item)
     {
-        // 过滤隐藏文件
-        if (substr($item['name'], 0, 1) == '.') // linux 风格
+        // Filter hidden files.
+        if (substr($item['name'], 0, 1) == '.') {
+            // Unix style.
             return true;
+        }
 
-        // 其他需要过滤内容
+        // Other need to filter.
 
         return false;
     }
 
     /**
-     * 获得上级文件夹路径
-     * @param $request_sub_dir
-     * @return unknown_type
+     * Get upper directory path.
+     * @param string $request_sub_dir current directory path
+     * @return string upper directory path
      */
     private function get_parent_dir($request_sub_dir)
     {
@@ -680,7 +525,7 @@ class FileManager
     }
 
     /**
-     * 显示当前的子目录路径
+     * Display current directory full path.
      */
     public function display_full_path()
     {
@@ -721,7 +566,6 @@ class FileManager
                         if (!$this->is_mobile) {
                             $this->display_sub_menus($dir_str, $sub_dirs[$i + 1]);
                         }
-
                         ?>
                     </div>
                     <?php
@@ -729,15 +573,14 @@ class FileManager
                 ?>
             </div>
             <div class="clear"></div>
-
         </div>
         <?php
     }
 
     /**
-     * 填充子目录菜单
-     * @param $sub_dir_str 至当前目录的路径
-     * @param $next_in_path 下一个在路径中的目录名
+     * Fill sub directory menu.
+     * @param string $sub_dir_str directory path to current
+     * @param string $next_in_path next item in path
      */
     private function display_sub_menus($sub_dir_str, $next_in_path = "")
     {
@@ -757,10 +600,11 @@ class FileManager
                                     <a href="<?php echo $this->browser_page . "?" . $this->query_str; ?>&dir=<?php echo rawurlencode($sub_dir_str . $sub_dstat['name']); ?>"
                                        title="<?php echo $sub_dstat['name']; ?>">
                                         <?php
-                                        if ($sub_dstat['name'] == $next_in_path)
+                                        if ($sub_dstat['name'] == $next_in_path) {
                                             printf("<strong>%s</strong>", str_replace(" ", "&nbsp;", $sub_dstat['name']));
-                                        else
+                                        } else {
                                             printf(str_replace(" ", "&nbsp;", $sub_dstat['name']));
+                                        }
                                         ?>
                                     </a>
                                 </li>
@@ -776,31 +620,29 @@ class FileManager
     }
 
     /**
-     * 显示工具栏
+     * Display toolbar.
      */
     public function display_toolbar()
     {
         $this_page = $this->is_search ? $this->search_page : $this->browser_page;
 
-        // 准备基本图标
+        // Prepare basic icons.
         $this->prepare_basic_funcs($query_str, $up, $up_img, $new_folder_img, $upload_img);
 
-        // 准备图标模式和清除搜索
+        // Prepare view mode icon.
         $detail_view_url = $this_page . "?" . $query_str .
             "&dir=" . rawurlencode($this->request_sub_dir) . "&view=detail";
         $largeicon_view_url = $this_page . "?" . $query_str .
             "&dir=" . rawurlencode($this->request_sub_dir) . "&view=largeicon";
-        $clean_search_url = $this->browser_page . "?" . $this->query_str .
-            "&dir=" . rawurlencode($this->request_sub_dir);
 
-        // 准备粘贴
+        // Prepare paste.
         $this->prepare_paste_func($paste_img_src, $paste_class);
 
-        // 准备历史
+        // Prepare history.
         $this->prepare_history_funcs($back_url, $back_class, $forward_url, $forward_class);
         $history_items = $this->render_history_items();
 
-        // 准备 more
+        // Prepare more
         $more_img_src = "images/toolbar-arrow-left.gif";
         $more_class = "full";
         if ($this->toolbar_type == "little") {
@@ -808,10 +650,10 @@ class FileManager
             $more_class = "little";
         }
 
-        // 准备按钮名称
+        // Prepare button name.
         $button_names = $this->prepare_buttons_name();
 
-        // 下面是工具栏的 HTML 部分
+        // Toolbar HTML.
         ?>
         <div id="toolbar">
             <div id="leftToolbar">
@@ -869,36 +711,13 @@ class FileManager
                 <?php } ?>
             </div>
             <div id="rightToolbar">
-                <?php
-                if (SEARCH) {
-                    ?>
-                    <form id="searchForm" action="<?php echo $this->search_page ?>" method="get" class="splitLeft">
-                        <input id="q" name="q" type="text" value="<?php echo $this->search_query; ?>" maxlength="255"
-                               size="10"/>
-                        <input type="hidden" name="dir" value="<?php echo $this->request_sub_dir; ?>"/>
-                        <input type="submit" value="<?php echo _("Search"); ?>" title="<?php echo _("Search"); ?>"/>
-                        <?php
-                        if ($this->is_search) {
-                            ?>
-                            <a href="<?php echo $clean_search_url; ?>"
-                               title="<?php echo $button_names['Clean Search']; ?>" class="toolbarSmallButton">
-                                <img alt="<?php echo $button_names['Clean Search']; ?>" src="images/close.png"/>
-                            </a>
-                            <?php
-                        }
-                        ?>
-                    </form>
-                    <?php
-                }
-                ?>
             </div>
         </div>
         <?php
     }
 
     /**
-     * 显示主要视图
-     * @param $display_type 显示方式
+     * Display main view.
      */
     public function display_main_view()
     {
@@ -906,7 +725,7 @@ class FileManager
         <div id="mainView">
             <?php
             if (!$this->is_mobile) {
-                // 显示列表头
+                // display header.
                 $this->display_header();
             }
 
@@ -923,7 +742,7 @@ class FileManager
     }
 
     /**
-     * 为功能准备的 HTML 内容
+     * Prepare HTML for functions.
      */
     public function display_func_pre()
     {
@@ -1034,11 +853,11 @@ class FileManager
     }
 
     /**
-     * 显示目录和文件部分
+     * Display directories and files.
      */
     private function render_main_view($items)
     {
-        // 详细视图
+        // Only detail view.
         ?>
         <ul id="detailView" class="<?php echo $this->sort_type; ?>">
             <?php
@@ -1054,14 +873,14 @@ class FileManager
                     $item['stat']['mtime']);
                 $i++;
             }
-            //$this->mark_to_20($i);
+
             ?>
         </ul>
         <?php
     }
 
     /**
-     * 显示列表头
+     * Display header.
      */
     private function display_header()
     {
@@ -1087,37 +906,37 @@ class FileManager
         }
         ?>
         <div class="header">
-			<span class="check">
-				<input id="checkSelectAll" type="checkbox" title="<?php echo _("Select All"); ?>"/>
-			</span>
+            <span class="check">
+                <input id="checkSelectAll" type="checkbox" title="<?php echo _("Select All"); ?>"/>
+            </span>
             <span class="icon">&nbsp;</span>
             <span class="name split">
-				<a href="<?php echo $this_page . "?q=" .
+                <a href="<?php echo $this_page . "?q=" .
                     $this->search_query . "&dir=" .
                     $request_sub_dir . "&s=n" .
                     "&o=" . $norder; ?>"><?php echo _("Name"); ?></a>
-			</span>
+            </span>
             <span class="size split">
-				<a href="<?php echo $this_page . "?q=" .
+                <a href="<?php echo $this_page . "?q=" .
                     $this->search_query . "&dir=" .
                     $request_sub_dir . "&s=s" .
                     "&o=" . $sorder; ?>"><?php echo _("Size"); ?></a>
-			</span>
+            </span>
             <?php
             if (!$this->is_mobile) {
                 ?>
                 <span class="type split">
-				<a href="<?php echo $this_page . "?q=" .
+                <a href="<?php echo $this_page . "?q=" .
                     $this->search_query . "&dir=" .
                     $request_sub_dir . "&s=t" .
                     "&o=" . $torder; ?>"><?php echo _("Type"); ?></a>
-			</span>
+            </span>
                 <span class="mtime split">
-				<a href="<?php echo $this_page . "?q=" .
+                <a href="<?php echo $this_page . "?q=" .
                     $this->search_query . "&dir=" .
                     $request_sub_dir . "&s=m" .
                     "&o=" . $morder; ?>"><?php echo _("Modified Time"); ?></a>
-			</span>
+            </span>
                 <?php
             }
             ?>
@@ -1136,14 +955,14 @@ class FileManager
         <script type="text/javascript">
             //<![CDATA[
             FileManager.setSortArrow(<?php echo "\"$javascript_call_arg\""; ?>, <?php echo "\"$order\""; ?>);
-            FileManager.setSearchMode(<?php echo($this->is_search ? "true" : "false"); ?>);
+            FileManager.setSearchMode(false);
             //]]>
         </script>
         <?php
     }
 
     /**
-     * 显示“向上”
+     * Display "UP".
      */
     private function display_up()
     {
@@ -1156,14 +975,13 @@ class FileManager
             <li>
                 <span class="check"></span>
                 <a href="<?php echo $up; ?>">
-					<span class="icon">
-					<img src="images/go-up.gif" alt="file icon" width="16" height="16" border="0"/>
-					</span>
+                    <span class="icon">
+                    <img src="images/go-up.gif" alt="file icon" width="16" height="16" border="0"/>
+                    </span>
                     <span class="name"><?php echo _("Up"); ?></span>
                     <span class="size">&nbsp;</span>
                     <span class="type">&nbsp;</span>
                     <span class="mtime">&nbsp;</span>
-
                 </a>
             </li>
             <?php
@@ -1171,7 +989,7 @@ class FileManager
     }
 
     /**
-     * 列表显示行
+     * Display detail view row.
      * @param $a_href
      * @param $a_title
      * @param $img_html
@@ -1190,18 +1008,19 @@ class FileManager
                                       $mtime = 0)
     {
         $class = "";
-        if (LIGHTBOX && $this->is_img_type($type))
+        if (LIGHTBOX && $this->is_img_type($type)) {
             $class = 'class="lightboxImg"';
+        }
 
-        if (AUDIOPLAYER && $this->is_audio_type($type))
+        if (AUDIOPLAYER && $this->is_audio_type($type)) {
             $class = 'class="audioPlayer"';
-
+        }
 
         ?>
         <li>
-				<span class="check">
-					<input class="inputCheck" type="checkbox" name="<?php echo $item_path; ?>"/>
-				</span>
+            <span class="check">
+                <input class="inputCheck" type="checkbox" name="<?php echo $item_path; ?>"/>
+            </span>
             <a href="<?php echo $a_href; ?>" title="<?php echo $a_title; ?>" <?php echo $class; ?>>
                 <span class="icon"><?php echo $img_html; ?></span>
                 <span class="name"><?php echo str_replace(" ", "&nbsp;", $name); ?></span>
@@ -1220,80 +1039,9 @@ class FileManager
     }
 
     /**
-     * Large Icon 显示一个项目
-     * @param $a_href
-     * @param $a_title
-     * @param $img_html
-     * @param $name
-     * @param $size
-     * @param $type
-     * @param $mtime
-     */
-    private function largeicon_view_item($item_path = "",
-                                         $a_href = "",
-                                         $a_title = "",
-                                         $img_html = "",
-                                         $name = "",
-                                         $size = "",
-                                         $type = "",
-                                         $mtime = 0)
-    {
-        $class_1 = "";
-        $class_2 = "";
-        if (LIGHTBOX && $this->is_img_type($type))
-            $class_1 = 'class="lightboxImg"';
-        if (AUDIOPLAYER && $this->is_audio_type($type)) {
-            $class_1 = 'class="audioPlayer"';
-            $class_2 = 'class="audioPlayer"';
-        }
-        ?>
-        <div class="largeIconItem">
-            <div class="firstLine">
-                <input class="inputCheck" type="checkbox" name="<?php echo $item_path; ?>"/>
-                <span class="type"><?php echo $type; ?></span>
-            </div>
-            <div class="imgLine">
-                <a href="<?php echo $a_href; ?>" title="<?php echo $a_title; ?>" <?php echo $class_1; ?>>
-                    <?php echo $img_html; ?>
-                </a>
-            </div>
-            <div class="infoLine">
-                <a href="<?php echo $a_href; ?>" title="<?php echo $a_title; ?>" <?php echo $class_2; ?>>
-                    <span class="name"><?php echo str_replace(" ", "&nbsp;", $name); ?></span>
-                </a>
-                <span class="size"><?php echo $size; ?></span>
-                <span class="mtime"><?php echo date("Y-n-j H:i", $mtime); ?></span>
-            </div>
-        </div>
-        <?php
-    }
-
-
-    /**
-     * 补齐 20
-     * @param $total 已经有的行数
-     */
-    private function mark_to_20($total)
-    {
-        $empty = "";
-        if ($this->view_type == "largeicon") {
-            $empty = '<div class="largeIconItem empty"></div>';
-        } else {
-            $empty = '<li class="empty"></li>';
-        }
-        if ($total < 20) {
-            $need = 20 - $total;
-            for ($i = 0; $i < $need; $i++) {
-
-                echo "$empty\n";
-            }
-        }
-    }
-
-    /**
-     * 根据扩展名判断是不是图片格式
-     * @param $type 扩展名
-     * @return boolean 是 true，否 false
+     * Detect image by type.
+     * @param string $type type
+     * @return boolean
      */
     private function is_img_type($type)
     {
@@ -1302,33 +1050,35 @@ class FileManager
             $type == "jpeg" ||
             $type == "bmp" ||
             $type == "png" ||
-            $type == "gif")
+            $type == "gif") {
             return true;
-        else
+        } else {
             return false;
+        }
     }
 
     /**
-     * 根据扩展名判断是不是音乐格式
-     * @param $type 扩展名
-     * @return boolean 是 true，否 false
+     * Detect music by type.
+     * @param string $type type
+     * @return boolean
      */
     private function is_audio_type($type)
     {
         $type = strtolower($type);
-        if ($type == "mp3")
+        if ($type == "mp3") {
             return true;
-        else
+        } else {
             return false;
+        }
     }
 
     /**
-     * 准备基本功能
-     * @param $query_str query string
-     * @param $up 向上地址
-     * @param $up_img 向上图标
-     * @param $new_folder_img 新建目录图标
-     * @param $upload_img 上传图标
+     * Prepare basic functions.
+     * @param string $query_str query string
+     * @param string $up UP address
+     * @param string $up_img UP icon
+     * @param string $new_folder_img new folder icon
+     * @param string $upload_img upload icon
      */
     private function prepare_basic_funcs(
         &$query_str, &$up,
@@ -1342,29 +1092,17 @@ class FileManager
         $upload_img = "images/toolbar-upload.png";
 
         //echo $request_sub_dir;
-        // 设置向上，新建目录和上传按钮状态
-        if (!$this->is_search) {
-            // 浏览模式
-            $up = $this->browser_page . "?";
-            $up .= $this->query_str;
-            $up .= ("&dir=" . rawurlencode($this->get_parent_dir($this->request_sub_dir)));
-
-        } else {
-            // 搜索模式
-            $query_str = "q=" . $this->search_query . "&" . $query_str;
-
-            $up = "javascript:;";
-
-            $up_img = "images/toolbar-up.png";
-            $new_folder_img = "images/toolbar-new-folder.png";
-            $upload_img = "images/toolbar-upload.png";
-        }
+        // Set UP, new folder and upload state.
+        // 浏览模式
+        $up = $this->browser_page . "?";
+        $up .= $this->query_str;
+        $up .= ("&dir=" . rawurlencode($this->get_parent_dir($this->request_sub_dir)));
     }
 
     /**
-     * 准备粘贴
-     * @param $paste_img 粘贴图标
-     * @param $paste_class 粘贴 class
+     * Prepare paste.
+     * @param string $paste_img paste icon
+     * @param string $paste_class paste css class
      */
     private function prepare_paste_func(&$paste_img, &$paste_class)
     {
@@ -1377,11 +1115,11 @@ class FileManager
     }
 
     /**
-     * 准备历史功能状态
-     * @param $back_url 后退地址
-     * @param $back_class 后退 class
-     * @param $forward_url 前进地址
-     * @param $forward_class 前进 class
+     * Prepare history.
+     * @param string $back_url back url
+     * @param string $back_class back css class
+     * @param string $forward_url forward url
+     * @param string $forward_class forward css class
      */
     private function prepare_history_funcs(
         &$back_url, &$back_class,
@@ -1402,7 +1140,7 @@ class FileManager
     }
 
     /**
-     * 将历史转变成 HTML
+     * Render history to HTML.
      * @return string
      */
     private function render_history_items()
@@ -1412,24 +1150,28 @@ class FileManager
         $history_items = "";
         $i = 0;
         foreach ($history as $item) {
-            if ($i >= $this->history->get_length())
+            if ($i >= $this->history->get_length()) {
                 break;
+            }
 
             $url = "func/history.func.php?action=f&sp=" . $this->search_page . "&step=" . ($i - $history_current);
-            if ($i != $history_current)
+            if ($i != $history_current) {
                 $history_items .= ('<li><a href="' . $url . '">');
-            else
+            } else {
                 $history_items .= ('<li class="current">');
+            }
 
-            if ($item->is_search())
+            if ($item->is_search()) {
                 $history_items .= (_("Search") . ' ' . $item->to_string());
-            else
+            } else {
                 $history_items .= ($item->to_string());
+            }
 
-            if ($i != $history_current)
+            if ($i != $history_current) {
                 $history_items .= '</a></li>';
-            else
+            } else {
                 $history_items .= '</li>';
+            }
 
             ++$i;
         }
@@ -1438,7 +1180,7 @@ class FileManager
     }
 
     /**
-     * 设置按钮的 title
+     * Set button title.
      * @return Array
      */
     private function prepare_buttons_name()
@@ -1462,8 +1204,8 @@ class FileManager
     }
 
     /**
-     * 用户是否登录
-     * 直接调用 UserManager->is_logged()
+     * Is user log in.
+     * Call UserManager->is_logged().
      */
     private function is_logged()
     {
@@ -1471,8 +1213,8 @@ class FileManager
     }
 
     /**
-     * 获得用户对象
-     * 直接调用 UserManager->get_user()
+     * Get user.
+     * Call UserManager->get_user()
      */
     private function get_user()
     {
