@@ -1087,7 +1087,6 @@ class FileManager
 
         //echo $request_sub_dir;
         // Set UP, new folder and upload state.
-        // 浏览模式
         $up = $this->browser_page . "?";
         $up .= $this->query_str;
         $up .= ("&dir=" . rawurlencode($this->get_parent_dir($this->request_sub_dir)));
