@@ -54,11 +54,6 @@ class ClipBoard
         $messageboard = Utility::get_messageboard();
         $message = "";
 
-        $search = null;
-        if (SEARCH) {
-            $search = new Search();
-        }
-
         $files_base_dir = $_SESSION['base_dir'];
         //$old_dir = $files_base_dir . $this->subdir;
         $new_dir = $files_base_dir . $target_subdir;
@@ -84,14 +79,6 @@ class ClipBoard
             if ($success) {
                 $message .= (_("succeed") . "<br />");
                 $stat = 1;
-
-                if (SEARCH) {
-                    if ($this->oper == "cut") {
-                        $search->create_index($item_sub_dir);
-                    }
-
-                    $search->create_index($target_subdir);
-                }
             } else {
                 $message .= ("<strong>" . _("failed") . "</strong><br />");
                 $stat = 2;

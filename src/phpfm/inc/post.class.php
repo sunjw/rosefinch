@@ -101,11 +101,6 @@ class Post
         $items = explode("|", $items);
         $items = Utility::filter_paths($items);
 
-        $search = null;
-        if (SEARCH) {
-            $search = new Search();
-        }
-
         $message = "";
 
         $count = count($items);
@@ -127,10 +122,6 @@ class Post
             if ($success === true) {
                 $message .= (_("succeed") . "<br />");
                 $stat = 1;
-
-                if (SEARCH) {
-                    $search->create_index($sub_dir);
-                }
             } else {
                 $message .= ("<strong>" . _("failed") . "</strong><br />");
                 $stat = 2;
@@ -173,11 +164,6 @@ class Post
             Utility::redirct_after_oper(false, 1);
         }
 
-        $search = null;
-        if (SEARCH) {
-            $search = new Search();
-        }
-
         $sub_dir = rawurldecode(post_query("subdir"));
         $name = post_query("newname");
 
@@ -195,10 +181,6 @@ class Post
             $this->messageboard->set_message(
                 _("Make new folder:") . "&nbsp;" . htmlentities_utf8(post_query("newname")) . "&nbsp;" . _("succeed"),
                 1);
-
-            if (SEARCH) {
-                $search->create_index($sub_dir);
-            }
         } else {
             $this->messageboard->set_message(
                 _("Make new folder:") . "&nbsp;" . htmlentities_utf8(post_query("newname")) . "&nbsp;<strong>" . _("failed") . "</strong>",
@@ -217,11 +199,6 @@ class Post
         if (!Utility::allow_to_modify()) {
             $this->messageboard->set_message(_("Please login to rename file."), 2);
             Utility::redirct_after_oper(false, 1);
-        }
-
-        $search = null;
-        if (SEARCH) {
-            $search = new Search();
         }
 
         //$sub_dir = rawurldecode(post_query("subdir"));
@@ -250,10 +227,6 @@ class Post
             $this->messageboard->set_message(
                 sprintf(_("Rename %s to %s ") . _("succeed"), htmlentities_utf8(post_query("oldname")), htmlentities_utf8(post_query("newname"))),
                 1);
-
-            if (SEARCH) {
-                $search->create_index($sub_dir);
-            }
         } else {
             $this->messageboard->set_message(
                 sprintf(_("Rename %s to %s ") . " <strong>" . _("failed") . "<strong>", htmlentities_utf8(post_query("oldname")), htmlentities_utf8(post_query("newname"))),
@@ -271,11 +244,6 @@ class Post
         if (!Utility::allow_to_modify()) {
             $this->messageboard->set_message(_("Please login to upload file."), 2);
             Utility::redirct_after_oper(false, 1);
-        }
-
-        $search = null;
-        if (SEARCH) {
-            $search = new Search();
         }
 
         $used_ajax = post_query("ajax") == "ajax";
@@ -300,10 +268,6 @@ class Post
                     }
                 }
 
-                if (SEARCH) {
-                    $search->create_index($sub_dir);
-                }
-
                 if ($multi_result) {
                     $this->messageboard->set_message(
                         _("Upload files") . " " . _("succeed"),
@@ -322,10 +286,6 @@ class Post
                         _("Upload") . ":&nbsp;" . $_FILES['uploadFile']['name'] . "&nbsp;" . _("succeed"),
                         1);
                     get_logger()->info("upload success: " . $uploadfile);
-
-                    if (SEARCH) {
-                        $search->create_index($sub_dir);
-                    }
                 } else {
                     $this->messageboard->set_message(
                         _("Upload") . ":&nbsp;" . $_FILES['uploadFile']['name'] . " <strong>" . _("failed") . "<strong>",

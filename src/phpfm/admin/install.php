@@ -23,7 +23,6 @@ $settings = array('root_type' => "absolute",
     'title_name' => "Rosefinch",
     'lightbox' => 1,
     'audioPlayer' => 1,
-    'search' => 0,
     'usermng' => 0,
     'install' => 1);
 
