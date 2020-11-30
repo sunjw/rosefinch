@@ -43,7 +43,7 @@ class FileManager
     private $history;
     private $user_manager;
 
-    function __construct($browser_page = "index.php", $search_page = "search.php")
+    function __construct($browser_page = "index.php")
     {
         /*
          * all string are UTF-8!!!
@@ -58,8 +58,6 @@ class FileManager
         $this->user_manager = Utility::get_usermng();
 
         $this->browser_page = $browser_page;
-        $this->search_page = $search_page;
-        $this->search_query = "";
 
         $this->dstats = array();
         $this->fstats = array();
@@ -911,14 +909,12 @@ class FileManager
             </span>
             <span class="icon">&nbsp;</span>
             <span class="name split">
-                <a href="<?php echo $this_page . "?q=" .
-                    $this->search_query . "&dir=" .
+                <a href="<?php echo $this_page . "?dir=" .
                     $request_sub_dir . "&s=n" .
                     "&o=" . $norder; ?>"><?php echo _("Name"); ?></a>
             </span>
             <span class="size split">
-                <a href="<?php echo $this_page . "?q=" .
-                    $this->search_query . "&dir=" .
+                <a href="<?php echo $this_page . "?dir=" .
                     $request_sub_dir . "&s=s" .
                     "&o=" . $sorder; ?>"><?php echo _("Size"); ?></a>
             </span>
@@ -926,14 +922,12 @@ class FileManager
             if (!$this->is_mobile) {
                 ?>
                 <span class="type split">
-                <a href="<?php echo $this_page . "?q=" .
-                    $this->search_query . "&dir=" .
+                <a href="<?php echo $this_page . "?dir=" .
                     $request_sub_dir . "&s=t" .
                     "&o=" . $torder; ?>"><?php echo _("Type"); ?></a>
             </span>
                 <span class="mtime split">
-                <a href="<?php echo $this_page . "?q=" .
-                    $this->search_query . "&dir=" .
+                <a href="<?php echo $this_page . "?dir=" .
                     $request_sub_dir . "&s=m" .
                     "&o=" . $morder; ?>"><?php echo _("Modified Time"); ?></a>
             </span>
@@ -1131,11 +1125,11 @@ class FileManager
         $forward_class = "disable";
         if ($this->history->able_to_back()) {
             $back_class = "";
-            $back_url = "func/history.func.php?action=b&sp=" . $this->search_page;
+            $back_url = "func/history.func.php?action=b";
         }
         if ($this->history->able_to_forward()) {
             $forward_class = "";
-            $forward_url = "func/history.func.php?action=f&sp=" . $this->search_page;
+            $forward_url = "func/history.func.php?action=f";
         }
     }
 
@@ -1154,7 +1148,7 @@ class FileManager
                 break;
             }
 
-            $url = "func/history.func.php?action=f&sp=" . $this->search_page . "&step=" . ($i - $history_current);
+            $url = "func/history.func.php?action=f" . "&step=" . ($i - $history_current);
             if ($i != $history_current) {
                 $history_items .= ('<li><a href="' . $url . '">');
             } else {

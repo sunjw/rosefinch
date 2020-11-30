@@ -9,12 +9,10 @@
 class HistoryItem
 {
     private $dir;
-    private $search_key;
 
-    public function __construct($dir, $search_key = "")
+    public function __construct($dir)
     {
         $this->dir = $dir;
-        $this->search_key = $search_key;
     }
 
     public function get_dir()
@@ -22,29 +20,18 @@ class HistoryItem
         return $this->dir;
     }
 
-    public function get_search_key()
+    public function equal($dir)
     {
-        return $this->search_key;
-    }
-
-    public function equal($dir, $search_key = "")
-    {
-        return ($this->dir == $dir && $this->search_key == $search_key);
-    }
-
-    public function is_search()
-    {
-        return ($this->search_key != "");
+        return ($this->dir == $dir);
     }
 
     public function to_string()
     {
-        if ($this->search_key != "")
-            return $this->search_key;
-        else if ($this->dir == "")
+        if ($this->dir == "") {
             return "Root";
-        else
+        } else {
             return erase_last_slash($this->dir);
+        }
     }
 
 }
@@ -67,27 +54,26 @@ class History
     }
 
     /**
-     * 压入历史
-     * @param $dir 访问的目录
-     * @param $search_key 搜索关键字
+     * Push a history.
+     * @param string $dir current directory
      */
-    public function push($dir, $search_key = "")
+    public function push($dir)
     {
         if ($this->current == 0) {
-            $this->history_array[++$this->current] = new HistoryItem($dir, $search_key);
+            $this->history_array[++$this->current] = new HistoryItem($dir);
             $this->length = $this->current;
             return;
         }
 
         $current_item = $this->history_array[$this->current];
-        if (!$current_item->equal($dir, $search_key)) {
-            $this->history_array[++$this->current] = new HistoryItem($dir, $search_key);
+        if (!$current_item->equal($dir)) {
+            $this->history_array[++$this->current] = new HistoryItem($dir);
             $this->length = $this->current;
         }
     }
 
     /**
-     * 判断是否可以后退
+     * Detect if be able to back.
      * @return bool
      */
     public function able_to_back()
@@ -96,24 +82,26 @@ class History
     }
 
     /**
-     * 后退
-     * 获得后退去的 History item
+     * Back.<br/>
+     * Get back History item.
      * @return HistoryItem
      */
     public function back($step = 1)
     {
         $step = $step == null ? 1 : $step;
-        if ($this->current < $step)
+        if ($this->current < $step) {
             return null;
+        }
 
-        if ($this->current > $step)
+        if ($this->current > $step) {
             $this->current -= $step;
+        }
 
         return $this->history_array[$this->current];
     }
 
     /**
-     * 判断是否可以前进
+     * Detect if be able to forward.
      * @return bool
      */
     public function able_to_forward()
@@ -122,25 +110,27 @@ class History
     }
 
     /**
-     * 前进
-     * 获得前进的 History item
+     * Forward.<br/>
+     * Get forward History item.
      * @return HistoryItem
      */
     public function forward($step = 1)
     {
         $step = $step == null ? 1 : $step;
-        if ($this->current < 1)
+        if ($this->current < 1) {
             return null;
+        }
 
-        if ($this->current <= $this->length - $step)
+        if ($this->current <= $this->length - $step) {
             $this->current += $step;
+        }
 
         return $this->history_array[$this->current];
     }
 
     /**
-     * 获得当前位置
-     * @return current
+     * Get current position.
+     * @return HistoryItem
      */
     public function get_current()
     {
@@ -148,8 +138,8 @@ class History
     }
 
     /**
-     * 获得历史长度，不是历史数组的长度
-     * @return length
+     * Get history length.
+     * @return number history length
      */
     public function get_length()
     {
@@ -157,8 +147,8 @@ class History
     }
 
     /**
-     * 获得历史数组，注意它的长度并非历史的长度
-     * @return Array 历史数组
+     * Get history array.
+     * @return Array history array
      */
     public function get_history()
     {
@@ -166,7 +156,7 @@ class History
     }
 
     /**
-     * 测试用
+     * Debug.
      */
     public function debug()
     {
@@ -177,7 +167,7 @@ class History
     }
 
     /**
-     * 测试用
+     * Debug.
      */
     public function clear()
     {
