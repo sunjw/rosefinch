@@ -65,34 +65,6 @@
             {
             ?>
             <fieldset>
-                <legend><?php echo _("Search"); ?></legend>
-                <div>
-                    <label for="search"><?php echo _("Enable search:"); ?></label>
-                    <select id="search" name="search">
-                        <option value="1" <?php if($settings['search'] == 1)print("selected='selected'"); ?>><?php echo _("Enable"); ?></option>
-                        <option value="0" <?php if($settings['search'] == 0)print("selected='selected'"); ?>><?php echo _("Disable"); ?></option>
-                    </select>
-                    <div class="info">
-                        <?php 
-                        echo _("If enable search, you should setup your database.");
-                        ?>
-                    </div>
-                </div>
-                <?php 
-                if($settings['search'] == 1)
-                {
-                ?>
-                <div>
-                    <input id="buttonIndexfile" type="button" value="<?php echo _("Index all files"); ?>" disabled="disabled" />
-                    <div id="result" class="info">
-                        &nbsp;
-                    </div>
-                </div>
-                <?php 
-                }
-                ?>
-            </fieldset>
-            <fieldset>
                 <legend><?php echo _("User Management"); ?></legend>
                 <div>
                     <label for="usermng"><?php echo _("Enable user management:"); ?></label>

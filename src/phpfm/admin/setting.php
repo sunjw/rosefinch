@@ -37,7 +37,6 @@ if ($mode == 0) {
         'title_name' => TITLENAME,
         'lightbox' => LIGHTBOX,
         'audioPlayer' => AUDIOPLAYER,
-        'search' => SEARCH,
         'usermng' => USERMNG);
 } else if ($mode == 1) {
     $settings = array('db_user' => "",
