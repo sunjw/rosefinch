@@ -609,15 +609,16 @@ class Utility
     }
 
     /**
-     * 获得数据库连接
-     * @return ezSQL_mysql 对象
+     * Get db connection.
+     * @return ezSQL_mysql db object
      */
     public static function get_ezMysql()
     {
         // Initialise database object and establish a connection
         // at the same time - db_user / db_password / db_name / db_host
-        if (!defined('DB_USER') || !defined('DB_PSWD') || !defined('DB_NAME') || !defined('DB_HOST'))
+        if (!defined('DB_USER') || !defined('DB_PSWD') || !defined('DB_NAME') || !defined('DB_HOST')) {
             return null;
+        }
         $db = new ezSQL_mysqli(DB_USER, DB_PSWD, DB_NAME, DB_HOST);
 
         $db->hide_errors();
@@ -631,9 +632,9 @@ class Utility
     }
 
     /**
-     * 从 SESSION 中获得当前 History 对象，并存入 SESSION
-     * @param $need_new 不存在是否要新建，默认 true
-     * @return History 对象或 null
+     * Read History from SESSION.
+     * @param bool $need_new create new when not exists
+     * @return History history or null
      */
     public static function get_history($need_new = true)
     {
@@ -648,9 +649,9 @@ class Utility
     }
 
     /**
-     * 从 SESSION 中获得当前 UserManager 对象，并存入 SESSION
-     * @param $need_new 不存在是否要新建，默认 true
-     * @return UserManager 对象或 null
+     * Read UserManager from SESSION.
+     * @param bool $need_new create new when not exists
+     * @return UserManager user or null
      */
     public static function get_usermng($need_new = true)
     {
@@ -685,8 +686,8 @@ class Utility
     }
 
     /**
-     * 检查当前用户是否可以浏览文件
-     * @return true, 可以；false, 不行
+     * Check current user is able to view file.
+     * @return bool
      */
     public static function allow_to_browser()
     {
@@ -696,8 +697,8 @@ class Utility
     }
 
     /**
-     * 检查当前用户是否可以修改文件
-     * @return true, 可以；false, 不行
+     * Check current user is able to modify file.
+     * @return bool
      */
     public static function allow_to_modify()
     {
@@ -707,8 +708,8 @@ class Utility
     }
 
     /**
-     * 检查当前用户是否可以管理
-     * @return true, 可以；false, 不行
+     * Check current user is admin.
+     * @return bool
      */
     public static function allow_to_admin()
     {
@@ -718,7 +719,7 @@ class Utility
     }
 
     /**
-     * 显示用户状态
+     * Display user.
      */
     public static function display_user()
     {
@@ -733,7 +734,7 @@ class Utility
     }
 
     /**
-     * 显示导航栏
+     * Display navigation bar.
      */
     public static function html_navigation($page = "index")
     {
