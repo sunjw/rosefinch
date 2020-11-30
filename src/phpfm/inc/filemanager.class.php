@@ -624,7 +624,7 @@ class FileManager
      */
     public function display_toolbar()
     {
-        $this_page = $this->is_search ? $this->search_page : $this->browser_page;
+        $this_page = $this->browser_page;
 
         // Prepare basic icons.
         $this->prepare_basic_funcs($query_str, $up, $up_img, $new_folder_img, $upload_img);
@@ -884,7 +884,7 @@ class FileManager
      */
     private function display_header()
     {
-        $this_page = $this->is_search ? $this->search_page : $this->browser_page;
+        $this_page = $this->browser_page;
 
         $request_sub_dir = $this->request_sub_dir;
         $sort_type = $this->sort_type;
