@@ -1102,7 +1102,7 @@ class FileManager
     {
         $paste_img = "images/toolbar-paste.png";
         $paste_class = "disable";
-        if ($this->clipboard->have_items() && $this->is_search == false) {
+        if ($this->clipboard->have_items()) {
             $paste_img = "images/toolbar-paste.png";
             $paste_class = "";
         }
@@ -1155,11 +1155,7 @@ class FileManager
                 $history_items .= ('<li class="current">');
             }
 
-            if ($item->is_search()) {
-                $history_items .= (_("Search") . ' ' . $item->to_string());
-            } else {
-                $history_items .= ($item->to_string());
-            }
+            $history_items .= ($item->to_string());
 
             if ($i != $history_current) {
                 $history_items .= '</a></li>';
