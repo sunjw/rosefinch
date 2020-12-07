@@ -60,7 +60,7 @@ var FileManager = {
     /*
      * Do nothing.
      */
-    doNothing: function () {
+    dummy: function () {
         return;
     },
 
@@ -107,14 +107,14 @@ var FileManager = {
      */
     viewItemCheck: function () {
         FileManager.setButton('toolbarCut', 'images/toolbar-cut.png',
-            FileManager.doNothing, 'disable', '');
+            FileManager.dummy, 'disable', '');
         FileManager.setButton('toolbarCopy', 'images/toolbar-copy.png',
-            FileManager.doNothing, 'disable', '');
+            FileManager.dummy, 'disable', '');
         FileManager.setButton('toolbarRename',
-            'images/toolbar-rename.png', FileManager.doNothing,
+            'images/toolbar-rename.png', FileManager.dummy,
             'disable', '');
         FileManager.setButton('toolbarDelete',
-            'images/toolbar-delete.png', FileManager.doNothing,
+            'images/toolbar-delete.png', FileManager.dummy,
             'disable', '');
 
         var count = FileManager.inputChecks.length;
@@ -158,10 +158,12 @@ var FileManager = {
             var button = $(buttons.get(i));
             if (button.hasClass(className)) {
                 button.get(0).onclick = clickFunc;
-                if (addClass != '')
+                if (addClass != '') {
                     button.addClass(addClass);
-                if (removeClass != '')
+                }
+                if (removeClass != '') {
                     button.removeClass(removeClass);
+                }
                 var img = button.children('img');
                 img.attr('src', src);
             }
@@ -242,7 +244,7 @@ var FileManager = {
         var funcDelete = $('div#funcDelete');
         funcDelete.css('display', 'none');
 
-        FileManager.funcBg.get(0).onclick = FileManager.doNothing;
+        FileManager.funcBg.get(0).onclick = FileManager.dummy;
         FileManager.displayFuncDialog('', 'waiting',
             'waiting', null);
 
@@ -365,7 +367,6 @@ var FileManager = {
      * Send ajax
      */
     sendAjaxOper: function (oper) {
-
         var itemsStr = FileManager.selectedItems.join('|');
 
         // var subdir = $('input#subdir').val();
@@ -381,7 +382,7 @@ var FileManager = {
             } else {
                 FileManager.setButton('toolbarPaste',
                     'images/toolbar-paste.png',
-                    FileManager.doNothing, 'disable', '');
+                    FileManager.dummy, 'disable', '');
             }
         });
 
@@ -480,10 +481,10 @@ var FileManager = {
         }
 
         if (canClose) {
-            FileManager.funcBg.get(0).onclick = closeableBkg ? FileManager.closeFunc : FileManager.doNothing;
+            FileManager.funcBg.get(0).onclick = closeableBkg ? FileManager.closeFunc : FileManager.dummy;
             FileManager.funcDialog.header.find('.funcClose').css('display', 'block');
         } else {
-            FileManager.funcBg.get(0).onclick = FileManager.doNothing;
+            FileManager.funcBg.get(0).onclick = FileManager.dummy;
             FileManager.funcDialog.header.find('.funcClose').css('display', 'none');
         }
         FileManager.funcBg.css('height', document.documentElement.scrollHeight + 'px');
@@ -746,7 +747,7 @@ var FileManager = {
         var funcInput = $('div#divInput');
         funcInput.css('display', 'none');
 
-        FileManager.funcBg.get(0).onclick = FileManager.doNothing;
+        FileManager.funcBg.get(0).onclick = FileManager.dummy;
         FileManager.displayFuncDialog('', 'waiting',
             'waiting', null);
     },
@@ -815,10 +816,11 @@ var FileManager = {
             FileManager.toolbarButtonMouseOut); // button hover
 
         $('#mainView .header span #checkSelectAll').click(function () {
-            if (this.checked)
+            if (this.checked) {
                 FileManager.selectAll();
-            else
+            } else {
                 FileManager.deselect();
+            }
         });
 
         // more...

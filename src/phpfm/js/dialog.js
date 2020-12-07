@@ -5,14 +5,14 @@ var Dialog = {
     funcDialog: null,
 
     /**
-     * 无功能函数
+     * Dummy.
      */
     dummy: function () {
         return;
     },
 
     /**
-     * 准备功能对话框
+     * Init func dialog.
      */
     initFuncDialog: function (title, oper, redirect, closable, secondaryFolder) {
         if (Dialog.funcBg == null) {
@@ -65,17 +65,18 @@ var Dialog = {
             id: 'oper',
             name: 'oper'
         }).val(oper));
-        if (redirect)
+        if (redirect) {
             form.append($('<input/>').attr({
                 type: 'hidden',
                 id: 'return',
                 name: 'return'
             }).val(Strings['return']));
-        else
+        } else {
             form.append($('<input/>').attr({
                 type: 'hidden',
                 name: 'noredirect'
             }).val('noredirect'));
+        }
 
         form.unbind('submit');
 
@@ -88,11 +89,12 @@ var Dialog = {
     },
 
     /**
-     * 显示对话框提交部分
+     * Display submit part.
      */
     displaySubmit: function () {
-        if (Dialog.funcDialog == null)
+        if (Dialog.funcDialog == null) {
             return;
+        }
         var div = $('<div/>').addClass('funcBtnLine');
         div.append($('<input/>').attr('type', 'submit').val(Strings['OK']));
         if (Dialog.funcDialog.hasClass('closable')) {
@@ -104,11 +106,12 @@ var Dialog = {
     },
 
     /**
-     * 显示功能对话框
+     * Display func dialog.
      */
     displayFuncDialog: function () {
-        if (Dialog.funcBg == null || Dialog.funcDialog == null)
+        if (Dialog.funcBg == null || Dialog.funcDialog == null) {
             return;
+        }
 
         Dialog.funcBg.css('height', document.documentElement.scrollHeight + 'px');
         Dialog.funcBg.css('display', 'block');
@@ -117,7 +120,7 @@ var Dialog = {
     },
 
     /**
-     * 关闭功能对话框
+     * Close func dialog.
      */
     closeFunc: function () {
         var funcAudioPlayer = Dialog.funcDialog.find('div#funcAudioPlayer');
@@ -126,8 +129,9 @@ var Dialog = {
             //funcAudioPlayer.fadeOut();
         }
 
-        if (Dialog.funcDialog.is(':visible'))
+        if (Dialog.funcDialog.is(':visible')) {
             Dialog.funcDialog.fadeOut();
+        }
 
         Dialog.funcBg.css('display', 'none');
     }

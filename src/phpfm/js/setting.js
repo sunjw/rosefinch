@@ -15,7 +15,7 @@ var Setting = {
     },
 
     /**
-     * 获得消息
+     * Get message.
      */
     getMessage: function () {
         $.get('../func/getmessage.ajax.php', function (data) {
@@ -31,7 +31,7 @@ var Setting = {
 
                     phpfmMessage.html(msg);
                     if (stat == 2) {
-                        // 错误消息
+                        // wrong!
                         phpfmMessage.addClass('wrong');
                     } else {
                         phpfmMessage.removeClass('wrong');
@@ -45,26 +45,7 @@ var Setting = {
     },
 
     /**
-     * 索引文件
-     */
-    indexfile: function () {
-        var button = $('input#buttonIndexfile');
-        var result = $('div#result');
-        button.attr('disabled', 'disabled');
-
-        $.get('../func/indexfiles.func.php', function (data) {
-            if (data == 'ok') {
-                result.html('OK');
-            } else {
-                result.html('Failed');
-            }
-            button.removeAttr('disabled');
-        });
-
-    },
-
-    /**
-     * 显示登录对话框
+     * Display login.
      */
     displayLogin: function () {
         var form = Dialog.initFuncDialog(Strings['User'], 'login', true, false, true);
@@ -104,11 +85,12 @@ var Setting = {
     },
 
     /**
-     * 显示登出对话框
+     * Display logout.
      */
     displayLogout: function () {
-        if (Setting.working)
+        if (Setting.working) {
             return;
+        }
 
         var form = Dialog.initFuncDialog(Strings['User'], 'logout', true, true, true);
         form.find('input#return').val('../');
@@ -140,9 +122,9 @@ var Setting = {
                 row.append($('<td></td>').html(user.id));
                 row.append($('<td></td>').html(user.username));
                 row.append($('<td></td>').html(user.permission));
-                if (user.username == 'root')
+                if (user.username == 'root') {
                     row.append($('<td></td>').html(''));
-                else {
+                } else {
                     var html = '<a href="javascript:Setting.modifyUser(' + user.id + ')">' + Strings['Modify'] + '</a>';
                     html += '&nbsp;|&nbsp;<a href="javascript:Setting.deleteUser(' + user.id + ')">' + Strings['Delete'] + '</a>';
                     row.append($('<td></td>').html(html));
@@ -156,8 +138,9 @@ var Setting = {
 
     addUser: function () {
         //alert('add');
-        if (Setting.working)
+        if (Setting.working) {
             return;
+        }
 
         var form = Dialog.initFuncDialog(Strings['Add'], 'adduser', true, true, true);
         var divAddUser = $('<div/>');
@@ -220,8 +203,9 @@ var Setting = {
     },
 
     modifyUser: function (id) {
-        if (Setting.working)
+        if (Setting.working) {
             return;
+        }
 
         var user = Setting.users[id];
         var form = Dialog.initFuncDialog(Strings['Modify'], 'modiuser', true, true, true);
@@ -241,16 +225,19 @@ var Setting = {
                     }).val(user.username))));
         var select = $('<select/>').attr('name', 'permission');
         var option = $('<option/>').val(25).html('User');
-        if (user.permission == 'User')
+        if (user.permission == 'User') {
             option.attr('selected', 'selected');
+        }
         select.append(option);
         option = $('<option/>').val(75).html('Administrator');
-        if (user.permission == 'Administrator')
+        if (user.permission == 'Administrator') {
             option.attr('selected', 'selected');
+        }
         select.append(option);
         option = $('<option/>').val(100).html('Root');
-        if (user.permission == 'Root')
+        if (user.permission == 'Root') {
             option.attr('selected', 'selected');
+        }
         select.append(option);
         table.append(
             $('<tr/>').append(
@@ -287,8 +274,9 @@ var Setting = {
     },
 
     deleteUser: function (id) {
-        if (Setting.working)
+        if (Setting.working) {
             return;
+        }
 
         var form = Dialog.initFuncDialog(Strings['Delete'], 'deluser', true, true, true);
         var divDelUser = $('<div/>');
@@ -379,13 +367,9 @@ var Setting = {
     },
 
     /**
-     * 初始化 Setting 部分的 js
+     * Init.
      */
     init: function () {
-        var buttonIndex = $('input#buttonIndexfile');
-        buttonIndex.click(Setting.indexfile);
-        buttonIndex.removeAttr('disabled');
-
         var linkLogout = $('a#linkLogout');
         linkLogout.click(Setting.displayLogout);
 
