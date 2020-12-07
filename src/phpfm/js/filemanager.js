@@ -1,5 +1,5 @@
 var FileManager = {
-    restApiUrl: 'func/post.func.php',
+    restApiUrl: 'func/rest.api.php',
 
     funcBg: null,
     multilanTitles: null,

@@ -1,5 +1,5 @@
 var Dialog = {
-    restApiUrl: 'func/post.func.php',
+    restApiUrl: 'func/rest.api.php',
 
     funcBg: null,
     funcDialog: null,

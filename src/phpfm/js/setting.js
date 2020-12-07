@@ -1,5 +1,5 @@
 var Setting = {
-    restApiUrl: '../func/post.func.php',
+    restApiUrl: '../func/rest.api.php',
 
     working: false,
     users: null,
