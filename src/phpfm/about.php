@@ -4,7 +4,7 @@ $begin_time = microtime(true);
 require_once "inc/defines.inc.php";
 require_once "inc/common.inc.php";
 require_once "inc/gettext.inc.php";
-require_once "inc/utility.class.php";
+require_once "clazz/utility.class.php";
 
 @session_start();
 

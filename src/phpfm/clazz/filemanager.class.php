@@ -1,9 +1,9 @@
 <?php
 
-require_once "defines.inc.php";
-require_once "common.inc.php";
-require_once "gettext.inc.php";
-require_once "sort.inc.php";
+require_once dirname(__FILE__) . "/../inc/defines.inc.php";
+require_once dirname(__FILE__) . "/../inc/common.inc.php";
+require_once dirname(__FILE__) . "/../inc/gettext.inc.php";
+require_once dirname(__FILE__) . "/../inc/sort.inc.php";
 require_once "clipboard.class.php";
 require_once "messageboard.class.php";
 require_once "history.class.php";

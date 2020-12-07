@@ -1,7 +1,7 @@
 <?php
 
-require_once "../inc/common.inc.php";
-require_once "../inc/utility.class.php";
+require_once dirname(__FILE__) . "/../inc/common.inc.php";
+require_once "../clazz/utility.class.php";
 
 /**
  * Save settings into settings.inc.php.

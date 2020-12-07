@@ -1,9 +1,9 @@
 <?php
 $begin_time = microtime(true);
 
-require_once "../inc/defines.inc.php";
-require_once "../inc/common.inc.php";
-require_once "../inc/utility.class.php";
+require_once dirname(__FILE__) . "/../inc/defines.inc.php";
+require_once dirname(__FILE__) . "/../inc/common.inc.php";
+require_once "../clazz/utility.class.php";
 require_once "progress.php";
 require_once "../log/log.func.php";
 

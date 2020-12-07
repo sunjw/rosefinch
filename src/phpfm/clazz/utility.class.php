@@ -1,6 +1,6 @@
 <?php
-require_once "defines.inc.php";
-require_once "common.inc.php";
+require_once dirname(__FILE__) . "/../inc/defines.inc.php";
+require_once dirname(__FILE__) . "/../inc/common.inc.php";
 require_once "clipboard.class.php";
 require_once "messageboard.class.php";
 require_once "history.class.php";
@@ -691,7 +691,7 @@ class Utility
             if ($page == "setting") {
                 ?>
                 <ul>
-                    <li class="li-item"><a href="../"><?php echo htmlentities_utf8(_(TITLENAME)); ?></a></li>
+                    <li class="li-item"><a href=".."><?php echo htmlentities_utf8(_(TITLENAME)); ?></a></li>
                     <li class="li-item current"><a href="setting.php"><?php echo _("Setting"); ?></a></li>
                     <li class="li-item"><a href="../about.php"><?php echo _("About"); ?></a></li>
                 </ul>

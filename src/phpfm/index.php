@@ -3,8 +3,8 @@ $begin_time = microtime(true);
 
 require_once "inc/defines.inc.php";
 require_once "inc/common.inc.php";
-require_once "inc/filemanager.class.php";
-require_once "inc/utility.class.php";
+require_once "clazz/filemanager.class.php";
+require_once "clazz/utility.class.php";
 require_once "log/log.func.php";
 
 @session_start();

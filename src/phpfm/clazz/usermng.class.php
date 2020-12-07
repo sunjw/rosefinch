@@ -1,7 +1,7 @@
 <?php
 
-require_once "defines.inc.php";
-require_once "common.inc.php";
+require_once dirname(__FILE__) . "/../inc/defines.inc.php";
+require_once dirname(__FILE__) . "/../inc/common.inc.php";
 require_once "utility.class.php";
 
 /**
