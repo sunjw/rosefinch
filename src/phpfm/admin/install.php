@@ -4,7 +4,7 @@ define("INSTALL", 1);
 
 require_once dirname(__FILE__) . "/../inc/common.inc.php";
 require_once "progress.php";
-require_once "../log/log.func.php";
+require_once dirname(__FILE__) . "/../log/log.func.php";
 
 @session_start();
 

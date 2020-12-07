@@ -1,8 +1,8 @@
 <?php
 require_once dirname(__FILE__) . "/../inc/defines.inc.php";
 require_once dirname(__FILE__) . "/../inc/common.inc.php";
-require_once "../clazz/history.class.php";
-require_once "../clazz/utility.class.php";
+require_once dirname(__FILE__) . "/../clazz/history.class.php";
+require_once dirname(__FILE__) . "/../clazz/utility.class.php";
 
 @session_start();
 

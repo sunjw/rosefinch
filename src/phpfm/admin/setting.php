@@ -3,9 +3,9 @@ $begin_time = microtime(true);
 
 require_once dirname(__FILE__) . "/../inc/defines.inc.php";
 require_once dirname(__FILE__) . "/../inc/common.inc.php";
-require_once "../clazz/utility.class.php";
+require_once dirname(__FILE__) . "/../clazz/utility.class.php";
 require_once "progress.php";
-require_once "../log/log.func.php";
+require_once dirname(__FILE__) . "/../log/log.func.php";
 
 @session_start();
 

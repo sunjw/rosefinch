@@ -5,7 +5,7 @@ require_once dirname(__FILE__) . "/../inc/gettext.inc.php";
 require_once "utility.class.php";
 require_once "clipboard.class.php";
 require_once "messageboard.class.php";
-require_once "../log/log.func.php";
+require_once dirname(__FILE__) . "/../log/log.func.php";
 
 /**
  * Search Class
