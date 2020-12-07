@@ -932,7 +932,6 @@ class FileManager
         <script type="text/javascript">
             //<![CDATA[
             FileManager.setSortArrow(<?php echo "\"$javascript_call_arg\""; ?>, <?php echo "\"$order\""; ?>);
-            FileManager.setSearchMode(false);
             //]]>
         </script>
         <?php
