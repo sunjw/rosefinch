@@ -7,24 +7,25 @@ require_once dirname(__FILE__) . "/../log/log.func.php";
 @session_start();
 
 /**
- * 向客户端写文件以提供下载
- * @param $file
+ * Write file to HTTP client.
+ * @param string $file file path
  */
 function dl_file($file)
 {
-    //Gather relevent info about file
+    // Gather relevant info about file.
     $size = filesize($file);
     $fileinfo['basename'] = get_basename($file);
 
     $fileinfo['extension'] = Utility::get_file_ext($file);
-    //workaround for IE filename bug with multiple periods / multiple dots in filename
-    //that adds square brackets to filename - eg. setup.abc.exe becomes setup[1].abc.exe
+    // Workaround for IE filename bug with multiple periods / multiple dots in filename
+    // that adds square brackets to filename - eg. setup.abc.exe becomes setup[1].abc.exe.
     if (isset($_SERVER['HTTP_USER_AGENT'])) {
         $filename = (strstr($_SERVER['HTTP_USER_AGENT'], 'MSIE')) ?
             preg_replace('/\./', '%2e', $fileinfo['basename'], substr_count($fileinfo['basename'], '.') - 1) :
             $fileinfo['basename'];
-    } else
+    } else {
         $filename = $fileinfo['basename'];
+    }
 
     $file_extension = strtolower($fileinfo['extension']);
 
@@ -40,15 +41,15 @@ function dl_file($file)
     $ctype = Utility::get_mime_type($file_extension);
     //get_logger()->info($ctype);
     //echo $ctype;
-    //check if http_range is sent by browser (or download manager)
+    // Check if http_range is sent by browser (or download manager).
 
     $range = '';
     if (isset($_SERVER['HTTP_RANGE'])) {
         list($size_unit, $range_orig) = explode('=', $_SERVER['HTTP_RANGE'], 2);
 
         if ($size_unit == 'bytes') {
-            //multiple ranges could be specified at the same time, but for simplicity only serve the first range
-            //http://tools.ietf.org/id/draft-ietf-http-range-retrieval-00.txt
+            // Multiple ranges could be specified at the same time, but for simplicity only serve the first range.
+            // http://tools.ietf.org/id/draft-ietf-http-range-retrieval-00.txt
             //list($range, $extra_ranges) = explode(',', $range_orig, 2);
             $ranges = explode(',', $range_orig, 2);
             $range = $ranges[0];
@@ -59,19 +60,20 @@ function dl_file($file)
         $range = '';
     }
 
-    //figure out download piece from range (if set)
-    if ($range != '')
+    // Figure out download piece from range (if set).
+    if ($range != '') {
         list($seek_start, $seek_end) = explode('-', $range, 2);
+    }
 
-    //set start and end based on range (if set), else set defaults
-    //also check for invalid ranges.
+    // Set start and end based on range (if set), else set defaults
+    // also check for invalid ranges.
     $seek_end = (empty($seek_end)) ? ($size - 1) : min(abs(intval($seek_end)), ($size - 1));
     $seek_start = (empty($seek_start) || $seek_end < abs(intval($seek_start))) ? 0 : max(abs(intval($seek_start)), 0);
 
-    //add headers if resumable
+    // Add headers if resumable.
     //if ($is_resume)
     //{
-    //Only send partial content header if downloading a piece of the file (IE workaround)
+    // Only send partial content header if downloading a piece of the file (IE workaround).
     if ($seek_start > 0 || $seek_end < ($size - 1)) {
         header('HTTP/1.1 206 Partial Content');
     }
@@ -88,12 +90,12 @@ function dl_file($file)
     header('Content-Disposition: attachment; filename="' . $filename . '"');
     header('Content-Length: ' . ($seek_end - $seek_start + 1));
 
-    //open the file
+    // Open the file.
     $fp = fopen($file, 'rb');
-    //seek to start of missing part
+    // Seek to start of missing part
     fseek($fp, $seek_start);
 
-    //start buffered download
+    // Start buffered download
     while (!feof($fp)) {
         //reset time limit for big files
         set_time_limit(0);
@@ -108,39 +110,38 @@ function dl_file($file)
 }
 
 /**
- * 准备下载路径
- * 对字符串编码方式进行判断
- * @param $request_file
- * @return 正确的文件路径或 false
+ * Prepare download path, detect request encoding.
+ * @param string $request_file request file path
+ * @return string platform file path or false
  */
 function prepare_file_path($request_file)
 {
     $files_base_dir = Utility::get_file_base_dir();
     $files_base_dir_plat = convert_toplat($files_base_dir);
-    $file = $files_base_dir_plat . $request_file; // 获得文件路径
+    $file = $files_base_dir_plat . $request_file; // get file path
     if (PLAT_CHARSET != "UTF-8") {
         //get_logger()->info("file1:$file");
         if (!is_file($file)) {
-            // 不存在，试试转化成本地编码
-            $file = $files_base_dir_plat . convert_toplat($request_file); // Windows 上可能要转换成 gb2312
+            // Not exists, try local encoding.
+            $file = $files_base_dir_plat . convert_toplat($request_file); // On Windows, may need convert to GB2312.
             //get_logger()->info("file2:$file");
             if (!is_file($file)) {
-                $file = false; // 没有这个文件
+                $file = false; // Not exists.
             }
         } else {
-            // 存在说明就是 gb2312 编码的，要换成 utf-8
+            // Exists, may need convert to UTF-8.
             //$request_sub_dir = convert_gbtoutf8($request_sub_dir);
         }
     } else if (PLAT_CHARSET == "UTF-8") {
         if (!is_file($file)) {
-            // 不存在，试试转化成 UTF-8  编码
-            $file = $files_base_dir_plat . convert_gbtoutf8($request_file); // Linux 上可能要转换成 utf-8
+            // Not exists, try UTF-8.
+            $file = $files_base_dir_plat . convert_gbtoutf8($request_file); // On Linux, may need convert to UTF-8.
             if (!is_file($file)) {
-                $file = false; // 没有这个文件
+                $file = false; // Not exists.
                 //$request_sub_dir = "";
             }
         } else {
-            // 存在说明就是 utf-8 编码的，什么都不用做
+            // Exists, UTF-8, do nothing.
         }
     }
 
@@ -148,7 +149,7 @@ function prepare_file_path($request_file)
 }
 
 if (Utility::allow_to_browser()) {
-    // Need browser permission
+    // Need browser permission.
     $request_file = rawurldecode(get_query("file"));
     get_logger()->info(join($_GET));
 
