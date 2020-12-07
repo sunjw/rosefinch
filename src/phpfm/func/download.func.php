@@ -118,7 +118,7 @@ function prepare_file_path($request_file)
 {
     $files_base_dir = Utility::get_file_base_dir();
     $files_base_dir_plat = convert_toplat($files_base_dir);
-    $file = $files_base_dir_plat . $request_file; // get file path
+    $file = $files_base_dir_plat . $request_file; // Get file path.
     if (PLAT_CHARSET != "UTF-8") {
         //get_logger()->info("file1:$file");
         if (!is_file($file)) {

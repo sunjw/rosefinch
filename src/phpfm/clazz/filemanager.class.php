@@ -177,35 +177,22 @@ class FileManager
     /**
      * HTML include, css and js.
      */
-    public function html_include_files($debug = false)
+    public function html_include_files()
     {
-        $debug_rand = "";
-        if ($debug) {
-            $debug_rand = "?rand=" . rand(1, 1000);
-        }
+        $rand = "?rand=" . rand(1, 1000);
         ?>
-        <link href="css/filemanager.css<?php echo($debug_rand); ?>" rel="stylesheet" type="text/css"/>
-        <link href="css/message.css<?php echo($debug_rand); ?>" rel="stylesheet" type="text/css"/>
-        <link href="css/detailView.css<?php echo($debug_rand); ?>" rel="stylesheet" type="text/css"/>
+        <link href="css/filemanager.css<?php echo($rand); ?>" rel="stylesheet" type="text/css"/>
+        <link href="css/message.css<?php echo($rand); ?>" rel="stylesheet" type="text/css"/>
+        <link href="css/detailView.css<?php echo($rand); ?>" rel="stylesheet" type="text/css"/>
         <link href="css/largeiconView.css" rel="stylesheet" type="text/css"/>
-        <link href="css/func.css<?php echo($debug_rand); ?>" rel="stylesheet" type="text/css"/>
+        <link href="css/func.css<?php echo($rand); ?>" rel="stylesheet" type="text/css"/>
         <link href="css/jquery.lightbox-0.5.css" rel="stylesheet" type="text/css"/>
         <script type="text/javascript" language="javascript" src="js/jquery-1.8.1.min.js"></script>
         <script type="text/javascript" language="javascript" src="js/jquery.common.min.js"></script>
         <script type="text/javascript" language="javascript" src="js/jquery.menu.min.js"></script>
+        <script type="text/javascript" language="javascript" src="js/jquery.lightbox-0.5.plus.js"></script>
+        <script type="text/javascript" language="javascript" src="js/filemanager.js<?php echo($rand); ?>"></script>
         <?php
-        if ($debug) {
-            ?>
-            <script type="text/javascript" language="javascript" src="js/jquery.lightbox-0.5.plus.js"></script>
-            <script type="text/javascript" language="javascript"
-                    src="js/filemanager.js<?php echo($debug_rand); ?>"></script>
-            <?php
-        } else {
-            ?>
-            <script type="text/javascript" language="javascript" src="js/jquery.lightbox-0.5.plus.pack.js"></script>
-            <script type="text/javascript" language="javascript" src="js/filemanager.min.js"></script>
-            <?php
-        }
     }
 
     /**
