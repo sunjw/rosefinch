@@ -1,4 +1,6 @@
 var Dialog = {
+    restApiUrl: 'func/post.func.php',
+
     funcBg: null,
     funcDialog: null,
 
@@ -28,7 +30,7 @@ var Dialog = {
             divInput.attr("id", "divInput");
             divInput.addClass("container");
             var form = $("<form/>");
-            var actionUrl = secondaryFolder ? "../func/post.func.php" : "func/post.func.php";
+            var actionUrl = secondaryFolder ? ("../" + Dialog.restApiUrl) : Dialog.restApiUrl;
             form.attr({
                 action: actionUrl,
                 method: "post",

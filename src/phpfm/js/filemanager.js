@@ -1,4 +1,6 @@
 var FileManager = {
+    restApiUrl: 'func/post.func.php',
+
     funcBg: null,
     multilanTitles: null,
     inputChecks: null,
@@ -172,7 +174,7 @@ var FileManager = {
      */
     clickRename: function () {
         FileManager.setOldname();
-        FileManager.displayFuncDialog("func/post.func.php", "rename", "rename",
+        FileManager.displayFuncDialog(FileManager.restApiUrl, "rename", "rename",
             null);
     },
 
@@ -181,7 +183,7 @@ var FileManager = {
      */
     clickNewFolder: function () {
         // alert("newfolder");
-        FileManager.displayFuncDialog("func/post.func.php", "newfolder",
+        FileManager.displayFuncDialog(FileManager.restApiUrl, "newfolder",
             "new folder", null);
     },
 
@@ -210,7 +212,7 @@ var FileManager = {
         FileManager.displayFuncDialog("", "waiting",
             "waiting", null);
 
-        $.post("func/post.func.php", {
+        $.post(FileManager.restApiUrl, {
             "oper": "paste",
             "subdir": subdir,
             "return": returnURL
@@ -249,7 +251,7 @@ var FileManager = {
 
         // var subdir = $("input#subdir").val();
 
-        $.post("func/post.func.php", {
+        $.post(FileManager.restApiUrl, {
             "oper": "delete",
             "items": itemsStr,
             "noredirect": "noredirect"
@@ -263,7 +265,7 @@ var FileManager = {
      * 点击了上传的操作
      */
     clickUpload: function () {
-        FileManager.displayFuncDialog("func/post.func.php", "upload", "upload",
+        FileManager.displayFuncDialog(FileManager.restApiUrl, "upload", "upload",
             null);
     },
 
@@ -376,7 +378,7 @@ var FileManager = {
 
         // var subdir = $("input#subdir").val();
 
-        $.post("func/post.func.php", {
+        $.post(FileManager.restApiUrl, {
             "oper": oper,
             "items": itemsStr
         }, function (data) {
@@ -1060,7 +1062,7 @@ var FileManager = {
         var returnURLdecoded = decodeURIComponent($("input#return").val());
 
         var xhrUpload = new XMLHttpRequest();
-        xhrUpload.open('POST', 'func/post.func.php');
+        xhrUpload.open('POST', FileManager.restApiUrl);
 
         xhrUpload.onload = function () {
             window.location.href = returnURLdecoded;
@@ -1087,7 +1089,7 @@ var FileManager = {
      * 点击了登录的操作
      */
     clickLogin: function () {
-        FileManager.displayFuncDialog("func/post.func.php", "login", "user",
+        FileManager.displayFuncDialog(FileManager.restApiUrl, "login", "user",
             null);
     },
 
@@ -1095,7 +1097,7 @@ var FileManager = {
      * 点击了登出的操作
      */
     clickLogout: function () {
-        FileManager.displayFuncDialog("func/post.func.php", "logout", "user",
+        FileManager.displayFuncDialog(FileManager.restApiUrl, "logout", "user",
             null);
     },
 

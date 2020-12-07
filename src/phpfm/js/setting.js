@@ -1,4 +1,6 @@
 var Setting = {
+    restApiUrl: '../func/post.func.php',
+
     working: false,
     users: null,
     oldTable: "",
@@ -121,7 +123,7 @@ var Setting = {
 
     loadUsers: function (table) {
         Setting.setStat(true);
-        $.post("../func/post.func.php", {
+        $.post(Setting.restApiUrl, {
             oper: "userlist"
         }, function (data) {
             table.html(Setting.oldTable);
@@ -203,7 +205,7 @@ var Setting = {
         form.submit(function () {
             Dialog.closeFunc();
             Setting.setStat(true);
-            $.post("../func/post.func.php", {
+            $.post(Setting.restApiUrl, {
                 oper: $("input[name='oper']").val(),
                 noredirect: "noredirect",
                 username: $("input[name='username']").val(),
@@ -270,7 +272,7 @@ var Setting = {
         form.submit(function () {
             Dialog.closeFunc();
             Setting.setStat(true);
-            $.post("../func/post.func.php", {
+            $.post(Setting.restApiUrl, {
                 oper: $("input[name='oper']").val(),
                 noredirect: "noredirect",
                 id: $("input[name='id']").val(),
@@ -304,7 +306,7 @@ var Setting = {
         form.submit(function () {
             Dialog.closeFunc();
             Setting.setStat(true);
-            $.post("../func/post.func.php", {
+            $.post(Setting.restApiUrl, {
                 oper: $("input[name='oper']").val(),
                 noredirect: "noredirect",
                 id: $("input[name='id']").val()
