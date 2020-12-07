@@ -28,15 +28,15 @@ function dl_file($file)
 
     $file_extension = strtolower($fileinfo['extension']);
 
-//	switch($file_extension)
-//	{
-//		case 'exe': $ctype='application/octet-stream'; break;
-//		case 'zip': $ctype='application/zip'; break;
-//		case 'mp3': $ctype='audio/mpeg'; break;
-//		case 'mpg': $ctype='video/mpeg'; break;
-//		case 'avi': $ctype='video/x-msvideo'; break;
-//		default: $ctype='application/force-download';
-//	}
+//    switch($file_extension)
+//    {
+//        case 'exe': $ctype='application/octet-stream'; break;
+//        case 'zip': $ctype='application/zip'; break;
+//        case 'mp3': $ctype='audio/mpeg'; break;
+//        case 'mpg': $ctype='video/mpeg'; break;
+//        case 'avi': $ctype='video/x-msvideo'; break;
+//        default: $ctype='application/force-download';
+//    }
     $ctype = Utility::get_mime_type($file_extension);
     //get_logger()->info($ctype);
     //echo $ctype;
