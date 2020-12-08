@@ -148,6 +148,14 @@ function get_basename($filename)
 }
 
 /**
+ * Set header "Content-Type" to "text/html; charset=UTF-8".
+ */
+function set_response_utf8()
+{
+    header('Content-Type: text/html; charset=UTF-8');
+}
+
+/**
  * Response 302 redirect to url.
  * @param string $url
  * @param bool $need_rawurldecode need to call rawurldecode(), default is false
@@ -163,11 +171,33 @@ function redirect($url, $need_rawurldecode = false)
 }
 
 /**
- * Set header "Content-Type" to "text/html; charset=UTF-8".
+ * Response 400 Bad Request.
  */
-function set_response_utf8()
+function response_400()
 {
-    header('Content-Type: text/html; charset=UTF-8');
+    header('HTTP/1.1 400 Bad Request');
+    echo '400 Bad Request';
+    exit;
+}
+
+/**
+ * Response 404 Not Found.
+ */
+function response_404()
+{
+    header('HTTP/1.1 404 Not Found');
+    echo '404 Not Found';
+    exit;
+}
+
+/**
+ * Response 500 Internal Error.
+ */
+function response_500()
+{
+    header('HTTP/1.1 500 Internal Server Error');
+    echo '500 Internal Server Error';
+    exit;
 }
 
 /**

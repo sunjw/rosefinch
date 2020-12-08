@@ -72,7 +72,8 @@ class Rest
         }
 
         if ($return_url == '') {
-
+            get_logger()->error('Not "return" found in request.');
+            response_400();
         }
 
         redirect($return_url);

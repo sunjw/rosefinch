@@ -1,8 +1,8 @@
 <?php
-require_once dirname(__FILE__) . "/../inc/defines.inc.php";
-require_once dirname(__FILE__) . "/../inc/common.inc.php";
-require_once dirname(__FILE__) . "/../clazz/utility.class.php";
-require_once dirname(__FILE__) . "/../log/log.func.php";
+require_once dirname(__FILE__) . '/../inc/defines.inc.php';
+require_once dirname(__FILE__) . '/../inc/common.inc.php';
+require_once dirname(__FILE__) . '/../clazz/utility.class.php';
+require_once dirname(__FILE__) . '/../log/log.func.php';
 
 @session_start();
 
@@ -83,8 +83,8 @@ function dl_file($file)
     //}
 
     //headers for IE Bugs (is this necessary?)
-    //header("Cache-Control: cache, must-revalidate");
-    //header("Pragma: public");
+    //header('Cache-Control: cache, must-revalidate');
+    //header('Pragma: public');
 
     header('Content-Type: ' . $ctype);
     header('Content-Disposition: attachment; filename="' . $filename . '"');
@@ -119,12 +119,12 @@ function prepare_file_path($request_file)
     $files_base_dir = Utility::get_file_base_dir();
     $files_base_dir_plat = convert_toplat($files_base_dir);
     $file = $files_base_dir_plat . $request_file; // Get file path.
-    if (PLAT_CHARSET != "UTF-8") {
-        //get_logger()->info("file1:$file");
+    if (PLAT_CHARSET != 'UTF-8') {
+        //get_logger()->info('file1:$file');
         if (!is_file($file)) {
             // Not exists, try local encoding.
             $file = $files_base_dir_plat . convert_toplat($request_file); // On Windows, may need convert to GB2312.
-            //get_logger()->info("file2:$file");
+            //get_logger()->info('file2:$file');
             if (!is_file($file)) {
                 $file = false; // Not exists.
             }
@@ -132,7 +132,7 @@ function prepare_file_path($request_file)
             // Exists, may need convert to UTF-8.
             //$request_sub_dir = convert_gbtoutf8($request_sub_dir);
         }
-    } else if (PLAT_CHARSET == "UTF-8") {
+    } else if (PLAT_CHARSET == 'UTF-8') {
         if (!is_file($file)) {
             // Not exists, try UTF-8.
             $file = $files_base_dir_plat . convert_gbtoutf8($request_file); // On Linux, may need convert to UTF-8.
@@ -150,10 +150,10 @@ function prepare_file_path($request_file)
 
 if (Utility::allow_to_view()) {
     // Need view permission.
-    $request_file = rawurldecode(get_query("file"));
+    $request_file = rawurldecode(get_query('file'));
     get_logger()->info(join($_GET));
 
-    if (substr($request_file, -1) == "\"") {
+    if (substr($request_file, -1) == '\"') {
         $request_file = substr($request_file, 0, -1);
     }
     $request_file = prepare_file_path($request_file);
@@ -162,14 +162,12 @@ if (Utility::allow_to_view()) {
         $test_array[0] = $request_file;
         $test_array = Utility::filter_paths($test_array);
         if (count($test_array) > 0) {
-            get_logger()->info("Download start");
+            get_logger()->info('Download start');
             dl_file($request_file);
         }
     } else {
-        get_logger()->info("Download fail");
-        header("HTTP/1.1 404 Not Found");
-        echo "<strong>404 Not Found</strong>";
-        exit;
+        get_logger()->info('Download fail');
+        response_404();
     }
 }
 //
