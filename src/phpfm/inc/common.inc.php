@@ -148,7 +148,7 @@ function get_basename($filename)
 }
 
 /**
- * Response redirect to url.
+ * Response 302 redirect to url.
  * @param string $url
  * @param bool $need_rawurldecode need to call rawurldecode(), default is false
  */

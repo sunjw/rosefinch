@@ -55,6 +55,30 @@ class Rest
     }
 
     /**
+     * Response with 302 redirect.
+     * Read "return" from request, rawurldecode and jump.
+     * @param bool $from_get read "return" from GET, default is true
+     */
+    private function response_redirect($from_get = true)
+    {
+        if (post_query('noredirect') != '') {
+            return;
+        }
+
+        if ($from_get) {
+            $return_url = rawurldecode(get_query('return'));
+        } else {
+            $return_url = rawurldecode(post_query('return'));
+        }
+
+        if ($return_url == '') {
+
+        }
+
+        redirect($return_url);
+    }
+
+    /**
      * Handle API request.
      */
     public function handle_request()
@@ -156,7 +180,7 @@ class Rest
 
         $this->messageboard->set_message($message, $stat);
 
-        Utility::redirct_by_request(false, 1);
+        $this->response_redirect(false);
     }
 
     /**
@@ -187,7 +211,7 @@ class Rest
     {
         if (!Utility::allow_to_modify()) {
             $this->messageboard->set_message(_('Please login to make a new folder.'), 2);
-            Utility::redirct_by_request(false, 1);
+            $this->response_redirect(false);
         }
 
         $sub_dir = rawurldecode(post_query('subdir'));
@@ -214,8 +238,7 @@ class Rest
                 2);
         }
 
-
-        Utility::redirct_by_request(false, 1);
+        $this->response_redirect(false);
     }
 
     /**
@@ -225,7 +248,7 @@ class Rest
     {
         if (!Utility::allow_to_modify()) {
             $this->messageboard->set_message(_('Please login to rename file.'), 2);
-            Utility::redirct_by_request(false, 1);
+            $this->response_redirect(false);
         }
 
         //$sub_dir = rawurldecode(post_query('subdir'));
@@ -259,7 +282,7 @@ class Rest
                 2);
         }
 
-        Utility::redirct_by_request(false, 1);
+        $this->response_redirect(false);
     }
 
     /**
@@ -269,7 +292,7 @@ class Rest
     {
         if (!Utility::allow_to_modify()) {
             $this->messageboard->set_message(_('Please login to upload file.'), 2);
-            Utility::redirct_by_request(false, 1);
+            $this->response_redirect(false);
         }
 
         $used_ajax = post_query('ajax') == 'ajax';
@@ -324,7 +347,7 @@ class Rest
         if ($used_ajax) {
             echo 'ok';
         } else {
-            Utility::redirct_by_request(false, 1);
+            $this->response_redirect(false);
         }
     }
 

@@ -543,35 +543,6 @@ class Utility
     }
 
     /**
-     * Redirect after operation.
-     * Read "return" from request, rawurldecode and jump.
-     * @param bool $from_get read "return" from GET, default is true
-     * @param number $sub_dir_level sub directory level, default is 0
-     */
-    public static function redirct_by_request($from_get = true, $sub_dir_level = 0)
-    {
-        if (post_query("noredirect") != "") {
-            return;
-        }
-
-        if ($from_get) {
-            $returnURL = rawurldecode(get_query("return"));
-        } else {
-            $returnURL = rawurldecode(post_query("return"));
-        }
-
-        if ($returnURL == "") {
-            $prefix = "";
-            for ($i = 0; $i < $sub_dir_level; $i++) {
-                $prefix .= "../";
-            }
-            $returnURL = $prefix . "index.php";
-        }
-
-        redirect($returnURL);
-    }
-
-    /**
      * Read MessageBoard from SESSION.
      * @param bool $need_new create new when not exists, default is true
      * @return MessageBoard message board or null
