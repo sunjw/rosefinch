@@ -193,14 +193,14 @@ var FileManager = {
      */
     clickCut: function () {
         // alert('cut');
-        FileManager.sendAjaxOper('cut');
+        FileManager.sendRestApi('cut');
     },
 
     /*
      * Copy.
      */
     clickCopy: function () {
-        FileManager.sendAjaxOper('copy');
+        FileManager.sendRestApi('copy');
     },
 
     /*
@@ -214,7 +214,7 @@ var FileManager = {
             'waiting', null);
 
         $.post(FileManager.restApiUrl, {
-            'oper': 'paste',
+            'api': 'paste',
             'subdir': subdir,
             'return': returnURL
         }, function () {
@@ -253,7 +253,7 @@ var FileManager = {
         // var subdir = $('input#subdir').val();
 
         $.post(FileManager.restApiUrl, {
-            'oper': 'delete',
+            'api': 'delete',
             'items': itemsStr,
             'noredirect': 'noredirect'
         }, function () {
@@ -364,15 +364,15 @@ var FileManager = {
     },
 
     /*
-     * Send ajax
+     * Send ajax.
      */
-    sendAjaxOper: function (oper) {
+    sendRestApi: function (api) {
         var itemsStr = FileManager.selectedItems.join('|');
 
         // var subdir = $('input#subdir').val();
 
         $.post(FileManager.restApiUrl, {
-            'oper': oper,
+            'api': api,
             'items': itemsStr
         }, function (data) {
             if (data == 'ok') {
@@ -522,8 +522,8 @@ var FileManager = {
             case 'logout':
                 FileManager.displayFuncPart(divInput);
 
-                var operInput = divInput.find('input#oper');
-                operInput.val(oper);
+                var apiInput = divInput.find('input#api');
+                apiInput.val(oper);
                 var form = divInput.find('form');
                 form.attr('action', action);
 
@@ -1057,7 +1057,7 @@ var FileManager = {
 
         var form = new FormData();
         form.append('session', sessionId);
-        form.append('oper', 'upload');
+        form.append('api', 'upload');
         form.append('ajax', 'ajax');
         form.append('subdir', subdir);
         form.append('return', returnURL);

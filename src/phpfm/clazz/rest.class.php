@@ -44,14 +44,14 @@ class Rest
     private $files_base_dir;
     private $messageboard;
     private $clipboard;
-    private $oper;
+    private $api;
 
     function __construct()
     {
         $this->files_base_dir = Utility::get_file_base_dir();
         $this->messageboard = Utility::get_messageboard();
         $this->clipboard = Utility::get_clipboard(false);
-        $this->oper = post_query('oper');
+        $this->api = post_query('api');
     }
 
     /**
@@ -59,7 +59,7 @@ class Rest
      */
     public function handle_request()
     {
-        switch ($this->oper) {
+        switch ($this->api) {
             case 'cut':
             case 'copy':
                 $this->handle_cut_copy();
@@ -100,7 +100,7 @@ class Rest
             $items = Utility::filter_paths($items);
             //print_r($files);
 
-            $this->clipboard->set_items($this->oper, $items);
+            $this->clipboard->set_items($this->api, $items);
 
             if ($this->clipboard->have_items()) {
                 $message = _('Add items to clipboard:') . '&nbsp;<br />';
