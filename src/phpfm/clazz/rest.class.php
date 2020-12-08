@@ -55,7 +55,7 @@ class Rest
     }
 
     /**
-     * Do operation.
+     * Handle API request.
      */
     public function handle_request()
     {
