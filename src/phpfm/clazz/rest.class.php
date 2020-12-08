@@ -20,38 +20,38 @@ class Rest
     private $clipboard;
     private $oper;
 
-    function __construct($oper)
+    function __construct()
     {
-        $this->files_base_dir = Utility::get_file_base_dir();//$_SESSION['base_dir'];
+        $this->files_base_dir = Utility::get_file_base_dir();
         $this->messageboard = Utility::get_messageboard();
         $this->clipboard = Utility::get_clipboard(false);
-        $this->oper = $oper;
+        $this->oper = post_query("oper");
     }
 
     /**
      * Do operation.
      */
-    public function do_oper()
+    public function handle_request()
     {
         switch ($this->oper) {
             case "cut":
             case "copy":
-                $this->post_cut_copy();
+                $this->handle_cut_copy();
                 break;
             case "delete":
-                $this->post_delete();
+                $this->handle_delete();
                 break;
             case "newfolder":
-                $this->post_newfolder();
+                $this->handle_newfolder();
                 break;
             case "paste":
-                $this->post_paste();
+                $this->handle_paste();
                 break;
             case "rename":
-                $this->post_rename();
+                $this->handle_rename();
                 break;
             case "upload":
-                $this->post_upload();
+                $this->handle_upload();
                 break;
         }
     }
@@ -59,7 +59,7 @@ class Rest
     /**
      * Cut and copy.
      */
-    private function post_cut_copy()
+    private function handle_cut_copy()
     {
         if ($this->clipboard != null) {
             if (!Utility::allow_to_modify()) {
@@ -89,7 +89,7 @@ class Rest
     /**
      * Delete.
      */
-    private function post_delete()
+    private function handle_delete()
     {
         if (!Utility::allow_to_modify()) {
             $this->messageboard->set_message(_("Please login to delete files."), 2);
@@ -136,7 +136,7 @@ class Rest
     /**
      * Paste.
      */
-    private function post_paste()
+    private function handle_paste()
     {
         if (!Utility::allow_to_modify()) {
             $this->messageboard->set_message(_("Please login to paste files."), 2);
@@ -157,7 +157,7 @@ class Rest
     /**
      * New folder.
      */
-    private function post_newfolder()
+    private function handle_newfolder()
     {
         if (!Utility::allow_to_modify()) {
             $this->messageboard->set_message(_("Please login to make a new folder."), 2);
@@ -195,7 +195,7 @@ class Rest
     /**
      * Rename.
      */
-    private function post_rename()
+    private function handle_rename()
     {
         if (!Utility::allow_to_modify()) {
             $this->messageboard->set_message(_("Please login to rename file."), 2);
@@ -239,7 +239,7 @@ class Rest
     /**
      * Upload.
      */
-    private function post_upload()
+    private function handle_upload()
     {
         if (!Utility::allow_to_modify()) {
             $this->messageboard->set_message(_("Please login to upload file."), 2);

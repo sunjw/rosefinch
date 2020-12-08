@@ -10,8 +10,8 @@ if (isset($_REQUEST['session']) && $_REQUEST['session']) {
 
 @session_start();
 
-$post = new Rest(post_query("oper"));
+$post = new Rest();
 
-$post->do_oper();
+$post->handle_request();
 
 ?>
