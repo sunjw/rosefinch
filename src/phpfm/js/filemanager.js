@@ -193,14 +193,14 @@ var FileManager = {
      */
     clickCut: function () {
         // alert('cut');
-        FileManager.sendAjaxApi('cut');
+        FileManager.sendRestApi('cut', true);
     },
 
     /*
      * Copy.
      */
     clickCopy: function () {
-        FileManager.sendAjaxApi('copy');
+        FileManager.sendRestApi('copy', true);
     },
 
     /*
@@ -402,14 +402,12 @@ var FileManager = {
     sendRestApi: function (api, cutCopy) {
         var itemsStr = FileManager.selectedItems.join('|');
 
-        // var subdir = $('input#subdir').val();
-
         $.post(FileManager.restApiUrl, {
             'api': api,
             'items': itemsStr
         }, function (data) {
+            var wrong = false;
             if (data.code == 0) {
-                // OK
                 if (cutCopy) {
                     FileManager.setButton('toolbarPaste',
                         'images/toolbar-paste.png', FileManager.clickPaste, '',
@@ -417,16 +415,16 @@ var FileManager = {
                 }
             } else {
                 // Error
+                wrong = true;
                 if (cutCopy) {
                     FileManager.setButton('toolbarPaste',
                         'images/toolbar-paste.png',
                         FileManager.dummy, 'disable', '');
                 }
             }
-
-            setTimeout(function () {
-                FileManager.getMessage();
-            }, 500);
+            if (data.message != '') {
+                FileManager.showMessage(data.message, wrong);
+            }
         });
     },
 
