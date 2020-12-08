@@ -194,14 +194,14 @@ var FileManager = {
      */
     clickCut: function () {
         // alert('cut');
-        FileManager.sendRestApi(/*FileManager.restApiBase + */'cut', true);
+        FileManager.sendCutCopyRestApi(FileManager.restApiBase + 'cut');
     },
 
     /*
      * Copy.
      */
     clickCopy: function () {
-        FileManager.sendRestApi(FileManager.restApiBase + 'copy', true);
+        FileManager.sendCutCopyRestApi(FileManager.restApiBase + 'copy');
     },
 
     /*
@@ -398,9 +398,9 @@ var FileManager = {
     },
 
     /*
-     * Send REST API request.
+     * Send cut/copy REST API request.
      */
-    sendRestApi: function (api, cutCopy) {
+    sendCutCopyRestApi: function (api) {
         var itemsStr = FileManager.selectedItems.join('|');
 
         $.post(FileManager.restApiUrl, {
@@ -415,19 +415,15 @@ var FileManager = {
             }
             var wrong = false;
             if (data.code == 0) {
-                if (cutCopy) {
-                    FileManager.setButton('toolbarPaste',
-                        'images/toolbar-paste.png', FileManager.clickPaste, '',
-                        'disable');
-                }
+                FileManager.setButton('toolbarPaste',
+                    'images/toolbar-paste.png', FileManager.clickPaste, '',
+                    'disable');
             } else {
                 // Error
                 wrong = true;
-                if (cutCopy) {
-                    FileManager.setButton('toolbarPaste',
-                        'images/toolbar-paste.png',
-                        FileManager.dummy, 'disable', '');
-                }
+                FileManager.setButton('toolbarPaste',
+                    'images/toolbar-paste.png',
+                    FileManager.dummy, 'disable', '');
             }
             if (data.message != '') {
                 FileManager.showMessage(data.message, wrong);

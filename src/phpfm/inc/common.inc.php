@@ -262,4 +262,31 @@ function is_mobile_browser()
     return false;
 }
 
+/**
+ * Check string starts with needle.
+ * @param $haystack
+ * @param $needle
+ * @return bool
+ */
+function starts_with($haystack, $needle)
+{
+    $length = strlen($needle);
+    return substr($haystack, 0, $length) === $needle;
+}
+
+/**
+ * Check string ends with needle.
+ * @param $haystack
+ * @param $needle
+ * @return bool
+ */
+function ends_with($haystack, $needle)
+{
+    $length = strlen($needle);
+    if (!$length) {
+        return true;
+    }
+    return substr($haystack, -$length) === $needle;
+}
+
 ?>

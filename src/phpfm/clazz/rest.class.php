@@ -103,26 +103,37 @@ class Rest
      */
     public function handle_request()
     {
-        switch ($this->api) {
-            case 'cut':
-            case 'copy':
-                $this->handle_cut_copy();
-                break;
-            case 'delete':
-                $this->handle_delete();
-                break;
-            case 'newfolder':
-                $this->handle_newfolder();
-                break;
-            case 'paste':
-                $this->handle_paste();
-                break;
-            case 'rename':
-                $this->handle_rename();
-                break;
-            case 'upload':
-                $this->handle_upload();
-                break;
+        $api_v1_base = 'api/v1/';
+        if (starts_with($this->api, $api_v1_base)) {
+            $api = substr($this->api, strlen($api_v1_base));
+            switch ($api) {
+                case 'cut':
+                case 'copy':
+                    $this->handle_cut_copy();
+                    break;
+                case 'delete':
+                    $this->handle_delete();
+                    break;
+                case 'newfolder':
+                    $this->handle_newfolder();
+                    break;
+                case 'paste':
+                    $this->handle_paste();
+                    break;
+                case 'rename':
+                    $this->handle_rename();
+                    break;
+                case 'upload':
+                    $this->handle_upload();
+                    break;
+                default:
+                    get_logger()->error('Wrong API request: [' . $this->api . ']');
+                    $this->response_json_400();
+                    break;
+            }
+        } else {
+            get_logger()->error('Wrong API request: [' . $this->api . ']');
+            $this->response_json_400();
         }
     }
 
