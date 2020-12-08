@@ -1,11 +1,11 @@
 <?php
-require_once dirname(__FILE__) . "/../log/log.func.php";
-require_once dirname(__FILE__) . "/../inc/defines.inc.php";
-require_once dirname(__FILE__) . "/../inc/common.inc.php";
-require_once dirname(__FILE__) . "/../inc/gettext.inc.php";
-require_once "utility.class.php";
-require_once "clipboard.class.php";
-require_once "messageboard.class.php";
+require_once dirname(__FILE__) . '/../log/log.func.php';
+require_once dirname(__FILE__) . '/../inc/defines.inc.php';
+require_once dirname(__FILE__) . '/../inc/common.inc.php';
+require_once dirname(__FILE__) . '/../inc/gettext.inc.php';
+require_once 'utility.class.php';
+require_once 'clipboard.class.php';
+require_once 'messageboard.class.php';
 
 /**
  * Rest API Class
@@ -25,7 +25,7 @@ class Rest
         $this->files_base_dir = Utility::get_file_base_dir();
         $this->messageboard = Utility::get_messageboard();
         $this->clipboard = Utility::get_clipboard(false);
-        $this->oper = post_query("oper");
+        $this->oper = post_query('oper');
     }
 
     /**
@@ -34,23 +34,23 @@ class Rest
     public function handle_request()
     {
         switch ($this->oper) {
-            case "cut":
-            case "copy":
+            case 'cut':
+            case 'copy':
                 $this->handle_cut_copy();
                 break;
-            case "delete":
+            case 'delete':
                 $this->handle_delete();
                 break;
-            case "newfolder":
+            case 'newfolder':
                 $this->handle_newfolder();
                 break;
-            case "paste":
+            case 'paste':
                 $this->handle_paste();
                 break;
-            case "rename":
+            case 'rename':
                 $this->handle_rename();
                 break;
-            case "upload":
+            case 'upload':
                 $this->handle_upload();
                 break;
         }
@@ -63,25 +63,25 @@ class Rest
     {
         if ($this->clipboard != null) {
             if (!Utility::allow_to_modify()) {
-                $this->messageboard->set_message(_("Please login to cut or copy files."), 2);
-                echo "ok";
+                $this->messageboard->set_message(_('Please login to cut or copy files.'), 2);
+                echo 'ok';
                 return;
             }
 
-            $items = post_query("items");
+            $items = post_query('items');
 
-            $items = explode("|", $items);
+            $items = explode('|', $items);
             $items = Utility::filter_paths($items);
             //print_r($files);
 
             $this->clipboard->set_items($this->oper, $items);
 
             if ($this->clipboard->have_items()) {
-                $message = _("Add items to clipboard:") . "&nbsp;<br />";
-                $message .= htmlentities_utf8((join("***", $items)));
-                $message = str_replace("***", "<br />", $message);
+                $message = _('Add items to clipboard:') . '&nbsp;<br />';
+                $message .= htmlentities_utf8((join('***', $items)));
+                $message = str_replace('***', '<br />', $message);
                 $this->messageboard->set_message($message);
-                echo "ok";
+                echo 'ok';
             }
         }
     }
@@ -92,16 +92,16 @@ class Rest
     private function handle_delete()
     {
         if (!Utility::allow_to_modify()) {
-            $this->messageboard->set_message(_("Please login to delete files."), 2);
-            echo "ok";
+            $this->messageboard->set_message(_('Please login to delete files.'), 2);
+            echo 'ok';
             return;
         }
 
-        $items = post_query("items");
-        $items = explode("|", $items);
+        $items = post_query('items');
+        $items = explode('|', $items);
         $items = Utility::filter_paths($items);
 
-        $message = "";
+        $message = '';
 
         $count = count($items);
         for ($i = 0; $i < $count; $i++) {
@@ -109,8 +109,8 @@ class Rest
             $item = $items[$i];
             $sub_dir = dirname($item);
             $path = $this->files_base_dir . $item;
-            get_logger()->info("try to delete: $path");
-            $message .= (_("Delete") . " " . htmlentities_utf8($item) . " ");
+            get_logger()->info('try to delete: ' . $path);
+            $message .= (_('Delete') . ' ' . htmlentities_utf8($item) . ' ');
             $path = convert_toplat($path);
             if (file_exists($path)) {
                 if (is_dir($path)) {
@@ -120,10 +120,10 @@ class Rest
                 }
             }
             if ($success === true) {
-                $message .= (_("succeed") . "<br />");
+                $message .= (_('succeed') . '<br />');
                 $stat = 1;
             } else {
-                $message .= ("<strong>" . _("failed") . "</strong><br />");
+                $message .= ('<strong>' . _('failed') . '</strong><br />');
                 $stat = 2;
             }
         }
@@ -139,11 +139,11 @@ class Rest
     private function handle_paste()
     {
         if (!Utility::allow_to_modify()) {
-            $this->messageboard->set_message(_("Please login to paste files."), 2);
-            echo "ok";
+            $this->messageboard->set_message(_('Please login to paste files.'), 2);
+            echo 'ok';
             return;
         }
-        $target_subdir = rawurldecode(post_query("subdir"));
+        $target_subdir = rawurldecode(post_query('subdir'));
 
         if ($this->clipboard != null) {
             $this->clipboard->paste($target_subdir);
@@ -151,7 +151,7 @@ class Rest
 
         //print_r($_GET);
 
-        echo "ok";
+        echo 'ok';
     }
 
     /**
@@ -160,18 +160,18 @@ class Rest
     private function handle_newfolder()
     {
         if (!Utility::allow_to_modify()) {
-            $this->messageboard->set_message(_("Please login to make a new folder."), 2);
+            $this->messageboard->set_message(_('Please login to make a new folder.'), 2);
             Utility::redirct_by_request(false, 1);
         }
 
-        $sub_dir = rawurldecode(post_query("subdir"));
-        $name = post_query("newname");
+        $sub_dir = rawurldecode(post_query('subdir'));
+        $name = post_query('newname');
 
         $success = false;
-        if (false === strpos($sub_dir, "..") && Utility::check_name($name)) // filter
+        if (false === strpos($sub_dir, '..') && Utility::check_name($name)) // filter
         {
             $name = $this->files_base_dir . $sub_dir . $name;
-            get_logger()->info("mkdir: $name");
+            get_logger()->info('mkdir: ' . $name);
             $name = convert_toplat($name);
             if (!file_exists($name)) {
                 $success = @mkdir($name);
@@ -180,11 +180,11 @@ class Rest
 
         if ($success === true) {
             $this->messageboard->set_message(
-                _("Make new folder:") . "&nbsp;" . htmlentities_utf8(post_query("newname")) . "&nbsp;" . _("succeed"),
+                _('Make new folder:') . '&nbsp;' . htmlentities_utf8(post_query('newname')) . '&nbsp;' . _('succeed'),
                 1);
         } else {
             $this->messageboard->set_message(
-                _("Make new folder:") . "&nbsp;" . htmlentities_utf8(post_query("newname")) . "&nbsp;<strong>" . _("failed") . "</strong>",
+                _('Make new folder:') . '&nbsp;' . htmlentities_utf8(post_query('newname')) . '&nbsp;<strong>' . _('failed') . '</strong>',
                 2);
         }
 
@@ -198,38 +198,38 @@ class Rest
     private function handle_rename()
     {
         if (!Utility::allow_to_modify()) {
-            $this->messageboard->set_message(_("Please login to rename file."), 2);
+            $this->messageboard->set_message(_('Please login to rename file.'), 2);
             Utility::redirct_by_request(false, 1);
         }
 
-        //$sub_dir = rawurldecode(post_query("subdir"));
-        $oldpath = post_query("renamePath");
-        $sub_dir = "";
-        if (strrpos($oldpath, "/") != false) {
-            $sub_dir = substr($oldpath, 0, strrpos($oldpath, "/") + 1);
+        //$sub_dir = rawurldecode(post_query('subdir'));
+        $oldpath = post_query('renamePath');
+        $sub_dir = '';
+        if (strrpos($oldpath, '/') != false) {
+            $sub_dir = substr($oldpath, 0, strrpos($oldpath, '/') + 1);
         }
 
-        $oldname = post_query("oldname");
-        $newname = post_query("newname");
+        $oldname = post_query('oldname');
+        $newname = post_query('newname');
 
         $success = false;
-        if (false === strpos($sub_dir, "..") &&
+        if (false === strpos($sub_dir, '..') &&
             Utility::check_name($newname) && Utility::check_name($oldname)) {
             $oldname = $this->files_base_dir . $sub_dir . $oldname;
             $newname = $this->files_base_dir . $sub_dir . $newname;
 
-            get_logger()->info("Try to rename: $oldname to $newname");
+            get_logger()->info('Try to rename: ' . $oldname . ' to ' . $newname);
 
             $success = Utility::phpfm_rename($oldname, $newname, false);
 
         }
         if ($success === true) {
             $this->messageboard->set_message(
-                sprintf(_("Rename %s to %s ") . _("succeed"), htmlentities_utf8(post_query("oldname")), htmlentities_utf8(post_query("newname"))),
+                sprintf(_('Rename %s to %s ') . _('succeed'), htmlentities_utf8(post_query('oldname')), htmlentities_utf8(post_query('newname'))),
                 1);
         } else {
             $this->messageboard->set_message(
-                sprintf(_("Rename %s to %s ") . " <strong>" . _("failed") . "<strong>", htmlentities_utf8(post_query("oldname")), htmlentities_utf8(post_query("newname"))),
+                sprintf(_('Rename %s to %s ') . ' <strong>' . _('failed') . '<strong>', htmlentities_utf8(post_query('oldname')), htmlentities_utf8(post_query('newname'))),
                 2);
         }
 
@@ -242,14 +242,14 @@ class Rest
     private function handle_upload()
     {
         if (!Utility::allow_to_modify()) {
-            $this->messageboard->set_message(_("Please login to upload file."), 2);
+            $this->messageboard->set_message(_('Please login to upload file.'), 2);
             Utility::redirct_by_request(false, 1);
         }
 
-        $used_ajax = post_query("ajax") == "ajax";
-        $sub_dir = rawurldecode(post_query("subdir"));
-        //get_logger()->info("post_query=".$post_subdir);
-        //get_logger()->info("sub_dir=".$sub_dir);
+        $used_ajax = post_query('ajax') == 'ajax';
+        $sub_dir = rawurldecode(post_query('subdir'));
+        //get_logger()->info('post_query='.$post_subdir);
+        //get_logger()->info('sub_dir='.$sub_dir);
 
         if (isset($_FILES['uploadFile'])) {
             if (is_array($_FILES['uploadFile']['name'])) {
@@ -261,20 +261,20 @@ class Rest
                     $uploadfile = $this->files_base_dir . $sub_dir . $upload_files['name'][$i];
                     //print_r($upload_files['tmp_name']);
                     if (Utility::phpfm_move_uploaded_file($upload_files['tmp_name'][$i], $uploadfile)) {
-                        get_logger()->info("upload success: " . $uploadfile);
+                        get_logger()->info('upload success: ' . $uploadfile);
                     } else {
                         $multi_result = false;
-                        get_logger()->info("upload failed: " . $uploadfile);
+                        get_logger()->info('upload failed: ' . $uploadfile);
                     }
                 }
 
                 if ($multi_result) {
                     $this->messageboard->set_message(
-                        _("Upload files") . " " . _("succeed"),
+                        _('Upload files') . ' ' . _('succeed'),
                         1);
                 } else {
                     $this->messageboard->set_message(
-                        _("Upload some files") . " <strong>" . _("failed") . "<strong>",
+                        _('Upload some files') . ' <strong>' . _('failed') . '<strong>',
                         2);
                 }
             } else {
@@ -283,20 +283,20 @@ class Rest
 
                 if (Utility::phpfm_move_uploaded_file($_FILES['uploadFile']['tmp_name'], $uploadfile)) {
                     $this->messageboard->set_message(
-                        _("Upload") . ":&nbsp;" . $_FILES['uploadFile']['name'] . "&nbsp;" . _("succeed"),
+                        _('Upload') . ':&nbsp;' . $_FILES['uploadFile']['name'] . '&nbsp;' . _('succeed'),
                         1);
-                    get_logger()->info("upload success: " . $uploadfile);
+                    get_logger()->info('upload success: ' . $uploadfile);
                 } else {
                     $this->messageboard->set_message(
-                        _("Upload") . ":&nbsp;" . $_FILES['uploadFile']['name'] . " <strong>" . _("failed") . "<strong>",
+                        _('Upload') . ':&nbsp;' . $_FILES['uploadFile']['name'] . ' <strong>' . _('failed') . '<strong>',
                         2);
-                    get_logger()->info("upload failed: " . $uploadfile);
+                    get_logger()->info('upload failed: ' . $uploadfile);
                 }
             }
         }
 
         if ($used_ajax) {
-            echo "ok";
+            echo 'ok';
         } else {
             Utility::redirct_by_request(false, 1);
         }
