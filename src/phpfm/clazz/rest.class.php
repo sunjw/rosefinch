@@ -132,7 +132,7 @@ class Rest
     private function handle_cut_copy()
     {
         if ($this->clipboard == null) {
-            get_logger()->error('Rest clipboard is null.');
+            get_logger()->error('Rest->clipboard is null.');
             $this->response_json_500();
             return;
         }
@@ -161,6 +161,7 @@ class Rest
             $message = str_replace('***', '<br />', $message);
             $this->messageboard->set_message($message);
             $resp_obj = new RestRet();
+            $resp_obj->message = $message;
             $this->response_json($resp_obj);
             return;
         }
