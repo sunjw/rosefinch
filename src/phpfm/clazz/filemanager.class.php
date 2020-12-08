@@ -34,7 +34,7 @@ class FileManager
     private $fstats;
     private $dstats;
 
-    private $view_page; // browser page, default is index.php
+    private $view_page; // view page, default is index.php
 
     private $clipboard;
     private $messageboard;
@@ -135,7 +135,7 @@ class FileManager
 
         $this->query_str = "s=" . $this->sort_type . "&o=" . $this->order . "&view=" . $this->view_type;
 
-        $this->init_browser();
+        $this->init_view();
 
         if (!isset($_GET['h'])) {
             // h means visit by back/forward.
@@ -144,16 +144,16 @@ class FileManager
     }
 
     /**
-     * Init browser page.
+     * Init view page.
      */
-    private function init_browser()
+    private function init_view()
     {
-        if (!Utility::allow_to_browser()) {
+        if (!Utility::allow_to_view()) {
             $this->messageboard->set_message(_("Please login to browse files."), 2);
             return;
         }
-        $this->dstats = $this->get_dirs_list($this->request_dir, $this->dsort); // 获得已排序的目录数组
-        $this->fstats = $this->get_files_list($this->request_dir, $this->sort); // 获得已排序的文件数组
+        $this->dstats = $this->get_dirs_list($this->request_dir, $this->dsort); // get sorted directory list
+        $this->fstats = $this->get_files_list($this->request_dir, $this->sort); // get sorted file list
     }
 
     /**
@@ -510,7 +510,7 @@ class FileManager
      */
     public function display_full_path()
     {
-        if (!Utility::allow_to_browser())
+        if (!Utility::allow_to_view())
             return;
         ?>
         <div id="fullpath">

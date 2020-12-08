@@ -148,8 +148,8 @@ function prepare_file_path($request_file)
     return $file;
 }
 
-if (Utility::allow_to_browser()) {
-    // Need browser permission.
+if (Utility::allow_to_view()) {
+    // Need view permission.
     $request_file = rawurldecode(get_query("file"));
     get_logger()->info(join($_GET));
 
