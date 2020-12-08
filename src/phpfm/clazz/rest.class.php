@@ -8,7 +8,33 @@ require_once 'clipboard.class.php';
 require_once 'messageboard.class.php';
 
 /**
- * Rest API Class
+ * Rest API return object Class.
+ */
+class RestRet implements JsonSerializable
+{
+    private $code; // 0: OK, 400: request error, 500: internal error.
+    private $message; // OK: '', error: 'some message'.
+    private $data; // data array.
+
+    function __construct($code = 0, $message = '', $data = [])
+    {
+        $this->code = $code;
+        $this->message = $message;
+        $this->data = $data;
+    }
+
+    public function jsonSerialize()
+    {
+        return [
+            'code' => $this->code,
+            'message' => $this->message,
+            'data' => $this->data
+        ];
+    }
+}
+
+/**
+ * Rest API Class.
  * 2009-10-7
  * @author Sun Junwen
  *

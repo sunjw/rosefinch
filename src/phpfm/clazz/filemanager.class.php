@@ -12,7 +12,7 @@ require_once "utility.class.php";
 @session_start();
 
 /**
- * File Manager Class
+ * File Manager Class.
  * 2009-8-4
  * @author Sun Junwen
  *
