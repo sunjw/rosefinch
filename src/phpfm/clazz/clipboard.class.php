@@ -9,7 +9,7 @@ require_once "utility.class.php";
 //@session_start();
 
 /**
- * Clip Board Class
+ * Clipboard Class
  *
  * 2009-8-11
  * @author Sun Junwen

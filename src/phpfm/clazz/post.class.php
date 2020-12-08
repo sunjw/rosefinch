@@ -8,7 +8,7 @@ require_once "clipboard.class.php";
 require_once "messageboard.class.php";
 
 /**
- * Search Class
+ * Rest API Class
  * 2009-10-7
  * @author Sun Junwen
  *
@@ -29,7 +29,7 @@ class Post
     }
 
     /**
-     * 执行操作
+     * Do operation.
      */
     public function do_oper()
     {
@@ -57,7 +57,7 @@ class Post
     }
 
     /**
-     * 剪切和复制的操作
+     * Cut and copy.
      */
     private function post_cut_copy()
     {
@@ -77,7 +77,7 @@ class Post
             $this->clipboard->set_items($this->oper, $items);
 
             if ($this->clipboard->have_items()) {
-                $message = _("Add items to clipboard:") . "&nbsp;<br />";//"向剪贴板添加项目:&nbsp;<br />";
+                $message = _("Add items to clipboard:") . "&nbsp;<br />";
                 $message .= htmlentities_utf8((join("***", $items)));
                 $message = str_replace("***", "<br />", $message);
                 $this->messageboard->set_message($message);
@@ -87,7 +87,7 @@ class Post
     }
 
     /**
-     * 删除的操作
+     * Delete.
      */
     private function post_delete()
     {
@@ -110,7 +110,7 @@ class Post
             $sub_dir = dirname($item);
             $path = $this->files_base_dir . $item;
             get_logger()->info("try to delete: $path");
-            $message .= (_("Delete") . " " . htmlentities_utf8($item) . " ");//("删除 $item ");
+            $message .= (_("Delete") . " " . htmlentities_utf8($item) . " ");
             $path = convert_toplat($path);
             if (file_exists($path)) {
                 if (is_dir($path)) {
@@ -134,7 +134,7 @@ class Post
     }
 
     /**
-     * 粘贴的操作
+     * Paste.
      */
     private function post_paste()
     {
@@ -155,7 +155,7 @@ class Post
     }
 
     /**
-     * 新建目录的操作
+     * New folder.
      */
     private function post_newfolder()
     {
@@ -168,13 +168,14 @@ class Post
         $name = post_query("newname");
 
         $success = false;
-        if (false === strpos($sub_dir, "..") && Utility::check_name($name)) // 过滤
+        if (false === strpos($sub_dir, "..") && Utility::check_name($name)) // filter
         {
             $name = $this->files_base_dir . $sub_dir . $name;
             get_logger()->info("mkdir: $name");
             $name = convert_toplat($name);
-            if (!file_exists($name))
+            if (!file_exists($name)) {
                 $success = @mkdir($name);
+            }
         }
 
         if ($success === true) {
@@ -192,7 +193,7 @@ class Post
     }
 
     /**
-     * 重命名的操作
+     * Rename.
      */
     private function post_rename()
     {
@@ -213,8 +214,7 @@ class Post
 
         $success = false;
         if (false === strpos($sub_dir, "..") &&
-            Utility::check_name($newname) && Utility::check_name($oldname)) // 过滤
-        {
+            Utility::check_name($newname) && Utility::check_name($oldname)) {
             $oldname = $this->files_base_dir . $sub_dir . $oldname;
             $newname = $this->files_base_dir . $sub_dir . $newname;
 
@@ -237,7 +237,7 @@ class Post
     }
 
     /**
-     * 上传的操作
+     * Upload.
      */
     private function post_upload()
     {
@@ -295,10 +295,11 @@ class Post
             }
         }
 
-        if ($used_ajax)
+        if ($used_ajax) {
             echo "ok";
-        else
+        } else {
             Utility::redirct_after_oper(false, 1);
+        }
     }
 
 }
