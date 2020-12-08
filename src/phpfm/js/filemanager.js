@@ -1,5 +1,6 @@
 var FileManager = {
     restApiUrl: 'func/rest.api.php',
+    restApiBase: 'api/v1/',
 
     funcBg: null,
     multilanTitles: null,
@@ -193,14 +194,14 @@ var FileManager = {
      */
     clickCut: function () {
         // alert('cut');
-        FileManager.sendRestApi('cut', true);
+        FileManager.sendRestApi(/*FileManager.restApiBase + */'cut', true);
     },
 
     /*
      * Copy.
      */
     clickCopy: function () {
-        FileManager.sendRestApi('copy', true);
+        FileManager.sendRestApi(FileManager.restApiBase + 'copy', true);
     },
 
     /*
@@ -406,6 +407,12 @@ var FileManager = {
             'api': api,
             'items': itemsStr
         }, function (data) {
+            if ((typeof data !== 'object' || data === null) ||
+                !('code' in data)) {
+                // Not return proper object.
+                FileManager.showMessage('Error.', true);
+                return;
+            }
             var wrong = false;
             if (data.code == 0) {
                 if (cutCopy) {
