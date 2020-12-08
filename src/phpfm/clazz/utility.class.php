@@ -543,18 +543,18 @@ class Utility
     }
 
     /**
-     * Redirect after operation.<br/>
+     * Redirect after operation.
      * Read "return" from request, rawurldecode and jump.
-     * @param bool $is_from_get read "return" from GET, default is true
+     * @param bool $from_get read "return" from GET, default is true
      * @param number $sub_dir_level sub directory level, default is 0
      */
-    public static function redirct_after_oper($is_from_get = true, $sub_dir_level = 0)
+    public static function redirct_by_request($from_get = true, $sub_dir_level = 0)
     {
         if (post_query("noredirect") != "") {
             return;
         }
 
-        if ($is_from_get) {
+        if ($from_get) {
             $returnURL = rawurldecode(get_query("return"));
         } else {
             $returnURL = rawurldecode(post_query("return"));
@@ -642,10 +642,10 @@ class Utility
      */
     public static function allow_to_browser()
     {
-        if (!defined("ROSE_BROWSER")) {
+        if (!defined("ROSE_VIEW")) {
             return true;
         }
-        return Utility::allow_to(ROSE_BROWSER);
+        return Utility::allow_to(ROSE_VIEW);
     }
 
     /**

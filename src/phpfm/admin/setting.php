@@ -45,7 +45,7 @@ if ($mode == 0) {
         'db_host' => "");
 } else if ($mode == 2) {
     $settings = array('language' => LOCALE,
-        'rose_browser' => ROSE_BROWSER,
+        'rose_view' => ROSE_VIEW,
         'rose_modify' => ROSE_MODIFY,
         'rose_admin' => ROSE_ADMIN);
 }

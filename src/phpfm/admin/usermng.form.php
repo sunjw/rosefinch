@@ -3,12 +3,12 @@
             <fieldset>
                 <legend><?php echo _("User Permission"); ?></legend>
                 <div>
-                    <label for="roseBrowser"><?php echo _("Browse Permission:"); ?></label>
-                    <select id="roseBrowser" name="roseBrowser">
-                        <option value="<?php echo User::$NOBODY; ?>" <?php if($settings['rose_browser'] == User::$NOBODY)print("selected='selected'"); ?>>Everyone</option>
-                        <option value="<?php echo User::$USER; ?>" <?php if($settings['rose_browser'] == User::$USER)print("selected='selected'"); ?>>User</option>
-                        <option value="<?php echo User::$ADMIN; ?>" <?php if($settings['rose_browser'] == User::$ADMIN)print("selected='selected'"); ?>>Administrator</option>
-                        <option value="<?php echo User::$ROOT; ?>" <?php if($settings['rose_browser'] == User::$ROOT)print("selected='selected'"); ?>>Root</option>
+                    <label for="roseView"><?php echo _("View Permission:"); ?></label>
+                    <select id="roseView" name="roseView">
+                        <option value="<?php echo User::$NOBODY; ?>" <?php if($settings['rose_view'] == User::$NOBODY)print("selected='selected'"); ?>>Everyone</option>
+                        <option value="<?php echo User::$USER; ?>" <?php if($settings['rose_view'] == User::$USER)print("selected='selected'"); ?>>User</option>
+                        <option value="<?php echo User::$ADMIN; ?>" <?php if($settings['rose_view'] == User::$ADMIN)print("selected='selected'"); ?>>Administrator</option>
+                        <option value="<?php echo User::$ROOT; ?>" <?php if($settings['rose_view'] == User::$ROOT)print("selected='selected'"); ?>>Root</option>
                     </select>
                     <div class="info">
                         <?php 

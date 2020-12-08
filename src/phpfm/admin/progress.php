@@ -101,7 +101,7 @@ function save_general(&$settings)
         //echo $settings;
 
         $settings_php = fopen("settings.inc.php", "w");
-        fwrite($settings_php, $settings_str); // 写回配置文件
+        fwrite($settings_php, $settings_str); // write back
         fclose($settings_php);
 
         if ($settings['usermng'] && !USERMNG && !file_exists("usermng.inc.php")) {
@@ -112,7 +112,7 @@ function save_general(&$settings)
             fclose($settings_tpl);
             //print_r( $settings);
 
-            $templates = array("&&ROSE_BROWSER&&",
+            $templates = array("&&ROSE_VIEW&&",
                 "&&ROSE_MODIFY&&",
                 "&&ROSE_ADMIN&&");
             $values = array(0, 100, 100);
@@ -121,7 +121,7 @@ function save_general(&$settings)
             //echo $settings;
 
             $settings_php = fopen("usermng.inc.php", "w");
-            fwrite($settings_php, $settings_str); // 写回配置文件
+            fwrite($settings_php, $settings_str); // write back
             fclose($settings_php);
         }
 
@@ -132,11 +132,11 @@ function save_general(&$settings)
 
 function save_usermng(&$settings)
 {
-    $settings['rose_browser'] = post_query("roseBrowser");
+    $settings['rose_view'] = post_query("roseView");
     $settings['rose_modify'] = post_query("roseModify");
     $settings['rose_admin'] = post_query("roseAdmin");
 
-    if ($settings['rose_browser'] == "" ||
+    if ($settings['rose_view'] == "" ||
         $settings['rose_modify'] == "" ||
         $settings['rose_admin'] == "") {
         return false;
@@ -152,10 +152,10 @@ function save_usermng(&$settings)
     fclose($settings_tpl);
     //print_r( $settings);
 
-    $templates = array("&&ROSE_BROWSER&&",
+    $templates = array("&&ROSE_VIEW&&",
         "&&ROSE_MODIFY&&",
         "&&ROSE_ADMIN&&");
-    $values = array($settings['rose_browser'],
+    $values = array($settings['rose_view'],
         $settings['rose_modify'],
         $settings['rose_admin']);
 
@@ -163,7 +163,7 @@ function save_usermng(&$settings)
     //echo $settings;
 
     $settings_php = fopen("usermng.inc.php", "w");
-    fwrite($settings_php, $settings_str); // 写回配置文件
+    fwrite($settings_php, $settings_str); // write back
     fclose($settings_php);
 
     return true;

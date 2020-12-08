@@ -130,7 +130,7 @@ class Rest
 
         $this->messageboard->set_message($message, $stat);
 
-        Utility::redirct_after_oper(false, 1);
+        Utility::redirct_by_request(false, 1);
     }
 
     /**
@@ -161,7 +161,7 @@ class Rest
     {
         if (!Utility::allow_to_modify()) {
             $this->messageboard->set_message(_("Please login to make a new folder."), 2);
-            Utility::redirct_after_oper(false, 1);
+            Utility::redirct_by_request(false, 1);
         }
 
         $sub_dir = rawurldecode(post_query("subdir"));
@@ -189,7 +189,7 @@ class Rest
         }
 
 
-        Utility::redirct_after_oper(false, 1);
+        Utility::redirct_by_request(false, 1);
     }
 
     /**
@@ -199,7 +199,7 @@ class Rest
     {
         if (!Utility::allow_to_modify()) {
             $this->messageboard->set_message(_("Please login to rename file."), 2);
-            Utility::redirct_after_oper(false, 1);
+            Utility::redirct_by_request(false, 1);
         }
 
         //$sub_dir = rawurldecode(post_query("subdir"));
@@ -233,7 +233,7 @@ class Rest
                 2);
         }
 
-        Utility::redirct_after_oper(false, 1);
+        Utility::redirct_by_request(false, 1);
     }
 
     /**
@@ -243,7 +243,7 @@ class Rest
     {
         if (!Utility::allow_to_modify()) {
             $this->messageboard->set_message(_("Please login to upload file."), 2);
-            Utility::redirct_after_oper(false, 1);
+            Utility::redirct_by_request(false, 1);
         }
 
         $used_ajax = post_query("ajax") == "ajax";
@@ -298,7 +298,7 @@ class Rest
         if ($used_ajax) {
             echo "ok";
         } else {
-            Utility::redirct_after_oper(false, 1);
+            Utility::redirct_by_request(false, 1);
         }
     }
 

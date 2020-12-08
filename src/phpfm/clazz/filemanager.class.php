@@ -34,13 +34,13 @@ class FileManager
     private $fstats;
     private $dstats;
 
-    private $browser_page; // browser page, default is index.php
+    private $view_page; // browser page, default is index.php
 
     private $clipboard;
     private $messageboard;
     private $history;
 
-    function __construct($browser_page = "index.php")
+    function __construct($view_page = "index.php")
     {
         /*
          * all string are UTF-8!!!
@@ -53,7 +53,7 @@ class FileManager
         $this->messageboard = Utility::get_messageboard();
         $this->history = Utility::get_history();
 
-        $this->browser_page = $browser_page;
+        $this->view_page = $view_page;
 
         $this->dstats = array();
         $this->fstats = array();
@@ -424,7 +424,7 @@ class FileManager
                         continue;
                     }
 
-                    $a_href = $this->browser_page . "?" .
+                    $a_href = $this->view_page . "?" .
                         $this->query_str . "&dir=" .
                         rawurlencode($this->request_sub_dir .
                             $dir['name']);
@@ -515,7 +515,7 @@ class FileManager
         ?>
         <div id="fullpath">
             <div>
-                <div class="divDir"><a href="<?php echo $this->browser_page . "?" . $this->query_str; ?>">Root</a></div>
+                <div class="divDir"><a href="<?php echo $this->view_page . "?" . $this->query_str; ?>">Root</a></div>
                 <div class="pathSlash menuContainer">
                     <a class="arrow menuButton" href="javascript:void(0);">&nbsp;</a>
 
@@ -536,7 +536,7 @@ class FileManager
                     $dir_str .= $sub_dir;
                     ?>
                     <div class="divDir">
-                        <a href="<?php echo $this->browser_page . "?" . $this->query_str; ?>&dir=<?php echo rawurlencode($dir_str); ?>">
+                        <a href="<?php echo $this->view_page . "?" . $this->query_str; ?>&dir=<?php echo rawurlencode($dir_str); ?>">
                             <?php echo str_replace(" ", "&nbsp;", $sub_dir); ?>
                         </a>
                     </div>
@@ -578,7 +578,7 @@ class FileManager
                             if (!$this->filter_item($sub_dstat)) {
                                 ?>
                                 <li>
-                                    <a href="<?php echo $this->browser_page . "?" . $this->query_str; ?>&dir=<?php echo rawurlencode($sub_dir_str . $sub_dstat['name']); ?>"
+                                    <a href="<?php echo $this->view_page . "?" . $this->query_str; ?>&dir=<?php echo rawurlencode($sub_dir_str . $sub_dstat['name']); ?>"
                                        title="<?php echo $sub_dstat['name']; ?>">
                                         <?php
                                         if ($sub_dstat['name'] == $next_in_path) {
@@ -605,7 +605,7 @@ class FileManager
      */
     public function display_toolbar()
     {
-        $this_page = $this->browser_page;
+        $this_page = $this->view_page;
 
         // Prepare basic icons.
         $this->prepare_basic_funcs($query_str, $up, $up_img, $new_folder_img, $upload_img);
@@ -865,7 +865,7 @@ class FileManager
      */
     private function display_header()
     {
-        $this_page = $this->browser_page;
+        $this_page = $this->view_page;
 
         $request_sub_dir = $this->request_sub_dir;
         $sort_type = $this->sort_type;
@@ -944,7 +944,7 @@ class FileManager
     {
         if ($this->request_sub_dir != "") {
             //echo $request_sub_dir;
-            $up = $this->browser_page . "?";
+            $up = $this->view_page . "?";
             $up .= $this->query_str;
             $up .= ("&dir=" . $this->get_parent_dir($this->request_sub_dir));
             ?>
@@ -1069,7 +1069,7 @@ class FileManager
 
         //echo $request_sub_dir;
         // Set UP, new folder and upload state.
-        $up = $this->browser_page . "?";
+        $up = $this->view_page . "?";
         $up .= $this->query_str;
         $up .= ("&dir=" . rawurlencode($this->get_parent_dir($this->request_sub_dir)));
     }

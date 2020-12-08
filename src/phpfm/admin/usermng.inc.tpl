@@ -1,8 +1,8 @@
 <?php
 
-// 权限 privilege
-define("ROSE_BROWSER", &&ROSE_BROWSER&&); // 浏览
-define("ROSE_MODIFY", &&ROSE_MODIFY&&); // 修改文件
-define("ROSE_ADMIN", &&ROSE_ADMIN&&); // 全部管理
+// privilege
+define("ROSE_VIEW", &&ROSE_VIEW&&); // view
+define("ROSE_MODIFY", &&ROSE_MODIFY&&); // modify
+define("ROSE_ADMIN", &&ROSE_ADMIN&&); // admin
 
 ?>
