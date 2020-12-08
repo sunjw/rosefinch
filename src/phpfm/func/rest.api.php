@@ -1,9 +1,11 @@
 <?php
 require_once dirname(__FILE__) . '/../clazz/rest.class.php';
 
+$REQUEST_SESSION_NAME = 'session';
+
 // For HTML5 upload.
-if (isset($_REQUEST['session']) && $_REQUEST['session']) {
-    @session_id($_REQUEST['session']);
+if (isset($_REQUEST[$REQUEST_SESSION_NAME]) && $_REQUEST[$REQUEST_SESSION_NAME]) {
+    @session_id($_REQUEST[$REQUEST_SESSION_NAME]);
 }
 
 @session_start();
