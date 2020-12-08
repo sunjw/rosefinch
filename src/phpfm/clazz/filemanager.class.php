@@ -212,7 +212,7 @@ class FileManager
     {
         $current_dir = "";
         $temp = $this->request_sub_dir;
-        $temp = erase_last_slash($this->request_sub_dir);
+        $temp = trim_last_slash($this->request_sub_dir);
 
         if ($temp == "") {
             $current_dir = "Root";

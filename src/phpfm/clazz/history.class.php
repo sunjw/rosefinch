@@ -30,7 +30,7 @@ class HistoryItem
         if ($this->dir == "") {
             return "Root";
         } else {
-            return erase_last_slash($this->dir);
+            return trim_last_slash($this->dir);
         }
     }
 
