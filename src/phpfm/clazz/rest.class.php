@@ -13,7 +13,7 @@ require_once "messageboard.class.php";
  * @author Sun Junwen
  *
  */
-class Post
+class Rest
 {
     private $files_base_dir;
     private $messageboard;
