@@ -193,14 +193,14 @@ var FileManager = {
      */
     clickCut: function () {
         // alert('cut');
-        FileManager.sendRestApi('cut');
+        FileManager.sendAjaxApi('cut');
     },
 
     /*
      * Copy.
      */
     clickCopy: function () {
-        FileManager.sendRestApi('copy');
+        FileManager.sendAjaxApi('copy');
     },
 
     /*
@@ -316,34 +316,39 @@ var FileManager = {
     getMessage: function () {
         $.get('func/getmessage.ajax.php', function (data) {
             if (data != '') {
-                var phpfmMessage = $('#phpfmMessage');
-                if (phpfmMessage.length == 1) {
-                    var msg;
-                    var stat;
+                var msg;
+                var stat;
+                data = data.split('|PHPFM|');
+                msg = data[0];
+                stat = data[1];
 
-                    data = data.split('|PHPFM|');
-                    msg = data[0];
-                    stat = data[1];
-
-                    phpfmMessage.html(msg);
-                    if (stat == 2) {
-                        // Wrong!
-                        phpfmMessage.addClass('wrong');
-                    } else {
-                        phpfmMessage.removeClass('wrong');
-                    }
-
-                    phpfmMessage.slideToggle();
-                }
-
-                phpfmMessage.click(FileManager.closeMessage);
-                clearTimeout(FileManager.delayID);
-                FileManager.delayID = setTimeout(function () {
-                    FileManager.closeMessage();
-                }, 5000);
+                FileManager.showMessage(msg, (stat == 2));
             }
         });
 
+    },
+
+    /*
+     * Show message with auto close.
+     */
+    showMessage: function (msg, wrong) {
+        var phpfmMessage = $('#phpfmMessage');
+        if (phpfmMessage.length == 1) {
+            phpfmMessage.html(msg);
+            if (wrong) {
+                phpfmMessage.addClass('wrong');
+            } else {
+                phpfmMessage.removeClass('wrong');
+            }
+
+            phpfmMessage.slideToggle();
+        }
+
+        phpfmMessage.click(FileManager.closeMessage);
+        clearTimeout(FileManager.delayID);
+        FileManager.delayID = setTimeout(function () {
+            FileManager.closeMessage();
+        }, 5000);
     },
 
     /*
@@ -364,9 +369,9 @@ var FileManager = {
     },
 
     /*
-     * Send ajax.
+     * Send old ajax request.
      */
-    sendRestApi: function (api) {
+    sendAjaxApi: function (api) {
         var itemsStr = FileManager.selectedItems.join('|');
 
         // var subdir = $('input#subdir').val();
@@ -389,6 +394,40 @@ var FileManager = {
         setTimeout(function () {
             FileManager.getMessage();
         }, 500);
+    },
+
+    /*
+     * Send REST API request.
+     */
+    sendRestApi: function (api, cutCopy) {
+        var itemsStr = FileManager.selectedItems.join('|');
+
+        // var subdir = $('input#subdir').val();
+
+        $.post(FileManager.restApiUrl, {
+            'api': api,
+            'items': itemsStr
+        }, function (data) {
+            if (data.code == 0) {
+                // OK
+                if (cutCopy) {
+                    FileManager.setButton('toolbarPaste',
+                        'images/toolbar-paste.png', FileManager.clickPaste, '',
+                        'disable');
+                }
+            } else {
+                // Error
+                if (cutCopy) {
+                    FileManager.setButton('toolbarPaste',
+                        'images/toolbar-paste.png',
+                        FileManager.dummy, 'disable', '');
+                }
+            }
+
+            setTimeout(function () {
+                FileManager.getMessage();
+            }, 500);
+        });
     },
 
     /*
