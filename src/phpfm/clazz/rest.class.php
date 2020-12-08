@@ -12,9 +12,9 @@ require_once 'messageboard.class.php';
  */
 class RestRet implements JsonSerializable
 {
-    private $code; // 0: OK, 400: request error, 500: internal error.
-    private $message; // OK: '', error: 'some message'.
-    private $data; // data array.
+    public $code; // 0: OK, 400: request error, 500: internal error.
+    public $message; // OK: '', error: 'some message'.
+    public $data; // data array.
 
     function __construct($code = 0, $message = '', $data = [])
     {
@@ -79,6 +79,25 @@ class Rest
         redirect($return_url);
     }
 
+    private function response_json($resp_obj)
+    {
+        header('Content-Type: application/json');
+        echo json_encode($resp_obj);
+        exit;
+    }
+
+    private function response_json_500()
+    {
+        $resp_obj = new RestRet(500, 'Internal Server Error.');
+        $this->response_json($resp_obj);
+    }
+
+    private function response_json_400()
+    {
+        $resp_obj = new RestRet(400, 'Bad request.');
+        $this->response_json($resp_obj);
+    }
+
     /**
      * Handle API request.
      */
@@ -112,29 +131,42 @@ class Rest
      */
     private function handle_cut_copy()
     {
-        if ($this->clipboard != null) {
-            if (!Utility::allow_to_modify()) {
-                $this->messageboard->set_message(_('Please login to cut or copy files.'), 2);
-                echo 'ok';
-                return;
-            }
-
-            $items = post_query('items');
-
-            $items = explode('|', $items);
-            $items = Utility::filter_paths($items);
-            //print_r($files);
-
-            $this->clipboard->set_items($this->api, $items);
-
-            if ($this->clipboard->have_items()) {
-                $message = _('Add items to clipboard:') . '&nbsp;<br />';
-                $message .= htmlentities_utf8((join('***', $items)));
-                $message = str_replace('***', '<br />', $message);
-                $this->messageboard->set_message($message);
-                echo 'ok';
-            }
+        if ($this->clipboard == null) {
+            get_logger()->error('Rest clipboard is null.');
+            $this->response_json_500();
+            return;
         }
+
+        if (!Utility::allow_to_modify()) {
+            $message = 'Not allowed to cut or copy files.';
+            get_logger()->warning($message);
+            $this->messageboard->set_message(_($message), 2);
+            $this->response_json_400();
+            return;
+        }
+
+        $items = post_query('items');
+
+        $items = explode('|', $items);
+        $items = Utility::filter_paths($items);
+        //print_r($files);
+
+        $this->clipboard->set_items($this->api, $items);
+        $message = 'Add items to clipboard: [' . join(',', $items) . ']';
+        get_logger()->info($message);
+
+        if ($this->clipboard->have_items()) {
+            $message = _('Add items to clipboard:') . '&nbsp;<br />';
+            $message .= htmlentities_utf8((join('***', $items)));
+            $message = str_replace('***', '<br />', $message);
+            $this->messageboard->set_message($message);
+            $resp_obj = new RestRet();
+            $this->response_json($resp_obj);
+            return;
+        }
+
+        get_logger()->error('No item in clipboard.');
+        $this->response_json_500();
     }
 
     /**
