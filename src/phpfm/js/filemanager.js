@@ -401,32 +401,36 @@ var FileManager = {
      * Send cut/copy REST API request.
      */
     sendCutCopyRestApi: function (api) {
-        var itemsStr = FileManager.selectedItems.join('|');
+        var reqObj = {};
+        reqObj.items = FileManager.selectedItems;
 
-        $.post(FileManager.restApiUrl, {
-            'api': api,
-            'items': itemsStr
-        }, function (data) {
-            if ((typeof data !== 'object' || data === null) ||
-                !('code' in data)) {
-                // Not return proper object.
-                FileManager.showMessage('Error.', true);
-                return;
-            }
-            var wrong = false;
-            if (data.code == 0) {
-                FileManager.setButton('toolbarPaste',
-                    'images/toolbar-paste.png', FileManager.clickPaste, '',
-                    'disable');
-            } else {
-                // Error
-                wrong = true;
-                FileManager.setButton('toolbarPaste',
-                    'images/toolbar-paste.png',
-                    FileManager.dummy, 'disable', '');
-            }
-            if (data.message != '') {
-                FileManager.showMessage(data.message, wrong);
+        $.ajax({
+            type: 'POST',
+            url: FileManager.restApiUrl + '?api=' + api,
+            data: JSON.stringify(reqObj),
+            contentType: "application/json",
+            success: function (data) {
+                if ((typeof data !== 'object' || data === null) ||
+                    !('code' in data)) {
+                    // Not return proper object.
+                    FileManager.showMessage('Error.', true);
+                    return;
+                }
+                var wrong = false;
+                if (data.code == 0) {
+                    FileManager.setButton('toolbarPaste',
+                        'images/toolbar-paste.png', FileManager.clickPaste, '',
+                        'disable');
+                } else {
+                    // Error
+                    wrong = true;
+                    FileManager.setButton('toolbarPaste',
+                        'images/toolbar-paste.png',
+                        FileManager.dummy, 'disable', '');
+                }
+                if (data.message != '') {
+                    FileManager.showMessage(data.message, wrong);
+                }
             }
         });
     },

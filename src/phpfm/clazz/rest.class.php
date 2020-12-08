@@ -51,7 +51,7 @@ class Rest
         $this->files_base_dir = Utility::get_file_base_dir();
         $this->messageboard = Utility::get_messageboard();
         $this->clipboard = Utility::get_clipboard(false);
-        $this->api = post_query('api');
+        $this->api = get_query('api');
     }
 
     /**
@@ -109,7 +109,7 @@ class Rest
             switch ($api) {
                 case 'cut':
                 case 'copy':
-                    $this->handle_cut_copy();
+                    $this->handle_cut_copy(($api == 'cut'));
                     break;
                 case 'delete':
                     $this->handle_delete();
@@ -140,8 +140,10 @@ class Rest
     /**
      * Cut and copy.
      */
-    private function handle_cut_copy()
+    private function handle_cut_copy($is_cut)
     {
+        get_logger()->info('handle_cut_copy.');
+
         if ($this->clipboard == null) {
             get_logger()->error('Rest->clipboard is null.');
             $this->response_json_500();
@@ -156,14 +158,13 @@ class Rest
             return;
         }
 
-        $items = post_query('items');
-
-        $items = explode('|', $items);
+        $req_obj = read_body_json();
+        $items = $req_obj['items'];
         $items = Utility::filter_paths($items);
         //print_r($files);
 
-        $this->clipboard->set_items($this->api, $items);
-        $message = 'Add items to clipboard: [' . join(',', $items) . ']';
+        $this->clipboard->set_items(($is_cut ? 'cut' : 'copy'), $items);
+        $message = 'Add items to clipboard: [' . join(', ', $items) . ']';
         get_logger()->info($message);
 
         if ($this->clipboard->have_items()) {

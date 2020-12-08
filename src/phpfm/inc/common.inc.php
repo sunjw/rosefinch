@@ -29,6 +29,17 @@ function get_query($param_name)
 }
 
 /**
+ * Get request body JSON data.
+ * @return mixed
+ */
+function read_body_json()
+{
+    $req_body = file_get_contents('php://input');
+    $req_json = json_decode($req_body, TRUE); //convert JSON into array
+    return $req_json;
+}
+
+/**
  * Get value from $_COOKIE.
  * @param string $name cookie name
  * @return string value or ''
