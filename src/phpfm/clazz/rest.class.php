@@ -140,14 +140,14 @@ class Rest
             case 'copy':
                 $this->handle_cut_copy(($api == 'cut'));
                 break;
+            case 'paste':
+                $this->handle_paste();
+                break;
             case 'delete':
                 $this->handle_delete();
                 break;
             case 'newfolder':
                 $this->handle_newfolder();
-                break;
-            case 'paste':
-                $this->handle_paste();
                 break;
             case 'rename':
                 $this->handle_rename();
