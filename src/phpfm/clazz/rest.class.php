@@ -55,6 +55,17 @@ class Rest
     }
 
     /**
+     * Remove prefix of api.
+     * @param string $api
+     * @param string $prefix
+     * @return string api with prefix removed
+     */
+    private function api_chain($api, $prefix)
+    {
+        return substr($api, strlen($prefix));
+    }
+
+    /**
      * Response with 302 redirect.
      * Read "return" from request, rawurldecode and jump.
      * @param bool $from_get read "return" from GET, default is true
@@ -105,7 +116,7 @@ class Rest
     {
         $api_v1_prefix = 'api/v1/';
         if (starts_with($this->api, $api_v1_prefix)) {
-            $api = substr($this->api, strlen($api_v1_prefix));
+            $api = $this->api_chain($this->api, $api_v1_prefix);
             switch ($api) {
                 case 'cut':
                 case 'copy':
@@ -153,7 +164,6 @@ class Rest
         if (!Utility::allow_to_modify()) {
             $message = 'Not allowed to cut or copy files.';
             get_logger()->warning($message);
-            $this->messageboard->set_message(_($message), 2);
             $this->response_json_400();
             return;
         }
@@ -171,7 +181,6 @@ class Rest
             $message = _('Add items to clipboard:') . '&nbsp;<br />';
             $message .= htmlentities_utf8((join('***', $items)));
             $message = str_replace('***', '<br />', $message);
-            $this->messageboard->set_message($message);
             $resp_obj = new RestRet();
             $resp_obj->message = $message;
             $this->response_json($resp_obj);

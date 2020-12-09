@@ -370,34 +370,6 @@ var FileManager = {
     },
 
     /*
-     * Send old ajax request.
-     */
-    sendAjaxApi: function (api) {
-        var itemsStr = FileManager.selectedItems.join('|');
-
-        // var subdir = $('input#subdir').val();
-
-        $.post(FileManager.restApiUrl, {
-            'api': api,
-            'items': itemsStr
-        }, function (data) {
-            if (data == 'ok') {
-                FileManager.setButton('toolbarPaste',
-                    'images/toolbar-paste.png', FileManager.clickPaste, '',
-                    'disable');
-            } else {
-                FileManager.setButton('toolbarPaste',
-                    'images/toolbar-paste.png',
-                    FileManager.dummy, 'disable', '');
-            }
-        });
-
-        setTimeout(function () {
-            FileManager.getMessage();
-        }, 500);
-    },
-
-    /*
      * Send cut/copy REST API request.
      */
     sendCutCopyRestApi: function (api) {
@@ -431,6 +403,12 @@ var FileManager = {
                 if (data.message != '') {
                     FileManager.showMessage(data.message, wrong);
                 }
+            },
+            error: function () {
+                FileManager.setButton('toolbarPaste',
+                    'images/toolbar-paste.png',
+                    FileManager.dummy, 'disable', '');
+                FileManager.showMessage('Request error.', true);
             }
         });
     },
