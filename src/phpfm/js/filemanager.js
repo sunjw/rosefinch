@@ -370,46 +370,61 @@ var FileManager = {
     },
 
     /*
+     * Send REST API request.
+     */
+    sendRestApi: function (method, api, reqObj, successCallback, errorCallback) {
+        $.ajax({
+            type: method,
+            url: FileManager.restApiUrl + '?api=' + api,
+            data: reqObj ? JSON.stringify(reqObj) : null,
+            contentType: "application/json",
+            success: function (data) {
+                if (successCallback) {
+                    successCallback(data);
+                }
+            },
+            error: function () {
+                if (errorCallback) {
+                    errorCallback();
+                }
+            }
+        });
+    },
+
+    /*
      * Send cut/copy REST API request.
      */
     sendCutCopyRestApi: function (api) {
         var reqObj = {};
         reqObj.items = FileManager.selectedItems;
 
-        $.ajax({
-            type: 'POST',
-            url: FileManager.restApiUrl + '?api=' + api,
-            data: JSON.stringify(reqObj),
-            contentType: "application/json",
-            success: function (data) {
-                if ((typeof data !== 'object' || data === null) ||
-                    !('code' in data)) {
-                    // Not return proper object.
-                    FileManager.showMessage('Error.', true);
-                    return;
-                }
-                var wrong = false;
-                if (data.code == 0) {
-                    FileManager.setButton('toolbarPaste',
-                        'images/toolbar-paste.png', FileManager.clickPaste, '',
-                        'disable');
-                } else {
-                    // Error
-                    wrong = true;
-                    FileManager.setButton('toolbarPaste',
-                        'images/toolbar-paste.png',
-                        FileManager.dummy, 'disable', '');
-                }
-                if (data.message != '') {
-                    FileManager.showMessage(data.message, wrong);
-                }
-            },
-            error: function () {
+        FileManager.sendRestApi('POST', api, reqObj, function (data) {
+            if ((typeof data !== 'object' || data === null) ||
+                !('code' in data)) {
+                // Not return proper object.
+                FileManager.showMessage('Error.', true);
+                return;
+            }
+            var wrong = false;
+            if (data.code == 0) {
+                FileManager.setButton('toolbarPaste',
+                    'images/toolbar-paste.png', FileManager.clickPaste, '',
+                    'disable');
+            } else {
+                // Error
+                wrong = true;
                 FileManager.setButton('toolbarPaste',
                     'images/toolbar-paste.png',
                     FileManager.dummy, 'disable', '');
-                FileManager.showMessage('Request error.', true);
             }
+            if (data.message != '') {
+                FileManager.showMessage(data.message, wrong);
+            }
+        }, function () {
+            FileManager.setButton('toolbarPaste',
+                'images/toolbar-paste.png',
+                FileManager.dummy, 'disable', '');
+            FileManager.showMessage('Request error.', true);
         });
     },
 
