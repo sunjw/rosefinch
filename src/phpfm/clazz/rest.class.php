@@ -219,7 +219,8 @@ class Rest
             return;
         }
 
-        $target_subdir = rawurldecode(post_query('subdir'));
+        $req_obj = read_body_json();
+        $target_subdir = rawurldecode($req_obj['subdir']);
         $this->clipboard->paste($target_subdir);
 
         //print_r($_GET);

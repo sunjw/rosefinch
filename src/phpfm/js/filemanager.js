@@ -65,6 +65,10 @@ var FileManager = {
         return;
     },
 
+    refresh: function () {
+        window.location.reload();
+    },
+
     getItemCheckbox: function (item) {
         return $(item.children().get(0)).children().get(0); // Stupid way.
     },
@@ -209,24 +213,16 @@ var FileManager = {
      */
     clickPaste: function () {
         var subdir = $('input#subdir').attr('value');
-        var returnURL = $('input#return').val();
+        var returnUrl = $('input#return').val();
+        var reqObj = {};
+        reqObj.subdir = subdir;
 
         FileManager.displayFuncDialog('', 'waiting',
             'waiting', null);
 
-        $.post(FileManager.restApiUrl, {
-            'api': 'paste',
-            'subdir': subdir,
-            'return': returnURL
-        }, function () {
-            // alert(data);
-            window.location.reload();
+        FileManager.sendPostRestApi(FileManager.restApiPrefix + 'fm/paste', reqObj, function () {
+            FileManager.refresh();
         });
-        /*
-         * $.get('func/paste.ajax.php?subdir=' + subdir + '&return=' +
-         * returnURL, function(data) { // alert(data); window.location.reload();
-         * });
-         */
     },
 
     /*
@@ -392,13 +388,20 @@ var FileManager = {
     },
 
     /*
+     * Send POST REST API request.
+     */
+    sendPostRestApi: function (api, reqObj, successCallback, errorCallback) {
+        FileManager.sendRestApi('POST', api, reqObj, successCallback, errorCallback);
+    },
+
+    /*
      * Send cut/copy REST API request.
      */
     sendCutCopyRestApi: function (api) {
         var reqObj = {};
         reqObj.items = FileManager.selectedItems;
 
-        FileManager.sendRestApi('POST', api, reqObj, function (data) {
+        FileManager.sendPostRestApi(api, reqObj, function (data) {
             if ((typeof data !== 'object' || data === null) ||
                 !('code' in data)) {
                 // Not return proper object.
