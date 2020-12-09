@@ -83,7 +83,7 @@ class Rest
         }
 
         if ($return_url == '') {
-            get_logger()->error('Not "return" found in request.');
+            get_logger()->error('response_redirect, no "return" found in request.');
             response_400();
         }
 
@@ -117,34 +117,48 @@ class Rest
         $api_v1_prefix = 'api/v1/';
         if (starts_with($this->api, $api_v1_prefix)) {
             $api = $this->api_chain($this->api, $api_v1_prefix);
-            switch ($api) {
-                case 'cut':
-                case 'copy':
-                    $this->handle_cut_copy(($api == 'cut'));
-                    break;
-                case 'delete':
-                    $this->handle_delete();
-                    break;
-                case 'newfolder':
-                    $this->handle_newfolder();
-                    break;
-                case 'paste':
-                    $this->handle_paste();
-                    break;
-                case 'rename':
-                    $this->handle_rename();
-                    break;
-                case 'upload':
-                    $this->handle_upload();
-                    break;
-                default:
-                    get_logger()->error('Wrong API request: [' . $this->api . ']');
-                    $this->response_json_400();
-                    break;
+
+            $fm_prefix = 'fm/';
+            if (starts_with($api, $fm_prefix)) {
+                $api = $this->api_chain($api, $fm_prefix);
+                $this->handle_fm_request($api);
+            } else {
+                get_logger()->error('handle_request, wrong API request: [' . $this->api . ']');
+                $this->response_json_400();
+                return;
             }
         } else {
-            get_logger()->error('Wrong API request: [' . $this->api . ']');
+            get_logger()->error('handle_request, wrong API request: [' . $this->api . ']');
             $this->response_json_400();
+        }
+    }
+
+    private function handle_fm_request($api)
+    {
+        switch ($api) {
+            case 'cut':
+            case 'copy':
+                $this->handle_cut_copy(($api == 'cut'));
+                break;
+            case 'delete':
+                $this->handle_delete();
+                break;
+            case 'newfolder':
+                $this->handle_newfolder();
+                break;
+            case 'paste':
+                $this->handle_paste();
+                break;
+            case 'rename':
+                $this->handle_rename();
+                break;
+            case 'upload':
+                $this->handle_upload();
+                break;
+            default:
+                get_logger()->error('handle_fm_request, wrong API request: [' . $this->api . ']');
+                $this->response_json_400();
+                break;
         }
     }
 
@@ -156,14 +170,13 @@ class Rest
         get_logger()->info('handle_cut_copy.');
 
         if ($this->clipboard == null) {
-            get_logger()->error('Rest->clipboard is null.');
+            get_logger()->error('handle_cut_copy, Rest->clipboard is null.');
             $this->response_json_500();
             return;
         }
 
         if (!Utility::allow_to_modify()) {
-            $message = 'Not allowed to cut or copy files.';
-            get_logger()->warning($message);
+            get_logger()->warning('handle_cut_copy, not allowed to cut or copy files.');
             $this->response_json_400();
             return;
         }
@@ -174,7 +187,7 @@ class Rest
         //print_r($files);
 
         $this->clipboard->set_items(($is_cut ? 'cut' : 'copy'), $items);
-        $message = 'Add items to clipboard: [' . join(', ', $items) . ']';
+        $message = 'handle_cut_copy, add items to clipboard: [' . join(', ', $items) . ']';
         get_logger()->info($message);
 
         if ($this->clipboard->have_items()) {
@@ -187,7 +200,7 @@ class Rest
             return;
         }
 
-        get_logger()->error('No item in clipboard.');
+        get_logger()->error('handle_cut_copy, no item in clipboard.');
         $this->response_json_500();
     }
 
@@ -214,7 +227,7 @@ class Rest
             $item = $items[$i];
             $sub_dir = dirname($item);
             $path = $this->files_base_dir . $item;
-            get_logger()->info('try to delete: ' . $path);
+            get_logger()->info('handle_delete, try to delete: [' . $path . ']');
             $message .= (_('Delete') . ' ' . htmlentities_utf8($item) . ' ');
             $path = convert_toplat($path);
             if (file_exists($path)) {
@@ -322,7 +335,7 @@ class Rest
             $oldname = $this->files_base_dir . $sub_dir . $oldname;
             $newname = $this->files_base_dir . $sub_dir . $newname;
 
-            get_logger()->info('Try to rename: ' . $oldname . ' to ' . $newname);
+            get_logger()->info('handle_rename, try to rename: [' . $oldname . '] to [' . $newname . ']');
 
             $success = Utility::phpfm_rename($oldname, $newname, false);
 
@@ -365,10 +378,10 @@ class Rest
                     $uploadfile = $this->files_base_dir . $sub_dir . $upload_files['name'][$i];
                     //print_r($upload_files['tmp_name']);
                     if (Utility::phpfm_move_uploaded_file($upload_files['tmp_name'][$i], $uploadfile)) {
-                        get_logger()->info('upload success: ' . $uploadfile);
+                        get_logger()->info('handle_upload, upload success: [' . $uploadfile . ']');
                     } else {
                         $multi_result = false;
-                        get_logger()->info('upload failed: ' . $uploadfile);
+                        get_logger()->info('handle_upload, upload failed: [' . $uploadfile . ']');
                     }
                 }
 
@@ -389,12 +402,12 @@ class Rest
                     $this->messageboard->set_message(
                         _('Upload') . ':&nbsp;' . $_FILES['uploadFile']['name'] . '&nbsp;' . _('succeed'),
                         1);
-                    get_logger()->info('upload success: ' . $uploadfile);
+                    get_logger()->info('handle_upload, upload success: [' . $uploadfile . ']');
                 } else {
                     $this->messageboard->set_message(
                         _('Upload') . ':&nbsp;' . $_FILES['uploadFile']['name'] . ' <strong>' . _('failed') . '<strong>',
                         2);
-                    get_logger()->info('upload failed: ' . $uploadfile);
+                    get_logger()->info('handle_upload, upload failed: [' . $uploadfile . ']');
                 }
             }
         }

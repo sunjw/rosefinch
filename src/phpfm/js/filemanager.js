@@ -194,14 +194,14 @@ var FileManager = {
      */
     clickCut: function () {
         // alert('cut');
-        FileManager.sendCutCopyRestApi(FileManager.restApiPrefix + 'cut');
+        FileManager.sendCutCopyRestApi(FileManager.restApiPrefix + 'fm/cut');
     },
 
     /*
      * Copy.
      */
     clickCopy: function () {
-        FileManager.sendCutCopyRestApi(FileManager.restApiPrefix + 'copy');
+        FileManager.sendCutCopyRestApi(FileManager.restApiPrefix + 'fm/copy');
     },
 
     /*
