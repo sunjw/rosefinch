@@ -375,17 +375,25 @@ class Rest
      */
     private function handle_upload()
     {
-        if (!Utility::allow_to_modify()) {
-            $this->messageboard->set_message(_('Please login to upload file.'), 2);
-            $this->response_redirect(false);
-        }
-
         $is_ajax = post_query('ajax') == 'ajax';
         $sub_dir = rawurldecode(post_query('subdir'));
-        //get_logger()->info('post_query='.$post_subdir);
-        //get_logger()->info('sub_dir='.$sub_dir);
+
+        //get_logger()->info('handle_upload, post_query='.$post_subdir);
+        //get_logger()->info('handle_upload, sub_dir='.$sub_dir);
+
+        if (!Utility::allow_to_modify()) {
+            if (!$is_ajax) {
+                $this->messageboard->set_message(_('Please login to upload file.'), 2);
+                $this->response_redirect(false);
+            } else {
+                get_logger()->warning('handle_upload, not allowed to upload.');
+                $this->response_json_400();
+            }
+            return;
+        }
 
         if (isset($_FILES['uploadFile'])) {
+            $upload_result = false;
             if (is_array($_FILES['uploadFile']['name'])) {
                 // multi upload
                 $upload_files = $_FILES['uploadFile'];
@@ -398,10 +406,11 @@ class Rest
                         get_logger()->info('handle_upload, upload success: [' . $uploadfile . '].');
                     } else {
                         $multi_result = false;
-                        get_logger()->info('handle_upload, upload failed: [' . $uploadfile . '].');
+                        get_logger()->error('handle_upload, upload failed: [' . $uploadfile . '].');
                     }
                 }
 
+                $upload_result = $multi_result;
                 if ($multi_result) {
                     $this->messageboard->set_message(
                         _('Upload files') . ' ' . _('succeed'),
@@ -414,23 +423,31 @@ class Rest
             } else {
                 // single upload
                 $uploadfile = $this->files_base_dir . $sub_dir . $_FILES['uploadFile']['name'];
-
-                if (Utility::phpfm_move_uploaded_file($_FILES['uploadFile']['tmp_name'], $uploadfile)) {
-                    $this->messageboard->set_message(
-                        _('Upload') . ':&nbsp;' . $_FILES['uploadFile']['name'] . '&nbsp;' . _('succeed'),
-                        1);
+                $upload_result = Utility::phpfm_move_uploaded_file($_FILES['uploadFile']['tmp_name'], $uploadfile);
+                if ($upload_result) {
                     get_logger()->info('handle_upload, upload success: [' . $uploadfile . '].');
                 } else {
-                    $this->messageboard->set_message(
-                        _('Upload') . ':&nbsp;' . $_FILES['uploadFile']['name'] . ' <strong>' . _('failed') . '<strong>',
-                        2);
-                    get_logger()->info('handle_upload, upload failed: [' . $uploadfile . '].');
+                    get_logger()->error('handle_upload, upload failed: [' . $uploadfile . '].');
                 }
             }
+
+            if ($upload_result) {
+                $this->messageboard->set_message(
+                    _('Upload files') . ' ' . _('succeed'),
+                    1);
+            } else {
+                $this->messageboard->set_message(
+                    _('Upload some files') . ' <strong>' . _('failed') . '<strong>',
+                    2);
+            }
+        } else {
+            get_logger()->error('handle_upload, no $_FILES[\'uploadFile\'].');
         }
 
         if ($is_ajax) {
-            echo 'ok';
+            $resp_obj = new RestRet();
+            //$resp_obj->message = $message;
+            $this->response_json($resp_obj);
         } else {
             $this->response_redirect(false);
         }
