@@ -295,7 +295,7 @@ var FileManager = {
                     FileManager.showMessage(data.message, false);
                 }
                 setTimeout(function () {
-                    //FileManager.refresh();
+                    FileManager.refresh();
                 }, 2000);
             });
 

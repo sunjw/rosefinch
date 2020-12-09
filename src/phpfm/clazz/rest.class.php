@@ -302,24 +302,26 @@ class Rest
 
         $req_obj = read_body_json();
         $sub_dir = rawurldecode($req_obj['subdir']);
-        $name = $req_obj['newname'];
+        $name_req = $req_obj['newname'];
+        $name = $name_req;
 
         $success = false;
-        if (false === strpos($sub_dir, '..') && Utility::check_name($name)) // filter
-        {
+        if (Utility::check_path($sub_dir) && Utility::check_name($name)) {
             $name = $this->files_base_dir . $sub_dir . $name;
-            get_logger()->info('mkdir: ' . $name);
+            get_logger()->info('handle_newfolder, try to make new folder: [' . $name . '].');
             $name = convert_toplat($name);
             if (!file_exists($name)) {
                 $success = @mkdir($name);
             }
+        } else {
+            get_logger()->error('handle_newfolder, illegal name: sub_dir=[' . $sub_dir . '], name=[' . $name . '].');
         }
 
         $message = '';
-        if ($success === true) {
-            $message = _('Make new folder:') . '&nbsp;' . htmlentities_utf8($name) . '&nbsp;' . _('succeed');
+        if ($success) {
+            $message = _('Make new folder:') . '&nbsp;' . htmlentities_utf8($name_req) . '&nbsp;' . _('succeed');
         } else {
-            $message = _('Make new folder:') . '&nbsp;' . htmlentities_utf8($name) . '&nbsp;<strong>' . _('failed') . '</strong>';
+            $message = _('Make new folder:') . '&nbsp;' . htmlentities_utf8($name_req) . '&nbsp;<strong>' . _('failed') . '</strong>';
         }
 
         $resp_obj = new RestRet();
@@ -333,42 +335,48 @@ class Rest
     private function handle_rename()
     {
         if (!Utility::allow_to_modify()) {
-            $this->messageboard->set_message(_('Please login to rename file.'), 2);
-            $this->response_redirect(false);
+            get_logger()->warning('handle_rename, not allowed to rename.');
+            $this->response_json_400();
+            return;
         }
 
+        $req_obj = read_body_json();
         //$sub_dir = rawurldecode(post_query('subdir'));
-        $oldpath = post_query('renamePath');
+        $oldpath = $req_obj['renamePath'];
         $sub_dir = '';
         if (strrpos($oldpath, '/') != false) {
             $sub_dir = substr($oldpath, 0, strrpos($oldpath, '/') + 1);
         }
 
-        $oldname = post_query('oldname');
-        $newname = post_query('newname');
+        $oldname_req = $req_obj['oldname'];
+        $oldname = $oldname_req;
+        $newname_req = $req_obj['newname'];
+        $newname = $newname_req;
 
         $success = false;
-        if (false === strpos($sub_dir, '..') &&
+        if (Utility::check_path($sub_dir) &&
             Utility::check_name($newname) && Utility::check_name($oldname)) {
             $oldname = $this->files_base_dir . $sub_dir . $oldname;
             $newname = $this->files_base_dir . $sub_dir . $newname;
 
             get_logger()->info('handle_rename, try to rename: [' . $oldname . '] to [' . $newname . '].');
-
             $success = Utility::phpfm_rename($oldname, $newname, false);
-
-        }
-        if ($success === true) {
-            $this->messageboard->set_message(
-                sprintf(_('Rename %s to %s ') . _('succeed'), htmlentities_utf8(post_query('oldname')), htmlentities_utf8(post_query('newname'))),
-                1);
         } else {
-            $this->messageboard->set_message(
-                sprintf(_('Rename %s to %s ') . ' <strong>' . _('failed') . '<strong>', htmlentities_utf8(post_query('oldname')), htmlentities_utf8(post_query('newname'))),
-                2);
+            get_logger()->error('handle_rename, illegal name: sub_dir=[' . $sub_dir . '], oldname=[' . $oldname . '], newname=[' . $newname . '].');
         }
 
-        $this->response_redirect(false);
+        $message = '';
+        if ($success) {
+            $message = sprintf(_('Rename %s to %s ') . _('succeed'),
+                htmlentities_utf8($oldname_req), htmlentities_utf8($newname_req));
+        } else {
+            $message = sprintf(_('Rename %s to %s ') . ' <strong>' . _('failed') . '<strong>',
+                htmlentities_utf8($oldname_req), htmlentities_utf8($newname_req));
+        }
+
+        $resp_obj = new RestRet();
+        $resp_obj->message = $message;
+        $this->response_json($resp_obj);
     }
 
     /**
