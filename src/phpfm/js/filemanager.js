@@ -217,11 +217,17 @@ var FileManager = {
         var reqObj = {};
         reqObj.subdir = subdir;
 
-        FileManager.displayFuncDialog('', 'waiting',
-            'waiting', null);
+        FileManager.displayWaiting();
 
-        FileManager.sendPostRestApi(FileManager.restApiPrefix + 'fm/paste', reqObj, function () {
-            FileManager.refresh();
+        FileManager.sendPostRestApi(FileManager.restApiPrefix + 'fm/paste', reqObj, function (data) {
+            if (!FileManager.checkRestRespData(data)) {
+                FileManager.showMessage('Error.', true);
+            } else {
+                FileManager.showMessage(data.message, false);
+            }
+            setTimeout(function () {
+                FileManager.refresh();
+            }, 2000);
         });
     },
 
@@ -241,9 +247,7 @@ var FileManager = {
         var funcDelete = $('div#funcDelete');
         funcDelete.css('display', 'none');
 
-        FileManager.funcBg.get(0).onclick = FileManager.dummy;
-        FileManager.displayFuncDialog('', 'waiting',
-            'waiting', null);
+        FileManager.displayWaiting();
 
         var itemsStr = FileManager.selectedItems.join('|');
 
@@ -394,6 +398,15 @@ var FileManager = {
         FileManager.sendRestApi('POST', api, reqObj, successCallback, errorCallback);
     },
 
+    checkRestRespData: function (data) {
+        if ((typeof data !== 'object' || data === null) ||
+            !('code' in data)) {
+            // Not return proper object.
+            return false;
+        }
+        return true;
+    },
+
     /*
      * Send cut/copy REST API request.
      */
@@ -402,9 +415,7 @@ var FileManager = {
         reqObj.items = FileManager.selectedItems;
 
         FileManager.sendPostRestApi(api, reqObj, function (data) {
-            if ((typeof data !== 'object' || data === null) ||
-                !('code' in data)) {
-                // Not return proper object.
+            if (!FileManager.checkRestRespData(data)) {
                 FileManager.showMessage('Error.', true);
                 return;
             }

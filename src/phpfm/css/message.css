@@ -15,6 +15,7 @@
     font-size: small;
     text-align: center;
     color: #339900;
+    z-index: 1005;
     
     opacity: 0.9; /* 透明 firefox */
     -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=90)";
