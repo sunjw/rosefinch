@@ -411,15 +411,6 @@ class Rest
                 }
 
                 $upload_result = $multi_result;
-                if ($multi_result) {
-                    $this->messageboard->set_message(
-                        _('Upload files') . ' ' . _('succeed'),
-                        1);
-                } else {
-                    $this->messageboard->set_message(
-                        _('Upload some files') . ' <strong>' . _('failed') . '<strong>',
-                        2);
-                }
             } else {
                 // single upload
                 $uploadfile = $this->files_base_dir . $sub_dir . $_FILES['uploadFile']['name'];
