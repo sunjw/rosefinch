@@ -103,9 +103,9 @@ class Rest
      */
     public function handle_request()
     {
-        $api_v1_base = 'api/v1/';
-        if (starts_with($this->api, $api_v1_base)) {
-            $api = substr($this->api, strlen($api_v1_base));
+        $api_v1_prefix = 'api/v1/';
+        if (starts_with($this->api, $api_v1_prefix)) {
+            $api = substr($this->api, strlen($api_v1_prefix));
             switch ($api) {
                 case 'cut':
                 case 'copy':

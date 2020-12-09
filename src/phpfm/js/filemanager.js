@@ -1,6 +1,6 @@
 var FileManager = {
     restApiUrl: 'func/rest.api.php',
-    restApiBase: 'api/v1/',
+    restApiPrefix: 'api/v1/',
 
     funcBg: null,
     multilanTitles: null,
@@ -194,14 +194,14 @@ var FileManager = {
      */
     clickCut: function () {
         // alert('cut');
-        FileManager.sendCutCopyRestApi(FileManager.restApiBase + 'cut');
+        FileManager.sendCutCopyRestApi(FileManager.restApiPrefix + 'cut');
     },
 
     /*
      * Copy.
      */
     clickCopy: function () {
-        FileManager.sendCutCopyRestApi(FileManager.restApiBase + 'copy');
+        FileManager.sendCutCopyRestApi(FileManager.restApiPrefix + 'copy');
     },
 
     /*
