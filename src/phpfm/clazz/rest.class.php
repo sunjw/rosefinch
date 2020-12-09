@@ -167,8 +167,6 @@ class Rest
      */
     private function handle_cut_copy($is_cut)
     {
-        get_logger()->info('handle_cut_copy.');
-
         if ($this->clipboard == null) {
             get_logger()->error('handle_cut_copy, Rest->clipboard is null.');
             $this->response_json_500();
@@ -176,7 +174,7 @@ class Rest
         }
 
         if (!Utility::allow_to_modify()) {
-            get_logger()->warning('handle_cut_copy, not allowed to cut or copy files.');
+            get_logger()->warning('handle_cut_copy, not allowed to cut or copy.');
             $this->response_json_400();
             return;
         }
@@ -202,6 +200,32 @@ class Rest
 
         get_logger()->error('handle_cut_copy, no item in clipboard.');
         $this->response_json_500();
+    }
+
+    /**
+     * Paste.
+     */
+    private function handle_paste()
+    {
+        if ($this->clipboard == null) {
+            get_logger()->error('handle_paste, Rest->clipboard is null.');
+            $this->response_json_500();
+            return;
+        }
+
+        if (!Utility::allow_to_modify()) {
+            get_logger()->warning('handle_paste, not allowed to paste.');
+            $this->response_json_400();
+            return;
+        }
+
+        $target_subdir = rawurldecode(post_query('subdir'));
+        $this->clipboard->paste($target_subdir);
+
+        //print_r($_GET);
+
+        $resp_obj = new RestRet();
+        $this->response_json($resp_obj);
     }
 
     /**
@@ -249,27 +273,6 @@ class Rest
         $this->messageboard->set_message($message, $stat);
 
         $this->response_redirect(false);
-    }
-
-    /**
-     * Paste.
-     */
-    private function handle_paste()
-    {
-        if (!Utility::allow_to_modify()) {
-            $this->messageboard->set_message(_('Please login to paste files.'), 2);
-            echo 'ok';
-            return;
-        }
-        $target_subdir = rawurldecode(post_query('subdir'));
-
-        if ($this->clipboard != null) {
-            $this->clipboard->paste($target_subdir);
-        }
-
-        //print_r($_GET);
-
-        echo 'ok';
     }
 
     /**
