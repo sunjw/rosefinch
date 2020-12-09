@@ -380,7 +380,7 @@ class Rest
             $this->response_redirect(false);
         }
 
-        $used_ajax = post_query('ajax') == 'ajax';
+        $is_ajax = post_query('ajax') == 'ajax';
         $sub_dir = rawurldecode(post_query('subdir'));
         //get_logger()->info('post_query='.$post_subdir);
         //get_logger()->info('sub_dir='.$sub_dir);
@@ -429,7 +429,7 @@ class Rest
             }
         }
 
-        if ($used_ajax) {
+        if ($is_ajax) {
             echo 'ok';
         } else {
             $this->response_redirect(false);
