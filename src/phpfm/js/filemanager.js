@@ -247,19 +247,20 @@ var FileManager = {
         var funcDelete = $('div#funcDelete');
         funcDelete.css('display', 'none');
 
+        var reqObj = {};
+        reqObj.items = FileManager.selectedItems;
+
         FileManager.displayWaiting();
 
-        var itemsStr = FileManager.selectedItems.join('|');
-
-        // var subdir = $('input#subdir').val();
-
-        $.post(FileManager.restApiUrl, {
-            'api': 'delete',
-            'items': itemsStr,
-            'noredirect': 'noredirect'
-        }, function () {
-            // alert(data);
-            window.location.reload();
+        FileManager.sendPostRestApi(FileManager.restApiPrefix + 'fm/delete', reqObj, function (data) {
+            if (!FileManager.checkRestRespData(data)) {
+                FileManager.showMessage('Error.', true);
+            } else {
+                FileManager.showMessage(data.message, false);
+            }
+            setTimeout(function () {
+                FileManager.refresh();
+            }, 2000);
         });
     },
 

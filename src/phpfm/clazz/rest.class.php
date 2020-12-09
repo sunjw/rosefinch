@@ -248,13 +248,13 @@ class Rest
     private function handle_delete()
     {
         if (!Utility::allow_to_modify()) {
-            $this->messageboard->set_message(_('Please login to delete files.'), 2);
-            echo 'ok';
+            get_logger()->warning('handle_delete, not allowed to delete.');
+            $this->response_json_400();
             return;
         }
 
-        $items = post_query('items');
-        $items = explode('|', $items);
+        $req_obj = read_body_json();
+        $items = $req_obj['items'];
         $items = Utility::filter_paths($items);
 
         $message = '';
@@ -284,9 +284,9 @@ class Rest
             }
         }
 
-        $this->messageboard->set_message($message, $stat);
-
-        $this->response_redirect(false);
+        $resp_obj = new RestRet();
+        $resp_obj->message = $message;
+        $this->response_json($resp_obj);
     }
 
     /**
