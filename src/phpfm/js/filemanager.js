@@ -180,7 +180,7 @@ var FileManager = {
      */
     clickRename: function () {
         FileManager.setOldname();
-        FileManager.displayFuncDialog(FileManager.restApiUrl, 'rename', 'rename',
+        FileManager.displayFuncDialog(FileManager.restApiPrefix + 'fm/rename', 'rename', 'rename',
             null);
     },
 
@@ -189,7 +189,7 @@ var FileManager = {
      */
     clickNewFolder: function () {
         // alert('newfolder');
-        FileManager.displayFuncDialog(FileManager.restApiUrl, 'newfolder',
+        FileManager.displayFuncDialog(FileManager.restApiPrefix + 'fm/newfolder', 'newfolder',
             'new folder', null);
     },
 
@@ -268,7 +268,7 @@ var FileManager = {
      * Upload.
      */
     clickUpload: function () {
-        FileManager.displayFuncDialog(FileManager.restApiUrl, 'upload', 'upload',
+        FileManager.displayFuncDialog(FileManager.restApiPrefix + 'fm/upload', 'upload', 'upload',
             null);
     },
 
@@ -577,7 +577,7 @@ var FileManager = {
                 var apiInput = divInput.find('input#api');
                 apiInput.val(oper);
                 var form = divInput.find('form');
-                form.attr('action', action);
+                form.attr('action', FileManager.restApiUrl + '?api=' + action);
 
                 if (oper == 'upload') {
                     FileManager.displayInputPart(divInput.find('div#divUpload'));
@@ -1101,7 +1101,7 @@ var FileManager = {
         var returnURLdecoded = decodeURIComponent($('input#return').val());
 
         var xhrUpload = new XMLHttpRequest();
-        xhrUpload.open('POST', FileManager.restApiUrl);
+        xhrUpload.open('POST', FileManager.restApiUrl + '?api=' + FileManager.restApiPrefix + 'fm/upload');
 
         xhrUpload.onload = function () {
             window.location.href = returnURLdecoded;
