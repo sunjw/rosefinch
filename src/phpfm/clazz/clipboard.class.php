@@ -2,11 +2,7 @@
 
 require_once dirname(__FILE__) . "/../inc/defines.inc.php";
 require_once dirname(__FILE__) . "/../inc/common.inc.php";
-require_once dirname(__FILE__) . "/../inc/gettext.inc.php";
-require_once "messageboard.class.php";
 require_once "utility.class.php";
-
-//@session_start();
 
 /**
  * Clipboard Class
@@ -17,7 +13,7 @@ require_once "utility.class.php";
  */
 class ClipBoard
 {
-    private $oper;
+    private $oper; // cut/copy
     private $items;
 
     function __construct()
@@ -26,18 +22,18 @@ class ClipBoard
     }
 
     /**
-     * 清楚剪贴板内容
+     * Clear clipboard content.
      */
     private function clear()
     {
-        $this->oper = "";
+        $this->oper = '';
         $this->items = array();
     }
 
     /**
-     * 添加项目
-     * @param $oper 操作
-     * @param $items 项目
+     * Add items.
+     * @param string $oper cut/copy
+     * @param array $items paths array
      */
     public function set_items($oper, $items)
     {
@@ -46,13 +42,13 @@ class ClipBoard
     }
 
     /**
-     * 粘贴，并记录到消息板
-     * @param $target_subdir 目标子文件夹
+     * Paste items to target directory.
+     * @param string $target_subdir target directory
+     * @return array result array (path => true/false)
      */
     public function paste($target_subdir)
     {
-        $messageboard = Utility::get_messageboard();
-        $message = "";
+        $result = [];
 
         $files_base_dir = $_SESSION['base_dir'];
         //$old_dir = $files_base_dir . $this->subdir;
@@ -64,38 +60,32 @@ class ClipBoard
             $oldname = $files_base_dir . $item;
             $basename = get_basename($item);
             $newname = $new_dir . $basename;
-            get_logger()->info($this->oper . ": " . $oldname . " to " . $newname);
+            get_logger()->info('paste, ' . $this->oper . ': [' . $oldname . '] to [' . $newname . '].');
 
-            // 处理重名
             $success = false;
-            if ($this->oper == "cut") {
-                $message .= (_("Cut") . " " . htmlentities_utf8($item) . " ");
+            if ($this->oper == 'cut') {
                 $success = Utility::phpfm_rename($oldname, $newname, true);
-            } else if ($this->oper == "copy") {
-                $message .= (_("Copy") . " " . htmlentities_utf8($item) . " ");
+            } else if ($this->oper == 'copy') {
                 $success = Utility::phpfm_copy($oldname, $newname);
+            } else {
+                get_logger()->error('paste, unknown oper: [' . $this->oper . '].');
             }
 
-            if ($success) {
-                $message .= (_("succeed") . "<br />");
-                $stat = 1;
-            } else {
-                $message .= ("<strong>" . _("failed") . "</strong><br />");
-                $stat = 2;
-            }
+            $result[$item] = $success;
         }
-        $messageboard->set_message($message, $stat);
+
         $this->clear();
+        return $result;
     }
 
     /**
-     * 剪贴板中是否有内容
-     * @return bool 有 true，没有 false
+     * Check has items in clipboard.
+     * @return bool
      */
-    public function have_items()
+    public function has_items()
     {
         if (is_array($this->items)) {
-            if (count($this->items) > 0 && $this->oper != "") {
+            if (count($this->items) > 0 && $this->oper != '') {
                 return true;
             }
         }
@@ -104,7 +94,7 @@ class ClipBoard
     }
 
     /**
-     * 输出 debug 信息
+     * Debug.
      */
     public function debug()
     {

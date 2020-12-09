@@ -395,11 +395,11 @@ class Utility
     }
 
     /**
-     * Deal with the same name.
+     * Resolve the same name.
      * @param string $name full path (UTF-8)
      * @return string new full path (UTF-8)
      */
-    public static function deal_same_name($name, $i = 2)
+    public static function resolve_same_name($name, $i = 2)
     {
         $file_name = get_basename($name);
         $dir_name = dirname($name);
@@ -424,7 +424,7 @@ class Utility
 
         $newname = $dir_name . "/" . $newname;
         if (file_exists(convert_toplat($newname))) {
-            $newname = Utility::deal_same_name($newname, $i + 1);
+            $newname = Utility::resolve_same_name($newname, $i + 1);
         }
 
         return $newname;
@@ -454,7 +454,7 @@ class Utility
         if (file_exists($plat_oldname)) {
             if (file_exists($plat_newname)) {
                 if ($deal_same_name)
-                    $newname = Utility::deal_same_name($newname);
+                    $newname = Utility::resolve_same_name($newname);
                 else
                     return false;
             }
@@ -483,7 +483,7 @@ class Utility
         $plat_newname = convert_toplat($newname);
 
         if (file_exists($plat_newname)) {
-            $newname = Utility::deal_same_name($newname);
+            $newname = Utility::resolve_same_name($newname);
         }
         $plat_newname = convert_toplat($newname);
 
@@ -534,7 +534,7 @@ class Utility
     {
         $plat_destination = convert_toplat($destination);
         if (file_exists($plat_destination)) {
-            $plat_destination = convert_toplat(Utility::deal_same_name($destination));
+            $plat_destination = convert_toplat(Utility::resolve_same_name($destination));
         }
 
         $uploaded_file_src = convert_toplat($filename);
@@ -699,7 +699,7 @@ class Utility
             <div>
                 <?php
                 $generating_time = _("Generating time") . '&nbsp;' . (microtime(true) - $begin_time) . "s";
-                printf("Rosefinch - %s - PHPFM %s&nbsp;|&nbsp;SUN Junwen&nbsp;|&nbsp;%s",  _("Rosefinch"), VERSION, $generating_time);
+                printf("Rosefinch - %s - PHPFM %s&nbsp;|&nbsp;SUN Junwen&nbsp;|&nbsp;%s", _("Rosefinch"), VERSION, $generating_time);
                 ?>
             </div>
         </div>

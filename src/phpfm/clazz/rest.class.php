@@ -123,12 +123,12 @@ class Rest
                 $api = $this->api_chain($api, $fm_prefix);
                 $this->handle_fm_request($api);
             } else {
-                get_logger()->error('handle_request, wrong API request: [' . $this->api . ']');
+                get_logger()->error('handle_request, wrong API request: [' . $this->api . '].');
                 $this->response_json_400();
                 return;
             }
         } else {
-            get_logger()->error('handle_request, wrong API request: [' . $this->api . ']');
+            get_logger()->error('handle_request, wrong API request: [' . $this->api . '].');
             $this->response_json_400();
         }
     }
@@ -156,7 +156,7 @@ class Rest
                 $this->handle_upload();
                 break;
             default:
-                get_logger()->error('handle_fm_request, wrong API request: [' . $this->api . ']');
+                get_logger()->error('handle_fm_request, wrong API request: [' . $this->api . '].');
                 $this->response_json_400();
                 break;
         }
@@ -185,10 +185,10 @@ class Rest
         //print_r($files);
 
         $this->clipboard->set_items(($is_cut ? 'cut' : 'copy'), $items);
-        $message = 'handle_cut_copy, add items to clipboard: [' . join(', ', $items) . ']';
+        $message = 'handle_cut_copy, add items to clipboard: [' . join(', ', $items) . '].';
         get_logger()->info($message);
 
-        if ($this->clipboard->have_items()) {
+        if ($this->clipboard->has_items()) {
             $message = _('Add items to clipboard:') . '&nbsp;<br />';
             $message .= htmlentities_utf8((join('***', $items)));
             $message = str_replace('***', '<br />', $message);
@@ -221,7 +221,7 @@ class Rest
 
         $req_obj = read_body_json();
         $target_subdir = rawurldecode($req_obj['subdir']);
-        $this->clipboard->paste($target_subdir);
+        $past_result = $this->clipboard->paste($target_subdir);
 
         //print_r($_GET);
 
@@ -252,7 +252,7 @@ class Rest
             $item = $items[$i];
             $sub_dir = dirname($item);
             $path = $this->files_base_dir . $item;
-            get_logger()->info('handle_delete, try to delete: [' . $path . ']');
+            get_logger()->info('handle_delete, try to delete: [' . $path . '].');
             $message .= (_('Delete') . ' ' . htmlentities_utf8($item) . ' ');
             $path = convert_toplat($path);
             if (file_exists($path)) {
@@ -339,7 +339,7 @@ class Rest
             $oldname = $this->files_base_dir . $sub_dir . $oldname;
             $newname = $this->files_base_dir . $sub_dir . $newname;
 
-            get_logger()->info('handle_rename, try to rename: [' . $oldname . '] to [' . $newname . ']');
+            get_logger()->info('handle_rename, try to rename: [' . $oldname . '] to [' . $newname . '].');
 
             $success = Utility::phpfm_rename($oldname, $newname, false);
 
@@ -382,10 +382,10 @@ class Rest
                     $uploadfile = $this->files_base_dir . $sub_dir . $upload_files['name'][$i];
                     //print_r($upload_files['tmp_name']);
                     if (Utility::phpfm_move_uploaded_file($upload_files['tmp_name'][$i], $uploadfile)) {
-                        get_logger()->info('handle_upload, upload success: [' . $uploadfile . ']');
+                        get_logger()->info('handle_upload, upload success: [' . $uploadfile . '].');
                     } else {
                         $multi_result = false;
-                        get_logger()->info('handle_upload, upload failed: [' . $uploadfile . ']');
+                        get_logger()->info('handle_upload, upload failed: [' . $uploadfile . '].');
                     }
                 }
 
@@ -406,12 +406,12 @@ class Rest
                     $this->messageboard->set_message(
                         _('Upload') . ':&nbsp;' . $_FILES['uploadFile']['name'] . '&nbsp;' . _('succeed'),
                         1);
-                    get_logger()->info('handle_upload, upload success: [' . $uploadfile . ']');
+                    get_logger()->info('handle_upload, upload success: [' . $uploadfile . '].');
                 } else {
                     $this->messageboard->set_message(
                         _('Upload') . ':&nbsp;' . $_FILES['uploadFile']['name'] . ' <strong>' . _('failed') . '<strong>',
                         2);
-                    get_logger()->info('handle_upload, upload failed: [' . $uploadfile . ']');
+                    get_logger()->info('handle_upload, upload failed: [' . $uploadfile . '].');
                 }
             }
         }
