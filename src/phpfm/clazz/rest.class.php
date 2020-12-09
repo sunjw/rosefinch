@@ -295,12 +295,14 @@ class Rest
     private function handle_newfolder()
     {
         if (!Utility::allow_to_modify()) {
-            $this->messageboard->set_message(_('Please login to make a new folder.'), 2);
-            $this->response_redirect(false);
+            get_logger()->warning('handle_newfolder, not allowed to make new folder.');
+            $this->response_json_400();
+            return;
         }
 
-        $sub_dir = rawurldecode(post_query('subdir'));
-        $name = post_query('newname');
+        $req_obj = read_body_json();
+        $sub_dir = rawurldecode($req_obj['subdir']);
+        $name = $req_obj['newname'];
 
         $success = false;
         if (false === strpos($sub_dir, '..') && Utility::check_name($name)) // filter
@@ -313,17 +315,16 @@ class Rest
             }
         }
 
+        $message = '';
         if ($success === true) {
-            $this->messageboard->set_message(
-                _('Make new folder:') . '&nbsp;' . htmlentities_utf8(post_query('newname')) . '&nbsp;' . _('succeed'),
-                1);
+            $message = _('Make new folder:') . '&nbsp;' . htmlentities_utf8($name) . '&nbsp;' . _('succeed');
         } else {
-            $this->messageboard->set_message(
-                _('Make new folder:') . '&nbsp;' . htmlentities_utf8(post_query('newname')) . '&nbsp;<strong>' . _('failed') . '</strong>',
-                2);
+            $message = _('Make new folder:') . '&nbsp;' . htmlentities_utf8($name) . '&nbsp;<strong>' . _('failed') . '</strong>';
         }
 
-        $this->response_redirect(false);
+        $resp_obj = new RestRet();
+        $resp_obj->message = $message;
+        $this->response_json($resp_obj);
     }
 
     /**

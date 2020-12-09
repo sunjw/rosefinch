@@ -274,13 +274,34 @@ var FileManager = {
 
     funcSubmit: function () {
         FileManager.displayWaiting();
+
         var restApi = ['newfolder', 'rename'];
         var divInput = FileManager.funcDialog.divInput;
         var apiInput = divInput.find('input#api');
         var api = apiInput.val();
         if (restApi.includes(api)) {
+            // Rest API
+            var form = divInput.find('form');
+            var formData = new FormData(form[0]);
+            var reqObj = {};
+            formData.forEach(function (value, key) {
+                reqObj[key] = value;
+            });
+
+            FileManager.sendPostRestApi(FileManager.restApiPrefix + 'fm/' + api, reqObj, function (data) {
+                if (!FileManager.checkRestRespData(data)) {
+                    FileManager.showMessage('Error.', true);
+                } else {
+                    FileManager.showMessage(data.message, false);
+                }
+                setTimeout(function () {
+                    //FileManager.refresh();
+                }, 2000);
+            });
+
             return false;
         } else {
+            // Normal form
             return true;
         }
     },
