@@ -794,7 +794,7 @@ class FileManager
                         <div class="center"><?php echo _("Are you sure to logout?"); ?></div>
                     </div>
                     <div class="funcBtnLine">
-                        <input type="submit" value="<?php echo _("OK"); ?>" onclick="FileManager.funcSubmit()"/><input
+                        <input type="submit" value="<?php echo _("OK"); ?>" onclick="return FileManager.funcSubmit()"/><input
                                 type="button" value="<?php echo _("Cancel"); ?>" onclick="FileManager.closeFunc()"/>
                     </div>
                 </form>

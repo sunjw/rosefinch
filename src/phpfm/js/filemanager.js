@@ -274,6 +274,15 @@ var FileManager = {
 
     funcSubmit: function () {
         FileManager.displayWaiting();
+        var restApi = ['newfolder', 'rename'];
+        var divInput = FileManager.funcDialog.divInput;
+        var apiInput = divInput.find('input#api');
+        var api = apiInput.val();
+        if (restApi.includes(api)) {
+            return false;
+        } else {
+            return true;
+        }
     },
 
     /*
