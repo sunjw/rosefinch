@@ -49,6 +49,7 @@ class ClipBoard
     public function paste($target_subdir)
     {
         $result = [];
+        $result['items'] = [];
 
         $files_base_dir = $_SESSION['base_dir'];
         //$old_dir = $files_base_dir . $this->subdir;
@@ -71,8 +72,10 @@ class ClipBoard
                 get_logger()->error('paste, unknown oper: [' . $this->oper . '].');
             }
 
-            $result[$item] = $success;
+            $result['items'][$item] = $success;
         }
+
+        $result['oper'] = $this->oper;
 
         $this->clear();
         return $result;

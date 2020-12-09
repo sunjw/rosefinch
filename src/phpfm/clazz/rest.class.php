@@ -221,11 +221,24 @@ class Rest
 
         $req_obj = read_body_json();
         $target_subdir = rawurldecode($req_obj['subdir']);
-        $past_result = $this->clipboard->paste($target_subdir);
+        $paste_result = $this->clipboard->paste($target_subdir);
+
+        $message = '';
+        $oper_str = ($paste_result['oper'] == 'cut') ? 'Cut' : 'Copy';
+        $items = $paste_result['items'];
+        foreach ($items as $item => $result) {
+            $message .= (_($oper_str) . ' ' . htmlentities_utf8($item) . ' ');
+            if ($result) {
+                $message .= (_('succeed') . '<br />');
+            } else {
+                $message .= ('<strong>' . _('failed') . '</strong><br />');
+            }
+        }
 
         //print_r($_GET);
 
         $resp_obj = new RestRet();
+        $resp_obj->message = $message;
         $this->response_json($resp_obj);
     }
 
