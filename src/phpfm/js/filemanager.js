@@ -1098,13 +1098,20 @@ var FileManager = {
         var sessionId = FileManager.getCookie('PHPSESSID');
         var subdir = $('input#subdir').attr('value');
         var returnURL = $('input#return').val();
-        var returnURLdecoded = decodeURIComponent($('input#return').val());
 
         var xhrUpload = new XMLHttpRequest();
         xhrUpload.open('POST', FileManager.restApiUrl + '?api=' + FileManager.restApiPrefix + 'fm/upload');
 
         xhrUpload.onload = function () {
-            window.location.href = returnURLdecoded;
+            data = JSON.parse(this.responseText);
+            if (!FileManager.checkRestRespData(data)) {
+                FileManager.showMessage('Error.', true);
+            } else {
+                FileManager.showMessage(data.message, false);
+            }
+            setTimeout(function () {
+                FileManager.refresh();
+            }, 2000);
         };
 
         var form = new FormData();
