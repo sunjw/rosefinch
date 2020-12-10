@@ -346,18 +346,14 @@ var FileManager = {
      * Get message.
      */
     getMessage: function () {
-        $.get('func/getmessage.ajax.php', function (data) {
-            if (data != '') {
-                var msg;
-                var stat;
-                data = data.split('|PHPFM|');
-                msg = data[0];
-                stat = data[1];
-
-                FileManager.showMessage(msg, (stat != 0));
+        FileManager.sendGetRestApi(FileManager.restApiPrefix + 'sys/message', function (data) {
+            if (!FileManager.checkRestRespData(data)) {
+                return;
+            }
+            if (data.message != '') {
+                FileManager.showMessage(data.message, (data.code != 0));
             }
         });
-
     },
 
     /*
@@ -427,6 +423,13 @@ var FileManager = {
      */
     sendPostRestApi: function (api, reqObj, successCallback, errorCallback) {
         FileManager.sendRestApi('POST', api, reqObj, successCallback, errorCallback);
+    },
+
+    /*
+     * Send GET REST API request.
+     */
+    sendGetRestApi: function (api, successCallback, errorCallback) {
+        FileManager.sendRestApi('GET', api, null, successCallback, errorCallback);
     },
 
     checkRestRespData: function (data) {

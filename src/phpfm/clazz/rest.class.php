@@ -49,7 +49,7 @@ class Rest
     function __construct()
     {
         $this->files_base_dir = Utility::get_file_base_dir();
-        $this->messageboard = Utility::get_messageboard();
+        $this->messageboard = Utility::get_messageboard(false);
         $this->clipboard = Utility::get_clipboard(false);
         $this->api = get_query('api');
     }
@@ -119,9 +119,13 @@ class Rest
             $api = $this->api_chain($this->api, $api_v1_prefix);
 
             $fm_prefix = 'fm/';
+            $sys_prefix = 'sys/';
             if (starts_with($api, $fm_prefix)) {
                 $api = $this->api_chain($api, $fm_prefix);
                 $this->handle_fm_request($api);
+            } elseif (starts_with($api, $sys_prefix)) {
+                $api = $this->api_chain($api, $sys_prefix);
+                $this->handle_sys_request($api);
             } else {
                 get_logger()->error('handle_request, wrong API request: [' . $this->api . '].');
                 $this->response_json_400();
@@ -455,6 +459,43 @@ class Rest
         } else {
             $this->response_redirect(false);
         }
+    }
+
+    private function handle_sys_request($api)
+    {
+        switch ($api) {
+            case 'message':
+                $this->handle_message();
+                break;
+            default:
+                get_logger()->error('handle_sys_request, wrong API request: [' . $this->api . '].');
+                $this->response_json_400();
+                break;
+        }
+    }
+
+    /**
+     * Get message.
+     */
+    private function handle_message()
+    {
+        if ($this->messageboard == null) {
+            get_logger()->error('handle_message, Rest->messageboard is null.');
+            $this->response_json_500();
+            return;
+        }
+
+        $resp_obj = new RestRet();
+
+        $message = "";
+        $stat = 0;
+        if ($this->messageboard->has_message()) {
+            $this->messageboard->get_message($message, $stat);
+            $resp_obj->code = $stat;
+            $resp_obj->message = $message;
+        }
+
+        $this->response_json($resp_obj);
     }
 
 }
