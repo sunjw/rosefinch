@@ -354,7 +354,7 @@ var FileManager = {
                 msg = data[0];
                 stat = data[1];
 
-                FileManager.showMessage(msg, (stat == 2));
+                FileManager.showMessage(msg, (stat != 0));
             }
         });
 
