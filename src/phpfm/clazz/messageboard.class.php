@@ -11,7 +11,7 @@
 class MessageBoard
 {
     private $cur_msg;
-    private $cur_msg_stat; // 0: 一般, 1: 正确, 2: 错误
+    private $cur_msg_stat; // 0: normal, other: some wrong.
 
     function __construct()
     {
@@ -19,9 +19,9 @@ class MessageBoard
     }
 
     /**
-     * 设置要显示的消息
-     * @param $message 消息
-     * @param $stat 消息状态，0: 一般, 1: 正确, 2: 错误
+     * Set message.
+     * @param string $message message
+     * @param number $stat 0: normal, other: some wrong
      */
     public function set_message($message, $stat = 0)
     {
@@ -30,9 +30,9 @@ class MessageBoard
     }
 
     /**
-     * 获得消息
-     * @param $message 消息
-     * @param $stat 消息状态
+     * Get current message.
+     * @param string $message message
+     * @param number $stat 0: normal, other: some wrong
      */
     public function get_message(&$message, &$stat)
     {
@@ -42,29 +42,30 @@ class MessageBoard
     }
 
     /**
-     * 是否有新的(未显示)消息
-     * @return true 有，false 没有
+     * Has message.
+     * @return bool
      */
-    public function have_new_message()
+    public function has_message()
     {
-        if ($this->cur_msg == "")
+        if ($this->cur_msg == '') {
             return false;
-        else
+        } else {
             return true;
+        }
     }
 
     /**
-     * 清除消息
+     * Clear message.
      */
     private function clear()
     {
-        $this->cur_msg = "";
+        $this->cur_msg = '';
         $this->cur_msg_stat = 0;
     }
 
     public function debug()
     {
-        echo("Msg: " . $this->cur_msg . ", Stat: " . $this->cur_msg_stat);
+        echo('Msg: ' . $this->cur_msg . ', Stat: ' . $this->cur_msg_stat);
     }
 }
 
