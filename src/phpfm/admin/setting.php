@@ -52,9 +52,9 @@ if ($mode == 0) {
 
 if (isset($_POST['settingsForm'])) {
     if (!save_settings($settings, $mode)) {
-        Utility::get_messageboard()->set_message(_("There is something wrong in your settings."), 2);
+        Utility::get_messageboard()->set_message(_("There is something wrong in your settings."), 400);
     } else {
-        Utility::get_messageboard()->set_message(_("Settings have been changed. Go to <a href='../index.php'>index page</a> and see."), 1);
+        Utility::get_messageboard()->set_message(_("Settings have been changed. Go to <a href='../index.php'>index page</a> and see."));
     }
 }
 
@@ -142,7 +142,8 @@ textdomain($domain);
             <?php
         } else if ($mode == 2 && (USERMNG || $settings['usermng'])) {
             ?>
-            <a class="" title="<?php echo _("Setting"); ?>" href="setting.php"><?php echo _("Setting"); ?></a><?php if (USERMNG) { ?>&nbsp;|&nbsp;<?php echo _("User Management"); ?><?php } ?>
+            <a class="" title="<?php echo _("Setting"); ?>"
+               href="setting.php"><?php echo _("Setting"); ?></a><?php if (USERMNG) { ?>&nbsp;|&nbsp;<?php echo _("User Management"); ?><?php } ?>
             <?php
         }
         ?>

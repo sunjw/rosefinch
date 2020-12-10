@@ -149,7 +149,7 @@ class FileManager
     private function init_view()
     {
         if (!Utility::allow_to_view()) {
-            $this->messageboard->set_message(_("Please login to browse files."), 2);
+            $this->messageboard->set_message(_("Please login to browse files."), 400);
             return;
         }
         $this->dstats = $this->get_dirs_list($this->request_dir, $this->dsort); // get sorted directory list

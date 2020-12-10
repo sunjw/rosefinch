@@ -394,7 +394,7 @@ class Rest
 
         if (!Utility::allow_to_modify()) {
             if (!$is_ajax) {
-                $this->messageboard->set_message(_('Please login to upload file.'), 2);
+                $this->messageboard->set_message(_('Please login to upload file.'), 400);
                 $this->response_redirect(false);
             } else {
                 get_logger()->warning('handle_upload, not allowed to upload.');
@@ -436,12 +436,12 @@ class Rest
             if ($upload_result) {
                 $message = _('Upload files') . ' ' . _('succeed');
                 if (!$is_ajax) {
-                    $this->messageboard->set_message($message, 1);
+                    $this->messageboard->set_message($message);
                 }
             } else {
                 $message = _('Upload some files') . ' <strong>' . _('failed') . '<strong>';
                 if (!$is_ajax) {
-                    $this->messageboard->set_message($message, 2);
+                    $this->messageboard->set_message($message, 500);
                 }
             }
         } else {
