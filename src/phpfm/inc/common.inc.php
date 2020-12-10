@@ -89,7 +89,7 @@ function get_base_dir()
  */
 function get_encoding()
 {
-    return "UTF-8";
+    return 'UTF-8';
 }
 
 /**
