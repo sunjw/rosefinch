@@ -88,8 +88,9 @@ class FileManager
         }
 
         $this->toolbar_type = get_cookie(TOOLBAR_PARAM);
-        if ($this->toolbar_type != "little")
+        if ($this->toolbar_type != "little") {
             $this->toolbar_type = "full";
+        }
 
         $allowed_sort_type = array('', 'n', 's', 't', 'm');
         $allowed_view_type = array('', 'detail', 'largeicon');
