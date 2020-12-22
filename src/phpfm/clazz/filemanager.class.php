@@ -74,7 +74,6 @@ class FileManager
 
         $this->sort_type = get_query(SORT_PARAM);
         $this->order = get_query(ORDER_PARAM);
-        $this->view_type = get_query(VIEW_PARAM);
 
         if ($this->sort_type == "") {
             // 读取 Cookie 值
@@ -83,25 +82,17 @@ class FileManager
         if ($this->order == "") {
             $this->order = get_cookie(ORDER_PARAM);
         }
-        if ($this->view_type == "") {
-            $this->view_type = get_cookie(VIEW_PARAM);
-        }
 
         $allowed_sort_type = array('', 'n', 's', 't', 'm');
-        $allowed_view_type = array('', 'detail', 'largeicon');
         if (!in_array($this->sort_type, $allowed_sort_type)) {
             $this->sort_type = "";
         }
         if ($this->order != "d") {
             $this->order = "a";
         }
-        if (!in_array($this->view_type, $allowed_view_type)) {
-            $this->view_type = "";
-        }
 
         setcookie(SORT_PARAM, $this->sort_type, time() + 60 * 60 * 24 * 365);
         setcookie(ORDER_PARAM, $this->order, time() + 60 * 60 * 24 * 365);
-        setcookie(VIEW_PARAM, $this->view_type, time() + 60 * 60 * 24 * 365);
 
         $this->sort = 1;
         if ($this->sort_type == "" || ($this->sort_type == "n" && $this->order == "a")) {
@@ -129,7 +120,7 @@ class FileManager
             $this->dsort = $this->sort > 0 ? 2 : -2;
         }
 
-        $this->query_str = "s=" . $this->sort_type . "&o=" . $this->order . "&view=" . $this->view_type;
+        $this->query_str = "s=" . $this->sort_type . "&o=" . $this->order;
 
         $this->init_view();
 
@@ -605,12 +596,6 @@ class FileManager
 
         // Prepare basic icons.
         $this->prepare_basic_funcs($query_str, $up, $up_img, $new_folder_img, $upload_img);
-
-        // Prepare view mode icon.
-        $detail_view_url = $this_page . "?" . $query_str .
-            "&dir=" . rawurlencode($this->request_sub_dir) . "&view=detail";
-        $largeicon_view_url = $this_page . "?" . $query_str .
-            "&dir=" . rawurlencode($this->request_sub_dir) . "&view=largeicon";
 
         // Prepare paste.
         $this->prepare_paste_func($paste_img_src, $paste_class);

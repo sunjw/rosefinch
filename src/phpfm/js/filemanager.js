@@ -888,7 +888,6 @@ var FileManager = {
         buttons.filter('.toolbarPaste').hasClass('disable') ? null :
             buttons.filter('.toolbarPaste').click(FileManager.clickPaste); // paste
 
-        // view mode
         buttons.filter('.toolbarNewFolder').click(
             FileManager.clickNewFolder); // new folder
         buttons.filter('.toolbarUpload').click(FileManager.clickUpload); // upload
