@@ -87,11 +87,6 @@ class FileManager
             $this->view_type = get_cookie(VIEW_PARAM);
         }
 
-        $this->toolbar_type = get_cookie(TOOLBAR_PARAM);
-        if ($this->toolbar_type != "little") {
-            $this->toolbar_type = "full";
-        }
-
         $allowed_sort_type = array('', 'n', 's', 't', 'm');
         $allowed_view_type = array('', 'detail', 'largeicon');
         if (!in_array($this->sort_type, $allowed_sort_type)) {
@@ -623,14 +618,6 @@ class FileManager
         // Prepare history.
         $this->prepare_history_funcs($back_url, $back_class, $forward_url, $forward_class);
         $history_items = $this->render_history_items();
-
-        // Prepare more
-        $more_img_src = "images/toolbar-arrow-left.gif";
-        $more_class = "full";
-        if ($this->toolbar_type == "little") {
-            $more_img_src = "images/toolbar-arrow-right.gif";
-            $more_class = "little";
-        }
 
         // Prepare button name.
         $button_names = $this->prepare_buttons_name();

@@ -13,7 +13,6 @@ define("DIR_PARAM", "dir"); // request dir param
 define("SORT_PARAM", "s"); // request sort param
 define("ORDER_PARAM", "o"); // request order param
 define("VIEW_PARAM", "view"); // request view param
-define("TOOLBAR_PARAM", "toolbar"); // request toolbar param
 
 define("DOMAIN", "phpfm"); // gettext param
 

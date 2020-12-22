@@ -130,7 +130,7 @@
     cursor: pointer;
 }
 
-#toolbar .toolbarPart, #toolbar .toolbarHiddenable {
+#toolbar .toolbarPart {
     float: left;
 }
 

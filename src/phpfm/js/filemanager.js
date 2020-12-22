@@ -907,26 +907,6 @@ var FileManager = {
                 FileManager.deselect();
             }
         });
-
-        // more...
-        var buttonMore = buttons.filter('.toolbarMore');
-        if (buttonMore.hasClass('little')) {
-            buttonMore.parent().find('.toolbarHiddenable').hide();
-            buttonMore.find('img').attr('src', 'images/toolbar-arrow-right.gif');
-        }
-        buttonMore.click(function () {
-            var img = $(this).find('img');
-            var part = $(this).parent().find('.toolbarHiddenable');
-            if (part.is(':visible')) {
-                part.fadeOut('fast');
-                img.attr('src', 'images/toolbar-arrow-right.gif');
-                FileManager.setCookie('toolbar', 'little');
-            } else {
-                part.fadeIn('fast');
-                img.attr('src', 'images/toolbar-arrow-left.gif');
-                FileManager.setCookie('toolbar', 'full');
-            }
-        });
     },
 
     /*
