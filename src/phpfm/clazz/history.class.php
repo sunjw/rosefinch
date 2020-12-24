@@ -160,9 +160,9 @@ class History
      */
     public function debug()
     {
-        echo "Current: " . $this->current . "<br />";
-        echo "Length: " . $this->length . "<br />";
-        echo "History:<br />";
+        echo 'Current: ' . $this->current . '<br />';
+        echo 'Length: ' . $this->length . '<br />';
+        echo 'History:<br />';
         print_r($this->history_array);
     }
 
