@@ -22,8 +22,9 @@ function save_settings(&$settings, $mode)
         $save_func = 'save_usermng';
     }
 
-    if (!($ret = $save_func($settings)))
+    if (!($ret = $save_func($settings))) {
         $settings = $old_settings;
+    }
 
     return $ret;
 }
@@ -105,7 +106,7 @@ function save_general(&$settings)
         fclose($settings_php);
 
         if ($settings['usermng'] && !USERMNG && !file_exists("usermng.inc.php")) {
-            // 打开了用户管理
+            // enabled usermng
             $file_name = "usermng.inc.tpl";
             $settings_tpl = fopen($file_name, "r");
             $settings_str = fread($settings_tpl, filesize($file_name));
@@ -142,8 +143,9 @@ function save_usermng(&$settings)
         return false;
     }
 
-    if ($settings['rose_admin'] < User::$ADMIN)
+    if ($settings['rose_admin'] < User::$ADMIN) {
         $settings['rose_admin'] = User::$ADMIN;
+    }
 
     //echo 1;
     $file_name = "usermng.inc.tpl";

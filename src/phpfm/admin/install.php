@@ -36,7 +36,7 @@ if (isset($_POST['settingsForm'])) {
     }
 }
 
-$settings['root_path'] = str_replace("\\\\", "\\", $settings['root_path']); // 修正显示
+$settings['root_path'] = str_replace("\\\\", "\\", $settings['root_path']); // fix path display
 
 $locale = get_query("lang");
 if ($locale == "") {
@@ -53,7 +53,7 @@ $directory = get_base_dir() . $lang_dir;
 $domain = "phpfm";
 
 bindtextdomain($domain, $directory);
-bind_textdomain_codeset($domain, get_encoding()); // 让 gettext 以 utf-8 读取 mo
+bind_textdomain_codeset($domain, get_encoding()); // make gettext read mo by utf-8
 textdomain($domain);
 
 ?>
