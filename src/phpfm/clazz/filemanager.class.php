@@ -1,13 +1,13 @@
 <?php
 
-require_once dirname(__FILE__) . "/../inc/defines.inc.php";
-require_once dirname(__FILE__) . "/../inc/common.inc.php";
-require_once dirname(__FILE__) . "/../inc/gettext.inc.php";
-require_once dirname(__FILE__) . "/../inc/sort.inc.php";
-require_once "clipboard.class.php";
-require_once "messageboard.class.php";
-require_once "history.class.php";
-require_once "utility.class.php";
+require_once dirname(__FILE__) . '/../inc/defines.inc.php';
+require_once dirname(__FILE__) . '/../inc/common.inc.php';
+require_once dirname(__FILE__) . '/../inc/gettext.inc.php';
+require_once dirname(__FILE__) . '/../inc/sort.inc.php';
+require_once 'clipboard.class.php';
+require_once 'messageboard.class.php';
+require_once 'history.class.php';
+require_once 'utility.class.php';
 
 @session_start();
 
@@ -40,7 +40,7 @@ class FileManager
     private $messageboard;
     private $history;
 
-    function __construct($view_page = "index.php")
+    function __construct($view_page = 'index.php')
     {
         /*
          * all string are UTF-8!!!
@@ -87,29 +87,29 @@ class FileManager
         if (!in_array($this->sort_type, $allowed_sort_type)) {
             $this->sort_type = "";
         }
-        if ($this->order != "d") {
-            $this->order = "a";
+        if ($this->order != 'd') {
+            $this->order = 'a';
         }
 
         setcookie(SORT_PARAM, $this->sort_type, time() + 60 * 60 * 24 * 365);
         setcookie(ORDER_PARAM, $this->order, time() + 60 * 60 * 24 * 365);
 
         $this->sort = 1;
-        if ($this->sort_type == "" || ($this->sort_type == "n" && $this->order == "a")) {
+        if ($this->sort_type == '' || ($this->sort_type == 'n' && $this->order == 'a')) {
             $this->sort = 1;
-        } else if ($this->sort_type == "n" && $this->order == "d") {
+        } else if ($this->sort_type == 'n' && $this->order == 'd') {
             $this->sort = -1;
-        } else if ($this->sort_type == "s" && $this->order == "a") {
+        } else if ($this->sort_type == 's' && $this->order == 'a') {
             $this->sort = 2;
-        } else if ($this->sort_type == "s" && $this->order == "d") {
+        } else if ($this->sort_type == 's' && $this->order == 'd') {
             $this->sort = -2;
-        } else if ($this->sort_type == "t" && $this->order == "a") {
+        } else if ($this->sort_type == 't' && $this->order == 'a') {
             $this->sort = 3;
-        } else if ($this->sort_type == "t" && $this->order == "d") {
+        } else if ($this->sort_type == 't' && $this->order == 'd') {
             $this->sort = -3;
-        } else if ($this->sort_type == "m" && $this->order == "a") {
+        } else if ($this->sort_type == 'm' && $this->order == 'a') {
             $this->sort = 4;
-        } else if ($this->sort_type == "m" && $this->order == "d") {
+        } else if ($this->sort_type == 'm' && $this->order == 'd') {
             $this->sort = -4;
         }
 
@@ -120,7 +120,7 @@ class FileManager
             $this->dsort = $this->sort > 0 ? 2 : -2;
         }
 
-        $this->query_str = "s=" . $this->sort_type . "&o=" . $this->order;
+        $this->query_str = 's=' . $this->sort_type . '&o=' . $this->order;
 
         $this->init_view();
 
@@ -136,7 +136,7 @@ class FileManager
     private function init_view()
     {
         if (!Utility::allow_to_view()) {
-            $this->messageboard->set_message(_("Please login to browse files."), 400);
+            $this->messageboard->set_message(_('Please login to browse files.'), 400);
             return;
         }
         $this->dstats = $this->get_dirs_list($this->request_dir, $this->dsort); // get sorted directory list
@@ -149,7 +149,7 @@ class FileManager
      */
     public function title()
     {
-        return _(TITLENAME) . " - " . _("PHP File Manager");
+        return _(TITLENAME) . ' - ' . _('PHP File Manager');
     }
 
     /**
@@ -166,7 +166,7 @@ class FileManager
      */
     public function html_include_files()
     {
-        $rand = "?rand=" . rand(1, 1000);
+        $rand = '?rand=' . rand(1, 1000);
         ?>
         <link href="css/filemanager.css<?php echo($rand); ?>" rel="stylesheet" type="text/css"/>
         <link href="css/message.css<?php echo($rand); ?>" rel="stylesheet" type="text/css"/>
@@ -188,7 +188,7 @@ class FileManager
      */
     public function get_current_path()
     {
-        return "/" . $this->request_sub_dir;
+        return '/' . $this->request_sub_dir;
     }
 
     /**
@@ -201,8 +201,8 @@ class FileManager
         $temp = $this->request_sub_dir;
         $temp = trim_last_slash($this->request_sub_dir);
 
-        if ($temp == "") {
-            $current_dir = "Root";
+        if ($temp == '') {
+            $current_dir = 'Root';
         } else {
             $current_dir = get_basename($temp);
         }
@@ -218,14 +218,14 @@ class FileManager
     {
         $request_sub_dir = rawurldecode(get_query(DIR_PARAM));
 
-        if (false !== strpos($request_sub_dir, "..")) {
+        if (false !== strpos($request_sub_dir, '..')) {
             // filter '..'
-            $request_sub_dir = "";
+            $request_sub_dir = '';
         }
 
-        if ($request_sub_dir != "") {
-            if (substr($request_sub_dir, -1) != "/") {
-                $request_sub_dir .= "/";
+        if ($request_sub_dir != '') {
+            if (substr($request_sub_dir, -1) != '/') {
+                $request_sub_dir .= '/';
             }
         }
 
@@ -243,7 +243,7 @@ class FileManager
         //echo $request_sub_dir;
         $files_base_dir_plat = convert_toplat($files_base_dir);
         $request_dir = $files_base_dir_plat . $request_sub_dir; // get request directory.
-        if (PLAT_CHARSET != "UTF-8") {
+        if (PLAT_CHARSET != 'UTF-8') {
             if (!file_exists($request_dir)) {
                 // not exists, try to convert to platform encoding.
                 $request_dir = $files_base_dir_plat . convert_toplat($request_sub_dir); // maybe GB2312 on Windows.
@@ -255,7 +255,7 @@ class FileManager
                 // exits, means GB2312, need convert to UTF-8.
                 //$request_sub_dir = convert_gbtoutf8($request_sub_dir);
             }
-        } else if (PLAT_CHARSET == "UTF-8") {
+        } else if (PLAT_CHARSET == 'UTF-8') {
             if (!file_exists($request_dir)) {
                 // not exists, try to convert to UTF-8.
                 $request_sub_dir = convert_gbtoutf8($request_sub_dir);
@@ -291,14 +291,14 @@ class FileManager
     {
         $files = array();
         if ($handle = @opendir($path)) {
-            //echo "List of files:<br />";
+            //echo 'List of files:<br />';
 
             while (false !== ($file_name = @readdir($handle))) {
-                //echo convert_toutf8($file)."<br />";
+                //echo convert_toutf8($file).'<br />';
 
                 $full_file_path = $path . $file_name;
                 if (!@is_dir($full_file_path)) {
-                    //echo convert_toutf8($full_file_path)."<br />";
+                    //echo convert_toutf8($full_file_path).'<br />';
                     $fstat = @stat($full_file_path);
                     if ($fstat == false) {
                         continue;
@@ -320,11 +320,11 @@ class FileManager
                     $size = Utility::format_size($size);
                     //echo $request_sub_dir;
 
-                    //$a_href = FILES_DIR."/".$this->request_sub_dir.$file['name'];
-                    $a_href = "func/download.func.php?file=" . rawurlencode($this->request_sub_dir . $file['name']);
+                    //$a_href = FILES_DIR.'/'.$this->request_sub_dir.$file['name'];
+                    $a_href = 'func/download.func.php?file=' . rawurlencode($this->request_sub_dir . $file['name']);
                     $type_html = "";
-                    if ($file['type'] == "") {
-                        $type_html = _("File");
+                    if ($file['type'] == '') {
+                        $type_html = _('File');
                     } else {
                         $type_html = $file['type'];
                     }
@@ -343,31 +343,31 @@ class FileManager
             closedir($handle);
 
             // Sort.
-            $cmp_function = "cmp_name";
+            $cmp_function = 'cmp_name';
             switch ($sort) {
                 case 1:
-                    $cmp_function = "cmp_name";
+                    $cmp_function = 'cmp_name';
                     break;
                 case 2:
-                    $cmp_function = "cmp_size";
+                    $cmp_function = 'cmp_size';
                     break;
                 case 3:
-                    $cmp_function = "cmp_type";
+                    $cmp_function = 'cmp_type';
                     break;
                 case 4:
-                    $cmp_function = "cmp_mtime";
+                    $cmp_function = 'cmp_mtime';
                     break;
                 case -1:
-                    $cmp_function = "rcmp_name";
+                    $cmp_function = 'rcmp_name';
                     break;
                 case -2:
-                    $cmp_function = "rcmp_size";
+                    $cmp_function = 'rcmp_size';
                     break;
                 case -3:
-                    $cmp_function = "rcmp_type";
+                    $cmp_function = 'rcmp_type';
                     break;
                 case -4:
-                    $cmp_function = "rcmp_mtime";
+                    $cmp_function = 'rcmp_mtime';
                     break;
             }
             usort($files, $cmp_function);
@@ -389,37 +389,37 @@ class FileManager
     {
         $dirs = array();
         if ($handle = @opendir($path)) {
-            //echo "List of dirs:<br />";
+            //echo 'List of dirs:<br />';
             while (false !== ($dir_name = @readdir($handle))) {
-                //echo convert_toutf8($file)."<br />";
-                if ($dir_name == "." || $dir_name == "..") {
-                    // filter "." and "..".
+                //echo convert_toutf8($file).'<br />';
+                if ($dir_name == '.' || $dir_name == '..') {
+                    // filter '.' and '..'.
                     continue;
                 }
 
                 $full_dir_path = $path . $dir_name;
                 if (is_dir($full_dir_path)) {
-                    //echo convert_toutf8($full_dir_path)."<br />";
+                    //echo convert_toutf8($full_dir_path).'<br />';
                     $dstat = stat($full_dir_path);
                     $dir = array();
                     $dir['name'] = htmlspecialchars(convert_toutf8($dir_name));
                     $dir['path'] = convert_toutf8($full_dir_path);
                     $dir['stat'] = $dstat;
-                    $dir['type'] = "dir";
+                    $dir['type'] = 'dir';
 
                     if ($this->filter_item($dir)) {
                         continue;
                     }
 
-                    $a_href = $this->view_page . "?" .
-                        $this->query_str . "&dir=" .
+                    $a_href = $this->view_page . '?' .
+                        $this->query_str . '&dir=' .
                         rawurlencode($this->request_sub_dir .
                             $dir['name']);
 
                     $item_path = $this->request_sub_dir . $dir['name'];
 
-                    $dir['size_str'] = "&nbsp;";
-                    $dir['type_html'] = _("Folder");
+                    $dir['size_str'] = '&nbsp;';
+                    $dir['type_html'] = _('Folder');
                     $dir['a_href'] = $a_href;
                     $dir['item_path'] = $item_path;
 
@@ -430,19 +430,19 @@ class FileManager
             closedir($handle);
 
             // sort.
-            $cmp_function = "cmp_name";
+            $cmp_function = 'cmp_name';
             switch ($sort) {
                 case 1:
-                    $cmp_function = "cmp_name";
+                    $cmp_function = 'cmp_name';
                     break;
                 case 2:
-                    $cmp_function = "cmp_mtime";
+                    $cmp_function = 'cmp_mtime';
                     break;
                 case -1:
-                    $cmp_function = "rcmp_name";
+                    $cmp_function = 'rcmp_name';
                     break;
                 case -2:
-                    $cmp_function = "rcmp_mtime";
+                    $cmp_function = 'rcmp_mtime';
                     break;
             }
             usort($dirs, $cmp_function);
@@ -476,11 +476,11 @@ class FileManager
     private function get_parent_dir($request_sub_dir)
     {
         //echo $request_sub_dir;
-        $last_slash = strrpos($request_sub_dir, "/");
+        $last_slash = strrpos($request_sub_dir, '/');
         $parent = "";
         if ($last_slash !== false) {
             $parent = substr($request_sub_dir, 0, $last_slash);
-            $last_slash = strrpos($parent, "/");
+            $last_slash = strrpos($parent, '/');
             if ($last_slash !== false) {
                 $parent = substr($parent, 0, $last_slash);
 
@@ -502,12 +502,12 @@ class FileManager
         ?>
         <div id="fullpath">
             <div>
-                <div class="divDir"><a href="<?php echo $this->view_page . "?" . $this->query_str; ?>">Root</a></div>
+                <div class="divDir"><a href="<?php echo $this->view_page . '?' . $this->query_str; ?>">Root</a></div>
                 <div class="pathSlash menuContainer">
                     <a class="arrow menuButton" href="javascript:void(0);">&nbsp;</a>
 
                     <?php
-                    $sub_dirs = explode("/", $this->request_sub_dir);
+                    $sub_dirs = explode('/', $this->request_sub_dir);
                     $dir_str = "";
                     if (!$this->is_mobile) {
                         $this->display_sub_menus($dir_str, $sub_dirs[0]);
@@ -523,14 +523,14 @@ class FileManager
                     $dir_str .= $sub_dir;
                     ?>
                     <div class="divDir">
-                        <a href="<?php echo $this->view_page . "?" . $this->query_str; ?>&dir=<?php echo rawurlencode($dir_str); ?>">
-                            <?php echo str_replace(" ", "&nbsp;", $sub_dir); ?>
+                        <a href="<?php echo $this->view_page . '?' . $this->query_str; ?>&dir=<?php echo rawurlencode($dir_str); ?>">
+                            <?php echo str_replace(' ', '&nbsp;', $sub_dir); ?>
                         </a>
                     </div>
                     <div class="pathSlash menuContainer">
                         <a class="arrow menuButton" href="javascript:void(0);">&nbsp;</a>
                         <?php
-                        $dir_str .= "/";
+                        $dir_str .= '/';
                         if (!$this->is_mobile) {
                             $this->display_sub_menus($dir_str, $sub_dirs[$i + 1]);
                         }
@@ -565,13 +565,13 @@ class FileManager
                             if (!$this->filter_item($sub_dstat)) {
                                 ?>
                                 <li>
-                                    <a href="<?php echo $this->view_page . "?" . $this->query_str; ?>&dir=<?php echo rawurlencode($sub_dir_str . $sub_dstat['name']); ?>"
+                                    <a href="<?php echo $this->view_page . '?' . $this->query_str; ?>&dir=<?php echo rawurlencode($sub_dir_str . $sub_dstat['name']); ?>"
                                        title="<?php echo $sub_dstat['name']; ?>">
                                         <?php
                                         if ($sub_dstat['name'] == $next_in_path) {
-                                            printf("<strong>%s</strong>", str_replace(" ", "&nbsp;", $sub_dstat['name']));
+                                            printf('<strong>%s</strong>', str_replace(' ', '&nbsp;', $sub_dstat['name']));
                                         } else {
-                                            printf(str_replace(" ", "&nbsp;", $sub_dstat['name']));
+                                            printf(str_replace(' ', '&nbsp;', $sub_dstat['name']));
                                         }
                                         ?>
                                     </a>
@@ -700,14 +700,14 @@ class FileManager
      */
     public function display_func_pre()
     {
-        $multilan_titles = "";
-        $multilan_titles .= ("rename:" . _("Rename") . "|");
-        $multilan_titles .= ("new folder:" . _("New Folder") . "|");
-        $multilan_titles .= ("upload:" . _("Upload") . "|");
-        $multilan_titles .= ("delete:" . _("Confirm") . "|");
-        $multilan_titles .= ("preview:" . _("Preview") . "|");
-        $multilan_titles .= ("user:" . _("User") . "|");
-        $multilan_titles .= ("waiting:" . _("Working...") . "|");
+        $multilan_titles = '';
+        $multilan_titles .= ('rename:' . _('Rename') . '|');
+        $multilan_titles .= ('new folder:' . _('New Folder') . '|');
+        $multilan_titles .= ('upload:' . _('Upload') . '|');
+        $multilan_titles .= ('delete:' . _('Confirm') . '|');
+        $multilan_titles .= ('preview:' . _('Preview') . '|');
+        $multilan_titles .= ('user:' . _('User') . '|');
+        $multilan_titles .= ('waiting:' . _('Working...') . '|');
         ?>
         <div id="funcBg">
         </div>
@@ -728,66 +728,66 @@ class FileManager
                     <div id="divReqInput">
                         <table>
                             <tr id="oldnameLine">
-                                <td><label for="oldname"><?php printf("%s&nbsp;", _("Old Name:")); ?></label></td>
+                                <td><label for="oldname"><?php printf('%s&nbsp;', _('Old Name:')); ?></label></td>
                                 <td><input id="oldname" type="text" name="oldname" value="" maxlength="128"
                                            readonly="readonly"/></td>
                             </tr>
                             <tr>
-                                <td><label for="newname"><?php printf("%s&nbsp;", _("New Name:")); ?></label></td>
+                                <td><label for="newname"><?php printf('%s&nbsp;', _('New Name:')); ?></label></td>
                                 <td><input id="newname" type="text" name="newname" value="" maxlength="128"/></td>
                             </tr>
                         </table>
                         <div>
-                            <span class="inputRequire"><?php printf(_("There should not have %s in new name"), ".., /, \, *, ?, \", |, &amp;, &lt;, &gt;"); ?></span>
+                            <span class="inputRequire"><?php printf(_('There should not have %s in new name'), '.., /, \, *, ?, ", |, &amp;, &lt;, &gt;'); ?></span>
                         </div>
                     </div>
                     <div id="divUpload">
                         <div>
                             <label id="uploadFileInfo"
-                                   for="uploadFile"><?php printf("%s&nbsp;", ($this->is_mobile ? _("Click here to upload.") : _("Drag and drop files here to upload."))); ?></label>
+                                   for="uploadFile"><?php printf('%s&nbsp;', ($this->is_mobile ? _('Click here to upload.') : _('Drag and drop files here to upload.'))); ?></label>
                             <input id="uploadFile" type="file" name="uploadFile[]" multiple="multiple"/>
                         </div>
                         <div>
-                            <span class="inputRequire"><?php printf("%s%s", _("File cannot be larger than "), "50MB"); ?></span>
+                            <span class="inputRequire"><?php printf('%s%s', _('File cannot be larger than '), '50MB'); ?></span>
                         </div>
                     </div>
                     <div id="divLogin">
                         <table>
                             <tr>
-                                <td><label for="username"><?php printf("%s&nbsp;", _("Username:")); ?></label></td>
+                                <td><label for="username"><?php printf('%s&nbsp;', _('Username:')); ?></label></td>
                                 <td><input id="username" type="text" name="username" value="" maxlength="128"/></td>
                             </tr>
                             <tr>
-                                <td><label for="password"><?php printf("%s&nbsp;", _("Password:")); ?></label></td>
+                                <td><label for="password"><?php printf('%s&nbsp;', _('Password:')); ?></label></td>
                                 <td><input id="password" type="password" name="password" value="" maxlength="128"/></td>
                             </tr>
                         </table>
                     </div>
                     <div id="divLogout">
-                        <div class="center"><?php echo _("Are you sure to logout?"); ?></div>
+                        <div class="center"><?php echo _('Are you sure to logout?'); ?></div>
                     </div>
                     <div class="funcBtnLine">
-                        <input type="submit" value="<?php echo _("OK"); ?>" onclick="return FileManager.funcSubmit()"/><input
-                                type="button" value="<?php echo _("Cancel"); ?>" onclick="FileManager.closeFunc()"/>
+                        <input type="submit" value="<?php echo _('OK'); ?>" onclick="return FileManager.funcSubmit()"/><input
+                                type="button" value="<?php echo _('Cancel'); ?>" onclick="FileManager.closeFunc()"/>
                     </div>
                 </form>
             </div>
             <div id="divDelete" class="container">
-                <div class="center"><?php echo _("Are you sure to delete these items?"); ?></div>
+                <div class="center"><?php echo _('Are you sure to delete these items?'); ?></div>
                 <div class="funcBtnLine">
-                    <input type="button" value="<?php echo _("OK"); ?>" onclick="FileManager.doDelete()"/><input
-                            type="button" value="<?php echo _("Cancel"); ?>" onclick="FileManager.closeFunc()"/>
+                    <input type="button" value="<?php echo _('OK'); ?>" onclick="FileManager.doDelete()"/><input
+                            type="button" value="<?php echo _('Cancel'); ?>" onclick="FileManager.closeFunc()"/>
                 </div>
             </div>
             <div id="divPreview" class="container">
                 <div id="divPreviewContent">
                 </div>
-                <div id="link"><?php echo _("Download:"); ?>&nbsp;</div>
+                <div id="link"><?php echo _('Download:'); ?>&nbsp;</div>
                 <?php
                 if ($this->is_mobile) {
                     ?>
                     <div class="funcBtnLine">
-                        <input type="button" value="<?php echo _("Close"); ?>" onclick="FileManager.closeFunc()"/>
+                        <input type="button" value="<?php echo _('Close'); ?>" onclick="FileManager.closeFunc()"/>
                     </div>
                     <?php
                 }
@@ -844,67 +844,67 @@ class FileManager
         $sort_type = $this->sort_type;
         $order = $this->order;
 
-        $norder = "a";
-        $sorder = "a";
-        $torder = "a";
-        $morder = "a";
+        $norder = 'a';
+        $sorder = 'a';
+        $torder = 'a';
+        $morder = 'a';
 
-        if ($sort_type == "" || ($sort_type == "n" && $order == "a")) {
-            $norder = "d";
-        } else if ($sort_type == "s" && $order == "a") {
-            $sorder = "d";
-        } else if ($sort_type == "t" && $order == "a") {
-            $torder = "d";
-        } else if ($sort_type == "m" && $order == "a") {
-            $morder = "d";
+        if ($sort_type == '' || ($sort_type == 'n' && $order == 'a')) {
+            $norder = 'd';
+        } else if ($sort_type == 's' && $order == 'a') {
+            $sorder = 'd';
+        } else if ($sort_type == 't' && $order == 'a') {
+            $torder = 'd';
+        } else if ($sort_type == 'm' && $order == 'a') {
+            $morder = 'd';
         }
         ?>
         <div class="header">
             <span class="check">
-                <input id="checkSelectAll" type="checkbox" title="<?php echo _("Select All"); ?>"/>
+                <input id="checkSelectAll" type="checkbox" title="<?php echo _('Select All'); ?>"/>
             </span>
             <span class="icon">&nbsp;</span>
             <span class="name split">
-                <a href="<?php echo $this_page . "?dir=" .
-                    $request_sub_dir . "&s=n" .
-                    "&o=" . $norder; ?>"><?php echo _("Name"); ?></a>
+                <a href="<?php echo $this_page . '?dir=' .
+                    $request_sub_dir . '&s=n' .
+                    '&o=' . $norder; ?>"><?php echo _('Name'); ?></a>
             </span>
             <span class="size split">
-                <a href="<?php echo $this_page . "?dir=" .
-                    $request_sub_dir . "&s=s" .
-                    "&o=" . $sorder; ?>"><?php echo _("Size"); ?></a>
+                <a href="<?php echo $this_page . '?dir=' .
+                    $request_sub_dir . '&s=s' .
+                    '&o=' . $sorder; ?>"><?php echo _('Size'); ?></a>
             </span>
             <?php
             if (!$this->is_mobile) {
                 ?>
                 <span class="type split">
-                <a href="<?php echo $this_page . "?dir=" .
-                    $request_sub_dir . "&s=t" .
-                    "&o=" . $torder; ?>"><?php echo _("Type"); ?></a>
+                <a href="<?php echo $this_page . '?dir=' .
+                    $request_sub_dir . '&s=t' .
+                    '&o=' . $torder; ?>"><?php echo _('Type'); ?></a>
             </span>
                 <span class="mtime split">
-                <a href="<?php echo $this_page . "?dir=" .
-                    $request_sub_dir . "&s=m" .
-                    "&o=" . $morder; ?>"><?php echo _("Modified Time"); ?></a>
+                <a href="<?php echo $this_page . '?dir=' .
+                    $request_sub_dir . '&s=m' .
+                    '&o=' . $morder; ?>"><?php echo _('Modified Time'); ?></a>
             </span>
                 <?php
             }
             ?>
         </div>
         <?php
-        $javascript_call_arg = "name";
-        if ($sort_type == "s") {
-            $javascript_call_arg = "size";
-        } else if ($sort_type == "t") {
-            $javascript_call_arg = "type";
-        } else if ($sort_type == "m") {
-            $javascript_call_arg = "mtime";
+        $javascript_call_arg = 'name';
+        if ($sort_type == 's') {
+            $javascript_call_arg = 'size';
+        } else if ($sort_type == 't') {
+            $javascript_call_arg = 'type';
+        } else if ($sort_type == 'm') {
+            $javascript_call_arg = 'mtime';
         }
 
         ?>
         <script type="text/javascript">
             //<![CDATA[
-            FileManager.setSortArrow(<?php echo "\"$javascript_call_arg\""; ?>, <?php echo "\"$order\""; ?>);
+            FileManager.setSortArrow('<?php echo $javascript_call_arg; ?>', '<?php echo $order; ?>');
             //]]>
         </script>
         <?php
@@ -917,9 +917,9 @@ class FileManager
     {
         if ($this->request_sub_dir != "") {
             //echo $request_sub_dir;
-            $up = $this->view_page . "?";
+            $up = $this->view_page . '?';
             $up .= $this->query_str;
-            $up .= ("&dir=" . $this->get_parent_dir($this->request_sub_dir));
+            $up .= ('&dir=' . $this->get_parent_dir($this->request_sub_dir));
             ?>
             <li>
                 <span class="check"></span>
@@ -927,7 +927,7 @@ class FileManager
                     <span class="icon">
                     <img src="images/go-up.gif" alt="file icon" width="16" height="16" border="0"/>
                     </span>
-                    <span class="name"><?php echo _("Up"); ?></span>
+                    <span class="name"><?php echo _('Up'); ?></span>
                     <span class="size">&nbsp;</span>
                     <span class="type">&nbsp;</span>
                     <span class="mtime">&nbsp;</span>
@@ -947,16 +947,16 @@ class FileManager
      * @param $type
      * @param $mtime
      */
-    private function detail_view_item($item_path = "",
-                                      $a_href = "",
-                                      $a_title = "",
-                                      $img_html = "",
-                                      $name = "",
-                                      $size = "",
-                                      $type = "",
+    private function detail_view_item($item_path = '',
+                                      $a_href = '',
+                                      $a_title = '',
+                                      $img_html = '',
+                                      $name = '',
+                                      $size = '',
+                                      $type = '',
                                       $mtime = 0)
     {
-        $class = "";
+        $class = '';
         if (LIGHTBOX && $this->is_img_type($type)) {
             $class = 'class="lightboxImg"';
         }
@@ -972,14 +972,14 @@ class FileManager
             </span>
             <a href="<?php echo $a_href; ?>" title="<?php echo $a_title; ?>" <?php echo $class; ?>>
                 <span class="icon"><?php echo $img_html; ?></span>
-                <span class="name"><?php echo str_replace(" ", "&nbsp;", $name); ?></span>
+                <span class="name"><?php echo str_replace(' ', '&nbsp;', $name); ?></span>
             </a>
             <span class="size"><?php echo $size; ?></span>
             <?php
             if (!$this->is_mobile) {
                 ?>
                 <span class="type"><?php echo $type; ?></span>
-                <span class="mtime"><?php echo date("Y-n-j H:i", $mtime); ?></span>
+                <span class="mtime"><?php echo date('Y-n-j H:i', $mtime); ?></span>
                 <?php
             }
             ?>
@@ -995,11 +995,11 @@ class FileManager
     private function is_img_type($type)
     {
         $type = strtolower($type);
-        if ($type == "jpg" ||
-            $type == "jpeg" ||
-            $type == "bmp" ||
-            $type == "png" ||
-            $type == "gif") {
+        if ($type == 'jpg' ||
+            $type == 'jpeg' ||
+            $type == 'bmp' ||
+            $type == 'png' ||
+            $type == 'gif') {
             return true;
         } else {
             return false;
@@ -1014,7 +1014,7 @@ class FileManager
     private function is_audio_type($type)
     {
         $type = strtolower($type);
-        if ($type == "mp3") {
+        if ($type == 'mp3') {
             return true;
         } else {
             return false;
@@ -1035,16 +1035,16 @@ class FileManager
         &$upload_img)
     {
         $query_str = $this->query_str;
-        $up = "";
-        $up_img = "images/toolbar-up.png";
-        $new_folder_img = "images/toolbar-new-folder.png";
-        $upload_img = "images/toolbar-upload.png";
+        $up = '';
+        $up_img = 'images/toolbar-up.png';
+        $new_folder_img = 'images/toolbar-new-folder.png';
+        $upload_img = 'images/toolbar-upload.png';
 
         //echo $request_sub_dir;
         // Set UP, new folder and upload state.
-        $up = $this->view_page . "?";
+        $up = $this->view_page . '?';
         $up .= $this->query_str;
-        $up .= ("&dir=" . rawurlencode($this->get_parent_dir($this->request_sub_dir)));
+        $up .= ('&dir=' . rawurlencode($this->get_parent_dir($this->request_sub_dir)));
     }
 
     /**
@@ -1054,11 +1054,11 @@ class FileManager
      */
     private function prepare_paste_func(&$paste_img, &$paste_class)
     {
-        $paste_img = "images/toolbar-paste.png";
-        $paste_class = "disable";
+        $paste_img = 'images/toolbar-paste.png';
+        $paste_class = 'disable';
         if ($this->clipboard->has_items()) {
-            $paste_img = "images/toolbar-paste.png";
-            $paste_class = "";
+            $paste_img = 'images/toolbar-paste.png';
+            $paste_class = '';
         }
     }
 
@@ -1073,17 +1073,17 @@ class FileManager
         &$back_url, &$back_class,
         &$forward_url, &$forward_class)
     {
-        $back_url = "javascript:;";
-        $back_class = "disable";
-        $forward_url = "javascript:;";
-        $forward_class = "disable";
+        $back_url = 'javascript:;';
+        $back_class = 'disable';
+        $forward_url = 'javascript:;';
+        $forward_class = 'disable';
         if ($this->history->able_to_back()) {
-            $back_class = "";
-            $back_url = "func/history.func.php?action=b";
+            $back_class = '';
+            $back_url = 'func/history.func.php?action=b';
         }
         if ($this->history->able_to_forward()) {
-            $forward_class = "";
-            $forward_url = "func/history.func.php?action=f";
+            $forward_class = '';
+            $forward_url = 'func/history.func.php?action=f';
         }
     }
 
@@ -1102,7 +1102,7 @@ class FileManager
                 break;
             }
 
-            $url = "func/history.func.php?action=f" . "&step=" . ($i - $history_current);
+            $url = 'func/history.func.php?action=f' . '&step=' . ($i - $history_current);
             if ($i != $history_current) {
                 $history_items .= ('<li><a href="' . $url . '">');
             } else {
@@ -1131,18 +1131,18 @@ class FileManager
     {
         $button_names['Back'] = _('Back');
         $button_names['Forward'] = _('Forward');
-        $button_names['Refresh'] = _("Refresh");
-        $button_names['Up'] = _("Up");
-        $button_names['Cut'] = _("Cut");
-        $button_names['Copy'] = _("Copy");
-        $button_names['Paste'] = _("Paste");
-        $button_names['New Folder'] = _("New Folder");
-        $button_names['Rename'] = _("Rename");
-        $button_names['Delete'] = _("Delete");
-        $button_names['Upload'] = _("Upload");
-        $button_names['Large Icon View'] = _("Large Icon View");
-        $button_names['Detail View'] = _("Detail View");
-        $button_names['Clean Search'] = _("Clean Search");
+        $button_names['Refresh'] = _('Refresh');
+        $button_names['Up'] = _('Up');
+        $button_names['Cut'] = _('Cut');
+        $button_names['Copy'] = _('Copy');
+        $button_names['Paste'] = _('Paste');
+        $button_names['New Folder'] = _('New Folder');
+        $button_names['Rename'] = _('Rename');
+        $button_names['Delete'] = _('Delete');
+        $button_names['Upload'] = _('Upload');
+        $button_names['Large Icon View'] = _('Large Icon View');
+        $button_names['Detail View'] = _('Detail View');
+        $button_names['Clean Search'] = _('Clean Search');
 
         return $button_names;
     }
