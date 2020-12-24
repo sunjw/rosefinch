@@ -5,10 +5,10 @@
                 <div>
                     <label for="roseView"><?php echo _("View Permission:"); ?></label>
                     <select id="roseView" name="roseView">
-                        <option value="<?php echo User::$NOBODY; ?>" <?php if($settings['rose_view'] == User::$NOBODY)print("selected='selected'"); ?>>Everyone</option>
-                        <option value="<?php echo User::$USER; ?>" <?php if($settings['rose_view'] == User::$USER)print("selected='selected'"); ?>>User</option>
-                        <option value="<?php echo User::$ADMIN; ?>" <?php if($settings['rose_view'] == User::$ADMIN)print("selected='selected'"); ?>>Administrator</option>
-                        <option value="<?php echo User::$ROOT; ?>" <?php if($settings['rose_view'] == User::$ROOT)print("selected='selected'"); ?>>Root</option>
+                        <option value="<?php echo User::$NOBODY; ?>" <?php if($settings['rose_view'] == User::$NOBODY) print("selected='selected'"); ?>>Everyone</option>
+                        <option value="<?php echo User::$USER; ?>" <?php if($settings['rose_view'] == User::$USER) print("selected='selected'"); ?>>User</option>
+                        <option value="<?php echo User::$ADMIN; ?>" <?php if($settings['rose_view'] == User::$ADMIN) print("selected='selected'"); ?>>Administrator</option>
+                        <option value="<?php echo User::$ROOT; ?>" <?php if($settings['rose_view'] == User::$ROOT) print("selected='selected'"); ?>>Root</option>
                     </select>
                     <div class="info">
                         <?php 
@@ -19,10 +19,10 @@
                 <div>
                     <label for="roseModify"><?php echo _("Modification Permission:"); ?></label>
                     <select id="roseModify" name="roseModify">
-                        <option value="<?php echo User::$NOBODY; ?>" <?php if($settings['rose_modify'] == User::$NOBODY)print("selected='selected'"); ?>>Everyone</option>
-                        <option value="<?php echo User::$USER; ?>" <?php if($settings['rose_modify'] == User::$USER)print("selected='selected'"); ?>>User</option>
-                        <option value="<?php echo User::$ADMIN; ?>" <?php if($settings['rose_modify'] == User::$ADMIN)print("selected='selected'"); ?>>Administrator</option>
-                        <option value="<?php echo User::$ROOT; ?>" <?php if($settings['rose_modify'] == User::$ROOT)print("selected='selected'"); ?>>Root</option>
+                        <option value="<?php echo User::$NOBODY; ?>" <?php if($settings['rose_modify'] == User::$NOBODY) print("selected='selected'"); ?>>Everyone</option>
+                        <option value="<?php echo User::$USER; ?>" <?php if($settings['rose_modify'] == User::$USER) print("selected='selected'"); ?>>User</option>
+                        <option value="<?php echo User::$ADMIN; ?>" <?php if($settings['rose_modify'] == User::$ADMIN) print("selected='selected'"); ?>>Administrator</option>
+                        <option value="<?php echo User::$ROOT; ?>" <?php if($settings['rose_modify'] == User::$ROOT) print("selected='selected'"); ?>>Root</option>
                     </select>
                     <div class="info">
                         <?php 
@@ -33,8 +33,8 @@
                 <div>
                     <label for="roseAdmin"><?php echo _("Administration Permission:"); ?></label>
                     <select id="roseAdmin" name="roseAdmin">
-                        <option value="<?php echo User::$ADMIN; ?>" <?php if($settings['rose_admin'] == User::$ADMIN)print("selected='selected'"); ?>>Administrator</option>
-                        <option value="<?php echo User::$ROOT; ?>" <?php if($settings['rose_admin'] == User::$ROOT)print("selected='selected'"); ?>>Root</option>
+                        <option value="<?php echo User::$ADMIN; ?>" <?php if($settings['rose_admin'] == User::$ADMIN) print("selected='selected'"); ?>>Administrator</option>
+                        <option value="<?php echo User::$ROOT; ?>" <?php if($settings['rose_admin'] == User::$ROOT) print("selected='selected'"); ?>>Root</option>
                     </select>
                     <div class="info">
                         <?php 

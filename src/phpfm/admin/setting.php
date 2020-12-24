@@ -1,17 +1,17 @@
 <?php
 $begin_time = microtime(true);
 
-require_once dirname(__FILE__) . "/../inc/defines.inc.php";
-require_once dirname(__FILE__) . "/../inc/common.inc.php";
-require_once dirname(__FILE__) . "/../clazz/utility.class.php";
-require_once "progress.php";
-require_once dirname(__FILE__) . "/../log/log.func.php";
+require_once dirname(__FILE__) . '/../inc/defines.inc.php';
+require_once dirname(__FILE__) . '/../inc/common.inc.php';
+require_once dirname(__FILE__) . '/../clazz/utility.class.php';
+require_once 'progress.php';
+require_once dirname(__FILE__) . '/../log/log.func.php';
 
 @session_start();
 
 set_response_utf8();
 
-get_logger()->info("setting...");
+get_logger()->info('setting...');
 
 //print_r($_GET);
 //print_r($_POST);
@@ -19,10 +19,10 @@ $settings = array();
 
 $timezone = date_default_timezone_get();
 
-$USERMNG_ARG = "usermng";
-$DB_ARG = "database";
+$USERMNG_ARG = 'usermng';
+$DB_ARG = 'database';
 $mode = 0;
-$arg = get_query("mode");
+$arg = get_query('mode');
 if ($arg == $DB_ARG) {
     $mode = 1;
 } else if ($arg == $USERMNG_ARG) {
@@ -52,14 +52,14 @@ if ($mode == 0) {
 
 if (isset($_POST['settingsForm'])) {
     if (!save_settings($settings, $mode)) {
-        Utility::get_messageboard()->set_message(_("There is something wrong in your settings."), 400);
+        Utility::get_messageboard()->set_message(_('There is something wrong in your settings.'), 400);
     } else {
-        Utility::get_messageboard()->set_message(_("Settings have been changed. Go to <a href='../index.php'>index page</a> and see."));
+        Utility::get_messageboard()->set_message(_('Settings have been changed. Go to <a href="../index.php">index page</a> and see.'));
     }
 }
 
 if ($mode == 0) {
-    $settings['root_path'] = str_replace("\\\\", "\\", $settings['root_path']); // fix path display
+    $settings['root_path'] = str_replace('\\\\', '\\', $settings['root_path']); // fix path display
 }
 
 if ($mode == 0) {
@@ -67,14 +67,14 @@ if ($mode == 0) {
 } else {
     $locale = LOCALE;
 }
-putenv("LANG=" . $locale);
+putenv('LANG=' . $locale);
 setlocale(LC_ALL, $locale);
 
-$lang_dir = "locales";
+$lang_dir = 'locales';
 
 $directory = get_base_dir() . $lang_dir;
 
-$domain = "phpfm";
+$domain = 'phpfm';
 
 bindtextdomain($domain, $directory);
 bind_textdomain_codeset($domain, get_encoding()); // make gettext read mo by utf-8
@@ -85,7 +85,7 @@ textdomain($domain);
         "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
-    <title><?php echo _("Setting"); ?></title>
+    <title><?php echo _('Setting'); ?></title>
     <meta http-equiv="Content-type" content="text/html;charset=UTF-8"/>
     <link href="../css/com.css" rel="stylesheet" type="text/css"/>
     <link href="../css/message.css" rel="stylesheet" type="text/css"/>
@@ -98,25 +98,25 @@ textdomain($domain);
         //<![CDATA[
         var Strings = new Array();
         <?php
-        echo "Strings['return'] = '" . rawurlencode(get_URI()) . "';";
-        echo "Strings['OK'] = '" . _('OK') . "';";
-        echo "Strings['Cancel'] = '" . _('Cancel') . "';";
-        echo "Strings['Never mind...'] = '" . _('Never mind...') . "';";
-        echo "Strings['Are you sure to logout?'] = '" . _('Are you sure to logout?') . "';";
-        echo "Strings['User'] = '" . _('User') . "';";
-        echo "Strings['Username:'] = '" . _('Username:') . "';";
-        echo "Strings['Password:'] = '" . _('Password:') . "';";
-        echo "Strings['Permission:'] = '" . _('Permission:') . "';";
-        echo "Strings['Working...'] = '" . _('Working...') . "';";
-        echo "Strings['Done'] = '" . _('Done') . "';";
-        echo "Strings['Add'] = '" . _('Add') . "';";
-        echo "Strings['Delete'] = '" . _('Delete') . "';";
-        echo "Strings['Are you sure to delete this user?'] = '" . _('Are you sure to delete this user?') . "';";
-        echo "Strings['Modify'] = '" . _('Modify') . "';";
-        echo "Strings['Change Password'] = '" . _('Change Password') . "';";
-        echo "Strings['Old:'] = '" . _('Old:') . "';";
-        echo "Strings['New:'] = '" . _('New:') . "';";
-        echo "Strings['Repeat:'] = '" . _('Repeat:') . "';";
+        echo 'Strings[\'return\'] = \'' . rawurlencode(get_URI()) . '\';';
+        echo 'Strings[\'OK\'] = \'' . _('OK') . '\';';
+        echo 'Strings[\'Cancel\'] = \'' . _('Cancel') . '\';';
+        echo 'Strings[\'Never mind...\'] = \'' . _('Never mind...') . '\';';
+        echo 'Strings[\'Are you sure to logout?\'] = \'' . _('Are you sure to logout?') . '\';';
+        echo 'Strings[\'User\'] = \'' . _('User') . '\';';
+        echo 'Strings[\'Username:\'] = \'' . _('Username:') . '\';';
+        echo 'Strings[\'Password:\'] = \'' . _('Password:') . '\';';
+        echo 'Strings[\'Permission:\'] = \'' . _('Permission:') . '\';';
+        echo 'Strings[\'Working...\'] = \'' . _('Working...') . '\';';
+        echo 'Strings[\'Done\'] = \'' . _('Done') . '\';';
+        echo 'Strings[\'Add\'] = \'' . _('Add') . '\';';
+        echo 'Strings[\'Delete\'] = \'' . _('Delete') . '\';';
+        echo 'Strings[\'Are you sure to delete this user?\'] = \'' . _('Are you sure to delete this user?') . '\';';
+        echo 'Strings[\'Modify\'] = \'' . _('Modify') . '\';';
+        echo 'Strings[\'Change Password\'] = \'' . _('Change Password') . '\';';
+        echo 'Strings[\'Old:\'] = \'' . _('Old:') . '\';';
+        echo 'Strings[\'New:\'] = \'' . _('New:') . '\';';
+        echo 'Strings[\'Repeat:\'] = \'' . _('Repeat:') . '\';';
         ?>
         //]]>
     </script>
@@ -124,7 +124,7 @@ textdomain($domain);
 <body>
 <div id="header">
     <div id="nav">
-        <?php Utility::html_navigation("setting"); ?>
+        <?php Utility::html_navigation('setting'); ?>
         <div class="clear"></div>
     </div>
     <div id="loginStatus">
@@ -137,14 +137,14 @@ textdomain($domain);
     <div id="phpfmDocNav">
         <?php
         if ($mode == 0) {
-            echo _("Setting"); ?><?php if (USERMNG) { ?>&nbsp;|&nbsp;
-                <a class="" title="<?php echo _("User Management"); ?>"
-                   href="setting.php?mode=<?php echo $USERMNG_ARG; ?>"><?php echo _("User Management"); ?></a><?php } ?>
+            echo _('Setting'); ?><?php if (USERMNG) { ?>&nbsp;|&nbsp;
+                <a class="" title="<?php echo _('User Management'); ?>"
+                   href="setting.php?mode=<?php echo $USERMNG_ARG; ?>"><?php echo _('User Management'); ?></a><?php } ?>
             <?php
         } else if ($mode == 2 && (USERMNG || $settings['usermng'])) {
             ?>
-            <a class="" title="<?php echo _("Setting"); ?>"
-               href="setting.php"><?php echo _("Setting"); ?></a><?php if (USERMNG) { ?>&nbsp;|&nbsp;<?php echo _("User Management"); ?><?php } ?>
+            <a class="" title="<?php echo _('Setting'); ?>"
+               href="setting.php"><?php echo _('Setting'); ?></a><?php if (USERMNG) { ?>&nbsp;|&nbsp;<?php echo _('User Management'); ?><?php } ?>
             <?php
         }
         ?>
@@ -154,9 +154,9 @@ textdomain($domain);
     <?php
     if (Utility::allow_to_admin()) {
         if ($mode == 0) {
-            include "settings.form.php";
+            include 'settings.form.php';
         } else if ($mode == 2) {
-            include "usermng.form.php";
+            include 'usermng.form.php';
         }
     } else {
         ?>
