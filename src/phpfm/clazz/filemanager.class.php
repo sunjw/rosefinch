@@ -958,7 +958,7 @@ class FileManager
             $class = 'class="lightboxImg"';
         }
 
-        if (AUDIOPLAYER && $this->is_audio_type($type)) {
+        if ($this->is_audio_type($type)) {
             $class = 'class="audioPlayer"';
         }
 

@@ -21,7 +21,6 @@ $settings = array('root_type' => 'absolute',
     'timezone' => '',
     'language' => 'en_US',
     'title_name' => 'Rosefinch',
-    'audioPlayer' => 1,
     'usermng' => 0,
     'install' => 1);
 

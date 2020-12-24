@@ -36,7 +36,6 @@ if ($mode == 0) {
         'timezone' => $timezone,
         'language' => LOCALE,
         'title_name' => TITLENAME,
-        'audioPlayer' => AUDIOPLAYER,
         'usermng' => USERMNG);
 } else if ($mode == 1) {
     $settings = array('db_user' => '',

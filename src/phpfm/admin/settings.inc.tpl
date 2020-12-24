@@ -26,7 +26,4 @@ define('USERMNG', &&USERMNG&&);
 // Title
 define('TITLENAME', '&&TITLENAME&&');
 
-// Enable AudioPlayer
-define('AUDIOPLAYER', &&AUDIOPLAYER&&);
-
 ?>
