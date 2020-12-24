@@ -212,6 +212,16 @@ function response_500()
 }
 
 /**
+ * Convert timestamp to time string.
+ * @param int $time timestamp
+ * @return string time string, format is: Y-n-j H:i:s
+ */
+function timetotimestr($time)
+{
+    return date('Y-n-j H:i', $time);
+}
+
+/**
  * Convert time string to timestamp.
  * @param string $str time string, format is: Y-n-j H:i:s
  * @return number timestamp

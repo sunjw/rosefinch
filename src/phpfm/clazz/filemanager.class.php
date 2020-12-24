@@ -1002,7 +1002,7 @@ class FileManager
             if (!$this->is_mobile) {
                 ?>
                 <span class="type"><?php echo $type; ?></span>
-                <span class="mtime"><?php echo date('Y-n-j H:i', $mtime); ?></span>
+                <span class="mtime"><?php echo timetotimestr($mtime); ?></span>
                 <?php
             }
             ?>
