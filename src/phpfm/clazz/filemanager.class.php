@@ -66,7 +66,7 @@ class FileManager
 
         $this->request_dir = $this->prepare_request_dir($files_base_dir, $this->request_sub_dir);
         if (strlen(convert_toutf8($this->request_dir)) == strlen($files_base_dir)) {
-            $this->request_sub_dir = "";
+            $this->request_sub_dir = '';
         } else {
             $this->request_sub_dir = substr(convert_toutf8($this->request_dir), strlen($files_base_dir));
         }
@@ -75,17 +75,17 @@ class FileManager
         $this->sort_type = get_query(SORT_PARAM);
         $this->order = get_query(ORDER_PARAM);
 
-        if ($this->sort_type == "") {
-            // 读取 Cookie 值
+        if ($this->sort_type == '') {
+            // read cookie value
             $this->sort_type = get_cookie(SORT_PARAM);
         }
-        if ($this->order == "") {
+        if ($this->order == '') {
             $this->order = get_cookie(ORDER_PARAM);
         }
 
         $allowed_sort_type = array('', 'n', 's', 't', 'm');
         if (!in_array($this->sort_type, $allowed_sort_type)) {
-            $this->sort_type = "";
+            $this->sort_type = '';
         }
         if ($this->order != 'd') {
             $this->order = 'a';
@@ -197,7 +197,7 @@ class FileManager
      */
     public function get_current_dir()
     {
-        $current_dir = "";
+        $current_dir = '';
         $temp = $this->request_sub_dir;
         $temp = trim_last_slash($this->request_sub_dir);
 
@@ -249,7 +249,7 @@ class FileManager
                 $request_dir = $files_base_dir_plat . convert_toplat($request_sub_dir); // maybe GB2312 on Windows.
                 if (!file_exists($request_dir)) {
                     $request_dir = $files_base_dir_plat;
-                    //$request_sub_dir = "";
+                    //$request_sub_dir = '';
                 }
             } else {
                 // exits, means GB2312, need convert to UTF-8.
@@ -262,7 +262,7 @@ class FileManager
                 $request_dir = $files_base_dir_plat . $request_sub_dir; // maybe UTF-8 on Unix.
                 if (!file_exists($request_dir)) {
                     $request_dir = $files_base_dir_plat;
-                    //$request_sub_dir = "";
+                    //$request_sub_dir = '';
                 }
             } else {
                 // exits, means UTF-8, done.
@@ -322,7 +322,7 @@ class FileManager
 
                     //$a_href = FILES_DIR.'/'.$this->request_sub_dir.$file['name'];
                     $a_href = 'func/download.func.php?file=' . rawurlencode($this->request_sub_dir . $file['name']);
-                    $type_html = "";
+                    $type_html = '';
                     if ($file['type'] == '') {
                         $type_html = _('File');
                     } else {
@@ -477,15 +477,14 @@ class FileManager
     {
         //echo $request_sub_dir;
         $last_slash = strrpos($request_sub_dir, '/');
-        $parent = "";
+        $parent = '';
         if ($last_slash !== false) {
             $parent = substr($request_sub_dir, 0, $last_slash);
             $last_slash = strrpos($parent, '/');
             if ($last_slash !== false) {
                 $parent = substr($parent, 0, $last_slash);
-
             } else {
-                $parent = "";
+                $parent = '';
             }
         }
         //echo $parent;
@@ -508,7 +507,7 @@ class FileManager
 
                     <?php
                     $sub_dirs = explode('/', $this->request_sub_dir);
-                    $dir_str = "";
+                    $dir_str = '';
                     if (!$this->is_mobile) {
                         $this->display_sub_menus($dir_str, $sub_dirs[0]);
                     }
@@ -517,7 +516,7 @@ class FileManager
                 <?php
                 //print_r($sub_dirs);
                 $len = count($sub_dirs);
-                $sub_dirs[$len] = "";
+                $sub_dirs[$len] = '';
                 for ($i = 0; $i < $len - 1; $i++) {
                     $sub_dir = $sub_dirs[$i];
                     $dir_str .= $sub_dir;
@@ -550,11 +549,11 @@ class FileManager
      * @param string $sub_dir_str directory path to current
      * @param string $next_in_path next item in path
      */
-    private function display_sub_menus($sub_dir_str, $next_in_path = "")
+    private function display_sub_menus($sub_dir_str, $next_in_path = '')
     {
         $temp = $sub_dir_str;
         $base_dir = $this->prepare_request_dir(Utility::get_file_base_dir(), $temp);
-        if ($base_dir != "") {
+        if ($base_dir != '') {
             $sub_dstats = $this->get_dirs_list($base_dir);
             if (count($sub_dstats) > 0) {
                 ?>
@@ -915,7 +914,7 @@ class FileManager
      */
     private function display_up()
     {
-        if ($this->request_sub_dir != "") {
+        if ($this->request_sub_dir != '') {
             //echo $request_sub_dir;
             $up = $this->view_page . '?';
             $up .= $this->query_str;
@@ -1095,7 +1094,7 @@ class FileManager
     {
         $history_current = $this->history->get_current() - 1;
         $history = $this->history->get_history();
-        $history_items = "";
+        $history_items = '';
         $i = 0;
         foreach ($history as $item) {
             if ($i >= $this->history->get_length()) {
@@ -1140,9 +1139,6 @@ class FileManager
         $button_names['Rename'] = _('Rename');
         $button_names['Delete'] = _('Delete');
         $button_names['Upload'] = _('Upload');
-        $button_names['Large Icon View'] = _('Large Icon View');
-        $button_names['Detail View'] = _('Detail View');
-        $button_names['Clean Search'] = _('Clean Search');
 
         return $button_names;
     }

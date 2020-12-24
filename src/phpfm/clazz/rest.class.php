@@ -487,7 +487,7 @@ class Rest
 
         $resp_obj = new RestRet();
 
-        $message = "";
+        $message = '';
         $stat = 0;
         if ($this->messageboard->has_message()) {
             $this->messageboard->get_message($message, $stat);

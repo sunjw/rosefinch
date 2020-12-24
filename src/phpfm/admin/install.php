@@ -16,9 +16,9 @@ get_logger()->info($_SERVER['REMOTE_ADDR'] . ' installing...');
 //print_r($_POST);
 
 $settings = array('root_type' => 'absolute',
-    'root_path' => "",
+    'root_path' => '',
     'charset' => 'UTF-8',
-    'timezone' => "",
+    'timezone' => '',
     'language' => 'en_US',
     'title_name' => 'Rosefinch',
     'lightbox' => 1,

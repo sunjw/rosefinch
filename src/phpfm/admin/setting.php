@@ -40,9 +40,9 @@ if ($mode == 0) {
         'audioPlayer' => AUDIOPLAYER,
         'usermng' => USERMNG);
 } else if ($mode == 1) {
-    $settings = array('db_user' => "",
-        'db_name' => "",
-        'db_host' => "");
+    $settings = array('db_user' => '',
+        'db_name' => '',
+        'db_host' => '');
 } else if ($mode == 2) {
     $settings = array('language' => LOCALE,
         'rose_view' => ROSE_VIEW,

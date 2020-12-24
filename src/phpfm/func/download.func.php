@@ -138,7 +138,7 @@ function prepare_file_path($request_file)
             $file = $files_base_dir_plat . convert_gbtoutf8($request_file); // On Linux, may need convert to UTF-8.
             if (!is_file($file)) {
                 $file = false; // Not exists.
-                //$request_sub_dir = "";
+                //$request_sub_dir = '';
             }
         } else {
             // Exists, UTF-8, do nothing.
@@ -153,7 +153,7 @@ if (Utility::allow_to_view()) {
     $request_file = rawurldecode(get_query('file'));
     get_logger()->info(join($_GET));
 
-    if (substr($request_file, -1) == '\"') {
+    if (substr($request_file, -1) == '"') {
         $request_file = substr($request_file, 0, -1);
     }
     $request_file = prepare_file_path($request_file);

@@ -61,7 +61,7 @@ class Utility
     public static function get_file_ext($file)
     {
         $dot_pos = strrpos($file, '.');
-        $type = "";
+        $type = '';
         if ($dot_pos !== false) {
             $type = substr($file, $dot_pos + 1, strlen($file) - $dot_pos - 1);
         }
@@ -75,7 +75,7 @@ class Utility
      */
     public static function check_name($name)
     {
-        if ($name == "") {
+        if ($name == '') {
             return false;
         }
         if (false !== strpos($name, '..') ||
@@ -83,7 +83,7 @@ class Utility
             false !== strpos($name, '\\') ||
             false !== strpos($name, '*') ||
             false !== strpos($name, '?') ||
-            false !== strpos($name, '\"') ||
+            false !== strpos($name, '"') ||
             false !== strpos($name, '|') ||
             false !== strpos($name, '&') ||
             false !== strpos($name, '>') ||
@@ -101,13 +101,13 @@ class Utility
      */
     public static function check_path($path)
     {
-        if ($path == "") {
+        if ($path == '') {
             return false;
         }
         if (false !== strpos($path, '..') ||
             false !== strpos($path, '*') ||
             false !== strpos($path, '?') ||
-            false !== strpos($path, '\"') ||
+            false !== strpos($path, '"') ||
             false !== strpos($path, '|') ||
             false !== strpos($path, '&') ||
             false !== strpos($path, '>') ||
@@ -405,10 +405,10 @@ class Utility
         $dir_name = dirname($name);
         $dot_pos = strrpos($file_name, '.');
 
-        $newname = "";
+        $newname = '';
 
-        $name_part = "";
-        $type_part = "";
+        $name_part = '';
+        $type_part = '';
         if ($dot_pos !== false) {
             $name_part = substr($file_name, 0, $dot_pos);
             $type_part = substr($file_name, $dot_pos + 1, strlen($file_name) - $dot_pos - 1);

@@ -137,9 +137,9 @@ function save_usermng(&$settings)
     $settings['rose_modify'] = post_query('roseModify');
     $settings['rose_admin'] = post_query('roseAdmin');
 
-    if ($settings['rose_view'] == "" ||
-        $settings['rose_modify'] == "" ||
-        $settings['rose_admin'] == "") {
+    if ($settings['rose_view'] == '' ||
+        $settings['rose_modify'] == '' ||
+        $settings['rose_admin'] == '') {
         return false;
     }
 
