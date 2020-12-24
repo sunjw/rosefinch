@@ -5,8 +5,8 @@
                 <div>
                     <label for="rootType"><?php echo _('Type of root directory path:'); ?></label>
                     <select id="rootType" name="rootType">
-                        <option value="absolute" <?php if($settings['root_type'] == 'absolute') print('selected="selected"'); ?>><?php echo _('Absolute path'); ?></option>
-                        <option value="relative" <?php if($settings['root_type'] == 'relative') print('selected="selected"'); ?>><?php echo _('Relative path'); ?></option>
+                        <option value="absolute" <?php if ($settings['root_type'] == 'absolute') print('selected="selected"'); ?>><?php echo _('Absolute path'); ?></option>
+                        <option value="relative" <?php if ($settings['root_type'] == 'relative') print('selected="selected"'); ?>><?php echo _('Relative path'); ?></option>
                     </select>
                     <div class="info">
                         <?php 
@@ -38,8 +38,8 @@
                 <div>
                     <label for="timezone"><?php echo _('Timezone:'); ?></label>
                     <select id="timezone" name="timezone">
-                        <option value="Asia/Shanghai" <?php if($settings['timezone'] == 'Asia/Shanghai') print('selected="selected"'); ?>>Asia/Shanghai</option>
-                        <option value="America/New_York" <?php if($settings['timezone'] == 'America/New_York') print('selected="selected"'); ?>>America/New_York</option>
+                        <option value="Asia/Shanghai" <?php if ($settings['timezone'] == 'Asia/Shanghai') print('selected="selected"'); ?>>Asia/Shanghai</option>
+                        <option value="America/New_York" <?php if ($settings['timezone'] == 'America/New_York') print('selected="selected"'); ?>>America/New_York</option>
                     </select>
                     <div class="info">
                         <?php 
@@ -50,8 +50,8 @@
                 <div>
                     <label for="language"><?php echo _('Language:'); ?></label>
                     <select id="language" name="language">
-                        <option value="en_US" <?php if($settings['language'] == 'en_US') print('selected="selected"'); ?>>English (US)</option>
-                        <option value="zh_CN" <?php if($settings['language'] == 'zh_CN') print('selected="selected"'); ?>>简体中文</option>
+                        <option value="en_US" <?php if ($settings['language'] == 'en_US') print('selected="selected"'); ?>>English (US)</option>
+                        <option value="zh_CN" <?php if ($settings['language'] == 'zh_CN') print('selected="selected"'); ?>>简体中文</option>
                     </select>
                     <div class="info">
                         <?php 
@@ -61,16 +61,15 @@
                 </div>
             </fieldset>
             <?php 
-            if(!(isset($settings['install']) && $settings['install']))
-            {
+            if (!(isset($settings['install']) && $settings['install'])) {
             ?>
             <fieldset>
                 <legend><?php echo _('User Management'); ?></legend>
                 <div>
                     <label for="usermng"><?php echo _('Enable user management:'); ?></label>
                     <select id="usermng" name="usermng">
-                        <option value="1" <?php if($settings['usermng'] == 1) print('selected="selected"'); ?>><?php echo _('Enable'); ?></option>
-                        <option value="0" <?php if($settings['usermng'] == 0) print('selected="selected"'); ?>><?php echo _('Disable'); ?></option>
+                        <option value="1" <?php if ($settings['usermng'] == 1) print('selected="selected"'); ?>><?php echo _('Enable'); ?></option>
+                        <option value="0" <?php if ($settings['usermng'] == 0) print('selected="selected"'); ?>><?php echo _('Disable'); ?></option>
                     </select>
                     <div class="info">
                         <?php 

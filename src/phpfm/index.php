@@ -49,7 +49,7 @@ $fileManager = new FileManager('index.php');
         ?>
     </div>
     <?php
-    if(!is_mobile_browser())
+    if (!is_mobile_browser())
     {
     ?>
     <div id="footer">
