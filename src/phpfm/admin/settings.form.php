@@ -94,18 +94,6 @@
                     </div>
                 </div>
                 <div>
-                    <label for="lightbox"><?php echo _('Enable LightBox for pictures:'); ?></label>
-                    <select id="lightbox" name="lightbox">
-                        <option value="1" <?php if($settings['lightbox'] == 1) print('selected="selected"'); ?>><?php echo _('Enable'); ?></option>
-                        <option value="0" <?php if($settings['lightbox'] == 0) print('selected="selected"'); ?>><?php echo _('Disable'); ?></option>
-                    </select>
-                    <div class="info">
-                        <?php 
-                        echo _('Let Rosefinch enable jQuery lightbox for pictures.');
-                        ?>
-                    </div>
-                </div>
-                <div>
                     <label for="audioPlayer"><?php echo _('Enable Audio Player for audio files:'); ?></label>
                     <select id="audioPlayer" name="audioPlayer">
                         <option value="1" <?php if($settings['audioPlayer'] == 1) print('selected="selected"'); ?>><?php echo _('Enable'); ?></option>

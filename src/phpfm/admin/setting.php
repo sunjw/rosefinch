@@ -36,7 +36,6 @@ if ($mode == 0) {
         'timezone' => $timezone,
         'language' => LOCALE,
         'title_name' => TITLENAME,
-        'lightbox' => LIGHTBOX,
         'audioPlayer' => AUDIOPLAYER,
         'usermng' => USERMNG);
 } else if ($mode == 1) {

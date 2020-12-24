@@ -37,7 +37,6 @@ function save_general(&$settings)
     $settings['timezone'] = post_query('timezone');
     $settings['language'] = post_query('language');
     $settings['title_name'] = post_query('titleName');
-    $settings['lightbox'] = post_query('lightbox');
     $settings['audioPlayer'] = post_query('audioPlayer');
     if (isset($settings['install']) && $settings['install']) {
         $settings['usermng'] = '0';
@@ -51,7 +50,6 @@ function save_general(&$settings)
         $settings['timezone'] == '' ||
         $settings['language'] == '' ||
         $settings['title_name'] == '' ||
-        $settings['lightbox'] == '' ||
         $settings['audioPlayer'] == '' ||
         $settings['usermng'] == '') {
         return false;
@@ -85,7 +83,6 @@ function save_general(&$settings)
             '&&TIME_ZONE&&',
             '&&LOCALE&&',
             '&&TITLENAME&&',
-            '&&LIGHTBOX&&',
             '&&AUDIOPLAYER&&',
             '&&USERMNG&&');
         $values = array($settings['root_type'],
@@ -94,7 +91,6 @@ function save_general(&$settings)
             $settings['timezone'],
             $settings['language'],
             $settings['title_name'],
-            $settings['lightbox'],
             $settings['audioPlayer'],
             $settings['usermng']);
 

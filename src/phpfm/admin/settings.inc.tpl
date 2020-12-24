@@ -26,8 +26,6 @@ define('USERMNG', &&USERMNG&&);
 // Title
 define('TITLENAME', '&&TITLENAME&&');
 
-// Enable lightbox
-define('LIGHTBOX', &&LIGHTBOX&&);
 // Enable AudioPlayer
 define('AUDIOPLAYER', &&AUDIOPLAYER&&);
 
