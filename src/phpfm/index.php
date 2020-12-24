@@ -1,24 +1,24 @@
 <?php
 $begin_time = microtime(true);
 
-require_once "inc/defines.inc.php";
-require_once "inc/common.inc.php";
-require_once "clazz/filemanager.class.php";
-require_once "clazz/utility.class.php";
-require_once "log/log.func.php";
+require_once dirname(__FILE__) . '/inc/defines.inc.php';
+require_once dirname(__FILE__) . '/inc/common.inc.php';
+require_once dirname(__FILE__) . '/clazz/filemanager.class.php';
+require_once dirname(__FILE__) . '/clazz/utility.class.php';
+require_once dirname(__FILE__) . '/log/log.func.php';
 
 @session_start();
 
-get_logger()->info("index.php visited.");
+get_logger()->info('index.php visited.');
 
-$fileManager = new FileManager("index.php");
+$fileManager = new FileManager('index.php');
 ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
     <title>
         <?php
-        echo $fileManager->title()." - ".$fileManager->get_current_dir();
+        echo $fileManager->title() . ' - ' . $fileManager->get_current_dir();
         ?>
     </title>
     <meta http-equiv="Content-type" content="text/html;charset=UTF-8" />
@@ -41,10 +41,10 @@ $fileManager = new FileManager("index.php");
     <div id="content">
         <?php
         $fileManager->display_toolbar();
-        $fileManager->display_full_path(); // display full path.
+        $fileManager->display_full_path(); // display full path
         $fileManager->display_main_view();
 
-        // 准备部分
+        // function preparation
         $fileManager->display_func_pre();
         ?>
     </div>
@@ -53,7 +53,7 @@ $fileManager = new FileManager("index.php");
     {
     ?>
     <div id="footer">
-        <?php Utility::html_copyright_info($begin_time); ?>
+        <?php Utility::html_footer($begin_time); ?>
     </div>
     <?php
     }

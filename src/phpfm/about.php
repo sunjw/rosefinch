@@ -1,10 +1,10 @@
 <?php
 $begin_time = microtime(true);
 
-require_once "inc/defines.inc.php";
-require_once "inc/common.inc.php";
-require_once "inc/gettext.inc.php";
-require_once "clazz/utility.class.php";
+require_once dirname(__FILE__) . '/inc/defines.inc.php';
+require_once dirname(__FILE__) . '/inc/common.inc.php';
+require_once dirname(__FILE__) . '/inc/gettext.inc.php';
+require_once dirname(__FILE__) . '/clazz/utility.class.php';
 
 @session_start();
 
@@ -28,22 +28,23 @@ set_response_utf8();
             <div class="clear"></div>
         </div>
         <div id="loginStatus">
-        <?php 
+        <?php
         echo Utility::display_user();
         ?>
         </div>
     </div>
     <div id="content">
         <div id="phpfmDocNav">
-            
+
         </div>
-        <?php 
-            if(file_exists("about/about." . LOCALE . ".php"))
+        <?php
+            if (file_exists('about/about.' . LOCALE . '.php')) {
                 require "about/about." . LOCALE . ".php";
+            }
         ?>
     </div>
     <div id="footer">
-        <?php Utility::html_copyright_info($begin_time); ?>
+        <?php Utility::html_footer($begin_time); ?>
     </div>
 </body>
 </html>

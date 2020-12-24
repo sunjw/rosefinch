@@ -690,9 +690,9 @@ class Utility
     }
 
     /**
-     * 版权信息
+     * Footer part.
      */
-    public static function html_copyright_info($begin_time)
+    public static function html_footer($begin_time)
     {
         ?>
         <div id="copyright">

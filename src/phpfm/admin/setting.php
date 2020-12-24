@@ -172,7 +172,7 @@ textdomain($domain);
     ?>
 </div>
 <div id="footer">
-    <?php Utility::html_copyright_info($begin_time); ?>
+    <?php Utility::html_footer($begin_time); ?>
 </div>
 </body>
 </html>
