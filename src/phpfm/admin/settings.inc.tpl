@@ -1,34 +1,34 @@
 <?php
 
 /*
- * 如果是相对路径，定义 FILE_POSITION 为 relative，
- * FILES_DIR 是 PHP File Manager 根目录下的指定目录；
- * 绝对路径，定义 FILE_POSITION 为 absolute，
- * FILES_DIR 是指定目录的完整路径，最后的 '\\' 或 '/' 不需要；
+ * If using relative path, define 'FILE_POSITION' as 'relative',
+ * then 'FILES_DIR' is a directory under PHP File Manager root.
+ * If using absolute path, define 'FILE_POSITION' as 'absolute',
+ * then 'FILES_DIR' is a full path to a directory, NOT ending with '\\' or '/'.
  */
-define("FILE_POSITION", "&&FILE_POSITION&&");
-define("FILES_DIR", "&&FILES_DIR&&");
+define('FILE_POSITION', '&&FILE_POSITION&&');
+define('FILES_DIR', '&&FILES_DIR&&');
 
 /* 
- * PLAT_CHARSET 平台文件系统的编码
- * Windows 用的是 GB2312
- * *nix 大多为 UTF-8
+ * PLAT_CHARSET is file system encoding.
+ * Windows: GB2312
+ * *nix: UTF-8
  */
-define("PLAT_CHARSET", "&&PLAT_CHARSET&&");
+define('PLAT_CHARSET', '&&PLAT_CHARSET&&');
 
-date_default_timezone_set("&&TIME_ZONE&&"); // 设置时区
+date_default_timezone_set('&&TIME_ZONE&&'); // timezone
 
-define("LOCALE", "&&LOCALE&&"); // 定义使用语言，如zh_CN, en_US
+define('LOCALE', '&&LOCALE&&'); // language, like 'zh_CN', 'en_US'
 
-// 用户管理
-define("USERMNG", &&USERMNG&&);
+// User management
+define('USERMNG', &&USERMNG&&);
 
-// 名称
-define("TITLENAME", "&&TITLENAME&&");
+// Title
+define('TITLENAME', '&&TITLENAME&&');
 
-// 控制 lightbox
-define("LIGHTBOX", &&LIGHTBOX&&);
-// 控制 AudioPlayer
-define("AUDIOPLAYER", &&AUDIOPLAYER&&);
+// Enable lightbox
+define('LIGHTBOX', &&LIGHTBOX&&);
+// Enable AudioPlayer
+define('AUDIOPLAYER', &&AUDIOPLAYER&&);
 
 ?>
