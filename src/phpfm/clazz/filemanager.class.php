@@ -22,12 +22,11 @@ class FileManager
     private $request_sub_dir; // request sub directory path, UTF-8.
     private $request_dir; // request directory absolute path.
     private $sort_type; // sort.
-    private $order; // order.
-    private $view_type; // view type.
-    private $toolbar_type;
+    private $sort_order; // sort order.
+
     private $is_mobile;
 
-    private $sort; // sort by.
+    private $sort; // sort by (a number).
     private $dsort;
     private $query_str;
 
@@ -73,43 +72,43 @@ class FileManager
         //echo $this->request_sub_dir;
 
         $this->sort_type = get_query(SORT_PARAM);
-        $this->order = get_query(ORDER_PARAM);
+        $this->sort_order = get_query(ORDER_PARAM);
 
         if ($this->sort_type == '') {
             // read cookie value
             $this->sort_type = get_cookie(SORT_PARAM);
         }
-        if ($this->order == '') {
-            $this->order = get_cookie(ORDER_PARAM);
+        if ($this->sort_order == '') {
+            $this->sort_order = get_cookie(ORDER_PARAM);
         }
 
         $allowed_sort_type = array('', 'n', 's', 't', 'm');
         if (!in_array($this->sort_type, $allowed_sort_type)) {
             $this->sort_type = '';
         }
-        if ($this->order != 'd') {
-            $this->order = 'a';
+        if ($this->sort_order != 'd') {
+            $this->sort_order = 'a';
         }
 
         setcookie(SORT_PARAM, $this->sort_type, time() + 60 * 60 * 24 * 365);
-        setcookie(ORDER_PARAM, $this->order, time() + 60 * 60 * 24 * 365);
+        setcookie(ORDER_PARAM, $this->sort_order, time() + 60 * 60 * 24 * 365);
 
         $this->sort = 1;
-        if ($this->sort_type == '' || ($this->sort_type == 'n' && $this->order == 'a')) {
+        if ($this->sort_type == '' || ($this->sort_type == 'n' && $this->sort_order == 'a')) {
             $this->sort = 1;
-        } else if ($this->sort_type == 'n' && $this->order == 'd') {
+        } else if ($this->sort_type == 'n' && $this->sort_order == 'd') {
             $this->sort = -1;
-        } else if ($this->sort_type == 's' && $this->order == 'a') {
+        } else if ($this->sort_type == 's' && $this->sort_order == 'a') {
             $this->sort = 2;
-        } else if ($this->sort_type == 's' && $this->order == 'd') {
+        } else if ($this->sort_type == 's' && $this->sort_order == 'd') {
             $this->sort = -2;
-        } else if ($this->sort_type == 't' && $this->order == 'a') {
+        } else if ($this->sort_type == 't' && $this->sort_order == 'a') {
             $this->sort = 3;
-        } else if ($this->sort_type == 't' && $this->order == 'd') {
+        } else if ($this->sort_type == 't' && $this->sort_order == 'd') {
             $this->sort = -3;
-        } else if ($this->sort_type == 'm' && $this->order == 'a') {
+        } else if ($this->sort_type == 'm' && $this->sort_order == 'a') {
             $this->sort = 4;
-        } else if ($this->sort_type == 'm' && $this->order == 'd') {
+        } else if ($this->sort_type == 'm' && $this->sort_order == 'd') {
             $this->sort = -4;
         }
 
@@ -120,7 +119,7 @@ class FileManager
             $this->dsort = $this->sort > 0 ? 2 : -2;
         }
 
-        $this->query_str = 's=' . $this->sort_type . '&o=' . $this->order;
+        $this->query_str = 's=' . $this->sort_type . '&o=' . $this->sort_order;
 
         $this->init_view();
 
@@ -455,6 +454,24 @@ class FileManager
     public function get_main_list()
     {
         return $items = array_merge($this->dstats, $this->fstats);
+    }
+
+    /**
+     * Get item list sort type.
+     * @return string
+     */
+    public function get_sort_type()
+    {
+        return $this->sort_type;
+    }
+
+    /**
+     * Get item list sort order.
+     * @return string
+     */
+    public function get_sort_order()
+    {
+        return $this->sort_order;
     }
 
     /**
@@ -848,7 +865,7 @@ class FileManager
 
         $request_sub_dir = $this->request_sub_dir;
         $sort_type = $this->sort_type;
-        $order = $this->order;
+        $order = $this->sort_order;
 
         $norder = 'a';
         $sorder = 'a';

@@ -11,20 +11,21 @@ require_once dirname(__FILE__) . '/log/log.func.php';
 
 get_logger()->info('index.php visited.');
 
-$fileManager = new FileManager('index.php');
+$file_manager = new FileManager('index.php');
+
 ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
     <title>
         <?php
-        echo $fileManager->title() . ' - ' . $fileManager->get_current_dir();
+        echo $file_manager->title() . ' - ' . $file_manager->get_current_dir();
         ?>
     </title>
     <meta http-equiv="Content-type" content="text/html;charset=UTF-8" />
     <meta name="viewport" content="width=540" />
     <link href="css/com.css" rel="stylesheet" type="text/css" />
-    <?php echo $fileManager->html_include_files(DEBUG); ?>
+    <?php echo $file_manager->html_include_files(DEBUG); ?>
 </head>
 <body>
     <div id="header">
@@ -40,12 +41,12 @@ $fileManager = new FileManager('index.php');
     </div>
     <div id="content">
         <?php
-        $fileManager->display_toolbar();
-        $fileManager->display_full_path(); // display full path
-        $fileManager->display_main_view();
+        $file_manager->display_toolbar();
+        $file_manager->display_full_path(); // display full path
+        $file_manager->display_main_view();
 
         // function preparation
-        $fileManager->display_func_pre();
+        $file_manager->display_func_pre();
         ?>
     </div>
     <?php

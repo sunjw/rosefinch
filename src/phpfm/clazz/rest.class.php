@@ -175,8 +175,8 @@ class Rest
      */
     private function handle_list()
     {
-        $fileManager = new FileManager('index.php');
-        $main_list = $fileManager->get_main_list();
+        $file_manager = new FileManager('index.php');
+        $main_list = $file_manager->get_main_list();
 
         $resp_obj = new RestRet();
 
@@ -187,6 +187,10 @@ class Rest
             unset($main_list[$i]['stat']);
             unset($main_list[$i]['path']);
         }
+
+        $resp_obj->data['sort'] = array();
+        $resp_obj->data['sort']['type'] = $file_manager->get_sort_type();
+        $resp_obj->data['sort']['order'] = $file_manager->get_sort_order();
         $resp_obj->data['main_list'] = $main_list;
 
         $this->response_json($resp_obj);
