@@ -94,14 +94,14 @@ function cmp_type($a, $b)
 {
     $a_name = $a['name'];
     $a_dot_pos = strrpos($a_name, '.');
-    $a_type = "";
+    $a_type = '';
     if ($a_dot_pos !== false) {
         $a_type = substr($a_name, $a_dot_pos + 1, strlen($a_name) - $a_dot_pos - 1);
     }
 
     $b_name = $b['name'];
     $b_dot_pos = strrpos($b_name, '.');
-    $b_type = "";
+    $b_type = '';
     if ($b_dot_pos !== false) {
         $b_type = substr($b_name, $b_dot_pos + 1, strlen($b_name) - $b_dot_pos - 1);
     }

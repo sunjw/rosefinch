@@ -24,7 +24,7 @@ set_response_utf8();
 <body>
     <div id="header">
         <div id="nav">
-            <?php Utility::html_navigation("about"); ?>
+            <?php Utility::html_navigation('about'); ?>
             <div class="clear"></div>
         </div>
         <div id="loginStatus">

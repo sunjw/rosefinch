@@ -1124,7 +1124,7 @@ class FileManager
 
     /**
      * Set button title.
-     * @return Array
+     * @return array
      */
     private function prepare_buttons_name()
     {

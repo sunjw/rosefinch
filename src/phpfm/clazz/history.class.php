@@ -27,8 +27,8 @@ class HistoryItem
 
     public function to_string()
     {
-        if ($this->dir == "") {
-            return "Root";
+        if ($this->dir == '') {
+            return 'Root';
         } else {
             return trim_last_slash($this->dir);
         }
@@ -148,7 +148,7 @@ class History
 
     /**
      * Get history array.
-     * @return Array history array
+     * @return array history array
      */
     public function get_history()
     {
