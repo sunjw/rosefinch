@@ -449,6 +449,15 @@ class FileManager
     }
 
     /**
+     * Merge directories and files into one array (directory first).
+     * @return array
+     */
+    public function get_main_list()
+    {
+        return $items = array_merge($this->dstats, $this->fstats);
+    }
+
+    /**
      * Filter item.
      * @param item $item
      * @return bool true to filter，false not
@@ -668,31 +677,6 @@ class FileManager
     }
 
     /**
-     * Display main view.
-     */
-    public function display_main_view()
-    {
-        ?>
-        <div id="mainView">
-            <?php
-            if (!$this->is_mobile) {
-                // display header.
-                $this->display_header();
-            }
-
-            $items = array_merge($this->dstats, $this->fstats);
-
-            ?>
-            <div id="mainViewList">
-                <?php
-                $this->render_main_view($items);
-                ?>
-            </div>
-        </div>
-        <?php
-    }
-
-    /**
      * Prepare HTML for functions.
      */
     public function display_func_pre()
@@ -804,6 +788,31 @@ class FileManager
     }
 
     /**
+     * Display main view.
+     */
+    public function display_main_view()
+    {
+        ?>
+        <div id="mainView">
+            <?php
+            if (!$this->is_mobile) {
+                // display header.
+                $this->display_header();
+            }
+
+            $items = $this->get_main_list();
+
+            ?>
+            <div id="mainViewList">
+                <?php
+                $this->render_main_view($items);
+                ?>
+            </div>
+        </div>
+        <?php
+    }
+
+    /**
      * Display directories and files.
      */
     private function render_main_view($items)
@@ -812,7 +821,7 @@ class FileManager
         ?>
         <ul id="detailView" class="<?php echo $this->sort_type; ?>">
             <?php
-            $i = 0;
+            //$i = 0;
             foreach ($items as $item) {
                 $this->detail_view_item($item['item_path'],
                     $item['a_href'],
@@ -822,7 +831,7 @@ class FileManager
                     $item['size_str'],
                     $item['type_html'],
                     $item['stat']['mtime']);
-                $i++;
+                //$i++;
             }
 
             ?>
@@ -1140,6 +1149,7 @@ class FileManager
 
         return $button_names;
     }
+
 }
 
 ?>

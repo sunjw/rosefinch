@@ -6,6 +6,7 @@ require_once dirname(__FILE__) . '/../inc/gettext.inc.php';
 require_once 'utility.class.php';
 require_once 'clipboard.class.php';
 require_once 'messageboard.class.php';
+require_once 'filemanager.class.php';
 
 /**
  * Rest API return object Class.
@@ -140,6 +141,9 @@ class Rest
     private function handle_fm_request($api)
     {
         switch ($api) {
+            case 'ls':
+                $this->handle_list();
+                break;
             case 'cut':
             case 'copy':
                 $this->handle_cut_copy(($api == 'cut'));
@@ -164,6 +168,28 @@ class Rest
                 $this->response_json_400();
                 break;
         }
+    }
+
+    /*
+     * List directory.
+     */
+    private function handle_list()
+    {
+        $fileManager = new FileManager('index.php');
+        $main_list = $fileManager->get_main_list();
+
+        $resp_obj = new RestRet();
+
+        $main_list_count = count($main_list);
+        for ($i = 0; $i < $main_list_count; $i++) {
+            $main_list[$i]['mtime'] = $main_list[$i]['stat']['mtime'];
+            $main_list[$i]['$img_html'] = Utility::get_icon($main_list[$i]['type'], 36);
+            unset($main_list[$i]['stat']);
+            unset($main_list[$i]['path']);
+        }
+        $resp_obj->data['main_list'] = $main_list;
+
+        $this->response_json($resp_obj);
     }
 
     /**
