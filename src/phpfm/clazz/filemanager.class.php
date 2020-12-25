@@ -819,8 +819,8 @@ class FileManager
             ?>
             <div id="mainViewList">
                 <?php
-                $items = $this->get_main_list();
-                $this->render_main_view($items);
+//                $items = $this->get_main_list();
+//                $this->render_main_view($items);
                 ?>
             </div>
         </div>
