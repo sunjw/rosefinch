@@ -963,6 +963,23 @@ var FileManager = {
             aItem.append(spanName);
             li.append(aItem);
 
+            var spanSize = $('<span/>');
+            spanSize.addClass('size');
+            spanSize.html(item['size_str']);
+            li.append(spanSize);
+
+            if (!FileManager.isMobile) {
+                var spanType = $('<span/>');
+                spanType.addClass('type');
+                spanType.html(item['type_html']);
+                li.append(spanType);
+
+                var spanMTime = $('<span/>');
+                spanMTime.addClass('mtime');
+                spanMTime.html(item['mtime_str']);
+                li.append(spanMTime);
+            }
+
             detailView.append(li);
         }
 
