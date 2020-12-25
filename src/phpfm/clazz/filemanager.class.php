@@ -816,12 +816,10 @@ class FileManager
                 // display header.
                 $this->display_header();
             }
-
-            $items = $this->get_main_list();
-
             ?>
             <div id="mainViewList">
                 <?php
+                $items = $this->get_main_list();
                 $this->render_main_view($items);
                 ?>
             </div>
