@@ -223,47 +223,6 @@
     font-weight: bold;
 }
 
-#toolbar form#searchForm {
-    float: left;
-    height: 32px;
-    line-height: 32px;
-    margin-top: 6px;
-}
-
-#toolbar form#searchForm input {
-    vertical-align: top;
-    float: left;
-}
-
-#toolbar form#searchForm input[type="text"] {
-    height: 26px;
-    font-size: 16px;
-    color: #999999;
-    margin: 0 4px;
-}
-
-#toolbar form#searchForm input[type="submit"] {
-    font-size: 10px;
-    background: transparent url('../images/toolbar-search.png') center center no-repeat;
-    border: none;
-    width: 34px;
-    height: 30px;
-    border: 1px solid white;
-    text-indent: 30px;
-    cursor: pointer;
-    box-shadow: none;
-}
-#toolbar form#searchForm input[type="submit"].buttonHover {
-    border: 1px solid white;
-}
-#toolbar form#searchForm .toolbarSmallButton {
-    height: 30px;
-}
-#toolbar form#searchForm .toolbarSmallButton img {
-    width: 18px;
-    height: 18px;
-}
-
 /* View sector */
 #mainView .header {
     padding: 0;

@@ -900,10 +900,6 @@ var FileManager = {
         buttons.hover(FileManager.toolbarButtonMouseIn,
             FileManager.toolbarButtonMouseOut); // button hover
 
-        $('#toolbar form#searchForm input[type="submit"]').hover(
-            FileManager.toolbarButtonMouseIn,
-            FileManager.toolbarButtonMouseOut); // button hover
-
         $('#mainView .header span #checkSelectAll').click(function () {
             if (this.checked) {
                 FileManager.selectAll();
@@ -1211,9 +1207,6 @@ FileManager.init = function () {
     FileManager.getMessage();
     FileManager.initMediaPreview();
     FileManager.initUploadHtml5();
-
-    jqCommon.setPlaceholder('#searchForm', '#q', 'Search');
-    jqCommon.setVerify('#searchForm', '#q', 'empty', null, null);
 
 };
 
