@@ -175,7 +175,7 @@ class FileManager
         <script type="text/javascript" language="javascript" src="js/jquery-1.8.1.min.js"></script>
         <script type="text/javascript" language="javascript" src="js/jquery.common.min.js"></script>
         <script type="text/javascript" language="javascript" src="js/jquery.menu.min.js"></script>
-        <script type="text/javascript" language="javascript" src="js/filemanager.js<?php echo($rand); ?>"></script>
+        <script type="text/javascript" language="javascript" src="js/filemanager.js<?php /*echo($rand);*/ ?>"></script>
         <?php
     }
 
