@@ -897,22 +897,16 @@ class FileManager
                     $request_sub_dir . '&s=s' .
                     '&o=' . $sorder; ?>"><?php echo _('Size'); ?></a>
             </span>
-            <?php
-            if (!$this->is_mobile) {
-                ?>
-                <span class="type split">
+            <span class="type split">
                 <a href="<?php echo $this_page . '?dir=' .
                     $request_sub_dir . '&s=t' .
                     '&o=' . $torder; ?>"><?php echo _('Type'); ?></a>
             </span>
-                <span class="mtime split">
+            <span class="mtime split">
                 <a href="<?php echo $this_page . '?dir=' .
                     $request_sub_dir . '&s=m' .
                     '&o=' . $morder; ?>"><?php echo _('Modified Time'); ?></a>
             </span>
-                <?php
-            }
-            ?>
         </div>
         <?php
         $javascript_call_arg = 'name';
