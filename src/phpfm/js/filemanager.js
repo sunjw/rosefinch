@@ -886,12 +886,9 @@ var FileManager = {
             window.location.reload(); // refresh
         });
 
-        // buttons.filter('.toolbarSelectAll').click(FileManager.selectAll); //
-        // select all
-        // buttons.filter('.toolbarDeselect').click(FileManager.deselect); //
-        // deselect
-        buttons.filter('.toolbarPaste').hasClass('disable') ? null :
+        if (!buttons.filter('.toolbarPaste').hasClass('disable')) {
             buttons.filter('.toolbarPaste').click(FileManager.clickPaste); // paste
+        }
 
         buttons.filter('.toolbarNewFolder').click(
             FileManager.clickNewFolder); // new folder
