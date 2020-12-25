@@ -1190,9 +1190,9 @@ FileManager.init = function () {
         $('body').addClass('mobile');
     }
 
-    var str = '#mainView > .header > span.' + FileManager.sortName + ' > a';
-    var item = $(str);
-    item.addClass('sort' + FileManager.sortOrder);
+    var listHeaderSelector = '#mainView > .header > span.' + FileManager.sortName + ' > a';
+    var listHeader = $(listHeaderSelector);
+    listHeader.addClass('sort' + FileManager.sortOrder);
 
     // FileManager.initFullPath();
     jqMenu.setup({
