@@ -834,7 +834,7 @@ class FileManager
     {
         // Only detail view.
         ?>
-        <ul id="detailView" class="<?php echo $this->sort_type; ?>">
+        <ul id="detailView">
             <?php
             //$i = 0;
             foreach ($items as $item) {

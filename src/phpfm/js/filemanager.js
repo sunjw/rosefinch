@@ -13,6 +13,7 @@ var FileManager = {
     sortName: null,
     sortOrder: null,
     delayID: 0,
+    mainViewList: 0,
     miniMainViewHeight: 120,
     downloadText: null,
     imgPreviewLoading: 'images/lightbox-ico-loading.gif',
@@ -658,7 +659,7 @@ var FileManager = {
                 var previewContentInner = null;
 
                 if (previewType == 'audio') {
-                    previewContentInner = $('<audio controls />');
+                    previewContentInner = $('<audio controls/>');
                     previewContent.addClass('previewAudio');
                     previewContent.append(previewContentInner);
                 }
@@ -848,8 +849,7 @@ var FileManager = {
 
     changeMainViewListHeight: function () {
         // Adapt mainViewList height.
-        var mainViewList = $('div#mainViewList');
-        var mainViewListOffset = mainViewList.offset();
+        var mainViewListOffset = FileManager.mainViewList.offset();
         var footerHeight = $('div#footer').height();
         var windowHeight = $(window).height();
         var mainViewListHeight;
@@ -862,8 +862,8 @@ var FileManager = {
             - footerHeight - mainViewListMarginBottom;
         mainViewListHeight = mainViewListHeight > FileManager.miniMainViewHeight ? mainViewListHeight
             : FileManager.miniMainViewHeight;
-        mainViewList.css('height', mainViewListHeight + 'px');
-        mainViewList.css('overflow', 'auto');
+        FileManager.mainViewList.css('height', mainViewListHeight + 'px');
+        FileManager.mainViewList.css('overflow', 'auto');
     },
 
     toolbarButtonMouseIn: function () {
@@ -874,6 +874,99 @@ var FileManager = {
 
     toolbarButtonMouseOut: function () {
         $(this).removeClass('buttonHover');
+    },
+
+    getMainList: function () {
+        var query = window.location.search;
+        logConsole('window.location.search=' + query);
+        if (query.startsWith('?')) {
+            query = query.slice(1);
+        }
+        FileManager.sendGetRestApi(FileManager.restApiPrefix + 'fm/ls&' + query, function (data) {
+            if (!FileManager.checkRestRespData(data)) {
+                return;
+            }
+            if (data.message != '') {
+                FileManager.showMessage(data.message, (data.code != 0));
+            }
+
+            var mainList = data.data['main_list'];
+            if (Array.isArray(mainList)) {
+                FileManager.renderMainList(mainList);
+
+                FileManager.initMainView();
+                FileManager.initFuncDialog();
+
+                FileManager.initMediaPreview();
+                FileManager.initUploadHtml5();
+
+                FileManager.getMessage();
+            } else {
+                logConsole('mainList is not an Array.');
+            }
+
+        });
+    },
+
+    isImgType: function (type) {
+        var imgTypes = ['jpg', 'jpeg', 'bmp', 'png', 'gif'];
+        type = type.toLowerCase();
+        return imgTypes.includes(type);
+    },
+
+    isAudioType: function (type) {
+        var audioTypes = ['mp3'];
+        type = type.toLowerCase();
+        return audioTypes.includes(type);
+    },
+
+    renderMainList: function (mainList) {
+        var detailView = $('<ul/>');
+        detailView.attr('id', 'detailView');
+
+        var mainListCount = mainList.length;
+        logConsole('mainListCount=' + mainListCount);
+        for (var i = 0; i < mainListCount; i++) {
+            var item = mainList[i];
+            var li = $('<li/>');
+
+            var spanCheck = $('<span/>');
+            spanCheck.addClass('check');
+            var inputCheck = $('<input/>');
+            inputCheck.addClass('inputCheck');
+            inputCheck.attr({
+                'type': 'checkbox',
+                'name': item['item_path']
+            });
+            spanCheck.append(inputCheck);
+            li.append(spanCheck);
+
+            var aItem = $('<a/>');
+            aItem.attr({
+                'href': item['a_href'],
+                'title': item['name']
+            });
+            var itemType = item['type'];
+            if (FileManager.isImgType(itemType)) {
+                aItem.addClass('lightboxImg');
+            }
+            if (FileManager.isAudioType(itemType)) {
+                aItem.addClass('audioPlayer');
+            }
+            var spanIcon = $('<span/>');
+            spanIcon.addClass('icon');
+            spanIcon.html(item['img_html']);
+            aItem.append(spanIcon);
+            var spanName = $('<span/>');
+            spanName.addClass('name');
+            spanName.html(item['name']);
+            aItem.append(spanName);
+            li.append(aItem);
+
+            detailView.append(li);
+        }
+
+        FileManager.mainViewList.append(detailView);
     },
 
     /*
@@ -1168,6 +1261,8 @@ var FileManager = {
  * Init.
  */
 FileManager.init = function () {
+    FileManager.mainViewList = $('div#mainViewList');
+
     // pre-load some images
     var imgPreload = new Image();
     imgPreload.src = FileManager.imgPreviewLoading;
@@ -1198,12 +1293,17 @@ FileManager.init = function () {
     jqMenu.init();
 
     FileManager.initToolbar();
-    FileManager.initMainView();
-    FileManager.initFuncDialog();
     FileManager.initUserMng();
-    FileManager.getMessage();
-    FileManager.initMediaPreview();
-    FileManager.initUploadHtml5();
+
+    FileManager.getMainList();
+
+    // FileManager.initMainView();
+    // FileManager.initFuncDialog();
+    //
+    // FileManager.initMediaPreview();
+    // FileManager.initUploadHtml5();
+    //
+    // FileManager.getMessage();
 
 };
 
