@@ -2,13 +2,3 @@
 *~
 .vscode
 tags
-src/phpfm/.buildpath
-src/phpfm/.project
-src/phpfm/.settings/
-src/phpfm/admin/database.inc.php
-src/phpfm/admin/settings.inc.php
-src/phpfm/admin/usermng.inc.php
-src/phpfm/images/Thumbs.db
-src/phpfm/images/png/
-src/phpfm/images/psd/
-src/phpfm/log/phpfm.log
