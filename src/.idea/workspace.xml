@@ -19,21 +19,14 @@
     <select />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="c145b546-2d1c-4a89-8032-30605f96ce13" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/phpfm_api/.idea/codeStyles/codeStyleConfig.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/phpfm_api/.idea/modules.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/phpfm_api/.idea/php.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/phpfm_api/.idea/phpfm_api.iml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/phpfm_api/.idea/vcs.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/phpfm_fed/css/main.css" beforeDir="false" afterPath="$PROJECT_DIR$/phpfm_fed/css/main.css" afterDir="false" />
-    </list>
+    <list default="true" id="c145b546-2d1c-4a89-8032-30605f96ce13" name="Default Changelist" comment="" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
   <component name="ComposerSettings" doNotAsk="true" synchronizationState="SYNCHRONIZE">
-    <pharConfigPath>$PROJECT_DIR$/composer.json</pharConfigPath>
+    <pharConfigPath>$PROJECT_DIR$/phpfm_api/composer.json</pharConfigPath>
     <execution />
   </component>
   <component name="FileTemplateManagerImpl">
@@ -48,9 +41,9 @@
   </component>
   <component name="PhpWorkspaceProjectConfiguration" interpreter_name="PHP">
     <include_path>
-      <path value="$PROJECT_DIR$/vendor/psr/log" />
-      <path value="$PROJECT_DIR$/vendor/monolog/monolog" />
-      <path value="$PROJECT_DIR$/vendor/composer" />
+      <path value="$PROJECT_DIR$/phpfm_api/vendor/psr/log" />
+      <path value="$PROJECT_DIR$/phpfm_api/vendor/monolog/monolog" />
+      <path value="$PROJECT_DIR$/phpfm_api/vendor/composer" />
     </include_path>
   </component>
   <component name="ProjectId" id="1jrKgjduVbz759IcwLxvo3DgyTL" />
@@ -72,6 +65,7 @@
     <property name="node.js.path.for.package.tslint" value="project" />
     <property name="node.js.selected.package.eslint" value="(autodetect)" />
     <property name="node.js.selected.package.tslint" value="(autodetect)" />
+    <property name="nodejs_package_manager_path" value="npm" />
     <property name="php.override.implement.member.chooser.php.doc" value="NONE" />
     <property name="settings.editor.selected.configurable" value="web-ide.project.structure" />
     <property name="vue.rearranger.settings.migration" value="true" />
@@ -105,7 +99,7 @@
       <workItem from="1609139284645" duration="42000" />
       <workItem from="1609139376877" duration="2152000" />
       <workItem from="1609143531658" duration="54000" />
-      <workItem from="1609143650920" duration="90000" />
+      <workItem from="1609143650920" duration="349000" />
     </task>
     <servers />
   </component>
@@ -126,7 +120,7 @@
   </component>
   <component name="VcsManagerConfiguration">
     <ignored-roots>
-      <path value="$PROJECT_DIR$/../.." />
+      <path value="$PROJECT_DIR$/.." />
     </ignored-roots>
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
