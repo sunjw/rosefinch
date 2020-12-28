@@ -1,62 +1,62 @@
 /* Common */
 * {
-  padding: 0;
-  margin: 0;
+    padding: 0;
+    margin: 0;
 }
 body {
-  line-height: 1.4em;
-  font-family: sans-serif;
-  font-size: 16px;
+    line-height: 1.4em;
+    font-family: sans-serif;
+    font-size: 16px;
 }
 
 .clear {
-  clear: both;
+    clear: both;
 }
 .center {
-  text-align: center;
+    text-align: center;
 }
 .right {
-  text-align: right;
+    text-align: right;
 }
 .floatLeft {
-  float: left;
+    float: left;
 }
 .floatRight {
-  float: right;
+    float: right;
 }
 .floatLeftWrapper:after, .floatRightWrapper:after {
-  content: '';
-  display: block;
-  clear: both;
+    content: '';
+    display: block;
+    clear: both;
 }
 
 a {
-  color: black;
-  text-decoration: none;
-  transition: color 0.2s;
+    color: black;
+    text-decoration: none;
+    transition: color 0.2s;
 }
 img {
-  border: 0;
+    border: 0;
 }
 ul {
-  list-style-type: none;
+    list-style-type: none;
 }
 /* Common */
 
 /* Dark */
 @media (prefers-color-scheme: dark) {
-  body {
-    background-color: #0c0c0c;
-    color: #cccccc;
-  }
-  a {
-    color: #cccccc;
-  }
+    body {
+        background-color: #0c0c0c;
+        color: #cccccc;
+    }
+    a {
+        color: #cccccc;
+    }
 }
 /* Dark */
 
 /* Dark */
 @media (prefers-color-scheme: dark) {
-  
+
 }
 /* Dark */
