@@ -1305,7 +1305,6 @@ FileManager.init = function () {
         menuItemsSelector: '.menuContainer',
         menuButtonSelector: '.menuButton',
         subMenuSelector: '.subMenu'
-        //inlineShadow : 'transparent url('images/shadow.png') no-repeat right bottom'
     });
     jqMenu.init();
 

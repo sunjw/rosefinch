@@ -135,7 +135,6 @@ input[type="submit"]:active, input[type="button"]:active, button:active {
 }
 #nav ul .li-item a:hover {
     color: #3399CC;
-    /*background: url('../images/nav-hover-bg.jpg') left center repeat-x;*/
     transition-property: background-color,color;
     transition-duration: 0.4s;
 }
@@ -146,7 +145,7 @@ input[type="submit"]:active, input[type="button"]:active, button:active {
     color: white;
 }
 
-/* Rosefinch 主页按钮 */
+/* Rosefinch Home button */
 #nav a#phpfmNavHome {
     display: block;
     height: 35px;

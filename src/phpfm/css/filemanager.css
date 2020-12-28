@@ -13,7 +13,7 @@
 }
 
 #mainView,#fullpath,#toolbar {
-    /* 设定主界面各个重要元素的共同属性 */
+    /* Same properties for important parts */
     margin: 1px 10px 2px 10px;
 }
 
@@ -75,8 +75,8 @@
     background-color: white;
     border: solid 1px #EAEAEA;
     padding: 1px;
-    max-height: 360px; /* 最大高度 菜单不会太长 IE6 及以下无效 */
-    overflow: auto; /* 溢出就有滚动条 */
+    max-height: 360px; /* max-height for sub-menu */
+    overflow: auto; /* overflow for scrollbar */
 }
 
 #fullpath .subMenu li {

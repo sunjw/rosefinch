@@ -1,18 +1,5 @@
 ﻿@CHARSET "UTF-8";
-/*
-#mainView ul.n {
-    background: url('../images/n.jpg') 25px 0 repeat-y;
-}
-#mainView ul.s {
-    background: url('../images/s.jpg') 27px 0 repeat-y;
-}
-#mainView ul.t {
-    background: url('../images/t.jpg') 27px 0 repeat-y;
-}
-#mainView ul.m {
-    background: url('../images/m.jpg') 29px 0 repeat-y;
-}
-*/
+
 #mainView #detailView {
     list-style: none;
     padding: 2px 0 0 0;
