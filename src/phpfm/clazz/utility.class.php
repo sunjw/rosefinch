@@ -99,9 +99,9 @@ class Utility
      * @param string $path
      * @return bool
      */
-    public static function check_path($path)
+    public static function check_path($path, $allow_empty = false)
     {
-        if ($path == '') {
+        if (!$allow_empty && $path == '') {
             return false;
         }
         if (false !== strpos($path, '..') ||

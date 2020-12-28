@@ -341,7 +341,7 @@ class Rest
         $name = $name_req;
 
         $success = false;
-        if (Utility::check_path($sub_dir) && Utility::check_name($name)) {
+        if (Utility::check_path($sub_dir, true) && Utility::check_name($name)) {
             $name = $this->files_base_dir . $sub_dir . $name;
             get_logger()->info('handle_newfolder, try to make new folder: [' . $name . '].');
             $name = convert_toplat($name);
@@ -389,7 +389,7 @@ class Rest
         $newname = $newname_req;
 
         $success = false;
-        if (Utility::check_path($sub_dir) &&
+        if (Utility::check_path($sub_dir, true) &&
             Utility::check_name($newname) && Utility::check_name($oldname)) {
             $oldname = $this->files_base_dir . $sub_dir . $oldname;
             $newname = $this->files_base_dir . $sub_dir . $newname;
