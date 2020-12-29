@@ -1,3 +1,3 @@
 const PHPFM_CONFIG = {
-  "api_endpoint": ""
+  "api_prefix": "./"
 };
