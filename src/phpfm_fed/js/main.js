@@ -1,11 +1,12 @@
 // css
 require('../css/main.css');
+require('../scss/bootstrap_phpfm.scss');
 
 // js
 window.$ = require('jquery');
+require('bootstrap');
 const utils = require('./utils');
 
-const bodyMinWidth = 250;
 const pageMaxWidth = 1000;
 
 function initContent() {
@@ -18,9 +19,6 @@ function initContent() {
 }
 
 function initLayout() {
-    $('body').css({
-        'min-width': bodyMinWidth + 'px'
-    });
 
     onWindowResize();
     $(window).resize(function () {
@@ -39,7 +37,8 @@ function onWindowResize() {
 
 }
 
-function initFunc() {}
+function initFunc() {
+}
 
 $(function () {
     utils.log('Rosefinch start...');
