@@ -1,6 +1,7 @@
 // css
 require('../css/main.css');
 require('../scss/bootstrap_phpfm.scss');
+require('bootstrap/scss/bootstrap.scss')
 
 // js
 window.$ = require('jquery');
