@@ -1,7 +1,7 @@
 /* Common */
 * {
-    padding: 0;
-    margin: 0;
+    /*padding: 0;*/
+    /*margin: 0;*/
 }
 body {
     line-height: 1.4em;
@@ -45,12 +45,12 @@ ul {
 
 /* Dark */
 @media (prefers-color-scheme: dark) {
-    body {
-        background-color: #0c0c0c;
-        color: #cccccc;
-    }
-    a {
-        color: #cccccc;
-    }
+    /*body {*/
+    /*    background-color: #0c0c0c;*/
+    /*    color: #cccccc;*/
+    /*}*/
+    /*a {*/
+    /*    color: #cccccc;*/
+    /*}*/
 }
 /* Dark */
