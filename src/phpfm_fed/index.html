@@ -10,8 +10,20 @@
   </head>
   <body>
     <div id="divWrapper">
-      <nav id="navToolbarWrapper" class="navbar navbar-light">[navToolbarWrapper]</nav>
-      <nav id="navPathWrapper" class="navbar navbar-light">[navPathWrapper]</nav>
+      <nav id="navToolbarWrapper" class="navbar navbar-light bg-light">[navToolbarWrapper]</nav>
+      <nav id="navPathWrapper" aria-label="breadcrumb">
+        <ol class="breadcrumb bg-white">
+          <li class="breadcrumb-item">
+            <a href="#">Root</a>
+          </li>
+          <li class="breadcrumb-item">
+            <a href="#">藤原とラふ店</a>
+          </li>
+          <li class="breadcrumb-item active">
+            <a href="#">Ole Gunnar Solskjær</a>
+          </li>
+        </ol>
+      </nav>
       <div id="divListWrapper">[divListWrapper]</div>
     </div>
   </body>

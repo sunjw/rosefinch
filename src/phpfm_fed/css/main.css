@@ -4,9 +4,9 @@
     /*margin: 0;*/
 }
 body {
-    line-height: 1.4em;
-    font-family: sans-serif;
-    font-size: 16px;
+    /*line-height: 1.4em;*/
+    /*font-family: sans-serif;*/
+    /*font-size: 20px;*/
 }
 
 .clear {
@@ -31,17 +31,21 @@ body {
 }
 
 a {
-    color: black;
-    text-decoration: none;
-    transition: color 0.2s;
+    /*color: black;*/
+    /*text-decoration: none;*/
+    /*transition: color 0.2s;*/
 }
 img {
-    border: 0;
+    /*border: 0;*/
 }
 ul {
-    list-style-type: none;
+    /*list-style-type: none;*/
 }
 /* Common */
+
+#divWrapper {
+    width: 100%;
+}
 
 /* Dark */
 @media (prefers-color-scheme: dark) {
