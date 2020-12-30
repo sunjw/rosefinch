@@ -47,6 +47,19 @@ ul {
     width: 100%;
 }
 
+#navPathWrapper .breadcrumb {
+    border-bottom: 1px solid var(--light);
+    border-radius: 0;
+}
+
+#navPathWrapper .breadcrumb .breadcrumb-item a {
+    color: var(--secondary);
+}
+
+#navPathWrapper .breadcrumb .breadcrumb-item.active a {
+    color: var(--primary);
+}
+
 /* Dark */
 @media (prefers-color-scheme: dark) {
     /*body {*/
