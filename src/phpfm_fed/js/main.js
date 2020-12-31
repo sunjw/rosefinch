@@ -1,6 +1,7 @@
 // css
 require('../scss/bootstrap_phpfm.scss');
-require('bootstrap/scss/bootstrap.scss')
+require('bootstrap/scss/bootstrap.scss');
+require('bootstrap-icons/font/bootstrap-icons.css');
 require('../css/main.css');
 
 // js
