@@ -51,14 +51,14 @@
         <button type="button" class="btn btn-sm btn-outline-secondary dropdown-toggle" data-toggle="dropdown"
                 aria-haspopup="true"
                 aria-expanded="false">
-          <span><i class="bi bi-arrow-up-short"></i>Name</span>
+          <span><i class="bi bi-sort-alpha-down"></i>Name</span>
         </button>
         <div class="dropdown-menu dropdown-menu-right">
-          <a class="dropdown-item" href="#"><span><i class="bi bi-arrow-down-short"></i>Name</span></a>
-          <a class="dropdown-item" href="#"><span><i class="bi bi-arrow-up-short"></i>Type</span></a>
-          <a class="dropdown-item" href="#"><span><i class="bi bi-arrow-down-short"></i>Type</span></a>
-          <a class="dropdown-item" href="#"><span><i class="bi bi-arrow-up-short"></i>Modified time</span></a>
-          <a class="dropdown-item" href="#"><span><i class="bi bi-arrow-down-short"></i>Modified time</span></a>
+          <a class="dropdown-item" href="#"><span><i class="bi bi-sort-alpha-down-alt"></i>Name</span></a>
+          <a class="dropdown-item" href="#"><span><i class="bi bi-sort-alpha-down"></i>Type</span></a>
+          <a class="dropdown-item" href="#"><span><i class="bi bi-sort-alpha-down-alt"></i>Type</span></a>
+          <a class="dropdown-item" href="#"><span><i class="bi bi-sort-numeric-down"></i>Modified time</span></a>
+          <a class="dropdown-item" href="#"><span><i class="bi bi-sort-numeric-down-alt"></i>Modified time</span></a>
         </div>
       </div>
     </div>
@@ -66,25 +66,64 @@
   <div id="divMainWrapper">
     <div id="divListWrapper">
       <ul id="ulDetailView" class="list-group list-group-flush">
-        <li class="list-group-item">
-          <span class="check"><input class="inputCheck" type="checkbox" name="藤原とラふ店/Ole Gunnar Solskjær/40岁的自己_IMG_7852.JPG"></span>
-          <a href="#" title="40岁的自己_IMG_7852.JPG" class="lightboxImg">
-            <span class="icon"><img src="images/image_32.png" alt="image" width="36" height="36" border="0"></span>
-            <span class="name">40岁的自己_IMG_7852.JPG</span>
-          </a>
-          <span class="size">82.93KB</span>
-          <span class="type">JPG</span>
-          <span class="mtime">2020-12-25 16:54</span>
+        <li class="detailLine list-group-item d-flex justify-content-between">
+          <div class="detailLineLeftPart">
+            <input class="fileCheck" type="checkbox" name="藤原とラふ店/Ole Gunnar Solskjær">
+            <a class="fileLink" title="Ole Gunnar Solskjær" href="#">
+              <span class="fileIcon"><i class="bi bi-folder"></i></span>
+              <span class="fileName">Ole Gunnar Solskjær</span>
+            </a>
+          </div>
+          <div class="detailLineRightPart">
+            <span class="fileType">folder</span>
+            <span class="fileSize">&nbsp;</span>
+            <span class="fileTime">2020-12-25 16:54</span>
+          </div>
         </li>
-        <li class="list-group-item">
-          <span class="check"><input class="inputCheck" type="checkbox" name="藤原とラふ店/Ole Gunnar Solskjær/adi_france.mp3"></span>
-          <a href="#" title="adi_france.mp3" class="audioPlayer">
-            <span class="icon"><img src="images/music_32.png" alt="music" width="36" height="36" border="0"></span>
-            <span class="name">adi_france.mp3</span>
-          </a>
-          <span class="size">130.86KB</span>
-          <span class="type">mp3</span>
-          <span class="mtime">2020-12-25 16:50</span>
+        <li class="detailLine list-group-item d-flex justify-content-between">
+          <div class="detailLineLeftPart">
+            <input class="fileCheck" type="checkbox"
+                   name="藤原とラふ店/Ole Gunnar Solskjær/40岁的自己_IMG_7852.JPG">
+            <a class="fileLink lightboxImg" title="40岁的自己_IMG_7852.JPG" href="#">
+              <span class="fileIcon"><i class="bi bi-image"></i></span>
+              <span class="fileTime">40岁的自己_IMG_7852.JPG</span>
+            </a>
+          </div>
+          <div class="detailLineRightPart">
+            <span class="fileType">jpg</span>
+            <span class="fileSize">82.93KB</span>
+            <span class="mtime">2020-12-25 16:54</span>
+          </div>
+        </li>
+        <li class="detailLine list-group-item d-flex justify-content-between">
+          <div class="detailLineLeftPart">
+            <input class="fileCheck" type="checkbox"
+                   name="藤原とラふ店/Ole Gunnar Solskjær/test.txt">
+            <a class="fileLink" title="adi_france.mp3" href="#">
+              <span class="fileIcon"><i class="bi bi-file-text"></i></span>
+              <span class="fileName">test.txt</span>
+            </a>
+          </div>
+          <div class="detailLineRightPart">
+            <span class="fileType">txt</span>
+            <span class="fileSize">58.62KB</span>
+            <span class="fileTime">2019-08-16 10:01</span>
+          </div>
+        </li>
+        <li class="detailLine list-group-item d-flex justify-content-between">
+          <div class="detailLineLeftPart">
+            <input class="fileCheck" type="checkbox"
+                   name="藤原とラふ店/Ole Gunnar Solskjær/adi_france.mp3">
+            <a class="fileLink audioPlayer" title="adi_france.mp3" href="#">
+              <span class="fileIcon"><i class="bi bi-file-music"></i></span>
+              <span class="fileName">adi_france.mp3</span>
+            </a>
+          </div>
+          <div class="detailLineRightPart">
+            <span class="fileType">mp3</span>
+            <span class="fileSize">130.86KB</span>
+            <span class="fileTime">2020-12-25 16:50</span>
+          </div>
         </li>
       </ul>
     </div>

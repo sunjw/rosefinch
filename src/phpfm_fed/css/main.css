@@ -86,7 +86,14 @@ ul {
   padding-right: 0.2rem;
 }
 #navPathWrapper #divPathBtnWrapper .dropdown-item {
-  padding-left: 1rem;
+  padding: 0.6rem 1.5rem 0.6rem 1rem;
+}
+
+#ulDetailView .list-group-item {
+  padding: 1.2rem 1.25rem 1.2rem 1.6rem;
+}
+#ulDetailView .list-group-item:last-child {
+  border-bottom-width: 1px;
 }
 /* PHPFM */
 
