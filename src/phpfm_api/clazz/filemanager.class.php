@@ -58,7 +58,7 @@ class FileManager
         $this->fstats = array();
 
         $files_base_dir = Utility::get_file_base_dir();
-        $_SESSION['base_dir'] = $files_base_dir; // 将文件基路径存入 SESSION
+        $_SESSION['base_dir'] = $files_base_dir; // save base dir into SESSION
 
         $this->request_sub_dir = $this->get_request_subdir();
         //echo $this->request_sub_dir;

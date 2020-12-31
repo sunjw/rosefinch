@@ -192,6 +192,7 @@ class Rest
         $resp_obj->data['sort'] = array();
         $resp_obj->data['sort']['type'] = $file_manager->get_sort_type();
         $resp_obj->data['sort']['order'] = $file_manager->get_sort_order();
+        $resp_obj->data['current_path'] = $file_manager->get_current_path();
         $resp_obj->data['main_list'] = $main_list;
 
         $this->response_json($resp_obj);
