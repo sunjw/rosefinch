@@ -6,7 +6,7 @@
 body {
     /*line-height: 1.4em;*/
     /*font-family: sans-serif;*/
-    /*font-size: 20px;*/
+    font-size: 1.2rem;
 }
 
 .clear {
@@ -47,15 +47,23 @@ ul {
     width: 100%;
 }
 
+#navToolbarWrapper {
+    /*border-bottom: 1px solid var(--primary);*/
+}
+#navToolbarWrapper .toolbarBtn {
+    font-size: 1.2rem;
+}
+#navToolbarWrapper .toolbarBtn:hover {
+    color: var(--primary);
+}
+
 #navPathWrapper .breadcrumb {
     border-bottom: 1px solid var(--light);
     border-radius: 0;
 }
-
 #navPathWrapper .breadcrumb .breadcrumb-item a {
     color: var(--secondary);
 }
-
 #navPathWrapper .breadcrumb .breadcrumb-item.active a {
     color: var(--primary);
 }
