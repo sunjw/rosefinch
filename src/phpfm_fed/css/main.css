@@ -9,26 +9,26 @@ body {
     font-size: 1.2rem;
 }
 
-.clear {
-    clear: both;
-}
-.center {
-    text-align: center;
-}
-.right {
-    text-align: right;
-}
-.floatLeft {
-    float: left;
-}
-.floatRight {
-    float: right;
-}
-.floatLeftWrapper:after, .floatRightWrapper:after {
-    content: '';
-    display: block;
-    clear: both;
-}
+/*.clear {*/
+/*    clear: both;*/
+/*}*/
+/*.center {*/
+/*    text-align: center;*/
+/*}*/
+/*.right {*/
+/*    text-align: right;*/
+/*}*/
+/*.floatLeft {*/
+/*    float: left;*/
+/*}*/
+/*.floatRight {*/
+/*    float: right;*/
+/*}*/
+/*.floatLeftWrapper:after, .floatRightWrapper:after {*/
+/*    content: '';*/
+/*    display: block;*/
+/*    clear: both;*/
+/*}*/
 
 a {
     /*color: black;*/
@@ -51,7 +51,7 @@ ul {
     /*border-bottom: 1px solid var(--primary);*/
 }
 #navToolbarWrapper .navbar-brand {
-    color: var(--primary);
+    color: #da020e;
 }
 #navToolbarWrapper .toolbarBtn {
     padding-bottom: 0.6rem;
@@ -61,10 +61,14 @@ ul {
     color: var(--primary);
 }
 
-#navPathWrapper .breadcrumb {
+#navPathWrapper {
     border-bottom: 1px solid var(--light);
-    border-radius: 0;
+}
+#navPathWrapper .breadcrumb {
     padding-left: 1.6rem;
+    margin-bottom: 0;
+    /*border-bottom: 1px solid var(--light);*/
+    /*border-radius: 0;*/
 }
 #navPathWrapper .breadcrumb .breadcrumb-item a {
     color: var(--secondary);
