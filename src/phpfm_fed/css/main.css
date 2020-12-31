@@ -60,6 +60,7 @@ ul {
 #navPathWrapper .breadcrumb {
     border-bottom: 1px solid var(--light);
     border-radius: 0;
+    padding-left: 1.6rem;
 }
 #navPathWrapper .breadcrumb .breadcrumb-item a {
     color: var(--secondary);
