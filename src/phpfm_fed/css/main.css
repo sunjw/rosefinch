@@ -50,7 +50,11 @@ ul {
 #navToolbarWrapper {
     /*border-bottom: 1px solid var(--primary);*/
 }
+#navToolbarWrapper .navbar-brand {
+    color: var(--primary);
+}
 #navToolbarWrapper .toolbarBtn {
+    padding-bottom: 0.6rem;
     font-size: 1.2rem;
 }
 #navToolbarWrapper .toolbarBtn:hover {
