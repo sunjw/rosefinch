@@ -6,8 +6,9 @@ function clone(obj) {
     var copy;
 
     // Handle the 3 simple types, and null or undefined
-    if (null == obj || "object" != typeof obj)
+    if (null == obj || 'object' != typeof obj) {
         return obj;
+    }
 
     // Handle Buffer
     if (obj instanceof Buffer) {
@@ -41,7 +42,7 @@ function clone(obj) {
         return copy;
     }
 
-    throw new Error("Unable to copy obj! Its type isn't supported.");
+    throw new Error('Unable to copy obj! Its type is not supported.');
 }
 
 function stringReplaceAll(string, target, replace) {
