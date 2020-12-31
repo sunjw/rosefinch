@@ -47,7 +47,20 @@
       </li>
     </ol>
     <div id="divPathBtnWrapper" class="float-right">
-      [pathBtnWrapper]
+      <div class="btn-group">
+        <button type="button" class="btn btn-sm btn-outline-secondary dropdown-toggle" data-toggle="dropdown"
+                aria-haspopup="true"
+                aria-expanded="false">
+          <span><i class="bi bi-arrow-up-short"></i>Name</span>
+        </button>
+        <div class="dropdown-menu dropdown-menu-right">
+          <a class="dropdown-item" href="#"><span><i class="bi bi-arrow-down-short"></i>Name</span></a>
+          <a class="dropdown-item" href="#"><span><i class="bi bi-arrow-up-short"></i>Type</span></a>
+          <a class="dropdown-item" href="#"><span><i class="bi bi-arrow-down-short"></i>Type</span></a>
+          <a class="dropdown-item" href="#"><span><i class="bi bi-arrow-up-short"></i>Modified time</span></a>
+          <a class="dropdown-item" href="#"><span><i class="bi bi-arrow-down-short"></i>Modified time</span></a>
+        </div>
+      </div>
     </div>
   </nav>
   <div id="divListWrapper">[divListWrapper]</div>
