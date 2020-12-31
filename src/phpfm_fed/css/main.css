@@ -83,6 +83,7 @@ ul {
 #navPathWrapper #divPathBtnWrapper .dropdown-toggle .bi, #navPathWrapper #divPathBtnWrapper .dropdown-item .bi {
   font-size: 1.2rem;
   line-height: 1;
+  padding-right: 0.2rem;
 }
 #navPathWrapper #divPathBtnWrapper .dropdown-item {
   padding-left: 1rem;
