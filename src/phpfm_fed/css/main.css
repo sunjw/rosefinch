@@ -51,8 +51,12 @@ ul {
 #navToolbarWrapper {
   /*border-bottom: 1px solid var(--primary);*/
 }
-#navToolbarWrapper .navbar-brand {
+#navToolbarWrapper .navbar-brand, #navToolbarWrapper .navbar-brand a {
   color: #da020e;
+}
+#navToolbarWrapper .navbar-brand a:hover, #navToolbarWrapper .navbar-brand a:active, #navToolbarWrapper .navbar-brand a:focus {
+  text-decoration: none;
+  outline: 0;
 }
 #navToolbarWrapper .toolbarBtn {
   padding-bottom: 0.6rem;
@@ -76,6 +80,9 @@ ul {
 }
 #navPathWrapper .breadcrumb .breadcrumb-item.active a {
   color: var(--primary);
+}
+#navPathWrapper .breadcrumb .breadcrumb-item a:hover, #navPathWrapper .breadcrumb .breadcrumb-item a:active, #navPathWrapper .breadcrumb .breadcrumb-item a:focus {
+  outline: 0;
 }
 #navPathWrapper #divPathBtnWrapper {
   padding: 0.6rem 1rem;
@@ -106,10 +113,8 @@ ul {
   height: 4rem;
   color: inherit;
 }
-#ulDetailView .list-group-item .fileLink:hover {
-  text-decoration: none;
-}
 #ulDetailView .list-group-item .fileLink:hover, #ulDetailView .list-group-item .fileLink:active, #ulDetailView .list-group-item .fileLink:focus {
+  text-decoration: none;
   outline: 0;
 }
 #ulDetailView .list-group-item .fileIcon {
