@@ -99,6 +99,10 @@ ul {
   border-left: 1px solid red;
   border-right: 1px solid red;
 }
+#ulDetailView .list-group-item .fileLink {
+  border-left: 1px solid gray;
+  border-right: 1px solid gray;
+}
 /* PHPFM */
 
 /* Dark */
