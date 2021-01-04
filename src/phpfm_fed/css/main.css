@@ -4,42 +4,20 @@
   /*margin: 0;*/
 }
 body {
-  /*line-height: 1.4em;*/
   /*font-family: sans-serif;*/
   font-size: 1.2rem;
 }
-
-/*.clear {*/
-/*    clear: both;*/
-/*}*/
-/*.center {*/
-/*    text-align: center;*/
-/*}*/
-/*.right {*/
-/*    text-align: right;*/
-/*}*/
-/*.floatLeft {*/
-/*    float: left;*/
-/*}*/
-/*.floatRight {*/
-/*    float: right;*/
-/*}*/
-/*.floatLeftWrapper:after, .floatRightWrapper:after {*/
-/*    content: '';*/
-/*    display: block;*/
-/*    clear: both;*/
-/*}*/
 
 a {
   /*color: black;*/
   /*text-decoration: none;*/
   /*transition: color 0.2s;*/
 }
+a.noOutline:hover, a.noOutline:active, a.noOutline:focus {
+  outline: 0;
+}
 img {
   /*border: 0;*/
-}
-ul {
-  /*list-style-type: none;*/
 }
 /* Common */
 
@@ -54,9 +32,8 @@ ul {
 #navToolbarWrapper .navbar-brand, #navToolbarWrapper .navbar-brand a {
   color: #da020e;
 }
-#navToolbarWrapper .navbar-brand a:hover, #navToolbarWrapper .navbar-brand a:active, #navToolbarWrapper .navbar-brand a:focus {
+#navToolbarWrapper .navbar-brand a:hover {
   text-decoration: none;
-  outline: 0;
 }
 #navToolbarWrapper .toolbarBtn {
   padding-bottom: 0.6rem;
@@ -78,11 +55,11 @@ ul {
 #navPathWrapper .breadcrumb .breadcrumb-item a {
   color: var(--secondary);
 }
+#navPathWrapper .breadcrumb .breadcrumb-item a:hover {
+  text-decoration: none;
+}
 #navPathWrapper .breadcrumb .breadcrumb-item.active a {
   color: var(--primary);
-}
-#navPathWrapper .breadcrumb .breadcrumb-item a:hover, #navPathWrapper .breadcrumb .breadcrumb-item a:active, #navPathWrapper .breadcrumb .breadcrumb-item a:focus {
-  outline: 0;
 }
 #navPathWrapper #divPathBtnWrapper {
   padding: 0.6rem 1rem;
@@ -107,31 +84,31 @@ ul {
   margin-left: 0.5rem;
 }
 #ulDetailView .list-group-item .fileCheck {
-  width: 1.8rem;
+  width: 1.4rem;
 }
 #ulDetailView .list-group-item .fileLink {
   height: 4rem;
   color: inherit;
 }
-#ulDetailView .list-group-item .fileLink:hover, #ulDetailView .list-group-item .fileLink:active, #ulDetailView .list-group-item .fileLink:focus {
+#ulDetailView .list-group-item .fileLink:hover {
   text-decoration: none;
-  outline: 0;
 }
 #ulDetailView .list-group-item .fileIcon {
   color: var(--secondary);
   font-size: 2.25rem;
+  padding-left: 0.4rem;
   padding-right: 0.8rem;
 }
 #ulDetailView .list-group-item .fileIcon::before {
   line-height: 3rem;
 }
 #ulDetailView .list-group-item .fileType {
-  width: 6.2rem;
+  width: 6rem;
 }
 #ulDetailView .list-group-item .fileSize {
-  width: 6.8rem;
+  width: 7.2rem;
   text-align: right;
-  padding-right: 1rem;
+  padding-right: 1.2rem;
 }
 #ulDetailView .list-group-item .fileTime {
   width: 10.2rem;
