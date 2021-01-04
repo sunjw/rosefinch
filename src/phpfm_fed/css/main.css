@@ -96,15 +96,15 @@ ul {
 #ulDetailView .list-group-item:last-child {
   border-bottom-width: 1px;
 }
-#ulDetailView .list-group-item .detailLineLeftPart {
-  border-left: 1px solid red;
-  border-right: 1px solid red;
+#ulDetailView .list-group-item .detailLineRightPart {
+  margin-left: 0.5rem;
+}
+#ulDetailView .list-group-item .fileCheck {
+  width: 1.8rem;
 }
 #ulDetailView .list-group-item .fileLink {
   height: 4rem;
   color: inherit;
-  border-left: 1px solid gray;
-  border-right: 1px solid gray;
 }
 #ulDetailView .list-group-item .fileLink:hover {
   text-decoration: none;
@@ -115,9 +115,21 @@ ul {
 #ulDetailView .list-group-item .fileIcon {
   color: var(--secondary);
   font-size: 2.25rem;
+  padding-right: 0.8rem;
 }
 #ulDetailView .list-group-item .fileIcon::before {
   line-height: 3rem;
+}
+#ulDetailView .list-group-item .fileType {
+  width: 6.2rem;
+}
+#ulDetailView .list-group-item .fileSize {
+  width: 6.8rem;
+  text-align: right;
+  padding-right: 1rem;
+}
+#ulDetailView .list-group-item .fileTime {
+  width: 10.2rem;
 }
 /* PHPFM */
 
