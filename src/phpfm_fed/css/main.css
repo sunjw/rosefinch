@@ -90,7 +90,8 @@ ul {
 }
 
 #ulDetailView .list-group-item {
-  padding: 1.2rem 1.25rem 1.2rem 1.6rem;
+  padding: 0 1.25rem 0 1.6rem;
+  margin-bottom: 0.18rem;
 }
 #ulDetailView .list-group-item:last-child {
   border-bottom-width: 1px;
@@ -100,8 +101,20 @@ ul {
   border-right: 1px solid red;
 }
 #ulDetailView .list-group-item .fileLink {
+  height: 4rem;
+  color: inherit;
   border-left: 1px solid gray;
   border-right: 1px solid gray;
+}
+#ulDetailView .list-group-item .fileLink:hover {
+  text-decoration: none;
+}
+#ulDetailView .list-group-item .fileLink:hover, #ulDetailView .list-group-item .fileLink:active, #ulDetailView .list-group-item .fileLink:focus {
+  outline: 0;
+}
+#ulDetailView .list-group-item .fileIcon {
+  font-size: 2.25rem;
+  color: var(--secondary);
 }
 /* PHPFM */
 
