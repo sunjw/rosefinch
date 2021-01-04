@@ -113,8 +113,11 @@ ul {
   outline: 0;
 }
 #ulDetailView .list-group-item .fileIcon {
-  font-size: 2.25rem;
   color: var(--secondary);
+  font-size: 2.25rem;
+}
+#ulDetailView .list-group-item .fileIcon::before {
+  line-height: 3rem;
 }
 /* PHPFM */
 
