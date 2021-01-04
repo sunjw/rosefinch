@@ -95,6 +95,10 @@ ul {
 #ulDetailView .list-group-item:last-child {
   border-bottom-width: 1px;
 }
+#ulDetailView .list-group-item .detailLineLeftPart {
+  border-left: 1px solid red;
+  border-right: 1px solid red;
+}
 /* PHPFM */
 
 /* Dark */
