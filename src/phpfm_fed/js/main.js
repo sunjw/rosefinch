@@ -11,6 +11,10 @@ require('bootstrap');
 const utils = require('./utils');
 const jqueryUtils = require('./jqueryUtils');
 
+function formatTimestamp(timestamp) {
+    return dayjs.unix(timestamp).format('YYYY-MM-DD HH:mm');
+}
+
 class RosefinchPage {
 
     constructor(apiPrefix) {
@@ -116,10 +120,6 @@ class RosefinchPage {
         return true;
     }
 
-    formatTimestamp(timestamp) {
-        return dayjs.unix(timestamp).format('YYYY-MM-DD HH:mm');
-    }
-
     renderMainList() {
         const folderTypes = ['folder'];
         const imageTypes = ['jpg', 'jpeg', 'bmp', 'png', 'gif'];
@@ -201,7 +201,7 @@ class RosefinchPage {
                 spanFileSize.text(item['size_str']);
             }
             divDetailLineRightPart.append(spanFileSize);
-            let spanFileTime = $('<span/>').addClass('fileTime').text(this.formatTimestamp(item['mtime']));
+            let spanFileTime = $('<span/>').addClass('fileTime').text(formatTimestamp(item['mtime']));
             divDetailLineRightPart.append(spanFileTime);
 
             li.append(divDetailLineRightPart);
