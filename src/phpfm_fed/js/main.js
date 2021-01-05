@@ -5,6 +5,7 @@ require('bootstrap-icons/font/bootstrap-icons.css');
 require('../css/main.css');
 
 // js
+const dayjs = require('dayjs/dayjs.min')
 window.$ = require('jquery');
 require('bootstrap');
 const utils = require('./utils');
@@ -115,6 +116,10 @@ class RosefinchPage {
         return true;
     }
 
+    formatTimestamp(timestamp) {
+        return dayjs.unix(timestamp).format('YYYY-MM-DD HH:mm');
+    }
+
     renderMainList() {
         const folderTypes = ['folder'];
         const imageTypes = ['jpg', 'jpeg', 'bmp', 'png', 'gif'];
@@ -196,7 +201,7 @@ class RosefinchPage {
                 spanFileSize.text(item['size_str']);
             }
             divDetailLineRightPart.append(spanFileSize);
-            let spanFileTime = $('<span/>').addClass('fileTime').text(item['mtime_str']);
+            let spanFileTime = $('<span/>').addClass('fileTime').text(this.formatTimestamp(item['mtime']));
             divDetailLineRightPart.append(spanFileTime);
 
             li.append(divDetailLineRightPart);
