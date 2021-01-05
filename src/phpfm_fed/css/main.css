@@ -73,6 +73,10 @@ img {
   padding: 0.6rem 1.5rem 0.6rem 1rem;
 }
 
+#divListWrapper {
+  overflow: auto;
+}
+
 #ulDetailView .list-group-item {
   padding: 0 1.25rem 0 1.6rem;
   margin-bottom: 0.18rem;
