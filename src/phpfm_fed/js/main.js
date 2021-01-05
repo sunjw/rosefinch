@@ -116,6 +116,11 @@ class RosefinchPage {
     }
 
     renderMainList() {
+        const folderTypes = ['folder'];
+
+        // clear all
+        this.ulDetailView.empty();
+
         if (!Array.isArray(this.mainList)) {
             utils.log('RosefinchPage.renderMainList, this.mainList not an Array.');
             return;
@@ -123,7 +128,53 @@ class RosefinchPage {
 
         utils.log('RosefinchPage.renderMainList, this.mainList.length=%d', this.mainList.length);
         for (let i = 0; i < this.mainList.length; i++) {
+            let item = this.mainList[i];
+            let itemType = item['type'];
 
+            let li = $('<li/>').addClass('detailLine list-group-item d-flex');
+
+            // left
+            let divDetailLineLeftPart = $('<div/>').addClass('detailLineLeftPart d-flex flex-grow-1');
+
+            let spanFileCheck = $('<span/>').addClass('fileCheck d-flex align-items-center');
+            let inputCheckbox = $('<input/>').attr({
+                'type': 'checkbox',
+                'name': item['item_path']
+            });
+            spanFileCheck.append(inputCheckbox);
+            divDetailLineLeftPart.append(spanFileCheck);
+
+            let aFileLink = $('<a/>').addClass('fileLink noOutline flex-grow-1 d-flex align-items-center');
+            aFileLink.attr({
+                'title': item['name'],
+                'href': '#'
+            });
+            let iFileIcon = $('<i/>').addClass('fileIcon bi');
+            if (folderTypes.includes(itemType)) {
+                iFileIcon.addClass('bi-folder');
+            } else {
+                iFileIcon.addClass('bi-file-text');
+            }
+            aFileLink.append(iFileIcon);
+            let spanFileName = $('<span/>').addClass('fileName').text(item['name']);
+            aFileLink.append(spanFileName);
+            divDetailLineLeftPart.append(aFileLink);
+
+            li.append(divDetailLineLeftPart);
+
+            // right
+            let divDetailLineRightPart = $('<div/>').addClass('detailLineRightPart d-flex align-items-center');
+
+            let spanFileType = $('<span/>').addClass('fileType').text(item['type_html']);
+            divDetailLineRightPart.append(spanFileType);
+            let spanFileSize = $('<span/>').addClass('fileSize').text(item['size_str']);
+            divDetailLineRightPart.append(spanFileSize);
+            let spanFileTime = $('<span/>').addClass('fileTime').text(item['mtime_str']);
+            divDetailLineRightPart.append(spanFileTime);
+
+            li.append(divDetailLineRightPart);
+
+            this.ulDetailView.append(li);
         }
     }
 }
