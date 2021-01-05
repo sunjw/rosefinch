@@ -92,14 +92,6 @@ function byteSizeToShortSize(size) {
     return shortSize;
 }
 
-// function isWindows() {
-//     return (process.platform == 'win32');
-// }
-
-// function isMacOS() {
-//     return (process.platform == 'darwin');
-// }
-
 function getParentDir(path) {
     var curPath = path;
     if (curPath.endsWith('/')) {
@@ -120,7 +112,7 @@ function getQueryVariable(variable) {
             return decodeURIComponent(pair[1]);
         }
     }
-    return "";
+    return '';
 }
 
 function getLocation() {
@@ -131,6 +123,25 @@ function navToLocation(url) {
     window.location.href = url;
 }
 
+function navToHash(hash) {
+    window.location.hash = hash;
+}
+
+// function isWindows() {
+//     return (process.platform == 'win32');
+// }
+
+// function isMacOS() {
+//     return (process.platform == 'darwin');
+// }
+
+// function fixWindowsPath(path) {
+//     if (isWindows()) {
+//         path = stringReplaceAll(path, '\/', '\\');
+//     }
+//     return path;
+// }
+
 // exports
 exports.log = log;
 exports.clone = clone;
@@ -140,8 +151,10 @@ exports.escapeHtmlPath = escapeHtmlPath;
 exports.getRandomInt = getRandomInt;
 exports.byteSizeToShortSize = byteSizeToShortSize;
 exports.getParentDir = getParentDir;
-// exports.isWindows = isWindows;
-// exports.isMacOS = isMacOS;
 exports.getQueryVariable = getQueryVariable;
 exports.getLocation = getLocation;
 exports.navToLocation = navToLocation;
+exports.navToHash = navToHash;
+// exports.isWindows = isWindows;
+// exports.isMacOS = isMacOS;
+// exports.fixWindowsPath = fixWindowsPath;
