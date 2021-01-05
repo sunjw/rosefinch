@@ -8,16 +8,27 @@ require('../css/main.css');
 window.$ = require('jquery');
 require('bootstrap');
 const utils = require('./utils');
+const jqueryUtils = require('./jqueryUtils');
 
 class RosefinchPage {
 
-    constructor() {
+    constructor(apiPrefix) {
+        // consts
+        this.apiBase = utils.isString(apiPrefix) ? apiPrefix : '';
+        this.apiEndpoint = 'func/rest.api.php';
+
+        // elements
         this.divWrapper = $('#divWrapper');
         this.navToolbarWrapper = $('#navToolbarWrapper');
         this.navPathWrapper = $('#navPathWrapper');
         this.divMainWrapper = $('#divMainWrapper');
         this.divListWrapper = $('#divListWrapper');
         this.ulDetailView = $('#ulDetailView');
+
+        // vars
+        this.currentDir = '';
+        this.sort = '';
+        this.order = '';
     }
 
     initContent() {
@@ -62,12 +73,38 @@ class RosefinchPage {
         if (locationHash.startsWith('#')) {
             locationHash = locationHash.slice(1);
         }
+
+        let requestDir = utils.getUrlQueryVariable(locationHash, 'dir');
+        let requestSort = utils.getUrlQueryVariable(locationHash, 's');
+        let requestOrder = utils.getUrlQueryVariable(locationHash, 'o');
+
+        let requestApi = this.prepareRestApi('api/v1/fm/ls');
+        requestApi += ('&s=' + requestSort);
+        requestApi += ('&o=' + requestOrder);
+        requestApi += ('&dir=' + requestDir);
+        utils.log('RosefinchPage.onHashChange, requestApi=[%s]', requestApi);
+
+    }
+
+    prepareRestApi(api) {
+        return (this.apiBase + this.apiEndpoint + '?' + api);
     }
 }
 
 $(function () {
     utils.log('init, Rosefinch start...');
 
-    let page = new RosefinchPage();
+    let apiPrefix = '';
+
+    if (PHPFM_CONFIG) {
+        const api_prefix_key = 'api_prefix';
+        if (api_prefix_key in PHPFM_CONFIG) {
+            apiPrefix = PHPFM_CONFIG[api_prefix_key];
+        }
+    }
+
+    utils.log('init, apiPrefix=[%s]', apiPrefix)
+
+    let page = new RosefinchPage(apiPrefix);
     page.initContent();
 });

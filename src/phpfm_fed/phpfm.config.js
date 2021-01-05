@@ -1,3 +1,3 @@
 const PHPFM_CONFIG = {
-  "api_prefix": "./"
+  'api_prefix': '../phpfm_api/'
 };

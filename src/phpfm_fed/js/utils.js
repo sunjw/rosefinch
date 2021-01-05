@@ -45,6 +45,10 @@ function clone(obj) {
     throw new Error('Unable to copy obj! Its type is not supported.');
 }
 
+function isString(variable) {
+    return (typeof variable === 'string' || variable instanceof String);
+}
+
 function stringReplaceAll(string, target, replace) {
     return string.replace(new RegExp(target, 'g'), replace);
 }
@@ -149,6 +153,7 @@ function navToHash(hash) {
 // exports
 exports.log = log;
 exports.clone = clone;
+exports.isString = isString;
 exports.stringReplaceAll = stringReplaceAll;
 exports.escapeShellPath = escapeShellPath;
 exports.escapeHtmlPath = escapeHtmlPath;
