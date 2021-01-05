@@ -12,6 +12,12 @@ const utils = require('./utils');
 class RosefinchPage {
 
     constructor() {
+        this.divWrapper = $('#divWrapper');
+        this.navToolbarWrapper = $('#navToolbarWrapper');
+        this.navPathWrapper = $('#navPathWrapper');
+        this.divMainWrapper = $('#divMainWrapper');
+        this.divListWrapper = $('#divListWrapper');
+        this.ulDetailView = $('#ulDetailView');
     }
 
     initContent() {
@@ -23,7 +29,7 @@ class RosefinchPage {
     }
 
     initLayout() {
-        var that = this;
+        let that = this;
 
         this.onWindowResize();
         $(window).on('resize', function () {
@@ -32,19 +38,22 @@ class RosefinchPage {
     }
 
     onWindowResize() {
-        var windowWidth = $(window).width();
-        var windowHeight = $(window).height();
+        let windowWidth = $(window).width();
+        let windowHeight = $(window).height();
         utils.log('RosefinchPage.onWindowResize, windowWidth=' + windowWidth + 'px, windowHeight=' + windowHeight + 'px');
+
+        let divListWrapperTop = this.divListWrapper.offset().top;
+        let divListWrapperHeight = windowHeight - divListWrapperTop - 2;
+        this.divListWrapper.css('height', divListWrapperHeight + 'px');
     }
 
     initFunc() {
     }
 }
 
-// variables
-var page = new RosefinchPage();
-
 $(function () {
     utils.log('Rosefinch start...');
+
+    let page = new RosefinchPage();
     page.initContent();
 });
