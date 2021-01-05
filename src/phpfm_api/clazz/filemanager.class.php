@@ -314,7 +314,7 @@ class FileManager
 
                     // Handle size.
                     $size = $file['stat']['size'];
-                    $size = Utility::format_size($size);
+                    $size_str = Utility::format_size($size);
                     //echo $request_sub_dir;
 
                     //$a_href = FILES_DIR.'/'.$this->request_sub_dir.$file['name'];
@@ -328,7 +328,8 @@ class FileManager
 
                     $item_path = $this->request_sub_dir . $file['name'];
 
-                    $file['size_str'] = $size;
+                    $file['size'] = $size;
+                    $file['size_str'] = $size_str;
                     $file['type_html'] = $type_html;
                     $file['a_href'] = $a_href;
                     $file['item_path'] = $item_path;
@@ -415,8 +416,9 @@ class FileManager
 
                     $item_path = $this->request_sub_dir . $dir['name'];
 
+                    $dir['size'] = 0;
                     $dir['size_str'] = '&nbsp;';
-                    $dir['type_html'] = 'Folder';
+                    $dir['type_html'] = 'folder';
                     $dir['a_href'] = $a_href;
                     $dir['item_path'] = $item_path;
 
