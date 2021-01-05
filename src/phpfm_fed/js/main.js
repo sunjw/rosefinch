@@ -117,6 +117,8 @@ class RosefinchPage {
 
     renderMainList() {
         const folderTypes = ['folder'];
+        const imageTypes = ['jpg', 'jpeg', 'bmp', 'png', 'gif'];
+        const audioTypes = ['mp3'];
 
         // clear all
         this.ulDetailView.empty();
@@ -131,9 +133,16 @@ class RosefinchPage {
             let item = this.mainList[i];
             let itemType = item['type'];
             let itemIsFolder = false;
+            let itemIsImage = false;
+            let itemIsAudio = false;
             if (folderTypes.includes(itemType)) {
                 itemIsFolder = true;
+            } else if (imageTypes.includes(itemType)) {
+                itemIsImage = true;
+            } else if (audioTypes.includes(itemType)) {
+                itemIsAudio = true;
             }
+
 
             let li = $('<li/>').addClass('detailLine list-group-item d-flex');
 
@@ -149,6 +158,11 @@ class RosefinchPage {
             divDetailLineLeftPart.append(spanFileCheck);
 
             let aFileLink = $('<a/>').addClass('fileLink noOutline flex-grow-1 d-flex align-items-center');
+            if (itemIsImage) {
+                aFileLink.addClass('previewImage');
+            } else if (itemIsAudio) {
+                aFileLink.addClass('previewAudio');
+            }
             aFileLink.attr({
                 'title': item['name'],
                 'href': '#'
@@ -156,6 +170,10 @@ class RosefinchPage {
             let iFileIcon = $('<i/>').addClass('fileIcon bi');
             if (itemIsFolder) {
                 iFileIcon.addClass('bi-folder');
+            } else if (itemIsImage) {
+                iFileIcon.addClass('bi-image');
+            } else if (itemIsAudio) {
+                iFileIcon.addClass('bi-file-music');
             } else {
                 iFileIcon.addClass('bi-file-text');
             }
