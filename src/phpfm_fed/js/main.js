@@ -130,6 +130,7 @@ class RosefinchPage {
         for (let i = 0; i < this.mainList.length; i++) {
             let item = this.mainList[i];
             let itemType = item['type'];
+            let itemIsFolder = false;
 
             let li = $('<li/>').addClass('detailLine list-group-item d-flex');
 
@@ -151,6 +152,7 @@ class RosefinchPage {
             });
             let iFileIcon = $('<i/>').addClass('fileIcon bi');
             if (folderTypes.includes(itemType)) {
+                itemIsFolder = true;
                 iFileIcon.addClass('bi-folder');
             } else {
                 iFileIcon.addClass('bi-file-text');
@@ -167,7 +169,12 @@ class RosefinchPage {
 
             let spanFileType = $('<span/>').addClass('fileType').text(item['type_html']);
             divDetailLineRightPart.append(spanFileType);
-            let spanFileSize = $('<span/>').addClass('fileSize').text(item['size_str']);
+            let spanFileSize = $('<span/>').addClass('fileSize')
+            if (itemIsFolder) {
+                spanFileSize.html('&nbsp;');
+            } else {
+                spanFileSize.text(item['size_str']);
+            }
             divDetailLineRightPart.append(spanFileSize);
             let spanFileTime = $('<span/>').addClass('fileTime').text(item['mtime_str']);
             divDetailLineRightPart.append(spanFileTime);
