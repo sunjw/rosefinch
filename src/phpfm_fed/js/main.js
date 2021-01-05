@@ -9,40 +9,42 @@ window.$ = require('jquery');
 require('bootstrap');
 const utils = require('./utils');
 
-const pageMaxWidth = 1000;
+class RosefinchPage {
 
-function initContent() {
-
-    initLayout();
-    initFunc();
-
-    // init call
-
-}
-
-function initLayout() {
-
-    onWindowResize();
-    $(window).resize(function () {
-        onWindowResize();
-    });
-
-}
-
-function onWindowResize() {
-    var windowWidth = $(window).width();
-    utils.log('onWindowResize, windowWidth=' + windowWidth);
-    var pageWidth = windowWidth;
-    if (pageWidth > pageMaxWidth) {
-        pageWidth = pageMaxWidth;
+    constructor() {
     }
 
+    initContent() {
+        this.initLayout();
+        this.initFunc();
+
+        // init call
+
+    }
+
+    initLayout() {
+        var that = this;
+
+        this.onWindowResize();
+        $(window).on('resize', function () {
+            that.onWindowResize();
+        });
+    }
+
+    onWindowResize() {
+        var windowWidth = $(window).width();
+        var windowHeight = $(window).height();
+        utils.log('RosefinchPage.onWindowResize, windowWidth=' + windowWidth + 'px, windowHeight=' + windowHeight + 'px');
+    }
+
+    initFunc() {
+    }
 }
 
-function initFunc() {
-}
+// variables
+var page = new RosefinchPage();
 
 $(function () {
     utils.log('Rosefinch start...');
-    initContent();
+    page.initContent();
 });
