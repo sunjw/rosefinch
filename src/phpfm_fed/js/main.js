@@ -67,6 +67,8 @@ class RosefinchPage {
     }
 
     onHashChange() {
+        let that = this;
+
         let locationHash = window.location.hash;
         utils.log('RosefinchPage.onHashChange, locationHash=[%s]', locationHash);
 
@@ -84,10 +86,31 @@ class RosefinchPage {
         requestApi += ('&dir=' + requestDir);
         utils.log('RosefinchPage.onHashChange, requestApi=[%s]', requestApi);
 
+        jqueryUtils.getRestRequest(requestApi, function (data) {
+            if (!that.checkRestRespData(data)) {
+                return;
+            }
+
+            let mainList = data.data['main_list'];
+            if (Array.isArray(mainList)) {
+                utils.log('RosefinchPage.onHashChange, mainList.length=%d', mainList.length);
+            } else {
+                utils.log('RosefinchPage.onHashChange, mainList not an Array.');
+            }
+
+        })
     }
 
     prepareRestApi(api) {
-        return (this.apiBase + this.apiEndpoint + '?' + api);
+        return (this.apiBase + this.apiEndpoint + '?api=' + api);
+    }
+
+    checkRestRespData(data) {
+        if (!utils.isObject(data) || !('code' in data)) {
+            // Not return proper object.
+            return false;
+        }
+        return true;
     }
 }
 

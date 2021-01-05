@@ -49,6 +49,10 @@ function isString(variable) {
     return (typeof variable === 'string' || variable instanceof String);
 }
 
+function isObject(variable) {
+    return (typeof variable === 'object' && variable !== null);
+}
+
 function stringReplaceAll(string, target, replace) {
     return string.replace(new RegExp(target, 'g'), replace);
 }
@@ -154,6 +158,7 @@ function navToHash(hash) {
 exports.log = log;
 exports.clone = clone;
 exports.isString = isString;
+exports.isObject = isObject;
 exports.stringReplaceAll = stringReplaceAll;
 exports.escapeShellPath = escapeShellPath;
 exports.escapeHtmlPath = escapeHtmlPath;
