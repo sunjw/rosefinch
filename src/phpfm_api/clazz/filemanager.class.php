@@ -305,7 +305,7 @@ class FileManager
                     $file = array();
                     $file['name'] = htmlspecialchars(convert_toutf8($file_name));
                     $file['path'] = convert_toutf8($full_file_path);
-                    $file['type'] = convert_toutf8($type);
+                    $file['type'] = strtolower(convert_toutf8($type));
                     $file['stat'] = $fstat;
 
                     if ($this->filter_item($file)) {
@@ -321,7 +321,7 @@ class FileManager
                     $a_href = 'func/download.func.php?file=' . rawurlencode($this->request_sub_dir . $file['name']);
                     $type_html = '';
                     if ($file['type'] == '') {
-                        $type_html = _('File');
+                        $type_html = 'file';
                     } else {
                         $type_html = $file['type'];
                     }
