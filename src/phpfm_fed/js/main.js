@@ -29,6 +29,8 @@ class RosefinchPage {
         this.currentDir = '';
         this.sort = '';
         this.order = '';
+
+        this.mainList = null;
     }
 
     initContent() {
@@ -91,13 +93,13 @@ class RosefinchPage {
                 return;
             }
 
-            let mainList = data.data['main_list'];
-            if (Array.isArray(mainList)) {
-                utils.log('RosefinchPage.onHashChange, mainList.length=%d', mainList.length);
-            } else {
+            that.mainList = data.data['main_list'];
+            if (!Array.isArray(that.mainList)) {
                 utils.log('RosefinchPage.onHashChange, mainList not an Array.');
+                return;
             }
 
+            that.renderMainList();
         })
     }
 
@@ -111,6 +113,18 @@ class RosefinchPage {
             return false;
         }
         return true;
+    }
+
+    renderMainList() {
+        if (!Array.isArray(this.mainList)) {
+            utils.log('RosefinchPage.renderMainList, this.mainList not an Array.');
+            return;
+        }
+
+        utils.log('RosefinchPage.renderMainList, this.mainList.length=%d', this.mainList.length);
+        for (let i = 0; i < this.mainList.length; i++) {
+
+        }
     }
 }
 
