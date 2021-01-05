@@ -131,6 +131,9 @@ class RosefinchPage {
             let item = this.mainList[i];
             let itemType = item['type'];
             let itemIsFolder = false;
+            if (folderTypes.includes(itemType)) {
+                itemIsFolder = true;
+            }
 
             let li = $('<li/>').addClass('detailLine list-group-item d-flex');
 
@@ -151,8 +154,7 @@ class RosefinchPage {
                 'href': '#'
             });
             let iFileIcon = $('<i/>').addClass('fileIcon bi');
-            if (folderTypes.includes(itemType)) {
-                itemIsFolder = true;
+            if (itemIsFolder) {
                 iFileIcon.addClass('bi-folder');
             } else {
                 iFileIcon.addClass('bi-file-text');
