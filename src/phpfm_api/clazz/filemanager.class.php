@@ -402,7 +402,7 @@ class FileManager
                     $dir['name'] = htmlspecialchars(convert_toutf8($dir_name));
                     $dir['path'] = convert_toutf8($full_dir_path);
                     $dir['stat'] = $dstat;
-                    $dir['type'] = 'dir';
+                    $dir['type'] = 'folder';
 
                     if ($this->filter_item($dir)) {
                         continue;
@@ -416,7 +416,7 @@ class FileManager
                     $item_path = $this->request_sub_dir . $dir['name'];
 
                     $dir['size_str'] = '&nbsp;';
-                    $dir['type_html'] = _('Folder');
+                    $dir['type_html'] = 'Folder';
                     $dir['a_href'] = $a_href;
                     $dir['item_path'] = $item_path;
 
