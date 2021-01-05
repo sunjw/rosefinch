@@ -103,16 +103,20 @@ function getParentDir(path) {
     return parentDirPath;
 }
 
-function getQueryVariable(variable) {
-    var query = window.location.search.substring(1);
-    var vars = query.split('&');
+function getUrlQueryVariable(queryStr, key) {
+    var vars = queryStr.split('&');
     for (var i = 0; i < vars.length; i++) {
         var pair = vars[i].split('=');
-        if (decodeURIComponent(pair[0]) == variable) {
+        if (decodeURIComponent(pair[0]) == key) {
             return decodeURIComponent(pair[1]);
         }
     }
     return '';
+}
+
+function getQueryVariable(key) {
+    var query = window.location.search.substring(1);
+    return getUrlQueryVariable(query, key);
 }
 
 function getLocation() {
@@ -151,6 +155,7 @@ exports.escapeHtmlPath = escapeHtmlPath;
 exports.getRandomInt = getRandomInt;
 exports.byteSizeToShortSize = byteSizeToShortSize;
 exports.getParentDir = getParentDir;
+exports.getUrlQueryVariable = getUrlQueryVariable;
 exports.getQueryVariable = getQueryVariable;
 exports.getLocation = getLocation;
 exports.navToLocation = navToLocation;
