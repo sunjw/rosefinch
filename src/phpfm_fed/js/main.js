@@ -25,7 +25,6 @@ class RosefinchPage {
         this.initFunc();
 
         // init call
-
     }
 
     initLayout() {
@@ -40,7 +39,7 @@ class RosefinchPage {
     onWindowResize() {
         let windowWidth = $(window).width();
         let windowHeight = $(window).height();
-        utils.log('RosefinchPage.onWindowResize, windowWidth=' + windowWidth + 'px, windowHeight=' + windowHeight + 'px');
+        utils.log('RosefinchPage.onWindowResize, windowWidth=%dpx, windowHeight=%dpx', windowWidth, windowHeight);
 
         let divListWrapperTop = this.divListWrapper.offset().top;
         let divListWrapperHeight = windowHeight - divListWrapperTop - 2;
@@ -48,11 +47,26 @@ class RosefinchPage {
     }
 
     initFunc() {
+        let that = this;
+
+        $(window).on('hashchange', function () {
+            that.onHashChange();
+        });
+        this.onHashChange();
+    }
+
+    onHashChange() {
+        let locationHash = window.location.hash;
+        utils.log('RosefinchPage.onHashChange, locationHash=[%s]', locationHash);
+
+        if (locationHash.startsWith('#')) {
+            locationHash = locationHash.slice(1);
+        }
     }
 }
 
 $(function () {
-    utils.log('Rosefinch start...');
+    utils.log('init, Rosefinch start...');
 
     let page = new RosefinchPage();
     page.initContent();
