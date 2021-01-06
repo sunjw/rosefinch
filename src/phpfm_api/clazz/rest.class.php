@@ -184,8 +184,7 @@ class Rest
         $resp_obj->data['sort']['type'] = $file_manager->get_sort_type();
         $resp_obj->data['sort']['order'] = $file_manager->get_sort_order();
 
-        $current_path = $file_manager->get_current_path();
-        $current_path_array = explode('/', $current_path);
+        $current_path_array = $file_manager->get_current_path_array();
         $resp_obj->data['current_path'] = $current_path_array;
 
         $main_list_count = count($main_list);

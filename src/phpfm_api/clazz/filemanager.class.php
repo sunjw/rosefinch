@@ -189,6 +189,15 @@ class FileManager
     }
 
     /**
+     * Get current path array.
+     * @return array current path exploded by "/"
+     */
+    public function get_current_path_array()
+    {
+        return explode('/', $this->request_sub_dir);
+    }
+
+    /**
      * Get current directory.
      * @return string current directory
      */
@@ -532,7 +541,7 @@ class FileManager
                     <a class="arrow menuButton" href="javascript:void(0);">&nbsp;</a>
 
                     <?php
-                    $sub_dirs = explode('/', $this->request_sub_dir);
+                    $sub_dirs = $this->get_current_path_array();
                     $dir_str = '';
                     if (!$this->is_mobile) {
                         $this->display_sub_menus($dir_str, $sub_dirs[0]);
