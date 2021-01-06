@@ -180,6 +180,14 @@ class Rest
 
         $resp_obj = new RestRet();
 
+        $resp_obj->data['sort'] = array();
+        $resp_obj->data['sort']['type'] = $file_manager->get_sort_type();
+        $resp_obj->data['sort']['order'] = $file_manager->get_sort_order();
+
+        $current_path = $file_manager->get_current_path();
+        $current_path_array = explode('/', $current_path);
+        $resp_obj->data['current_path'] = $current_path_array;
+
         $main_list_count = count($main_list);
         for ($i = 0; $i < $main_list_count; $i++) {
             $main_list[$i]['mtime'] = $main_list[$i]['stat']['mtime'];
@@ -188,11 +196,6 @@ class Rest
             unset($main_list[$i]['stat']);
             unset($main_list[$i]['path']);
         }
-
-        $resp_obj->data['sort'] = array();
-        $resp_obj->data['sort']['type'] = $file_manager->get_sort_type();
-        $resp_obj->data['sort']['order'] = $file_manager->get_sort_order();
-        $resp_obj->data['current_path'] = $file_manager->get_current_path();
         $resp_obj->data['main_list'] = $main_list;
 
         $this->response_json($resp_obj);
