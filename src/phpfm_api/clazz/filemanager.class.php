@@ -547,21 +547,20 @@ class FileManager
                 <div class="divDir"><a href="<?php echo $this->view_page . '?' . $this->query_str; ?>">Root</a></div>
                 <div class="pathSlash menuContainer">
                     <a class="arrow menuButton" href="javascript:void(0);">&nbsp;</a>
-
                     <?php
                     $sub_dirs = $this->get_current_path_array();
                     $dir_str = '';
-                    if (!$this->is_mobile) {
-                        $this->display_sub_menus($dir_str, $sub_dirs[0]);
-                    }
                     ?>
                 </div>
                 <?php
-                //print_r($sub_dirs);
                 $len = count($sub_dirs);
                 $sub_dirs[$len] = '';
-                for ($i = 0; $i < $len - 1; $i++) {
+                //print_r($sub_dirs);
+                for ($i = 0; $i < $len; $i++) {
                     $sub_dir = $sub_dirs[$i];
+                    if ($dir_str != '') {
+                        $dir_str .= '/';
+                    }
                     $dir_str .= $sub_dir;
                     ?>
                     <div class="divDir">
@@ -571,12 +570,6 @@ class FileManager
                     </div>
                     <div class="pathSlash menuContainer">
                         <a class="arrow menuButton" href="javascript:void(0);">&nbsp;</a>
-                        <?php
-                        $dir_str .= '/';
-                        if (!$this->is_mobile) {
-                            $this->display_sub_menus($dir_str, $sub_dirs[$i + 1]);
-                        }
-                        ?>
                     </div>
                     <?php
                 }
