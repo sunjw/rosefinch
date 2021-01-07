@@ -122,6 +122,16 @@ class RosefinchPage {
         return true;
     }
 
+    generateDirHrefEx(dirArray, sort, sortOrder) {
+        let paramDir = encodeURIComponent(dirArray.join('/'));
+        let href = '#s=' + sort + '&o=' + sortOrder + '&dir=' + paramDir;
+        return href;
+    }
+
+    generateDirHref(dirArray) {
+        return this.generateDirHrefEx(dirArray, this.sort, this.sortOrder);
+    }
+
     renderMainList() {
         const folderTypes = ['folder'];
         const imageTypes = ['jpg', 'jpeg', 'bmp', 'png', 'gif'];
@@ -173,8 +183,7 @@ class RosefinchPage {
             }
             let aFileLinkHref = '#';
             if (itemIsFolder) {
-                let hrefDir = encodeURIComponent(this.currentDir.join('/') + '/' + itemName);
-                aFileLinkHref = '#s=' + this.sort + '&o=' + this.sortOrder + '&dir=' + hrefDir;
+                aFileLinkHref = this.generateDirHref(this.currentDir.concat([itemName]));
             }
             aFileLink.attr({
                 'title': itemName,
