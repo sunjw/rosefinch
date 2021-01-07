@@ -16,7 +16,7 @@ class RosefinchPage {
     constructor(apiPrefix) {
         // consts
         this.apiBase = utils.isString(apiPrefix) ? apiPrefix : '';
-        this.apiEndpoint = 'func/rest.api.php';
+        this.restApiEndpoint = 'func/rest.api.php';
 
         // elements
         this.divWrapper = $('#divWrapper');
@@ -114,7 +114,7 @@ class RosefinchPage {
     }
 
     prepareRestApi(api) {
-        return (this.apiBase + this.apiEndpoint + '?api=' + api);
+        return (this.apiBase + this.restApiEndpoint + '?api=' + api);
     }
 
     checkRestRespData(data) {
