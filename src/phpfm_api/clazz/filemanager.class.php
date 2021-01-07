@@ -194,7 +194,15 @@ class FileManager
      */
     public function get_current_path_array()
     {
-        return explode('/', $this->request_sub_dir);
+        $request_sub_dir_array = explode('/', $this->request_sub_dir);
+        $request_sub_dir_array_count = count($request_sub_dir_array);
+        if ($request_sub_dir_array_count > 0) {
+            // Remove the last "" element in array.
+            if ($request_sub_dir_array[$request_sub_dir_array_count - 1] == '') {
+                array_pop($request_sub_dir_array);
+            }
+        }
+        return $request_sub_dir_array;
     }
 
     /**
