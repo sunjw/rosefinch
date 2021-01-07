@@ -24,7 +24,7 @@ class RosefinchPage {
         this.navPathWrapper = $('#navPathWrapper');
         this.divMainWrapper = $('#divMainWrapper');
         this.divListWrapper = $('#divListWrapper');
-        this.ulDetailView = $('#ulDetailView');
+        this.ulDetailView = null;
 
         // vars
         this.currentDir = '';
@@ -44,6 +44,11 @@ class RosefinchPage {
     initLayout() {
         let that = this;
 
+        // prepare layout
+        this.ulDetailView = $('<ul/>').attr('id', 'ulDetailView').addClass('list-group list-group-flush');
+        this.divListWrapper.append(this.ulDetailView);
+
+        // prepare event handler
         this.onWindowResize();
         $(window).on('resize', function () {
             that.onWindowResize();
@@ -143,7 +148,6 @@ class RosefinchPage {
             } else if (audioTypes.includes(itemType)) {
                 itemIsAudio = true;
             }
-
 
             let li = $('<li/>').addClass('detailLine list-group-item d-flex');
 
