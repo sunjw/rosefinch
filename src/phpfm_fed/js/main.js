@@ -17,6 +17,7 @@ class RosefinchPage {
         // consts
         this.apiBase = utils.isString(apiPrefix) ? apiPrefix : '';
         this.restApiEndpoint = 'func/rest.api.php';
+        this.dlApiEndpoint = 'func/download.func.php';
 
         // elements
         this.divWrapper = $('#divWrapper');
@@ -90,7 +91,7 @@ class RosefinchPage {
         let requestOrder = utils.getUrlQueryVariable(locationHash, 'o');
         let requestDir = utils.getUrlQueryVariable(locationHash, 'dir');
 
-        let requestApi = this.prepareRestApi('api/v1/fm/ls');
+        let requestApi = this.generateRestApi('api/v1/fm/ls');
         requestApi += ('&s=' + requestSort);
         requestApi += ('&o=' + requestOrder);
         requestApi += ('&dir=' + requestDir);
@@ -113,16 +114,20 @@ class RosefinchPage {
         })
     }
 
-    prepareRestApi(api) {
-        return (this.apiBase + this.restApiEndpoint + '?api=' + api);
-    }
-
     checkRestRespData(data) {
         if (!utils.isObject(data) || !('code' in data)) {
             // Not return proper object.
             return false;
         }
         return true;
+    }
+
+    generateRestApi(api) {
+        return (this.apiBase + this.restApiEndpoint + '?api=' + api);
+    }
+
+    generateDlApi() {
+        return (this.apiBase + this.dlApiEndpoint);
     }
 
     generateDirHrefEx(dirArray, sort, sortOrder) {
@@ -133,6 +138,12 @@ class RosefinchPage {
 
     generateDirHref(dirArray) {
         return this.generateDirHrefEx(dirArray, this.sort, this.sortOrder);
+    }
+
+    generateFileHref(dirArray, file) {
+        let paramFile = encodeURIComponent((dirArray.concat([file])).join('/'));
+        let href = this.generateDlApi() + '?file=' + paramFile;
+        return href;
     }
 
     renderBreadcrumb() {
@@ -222,6 +233,8 @@ class RosefinchPage {
             let aFileLinkHref = '#';
             if (itemIsFolder) {
                 aFileLinkHref = this.generateDirHref(this.currentDir.concat([itemName]));
+            } else {
+                aFileLinkHref = this.generateFileHref(this.currentDir, itemName);
             }
             aFileLink.attr({
                 'title': itemName,
