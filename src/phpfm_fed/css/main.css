@@ -110,12 +110,12 @@ img {
   width: 6rem;
 }
 #ulDetailView .list-group-item .fileSize {
-  width: 8rem;
+  width: 9rem;
   text-align: right;
-  padding-right: 1.8rem;
+  padding-right: 2rem;
 }
 #ulDetailView .list-group-item .fileTime {
-  width: 10.2rem;
+  width: 11rem;
 }
 /* PHPFM */
 
