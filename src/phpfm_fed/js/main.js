@@ -22,6 +22,8 @@ class RosefinchPage {
         this.divWrapper = $('#divWrapper');
         this.navToolbarWrapper = $('#navToolbarWrapper');
         this.navPathWrapper = $('#navPathWrapper');
+        this.olPathWrapper = $('#olPathWrapper');
+        this.divPathBtnWrapper = $('#divPathBtnWrapper');
         this.divMainWrapper = $('#divMainWrapper');
         this.divListWrapper = $('#divListWrapper');
         this.ulDetailView = null;
@@ -106,6 +108,7 @@ class RosefinchPage {
                 return;
             }
 
+            that.renderBreadcrumb();
             that.renderMainList();
         })
     }
@@ -130,6 +133,37 @@ class RosefinchPage {
 
     generateDirHref(dirArray) {
         return this.generateDirHrefEx(dirArray, this.sort, this.sortOrder);
+    }
+
+    renderBreadcrumb() {
+        // clear all
+        this.olPathWrapper.empty();
+
+        let dirs = [];
+        for (let i = 0; i <= this.currentDir.length; i++) {
+            let li = $('<li/>').addClass('breadcrumb-item');
+
+            let aDir = $('<a/>').addClass('noOutline');
+            let dirHref = this.generateDirHref(dirs);
+            aDir.attr('href', dirHref);
+            let dirName = '';
+            if (i == 0) {
+                dirName = 'Root';
+            } else {
+                dirName = this.currentDir[i - 1];
+            }
+            aDir.text(dirName);
+            li.append(aDir);
+
+            if (i == this.currentDir.length) {
+                // last one
+                li.addClass('active');
+            }
+
+            this.olPathWrapper.append(li);
+
+            dirs.push(this.currentDir[i]);
+        }
     }
 
     renderMainList() {
