@@ -27,9 +27,9 @@ class RosefinchPage {
         this.ulDetailView = null;
 
         // vars
-        this.currentDir = '';
+        this.currentDir = [];
         this.sort = '';
-        this.order = '';
+        this.sortOrder = '';
 
         this.mainList = null;
     }
@@ -84,9 +84,9 @@ class RosefinchPage {
             locationHash = locationHash.slice(1);
         }
 
-        let requestDir = utils.getUrlQueryVariable(locationHash, 'dir');
         let requestSort = utils.getUrlQueryVariable(locationHash, 's');
         let requestOrder = utils.getUrlQueryVariable(locationHash, 'o');
+        let requestDir = utils.getUrlQueryVariable(locationHash, 'dir');
 
         let requestApi = this.prepareRestApi('api/v1/fm/ls');
         requestApi += ('&s=' + requestSort);
@@ -99,6 +99,7 @@ class RosefinchPage {
                 return;
             }
 
+            that.currentDir = data.data['current_path'];
             that.mainList = data.data['main_list'];
             if (!Array.isArray(that.mainList)) {
                 utils.log('RosefinchPage.onHashChange, mainList not an Array.');
@@ -137,7 +138,9 @@ class RosefinchPage {
         utils.log('RosefinchPage.renderMainList, this.mainList.length=%d', this.mainList.length);
         for (let i = 0; i < this.mainList.length; i++) {
             let item = this.mainList[i];
+            let itemName = item['name'];
             let itemType = item['type'];
+
             let itemIsFolder = false;
             let itemIsImage = false;
             let itemIsAudio = false;
@@ -168,9 +171,14 @@ class RosefinchPage {
             } else if (itemIsAudio) {
                 aFileLink.addClass('previewAudio');
             }
+            let aFileLinkHref = '#';
+            if (itemIsFolder) {
+                let hrefDir = encodeURIComponent(this.currentDir.join('/') + '/' + itemName);
+                aFileLinkHref = '#s=' + this.sort + '&o=' + this.sortOrder + '&dir=' + hrefDir;
+            }
             aFileLink.attr({
-                'title': item['name'],
-                'href': '#'
+                'title': itemName,
+                'href': aFileLinkHref
             });
             let iFileIcon = $('<i/>').addClass('fileIcon bi');
             if (itemIsFolder) {
@@ -183,7 +191,7 @@ class RosefinchPage {
                 iFileIcon.addClass('bi-file-text');
             }
             aFileLink.append(iFileIcon);
-            let spanFileName = $('<span/>').addClass('fileName').text(item['name']);
+            let spanFileName = $('<span/>').addClass('fileName').text(itemName);
             aFileLink.append(spanFileName);
             divDetailLineLeftPart.append(aFileLink);
 
