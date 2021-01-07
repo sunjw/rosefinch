@@ -164,6 +164,10 @@ class RosefinchPage {
 
             dirs.push(this.currentDir[i]);
         }
+
+        // an empty last element for "/" postfix
+        let liPostfix = $('<li/>').addClass('breadcrumb-item');
+        this.olPathWrapper.append(liPostfix);
     }
 
     renderMainList() {
