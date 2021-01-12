@@ -1,4 +1,4 @@
-# # Rosefinch - FED
+## Rosefinch - FED
 FED for Rosefinch (a PHP file manager).
 
 ## Build and run
@@ -7,4 +7,4 @@ FED for Rosefinch (a PHP file manager).
 3. npm run start:dev
 
 ## Publish
-python3 pack-dist.py
+python3 pack-dist-webpack.py
