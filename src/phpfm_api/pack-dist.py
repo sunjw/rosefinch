@@ -90,7 +90,6 @@ def log_stage(stage_message):
 
 def main():
     publish_dir = 'publish'
-    static_dir = 'static'
     fed_dir = '../phpfm_fed'
 
     cwd = os.getcwd()
@@ -109,18 +108,20 @@ def main():
     # Rename fed index.html
     os.rename(os.path.join(publish_dir, 'index.html'), os.path.join(publish_dir, 'index_newui.html'))
 
-    # Copy build app.
-#     app_dirs = ['dist', static_dir]
-#     for app_dir in app_dirs:
-#         dest_app_dir = os.path.join(publish_dir, app_dir)
-#         os.mkdir(dest_app_dir)
-#         copy_dir(app_dir, dest_app_dir)
-#
-#     app_files = ['package.json', 'package-lock.json', 'README.md',
-#                 'api_config.sample.json']
-#     for app_file in app_files:
-#         dest_app_file = os.path.join(publish_dir, app_file)
-#         copy_file(app_file, dest_app_file)
+    # Copy app
+    app_dirs = ['about', 'admin', 'clazz', 'css',
+                'func', 'images', 'inc', 'js',
+                'locales', 'log', 'vendor']
+    for app_dir in app_dirs:
+        dest_app_dir = os.path.join(publish_dir, app_dir)
+        os.mkdir(dest_app_dir)
+        copy_dir(app_dir, dest_app_dir)
+
+    app_files = ['about.php', 'composer.json', 'composer.lock',
+                'gpl-2.0.txt', 'index.php', 'web.config']
+    for app_file in app_files:
+        dest_app_file = os.path.join(publish_dir, app_file)
+        copy_file(app_file, dest_app_file)
 
 if __name__ == '__main__':
     main()
