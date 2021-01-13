@@ -99,16 +99,16 @@ def main():
     run_cmd('python3 ./pack-dist-webpack.py')
     os.chdir(cwd)
 
-    # Copy fed
+    # Copy fed.
     remove_dir(publish_dir)
     os.mkdir(publish_dir)
     fed_publish_dir = os.path.join(fed_dir, 'publish')
     copy_dir(fed_publish_dir, publish_dir)
 
-    # Rename fed index.html
+    # Rename fed index.html.
     os.rename(os.path.join(publish_dir, 'index.html'), os.path.join(publish_dir, 'index_newui.html'))
 
-    # Copy app
+    # Copy app.
     app_dirs = ['about', 'admin', 'clazz', 'css',
                 'func', 'images', 'inc', 'js',
                 'locales', 'log', 'vendor']
@@ -122,6 +122,14 @@ def main():
     for app_file in app_files:
         dest_app_file = os.path.join(publish_dir, app_file)
         copy_file(app_file, dest_app_file)
+
+    # Clear up.
+    log_stage('Clear up...')
+    clear_files = ['admin/settings.inc.php', 'admin/usermng.inc.php', 'log/phpfm.log']
+    for clear_file in clear_files:
+        dest_clear_file = os.path.join(publish_dir, clear_file)
+        if os.path.exists(dest_clear_file):
+            os.remove(dest_clear_file)
 
 if __name__ == '__main__':
     main()
