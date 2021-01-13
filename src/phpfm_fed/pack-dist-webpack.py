@@ -121,11 +121,19 @@ def main():
         copy_file(app_file, dest_app_file)
 
     # Clear up.
+    log_stage('Clear up...')
     clear_files = []
     for clear_file in clear_files:
         dest_clear_file = os.path.join(publish_dir, clear_file)
         if os.path.exists(dest_clear_file):
             os.remove(dest_clear_file)
+
+    # Post step
+    log_stage('Post step...')
+    phpfm_config_publish_path = 'phpfm.config.publish.js'
+    phpfm_config_dist_path = os.path.join(publish_dir, 'dist/phpfm.config.js')
+    phpfm_config_publish_content = read_file_content(phpfm_config_publish_path)
+    write_file_content(phpfm_config_dist_path, phpfm_config_publish_content)
 
 if __name__ == '__main__':
     main()
