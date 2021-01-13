@@ -676,6 +676,7 @@ class Utility
                                 href="admin/setting.php"><?php echo _('Setting'); ?></a></li>
                     <li class="li-item<?php $page == 'about' ? print(' current') : print(''); ?>"><a
                                 href="about.php"><?php echo _('About'); ?></a></li>
+                    <li class="li-item"><a href="index_newui.html">NEWUI</a></li>
                 </ul>
                 <?php
             }
