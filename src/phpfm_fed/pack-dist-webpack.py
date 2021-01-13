@@ -128,7 +128,7 @@ def main():
         if os.path.exists(dest_clear_file):
             os.remove(dest_clear_file)
 
-    # Post step
+    # Post step.
     log_stage('Post step...')
     phpfm_config_publish_path = 'phpfm.config.publish.js'
     phpfm_config_dist_path = os.path.join(publish_dir, 'dist/phpfm.config.js')
