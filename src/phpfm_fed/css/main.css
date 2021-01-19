@@ -143,25 +143,26 @@ img {
     display: none;
   }
 
-  #ulDetailView .detailLineFolder .detailLineRightPart {
+  #ulDetailView .list-group-item {
+    padding-left: 1rem;
+  }
+  #ulDetailView .list-group-item.detailLineFolder .detailLineRightPart {
     display: none !important;
   }
   #ulDetailView .list-group-item .fileType, #ulDetailView .list-group-item .fileTime {
     display: none;
   }
 
-  #ulDetailView .list-group-item {
-    padding-left: 1rem;
-  }
 }
+/* Small screen */
 
-@media (max-width: 320px) {
-  #navToolbarWrapper #buttonAbout {
+/* Even small screen */
+@media (max-width: 380px) {
+  #navToolbarWrapper #buttonBack, #navToolbarWrapper #buttonRefresh {
     display: none;
   }
 }
-/* Small screen */
-/* PHPFM */
+/* Even small screen */
 
 /* Dark */
 @media (prefers-color-scheme: dark) {
@@ -174,3 +175,4 @@ img {
   /*}*/
 }
 /* Dark */
+/* PHPFM */
