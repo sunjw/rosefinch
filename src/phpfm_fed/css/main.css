@@ -138,6 +138,11 @@ img {
   #navToolbarWrapper #buttonSetting {
     display: none;
   }
+
+  #navPathWrapper #divPathBtnWrapper {
+    display: none;
+  }
+
   #ulDetailView .list-group-item .fileType, #ulDetailView .list-group-item .fileTime {
     display: none;
   }
