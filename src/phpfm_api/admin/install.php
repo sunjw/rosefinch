@@ -50,9 +50,22 @@ $directory = get_base_dir() . $lang_dir;
 
 $domain = 'phpfm';
 
-bindtextdomain($domain, $directory);
-bind_textdomain_codeset($domain, get_encoding()); // make gettext read mo by utf-8
-textdomain($domain);
+if (function_exists('bindtextdomain')) {
+    bindtextdomain($domain, $directory);
+    bind_textdomain_codeset($domain, get_encoding()); // Let gettext read mo by utf-8.
+    textdomain($domain);
+} else {
+    function bindtextdomain($arg1, $arg2) {}
+
+    function bind_textdomain_codeset($arg1, $arg2) {}
+
+    function textdomain($arg1) {}
+
+    function _($str)
+    {
+        return $str;
+    }
+}
 
 ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
