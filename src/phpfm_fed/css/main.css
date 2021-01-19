@@ -74,7 +74,7 @@ img {
 }
 
 #ulDetailView .list-group-item {
-  padding: 0 1.25rem 0 1.6rem;
+  padding: 0 1.25rem 0 1.5rem;
   margin-bottom: 0.18rem;
 }
 #ulDetailView .list-group-item:last-child {
@@ -122,13 +122,33 @@ img {
 
 /* Large screen */
 @media (min-width: 768px) {
-
+  #navToolbarWrapper #buttonBack {
+    display: none;
+  }
 }
 /* Large screen */
 
 /* Small screen */
 @media (max-width: 768px) {
+  #navToolbarWrapper #buttonCut,
+  #navToolbarWrapper #buttonCopy,
+  #navToolbarWrapper #buttonPaste,
+  #navToolbarWrapper #spanBrand,
+  #navToolbarWrapper #buttonDebug,
+  #navToolbarWrapper #buttonSetting {
+    display: none;
+  }
   #ulDetailView .list-group-item .fileType, #ulDetailView .list-group-item .fileTime {
+    display: none;
+  }
+
+  #ulDetailView .list-group-item {
+    padding-left: 1rem;
+  }
+}
+
+@media (max-width: 320px) {
+  #navToolbarWrapper #buttonAbout {
     display: none;
   }
 }
