@@ -149,6 +149,10 @@ img {
   #ulDetailView .list-group-item.detailLineFolder .detailLineRightPart {
     display: none !important;
   }
+  #ulDetailView .list-group-item .fileSize {
+    width: 7rem;
+    padding-right: 0rem;
+  }
   #ulDetailView .list-group-item .fileType, #ulDetailView .list-group-item .fileTime {
     display: none;
   }
