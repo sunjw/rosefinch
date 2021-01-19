@@ -120,6 +120,12 @@ img {
   width: 11rem;
 }
 
+/* Large screen */
+@media (min-width: 768px) {
+
+}
+/* Large screen */
+
 /* Small screen */
 @media (max-width: 768px) {
   #ulDetailView .list-group-item .fileType, #ulDetailView .list-group-item .fileTime {
