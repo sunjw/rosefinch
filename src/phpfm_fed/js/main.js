@@ -212,6 +212,9 @@ class RosefinchPage {
             }
 
             let li = $('<li/>').addClass('detailLine list-group-item d-flex');
+            if (itemIsFolder) {
+                li.addClass('detailLineFolder');
+            }
 
             // left
             let divDetailLineLeftPart = $('<div/>').addClass('detailLineLeftPart d-flex flex-grow-1 overflow-hidden');

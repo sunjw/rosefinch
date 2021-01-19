@@ -143,6 +143,9 @@ img {
     display: none;
   }
 
+  #ulDetailView .detailLineFolder .detailLineRightPart {
+    display: none !important;
+  }
   #ulDetailView .list-group-item .fileType, #ulDetailView .list-group-item .fileTime {
     display: none;
   }
