@@ -1,8 +1,4 @@
 /* Common */
-* {
-  /*padding: 0;*/
-  /*margin: 0;*/
-}
 body {
   /*font-family: sans-serif;*/
   font-size: 1.2rem;
@@ -88,7 +84,12 @@ img {
   margin-left: 0.5rem;
 }
 #ulDetailView .list-group-item .fileCheck {
-  width: 1.4rem;
+  width: 1.6rem;
+}
+#ulDetailView .list-group-item .fileCheck input {
+  margin-left: 1px;
+  width: 1.2rem;
+  height: 1.2rem;
 }
 #ulDetailView .list-group-item .fileLink {
   height: 4rem;
@@ -118,6 +119,14 @@ img {
 #ulDetailView .list-group-item .fileTime {
   width: 11rem;
 }
+
+/* Small screen */
+@media (max-width: 768px) {
+  #ulDetailView .list-group-item .fileType, #ulDetailView .list-group-item .fileTime {
+    display: none;
+  }
+}
+/* Small screen */
 /* PHPFM */
 
 /* Dark */

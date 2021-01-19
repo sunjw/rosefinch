@@ -216,7 +216,7 @@ class RosefinchPage {
             // left
             let divDetailLineLeftPart = $('<div/>').addClass('detailLineLeftPart d-flex flex-grow-1 overflow-hidden');
 
-            let spanFileCheck = $('<span/>').addClass('fileCheck d-flex align-items-center');
+            let spanFileCheck = $('<span/>').addClass('fileCheck d-flex align-items-center flex-shrink-0');
             let inputCheckbox = $('<input/>').attr({
                 'type': 'checkbox',
                 'name': item['item_path']
