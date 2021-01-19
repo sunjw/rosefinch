@@ -93,6 +93,7 @@ img {
 #ulDetailView .list-group-item .fileLink {
   height: 4rem;
   color: inherit;
+  min-width: 0; /* for fileName text-overflow */
 }
 #ulDetailView .list-group-item .fileLink:hover {
   text-decoration: none;

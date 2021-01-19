@@ -214,7 +214,7 @@ class RosefinchPage {
             let li = $('<li/>').addClass('detailLine list-group-item d-flex');
 
             // left
-            let divDetailLineLeftPart = $('<div/>').addClass('detailLineLeftPart d-flex flex-grow-1');
+            let divDetailLineLeftPart = $('<div/>').addClass('detailLineLeftPart d-flex flex-grow-1 overflow-hidden');
 
             let spanFileCheck = $('<span/>').addClass('fileCheck d-flex align-items-center');
             let inputCheckbox = $('<input/>').attr({
@@ -251,7 +251,7 @@ class RosefinchPage {
                 iFileIcon.addClass('bi-file-text');
             }
             aFileLink.append(iFileIcon);
-            let spanFileName = $('<span/>').addClass('fileName').text(itemName);
+            let spanFileName = $('<span/>').addClass('fileName text-truncate').text(itemName);
             aFileLink.append(spanFileName);
             divDetailLineLeftPart.append(aFileLink);
 
