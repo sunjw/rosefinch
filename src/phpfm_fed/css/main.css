@@ -88,7 +88,7 @@ img {
 #ulDetailView .list-group-item:last-child {
   border-bottom-width: 1px;
 }
-#ulDetailView .list-group-item .detailLineRightPart {
+#ulDetailView .list-group-item .detailLineRight {
   margin-left: 0.5rem;
 }
 #ulDetailView .list-group-item .fileCheck {
@@ -155,7 +155,7 @@ img {
   #ulDetailView .list-group-item {
     padding-left: 1rem;
   }
-  #ulDetailView .list-group-item.detailLineFolder .detailLineRightPart {
+  #ulDetailView .list-group-item.detailLineFolder .detailLineRight {
     display: none !important;
   }
   #ulDetailView .list-group-item .fileSize {

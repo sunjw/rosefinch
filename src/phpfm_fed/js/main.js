@@ -29,6 +29,21 @@ class RosefinchPage {
         this.divListWrapper = $('#divListWrapper');
         this.ulDetailView = null;
 
+        // buttons
+        this.buttonBack = null;
+        this.buttonRefresh = null;
+        this.buttonUpload = null;
+        this.buttonNewFolder = null;
+        this.buttonCut = null;
+        this.buttonCopy = null;
+        this.buttonPaste = null;
+        this.buttonRename = null;
+        this.buttonDelete = null;
+        this.buttonDebug = null;
+        this.buttonSetting = null;
+        this.buttonAbout = null;
+        this.buttonLoading = null;
+
         // vars
         this.currentDir = [];
         this.sort = '';
@@ -51,6 +66,9 @@ class RosefinchPage {
         this.ulDetailView = $('<ul/>').attr('id', 'ulDetailView').addClass('list-group list-group-flush');
         this.divListWrapper.append(this.ulDetailView);
 
+        // prepare buttons
+        this.initButtons();
+
         // prepare event handler
         this.onWindowResize();
         $(window).on('resize', function () {
@@ -66,6 +84,10 @@ class RosefinchPage {
         let divListWrapperTop = this.divListWrapper.offset().top;
         let divListWrapperHeight = windowHeight - divListWrapperTop - 2;
         this.divListWrapper.css('height', divListWrapperHeight + 'px');
+    }
+
+    initButtons() {
+
     }
 
     initFunc() {
@@ -217,7 +239,7 @@ class RosefinchPage {
             }
 
             // left
-            let divDetailLineLeftPart = $('<div/>').addClass('detailLineLeftPart d-flex flex-grow-1 overflow-hidden');
+            let divDetailLineLeft = $('<div/>').addClass('detailLineLeft d-flex flex-grow-1 overflow-hidden');
 
             let spanFileCheck = $('<span/>').addClass('fileCheck d-flex align-items-center flex-shrink-0');
             let inputCheckbox = $('<input/>').attr({
@@ -225,7 +247,7 @@ class RosefinchPage {
                 'name': item['item_path']
             });
             spanFileCheck.append(inputCheckbox);
-            divDetailLineLeftPart.append(spanFileCheck);
+            divDetailLineLeft.append(spanFileCheck);
 
             let aFileLink = $('<a/>').addClass('fileLink noOutline flex-grow-1 d-flex align-items-center');
             if (itemIsImage) {
@@ -256,26 +278,26 @@ class RosefinchPage {
             aFileLink.append(iFileIcon);
             let spanFileName = $('<span/>').addClass('fileName text-truncate').text(itemName);
             aFileLink.append(spanFileName);
-            divDetailLineLeftPart.append(aFileLink);
+            divDetailLineLeft.append(aFileLink);
 
-            li.append(divDetailLineLeftPart);
+            li.append(divDetailLineLeft);
 
             // right
-            let divDetailLineRightPart = $('<div/>').addClass('detailLineRightPart d-flex align-items-center');
+            let divDetailLineRight = $('<div/>').addClass('detailLineRight d-flex align-items-center');
 
             let spanFileType = $('<span/>').addClass('fileType').text(item['type_html']);
-            divDetailLineRightPart.append(spanFileType);
+            divDetailLineRight.append(spanFileType);
             let spanFileSize = $('<span/>').addClass('fileSize')
             if (itemIsFolder) {
                 spanFileSize.html('&nbsp;');
             } else {
                 spanFileSize.text(npmUtils.formatSize(item['size']));
             }
-            divDetailLineRightPart.append(spanFileSize);
+            divDetailLineRight.append(spanFileSize);
             let spanFileTime = $('<span/>').addClass('fileTime').text(npmUtils.formatTimestamp(item['mtime']));
-            divDetailLineRightPart.append(spanFileTime);
+            divDetailLineRight.append(spanFileTime);
 
-            li.append(divDetailLineRightPart);
+            li.append(divDetailLineRight);
 
             this.ulDetailView.append(li);
         }
