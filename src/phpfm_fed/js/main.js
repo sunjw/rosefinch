@@ -88,13 +88,14 @@ class RosefinchPage {
     initFunc() {
         let that = this;
 
+        // prepare buttons
+        this.initButtons();
+
+        // hash change
         $(window).on('hashchange', function () {
             that.onHashChange();
         });
         this.onHashChange();
-
-        // prepare buttons
-        this.initButtons();
     }
 
     onHashChange() {
@@ -117,6 +118,7 @@ class RosefinchPage {
         requestApi += ('&dir=' + requestDir);
         utils.log('RosefinchPage.onHashChange, requestApi=[%s]', requestApi);
 
+        this.showLoadingSpinner();
         jqueryUtils.getRestRequest(requestApi, function (data) {
             if (!that.checkRestRespData(data)) {
                 return;
@@ -131,6 +133,8 @@ class RosefinchPage {
 
             that.renderBreadcrumb();
             that.renderMainList();
+
+            that.hideLoadingSpinner();
         })
     }
 
@@ -239,6 +243,19 @@ class RosefinchPage {
         let paramFile = encodeURIComponent((dirArray.concat([file])).join('/'));
         let href = this.generateDlApi() + '?file=' + paramFile;
         return href;
+    }
+
+    showLoadingSpinner() {
+        this.buttonAbout.hide();
+        this.buttonLoading.show();
+    }
+
+    hideLoadingSpinner() {
+        let that = this;
+        setTimeout(function () {
+            that.buttonLoading.hide();
+            that.buttonAbout.show();
+        }, 250);
     }
 
     renderBreadcrumb() {
