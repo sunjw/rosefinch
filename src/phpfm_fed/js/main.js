@@ -22,6 +22,8 @@ class RosefinchPage {
         // elements
         this.divWrapper = $('#divWrapper');
         this.navToolbarWrapper = $('#navToolbarWrapper');
+        this.divToolbarLeft = $('#divToolbarLeft');
+        this.divToolbarRight = $('#divToolbarRight');
         this.navPathWrapper = $('#navPathWrapper');
         this.olPathWrapper = $('#olPathWrapper');
         this.divPathBtnWrapper = $('#divPathBtnWrapper');
@@ -66,9 +68,6 @@ class RosefinchPage {
         this.ulDetailView = $('<ul/>').attr('id', 'ulDetailView').addClass('list-group list-group-flush');
         this.divListWrapper.append(this.ulDetailView);
 
-        // prepare buttons
-        this.initButtons();
-
         // prepare event handler
         this.onWindowResize();
         $(window).on('resize', function () {
@@ -86,10 +85,6 @@ class RosefinchPage {
         this.divListWrapper.css('height', divListWrapperHeight + 'px');
     }
 
-    initButtons() {
-
-    }
-
     initFunc() {
         let that = this;
 
@@ -97,6 +92,9 @@ class RosefinchPage {
             that.onHashChange();
         });
         this.onHashChange();
+
+        // prepare buttons
+        this.initButtons();
     }
 
     onHashChange() {
@@ -134,6 +132,24 @@ class RosefinchPage {
             that.renderBreadcrumb();
             that.renderMainList();
         })
+    }
+
+    generateToolbarButton(buttonId, iconName) {
+        let button = $('<button/>').attr({
+            'id': buttonId,
+            'type': 'button'
+        }).addClass('btn btn-light toolbarBtn');
+        let buttonIcon = $('<i/>').addClass('bi').addClass(iconName);
+        button.append(buttonIcon);
+        return button;
+    }
+
+    initButtons() {
+        this.buttonBack = this.generateToolbarButton('buttonBack', 'bi-chevron-left');
+        this.buttonRefresh = this.generateToolbarButton('buttonRefresh', 'bi-arrow-clockwise');
+
+        this.divToolbarLeft.append(this.buttonBack);
+        this.divToolbarLeft.append(this.buttonRefresh);
     }
 
     checkRestRespData(data) {
