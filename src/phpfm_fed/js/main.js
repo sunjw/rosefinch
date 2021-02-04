@@ -69,13 +69,13 @@ class RosefinchPage {
         this.divListWrapper.append(this.ulDetailView);
 
         // prepare event handler
-        this.onWindowResize();
+        this.onLayoutResize();
         $(window).on('resize', function () {
-            that.onWindowResize();
+            that.onLayoutResize();
         });
     }
 
-    onWindowResize() {
+    onLayoutResize() {
         let windowWidth = $(window).width();
         let windowHeight = $(window).height();
         utils.log('RosefinchPage.onWindowResize, windowWidth=%dpx, windowHeight=%dpx', windowWidth, windowHeight);
@@ -132,6 +132,7 @@ class RosefinchPage {
             }
 
             that.renderBreadcrumb();
+            that.onLayoutResize();
             that.renderMainList();
 
             that.hideLoadingSpinner();
