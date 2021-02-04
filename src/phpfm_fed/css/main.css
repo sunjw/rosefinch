@@ -1,4 +1,8 @@
 /* Common */
+:root {
+  --phpfm-tint: #da020e;
+}
+
 body {
   /*font-family: sans-serif;*/
   font-size: 1.2rem;
@@ -26,7 +30,7 @@ img {
   /*border-bottom: 1px solid var(--primary);*/
 }
 #navToolbarWrapper .navbar-brand, #navToolbarWrapper .navbar-brand a {
-  color: #da020e;
+  color: var(--phpfm-tint);
 }
 #navToolbarWrapper .navbar-brand a:hover {
   text-decoration: none;
@@ -37,6 +41,10 @@ img {
 }
 #navToolbarWrapper .toolbarBtn:hover {
   color: var(--primary);
+}
+#navToolbarWrapper #buttonLoading .spinner-border-sm {
+  color: var(--phpfm-tint);
+  border-width: 0.15em;
 }
 
 #navPathWrapper {
