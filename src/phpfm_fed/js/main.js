@@ -145,6 +145,7 @@ class RosefinchPage {
     }
 
     initButtons() {
+        // left
         this.buttonBack = this.generateToolbarButton('buttonBack', 'bi-chevron-left');
         this.buttonRefresh = this.generateToolbarButton('buttonRefresh', 'bi-arrow-clockwise');
         this.buttonUpload = this.generateToolbarButton('buttonUpload', 'bi-cloud-upload');
@@ -173,6 +174,39 @@ class RosefinchPage {
         this.divToolbarLeft.append('\n');
         this.divToolbarLeft.append(this.buttonDelete);
         this.divToolbarLeft.append('\n');
+
+        // right
+        this.buttonDebug = $('<a/>').attr({
+            'id': 'buttonDebug',
+            'href': 'index.php',
+            'role': 'button'
+        }).addClass('btn btn-light toolbarBtn');
+        let debugIcon = $('<i/>').addClass('bi').addClass('bi-bug');
+        this.buttonDebug.append(debugIcon);
+
+        this.buttonSetting = this.generateToolbarButton('buttonSetting', 'bi-gear');
+        this.buttonAbout = this.generateToolbarButton('buttonAbout', 'bi-info-circle');
+
+        this.buttonLoading = $('<button/>').attr({
+            'id': 'buttonLoading',
+            'type': 'button',
+            'disabled': 'disabled'
+        }).addClass('btn btn-light toolbarBtn');
+        let loadingSpinner = $('<span/>').attr({
+            'role': 'status',
+            'aria-hidden': true
+        }).addClass('spinner-border spinner-border-sm');
+        this.buttonLoading.append(loadingSpinner);
+        this.buttonLoading.hide();
+
+        this.divToolbarRight.append(this.buttonDebug);
+        this.divToolbarRight.append('\n');
+        this.divToolbarRight.append(this.buttonSetting);
+        this.divToolbarRight.append('\n');
+        this.divToolbarRight.append(this.buttonAbout);
+        this.divToolbarRight.append('\n');
+        this.divToolbarRight.append(this.buttonLoading);
+        this.divToolbarRight.append('\n');
     }
 
     checkRestRespData(data) {
