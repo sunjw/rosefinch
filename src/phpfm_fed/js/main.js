@@ -147,9 +147,32 @@ class RosefinchPage {
     initButtons() {
         this.buttonBack = this.generateToolbarButton('buttonBack', 'bi-chevron-left');
         this.buttonRefresh = this.generateToolbarButton('buttonRefresh', 'bi-arrow-clockwise');
+        this.buttonUpload = this.generateToolbarButton('buttonUpload', 'bi-cloud-upload');
+        this.buttonNewFolder = this.generateToolbarButton('buttonNewFolder', 'bi-folder-plus');
+        this.buttonCut = this.generateToolbarButton('buttonCut', 'bi-scissors');
+        this.buttonCopy = this.generateToolbarButton('buttonCopy', 'bi-files');
+        this.buttonPaste = this.generateToolbarButton('buttonPaste', 'bi-clipboard');
+        this.buttonRename = this.generateToolbarButton('buttonRename', 'bi-input-cursor-text');
+        this.buttonDelete = this.generateToolbarButton('buttonDelete', 'bi-trash');
 
         this.divToolbarLeft.append(this.buttonBack);
+        this.divToolbarLeft.append('\n'); // fix strange layout
         this.divToolbarLeft.append(this.buttonRefresh);
+        this.divToolbarLeft.append('\n');
+        this.divToolbarLeft.append(this.buttonUpload);
+        this.divToolbarLeft.append('\n');
+        this.divToolbarLeft.append(this.buttonNewFolder);
+        this.divToolbarLeft.append('\n');
+        this.divToolbarLeft.append(this.buttonCut);
+        this.divToolbarLeft.append('\n');
+        this.divToolbarLeft.append(this.buttonCopy);
+        this.divToolbarLeft.append('\n');
+        this.divToolbarLeft.append(this.buttonPaste);
+        this.divToolbarLeft.append('\n');
+        this.divToolbarLeft.append(this.buttonRename);
+        this.divToolbarLeft.append('\n');
+        this.divToolbarLeft.append(this.buttonDelete);
+        this.divToolbarLeft.append('\n');
     }
 
     checkRestRespData(data) {
