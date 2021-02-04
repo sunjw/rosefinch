@@ -42,6 +42,18 @@ img {
 #navToolbarWrapper .toolbarBtn:hover {
   color: var(--primary);
 }
+@media (hover: none) {
+  #navToolbarWrapper .toolbarBtn:hover {
+    color: #212529;
+    background-color: inherit;
+    border-color: var(--light);
+  }
+  #navToolbarWrapper .toolbarBtn:focus {
+    color: #212529;
+    background-color: #e2e6ea;
+    border-color: #dae0e5;
+  }
+}
 #navToolbarWrapper #buttonLoading .spinner-border-sm {
   color: var(--phpfm-tint);
   width: 1.2rem;

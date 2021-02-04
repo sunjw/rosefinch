@@ -227,7 +227,9 @@ class RosefinchPage {
     }
 
     resetButtonStat(button) {
-        button.blur();
+        setTimeout(function () {
+            button.blur();
+        }, 250);
     }
 
     checkRestRespData(data) {
