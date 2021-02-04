@@ -154,6 +154,9 @@ class RosefinchPage {
 
         // left
         this.buttonBack = this.generateToolbarButton('buttonBack', 'bi-chevron-left');
+        this.onButtonClick(this.buttonBack, function () {
+            history.back();
+        });
         this.buttonRefresh = this.generateToolbarButton('buttonRefresh', 'bi-arrow-clockwise');
         this.onButtonClick(this.buttonRefresh, function () {
             that.onHashChange();
