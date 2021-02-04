@@ -149,9 +149,14 @@ class RosefinchPage {
     }
 
     initButtons() {
+        let that = this;
+
         // left
         this.buttonBack = this.generateToolbarButton('buttonBack', 'bi-chevron-left');
         this.buttonRefresh = this.generateToolbarButton('buttonRefresh', 'bi-arrow-clockwise');
+        this.onButtonClick(this.buttonRefresh, function () {
+            that.onHashChange();
+        });
         this.buttonUpload = this.generateToolbarButton('buttonUpload', 'bi-cloud-upload');
         this.buttonNewFolder = this.generateToolbarButton('buttonNewFolder', 'bi-folder-plus');
         this.buttonCut = this.generateToolbarButton('buttonCut', 'bi-scissors');
@@ -211,6 +216,18 @@ class RosefinchPage {
         this.divToolbarRight.append('\n');
         this.divToolbarRight.append(this.buttonLoading);
         this.divToolbarRight.append('\n');
+    }
+
+    onButtonClick(button, handler) {
+        let that = this;
+        button.on('click', function () {
+            handler();
+            that.resetButtonStat(button);
+        });
+    }
+
+    resetButtonStat(button) {
+        button.blur();
     }
 
     checkRestRespData(data) {
