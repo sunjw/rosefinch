@@ -7,6 +7,7 @@ require('../css/main.css');
 // js
 window.$ = require('jquery');
 require('bootstrap');
+const platform = require('platform');
 const utils = require('./utils');
 const npmUtils = require('./npmUtils');
 const jqueryUtils = require('./jqueryUtils');
@@ -18,6 +19,9 @@ class RosefinchPage {
         this.apiBase = utils.isString(apiPrefix) ? apiPrefix : '';
         this.restApiEndpoint = 'func/rest.api.php';
         this.dlApiEndpoint = 'func/download.func.php';
+
+        this.platformOS = platform.os.toString();
+        this.platformBrowser = platform.name;
 
         // elements
         this.divWrapper = $('#divWrapper');
@@ -52,6 +56,8 @@ class RosefinchPage {
         this.sortOrder = '';
 
         this.mainList = null;
+
+        utils.log('RosefinchPage.constructor, this.platformOS=[%s], this.platformBrowser=[%s]', this.platformOS, this.platformBrowser);
     }
 
     initContent() {
@@ -236,6 +242,10 @@ class RosefinchPage {
             button.removeClass('focus');
             button.blur();
         }, 250);
+    }
+
+    isMacOS() {
+
     }
 
     checkRestRespData(data) {
