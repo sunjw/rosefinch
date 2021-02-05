@@ -231,21 +231,34 @@ class RosefinchPage {
     onButtonClick(button, handler) {
         let that = this;
         button.on('click', function () {
-            button.addClass('focus');
+            if (that.needFixButtonFocus()) {
+                button.addClass('focus');
+            }
             handler();
             that.resetButtonStat(button);
         });
     }
 
     resetButtonStat(button) {
+        let that = this;
         setTimeout(function () {
-            button.removeClass('focus');
+            if (that.needFixButtonFocus()) {
+                button.removeClass('focus');
+            }
             button.blur();
         }, 250);
     }
 
-    isMacOS() {
+    needFixButtonFocus() {
+        return (this.isiOS() || this.isMacOS());
+    }
 
+    isMacOS() {
+        return (this.platformOS.indexOf('macOS') > -1 || this.platformOS.indexOf('OS X') > -1);
+    }
+
+    isiOS() {
+        return (this.platformOS.indexOf('iOS') > -1);
     }
 
     checkRestRespData(data) {
