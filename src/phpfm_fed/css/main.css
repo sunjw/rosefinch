@@ -48,7 +48,7 @@ img {
     background-color: inherit;
     border-color: var(--light);
   }
-  #navToolbarWrapper .toolbarBtn:focus {
+  #navToolbarWrapper .toolbarBtn:focus, #navToolbarWrapper .toolbarBtn.focus {
     color: #212529;
     background-color: #e2e6ea;
     border-color: #dae0e5;

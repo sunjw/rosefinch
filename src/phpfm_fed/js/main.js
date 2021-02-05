@@ -226,6 +226,7 @@ class RosefinchPage {
     onButtonClick(button, handler) {
         let that = this;
         button.on('click', function () {
+            button.addClass('focus');
             handler();
             that.resetButtonStat(button);
         });
@@ -233,6 +234,7 @@ class RosefinchPage {
 
     resetButtonStat(button) {
         setTimeout(function () {
+            button.removeClass('focus');
             button.blur();
         }, 250);
     }
