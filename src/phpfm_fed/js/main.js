@@ -139,11 +139,10 @@ class RosefinchPage {
         })
     }
 
-    generateToolbarButton(buttonId, iconName, tabindex) {
+    generateToolbarButton(buttonId, iconName) {
         let button = $('<button/>').attr({
             'id': buttonId,
-            'type': 'button',
-            'tabindex': tabindex
+            'type': 'button'
         }).addClass('btn btn-light toolbarBtn');
         let buttonIcon = $('<i/>').addClass('bi').addClass(iconName);
         button.append(buttonIcon);
@@ -154,21 +153,21 @@ class RosefinchPage {
         let that = this;
 
         // left
-        this.buttonBack = this.generateToolbarButton('buttonBack', 'bi-chevron-left', 1);
+        this.buttonBack = this.generateToolbarButton('buttonBack', 'bi-chevron-left');
         this.onButtonClick(this.buttonBack, function () {
             history.back();
         });
-        this.buttonRefresh = this.generateToolbarButton('buttonRefresh', 'bi-arrow-clockwise', 2);
+        this.buttonRefresh = this.generateToolbarButton('buttonRefresh', 'bi-arrow-clockwise');
         this.onButtonClick(this.buttonRefresh, function () {
             that.onHashChange();
         });
-        this.buttonUpload = this.generateToolbarButton('buttonUpload', 'bi-cloud-upload', 3);
-        this.buttonNewFolder = this.generateToolbarButton('buttonNewFolder', 'bi-folder-plus', 4);
-        this.buttonCut = this.generateToolbarButton('buttonCut', 'bi-scissors', 5);
-        this.buttonCopy = this.generateToolbarButton('buttonCopy', 'bi-files', 6);
-        this.buttonPaste = this.generateToolbarButton('buttonPaste', 'bi-clipboard', 7);
-        this.buttonRename = this.generateToolbarButton('buttonRename', 'bi-input-cursor-text', 8);
-        this.buttonDelete = this.generateToolbarButton('buttonDelete', 'bi-trash', 9);
+        this.buttonUpload = this.generateToolbarButton('buttonUpload', 'bi-cloud-upload');
+        this.buttonNewFolder = this.generateToolbarButton('buttonNewFolder', 'bi-folder-plus');
+        this.buttonCut = this.generateToolbarButton('buttonCut', 'bi-scissors');
+        this.buttonCopy = this.generateToolbarButton('buttonCopy', 'bi-files');
+        this.buttonPaste = this.generateToolbarButton('buttonPaste', 'bi-clipboard');
+        this.buttonRename = this.generateToolbarButton('buttonRename', 'bi-input-cursor-text');
+        this.buttonDelete = this.generateToolbarButton('buttonDelete', 'bi-trash');
 
         this.divToolbarLeft.append(this.buttonBack);
         this.divToolbarLeft.append('\n'); // fix strange layout
@@ -198,8 +197,8 @@ class RosefinchPage {
         let debugIcon = $('<i/>').addClass('bi').addClass('bi-bug');
         this.buttonDebug.append(debugIcon);
 
-        this.buttonSetting = this.generateToolbarButton('buttonSetting', 'bi-gear', 10);
-        this.buttonAbout = this.generateToolbarButton('buttonAbout', 'bi-info-circle', 11);
+        this.buttonSetting = this.generateToolbarButton('buttonSetting', 'bi-gear');
+        this.buttonAbout = this.generateToolbarButton('buttonAbout', 'bi-info-circle');
 
         this.buttonLoading = $('<button/>').attr({
             'id': 'buttonLoading',
