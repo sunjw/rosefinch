@@ -43,6 +43,7 @@ img {
   color: var(--primary);
 }
 @media (hover: none) {
+  /* Touch screen hover and focus fix */
   #navToolbarWrapper .toolbarBtn:hover {
     color: #212529;
     background-color: inherit;
