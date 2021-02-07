@@ -11,6 +11,56 @@ const utils = require('./utils');
 const npmUtils = require('./npmUtils');
 const jqueryUtils = require('./jqueryUtils');
 
+class RosefinchDialog {
+
+    constructor() {
+        this.divModal = null;
+        this.h5ModalTitle = null;
+        this.divModalBody = null;
+        this.divModalFooter = null;
+    }
+
+    init(modalId, needOkButton) {
+        this.divModal = $('<div/>').attr({
+            'id': modalId,
+            'tabindex': -1
+        }).addClass('modal fade');
+        let divModalDialog = $('<div/>').addClass('modal-dialog modal-dialog-centered modal-dialog-scrollable');
+        let divModalContent = $('<div/>').addClass('modal-content');
+
+        let divModalHeader = $('<div/>').addClass('modal-header');
+        this.h5ModalTitle = $('<h5/>').addClass('modal-title');
+        divModalHeader.append(this.h5ModalTitle);
+        divModalContent.append(divModalHeader);
+
+        this.divModalBody = $('<div/>').addClass('modal-body');
+        divModalContent.append(this.divModalBody);
+
+        this.divModalFooter = $('<div/>').addClass('modal-footer');
+        let buttonClose = $('<button/>').attr({
+            'type': 'button',
+            'data-dismiss': 'modal'
+        }).addClass('btn btn-secondary').text('Close');
+        this.divModalFooter.append(buttonClose);
+        divModalContent.append(this.divModalFooter);
+
+        divModalDialog.append(divModalContent);
+        this.divModal.append(divModalDialog);
+    }
+
+    setTitle(titleText) {
+        this.h5ModalTitle.text(titleText);
+    }
+
+    setBody(childElement) {
+        this.divModalBody.append(childElement);
+    }
+
+    show() {
+        this.divModal.modal();
+    }
+}
+
 class RosefinchPage {
 
     constructor(apiPrefix) {
@@ -47,6 +97,9 @@ class RosefinchPage {
         this.buttonSetting = null;
         this.buttonAbout = null;
         this.buttonLoadingRight = null;
+
+        // dialogs
+        this.modalAbout = null;
 
         // vars
         this.currentDir = [];
@@ -210,7 +263,7 @@ class RosefinchPage {
         this.buttonSetting = this.generateToolbarButton('buttonSetting', 'bi-gear');
         this.buttonAbout = this.generateToolbarButton('buttonAbout', 'bi-info-circle');
         this.onButtonClick(this.buttonAbout, function () {
-            $('#divModalAbout').modal();
+            that.showAboutDialog();
         });
         this.buttonLoadingRight = $('<button/>').attr({
             'id': 'buttonLoadingRight',
@@ -306,6 +359,16 @@ class RosefinchPage {
             that.buttonLoadingRight.hide();
             that.buttonAbout.show();
         }, 250);
+    }
+
+    showAboutDialog() {
+        if (this.modalAbout == null) {
+            this.modalAbout = new RosefinchDialog();
+            this.modalAbout.init('divModalAbout', false);
+            this.modalAbout.setTitle('About');
+            this.modalAbout.setBody($('<p/>').text('Modal body text goes here.'));
+        }
+        this.modalAbout.show();
     }
 
     renderBreadcrumb() {
