@@ -55,7 +55,7 @@ img {
     border-color: #dae0e5;
   }
 }
-#navToolbarWrapper .toolbarBtnLoading .spinner-border-sm {
+#navToolbarWrapper .toolbarBtnLoading .spinner-border {
   color: var(--phpfm-tint);
   width: 1.2rem;
   height: 1.2rem;

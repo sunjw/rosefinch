@@ -165,7 +165,7 @@ class RosefinchPage {
         this.loadingSpinnerLeft = $('<span/>').attr({
             'role': 'status',
             'aria-hidden': true
-        }).addClass('spinner-border spinner-border-sm');
+        }).addClass('spinner-border');
         this.loadingSpinnerLeft.hide();
         this.buttonRefresh.append(this.loadingSpinnerLeft);
         this.onButtonClick(this.buttonRefresh, function () {
@@ -218,7 +218,7 @@ class RosefinchPage {
         let loadingSpinnerRight = $('<span/>').attr({
             'role': 'status',
             'aria-hidden': true
-        }).addClass('spinner-border spinner-border-sm');
+        }).addClass('spinner-border');
         this.buttonLoadingRight.append(loadingSpinnerRight);
         this.buttonLoadingRight.hide();
 
