@@ -34,6 +34,8 @@ class RosefinchPage {
         // buttons
         this.buttonBack = null;
         this.buttonRefresh = null;
+        this.buttonIconRefresh = null;
+        this.loadingSpinnerLeft = null;
         this.buttonUpload = null;
         this.buttonNewFolder = null;
         this.buttonCut = null;
@@ -158,6 +160,14 @@ class RosefinchPage {
             history.back();
         });
         this.buttonRefresh = this.generateToolbarButton('buttonRefresh', 'bi-arrow-clockwise');
+        this.buttonRefresh.addClass('toolbarBtnLoading');
+        this.buttonIconRefresh = this.buttonRefresh.children('i.bi');
+        this.loadingSpinnerLeft = $('<span/>').attr({
+            'role': 'status',
+            'aria-hidden': true
+        }).addClass('spinner-border spinner-border-sm');
+        this.loadingSpinnerLeft.hide();
+        this.buttonRefresh.append(this.loadingSpinnerLeft);
         this.onButtonClick(this.buttonRefresh, function () {
             that.onHashChange();
         });
@@ -205,11 +215,11 @@ class RosefinchPage {
             'type': 'button',
             'disabled': 'disabled'
         }).addClass('btn btn-light toolbarBtn toolbarBtnLoading');
-        let loadingSpinner = $('<span/>').attr({
+        let loadingSpinnerRight = $('<span/>').attr({
             'role': 'status',
             'aria-hidden': true
         }).addClass('spinner-border spinner-border-sm');
-        this.buttonLoadingRight.append(loadingSpinner);
+        this.buttonLoadingRight.append(loadingSpinnerRight);
         this.buttonLoadingRight.hide();
 
         this.divToolbarRight.append(this.buttonDebug);
@@ -280,6 +290,8 @@ class RosefinchPage {
     }
 
     showLoadingSpinner() {
+        this.buttonIconRefresh.hide();
+        this.loadingSpinnerLeft.show();
         this.buttonAbout.hide();
         this.buttonLoadingRight.show();
     }
@@ -287,6 +299,8 @@ class RosefinchPage {
     hideLoadingSpinner() {
         let that = this;
         setTimeout(function () {
+            that.loadingSpinnerLeft.hide();
+            that.buttonIconRefresh.show();
             that.buttonLoadingRight.hide();
             that.buttonAbout.show();
         }, 250);

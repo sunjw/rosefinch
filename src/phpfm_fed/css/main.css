@@ -59,7 +59,7 @@ img {
   color: var(--phpfm-tint);
   width: 1.2rem;
   height: 1.2rem;
-  border-width: 0.15em;
+  border-width: 0.1em;
 }
 
 #navPathWrapper {
