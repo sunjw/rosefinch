@@ -44,7 +44,7 @@ class RosefinchPage {
         this.buttonDebug = null;
         this.buttonSetting = null;
         this.buttonAbout = null;
-        this.buttonLoading = null;
+        this.buttonLoadingRight = null;
 
         // vars
         this.currentDir = [];
@@ -200,17 +200,17 @@ class RosefinchPage {
         this.buttonSetting = this.generateToolbarButton('buttonSetting', 'bi-gear');
         this.buttonAbout = this.generateToolbarButton('buttonAbout', 'bi-info-circle');
 
-        this.buttonLoading = $('<button/>').attr({
-            'id': 'buttonLoading',
+        this.buttonLoadingRight = $('<button/>').attr({
+            'id': 'buttonLoadingRight',
             'type': 'button',
             'disabled': 'disabled'
-        }).addClass('btn btn-light toolbarBtn');
+        }).addClass('btn btn-light toolbarBtn toolbarBtnLoading');
         let loadingSpinner = $('<span/>').attr({
             'role': 'status',
             'aria-hidden': true
         }).addClass('spinner-border spinner-border-sm');
-        this.buttonLoading.append(loadingSpinner);
-        this.buttonLoading.hide();
+        this.buttonLoadingRight.append(loadingSpinner);
+        this.buttonLoadingRight.hide();
 
         this.divToolbarRight.append(this.buttonDebug);
         this.divToolbarRight.append('\n');
@@ -218,7 +218,7 @@ class RosefinchPage {
         this.divToolbarRight.append('\n');
         this.divToolbarRight.append(this.buttonAbout);
         this.divToolbarRight.append('\n');
-        this.divToolbarRight.append(this.buttonLoading);
+        this.divToolbarRight.append(this.buttonLoadingRight);
         this.divToolbarRight.append('\n');
     }
 
@@ -281,13 +281,13 @@ class RosefinchPage {
 
     showLoadingSpinner() {
         this.buttonAbout.hide();
-        this.buttonLoading.show();
+        this.buttonLoadingRight.show();
     }
 
     hideLoadingSpinner() {
         let that = this;
         setTimeout(function () {
-            that.buttonLoading.hide();
+            that.buttonLoadingRight.hide();
             that.buttonAbout.show();
         }, 250);
     }
