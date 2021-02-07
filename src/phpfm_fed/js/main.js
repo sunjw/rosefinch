@@ -365,8 +365,12 @@ class RosefinchPage {
         if (this.modalAbout == null) {
             this.modalAbout = new RosefinchDialog();
             this.modalAbout.init('divModalAbout', false);
-            this.modalAbout.setTitle('About');
-            this.modalAbout.setBody($('<p/>').text('Modal body text goes here.'));
+            this.modalAbout.setTitle('Rosefinch');
+            let pAboutBody = $('<p/>');
+            pAboutBody.html('A web file manager with copy/paste, rename, delete and make new folder in browser.<br/>' +
+                'Also, Rosefinch provides download, upload and other file manager features.<br/>' +
+                'Rosefinch can be an alternative of Apache Directory Listing.');
+            this.modalAbout.setBody(pAboutBody);
         }
         this.modalAbout.show();
     }
