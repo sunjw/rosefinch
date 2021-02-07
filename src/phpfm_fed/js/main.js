@@ -209,7 +209,9 @@ class RosefinchPage {
 
         this.buttonSetting = this.generateToolbarButton('buttonSetting', 'bi-gear');
         this.buttonAbout = this.generateToolbarButton('buttonAbout', 'bi-info-circle');
-
+        this.onButtonClick(this.buttonAbout, function () {
+            $('#divModalAbout').modal();
+        });
         this.buttonLoadingRight = $('<button/>').attr({
             'id': 'buttonLoadingRight',
             'type': 'button',
