@@ -253,7 +253,7 @@ class RosefinchPage {
         let requestOrder = utils.getUrlQueryVariable(locationHash, 'o');
         let requestDir = utils.getUrlQueryVariable(locationHash, 'dir');
 
-        let requestApi = this.generateRestApi('api/v1/fm/ls');
+        let requestApi = this.generateRestApiUrl('api/v1/fm/ls');
         requestApi += ('&s=' + requestSort);
         requestApi += ('&o=' + requestOrder);
         requestApi += ('&dir=' + requestDir);
@@ -416,11 +416,11 @@ class RosefinchPage {
         return true;
     }
 
-    generateRestApi(api) {
+    generateRestApiUrl(api) {
         return (this.apiBase + this.restApiEndpoint + '?api=' + api);
     }
 
-    generateDlApi() {
+    generateDlApiUrl() {
         return (this.apiBase + this.dlApiEndpoint);
     }
 
@@ -436,7 +436,7 @@ class RosefinchPage {
 
     generateFileHref(dirArray, file) {
         let paramFile = encodeURIComponent((dirArray.concat([file])).join('/'));
-        let href = this.generateDlApi() + '?file=' + paramFile;
+        let href = this.generateDlApiUrl() + '?file=' + paramFile;
         return href;
     }
 
@@ -481,14 +481,21 @@ class RosefinchPage {
             this.modalNewFolder.setResetHandler(function () {
                 utils.log('showNewFolderDialog, resetHandler.');
                 inputName.val('');
+                inputName.removeAttr('disabled');
             });
 
             this.modalNewFolder.setOkButtonHandler(function () {
                 utils.log('showNewFolderDialog, okButtonHandler.');
+
+                inputName.attr('disabled', 'disabled');
                 that.modalNewFolder.showOkButtonLoading();
-                setTimeout(function () {
-                    that.modalNewFolder.close();
-                }, 3000);
+
+
+
+                // setTimeout(function () {
+                //     that.modalNewFolder.close();
+                //     that.onHashChange();
+                // }, 3000);
             });
         }
         utils.log('showNewFolderDialog.');
