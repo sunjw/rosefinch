@@ -14,6 +14,10 @@ const jqueryUtils = require('./jqueryUtils');
 class RosefinchDialog {
 
     constructor() {
+        this.okText = 'OK';
+        this.closeText = 'Close';
+        this.loadingText = 'Loading...';
+
         this.divModal = null;
         this.h5ModalTitle = null;
         this.divModalBody = null;
@@ -49,7 +53,7 @@ class RosefinchDialog {
             this.buttonOk = $('<button/>').attr({
                 'type': 'button'
             }).addClass('btn btn-primary')
-            this.spanOkText = $('<span/>').text('OK');
+            this.spanOkText = $('<span/>').text(this.okText);
             this.spanOkLoadingSpinner = $('<span/>').attr({
                 'role': 'status',
                 'aria-hidden': true
@@ -62,7 +66,7 @@ class RosefinchDialog {
         this.buttonClose = $('<button/>').attr({
             'type': 'button',
             'data-dismiss': 'modal'
-        }).addClass('btn btn-outline-secondary').text('Close');
+        }).addClass('btn btn-outline-secondary').text(this.closeText);
         this.divModalFooter.append(this.buttonClose);
         divModalContent.append(this.divModalFooter);
 
@@ -70,12 +74,20 @@ class RosefinchDialog {
         this.divModal.append(divModalDialog);
     }
 
+    reset() {
+        this.hideOkButtonLoading();
+    }
+
     show() {
         this.divModal.modal('show');
     }
 
-    hide() {
+    close() {
+        let that = this;
         this.divModal.modal('hide');
+        this.divModal.on('hidden.bs.modal', function () {
+            that.reset();
+        })
     }
 
     setTitle(titleText) {
@@ -87,17 +99,37 @@ class RosefinchDialog {
     }
 
     setCloseButtonText(closeText) {
-        this.buttonClose.text(closeText);
+        this.closeText = closeText;
+        this.buttonClose.text(this.closeText);
     }
 
     setOkButtonHandler(OkHandler) {
+        if (this.buttonOk == null) {
+            return;
+        }
         this.buttonOk.on('click', function () {
             OkHandler();
         });
     }
 
     showOkButtonLoading() {
+        if (this.buttonOk == null) {
+            return;
+        }
+        this.buttonOk.attr('disabled', 'disabled');
+        this.buttonClose.attr('disabled', 'disabled');
+        this.spanOkText.text(this.loadingText);
+        this.spanOkLoadingSpinner.show();
+    }
 
+    hideOkButtonLoading() {
+        if (this.buttonOk == null) {
+            return;
+        }
+        this.spanOkText.text(this.okText);
+        this.spanOkLoadingSpinner.hide();
+        this.buttonOk.removeAttr('disabled');
+        this.buttonClose.removeAttr('disabled');
     }
 }
 
@@ -426,7 +458,10 @@ class RosefinchPage {
             //this.modalNewFolder.setBody(pAboutBody);
 
             this.modalNewFolder.setOkButtonHandler(function () {
-                that.modalNewFolder.hide();
+                that.modalNewFolder.showOkButtonLoading();
+                setTimeout(function () {
+                    that.modalNewFolder.close();
+                }, 3000);
             });
         }
         utils.log('showNewFolderDialog.');
