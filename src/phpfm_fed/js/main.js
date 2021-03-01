@@ -16,7 +16,7 @@ class RosefinchDialog {
     constructor() {
         this.okText = 'OK';
         this.closeText = 'Close';
-        this.loadingText = 'Loading...';
+        this.loadingText = 'Working...';
 
         this.divModal = null;
         this.h5ModalTitle = null;
@@ -119,7 +119,7 @@ class RosefinchDialog {
         this.buttonOk.attr('disabled', 'disabled');
         this.buttonClose.attr('disabled', 'disabled');
         this.spanOkText.text(this.loadingText);
-        this.spanOkText.addClass('loading');
+        this.spanOkText.addClass('loadingText');
         this.spanOkLoadingSpinner.show();
     }
 
@@ -128,7 +128,7 @@ class RosefinchDialog {
             return;
         }
         this.spanOkText.text(this.okText);
-        this.spanOkText.removeClass('loading');
+        this.spanOkText.removeClass('loadingText');
         this.spanOkLoadingSpinner.hide();
         this.buttonOk.removeAttr('disabled');
         this.buttonClose.removeAttr('disabled');
