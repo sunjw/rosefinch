@@ -27,7 +27,13 @@ function getRestRequest(api, successCallback, errorCallback) {
     restRequest('GET', api, null, successCallback, errorCallback);
 }
 
+function focusOnInput(inputElem) {
+    inputElem.focus();
+    inputElem.get(0).select();
+}
+
 // exports
 exports.restRequest = restRequest;
 exports.postRestRequest = postRestRequest;
 exports.getRestRequest = getRestRequest;
+exports.focusOnInput = focusOnInput;

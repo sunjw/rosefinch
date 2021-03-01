@@ -28,10 +28,12 @@ class RosefinchDialog {
         this.spanOkLoadingSpinner = null;
         this.buttonClose = null;
 
+        this.showHandler = null;
         this.resetHandler = null;
     }
 
     init(modalId, isStatic = false, needOkButton = false) {
+        let that = this;
         this.divModal = $('<div/>').attr({
             'id': modalId,
             'tabindex': -1
@@ -74,6 +76,15 @@ class RosefinchDialog {
 
         divModalDialog.append(divModalContent);
         this.divModal.append(divModalDialog);
+
+        this.divModal.on('shown.bs.modal', function () {
+            if (that.showHandler) {
+                that.showHandler();
+            }
+        });
+        this.divModal.on('hidden.bs.modal', function () {
+            that.reset();
+        });
     }
 
     reset() {
@@ -90,9 +101,6 @@ class RosefinchDialog {
     close() {
         let that = this;
         this.divModal.modal('hide');
-        this.divModal.on('hidden.bs.modal', function () {
-            that.reset();
-        })
     }
 
     setTitle(titleText) {
@@ -101,6 +109,10 @@ class RosefinchDialog {
 
     setBody(childElement) {
         this.divModalBody.append(childElement);
+    }
+
+    setShowHandler(showHandler) {
+        this.showHandler = showHandler;
     }
 
     setResetHandler(resetHandler) {
@@ -485,6 +497,11 @@ class RosefinchPage {
             divFormGroup.append(inputName);
             formBody.append(divFormGroup);
             this.modalNewFolder.setBody(formBody);
+
+            this.modalNewFolder.setShowHandler(function () {
+                utils.log('RosefinchPage.showNewFolderDialog, setShowHandler.');
+                jqueryUtils.focusOnInput(inputName);
+            });
 
             this.modalNewFolder.setResetHandler(function () {
                 utils.log('RosefinchPage.showNewFolderDialog, resetHandler.');
