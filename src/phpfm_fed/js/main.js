@@ -25,11 +25,14 @@ class RosefinchDialog {
         this.buttonClose = null;
     }
 
-    init(modalId, needOkButton = false) {
+    init(modalId, isStatic = false, needOkButton = false) {
         this.divModal = $('<div/>').attr({
             'id': modalId,
             'tabindex': -1
         }).addClass('modal fade');
+        if (isStatic) {
+            this.divModal.attr('data-backdrop', 'static');
+        }
         let divModalDialog = $('<div/>').addClass('modal-dialog modal-dialog-centered modal-dialog-scrollable');
         let divModalContent = $('<div/>').addClass('modal-content');
 
@@ -416,7 +419,7 @@ class RosefinchPage {
             utils.log('showNewFolderDialog, init modalAbout.');
             let that = this;
             this.modalNewFolder = new RosefinchDialog();
-            this.modalNewFolder.init('divModalNewFoler', true);
+            this.modalNewFolder.init('divModalNewFoler', true, true);
             this.modalNewFolder.setTitle('New folder');
             this.modalNewFolder.setCloseButtonText('Cancel');
 
