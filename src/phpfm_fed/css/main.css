@@ -147,6 +147,10 @@ img {
   width: 11rem;
 }
 
+.modal .modal-footer .btn span.loading {
+  margin-left: 0.4rem;
+}
+
 /* Large screen */
 @media (min-width: 769px) {
   #navToolbarWrapper #buttonBack {

@@ -119,6 +119,7 @@ class RosefinchDialog {
         this.buttonOk.attr('disabled', 'disabled');
         this.buttonClose.attr('disabled', 'disabled');
         this.spanOkText.text(this.loadingText);
+        this.spanOkText.addClass('loading');
         this.spanOkLoadingSpinner.show();
     }
 
@@ -127,6 +128,7 @@ class RosefinchDialog {
             return;
         }
         this.spanOkText.text(this.okText);
+        this.spanOkText.removeClass('loading');
         this.spanOkLoadingSpinner.hide();
         this.buttonOk.removeAttr('disabled');
         this.buttonClose.removeAttr('disabled');
