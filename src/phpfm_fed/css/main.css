@@ -200,7 +200,7 @@ img {
 /* Small screen */
 
 /* Even small screen */
-@media (max-width: 380px) {
+@media (max-width: 430px) {
   #navToolbarWrapper #buttonBack, #navToolbarWrapper #buttonRefresh {
     display: none;
   }
