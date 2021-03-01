@@ -457,7 +457,17 @@ class RosefinchPage {
             this.modalNewFolder.setTitle('New folder');
             this.modalNewFolder.setCloseButtonText('Cancel');
 
-            //this.modalNewFolder.setBody(pAboutBody);
+            let formBody = $('<form/>');
+            let divFormGroup = $('<div/>').addClass('form-group');
+            let labelName = $('<label/>').attr('for', 'inputName').addClass('col-form-label').text('Name: ');
+            let inputName = $('<input/>').attr({
+                'id': 'inputName',
+                'type': 'text'
+            }).addClass('form-control');
+            divFormGroup.append(labelName);
+            divFormGroup.append(inputName);
+            formBody.append(divFormGroup);
+            this.modalNewFolder.setBody(formBody);
 
             this.modalNewFolder.setOkButtonHandler(function () {
                 that.modalNewFolder.showOkButtonLoading();
