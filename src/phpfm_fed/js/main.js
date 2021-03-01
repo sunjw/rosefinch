@@ -20,6 +20,8 @@ class RosefinchDialog {
         this.divModalFooter = null;
 
         this.buttonOk = null;
+        this.spanOkText = null;
+        this.spanOkLoadingSpinner = null;
         this.buttonClose = null;
     }
 
@@ -43,7 +45,15 @@ class RosefinchDialog {
         if (needOkButton) {
             this.buttonOk = $('<button/>').attr({
                 'type': 'button'
-            }).addClass('btn btn-primary').text('OK');
+            }).addClass('btn btn-primary')
+            this.spanOkText = $('<span/>').text('OK');
+            this.spanOkLoadingSpinner = $('<span/>').attr({
+                'role': 'status',
+                'aria-hidden': true
+            }).addClass('spinner-border spinner-border-sm');
+            this.spanOkLoadingSpinner.hide();
+            this.buttonOk.append(this.spanOkLoadingSpinner);
+            this.buttonOk.append(this.spanOkText);
             this.divModalFooter.append(this.buttonOk);
         }
         this.buttonClose = $('<button/>').attr({
@@ -76,6 +86,16 @@ class RosefinchDialog {
     setCloseButtonText(closeText) {
         this.buttonClose.text(closeText);
     }
+
+    setOkButtonHandler(OkHandler) {
+        this.buttonOk.on('click', function () {
+            OkHandler();
+        });
+    }
+
+    showOkButtonLoading() {
+
+    }
 }
 
 class RosefinchPage {
@@ -102,7 +122,7 @@ class RosefinchPage {
         this.buttonBack = null;
         this.buttonRefresh = null;
         this.buttonIconRefresh = null;
-        this.loadingSpinnerLeft = null;
+        this.spanLoadingSpinnerLeft = null;
         this.buttonUpload = null;
         this.buttonNewFolder = null;
         this.buttonCut = null;
@@ -238,12 +258,12 @@ class RosefinchPage {
         this.buttonRefresh = this.generateToolbarButton('buttonRefresh', 'bi-arrow-clockwise', 'Refresh');
         this.buttonRefresh.addClass('toolbarBtnLoading');
         this.buttonIconRefresh = this.buttonRefresh.children('i.bi');
-        this.loadingSpinnerLeft = $('<span/>').attr({
+        this.spanLoadingSpinnerLeft = $('<span/>').attr({
             'role': 'status',
             'aria-hidden': true
         }).addClass('spinner-border');
-        this.loadingSpinnerLeft.hide();
-        this.buttonRefresh.append(this.loadingSpinnerLeft);
+        this.spanLoadingSpinnerLeft.hide();
+        this.buttonRefresh.append(this.spanLoadingSpinnerLeft);
         this.onButtonClick(this.buttonRefresh, function () {
             that.onHashChange();
         });
@@ -300,11 +320,11 @@ class RosefinchPage {
             'type': 'button',
             'disabled': 'disabled'
         }).addClass('btn btn-light toolbarBtn toolbarBtnLoading');
-        let loadingSpinnerRight = $('<span/>').attr({
+        let spanLoadingSpinnerRight = $('<span/>').attr({
             'role': 'status',
             'aria-hidden': true
         }).addClass('spinner-border');
-        this.buttonLoadingRight.append(loadingSpinnerRight);
+        this.buttonLoadingRight.append(spanLoadingSpinnerRight);
         this.buttonLoadingRight.hide();
 
         this.divToolbarRight.append(this.buttonDebug);
@@ -376,7 +396,7 @@ class RosefinchPage {
 
     showMainListLoading() {
         this.buttonIconRefresh.hide();
-        this.loadingSpinnerLeft.show();
+        this.spanLoadingSpinnerLeft.show();
         this.buttonAbout.hide();
         this.buttonLoadingRight.show();
     }
@@ -384,7 +404,7 @@ class RosefinchPage {
     hideMainListLoading() {
         let that = this;
         setTimeout(function () {
-            that.loadingSpinnerLeft.hide();
+            that.spanLoadingSpinnerLeft.hide();
             that.buttonIconRefresh.show();
             that.buttonLoadingRight.hide();
             that.buttonAbout.show();
@@ -394,11 +414,17 @@ class RosefinchPage {
     showNewFolderDialog() {
         if (this.modalNewFolder == null) {
             utils.log('showNewFolderDialog, init modalAbout.');
+            let that = this;
             this.modalNewFolder = new RosefinchDialog();
             this.modalNewFolder.init('divModalNewFoler', true);
             this.modalNewFolder.setTitle('New folder');
             this.modalNewFolder.setCloseButtonText('Cancel');
+
             //this.modalNewFolder.setBody(pAboutBody);
+
+            this.modalNewFolder.setOkButtonHandler(function () {
+                that.modalNewFolder.hide();
+            });
         }
         utils.log('showNewFolderDialog.');
         this.modalNewFolder.show();
