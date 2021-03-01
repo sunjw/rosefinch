@@ -179,7 +179,7 @@ class RosefinchPage {
         requestApi += ('&dir=' + requestDir);
         utils.log('RosefinchPage.onHashChange, requestApi=[%s]', requestApi);
 
-        this.showLoadingSpinner();
+        this.showMainListLoading();
         jqueryUtils.getRestRequest(requestApi, function (data) {
             if (!that.checkRestRespData(data)) {
                 return;
@@ -196,7 +196,7 @@ class RosefinchPage {
             that.onLayoutResize();
             that.renderMainList();
 
-            that.hideLoadingSpinner();
+            that.hideMainListLoading();
         })
     }
 
@@ -357,14 +357,14 @@ class RosefinchPage {
         return href;
     }
 
-    showLoadingSpinner() {
+    showMainListLoading() {
         this.buttonIconRefresh.hide();
         this.loadingSpinnerLeft.show();
         this.buttonAbout.hide();
         this.buttonLoadingRight.show();
     }
 
-    hideLoadingSpinner() {
+    hideMainListLoading() {
         let that = this;
         setTimeout(function () {
             that.loadingSpinnerLeft.hide();
