@@ -239,6 +239,12 @@ class RosefinchPage {
         this.onHashChange();
     }
 
+    getCurrentDirStr() {
+        let currentDirStr = this.currentDir.join('/');
+        currentDirStr = currentDirStr + '/';
+        return currentDirStr;
+    }
+
     onHashChange() {
         let that = this;
 
@@ -266,6 +272,8 @@ class RosefinchPage {
             }
 
             that.currentDir = data.data['current_path'];
+            that.sort = data.data['sort']['n'];
+            that.sortOrder = data.data['sort']['a'];
             that.mainList = data.data['main_list'];
             if (!Array.isArray(that.mainList)) {
                 utils.log('RosefinchPage.onHashChange, mainList not an Array.');
@@ -277,7 +285,7 @@ class RosefinchPage {
             that.renderMainList();
 
             that.hideMainListLoading();
-        })
+        });
     }
 
     generateToolbarButton(buttonId, iconName, title = null) {
@@ -459,7 +467,7 @@ class RosefinchPage {
 
     showNewFolderDialog() {
         if (this.modalNewFolder == null) {
-            utils.log('showNewFolderDialog, init modalAbout.');
+            utils.log('RosefinchPage.showNewFolderDialog, init modalAbout.');
             let that = this;
             this.modalNewFolder = new RosefinchDialog();
             this.modalNewFolder.init('divModalNewFoler', true, true);
@@ -479,32 +487,42 @@ class RosefinchPage {
             this.modalNewFolder.setBody(formBody);
 
             this.modalNewFolder.setResetHandler(function () {
-                utils.log('showNewFolderDialog, resetHandler.');
+                utils.log('RosefinchPage.showNewFolderDialog, resetHandler.');
                 inputName.val('');
                 inputName.removeAttr('disabled');
             });
 
             this.modalNewFolder.setOkButtonHandler(function () {
-                utils.log('showNewFolderDialog, okButtonHandler.');
+                utils.log('RosefinchPage.showNewFolderDialog, okButtonHandler.');
 
                 inputName.attr('disabled', 'disabled');
                 that.modalNewFolder.showOkButtonLoading();
 
+                let requestApi = that.generateRestApiUrl('api/v1/fm/newfolder');
+                utils.log('RosefinchPage.showNewFolderDialog, requestApi=[%s]', requestApi);
+                let reqObj = {};
+                reqObj['subdir'] = that.getCurrentDirStr();
+                reqObj['newname'] = inputName.val();
 
+                jqueryUtils.postRestRequest(requestApi, reqObj, function (data) {
+                    if (!that.checkRestRespData(data)) {
+                        utils.log('RosefinchPage.showNewFolderDialog, request ERROR!');
+                    } else {
+                        utils.log('RosefinchPage.showNewFolderDialog, request OK.');
+                    }
 
-                // setTimeout(function () {
-                //     that.modalNewFolder.close();
-                //     that.onHashChange();
-                // }, 3000);
+                    that.modalNewFolder.close();
+                    that.onHashChange();
+                });
             });
         }
-        utils.log('showNewFolderDialog.');
+        utils.log('RosefinchPage.showNewFolderDialog.');
         this.modalNewFolder.show();
     }
 
     showAboutDialog() {
         if (this.modalAbout == null) {
-            utils.log('showAboutDialog, init modalAbout.');
+            utils.log('RosefinchPage.showAboutDialog, init modalAbout.');
             this.modalAbout = new RosefinchDialog();
             this.modalAbout.init('divModalAbout');
             this.modalAbout.setTitle('Rosefinch');
@@ -514,7 +532,7 @@ class RosefinchPage {
                 'Rosefinch can be an alternative of Apache Directory Listing.');
             this.modalAbout.setBody(pAboutBody);
         }
-        utils.log('showAboutDialog.');
+        utils.log('RosefinchPage.showAboutDialog.');
         this.modalAbout.show();
     }
 
