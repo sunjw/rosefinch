@@ -533,7 +533,7 @@ class RosefinchPage {
 
     showNewFolderDialog() {
         if (this.modalNewFolder == null) {
-            utils.log('RosefinchPage.showNewFolderDialog, init modalAbout.');
+            utils.log('RosefinchPage.showNewFolderDialog, init modalNewFolder.');
             let that = this;
             this.modalNewFolder = new RosefinchDialog();
             this.modalNewFolder.init('divModalNewFoler', true, true);
