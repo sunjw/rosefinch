@@ -18,9 +18,12 @@ class RosefinchDialog {
         this.h5ModalTitle = null;
         this.divModalBody = null;
         this.divModalFooter = null;
+
+        this.buttonOk = null;
+        this.buttonClose = null;
     }
 
-    init(modalId, needOkButton) {
+    init(modalId, needOkButton = false) {
         this.divModal = $('<div/>').attr({
             'id': modalId,
             'tabindex': -1
@@ -37,15 +40,29 @@ class RosefinchDialog {
         divModalContent.append(this.divModalBody);
 
         this.divModalFooter = $('<div/>').addClass('modal-footer');
-        let buttonClose = $('<button/>').attr({
+        if (needOkButton) {
+            this.buttonOk = $('<button/>').attr({
+                'type': 'button'
+            }).addClass('btn btn-primary').text('OK');
+            this.divModalFooter.append(this.buttonOk);
+        }
+        this.buttonClose = $('<button/>').attr({
             'type': 'button',
             'data-dismiss': 'modal'
         }).addClass('btn btn-outline-secondary').text('Close');
-        this.divModalFooter.append(buttonClose);
+        this.divModalFooter.append(this.buttonClose);
         divModalContent.append(this.divModalFooter);
 
         divModalDialog.append(divModalContent);
         this.divModal.append(divModalDialog);
+    }
+
+    show() {
+        this.divModal.modal('show');
+    }
+
+    hide() {
+        this.divModal.modal('hide');
     }
 
     setTitle(titleText) {
@@ -56,12 +73,8 @@ class RosefinchDialog {
         this.divModalBody.append(childElement);
     }
 
-    show() {
-        this.divModal.modal('show');
-    }
-
-    hide() {
-        this.divModal.modal('hide');
+    setCloseButtonText(closeText) {
+        this.buttonClose.text(closeText);
     }
 }
 
@@ -105,6 +118,7 @@ class RosefinchPage {
         this.buttonLoadingRight = null;
 
         // dialogs
+        this.modalNewFolder = null;
         this.modalAbout = null;
 
         // vars
@@ -235,6 +249,9 @@ class RosefinchPage {
         });
         this.buttonUpload = this.generateToolbarButton('buttonUpload', 'bi-cloud-upload', 'Upload');
         this.buttonNewFolder = this.generateToolbarButton('buttonNewFolder', 'bi-folder-plus', 'New Folder');
+        this.onButtonClick(this.buttonNewFolder, function () {
+            that.showNewFolderDialog();
+        });
         this.buttonCut = this.generateToolbarButton('buttonCut', 'bi-scissors', 'Cut');
         this.buttonCopy = this.generateToolbarButton('buttonCopy', 'bi-files', 'Copy');
         this.buttonPaste = this.generateToolbarButton('buttonPaste', 'bi-clipboard', 'Paste');
@@ -374,10 +391,24 @@ class RosefinchPage {
         }, 250);
     }
 
+    showNewFolderDialog() {
+        if (this.modalNewFolder == null) {
+            utils.log('showNewFolderDialog, init modalAbout.');
+            this.modalNewFolder = new RosefinchDialog();
+            this.modalNewFolder.init('divModalNewFoler', true);
+            this.modalNewFolder.setTitle('New folder');
+            this.modalNewFolder.setCloseButtonText('Cancel');
+            //this.modalNewFolder.setBody(pAboutBody);
+        }
+        utils.log('showNewFolderDialog.');
+        this.modalNewFolder.show();
+    }
+
     showAboutDialog() {
         if (this.modalAbout == null) {
+            utils.log('showAboutDialog, init modalAbout.');
             this.modalAbout = new RosefinchDialog();
-            this.modalAbout.init('divModalAbout', false);
+            this.modalAbout.init('divModalAbout');
             this.modalAbout.setTitle('Rosefinch');
             let pAboutBody = $('<p/>');
             pAboutBody.html('A web file manager with copy/paste, rename, delete and make new folder in browser.<br/>' +
@@ -385,6 +416,7 @@ class RosefinchPage {
                 'Rosefinch can be an alternative of Apache Directory Listing.');
             this.modalAbout.setBody(pAboutBody);
         }
+        utils.log('showAboutDialog.');
         this.modalAbout.show();
     }
 
