@@ -291,8 +291,8 @@ class RosefinchPage {
             }
 
             that.currentDir = data.data['current_path'];
-            that.sort = data.data['sort']['n'];
-            that.sortOrder = data.data['sort']['a'];
+            that.sort = data.data['sort']['type'];
+            that.sortOrder = data.data['sort']['order'];
             that.mainList = data.data['main_list'];
             if (!Array.isArray(that.mainList)) {
                 utils.log('RosefinchPage.onHashChange, mainList not an Array.');
