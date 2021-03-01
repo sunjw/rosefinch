@@ -156,6 +156,14 @@ img {
   position: absolute;
   top: 0;
   right: 0;
+  margin: 1.5rem;
+}
+
+#divToastWrapper .toast {
+  background-color: white;
+}
+#divToastWrapper .toast .toast-body {
+  min-width: 18rem;
 }
 
 /* Large screen */

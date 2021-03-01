@@ -488,6 +488,40 @@ class RosefinchPage {
         }, 250);
     }
 
+    showToast() {
+        let divToast = $('<div/>').attr({
+            'role': 'alert',
+            'aria-live': 'assertive',
+            'aria-atomic': 'true',
+            'data-delay': '5000'
+        }).addClass('toast');
+
+        let divToastHeader = $('<div/>').addClass('toast-header');
+        let img = $('<img/>').attr({
+            'src': '...',
+            'alt': '...'
+        }).addClass('rounded mr-2');
+        divToastHeader.append(img);
+        let strong = $('<strong/>').addClass('mr-auto').text('Bootstrap');
+        divToastHeader.append(strong);
+        let button = $('<button/>').attr({
+            'type': 'button',
+            'data-dismiss': 'toast',
+            'aria-label': 'Close'
+        }).addClass('ml-2 mb-1 close');
+        let span = $('<span/>').attr('aria-hidden', 'true').html('&times;');
+        button.append(span);
+        divToastHeader.append(button);
+        divToast.append(divToastHeader);
+
+        let divToastBody = $('<div/>').addClass('toast-body').text('See? Just like this.');
+        divToast.append(divToastBody);
+
+        this.divToastWrapper.append(divToast);
+
+        divToast.toast('show');
+    }
+
     showNewFolderDialog() {
         if (this.modalNewFolder == null) {
             utils.log('RosefinchPage.showNewFolderDialog, init modalAbout.');
@@ -543,6 +577,8 @@ class RosefinchPage {
                     } else {
                         utils.log('RosefinchPage.showNewFolderDialog, request OK.');
                     }
+
+                    that.showToast();
 
                     that.modalNewFolder.close();
                     that.onHashChange();
