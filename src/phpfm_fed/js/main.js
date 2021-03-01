@@ -154,6 +154,13 @@ class RosefinchDialog {
         this.buttonOk.removeAttr('disabled');
         this.buttonClose.removeAttr('disabled');
     }
+
+    clickOkButton() {
+        if (this.buttonOk == null) {
+            return;
+        }
+        this.buttonOk.get(0).click();
+    }
 }
 
 class RosefinchPage {
@@ -487,6 +494,11 @@ class RosefinchPage {
             this.modalNewFolder.setCloseButtonText('Cancel');
 
             let formBody = $('<form/>');
+            formBody.submit(function (event) {
+                utils.log('RosefinchPage.showNewFolderDialog, formBody.submit');
+                event.preventDefault();
+                that.modalNewFolder.clickOkButton();
+            });
             let divFormGroup = $('<div/>').addClass('form-group');
             let labelName = $('<label/>').attr('for', 'inputName').addClass('col-form-label').text('Name: ');
             let inputName = $('<input/>').attr({
@@ -533,7 +545,7 @@ class RosefinchPage {
                 });
             });
         }
-        utils.log('RosefinchPage.showNewFolderDialog.');
+        utils.log('RosefinchPage.showNewFolderDialog');
         this.modalNewFolder.show();
     }
 
@@ -549,7 +561,7 @@ class RosefinchPage {
                 'Rosefinch can be an alternative of Apache Directory Listing.');
             this.modalAbout.setBody(pAboutBody);
         }
-        utils.log('RosefinchPage.showAboutDialog.');
+        utils.log('RosefinchPage.showAboutDialog');
         this.modalAbout.show();
     }
 
