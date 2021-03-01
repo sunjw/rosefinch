@@ -57,7 +57,11 @@ class RosefinchDialog {
     }
 
     show() {
-        this.divModal.modal();
+        this.divModal.modal('show');
+    }
+
+    hide() {
+        this.divModal.modal('hide');
     }
 }
 
