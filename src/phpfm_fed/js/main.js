@@ -40,7 +40,7 @@ class RosefinchDialog {
         let buttonClose = $('<button/>').attr({
             'type': 'button',
             'data-dismiss': 'modal'
-        }).addClass('btn btn-secondary').text('Close');
+        }).addClass('btn btn-outline-secondary').text('Close');
         this.divModalFooter.append(buttonClose);
         divModalContent.append(this.divModalFooter);
 
