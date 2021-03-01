@@ -488,7 +488,7 @@ class RosefinchPage {
         }, 250);
     }
 
-    showToast() {
+    showToast(title, message) {
         let divToast = $('<div/>').attr({
             'role': 'alert',
             'aria-live': 'assertive',
@@ -503,7 +503,7 @@ class RosefinchPage {
             'alt': '...'
         }).addClass('rounded mr-2');
         divToastHeader.append(img);
-        let strong = $('<strong/>').addClass('mr-auto').text('Bootstrap');
+        let strong = $('<strong/>').addClass('mr-auto').text(title);
         divToastHeader.append(strong);
         let button = $('<button/>').attr({
             'type': 'button',
@@ -515,7 +515,7 @@ class RosefinchPage {
         divToastHeader.append(button);
         divToast.append(divToastHeader);
 
-        let divToastBody = $('<div/>').addClass('toast-body').text('See? Just like this.');
+        let divToastBody = $('<div/>').addClass('toast-body').html(message);
         divToast.append(divToastBody);
 
         this.divToastWrapper.append(divToast);
@@ -575,11 +575,11 @@ class RosefinchPage {
                 jqueryUtils.postRestRequest(requestApi, reqObj, function (data) {
                     if (!that.checkRestRespData(data)) {
                         utils.log('RosefinchPage.showNewFolderDialog, request ERROR!');
+                        that.showToast('New folder', 'Request error.');
                     } else {
                         utils.log('RosefinchPage.showNewFolderDialog, request OK.');
+                        that.showToast('New folder', data['message']);
                     }
-
-                    that.showToast();
 
                     that.modalNewFolder.close();
                     that.onHashChange();
