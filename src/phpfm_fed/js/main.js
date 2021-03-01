@@ -489,6 +489,8 @@ class RosefinchPage {
     }
 
     showToast(title, message) {
+        utils.log('RosefinchPage.showToast');
+
         let divToast = $('<div/>').attr({
             'role': 'alert',
             'aria-live': 'assertive',
@@ -519,6 +521,12 @@ class RosefinchPage {
         divToast.append(divToastBody);
 
         this.divToastWrapper.append(divToast);
+
+        divToast.on('hidden.bs.toast', function () {
+            // clear up
+            utils.log('RosefinchPage.showToast, clear.');
+            divToast.remove();
+        });
 
         divToast.toast('show');
     }
