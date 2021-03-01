@@ -582,7 +582,7 @@ class RosefinchPage {
             } else {
                 dirName = this.currentDir[i - 1];
             }
-            aDir.text(dirName);
+            aDir.html(utils.escapeHtmlPath(dirName));
             li.append(aDir);
 
             if (i == this.currentDir.length) {
