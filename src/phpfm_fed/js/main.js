@@ -182,6 +182,7 @@ class RosefinchPage {
         this.divMainWrapper = $('#divMainWrapper');
         this.divListWrapper = $('#divListWrapper');
         this.ulDetailView = null;
+        this.divToastWrapper = null;
 
         // buttons
         this.buttonBack = null;
@@ -227,6 +228,9 @@ class RosefinchPage {
         // prepare layout
         this.ulDetailView = $('<ul/>').attr('id', 'ulDetailView').addClass('list-group list-group-flush');
         this.divListWrapper.append(this.ulDetailView);
+
+        this.divToastWrapper = $('<div/>').attr('id', 'divToastWrapper');
+        this.divWrapper.append(this.divToastWrapper);
 
         // prepare event handler
         this.onLayoutResize();

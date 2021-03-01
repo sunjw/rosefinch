@@ -24,6 +24,7 @@ img {
 /* PHPFM */
 #divWrapper {
   width: 100%;
+  position: relative;
 }
 
 #navToolbarWrapper {
@@ -149,6 +150,12 @@ img {
 
 .modal .modal-footer .btn span.loadingText {
   margin-left: 0.4rem;
+}
+
+#divToastWrapper {
+  position: absolute;
+  top: 0;
+  right: 0;
 }
 
 /* Large screen */
