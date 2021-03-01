@@ -673,7 +673,7 @@ class RosefinchPage {
                 iFileIcon.addClass('bi-file-text');
             }
             aFileLink.append(iFileIcon);
-            let spanFileName = $('<span/>').addClass('fileName text-truncate').text(itemName);
+            let spanFileName = $('<span/>').addClass('fileName text-truncate').html(utils.escapeHtmlPath(itemName));
             aFileLink.append(spanFileName);
             divDetailLineLeft.append(aFileLink);
 
