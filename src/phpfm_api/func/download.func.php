@@ -156,12 +156,12 @@ if (Utility::allow_to_view()) {
     if (substr($request_file, -1) == '"') {
         $request_file = substr($request_file, 0, -1);
     }
-    $request_file = prepare_file_path($request_file);
 
     if ($request_file != false) {
         $test_array[0] = $request_file;
         $test_array = Utility::filter_paths($test_array);
         if (count($test_array) > 0) {
+            $request_file = prepare_file_path($request_file);
             get_logger()->info('Download start');
             dl_file($request_file);
         }
