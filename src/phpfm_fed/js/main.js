@@ -27,6 +27,8 @@ class RosefinchDialog {
         this.spanOkText = null;
         this.spanOkLoadingSpinner = null;
         this.buttonClose = null;
+
+        this.resetHandler = null;
     }
 
     init(modalId, isStatic = false, needOkButton = false) {
@@ -76,6 +78,9 @@ class RosefinchDialog {
 
     reset() {
         this.hideOkButtonLoading();
+        if (this.resetHandler) {
+            this.resetHandler();
+        }
     }
 
     show() {
@@ -98,17 +103,21 @@ class RosefinchDialog {
         this.divModalBody.append(childElement);
     }
 
+    setResetHandler(resetHandler) {
+        this.resetHandler = resetHandler;
+    }
+
     setCloseButtonText(closeText) {
         this.closeText = closeText;
         this.buttonClose.text(this.closeText);
     }
 
-    setOkButtonHandler(OkHandler) {
+    setOkButtonHandler(okHandler) {
         if (this.buttonOk == null) {
             return;
         }
         this.buttonOk.on('click', function () {
-            OkHandler();
+            okHandler();
         });
     }
 
@@ -469,7 +478,13 @@ class RosefinchPage {
             formBody.append(divFormGroup);
             this.modalNewFolder.setBody(formBody);
 
+            this.modalNewFolder.setResetHandler(function () {
+                utils.log('showNewFolderDialog, resetHandler.');
+                inputName.val('');
+            });
+
             this.modalNewFolder.setOkButtonHandler(function () {
+                utils.log('showNewFolderDialog, okButtonHandler.');
                 that.modalNewFolder.showOkButtonLoading();
                 setTimeout(function () {
                     that.modalNewFolder.close();
