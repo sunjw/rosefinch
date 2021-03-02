@@ -360,7 +360,7 @@ class Rest
             $resp_obj->message = 'Directory "' . htmlentities_utf8($name_req) . '" created successfully.';
         } else {
             $resp_obj->code = 400;
-            $resp_obj->message = 'Directory "' . htmlentities_utf8($name_req) . '" creat failed.';
+            $resp_obj->message = 'Directory "' . htmlentities_utf8($name_req) . '" create failed.';
         }
 
         $this->response_json($resp_obj);
