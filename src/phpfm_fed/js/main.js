@@ -506,6 +506,7 @@ class RosefinchPage {
             'role': 'alert',
             'aria-live': 'assertive',
             'aria-atomic': 'true',
+            //'data-autohide': 'false',
             'data-delay': '5000'
         }).addClass('toast').addClass(type);
 
