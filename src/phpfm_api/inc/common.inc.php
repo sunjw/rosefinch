@@ -243,11 +243,16 @@ function timestrtotime($str)
 /**
  * htmlentities with UTF-8 encoding.
  * @param string $str
+ * @param bool $encode_space
  * @return string
  */
-function htmlentities_utf8($str)
+function htmlentities_utf8($str, $encode_space = false)
 {
-    return htmlentities($str, ENT_COMPAT, 'UTF-8');
+    $ret = htmlentities($str, ENT_COMPAT, 'UTF-8');
+    if ($encode_space) {
+        $ret = str_replace(' ', '&nbsp;', $ret);
+    }
+    return $ret;
 }
 
 /**
