@@ -154,7 +154,7 @@ img {
 
 #divToastWrapper {
   position: absolute;
-  top: 0;
+  bottom: 0;
   right: 0;
   margin: 1.5rem;
 }
