@@ -162,12 +162,21 @@ img {
 #divToastWrapper .toast {
   background-color: white;
 }
-#divToastWrapper .toast .toast-body {
-  min-width: 18rem;
-}
-#divToastWrapper .toast .toast-header .bi {
+#divToastWrapper .toast .toast-header .toastIcon {
   line-height: 1;
   padding-right: 0.4rem;
+}
+#divToastWrapper .toast.info .toast-header .toastIcon, #divToastWrapper .toast.info .toast-header .toastTitle {
+  color: var(--info);
+}
+#divToastWrapper .toast.success .toast-header .toastIcon, #divToastWrapper .toast.success .toast-header .toastTitle {
+  color: var(--success);
+}
+#divToastWrapper .toast.danger .toast-header .toastIcon, #divToastWrapper .toast.danger .toast-header .toastTitle {
+  color: var(--danger);
+}
+#divToastWrapper .toast .toast-body {
+  min-width: 18rem;
 }
 
 /* Large screen */

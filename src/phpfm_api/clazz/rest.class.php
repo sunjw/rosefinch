@@ -355,15 +355,14 @@ class Rest
             get_logger()->error('handle_newfolder, illegal name: sub_dir=[' . $sub_dir . '], name=[' . $name . '].');
         }
 
-        $message = '';
+        $resp_obj = new RestRet();
         if ($success) {
-            $message = _('Make new folder:') . '&nbsp;' . htmlentities_utf8($name_req) . '&nbsp;' . _('succeed');
+            $resp_obj->message = 'Directory "' . htmlentities_utf8($name_req) . '" created successfully.';
         } else {
-            $message = _('Make new folder:') . '&nbsp;' . htmlentities_utf8($name_req) . '&nbsp;<strong>' . _('failed') . '</strong>';
+            $resp_obj->code = 400;
+            $resp_obj->message = 'Directory "' . htmlentities_utf8($name_req) . '" creat failed.';
         }
 
-        $resp_obj = new RestRet();
-        $resp_obj->message = $message;
         $this->response_json($resp_obj);
     }
 

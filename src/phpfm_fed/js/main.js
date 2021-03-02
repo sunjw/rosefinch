@@ -291,6 +291,8 @@ class RosefinchPage {
         this.showMainListLoading();
         jqueryUtils.getRestRequest(requestApi, function (data) {
             if (!that.checkRestRespData(data)) {
+                utils.log('RosefinchPage.onHashChange, response ERROR!');
+                that.showToast('Rosefinch', 'Response error.', 'danger');
                 return;
             }
 
@@ -300,6 +302,7 @@ class RosefinchPage {
             that.mainList = data.data['main_list'];
             if (!Array.isArray(that.mainList)) {
                 utils.log('RosefinchPage.onHashChange, mainList not an Array.');
+                that.showToast('Rosefinch', 'Response error.', 'danger');
                 return;
             }
 
@@ -308,6 +311,9 @@ class RosefinchPage {
             that.renderMainList();
 
             that.hideMainListLoading();
+        }, function () {
+            utils.log('RosefinchPage.onHashChange, request ERROR!');
+            that.showToast('Rosefinch', 'Request error.', 'danger');
         });
     }
 
@@ -488,21 +494,25 @@ class RosefinchPage {
         }, 250);
     }
 
-    showToast(title, message) {
+    showToast(title, message, type = 'info') {
         utils.log('RosefinchPage.showToast');
+
+        let toastTypes = ['info', 'success', 'danger'];
+        if (!toastTypes.includes(type)) {
+            type = toastTypes[0];
+        }
 
         let divToast = $('<div/>').attr({
             'role': 'alert',
             'aria-live': 'assertive',
             'aria-atomic': 'true',
-            'data-autohide': 'false',
             'data-delay': '5000'
-        }).addClass('toast');
+        }).addClass('toast').addClass(type);
 
         let divToastHeader = $('<div/>').addClass('toast-header');
-        let iToastIcon = $('<i/>').addClass('bi bi-bell');
+        let iToastIcon = $('<i/>').addClass('bi bi-bell toastIcon');
         divToastHeader.append(iToastIcon);
-        let strongToastTitle = $('<strong/>').addClass('mr-auto').text(title);
+        let strongToastTitle = $('<strong/>').addClass('mr-auto toastTitle').text(title);
         divToastHeader.append(strongToastTitle);
         let buttonToastClose = $('<button/>').attr({
             'type': 'button',
@@ -577,17 +587,29 @@ class RosefinchPage {
                 reqObj['subdir'] = that.getCurrentDirStr();
                 reqObj['newname'] = inputName.val();
 
+                let toastTitle = 'New folder';
                 jqueryUtils.postRestRequest(requestApi, reqObj, function (data) {
+                    that.modalNewFolder.close();
+
                     if (!that.checkRestRespData(data)) {
-                        utils.log('RosefinchPage.showNewFolderDialog, request ERROR!');
-                        that.showToast('New folder', 'Request error.');
+                        utils.log('RosefinchPage.showNewFolderDialog, response ERROR!');
+                        that.showToast(toastTitle, 'Response error.', 'danger');
                     } else {
-                        utils.log('RosefinchPage.showNewFolderDialog, request OK.');
-                        that.showToast('New folder', data['message']);
+                        let dataCode = data['code'];
+                        let dataMessage = data['message'];
+                        utils.log('RosefinchPage.showNewFolderDialog, request OK, data[\'code\']=%d', dataCode);
+                        if (dataCode == 0) {
+                            that.showToast(toastTitle, dataMessage, 'success');
+                        } else {
+                            that.showToast(toastTitle, dataMessage, 'danger');
+                        }
                     }
 
-                    that.modalNewFolder.close();
                     that.onHashChange();
+                }, function () {
+                    utils.log('RosefinchPage.showNewFolderDialog, request ERROR!');
+                    that.modalNewFolder.close();
+                    that.showToast(toastTitle, 'Request error.', 'danger');
                 });
             });
         }
