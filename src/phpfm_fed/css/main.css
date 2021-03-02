@@ -13,11 +13,11 @@ a {
   /*text-decoration: none;*/
   /*transition: color 0.2s;*/
 }
-a.noOutline:hover, a.noOutline:active, a.noOutline:focus {
-  outline: 0;
-}
 img {
   /*border: 0;*/
+}
+.noOutline:hover, .noOutline:active, .noOutline:focus {
+  outline: 0;
 }
 /* Common */
 
