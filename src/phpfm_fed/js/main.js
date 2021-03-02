@@ -541,7 +541,7 @@ class RosefinchPage {
             this.modalNewFolder.setCloseButtonText('Cancel');
 
             let formBody = $('<form/>');
-            formBody.submit(function (event) {
+            formBody.on('submit', function (event) {
                 utils.log('RosefinchPage.showNewFolderDialog, formBody.submit');
                 event.preventDefault();
                 that.modalNewFolder.clickOkButton();
