@@ -167,6 +167,7 @@ class RosefinchPage {
 
     constructor(apiPrefix) {
         // consts
+        this.titleName = 'Rosefinch';
         this.apiBase = utils.isString(apiPrefix) ? apiPrefix : '';
         this.restApiEndpoint = 'func/rest.api.php';
         this.dlApiEndpoint = 'func/download.func.php';
@@ -292,7 +293,7 @@ class RosefinchPage {
         jqueryUtils.getRestRequest(requestApi, function (data) {
             if (!that.checkRestRespData(data)) {
                 utils.log('RosefinchPage.onHashChange, response ERROR!');
-                that.showToast('Rosefinch', 'Response error.', 'danger');
+                that.showToast(that.titleName, 'Response error.', 'danger');
                 return;
             }
 
@@ -302,7 +303,7 @@ class RosefinchPage {
             that.mainList = data.data['main_list'];
             if (!Array.isArray(that.mainList)) {
                 utils.log('RosefinchPage.onHashChange, mainList not an Array.');
-                that.showToast('Rosefinch', 'Response error.', 'danger');
+                that.showToast(that.titleName, 'Response error.', 'danger');
                 return;
             }
 
@@ -313,7 +314,7 @@ class RosefinchPage {
             that.hideMainListLoading();
         }, function () {
             utils.log('RosefinchPage.onHashChange, request ERROR!');
-            that.showToast('Rosefinch', 'Request error.', 'danger');
+            that.showToast(that.titleName, 'Request error.', 'danger');
         });
     }
 
@@ -623,7 +624,7 @@ class RosefinchPage {
             utils.log('RosefinchPage.showAboutDialog, init modalAbout.');
             this.modalAbout = new RosefinchDialog();
             this.modalAbout.init('divModalAbout');
-            this.modalAbout.setTitle('Rosefinch');
+            this.modalAbout.setTitle(this.titleName);
             let pAboutBody = $('<p/>');
             pAboutBody.html('A web file manager with copy/paste, rename, delete and make new folder in browser.<br/>' +
                 'Also, Rosefinch provides download, upload and other file manager features.<br/>' +
