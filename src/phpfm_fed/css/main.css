@@ -165,6 +165,10 @@ img {
 #divToastWrapper .toast .toast-body {
   min-width: 18rem;
 }
+#divToastWrapper .toast .toast-header .bi {
+  line-height: 1;
+  padding-right: 0.4rem;
+}
 
 /* Large screen */
 @media (min-width: 769px) {

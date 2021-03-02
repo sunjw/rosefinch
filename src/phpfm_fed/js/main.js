@@ -495,15 +495,13 @@ class RosefinchPage {
             'role': 'alert',
             'aria-live': 'assertive',
             'aria-atomic': 'true',
+            'data-autohide': 'false',
             'data-delay': '5000'
         }).addClass('toast');
 
         let divToastHeader = $('<div/>').addClass('toast-header');
-        let imgToastIcon = $('<img/>').attr({
-            'src': '...',
-            'alt': '...'
-        }).addClass('rounded mr-2');
-        divToastHeader.append(imgToastIcon);
+        let iToastIcon = $('<i/>').addClass('bi bi-bell');
+        divToastHeader.append(iToastIcon);
         let strongToastTitle = $('<strong/>').addClass('mr-auto').text(title);
         divToastHeader.append(strongToastTitle);
         let buttonToastClose = $('<button/>').attr({
