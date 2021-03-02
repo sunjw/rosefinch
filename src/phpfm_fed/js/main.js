@@ -500,21 +500,21 @@ class RosefinchPage {
         }).addClass('toast');
 
         let divToastHeader = $('<div/>').addClass('toast-header');
-        let img = $('<img/>').attr({
+        let imgToastIcon = $('<img/>').attr({
             'src': '...',
             'alt': '...'
         }).addClass('rounded mr-2');
-        divToastHeader.append(img);
-        let strong = $('<strong/>').addClass('mr-auto').text(title);
-        divToastHeader.append(strong);
-        let button = $('<button/>').attr({
+        divToastHeader.append(imgToastIcon);
+        let strongToastTitle = $('<strong/>').addClass('mr-auto').text(title);
+        divToastHeader.append(strongToastTitle);
+        let buttonToastClose = $('<button/>').attr({
             'type': 'button',
             'data-dismiss': 'toast',
             'aria-label': 'Close'
         }).addClass('ml-2 mb-1 close');
-        let span = $('<span/>').attr('aria-hidden', 'true').html('&times;');
-        button.append(span);
-        divToastHeader.append(button);
+        let spanClose = $('<span/>').attr('aria-hidden', 'true').html('&times;');
+        buttonToastClose.append(spanClose);
+        divToastHeader.append(buttonToastClose);
         divToast.append(divToastHeader);
 
         let divToastBody = $('<div/>').addClass('toast-body').html(message);
@@ -523,7 +523,7 @@ class RosefinchPage {
         this.divToastWrapper.append(divToast);
 
         divToast.on('hidden.bs.toast', function () {
-            // clear up
+            // remove self
             utils.log('RosefinchPage.showToast, clear.');
             divToast.remove();
         });
