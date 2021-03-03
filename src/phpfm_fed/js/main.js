@@ -29,7 +29,7 @@ class RosefinchDialog {
         this.buttonClose = null;
 
         this.showHandler = null;
-        this.resetHandler = null;
+        this.closeHandler = null;
     }
 
     init(modalId, isStatic = false, needOkButton = false) {
@@ -83,14 +83,14 @@ class RosefinchDialog {
             }
         });
         this.divModal.on('hidden.bs.modal', function () {
-            that.reset();
+            that.onclose();
         });
     }
 
-    reset() {
+    onclose() {
         this.hideOkButtonLoading();
-        if (this.resetHandler) {
-            this.resetHandler();
+        if (this.closeHandler) {
+            this.closeHandler();
         }
     }
 
@@ -115,8 +115,8 @@ class RosefinchDialog {
         this.showHandler = showHandler;
     }
 
-    setResetHandler(resetHandler) {
-        this.resetHandler = resetHandler;
+    setCloseHandler(closeHandler) {
+        this.closeHandler = closeHandler;
     }
 
     setCloseButtonText(closeText) {
@@ -550,9 +550,9 @@ class RosefinchPage {
             this.modalNewFolder.setCloseButtonText('Cancel');
 
             let formBody = $('<form/>');
-            formBody.on('submit', function (event) {
+            formBody.on('submit', function (e) {
                 utils.log('RosefinchPage.showNewFolderDialog, formBody.submit');
-                event.preventDefault();
+                e.preventDefault();
                 that.modalNewFolder.clickOkButton();
             });
             let divFormGroup = $('<div/>').addClass('form-group');
@@ -567,18 +567,18 @@ class RosefinchPage {
             this.modalNewFolder.setBody(formBody);
 
             this.modalNewFolder.setShowHandler(function () {
-                utils.log('RosefinchPage.showNewFolderDialog, setShowHandler.');
+                utils.log('RosefinchPage.showNewFolderDialog, show.');
                 jqueryUtils.focusOnInput(inputName);
             });
 
-            this.modalNewFolder.setResetHandler(function () {
-                utils.log('RosefinchPage.showNewFolderDialog, resetHandler.');
+            this.modalNewFolder.setCloseHandler(function () {
+                utils.log('RosefinchPage.showNewFolderDialog, close.');
                 inputName.val('');
                 inputName.removeAttr('disabled');
             });
 
             this.modalNewFolder.setOkButtonHandler(function () {
-                utils.log('RosefinchPage.showNewFolderDialog, okButtonHandler.');
+                utils.log('RosefinchPage.showNewFolderDialog, ok.');
 
                 inputName.attr('disabled', 'disabled');
                 that.modalNewFolder.showOkButtonLoading();
