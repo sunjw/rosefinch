@@ -500,6 +500,22 @@ class RosefinchPage {
             }
             return false;
         };
+        bodyElem.ondragleave = function (e) {
+            utils.log('RosefinchPage.initDragDropUpload, body ondragleave.');
+            e.preventDefault();
+            if (that.currentDialog == that.modalUpload) {
+                that.modalUpload.removeClass(dropFileClass);
+            }
+            return false;
+        };
+        bodyElem.ondragend = function (e) {
+            utils.log('RosefinchPage.initDragDropUpload, body ondragend.');
+            e.preventDefault();
+            if (that.currentDialog == that.modalUpload) {
+                that.modalUpload.removeClass(dropFileClass);
+            }
+            return false;
+        };
     }
 
     checkRestRespData(data) {
