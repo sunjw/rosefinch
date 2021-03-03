@@ -265,7 +265,9 @@ class RosefinchPage {
 
     getCurrentDirStr() {
         let currentDirStr = this.currentDir.join('/');
-        currentDirStr = currentDirStr + '/';
+        if (currentDirStr.length > 0) {
+            currentDirStr = currentDirStr + '/';
+        }
         return currentDirStr;
     }
 
