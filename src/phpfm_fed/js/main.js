@@ -570,21 +570,26 @@ class RosefinchPage {
                 e.preventDefault();
                 that.modalUpload.clickOkButton();
             });
-            // let divFormGroup = $('<div/>').addClass('form-group');
-            // let labelName = $('<label/>').attr('for', 'inputName').addClass('col-form-label').text('Name: ');
-            // let inputName = $('<input/>').attr({
-            //     'id': 'inputName',
-            //     'type': 'text'
-            // }).addClass('form-control');
-            // divFormGroup.append(labelName);
-            // divFormGroup.append(inputName);
-            // formBody.append(divFormGroup);
+            let divFormGroup = $('<div/>').addClass('form-group');
+            let labelUploadFileInfo = $('<label/>').attr({
+                'id': 'labelUploadFileInfo',
+                'for': 'inputUploadFile'
+            }).addClass('col-form-label');
+            labelUploadFileInfo.text('Click or drop files to upload.');
+            let inputUploadFile = $('<input/>').attr({
+                'id': 'inputUploadFile',
+                'type': 'file',
+                'multiple': 'multiple'
+            }).addClass('form-control');
+            inputUploadFile.hide();
+            divFormGroup.append(labelUploadFileInfo);
+            divFormGroup.append(inputUploadFile);
+            formBody.append(divFormGroup);
             this.modalUpload.setBody(formBody);
 
             this.modalUpload.setShowHandler(function () {
                 utils.log('RosefinchPage.showUploadDialog, show.');
                 that.currentDialog = that.modalUpload;
-                //jqueryUtils.focusOnInput(inputName);
             });
 
             this.modalUpload.setCloseHandler(function () {

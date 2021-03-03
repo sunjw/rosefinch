@@ -151,6 +151,18 @@ img {
 .modal .modal-footer .btn span.loadingText {
   margin-left: 0.4rem;
 }
+#divModalUpload .form-group {
+  margin-bottom: 0;
+}
+#divModalUpload #labelUploadFileInfo {
+  display: block;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  text-align: center;
+  height: 100px;
+  line-height: 80px;
+}
 
 #divToastWrapper {
   position: absolute;
