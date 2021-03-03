@@ -641,11 +641,50 @@ class RosefinchPage {
             this.modalUpload.setOkButtonHandler(function () {
                 utils.log('RosefinchPage.showUploadDialog, ok.');
 
-                //inputName.attr('disabled', 'disabled');
                 that.modalUpload.showOkButtonLoading();
 
-                // let requestApi = that.generateRestApiUrl('api/v1/fm/newfolder');
-                // utils.log('RosefinchPage.showUploadDialog, requestApi=[%s]', requestApi);
+                let requestApi = that.generateRestApiUrl('api/v1/fm/upload');
+                utils.log('RosefinchPage.showUploadDialog, requestApi=[%s]', requestApi);
+
+                let toastTitle = 'Upload';
+                let xhrUpload = new XMLHttpRequest();
+                xhrUpload.open('POST', requestApi);
+                xhrUpload.onload = function () {
+                    let data = JSON.parse(this.responseText);
+
+                    that.modalUpload.close();
+
+                    if (!that.checkRestRespData(data)) {
+                        utils.log('RosefinchPage.showUploadDialog, response ERROR!');
+                        that.showToast(toastTitle, 'Response error.', 'danger');
+                    } else {
+                        let dataCode = data['code'];
+                        let dataMessage = data['message'];
+                        utils.log('RosefinchPage.showUploadDialog, request OK, data[\'code\']=%d', dataCode);
+                        if (dataCode == 0) {
+                            that.showToast(toastTitle, dataMessage, 'success');
+                        } else {
+                            that.showToast(toastTitle, dataMessage, 'danger');
+                        }
+                    }
+
+                    that.onHashChange();
+                };
+
+                let form = new FormData();
+                //form.append('session', sessionId);
+                form.append('ajax', 'ajax');
+                form.append('subdir', that.getCurrentDirStr());
+
+                // multi files
+                let uploadFiles = inputUploadFile.prop('files');
+                let filesCount = uploadFiles.length;
+                for (let i = 0; i < filesCount; ++i) {
+                    form.append('uploadFile[]', uploadFiles[i]);
+                }
+
+                xhrUpload.send(form);
+
                 // let reqObj = {};
                 // reqObj['subdir'] = that.getCurrentDirStr();
                 // reqObj['newname'] = inputName.val();
