@@ -29,6 +29,9 @@ class RosefinchDialog {
         this.spanOkLoadingSpinner = null;
         this.buttonClose = null;
 
+        this.isShown = false;
+        this.pendingClose = false;
+
         this.showHandler = null;
         this.closeHandler = null;
     }
@@ -81,11 +84,16 @@ class RosefinchDialog {
         this.divModal.append(divModalDialog);
 
         this.divModal.on('shown.bs.modal', function () {
+            that.isShown = true;
             if (that.showHandler) {
                 that.showHandler();
             }
+            if (that.pendingClose) {
+                that.close();
+            }
         });
         this.divModal.on('hidden.bs.modal', function () {
+            that.isShown = false;
             that.onclose();
         });
     }
@@ -102,8 +110,12 @@ class RosefinchDialog {
     }
 
     close() {
-        let that = this;
-        this.divModal.modal('hide');
+        if (this.isShown) {
+            this.divModal.modal('hide');
+            this.pendingClose = false;
+        } else {
+            this.pendingClose = true;
+        }
     }
 
     addClass(className) {
@@ -120,6 +132,10 @@ class RosefinchDialog {
 
     setBody(childElement) {
         this.divModalBody.append(childElement);
+    }
+
+    hasShown() {
+        return this.isShown;
     }
 
     setShowHandler(showHandler) {
