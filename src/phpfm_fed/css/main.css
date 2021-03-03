@@ -148,7 +148,10 @@ img {
   width: 11rem;
 }
 
-.modal .modal-footer .btn span.loadingText {
+.modal .modal-footer .dialogTips {
+  color: var(--secondary);
+}
+.modal .modal-footer .btn .loadingText {
   margin-left: 0.4rem;
 }
 #divModalUpload .form-group {

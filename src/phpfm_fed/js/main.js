@@ -23,6 +23,7 @@ class RosefinchDialog {
         this.divModalBody = null;
         this.divModalFooter = null;
 
+        this.spanTips = null;
         this.buttonOk = null;
         this.spanOkText = null;
         this.spanOkLoadingSpinner = null;
@@ -53,6 +54,8 @@ class RosefinchDialog {
         divModalContent.append(this.divModalBody);
 
         this.divModalFooter = $('<div/>').addClass('modal-footer');
+        this.spanTips = $('<span/>').addClass('flex-grow-1 dialogTips');
+        this.divModalFooter.append(this.spanTips);
         if (needOkButton) {
             this.buttonOk = $('<button/>').attr({
                 'type': 'button'
@@ -119,9 +122,8 @@ class RosefinchDialog {
         this.closeHandler = closeHandler;
     }
 
-    setCloseButtonText(closeText) {
-        this.closeText = closeText;
-        this.buttonClose.text(this.closeText);
+    setTipsText(tipsText) {
+        this.spanTips.text(tipsText);
     }
 
     setOkButtonHandler(okHandler) {
@@ -160,6 +162,11 @@ class RosefinchDialog {
             return;
         }
         this.buttonOk.get(0).click();
+    }
+
+    setCloseButtonText(closeText) {
+        this.closeText = closeText;
+        this.buttonClose.text(this.closeText);
     }
 }
 
@@ -250,8 +257,8 @@ class RosefinchPage {
     }
 
     onLayoutResize() {
-        let windowWidth = $(window).width();
-        let windowHeight = $(window).height();
+        let windowWidth = this.getWindowWidth();
+        let windowHeight = this.getWindowHeight();
         utils.log('RosefinchPage.onWindowResize, windowWidth=%dpx, windowHeight=%dpx', windowWidth, windowHeight);
 
         let divListWrapperTop = this.divListWrapper.offset().top;
@@ -270,6 +277,14 @@ class RosefinchPage {
             that.onHashChange();
         });
         this.onHashChange();
+    }
+
+    getWindowWidth() {
+        return $(window).width();
+    }
+
+    getWindowHeight() {
+        return $(window).height();
     }
 
     getCurrentDirStr() {
@@ -589,14 +604,17 @@ class RosefinchPage {
                     let fileName = fileList[0].name;
                     if (fileList.length > 1) {
                         // multi files
-                        const fileNameMaxLen = 20;
-                        if (fileName.length > fileNameMaxLen) {
-                            fileName = fileName.substring(0, fileNameMaxLen) + '...';
-                        }
-                        fileName = fileName + ', ... ' + fileList.length + ' files';
+                        fileName = fileName + ', ...';
                     }
                     fileName = utils.escapeHtmlPath(fileName);
                     labelUploadFileInfo.html(fileName);
+                    let tipsText = '';
+                    if (fileList.length == 1) {
+                        tipsText = '1 file';
+                    } else if (fileList.length > 1) {
+                        tipsText = fileList.length + ' files';
+                    }
+                    that.modalUpload.setTipsText(tipsText);
                 }
             });
 
