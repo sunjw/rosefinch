@@ -519,7 +519,7 @@ class RosefinchPage {
         const dropFileClass = 'dropFile';
         let bodyElem = this.body.get(0);
         bodyElem.ondragover = function (e) {
-            utils.log('RosefinchPage.initDragDropUpload, body ondragover.');
+            //utils.log('RosefinchPage.initDragDropUpload, body ondragover.');
             e.preventDefault();
             if (that.currentDialog == null) {
                 that.showUploadDialog();
