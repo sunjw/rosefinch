@@ -425,6 +425,7 @@ class Rest
         $is_ajax = post_query('ajax') == 'ajax';
         $sub_dir = rawurldecode(post_query('subdir'));
 
+        $code = 0;
         $message = '';
 
         //get_logger()->info('handle_upload, post_query='.$post_subdir);
@@ -472,12 +473,14 @@ class Rest
             }
 
             if ($upload_result) {
-                $message = _('Upload files') . ' ' . _('succeed');
+                $code = 0;
+                $message = 'Files uploaded successfully.';
                 if (!$is_ajax) {
                     $this->messageboard->set_message($message);
                 }
             } else {
-                $message = _('Upload some files') . ' <strong>' . _('failed') . '<strong>';
+                $code = 500;
+                $message = 'Some files upload failed.';
                 if (!$is_ajax) {
                     $this->messageboard->set_message($message, 500);
                 }
@@ -488,6 +491,7 @@ class Rest
 
         if ($is_ajax) {
             $resp_obj = new RestRet();
+            $resp_obj->code = $code;
             $resp_obj->message = $message;
             $this->response_json($resp_obj);
         } else {
