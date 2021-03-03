@@ -180,6 +180,7 @@ class RosefinchPage {
         this.dlApiEndpoint = 'func/download.func.php';
 
         // elements
+        this.body = $('body');
         this.divWrapper = $('#divWrapper');
         this.navToolbarWrapper = $('#navToolbarWrapper');
         this.divToolbarBrand = $('#divToolbarBrand');
@@ -269,8 +270,9 @@ class RosefinchPage {
     initFunc() {
         let that = this;
 
-        // prepare buttons
+        // prepare
         this.initButtons();
+        this.initDragDropUpload();
 
         // hash change
         $(window).on('hashchange', function () {
@@ -475,6 +477,20 @@ class RosefinchPage {
         return (npmUtils.isiOS() || npmUtils.isMacOS());
     }
 
+    initDragDropUpload() {
+        let that = this;
+
+        let bodyElem = this.body.get(0);
+        bodyElem.ondragover = function (e) {
+            utils.log('RosefinchPage.initDragDropUpload, body ondragover.');
+            e.preventDefault();
+            if (that.currentDialog == null) {
+                that.showUploadDialog();
+            }
+            return false;
+        };
+    }
+
     checkRestRespData(data) {
         if (!utils.isObject(data) || !('code' in data)) {
             // Not return proper object.
@@ -625,11 +641,6 @@ class RosefinchPage {
             formBody.append(divFormGroup);
             this.modalUpload.setBody(formBody);
 
-            this.modalUpload.setShowHandler(function () {
-                utils.log('RosefinchPage.showUploadDialog, show.');
-                that.currentDialog = that.modalUpload;
-            });
-
             this.modalUpload.setCloseHandler(function () {
                 utils.log('RosefinchPage.showUploadDialog, close.');
                 inputUploadFile.val('');
@@ -698,6 +709,7 @@ class RosefinchPage {
         }
 
         utils.log('RosefinchPage.showUploadDialog');
+        this.currentDialog = this.modalUpload;
         this.modalUpload.show();
     }
 
@@ -730,7 +742,6 @@ class RosefinchPage {
 
             this.modalNewFolder.setShowHandler(function () {
                 utils.log('RosefinchPage.showNewFolderDialog, show.');
-                that.currentDialog = that.modalNewFolder;
                 jqueryUtils.focusOnInput(inputName);
             });
 
@@ -781,6 +792,7 @@ class RosefinchPage {
         }
 
         utils.log('RosefinchPage.showNewFolderDialog');
+        this.currentDialog = this.modalNewFolder;
         this.modalNewFolder.show();
     }
 
@@ -798,15 +810,13 @@ class RosefinchPage {
                 'Rosefinch can be an alternative of Apache Directory Listing.');
             this.modalAbout.setBody(pAboutBody);
 
-            this.modalAbout.setShowHandler(function () {
-                that.currentDialog = that.modalAbout;
-            });
             this.modalAbout.setCloseHandler(function () {
                 that.currentDialog = null;
             });
         }
 
         utils.log('RosefinchPage.showAboutDialog');
+        this.currentDialog = this.modalAbout;
         this.modalAbout.show();
     }
 

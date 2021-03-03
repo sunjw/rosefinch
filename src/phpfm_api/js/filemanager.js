@@ -1142,6 +1142,7 @@ var FileManager = {
         body = body[0];
 
         body.ondragover = function () {
+            //logConsole('body.ondragover');
             if (!FileManager.funcDialog.body.is(':visible')) {
                 FileManager.clickUpload();
             }
