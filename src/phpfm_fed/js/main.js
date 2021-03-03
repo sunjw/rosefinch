@@ -175,6 +175,7 @@ class RosefinchPage {
         // elements
         this.divWrapper = $('#divWrapper');
         this.navToolbarWrapper = $('#navToolbarWrapper');
+        this.divToolbarBrand = $('#divToolbarBrand');
         this.divToolbarLeft = $('#divToolbarLeft');
         this.divToolbarRight = $('#divToolbarRight');
         this.navPathWrapper = $('#navPathWrapper');
@@ -227,6 +228,11 @@ class RosefinchPage {
         let that = this;
 
         // prepare layout
+        let spanBrand = $('<span/>').attr('id', 'spanBrand').addClass('navbar-brand');
+        let aBrand = $('<a/>').attr('href', '#').addClass('noOutline').text(this.titleName);
+        spanBrand.append(aBrand);
+        this.divToolbarBrand.append(spanBrand);
+
         this.ulDetailView = $('<ul/>').attr('id', 'ulDetailView').addClass('list-group list-group-flush');
         this.divListWrapper.append(this.ulDetailView);
 
