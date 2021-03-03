@@ -487,6 +487,11 @@ class Rest
             }
         } else {
             get_logger()->error('handle_upload, no $_FILES[\'uploadFile\'].');
+            $code = 400;
+            $message = 'No file upload.';
+            if (!$is_ajax) {
+                $this->messageboard->set_message($message, 500);
+            }
         }
 
         if ($is_ajax) {
