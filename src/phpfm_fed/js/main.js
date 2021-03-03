@@ -106,6 +106,14 @@ class RosefinchDialog {
         this.divModal.modal('hide');
     }
 
+    addClass(className) {
+        this.divModal.addClass(className);
+    }
+
+    removeClass(className) {
+        this.divModal.removeClass(className);
+    }
+
     setTitle(titleText) {
         this.h5ModalTitle.text(titleText);
     }
@@ -480,12 +488,15 @@ class RosefinchPage {
     initDragDropUpload() {
         let that = this;
 
+        const dropFileClass = 'dropFile';
         let bodyElem = this.body.get(0);
         bodyElem.ondragover = function (e) {
             utils.log('RosefinchPage.initDragDropUpload, body ondragover.');
             e.preventDefault();
             if (that.currentDialog == null) {
                 that.showUploadDialog();
+            } else if (that.currentDialog == that.modalUpload) {
+                that.modalUpload.addClass(dropFileClass);
             }
             return false;
         };

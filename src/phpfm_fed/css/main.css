@@ -166,6 +166,12 @@ img {
   height: 100px;
   line-height: 80px;
 }
+#divModalUpload.dropFile .modal-content {
+  border-color: var(--danger);
+}
+#divModalUpload.dropFile #labelUploadFileInfo {
+  color: var(--danger);
+}
 
 #divToastWrapper {
   position: absolute;
