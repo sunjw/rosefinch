@@ -344,6 +344,8 @@ class RosefinchPage {
 
         this.showMainListLoading();
         jqueryUtils.getRestRequest(requestApi, function (data) {
+            that.hideMainListLoading();
+
             if (!that.checkRestRespData(data)) {
                 utils.log('RosefinchPage.onHashChange, response ERROR!');
                 that.showToast(that.titleName, 'Response error.', 'danger');
@@ -363,11 +365,10 @@ class RosefinchPage {
             that.renderBreadcrumb();
             that.onLayoutResize();
             that.renderMainList();
-
-            that.hideMainListLoading();
         }, function () {
             utils.log('RosefinchPage.onHashChange, request ERROR!');
             that.showToast(that.titleName, 'Request error.', 'danger');
+            that.hideMainListLoading();
         });
     }
 
