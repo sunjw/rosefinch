@@ -322,7 +322,7 @@ class RosefinchPage {
         return currentDirStr;
     }
 
-    onHashChange() {
+    onHashChange(isRetry = false) {
         let that = this;
 
         let locationHash = window.location.hash;
@@ -344,13 +344,23 @@ class RosefinchPage {
 
         this.showMainListLoading();
         jqueryUtils.getRestRequest(requestApi, function (data) {
-            that.hideMainListLoading();
-
             if (!that.checkRestRespData(data)) {
-                utils.log('RosefinchPage.onHashChange, response ERROR!');
-                that.showToast(that.titleName, 'Response error.', 'danger');
+                if (!isRetry) {
+                    // let's retry
+                    utils.log('RosefinchPage.onHashChange, response ERROR, retry.');
+                    setTimeout(function () {
+                        that.onHashChange(true);
+                    }, 250);
+                } else {
+                    // still error!
+                    utils.log('RosefinchPage.onHashChange, response ERROR!');
+                    that.hideMainListLoading();
+                    that.showToast(that.titleName, 'Response error.', 'danger');
+                }
                 return;
             }
+
+            that.hideMainListLoading();
 
             that.currentDir = data.data['current_path'];
             that.sort = data.data['sort']['type'];
