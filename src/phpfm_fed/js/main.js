@@ -215,6 +215,8 @@ class RosefinchPage {
         this.sortOrder = '';
 
         this.mainList = null;
+
+        this.currentDialog = null;
     }
 
     initContent() {
@@ -552,6 +554,7 @@ class RosefinchPage {
         if (this.modalNewFolder == null) {
             utils.log('RosefinchPage.showNewFolderDialog, init modalNewFolder.');
             let that = this;
+
             this.modalNewFolder = new RosefinchDialog();
             this.modalNewFolder.init('divModalNewFoler', true, true);
             this.modalNewFolder.setTitle('New folder');
@@ -576,6 +579,7 @@ class RosefinchPage {
 
             this.modalNewFolder.setShowHandler(function () {
                 utils.log('RosefinchPage.showNewFolderDialog, show.');
+                that.currentDialog = that.modalNewFolder;
                 jqueryUtils.focusOnInput(inputName);
             });
 
@@ -583,6 +587,7 @@ class RosefinchPage {
                 utils.log('RosefinchPage.showNewFolderDialog, close.');
                 inputName.val('');
                 inputName.removeAttr('disabled');
+                that.currentDialog = null;
             });
 
             this.modalNewFolder.setOkButtonHandler(function () {
@@ -623,6 +628,7 @@ class RosefinchPage {
                 });
             });
         }
+
         utils.log('RosefinchPage.showNewFolderDialog');
         this.modalNewFolder.show();
     }
@@ -630,6 +636,8 @@ class RosefinchPage {
     showAboutDialog() {
         if (this.modalAbout == null) {
             utils.log('RosefinchPage.showAboutDialog, init modalAbout.');
+            let that = this;
+
             this.modalAbout = new RosefinchDialog();
             this.modalAbout.init('divModalAbout');
             this.modalAbout.setTitle(this.titleName);
@@ -638,7 +646,15 @@ class RosefinchPage {
                 'Also, Rosefinch provides download, upload and other file manager features.<br/>' +
                 'Rosefinch can be an alternative of Apache Directory Listing.');
             this.modalAbout.setBody(pAboutBody);
+
+            this.modalAbout.setShowHandler(function () {
+                that.currentDialog = that.modalAbout;
+            });
+            this.modalAbout.setCloseHandler(function () {
+                that.currentDialog = null;
+            });
         }
+
         utils.log('RosefinchPage.showAboutDialog');
         this.modalAbout.show();
     }
