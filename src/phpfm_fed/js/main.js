@@ -574,6 +574,8 @@ class RosefinchPage {
             utils.log('RosefinchPage.showUploadDialog, init modalUpload.');
             let that = this;
 
+            const uploadFileInfoText = 'Click or drop files to upload.';
+
             this.modalUpload = new RosefinchDialog();
             this.modalUpload.init('divModalUpload', true, true);
             this.modalUpload.setTitle('Upload');
@@ -591,7 +593,7 @@ class RosefinchPage {
                 'id': 'labelUploadFileInfo',
                 'for': 'inputUploadFile'
             }).addClass('col-form-label');
-            labelUploadFileInfo.text('Click or drop files to upload.');
+            labelUploadFileInfo.text(uploadFileInfoText);
             let inputUploadFile = $('<input/>').attr({
                 'id': 'inputUploadFile',
                 'type': 'file',
@@ -630,8 +632,9 @@ class RosefinchPage {
 
             this.modalUpload.setCloseHandler(function () {
                 utils.log('RosefinchPage.showUploadDialog, close.');
-                // inputName.val('');
-                // inputName.removeAttr('disabled');
+                inputUploadFile.val('');
+                labelUploadFileInfo.text(uploadFileInfoText);
+                that.modalUpload.setTipsText('');
                 that.currentDialog = null;
             });
 
