@@ -234,6 +234,7 @@ class RosefinchPage {
         this.mainList = null;
 
         this.currentDialog = null;
+        this.dropFileEvent = null;
     }
 
     initContent() {
@@ -516,6 +517,16 @@ class RosefinchPage {
             }
             return false;
         };
+        bodyElem.ondrop = function (e) {
+            utils.log('RosefinchPage.initDragDropUpload, body ondrop.');
+            e.preventDefault();
+            if (that.currentDialog == that.modalUpload) {
+                that.dropFileEvent = e;
+                that.modalUpload.removeClass(dropFileClass);
+                that.modalUpload.clickOkButton();
+            }
+            return false;
+        }
     }
 
     checkRestRespData(data) {
@@ -724,8 +735,18 @@ class RosefinchPage {
                 form.append('ajax', 'ajax');
                 form.append('subdir', that.getCurrentDirStr());
 
-                // multi files
-                let uploadFiles = inputUploadFile.prop('files');
+                let uploadFiles = [];
+                if (that.dropFileEvent) {
+                    // drag and drop
+                    uploadFiles = that.dropFileEvent.dataTransfer.files;
+                    utils.log('RosefinchPage.showUploadDialog, dropFileEvent=%d', uploadFiles.length);
+                    that.dropFileEvent = null;
+                } else {
+                    // click
+                    uploadFiles = inputUploadFile.prop('files');
+                    utils.log('RosefinchPage.showUploadDialog, inputUploadFile=%d', uploadFiles.length);
+                }
+
                 let filesCount = uploadFiles.length;
                 for (let i = 0; i < filesCount; ++i) {
                     form.append('uploadFile[]', uploadFiles[i]);
