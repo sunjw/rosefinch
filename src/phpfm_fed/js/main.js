@@ -571,6 +571,7 @@ class RosefinchPage {
                 that.modalUpload.clickOkButton();
             });
             let divFormGroup = $('<div/>').addClass('form-group');
+
             let labelUploadFileInfo = $('<label/>').attr({
                 'id': 'labelUploadFileInfo',
                 'for': 'inputUploadFile'
@@ -582,6 +583,23 @@ class RosefinchPage {
                 'multiple': 'multiple'
             }).addClass('form-control');
             inputUploadFile.hide();
+            inputUploadFile.on('change', function () {
+                let fileList = inputUploadFile.prop('files');
+                if (fileList.length > 0) {
+                    let fileName = fileList[0].name;
+                    if (fileList.length > 1) {
+                        // multi files
+                        const fileNameMaxLen = 20;
+                        if (fileName.length > fileNameMaxLen) {
+                            fileName = fileName.substring(0, fileNameMaxLen) + '...';
+                        }
+                        fileName = fileName + ', ... ' + fileList.length + ' files';
+                    }
+                    fileName = utils.escapeHtmlPath(fileName);
+                    labelUploadFileInfo.html(fileName);
+                }
+            });
+
             divFormGroup.append(labelUploadFileInfo);
             divFormGroup.append(inputUploadFile);
             formBody.append(divFormGroup);
