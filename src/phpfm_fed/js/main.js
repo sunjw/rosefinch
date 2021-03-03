@@ -206,6 +206,7 @@ class RosefinchPage {
         this.buttonLoadingRight = null;
 
         // dialogs
+        this.modalUpload = null;
         this.modalNewFolder = null;
         this.modalAbout = null;
 
@@ -362,6 +363,9 @@ class RosefinchPage {
             that.onHashChange();
         });
         this.buttonUpload = this.generateToolbarButton('buttonUpload', 'bi-cloud-upload', 'Upload');
+        this.onButtonClick(this.buttonUpload, function () {
+            that.showUploadDialog();
+        });
         this.buttonNewFolder = this.generateToolbarButton('buttonNewFolder', 'bi-folder-plus', 'New Folder');
         this.onButtonClick(this.buttonNewFolder, function () {
             that.showNewFolderDialog();
@@ -548,6 +552,89 @@ class RosefinchPage {
         });
 
         divToast.toast('show');
+    }
+
+    showUploadDialog() {
+        if (this.modalUpload == null) {
+            utils.log('RosefinchPage.showUploadDialog, init modalUpload.');
+            let that = this;
+
+            this.modalUpload = new RosefinchDialog();
+            this.modalUpload.init('divModalUpload', true, true);
+            this.modalUpload.setTitle('Upload');
+            this.modalUpload.setCloseButtonText('Cancel');
+
+            let formBody = $('<form/>');
+            formBody.on('submit', function (e) {
+                utils.log('RosefinchPage.showUploadDialog, formBody.submit');
+                e.preventDefault();
+                that.modalUpload.clickOkButton();
+            });
+            // let divFormGroup = $('<div/>').addClass('form-group');
+            // let labelName = $('<label/>').attr('for', 'inputName').addClass('col-form-label').text('Name: ');
+            // let inputName = $('<input/>').attr({
+            //     'id': 'inputName',
+            //     'type': 'text'
+            // }).addClass('form-control');
+            // divFormGroup.append(labelName);
+            // divFormGroup.append(inputName);
+            // formBody.append(divFormGroup);
+            this.modalUpload.setBody(formBody);
+
+            this.modalUpload.setShowHandler(function () {
+                utils.log('RosefinchPage.showUploadDialog, show.');
+                that.currentDialog = that.modalUpload;
+                //jqueryUtils.focusOnInput(inputName);
+            });
+
+            this.modalUpload.setCloseHandler(function () {
+                utils.log('RosefinchPage.showUploadDialog, close.');
+                // inputName.val('');
+                // inputName.removeAttr('disabled');
+                that.currentDialog = null;
+            });
+
+            this.modalUpload.setOkButtonHandler(function () {
+                utils.log('RosefinchPage.showUploadDialog, ok.');
+
+                //inputName.attr('disabled', 'disabled');
+                that.modalUpload.showOkButtonLoading();
+
+                // let requestApi = that.generateRestApiUrl('api/v1/fm/newfolder');
+                // utils.log('RosefinchPage.showUploadDialog, requestApi=[%s]', requestApi);
+                // let reqObj = {};
+                // reqObj['subdir'] = that.getCurrentDirStr();
+                // reqObj['newname'] = inputName.val();
+                //
+                // let toastTitle = 'Upload';
+                // jqueryUtils.postRestRequest(requestApi, reqObj, function (data) {
+                //     that.modalUpload.close();
+                //
+                //     if (!that.checkRestRespData(data)) {
+                //         utils.log('RosefinchPage.showUploadDialog, response ERROR!');
+                //         that.showToast(toastTitle, 'Response error.', 'danger');
+                //     } else {
+                //         let dataCode = data['code'];
+                //         let dataMessage = data['message'];
+                //         utils.log('RosefinchPage.showUploadDialog, request OK, data[\'code\']=%d', dataCode);
+                //         if (dataCode == 0) {
+                //             that.showToast(toastTitle, dataMessage, 'success');
+                //         } else {
+                //             that.showToast(toastTitle, dataMessage, 'danger');
+                //         }
+                //     }
+                //
+                //     that.onHashChange();
+                // }, function () {
+                //     utils.log('RosefinchPage.showUploadDialog, request ERROR!');
+                //     that.modalUpload.close();
+                //     that.showToast(toastTitle, 'Request error.', 'danger');
+                // });
+            });
+        }
+
+        utils.log('RosefinchPage.showUploadDialog');
+        this.modalUpload.show();
     }
 
     showNewFolderDialog() {
