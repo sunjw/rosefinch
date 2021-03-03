@@ -650,9 +650,14 @@ class RosefinchPage {
                 let xhrUpload = new XMLHttpRequest();
                 xhrUpload.open('POST', requestApi);
                 xhrUpload.onload = function () {
-                    let data = JSON.parse(this.responseText);
-
                     that.modalUpload.close();
+
+                    let data = {};
+                    try {
+                        data = JSON.parse(this.responseText);
+                    } catch (e) {
+                        utils.log('RosefinchPage.showUploadDialog, JSON.parse ERROR!');
+                    }
 
                     if (!that.checkRestRespData(data)) {
                         utils.log('RosefinchPage.showUploadDialog, response ERROR!');
@@ -670,6 +675,11 @@ class RosefinchPage {
 
                     that.onHashChange();
                 };
+                xhrUpload.onerror = function () {
+                    utils.log('RosefinchPage.showUploadDialog, request ERROR!');
+                    that.modalUpload.close();
+                    that.showToast(toastTitle, 'Request error.', 'danger');
+                };
 
                 let form = new FormData();
                 //form.append('session', sessionId);
@@ -684,35 +694,6 @@ class RosefinchPage {
                 }
 
                 xhrUpload.send(form);
-
-                // let reqObj = {};
-                // reqObj['subdir'] = that.getCurrentDirStr();
-                // reqObj['newname'] = inputName.val();
-                //
-                // let toastTitle = 'Upload';
-                // jqueryUtils.postRestRequest(requestApi, reqObj, function (data) {
-                //     that.modalUpload.close();
-                //
-                //     if (!that.checkRestRespData(data)) {
-                //         utils.log('RosefinchPage.showUploadDialog, response ERROR!');
-                //         that.showToast(toastTitle, 'Response error.', 'danger');
-                //     } else {
-                //         let dataCode = data['code'];
-                //         let dataMessage = data['message'];
-                //         utils.log('RosefinchPage.showUploadDialog, request OK, data[\'code\']=%d', dataCode);
-                //         if (dataCode == 0) {
-                //             that.showToast(toastTitle, dataMessage, 'success');
-                //         } else {
-                //             that.showToast(toastTitle, dataMessage, 'danger');
-                //         }
-                //     }
-                //
-                //     that.onHashChange();
-                // }, function () {
-                //     utils.log('RosefinchPage.showUploadDialog, request ERROR!');
-                //     that.modalUpload.close();
-                //     that.showToast(toastTitle, 'Request error.', 'danger');
-                // });
             });
         }
 
