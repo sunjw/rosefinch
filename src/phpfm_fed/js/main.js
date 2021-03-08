@@ -248,6 +248,7 @@ class RosefinchPage {
         this.sortOrder = '';
 
         this.mainList = null;
+        this.fileSelectedList = null;
 
         this.currentDialog = null;
         this.dropFileEvent = null;
@@ -588,6 +589,22 @@ class RosefinchPage {
         return href;
     }
 
+    onFileSelected() {
+        this.fileSelectedList = [];
+        let fileListCheckboxes = $('li.detailLine .fileCheck input:checkbox');
+        for (let i = 0; i < fileListCheckboxes.length; i++) {
+            let fileListCheckboxElem = fileListCheckboxes.get(i);
+            if (fileListCheckboxElem.checked) {
+                let fileListCheckbox = $(fileListCheckboxElem);
+                let filePath = fileListCheckbox.attr('name');
+                this.fileSelectedList.push(filePath);
+            }
+        }
+
+        let fileSelectedCount = this.fileSelectedList.length;
+        utils.log('RosefinchPage.onFileSelected, fileSelectedCount=%d', fileSelectedCount);
+    }
+
     showMainListLoading() {
         this.buttonIconRefresh.hide();
         this.spanLoadingSpinnerLeft.show();
@@ -777,7 +794,7 @@ class RosefinchPage {
                 }
 
                 let filesCount = uploadFiles.length;
-                for (let i = 0; i < filesCount; ++i) {
+                for (let i = 0; i < filesCount; i++) {
                     form.append('uploadFile[]', uploadFiles[i]);
                 }
 
@@ -937,6 +954,8 @@ class RosefinchPage {
         const imageTypes = ['jpg', 'jpeg', 'bmp', 'png', 'gif'];
         const audioTypes = ['mp3'];
 
+        let that = this;
+
         // clear all
         this.ulDetailView.empty();
 
@@ -1039,6 +1058,7 @@ class RosefinchPage {
                 } else {
                     liDetailLine.removeClass('selected');
                 }
+                that.onFileSelected();
             });
             let aFileLinkElem = aFileLink.get(0);
             aFileLinkElem.onclick = function (e) {
