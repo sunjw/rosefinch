@@ -1028,6 +1028,14 @@ class RosefinchPage {
 
             liDetailLine.append(divDetailLineRight);
 
+            // event
+            liDetailLine.on('mouseover', function () {
+                liDetailLine.addClass('hover');
+            });
+            liDetailLine.on('mouseout', function () {
+                liDetailLine.removeClass('hover');
+            });
+
             this.ulDetailView.append(liDetailLine);
         }
     }

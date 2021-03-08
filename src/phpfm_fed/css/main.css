@@ -1,6 +1,7 @@
 /* Common */
 :root {
   --phpfm-tint: #da020e;
+  --ani-duration: 0.5s;
 }
 
 body {
@@ -103,9 +104,16 @@ img {
 #ulDetailView .list-group-item {
   padding: 0 1.25rem 0 1.5rem;
   margin-bottom: 0.18rem;
+  transition-property: background, color, border;
+  transition-duration: var(--ani-duration);
 }
 #ulDetailView .list-group-item:last-child {
   border-bottom-width: 1px;
+}
+#ulDetailView .list-group-item.hover {
+  border-color: rgba(0, 0, 0, 0.375);
+  transition-property: background, color, border;
+  transition-duration: var(--ani-duration);
 }
 #ulDetailView .list-group-item .detailLineRight {
   margin-left: 0.5rem;
