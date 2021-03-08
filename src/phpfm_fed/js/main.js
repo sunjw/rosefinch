@@ -376,6 +376,7 @@ class RosefinchPage {
             that.renderBreadcrumb();
             that.onLayoutResize();
             that.renderMainList();
+            that.onFileSelected();
         }, function () {
             utils.log('RosefinchPage.onHashChange, request ERROR!');
             that.showToast(that.titleName, 'Request error.', 'danger');
@@ -609,6 +610,29 @@ class RosefinchPage {
 
         let fileSelectedCount = this.fileSelectedList.length;
         utils.log('RosefinchPage.onFileSelected, fileSelectedCount=%d', fileSelectedCount);
+
+        if (fileSelectedCount == 0) {
+            this.buttonCut.hide();
+            this.buttonCopy.hide();
+            this.buttonPaste.hide();
+            this.buttonRename.hide();
+            this.buttonDelete.hide();
+            this.buttonShare.hide();
+        } else if (fileSelectedCount == 1) {
+            this.buttonCut.show();
+            this.buttonCopy.show();
+            this.buttonPaste.show();
+            this.buttonRename.show();
+            this.buttonDelete.show();
+            this.buttonShare.show();
+        } else if (fileSelectedCount > 1) {
+            this.buttonCut.show();
+            this.buttonCopy.show();
+            this.buttonPaste.show();
+            this.buttonRename.hide();
+            this.buttonDelete.show();
+            this.buttonShare.hide();
+        }
     }
 
     showMainListLoading() {
