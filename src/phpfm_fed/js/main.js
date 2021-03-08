@@ -436,7 +436,6 @@ class RosefinchPage {
         this.buttonDelete = this.generateToolbarButton('buttonDelete', 'bi-trash', 'Delete');
         this.buttonDelete.hide();
         this.buttonShare = this.generateToolbarButton('buttonShare', 'bi-upc-scan', 'QR Code');
-        this.buttonShare.hide();
 
         this.divToolbarLeft.append(this.buttonBack);
         this.divToolbarLeft.append('\n'); // fix strange layout
@@ -617,7 +616,7 @@ class RosefinchPage {
             this.buttonPaste.hide();
             this.buttonRename.hide();
             this.buttonDelete.hide();
-            this.buttonShare.hide();
+            this.buttonShare.show();
         } else if (fileSelectedCount == 1) {
             this.buttonCut.show();
             this.buttonCopy.show();
