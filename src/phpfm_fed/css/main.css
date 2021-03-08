@@ -234,9 +234,11 @@ img {
   #navToolbarWrapper #buttonCut,
   #navToolbarWrapper #buttonCopy,
   #navToolbarWrapper #buttonPaste,
-  #navToolbarWrapper #spanBrand,
   #navToolbarWrapper #buttonDebug,
   #navToolbarWrapper #buttonSetting {
+    display: none !important;
+  }
+  #navToolbarWrapper #spanBrand {
     display: none;
   }
 
