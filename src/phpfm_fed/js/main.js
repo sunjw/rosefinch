@@ -1029,11 +1029,30 @@ class RosefinchPage {
             liDetailLine.append(divDetailLineRight);
 
             // event
+            let inputCheckboxElem = inputCheckbox.get(0);
+            inputCheckboxElem.onclick = function (e) {
+                jqueryUtils.stopBubble(e);
+            };
+            inputCheckbox.on('change', function () {
+                if (inputCheckboxElem.checked) {
+                    liDetailLine.addClass('selected');
+                } else {
+                    liDetailLine.removeClass('selected');
+                }
+            });
+            let aFileLinkElem = aFileLink.get(0);
+            aFileLinkElem.onclick = function (e) {
+                jqueryUtils.stopBubble(e);
+            };
+
             liDetailLine.on('mouseover', function () {
                 liDetailLine.addClass('hover');
             });
             liDetailLine.on('mouseout', function () {
                 liDetailLine.removeClass('hover');
+            });
+            liDetailLine.on('click', function () {
+                inputCheckboxElem.click();
             });
 
             this.ulDetailView.append(liDetailLine);

@@ -32,8 +32,18 @@ function focusOnInput(inputElem) {
     inputElem.get(0).select();
 }
 
+function stopBubble(event) {
+    var event = event ? event : window.event;
+    if (window.event) {
+        event.cancelBubble = true;
+    } else {
+        event.stopPropagation();
+    }
+}
+
 // exports
 exports.restRequest = restRequest;
 exports.postRestRequest = postRestRequest;
 exports.getRestRequest = getRestRequest;
 exports.focusOnInput = focusOnInput;
+exports.stopBubble = stopBubble;

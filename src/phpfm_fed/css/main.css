@@ -110,7 +110,7 @@ img {
 #ulDetailView .list-group-item:last-child {
   border-bottom-width: 1px;
 }
-#ulDetailView .list-group-item.hover {
+#ulDetailView .list-group-item.hover, #ulDetailView .list-group-item.selected {
   border-color: rgba(0, 0, 0, 0.375);
   transition-property: background, color, border;
   transition-duration: var(--ani-duration);
