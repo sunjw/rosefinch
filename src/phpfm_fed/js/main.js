@@ -962,9 +962,9 @@ class RosefinchPage {
                 itemIsAudio = true;
             }
 
-            let li = $('<li/>').addClass('detailLine list-group-item d-flex');
+            let liDetailLine = $('<li/>').addClass('detailLine list-group-item d-flex');
             if (itemIsFolder) {
-                li.addClass('detailLineFolder');
+                liDetailLine.addClass('detailLineFolder');
             }
 
             // left
@@ -1009,7 +1009,7 @@ class RosefinchPage {
             aFileLink.append(spanFileName);
             divDetailLineLeft.append(aFileLink);
 
-            li.append(divDetailLineLeft);
+            liDetailLine.append(divDetailLineLeft);
 
             // right
             let divDetailLineRight = $('<div/>').addClass('detailLineRight d-flex align-items-center');
@@ -1026,9 +1026,9 @@ class RosefinchPage {
             let spanFileTime = $('<span/>').addClass('fileTime').text(npmUtils.formatTimestamp(item['mtime']));
             divDetailLineRight.append(spanFileTime);
 
-            li.append(divDetailLineRight);
+            liDetailLine.append(divDetailLineRight);
 
-            this.ulDetailView.append(li);
+            this.ulDetailView.append(liDetailLine);
         }
     }
 }
