@@ -425,11 +425,17 @@ class RosefinchPage {
             that.showNewFolderDialog();
         });
         this.buttonCut = this.generateToolbarButton('buttonCut', 'bi-scissors', 'Cut');
+        this.buttonCut.hide();
         this.buttonCopy = this.generateToolbarButton('buttonCopy', 'bi-files', 'Copy');
+        this.buttonCopy.hide();
         this.buttonPaste = this.generateToolbarButton('buttonPaste', 'bi-clipboard', 'Paste');
+        this.buttonPaste.hide();
         this.buttonRename = this.generateToolbarButton('buttonRename', 'bi-input-cursor-text', 'Rename');
+        this.buttonRename.hide();
         this.buttonDelete = this.generateToolbarButton('buttonDelete', 'bi-trash', 'Delete');
+        this.buttonDelete.hide();
         this.buttonShare = this.generateToolbarButton('buttonShare', 'bi-upc-scan', 'QR Code');
+        this.buttonShare.hide();
 
         this.divToolbarLeft.append(this.buttonBack);
         this.divToolbarLeft.append('\n'); // fix strange layout
