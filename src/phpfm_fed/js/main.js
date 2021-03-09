@@ -251,6 +251,7 @@ class RosefinchPage {
         // dialogs
         this.modalUpload = null;
         this.modalNewFolder = null;
+        this.modalDelete = null;
         this.modalAbout = null;
 
         // vars
@@ -445,6 +446,9 @@ class RosefinchPage {
         this.buttonRename = this.generateToolbarButton('buttonRename', 'bi-input-cursor-text', 'Rename');
         this.buttonRename.hide();
         this.buttonDelete = this.generateToolbarButton('buttonDelete', 'bi-trash', 'Delete');
+        this.onButtonClick(this.buttonDelete, function () {
+            that.showDeleteDialog();
+        });
         this.buttonDelete.hide();
         this.buttonShare = this.generateToolbarButton('buttonShare', 'bi-upc-scan', 'QR Code');
 
@@ -930,6 +934,71 @@ class RosefinchPage {
         this.modalNewFolder.show();
     }
 
+    showDeleteDialog() {
+        if (this.modalDelete == null) {
+            utils.log('RosefinchPage.showDeleteDialog, init modalNewFolder.');
+            let that = this;
+
+            this.modalDelete = new RosefinchDialog();
+            this.modalDelete.init('divModalDelete', true, true);
+            this.modalDelete.setTitle('Delete');
+            this.modalDelete.setCloseButtonText('Cancel');
+
+            let divMessage = $('<div/>');
+            let pDeleteMessage = $('<p/>');
+            pDeleteMessage.html('Are you sure to delete selected files?');
+            divMessage.append(pDeleteMessage);
+            this.modalDelete.setBody(divMessage);
+
+            this.modalDelete.setCloseHandler(function () {
+                utils.log('RosefinchPage.showDeleteDialog, close.');
+                that.currentDialog = null;
+            });
+
+            this.modalDelete.setOkButtonHandler(function () {
+                utils.log('RosefinchPage.showDeleteDialog, ok.');
+
+                // inputName.attr('disabled', 'disabled');
+                // that.modalDelete.showOkButtonLoading();
+                //
+                // let requestApi = that.generateRestApiUrl('api/v1/fm/newfolder');
+                // utils.log('RosefinchPage.showDeleteDialog, requestApi=[%s]', requestApi);
+                // let reqObj = {};
+                // reqObj['subdir'] = that.getCurrentDirStr();
+                // reqObj['newname'] = inputName.val();
+                //
+                // let toastTitle = 'New folder';
+                // jqueryUtils.postRestRequest(requestApi, reqObj, function (data) {
+                //     that.modalDelete.close();
+                //
+                //     if (!that.checkRestRespData(data)) {
+                //         utils.log('RosefinchPage.showDeleteDialog, response ERROR!');
+                //         that.showToast(toastTitle, 'Response error.', 'danger');
+                //     } else {
+                //         let dataCode = data['code'];
+                //         let dataMessage = data['message'];
+                //         utils.log('RosefinchPage.showDeleteDialog, request OK, data[\'code\']=%d', dataCode);
+                //         if (dataCode == 0) {
+                //             that.showToast(toastTitle, dataMessage, 'success');
+                //         } else {
+                //             that.showToast(toastTitle, dataMessage, 'danger');
+                //         }
+                //     }
+                //
+                //     that.onHashChange();
+                // }, function () {
+                //     utils.log('RosefinchPage.showDeleteDialog, request ERROR!');
+                //     that.modalDelete.close();
+                //     that.showToast(toastTitle, 'Request error.', 'danger');
+                // });
+            });
+        }
+
+        utils.log('RosefinchPage.showDeleteDialog');
+        this.currentDialog = this.modalDelete;
+        this.modalDelete.show();
+    }
+
     showAboutDialog() {
         if (this.modalAbout == null) {
             utils.log('RosefinchPage.showAboutDialog, init modalAbout.');
@@ -945,6 +1014,7 @@ class RosefinchPage {
             this.modalAbout.setBody(pAboutBody);
 
             this.modalAbout.setCloseHandler(function () {
+                utils.log('RosefinchPage.showAboutDialog, close.');
                 that.currentDialog = null;
             });
         }
