@@ -32,6 +32,7 @@ class RosefinchDialog {
         this.isShown = false;
         this.pendingClose = false;
 
+        this.dataHandler = null;
         this.showHandler = null;
         this.closeHandler = null;
     }
@@ -132,6 +133,16 @@ class RosefinchDialog {
 
     setBody(childElement) {
         this.divModalBody.append(childElement);
+    }
+
+    setDataHandler(dataHandler) {
+        this.dataHandler = dataHandler;
+    }
+
+    setData(data) {
+        if (this.dataHandler) {
+            this.dataHandler(data);
+        }
     }
 
     hasShown() {
