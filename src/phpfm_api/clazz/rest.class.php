@@ -295,16 +295,17 @@ class Rest
         $items = $req_obj['items'];
         $items = Utility::filter_paths($items);
 
+        $code = 0;
         $message = '';
 
+        $delete_result = true;
         $count = count($items);
         for ($i = 0; $i < $count; $i++) {
             $success = false;
             $item = $items[$i];
-            $sub_dir = dirname($item);
+            //$sub_dir = dirname($item);
             $path = $this->files_base_dir . $item;
             get_logger()->info('handle_delete, try to delete: [' . $path . '].');
-            $message .= (_('Delete') . ' ' . htmlentities_utf8($item) . ' ');
             $path = convert_toplat($path);
             if (file_exists($path)) {
                 if (is_dir($path)) {
@@ -313,16 +314,21 @@ class Rest
                     $success = @unlink($path);
                 }
             }
-            if ($success === true) {
-                $message .= (_('succeed') . '<br />');
-                $stat = 1;
-            } else {
-                $message .= ('<strong>' . _('failed') . '</strong><br />');
-                $stat = 2;
+            if ($success != true) {
+                $delete_result = false;
             }
         }
 
+        if ($delete_result) {
+            $code = 0;
+            $message = 'Files/folders deleted successfully.';
+        } else {
+            $code = 500;
+            $message = 'Some files/folders delete failed.';
+        }
+
         $resp_obj = new RestRet();
+        $resp_obj->code = $code;
         $resp_obj->message = $message;
         $this->response_json($resp_obj);
     }
