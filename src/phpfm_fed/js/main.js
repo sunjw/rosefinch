@@ -946,7 +946,7 @@ class RosefinchPage {
 
             let divMessage = $('<div/>');
             let pDeleteMessage = $('<p/>');
-            pDeleteMessage.html('Are you sure to delete selected files?');
+            pDeleteMessage.html('Are you sure to delete selected files/folders?');
             divMessage.append(pDeleteMessage);
             this.modalDelete.setBody(divMessage);
 
