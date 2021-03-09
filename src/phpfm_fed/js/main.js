@@ -958,39 +958,37 @@ class RosefinchPage {
             this.modalDelete.setOkButtonHandler(function () {
                 utils.log('RosefinchPage.showDeleteDialog, ok.');
 
-                // inputName.attr('disabled', 'disabled');
-                // that.modalDelete.showOkButtonLoading();
-                //
-                // let requestApi = that.generateRestApiUrl('api/v1/fm/newfolder');
-                // utils.log('RosefinchPage.showDeleteDialog, requestApi=[%s]', requestApi);
-                // let reqObj = {};
-                // reqObj['subdir'] = that.getCurrentDirStr();
-                // reqObj['newname'] = inputName.val();
-                //
-                // let toastTitle = 'New folder';
-                // jqueryUtils.postRestRequest(requestApi, reqObj, function (data) {
-                //     that.modalDelete.close();
-                //
-                //     if (!that.checkRestRespData(data)) {
-                //         utils.log('RosefinchPage.showDeleteDialog, response ERROR!');
-                //         that.showToast(toastTitle, 'Response error.', 'danger');
-                //     } else {
-                //         let dataCode = data['code'];
-                //         let dataMessage = data['message'];
-                //         utils.log('RosefinchPage.showDeleteDialog, request OK, data[\'code\']=%d', dataCode);
-                //         if (dataCode == 0) {
-                //             that.showToast(toastTitle, dataMessage, 'success');
-                //         } else {
-                //             that.showToast(toastTitle, dataMessage, 'danger');
-                //         }
-                //     }
-                //
-                //     that.onHashChange();
-                // }, function () {
-                //     utils.log('RosefinchPage.showDeleteDialog, request ERROR!');
-                //     that.modalDelete.close();
-                //     that.showToast(toastTitle, 'Request error.', 'danger');
-                // });
+                that.modalDelete.showOkButtonLoading();
+
+                let requestApi = that.generateRestApiUrl('api/v1/fm/delete');
+                utils.log('RosefinchPage.showDeleteDialog, requestApi=[%s]', requestApi);
+                let reqObj = {};
+                reqObj['items'] = that.fileSelectedList;
+
+                let toastTitle = 'Delete';
+                jqueryUtils.postRestRequest(requestApi, reqObj, function (data) {
+                    that.modalDelete.close();
+
+                    if (!that.checkRestRespData(data)) {
+                        utils.log('RosefinchPage.showDeleteDialog, response ERROR!');
+                        that.showToast(toastTitle, 'Response error.', 'danger');
+                    } else {
+                        let dataCode = data['code'];
+                        let dataMessage = data['message'];
+                        utils.log('RosefinchPage.showDeleteDialog, request OK, data[\'code\']=%d', dataCode);
+                        if (dataCode == 0) {
+                            that.showToast(toastTitle, dataMessage, 'success');
+                        } else {
+                            that.showToast(toastTitle, dataMessage, 'danger');
+                        }
+                    }
+
+                    that.onHashChange();
+                }, function () {
+                    utils.log('RosefinchPage.showDeleteDialog, request ERROR!');
+                    that.modalDelete.close();
+                    that.showToast(toastTitle, 'Request error.', 'danger');
+                });
             });
         }
 
