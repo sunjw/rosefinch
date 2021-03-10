@@ -33,7 +33,7 @@ function focusOnInput(inputElem) {
 }
 
 function stopBubble(event) {
-    var event = event ? event : window.event;
+    let event = event ? event : window.event;
     if (window.event) {
         event.cancelBubble = true;
     } else {
