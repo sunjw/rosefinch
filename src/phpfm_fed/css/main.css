@@ -185,6 +185,9 @@ img {
   color: var(--phpfm-tint);
   border-width: 0.1rem;
 }
+#divModalImage .previewContent img {
+  cursor: pointer;
+}
 #divModalImage.previewImageLoaded .modal-dialog {
   max-width: none;
 }

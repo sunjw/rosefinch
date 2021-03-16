@@ -1148,6 +1148,12 @@ class RosefinchPage {
                         window.location.href = dataLink;
                     });
 
+                    let downloadMaxWidth = imgPreviewWidth;
+                    if (imgPreviewWidth < 470) {
+                        downloadMaxWidth = 470;
+                    }
+                    divPreviewDownload.css('max-width', downloadMaxWidth + 'px');
+
                     divLoading.hide();
                     imgPreview.show();
                     that.modalImage.addClass(previewImageLoadedClass);
@@ -1167,8 +1173,9 @@ class RosefinchPage {
                 utils.log('RosefinchPage.showImagePreviewDialog, close.');
                 divLoading.show();
                 imgPreview.hide();
-                imgPreview.attr('src', '');
+                imgPreview.attr('src', '').width(0).height(0);
                 aDownload.attr('href', '').html('');
+                divPreviewDownload.css('max-width', 'none');
                 that.modalImage.removeClass(previewImageLoadedClass);
                 that.currentDialog = null;
             });
