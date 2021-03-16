@@ -536,7 +536,15 @@ class RosefinchPage {
     }
 
     isImageType(type) {
+        let imgTypes = ['jpg', 'jpeg', 'bmp', 'png', 'gif'];
+        type = type.toLowerCase();
+        return imgTypes.includes(type);
+    }
 
+    isAudioType(type) {
+        let audioTypes = ['mp3'];
+        type = type.toLowerCase();
+        return audioTypes.includes(type);
     }
 
     initDragDropUpload() {
