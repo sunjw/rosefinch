@@ -1039,7 +1039,7 @@ class RosefinchPage {
         this.modalAbout.show();
     }
 
-    showAudioPreviewDialog() {
+    showAudioPreviewDialog(audioTitle, audioLink) {
         if (this.modalAudio == null) {
             utils.log('RosefinchPage.showAudioPreviewDialog, init modalAudio.');
             let that = this;
@@ -1048,11 +1048,15 @@ class RosefinchPage {
             this.modalAudio.init('divModalAudio');
             this.modalAudio.setTitle('Preview');
 
-            let divMessage = $('<div/>');
-            let pDeleteMessage = $('<p/>');
-            pDeleteMessage.html('Are you sure to delete selected files/folders?');
-            divMessage.append(pDeleteMessage);
-            this.modalAudio.setBody(divMessage);
+            let divPreview = $('<div/>');
+            let audioControl = $('<audio controls/>');
+            divPreview.append(audioControl);
+            let divDownload = $('<div/>');
+            divDownload.html('Download:&nbsp;');
+            let aDownload = $('<a/>');
+            divDownload.append(aDownload);
+            divPreview.append(divDownload);
+            this.modalAudio.setBody(divPreview);
 
             this.modalAudio.setCloseHandler(function () {
                 utils.log('RosefinchPage.showAudioPreviewDialog, close.');
@@ -1229,7 +1233,7 @@ class RosefinchPage {
             // init preview
             if (aFileLink.hasClass(previewAudioClass)) {
                 aFileLink.on('click', function () {
-                    that.showAudioPreviewDialog();
+                    that.showAudioPreviewDialog(itemName, aFileLinkHref);
                     return false;
                 });
             }
