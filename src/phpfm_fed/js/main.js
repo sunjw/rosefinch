@@ -1053,7 +1053,7 @@ class RosefinchPage {
             divPreviewContent.append(audioControl);
             this.modalAudio.setBody(divPreviewContent);
             let divPreviewDownload = $('<div/>');
-            let divDownload = $('<div/>').addClass('previewDownload');
+            let divDownload = $('<div/>').addClass('previewDownload text-truncate');
             divDownload.html('Download:&nbsp;');
             let aDownload = $('<a/>');
             divDownload.append(aDownload);
