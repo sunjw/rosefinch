@@ -1088,6 +1088,8 @@ class RosefinchPage {
     showImagePreviewDialog(imageTitle, imageLink) {
         if (this.modalImage == null) {
             utils.log('RosefinchPage.showImagePreviewDialog, init modalImage.');
+            const previewImageLoadedClass = 'previewImageLoaded';
+
             let that = this;
 
             this.modalImage = new RosefinchDialog();
@@ -1099,6 +1101,9 @@ class RosefinchPage {
             let spanLoading = $('<span/>').addClass('sr-only');
             divLoading.append(spanLoading);
             divPreviewContent.append(divLoading);
+            let imgPreview = $('<img/>');
+            imgPreview.hide();
+            divPreviewContent.append(imgPreview);
             this.modalImage.appendBody(divPreviewContent);
             let divPreviewDownload = $('<div/>').addClass('previewDownload text-truncate');
             divPreviewDownload.html('Download:&nbsp;');
@@ -1109,15 +1114,73 @@ class RosefinchPage {
             this.modalImage.setDataHandler(function (data) {
                 let dataTitle = data['title'];
                 let dataLink = data['link'];
-                //audioControl.attr('src', dataLink);
                 aDownload.attr('href', dataLink).html(dataTitle);
+                let imgObj = new Image();
+                imgObj.onload = function () {
+                    // Load finished
+                    let imgWidth = imgObj.width;
+                    let imgHeight = imgObj.height;
+                    let imgRatio = imgWidth / imgHeight;
+                    utils.log('RosefinchPage.showImagePreviewDialog, imgWidth=%d, imgHeight=%d, imgRatio=%f',
+                        imgWidth, imgHeight, imgRatio);
+
+                    // var imgPreviewWidth;
+                    // var imgPreviewHeight;
+                    // if (!FileManager.isMobile) {
+                    //     imgPreviewWidth = 960; // 1000 - 40
+                    //     imgPreviewHeight = browserHeight - 200;
+                    // } else {
+                    //     imgPreviewWidth = funcDialog.width() - 20;
+                    //     imgPreviewHeight = funcDialog.height() - 280;
+                    // }
+                    // var imgPreviewRadio = imgPreviewWidth / imgPreviewHeight;
+                    //
+                    // if (imgRatio >= imgPreviewRadio) {
+                    //     imgPreviewHeight = imgPreviewWidth / imgRatio;
+                    // } else {
+                    //     imgPreviewWidth = imgPreviewHeight * imgRatio;
+                    // }
+                    //
+                    // if (!FileManager.isMobile) {
+                    //     // Desktop css fix again.
+                    //     var previewWidth = imgPreviewWidth + 20;
+                    //     var previewHeight = imgPreviewHeight + 90;
+                    //     previewWidth = (previewWidth > previewLoadingWidth) ? previewWidth : previewLoadingWidth;
+                    //     funcDialog.css({
+                    //         'left': ((browserWidth - previewWidth) / 2) + 'px',
+                    //         'width': previewWidth + 'px',
+                    //         'height': previewHeight + 'px'
+                    //     });
+                    // }
+                    // previewContentInner.attr('src', '');
+                    // previewContentInner.css({
+                    //     'width': imgPreviewWidth + 'px',
+                    //     'height': imgPreviewHeight + 'px'
+                    // });
+                    // previewContentInner.attr('src', previewLink);
+                    // previewContentInner.attr('alt', previewTitle);
+                    // previewContentInner.click(function () {
+                    //     window.location.href = previewLink;
+                    // });
+
+                    that.modalImage.addClass(previewImageLoadedClass);
+
+                    imgObj.onload = function () {
+                    };
+                };
+
+                setTimeout(function () {
+                    imgObj.src = dataLink;
+                }, 3000);
+                //imgObj.src = dataLink;
             });
 
             this.modalImage.setCloseHandler(function () {
                 utils.log('RosefinchPage.showImagePreviewDialog, close.');
-                // audioControl.get(0).pause();
-                // audioControl.attr('src', '');
+                divLoading.show();
+                imgPreview.hide();
                 aDownload.attr('href', '').html('');
+                that.modalImage.removeClass(previewImageLoadedClass);
                 that.currentDialog = null;
             });
         }

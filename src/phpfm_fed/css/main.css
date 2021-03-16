@@ -185,6 +185,12 @@ img {
   color: var(--phpfm-tint);
   border-width: 0.1rem;
 }
+#divModalImage.previewImageLoaded .modal-dialog {
+  max-width: none;
+}
+#divModalImage.previewImageLoaded .modal-content {
+  width: auto;
+}
 
 #divToastWrapper {
   position: absolute;
