@@ -1121,7 +1121,7 @@ class RosefinchPage {
                 aDownload.attr('href', dataLink).html(dataTitle);
                 let imgObj = new Image();
                 imgObj.onload = function () {
-                    // Load finished
+                    // load finished
                     let imgWidth = imgObj.width;
                     let imgHeight = imgObj.height;
                     let imgRatio = imgWidth / imgHeight;
@@ -1137,15 +1137,9 @@ class RosefinchPage {
                     } else {
                         imgPreviewWidth = imgPreviewHeight * imgRatio;
                     }
-
                     imgPreview.css({
                         'width': imgPreviewWidth + 'px',
                         'height': imgPreviewHeight + 'px'
-                    });
-                    imgPreview.attr('src', dataLink);
-                    imgPreview.attr('alt', dataTitle);
-                    imgPreview.on('click', function () {
-                        window.location.href = dataLink;
                     });
 
                     let downloadMaxWidth = imgPreviewWidth;
@@ -1153,6 +1147,12 @@ class RosefinchPage {
                         downloadMaxWidth = 470;
                     }
                     divPreviewDownload.css('max-width', downloadMaxWidth + 'px');
+
+                    imgPreview.attr('src', dataLink);
+                    imgPreview.attr('alt', dataTitle);
+                    imgPreview.on('click', function () {
+                        window.location.href = dataLink;
+                    });
 
                     divLoading.hide();
                     imgPreview.show();
