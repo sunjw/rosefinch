@@ -254,6 +254,8 @@ class RosefinchPage {
         this.modalDelete = null;
         this.modalAbout = null;
 
+        this.modalAudio = null;
+
         // vars
         this.currentDir = [];
         this.sort = '';
@@ -948,7 +950,7 @@ class RosefinchPage {
 
     showDeleteDialog() {
         if (this.modalDelete == null) {
-            utils.log('RosefinchPage.showDeleteDialog, init modalNewFolder.');
+            utils.log('RosefinchPage.showDeleteDialog, init modalDelete.');
             let that = this;
 
             this.modalDelete = new RosefinchDialog();
@@ -1035,6 +1037,32 @@ class RosefinchPage {
         utils.log('RosefinchPage.showAboutDialog');
         this.currentDialog = this.modalAbout;
         this.modalAbout.show();
+    }
+
+    showAudioPreviewDialog() {
+        if (this.modalAudio == null) {
+            utils.log('RosefinchPage.showAudioPreviewDialog, init modalAudio.');
+            let that = this;
+
+            this.modalAudio = new RosefinchDialog();
+            this.modalAudio.init('divModalAudio');
+            this.modalAudio.setTitle('Preview');
+
+            let divMessage = $('<div/>');
+            let pDeleteMessage = $('<p/>');
+            pDeleteMessage.html('Are you sure to delete selected files/folders?');
+            divMessage.append(pDeleteMessage);
+            this.modalAudio.setBody(divMessage);
+
+            this.modalAudio.setCloseHandler(function () {
+                utils.log('RosefinchPage.showAudioPreviewDialog, close.');
+                that.currentDialog = null;
+            });
+        }
+
+        utils.log('RosefinchPage.showAudioPreviewDialog');
+        this.currentDialog = this.modalAudio;
+        this.modalAudio.show();
     }
 
     renderBreadcrumb() {
@@ -1198,11 +1226,16 @@ class RosefinchPage {
                 inputCheckboxElem.click();
             });
 
+            // init preview
+            if (aFileLink.hasClass(previewAudioClass)) {
+                aFileLink.on('click', function () {
+                    that.showAudioPreviewDialog();
+                    return false;
+                });
+            }
+
             this.ulDetailView.append(liDetailLine);
         }
-
-        // init preview
-
     }
 }
 
