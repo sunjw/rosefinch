@@ -149,6 +149,10 @@ class RosefinchDialog {
         return this.isShown;
     }
 
+    handleUpdate() {
+        this.divModal.modal('handleUpdate');
+    }
+
     setShowHandler(showHandler) {
         this.showHandler = showHandler;
     }
@@ -1101,7 +1105,7 @@ class RosefinchPage {
             let spanLoading = $('<span/>').addClass('sr-only');
             divLoading.append(spanLoading);
             divPreviewContent.append(divLoading);
-            let imgPreview = $('<img/>');
+            let imgPreview = $('<img/>').attr('src', '');
             imgPreview.hide();
             divPreviewContent.append(imgPreview);
             this.modalImage.appendBody(divPreviewContent);
@@ -1124,46 +1128,30 @@ class RosefinchPage {
                     utils.log('RosefinchPage.showImagePreviewDialog, imgWidth=%d, imgHeight=%d, imgRatio=%f',
                         imgWidth, imgHeight, imgRatio);
 
-                    // var imgPreviewWidth;
-                    // var imgPreviewHeight;
-                    // if (!FileManager.isMobile) {
-                    //     imgPreviewWidth = 960; // 1000 - 40
-                    //     imgPreviewHeight = browserHeight - 200;
-                    // } else {
-                    //     imgPreviewWidth = funcDialog.width() - 20;
-                    //     imgPreviewHeight = funcDialog.height() - 280;
-                    // }
-                    // var imgPreviewRadio = imgPreviewWidth / imgPreviewHeight;
-                    //
-                    // if (imgRatio >= imgPreviewRadio) {
-                    //     imgPreviewHeight = imgPreviewWidth / imgRatio;
-                    // } else {
-                    //     imgPreviewWidth = imgPreviewHeight * imgRatio;
-                    // }
-                    //
-                    // if (!FileManager.isMobile) {
-                    //     // Desktop css fix again.
-                    //     var previewWidth = imgPreviewWidth + 20;
-                    //     var previewHeight = imgPreviewHeight + 90;
-                    //     previewWidth = (previewWidth > previewLoadingWidth) ? previewWidth : previewLoadingWidth;
-                    //     funcDialog.css({
-                    //         'left': ((browserWidth - previewWidth) / 2) + 'px',
-                    //         'width': previewWidth + 'px',
-                    //         'height': previewHeight + 'px'
-                    //     });
-                    // }
-                    // previewContentInner.attr('src', '');
-                    // previewContentInner.css({
-                    //     'width': imgPreviewWidth + 'px',
-                    //     'height': imgPreviewHeight + 'px'
-                    // });
-                    // previewContentInner.attr('src', previewLink);
-                    // previewContentInner.attr('alt', previewTitle);
-                    // previewContentInner.click(function () {
-                    //     window.location.href = previewLink;
-                    // });
+                    let imgPreviewWidth = that.getWindowWidth() - 100;
+                    let imgPreviewHeight = that.getWindowHeight() - 300;
+                    let imgPreviewRadio = imgPreviewWidth / imgPreviewHeight;
 
+                    if (imgRatio >= imgPreviewRadio) {
+                        imgPreviewHeight = imgPreviewWidth / imgRatio;
+                    } else {
+                        imgPreviewWidth = imgPreviewHeight * imgRatio;
+                    }
+
+                    imgPreview.css({
+                        'width': imgPreviewWidth + 'px',
+                        'height': imgPreviewHeight + 'px'
+                    });
+                    imgPreview.attr('src', dataLink);
+                    imgPreview.attr('alt', dataTitle);
+                    imgPreview.on('click', function () {
+                        window.location.href = dataLink;
+                    });
+
+                    divLoading.hide();
+                    imgPreview.show();
                     that.modalImage.addClass(previewImageLoadedClass);
+                    that.modalImage.handleUpdate();
 
                     imgObj.onload = function () {
                     };
@@ -1171,7 +1159,7 @@ class RosefinchPage {
 
                 setTimeout(function () {
                     imgObj.src = dataLink;
-                }, 3000);
+                }, 2000);
                 //imgObj.src = dataLink;
             });
 
@@ -1179,6 +1167,7 @@ class RosefinchPage {
                 utils.log('RosefinchPage.showImagePreviewDialog, close.');
                 divLoading.show();
                 imgPreview.hide();
+                imgPreview.attr('src', '');
                 aDownload.attr('href', '').html('');
                 that.modalImage.removeClass(previewImageLoadedClass);
                 that.currentDialog = null;
