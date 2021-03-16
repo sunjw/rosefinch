@@ -61,7 +61,7 @@ img {
   color: var(--phpfm-tint);
   width: 1.2rem;
   height: 1.2rem;
-  border-width: 0.1em;
+  border-width: 0.1rem;
 }
 #navToolbarWrapper .toolbarBtnLoading.disabled,#navToolbarWrapper .toolbarBtnLoading:disabled {
   opacity: 1;
@@ -180,6 +180,10 @@ img {
 }
 #divModalAudio .previewDownload, #divModalImage .previewDownload {
   margin-top: 0.6rem;
+}
+#divModalImage .previewContent .spinner-border {
+  color: var(--phpfm-tint);
+  border-width: 0.1rem;
 }
 
 #divToastWrapper {
