@@ -1115,38 +1115,51 @@ class RosefinchPage {
             divPreviewDownload.append(aDownload);
             this.modalImage.appendBody(divPreviewDownload);
 
+            let imgObj = null;
+            let calcPreviewSize = function () {
+                if (!imgObj) {
+                    return;
+                }
+
+                let imgWidth = imgObj.width;
+                let imgHeight = imgObj.height;
+                let imgRatio = imgWidth / imgHeight;
+                utils.log('RosefinchPage.showImagePreviewDialog, calcPreviewSize, imgWidth=%d, imgHeight=%d, imgRatio=%f',
+                    imgWidth, imgHeight, imgRatio);
+
+                let imgPreviewWidth = that.getWindowWidth() - 160;
+                let imgPreviewHeight = that.getWindowHeight() - 300;
+                let imgPreviewRadio = imgPreviewWidth / imgPreviewHeight;
+
+                if (imgRatio >= imgPreviewRadio) {
+                    imgPreviewHeight = imgPreviewWidth / imgRatio;
+                } else {
+                    imgPreviewWidth = imgPreviewHeight * imgRatio;
+                }
+                if (imgWidth < imgPreviewWidth || imgHeight < imgPreviewHeight) {
+                    imgPreviewWidth = imgWidth;
+                    imgPreviewHeight = imgHeight;
+                }
+                imgPreview.css({
+                    'width': imgPreviewWidth + 'px',
+                    'height': imgPreviewHeight + 'px'
+                });
+
+                let downloadMaxWidth = imgPreviewWidth;
+                if (imgPreviewWidth < 470) {
+                    downloadMaxWidth = 470;
+                }
+                divPreviewDownload.css('max-width', downloadMaxWidth + 'px');
+            };
+
             this.modalImage.setDataHandler(function (data) {
                 let dataTitle = data['title'];
                 let dataLink = data['link'];
                 aDownload.attr('href', dataLink).html(dataTitle);
-                let imgObj = new Image();
+                imgObj = new Image();
                 imgObj.onload = function () {
                     // load finished
-                    let imgWidth = imgObj.width;
-                    let imgHeight = imgObj.height;
-                    let imgRatio = imgWidth / imgHeight;
-                    utils.log('RosefinchPage.showImagePreviewDialog, imgWidth=%d, imgHeight=%d, imgRatio=%f',
-                        imgWidth, imgHeight, imgRatio);
-
-                    let imgPreviewWidth = that.getWindowWidth() - 160;
-                    let imgPreviewHeight = that.getWindowHeight() - 300;
-                    let imgPreviewRadio = imgPreviewWidth / imgPreviewHeight;
-
-                    if (imgRatio >= imgPreviewRadio) {
-                        imgPreviewHeight = imgPreviewWidth / imgRatio;
-                    } else {
-                        imgPreviewWidth = imgPreviewHeight * imgRatio;
-                    }
-                    imgPreview.css({
-                        'width': imgPreviewWidth + 'px',
-                        'height': imgPreviewHeight + 'px'
-                    });
-
-                    let downloadMaxWidth = imgPreviewWidth;
-                    if (imgPreviewWidth < 470) {
-                        downloadMaxWidth = 470;
-                    }
-                    divPreviewDownload.css('max-width', downloadMaxWidth + 'px');
+                    calcPreviewSize();
 
                     imgPreview.attr('src', dataLink);
                     imgPreview.attr('alt', dataTitle);
@@ -1174,6 +1187,7 @@ class RosefinchPage {
                 divLoading.show();
                 imgPreview.hide();
                 imgPreview.attr('src', '').width(0).height(0);
+                imgObj = null;
                 aDownload.attr('href', '').html('');
                 divPreviewDownload.css('max-width', 'none');
                 that.modalImage.removeClass(previewImageLoadedClass);
