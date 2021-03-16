@@ -58,7 +58,7 @@ class RosefinchDialog {
         divModalContent.append(this.divModalBody);
 
         this.divModalFooter = $('<div/>').addClass('modal-footer');
-        this.spanTips = $('<span/>').addClass('flex-grow-1 dialogTips');
+        this.spanTips = $('<span/>').addClass('dialogTips flex-grow-1');
         this.divModalFooter.append(this.spanTips);
         if (needOkButton) {
             this.buttonOk = $('<button/>').attr({
@@ -402,7 +402,7 @@ class RosefinchPage {
         let button = $('<button/>').attr({
             'id': buttonId,
             'type': 'button'
-        }).addClass('btn btn-light toolbarBtn');
+        }).addClass('toolbarBtn btn btn-light');
         if (title) {
             button.attr('title', title);
         }
@@ -481,7 +481,7 @@ class RosefinchPage {
             'href': 'index.php',
             'role': 'button',
             'title': 'Debug'
-        }).addClass('btn btn-light toolbarBtn');
+        }).addClass('toolbarBtn btn btn-light');
         let debugIcon = $('<i/>').addClass('bi').addClass('bi-bug');
         this.buttonDebug.append(debugIcon);
 
@@ -494,7 +494,7 @@ class RosefinchPage {
             'id': 'buttonLoadingRight',
             'type': 'button',
             'disabled': 'disabled'
-        }).addClass('btn btn-light toolbarBtn toolbarBtnLoading');
+        }).addClass('toolbarBtn toolbarBtnLoading btn btn-light');
         let spanLoadingSpinnerRight = $('<span/>').attr({
             'role': 'status',
             'aria-hidden': true
@@ -697,15 +697,15 @@ class RosefinchPage {
         }).addClass('toast').addClass(type);
 
         let divToastHeader = $('<div/>').addClass('toast-header');
-        let iToastIcon = $('<i/>').addClass('bi bi-bell toastIcon');
+        let iToastIcon = $('<i/>').addClass('toastIcon bi bi-bell');
         divToastHeader.append(iToastIcon);
-        let strongToastTitle = $('<strong/>').addClass('mr-auto toastTitle').text(title);
+        let strongToastTitle = $('<strong/>').addClass('toastTitle mr-auto').text(title);
         divToastHeader.append(strongToastTitle);
         let buttonToastClose = $('<button/>').attr({
             'type': 'button',
             'data-dismiss': 'toast',
             'aria-label': 'Close'
-        }).addClass('ml-2 mb-1 close noOutline');
+        }).addClass('noOutline ml-2 mb-1 close');
         let spanClose = $('<span/>').attr('aria-hidden', 'true').html('&times;');
         buttonToastClose.append(spanClose);
         divToastHeader.append(buttonToastClose);
@@ -1048,7 +1048,7 @@ class RosefinchPage {
             this.modalAudio.init('divModalAudio');
             this.modalAudio.setTitle('Preview');
 
-            let divPreviewContent = $('<div/>').addClass('previewContent');
+            let divPreviewContent = $('<div/>').addClass('previewContent text-center');
             let audioControl = $('<audio controls/>');
             divPreviewContent.append(audioControl);
             this.modalAudio.setBody(divPreviewContent);
