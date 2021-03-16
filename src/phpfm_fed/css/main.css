@@ -188,11 +188,14 @@ img {
 #divModalImage .previewContent img {
   cursor: pointer;
 }
-#divModalImage.previewImageLoaded .modal-dialog {
-  max-width: none;
-}
-#divModalImage.previewImageLoaded .modal-content {
-  width: auto;
+
+@media (min-width: 576px) {
+  #divModalImage.previewImageLoaded .modal-dialog {
+    max-width: none;
+  }
+  #divModalImage.previewImageLoaded .modal-content {
+    width: auto;
+  }
 }
 
 #divToastWrapper {
