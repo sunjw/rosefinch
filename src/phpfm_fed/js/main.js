@@ -1128,7 +1128,7 @@ class RosefinchPage {
                     utils.log('RosefinchPage.showImagePreviewDialog, imgWidth=%d, imgHeight=%d, imgRatio=%f',
                         imgWidth, imgHeight, imgRatio);
 
-                    let imgPreviewWidth = that.getWindowWidth() - 100;
+                    let imgPreviewWidth = that.getWindowWidth() - 160;
                     let imgPreviewHeight = that.getWindowHeight() - 300;
                     let imgPreviewRadio = imgPreviewWidth / imgPreviewHeight;
 
