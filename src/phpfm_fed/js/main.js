@@ -310,6 +310,12 @@ class RosefinchPage {
         let divListWrapperTop = this.divListWrapper.offset().top;
         let divListWrapperHeight = windowHeight - divListWrapperTop - 2;
         this.divListWrapper.css('height', divListWrapperHeight + 'px');
+
+        if (this.currentDialog && this.currentDialog == this.modalImage) {
+            this.modalImage.setData({
+                'on': 'resize'
+            });
+        }
     }
 
     initFunc() {
@@ -1153,8 +1159,16 @@ class RosefinchPage {
             };
 
             this.modalImage.setDataHandler(function (data) {
+                let onEvent = data['on'];
                 let dataTitle = data['title'];
                 let dataLink = data['link'];
+
+                if (onEvent == 'resize') {
+                    calcPreviewSize();
+                    that.modalImage.handleUpdate();
+                    return;
+                }
+
                 aDownload.attr('href', dataLink).html(dataTitle);
                 imgObj = new Image();
                 imgObj.onload = function () {
