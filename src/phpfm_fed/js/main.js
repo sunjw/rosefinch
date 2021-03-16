@@ -255,6 +255,7 @@ class RosefinchPage {
         this.modalAbout = null;
 
         this.modalAudio = null;
+        this.modalImage = null;
 
         // vars
         this.currentDir = [];
@@ -1086,6 +1087,53 @@ class RosefinchPage {
         this.modalAudio.show();
     }
 
+    showImagePreviewDialog(imageTitle, imageLink) {
+        if (this.modalImage == null) {
+            utils.log('RosefinchPage.showImagePreviewDialog, init modalImage.');
+            let that = this;
+
+            this.modalImage = new RosefinchDialog();
+            this.modalImage.init('divModalImage');
+            this.modalImage.setTitle('Preview');
+
+            let divPreviewContent = $('<div/>').addClass('previewContent text-center');
+            // let audioControl = $('<audio controls/>');
+            // divPreviewContent.append(audioControl);
+            this.modalImage.setBody(divPreviewContent);
+            let divPreviewDownload = $('<div/>');
+            let divDownload = $('<div/>').addClass('previewDownload text-truncate');
+            divDownload.html('Download:&nbsp;');
+            let aDownload = $('<a/>');
+            divDownload.append(aDownload);
+            divPreviewDownload.append(divDownload);
+            this.modalImage.setBody(divPreviewDownload);
+
+            this.modalImage.setDataHandler(function (data) {
+                let dataTitle = data['title'];
+                let dataLink = data['link'];
+                //audioControl.attr('src', dataLink);
+                aDownload.attr('href', dataLink).html(dataTitle);
+            });
+
+            this.modalImage.setCloseHandler(function () {
+                utils.log('RosefinchPage.showImagePreviewDialog, close.');
+                // audioControl.get(0).pause();
+                // audioControl.attr('src', '');
+                aDownload.attr('href', '').html('');
+                that.currentDialog = null;
+            });
+        }
+
+        utils.log('RosefinchPage.showImagePreviewDialog, imageTitle=[%s], imageLink=[%s]',
+            imageTitle, imageLink);
+        this.currentDialog = this.modalImage;
+        this.modalImage.setData({
+            'title': imageTitle,
+            'link': imageLink
+        });
+        this.modalImage.show();
+    }
+
     renderBreadcrumb() {
         // clear all
         this.olPathWrapper.empty();
@@ -1251,6 +1299,13 @@ class RosefinchPage {
             if (aFileLink.hasClass(previewAudioClass)) {
                 aFileLink.on('click', function () {
                     that.showAudioPreviewDialog(itemName, aFileLinkHref);
+                    return false;
+                });
+            }
+
+            if (aFileLink.hasClass(previewImageClass)) {
+                aFileLink.on('click', function () {
+                    that.showImagePreviewDialog(itemName, aFileLinkHref);
                     return false;
                 });
             }
