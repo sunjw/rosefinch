@@ -536,13 +536,13 @@ class RosefinchPage {
     }
 
     isImageType(type) {
-        let imgTypes = ['jpg', 'jpeg', 'bmp', 'png', 'gif'];
+        const imgTypes = ['jpg', 'jpeg', 'bmp', 'png', 'gif'];
         type = type.toLowerCase();
         return imgTypes.includes(type);
     }
 
     isAudioType(type) {
-        let audioTypes = ['mp3'];
+        const audioTypes = ['mp3'];
         type = type.toLowerCase();
         return audioTypes.includes(type);
     }
@@ -1073,9 +1073,9 @@ class RosefinchPage {
     }
 
     renderMainList() {
+        const previewImageClass = 'previewImage';
+        const previewAudioClass = 'previewAudio';
         const folderTypes = ['folder'];
-        const imageTypes = ['jpg', 'jpeg', 'bmp', 'png', 'gif'];
-        const audioTypes = ['mp3'];
 
         let that = this;
 
@@ -1098,9 +1098,9 @@ class RosefinchPage {
             let itemIsAudio = false;
             if (folderTypes.includes(itemType)) {
                 itemIsFolder = true;
-            } else if (imageTypes.includes(itemType)) {
+            } else if (this.isImageType(itemType)) {
                 itemIsImage = true;
-            } else if (audioTypes.includes(itemType)) {
+            } else if (this.isAudioType(itemType)) {
                 itemIsAudio = true;
             }
 
@@ -1122,9 +1122,9 @@ class RosefinchPage {
 
             let aFileLink = $('<a/>').addClass('fileLink noOutline flex-grow-1 d-flex align-items-center');
             if (itemIsImage) {
-                aFileLink.addClass('previewImage');
+                aFileLink.addClass(previewImageClass);
             } else if (itemIsAudio) {
-                aFileLink.addClass('previewAudio');
+                aFileLink.addClass(previewAudioClass);
             }
             let aFileLinkHref = '#';
             if (itemIsFolder) {
@@ -1200,6 +1200,9 @@ class RosefinchPage {
 
             this.ulDetailView.append(liDetailLine);
         }
+
+        // init preview
+
     }
 }
 
