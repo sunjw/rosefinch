@@ -1053,12 +1053,10 @@ class RosefinchPage {
             let audioControl = $('<audio controls/>');
             divPreviewContent.append(audioControl);
             this.modalAudio.setBody(divPreviewContent);
-            let divPreviewDownload = $('<div/>');
-            let divDownload = $('<div/>').addClass('previewDownload text-truncate');
-            divDownload.html('Download:&nbsp;');
+            let divPreviewDownload = $('<div/>').addClass('previewDownload text-truncate');
+            divPreviewDownload.html('Download:&nbsp;');
             let aDownload = $('<a/>');
-            divDownload.append(aDownload);
-            divPreviewDownload.append(divDownload);
+            divPreviewDownload.append(aDownload);
             this.modalAudio.setBody(divPreviewDownload);
 
             this.modalAudio.setDataHandler(function (data) {
@@ -1097,15 +1095,15 @@ class RosefinchPage {
             this.modalImage.setTitle('Preview');
 
             let divPreviewContent = $('<div/>').addClass('previewContent text-center');
-            // let audioControl = $('<audio controls/>');
-            // divPreviewContent.append(audioControl);
+            let divLoading = $('<div/>').attr('role', 'status').addClass('spinner-border');
+            let spanLoading = $('<span/>').addClass('sr-only');
+            divLoading.append(spanLoading);
+            divPreviewContent.append(divLoading);
             this.modalImage.setBody(divPreviewContent);
-            let divPreviewDownload = $('<div/>');
-            let divDownload = $('<div/>').addClass('previewDownload text-truncate');
-            divDownload.html('Download:&nbsp;');
+            let divPreviewDownload = $('<div/>').addClass('previewDownload text-truncate');
+            divPreviewDownload.html('Download:&nbsp;');
             let aDownload = $('<a/>');
-            divDownload.append(aDownload);
-            divPreviewDownload.append(divDownload);
+            divPreviewDownload.append(aDownload);
             this.modalImage.setBody(divPreviewDownload);
 
             this.modalImage.setDataHandler(function (data) {

@@ -178,6 +178,9 @@ img {
 #divModalUpload.dropFile #labelUploadFileInfo {
   color: var(--danger);
 }
+#divModalAudio .previewDownload, #divModalImage .previewDownload {
+  margin-top: 0.6rem;
+}
 
 #divToastWrapper {
   position: absolute;
