@@ -1190,10 +1190,7 @@ class RosefinchPage {
                     };
                 };
 
-                setTimeout(function () {
-                    imgObj.src = dataLink;
-                }, 2000);
-                //imgObj.src = dataLink;
+                imgObj.src = dataLink;
             });
 
             this.modalImage.setCloseHandler(function () {
