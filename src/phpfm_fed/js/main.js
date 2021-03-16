@@ -535,6 +535,10 @@ class RosefinchPage {
         return (npmUtils.isiOS() || npmUtils.isMacOS());
     }
 
+    isImageType(type) {
+
+    }
+
     initDragDropUpload() {
         let that = this;
 
@@ -1005,11 +1009,14 @@ class RosefinchPage {
             this.modalAbout = new RosefinchDialog();
             this.modalAbout.init('divModalAbout');
             this.modalAbout.setTitle(this.titleName);
-            let pAboutBody = $('<p/>');
-            pAboutBody.html('A web file manager with copy/paste, rename, delete and make new folder in browser.<br/>' +
+
+            let divMessage = $('<div/>');
+            let pAboutMessage = $('<p/>');
+            pAboutMessage.html('A web file manager with copy/paste, rename, delete and make new folder in browser.<br/>' +
                 'Also, Rosefinch provides download, upload and other file manager features.<br/>' +
                 'Rosefinch can be an alternative of Apache Directory Listing.');
-            this.modalAbout.setBody(pAboutBody);
+            divMessage.append(pAboutMessage);
+            this.modalAbout.setBody(divMessage);
 
             this.modalAbout.setCloseHandler(function () {
                 utils.log('RosefinchPage.showAboutDialog, close.');
