@@ -131,7 +131,7 @@ class RosefinchDialog {
         this.h5ModalTitle.text(titleText);
     }
 
-    setBody(childElement) {
+    appendBody(childElement) {
         this.divModalBody.append(childElement);
     }
 
@@ -780,7 +780,7 @@ class RosefinchPage {
             divFormGroup.append(labelUploadFileInfo);
             divFormGroup.append(inputUploadFile);
             formBody.append(divFormGroup);
-            this.modalUpload.setBody(formBody);
+            this.modalUpload.appendBody(formBody);
 
             this.modalUpload.setCloseHandler(function () {
                 utils.log('RosefinchPage.showUploadDialog, close.');
@@ -891,7 +891,7 @@ class RosefinchPage {
             divFormGroup.append(labelName);
             divFormGroup.append(inputName);
             formBody.append(divFormGroup);
-            this.modalNewFolder.setBody(formBody);
+            this.modalNewFolder.appendBody(formBody);
 
             this.modalNewFolder.setShowHandler(function () {
                 utils.log('RosefinchPage.showNewFolderDialog, show.');
@@ -963,7 +963,7 @@ class RosefinchPage {
             let pDeleteMessage = $('<p/>');
             pDeleteMessage.html('Are you sure to delete selected files/folders?');
             divMessage.append(pDeleteMessage);
-            this.modalDelete.setBody(divMessage);
+            this.modalDelete.appendBody(divMessage);
 
             this.modalDelete.setCloseHandler(function () {
                 utils.log('RosefinchPage.showDeleteDialog, close.');
@@ -1027,7 +1027,7 @@ class RosefinchPage {
                 'Also, Rosefinch provides download, upload and other file manager features.<br/>' +
                 'Rosefinch can be an alternative of Apache Directory Listing.');
             divMessage.append(pAboutMessage);
-            this.modalAbout.setBody(divMessage);
+            this.modalAbout.appendBody(divMessage);
 
             this.modalAbout.setCloseHandler(function () {
                 utils.log('RosefinchPage.showAboutDialog, close.');
@@ -1052,12 +1052,12 @@ class RosefinchPage {
             let divPreviewContent = $('<div/>').addClass('previewContent text-center');
             let audioControl = $('<audio controls/>');
             divPreviewContent.append(audioControl);
-            this.modalAudio.setBody(divPreviewContent);
+            this.modalAudio.appendBody(divPreviewContent);
             let divPreviewDownload = $('<div/>').addClass('previewDownload text-truncate');
             divPreviewDownload.html('Download:&nbsp;');
             let aDownload = $('<a/>');
             divPreviewDownload.append(aDownload);
-            this.modalAudio.setBody(divPreviewDownload);
+            this.modalAudio.appendBody(divPreviewDownload);
 
             this.modalAudio.setDataHandler(function (data) {
                 let dataTitle = data['title'];
@@ -1099,12 +1099,12 @@ class RosefinchPage {
             let spanLoading = $('<span/>').addClass('sr-only');
             divLoading.append(spanLoading);
             divPreviewContent.append(divLoading);
-            this.modalImage.setBody(divPreviewContent);
+            this.modalImage.appendBody(divPreviewContent);
             let divPreviewDownload = $('<div/>').addClass('previewDownload text-truncate');
             divPreviewDownload.html('Download:&nbsp;');
             let aDownload = $('<a/>');
             divPreviewDownload.append(aDownload);
-            this.modalImage.setBody(divPreviewDownload);
+            this.modalImage.appendBody(divPreviewDownload);
 
             this.modalImage.setDataHandler(function (data) {
                 let dataTitle = data['title'];
