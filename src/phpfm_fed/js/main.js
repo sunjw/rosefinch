@@ -748,7 +748,7 @@ class RosefinchPage {
             let labelUploadFileInfo = $('<label/>').attr({
                 'id': 'labelUploadFileInfo',
                 'for': 'inputUploadFile'
-            }).addClass('col-form-label');
+            }).addClass('col-form-label text-truncate');
             labelUploadFileInfo.text(uploadFileInfoText);
             let inputUploadFile = $('<input/>').attr({
                 'id': 'inputUploadFile',
@@ -1048,24 +1048,41 @@ class RosefinchPage {
             this.modalAudio.init('divModalAudio');
             this.modalAudio.setTitle('Preview');
 
-            let divPreview = $('<div/>');
+            let divPreviewContent = $('<div/>').addClass('previewContent');
             let audioControl = $('<audio controls/>');
-            divPreview.append(audioControl);
-            let divDownload = $('<div/>');
+            divPreviewContent.append(audioControl);
+            this.modalAudio.setBody(divPreviewContent);
+            let divPreviewDownload = $('<div/>');
+            let divDownload = $('<div/>').addClass('previewDownload');
             divDownload.html('Download:&nbsp;');
             let aDownload = $('<a/>');
             divDownload.append(aDownload);
-            divPreview.append(divDownload);
-            this.modalAudio.setBody(divPreview);
+            divPreviewDownload.append(divDownload);
+            this.modalAudio.setBody(divPreviewDownload);
+
+            this.modalAudio.setDataHandler(function (data) {
+                let dataTitle = data['title'];
+                let dataLink = data['link'];
+                audioControl.attr('src', dataLink);
+                aDownload.attr('href', dataLink).html(dataTitle);
+            });
 
             this.modalAudio.setCloseHandler(function () {
                 utils.log('RosefinchPage.showAudioPreviewDialog, close.');
+                audioControl.get(0).pause();
+                audioControl.attr('src', '');
+                aDownload.attr('href', '').html('');
                 that.currentDialog = null;
             });
         }
 
-        utils.log('RosefinchPage.showAudioPreviewDialog');
+        utils.log('RosefinchPage.showAudioPreviewDialog, audioTitle=[%s], audioLink=[%s]',
+            audioTitle, audioLink);
         this.currentDialog = this.modalAudio;
+        this.modalAudio.setData({
+            'title': audioTitle,
+            'link': audioLink
+        });
         this.modalAudio.show();
     }
 
