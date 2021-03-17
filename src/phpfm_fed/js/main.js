@@ -1214,6 +1214,10 @@ class RosefinchPage {
                 divLoading.show();
                 imgPreview.hide();
                 imgPreview.attr('src', '').width(0).height(0);
+                if (imgObj) {
+                    imgObj.onload = function () {
+                    };
+                }
                 imgObj = null;
                 aDownload.attr('href', '').html('');
                 divPreviewDownload.css('max-width', 'none');
