@@ -311,7 +311,7 @@ class RosefinchPage {
         let divListWrapperHeight = windowHeight - divListWrapperTop - 2;
         this.divListWrapper.css('height', divListWrapperHeight + 'px');
 
-        if (this.currentDialog && this.currentDialog == this.modalImage) {
+        if (this.isCurrentDialog(this.modalImage)) {
             this.modalImage.setData({
                 'on': 'resize'
             });
@@ -570,7 +570,7 @@ class RosefinchPage {
             e.preventDefault();
             if (that.currentDialog == null) {
                 that.showUploadDialog();
-            } else if (that.currentDialog == that.modalUpload) {
+            } else if (that.isCurrentDialog(that.modalUpload)) {
                 that.modalUpload.addClass(dropFileClass);
             }
             return false;
@@ -578,7 +578,7 @@ class RosefinchPage {
         bodyElem.ondragleave = function (e) {
             utils.log('RosefinchPage.initDragDropUpload, body ondragleave.');
             e.preventDefault();
-            if (that.currentDialog == that.modalUpload) {
+            if (that.isCurrentDialog(that.modalUpload)) {
                 that.modalUpload.removeClass(dropFileClass);
             }
             return false;
@@ -586,7 +586,7 @@ class RosefinchPage {
         bodyElem.ondragend = function (e) {
             utils.log('RosefinchPage.initDragDropUpload, body ondragend.');
             e.preventDefault();
-            if (that.currentDialog == that.modalUpload) {
+            if (that.isCurrentDialog(that.modalUpload)) {
                 that.modalUpload.removeClass(dropFileClass);
             }
             return false;
@@ -594,7 +594,7 @@ class RosefinchPage {
         bodyElem.ondrop = function (e) {
             utils.log('RosefinchPage.initDragDropUpload, body ondrop.');
             e.preventDefault();
-            if (that.currentDialog == that.modalUpload) {
+            if (that.isCurrentDialog(that.modalUpload)) {
                 that.dropFileEvent = e;
                 that.modalUpload.removeClass(dropFileClass);
                 that.modalUpload.clickOkButton();
@@ -734,6 +734,13 @@ class RosefinchPage {
         });
 
         divToast.toast('show');
+    }
+
+    isCurrentDialog(someDialog) {
+        if (!someDialog) {
+            return false;
+        }
+        return (this.currentDialog == someDialog);
     }
 
     showUploadDialog() {
