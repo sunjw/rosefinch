@@ -1222,6 +1222,7 @@ class RosefinchPage {
     }
 
     renderBreadcrumb() {
+        let that = this;
         // clear all
         this.olPathWrapper.empty();
 
@@ -1243,6 +1244,10 @@ class RosefinchPage {
 
             if (i == this.currentDir.length) {
                 // last one
+                aDir.on('click', function () {
+                    that.onHashChange();
+                    return false;
+                });
                 li.addClass('active');
             }
 
