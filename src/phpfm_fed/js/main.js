@@ -1184,6 +1184,13 @@ class RosefinchPage {
                 aDownload.attr('href', dataLink).html(dataTitle);
                 imgObj = new Image();
                 imgObj.onload = function () {
+                    imgObj.onload = function () {
+                    };
+
+                    if (!that.isCurrentDialog(that.modalImage)) {
+                        return;
+                    }
+
                     // load finished
                     calcPreviewSize();
 
@@ -1197,9 +1204,6 @@ class RosefinchPage {
                     imgPreview.show();
                     that.modalImage.addClass(previewImageLoadedClass);
                     that.modalImage.handleUpdate();
-
-                    imgObj.onload = function () {
-                    };
                 };
 
                 imgObj.src = dataLink;
