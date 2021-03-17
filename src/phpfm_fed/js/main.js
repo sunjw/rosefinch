@@ -1194,8 +1194,10 @@ class RosefinchPage {
                     // load finished
                     calcPreviewSize();
 
-                    imgPreview.attr('src', dataLink);
-                    imgPreview.attr('alt', dataTitle);
+                    imgPreview.attr({
+                        'src': dataLink,
+                        'alt': dataTitle
+                    });
                     imgPreview.on('click', function () {
                         window.location.href = dataLink;
                     });
@@ -1213,7 +1215,10 @@ class RosefinchPage {
                 utils.log('RosefinchPage.showImagePreviewDialog, close.');
                 divLoading.show();
                 imgPreview.hide();
-                imgPreview.attr('src', '').width(0).height(0);
+                imgPreview.attr({
+                    'src': '',
+                    'alt': ''
+                }).width(0).height(0);
                 if (imgObj) {
                     imgObj.onload = function () {
                     };
