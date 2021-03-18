@@ -225,8 +225,10 @@ class RosefinchPage {
         this.sortByName = 'n';
         this.sortByType = 't';
         this.sortByMTime = 'm';
+        this.sortByArray = [this.sortByName, this.sortByType, this.sortByMTime];
         this.sortOrderAsc = 'a';
         this.sortOrderDesc = 'd';
+        this.sortOrderArray = [this.sortOrderAsc, this.sortOrderDesc];
 
         // elements
         this.body = $('body');
@@ -261,6 +263,9 @@ class RosefinchPage {
         this.buttonSetting = null;
         this.buttonAbout = null;
         this.buttonLoadingRight = null;
+
+        this.buttonSortDropDown = null;
+        this.buttonSortArray = {};
 
         // dialogs
         this.modalUpload = null;
@@ -317,46 +322,31 @@ class RosefinchPage {
 
     initSortMenu() {
         let divBtnGroup = $('<div/>').addClass('btn-group');
-
         let spanButton = null;
-        let aDropDownItem = null;
 
-        let buttonSortDropDown = $('<button/>').attr({
+        this.buttonSortDropDown = $('<button/>').attr({
             'type': 'button',
             'data-toggle': 'dropdown',
             'aria-haspopup': 'true',
             'aria-expanded': 'false'
         }).addClass('btn btn-sm btn-outline-secondary dropdown-toggle');
         spanButton = this.generateSortButton(this.sortByName, this.sortOrderAsc);
-        buttonSortDropDown.append(spanButton);
-        divBtnGroup.append(buttonSortDropDown);
+        this.buttonSortDropDown.append(spanButton);
+        divBtnGroup.append(this.buttonSortDropDown);
 
         let divDropDownMenu = $('<div/>').addClass('dropdown-menu dropdown-menu-right');
-        aDropDownItem = $('<a/>').attr('href', '#').addClass('dropdown-item');
-        spanButton = this.generateSortButton(this.sortByName, this.sortOrderAsc);
-        aDropDownItem.append(spanButton);
-        divDropDownMenu.append(aDropDownItem);
-        aDropDownItem = $('<a/>').attr('href', '#').addClass('dropdown-item');
-        spanButton = this.generateSortButton(this.sortByName, this.sortOrderDesc);
-        aDropDownItem.append(spanButton);
-        divDropDownMenu.append(aDropDownItem);
-        aDropDownItem = $('<a/>').attr('href', '#').addClass('dropdown-item');
-        spanButton = this.generateSortButton(this.sortByType, this.sortOrderAsc);
-        aDropDownItem.append(spanButton);
-        divDropDownMenu.append(aDropDownItem);
-        aDropDownItem = $('<a/>').attr('href', '#').addClass('dropdown-item');
-        spanButton = this.generateSortButton(this.sortByType, this.sortOrderDesc);
-        aDropDownItem.append(spanButton);
-        divDropDownMenu.append(aDropDownItem);
-        aDropDownItem = $('<a/>').attr('href', '#').addClass('dropdown-item');
-        spanButton = this.generateSortButton(this.sortByMTime, this.sortOrderAsc);
-        aDropDownItem.append(spanButton);
-        divDropDownMenu.append(aDropDownItem);
-        aDropDownItem = $('<a/>').attr('href', '#').addClass('dropdown-item');
-        spanButton = this.generateSortButton(this.sortByMTime, this.sortOrderDesc);
-        aDropDownItem.append(spanButton);
-        divDropDownMenu.append(aDropDownItem);
-
+        for (let i = 0; i < this.sortByArray.length; i++) {
+            let itrSortBy = this.sortByArray[i];
+            this.buttonSortArray[itrSortBy] = {};
+            for (let j = 0; j < this.sortOrderArray.length; j++) {
+                let itrSortOrder = this.sortOrderArray[j];
+                let aDropDownItem = $('<a/>').attr('href', '#').addClass('dropdown-item');
+                spanButton = this.generateSortButton(itrSortBy, itrSortOrder);
+                aDropDownItem.append(spanButton);
+                this.buttonSortArray[itrSortBy][itrSortOrder] = aDropDownItem;
+                divDropDownMenu.append(aDropDownItem);
+            }
+        }
         divBtnGroup.append(divDropDownMenu);
 
         this.divPathBtnWrapper.append(divBtnGroup);
