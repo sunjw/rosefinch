@@ -410,6 +410,10 @@ class RosefinchPage {
             that.sortBy = data.data['sort']['by'];
             that.sortOrder = data.data['sort']['order'];
             that.mainList = data.data['main_list'];
+            if (that.sortBy == '') {
+                that.sortBy = that.sortByName;
+                that.sortOrder = that.sortOrderAsc;
+            }
             if (!Array.isArray(that.mainList)) {
                 utils.log('RosefinchPage.onHashChange, mainList not an Array.');
                 that.showToast(that.titleName, 'Response error.', 'danger');
