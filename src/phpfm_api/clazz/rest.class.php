@@ -181,7 +181,7 @@ class Rest
         $resp_obj = new RestRet();
 
         $resp_obj->data['sort'] = array();
-        $resp_obj->data['sort']['type'] = $file_manager->get_sort_by();
+        $resp_obj->data['sort']['by'] = $file_manager->get_sort_by();
         $resp_obj->data['sort']['order'] = $file_manager->get_sort_order();
 
         $current_path_array = $file_manager->get_current_path_array();
