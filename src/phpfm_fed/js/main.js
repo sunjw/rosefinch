@@ -217,9 +217,16 @@ class RosefinchPage {
         this.apiBase = utils.isString(apiPrefix) ? apiPrefix : '';
         this.restApiEndpoint = 'func/rest.api.php';
         this.dlApiEndpoint = 'func/download.func.php';
+
         this.reqSortByKey = 's';
         this.reqSortOrderKey = 'o';
         this.reqDirKey = 'dir';
+
+        this.sortByName = 'n';
+        this.sortByType = 't';
+        this.sortByMTime = 'm';
+        this.sortOrderAsc = 'a';
+        this.sortOrderDesc = 'd';
 
         // elements
         this.body = $('body');
@@ -293,6 +300,8 @@ class RosefinchPage {
         spanBrand.append(aBrand);
         this.divToolbarBrand.append(spanBrand);
 
+        this.initSortMenu();
+
         this.ulDetailView = $('<ul/>').attr('id', 'ulDetailView').addClass('list-group list-group-flush');
         this.divListWrapper.append(this.ulDetailView);
 
@@ -304,6 +313,88 @@ class RosefinchPage {
         $(window).on('resize', function () {
             that.onLayoutResize();
         });
+    }
+
+    initSortMenu() {
+        let divBtnGroup = $('<div/>').addClass('btn-group');
+
+        let spanButton = null;
+        let aDropDownItem = null;
+
+        let buttonSortDropDown = $('<button/>').attr({
+            'type': 'button',
+            'data-toggle': 'dropdown',
+            'aria-haspopup': 'true',
+            'aria-expanded': 'false'
+        }).addClass('btn btn-sm btn-outline-secondary dropdown-toggle');
+        spanButton = this.generateSortButton(this.sortByName, this.sortOrderAsc);
+        buttonSortDropDown.append(spanButton);
+        divBtnGroup.append(buttonSortDropDown);
+
+        let divDropDownMenu = $('<div/>').addClass('dropdown-menu dropdown-menu-right');
+        aDropDownItem = $('<a/>').attr('href', '#').addClass('dropdown-item');
+        spanButton = this.generateSortButton(this.sortByName, this.sortOrderAsc);
+        aDropDownItem.append(spanButton);
+        divDropDownMenu.append(aDropDownItem);
+        aDropDownItem = $('<a/>').attr('href', '#').addClass('dropdown-item');
+        spanButton = this.generateSortButton(this.sortByName, this.sortOrderDesc);
+        aDropDownItem.append(spanButton);
+        divDropDownMenu.append(aDropDownItem);
+        aDropDownItem = $('<a/>').attr('href', '#').addClass('dropdown-item');
+        spanButton = this.generateSortButton(this.sortByType, this.sortOrderAsc);
+        aDropDownItem.append(spanButton);
+        divDropDownMenu.append(aDropDownItem);
+        aDropDownItem = $('<a/>').attr('href', '#').addClass('dropdown-item');
+        spanButton = this.generateSortButton(this.sortByType, this.sortOrderDesc);
+        aDropDownItem.append(spanButton);
+        divDropDownMenu.append(aDropDownItem);
+        aDropDownItem = $('<a/>').attr('href', '#').addClass('dropdown-item');
+        spanButton = this.generateSortButton(this.sortByMTime, this.sortOrderAsc);
+        aDropDownItem.append(spanButton);
+        divDropDownMenu.append(aDropDownItem);
+        aDropDownItem = $('<a/>').attr('href', '#').addClass('dropdown-item');
+        spanButton = this.generateSortButton(this.sortByMTime, this.sortOrderDesc);
+        aDropDownItem.append(spanButton);
+        divDropDownMenu.append(aDropDownItem);
+
+        divBtnGroup.append(divDropDownMenu);
+
+        this.divPathBtnWrapper.append(divBtnGroup);
+    }
+
+    updateSortMenu() {
+
+    }
+
+    generateSortButton(sortBy, sortOrder) {
+        let spanButton = $('<span/>');
+        let iBi = $('<i/>').addClass('bi');
+        let sortOrderClass = '';
+        if (sortBy == this.sortByName || sortBy == this.sortByType) {
+            if (sortOrder == this.sortOrderAsc) {
+                sortOrderClass = 'bi-sort-alpha-down';
+            } else if (sortOrder == this.sortOrderDesc) {
+                sortOrderClass = 'bi-sort-alpha-down-alt';
+            }
+        } else if (sortBy == this.sortByMTime) {
+            if (sortOrder == this.sortOrderAsc) {
+                sortOrderClass = 'bi-sort-numeric-down';
+            } else if (sortOrder == this.sortOrderDesc) {
+                sortOrderClass = 'bi-sort-numeric-down-alt';
+            }
+        }
+        iBi.addClass(sortOrderClass);
+        spanButton.append(iBi);
+        let sortByString = '';
+        if (sortBy == this.sortByName) {
+            sortByString = 'Name';
+        } else if (sortBy == this.sortByType) {
+            sortByString = 'Type';
+        } else if (sortBy == this.sortByMTime) {
+            sortByString = 'Modified time';
+        }
+        spanButton.append(sortByString);
+        return spanButton;
     }
 
     onLayoutResize() {
