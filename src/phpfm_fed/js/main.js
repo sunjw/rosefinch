@@ -613,6 +613,8 @@ class RosefinchPage {
             for (let j = 0; j < this.sortOrderArray.length; j++) {
                 let itrSortOrder = this.sortOrderArray[j];
                 let aDropDownItem = this.buttonSortArray[itrSortBy][itrSortOrder];
+                let sortHref = this.generateDirHrefEx(this.currentDir, itrSortBy, itrSortOrder);
+                aDropDownItem.attr('href', sortHref);
                 if (itrSortBy == this.sortBy && itrSortOrder == this.sortOrder) {
                     aDropDownItem.hide();
                 } else {
