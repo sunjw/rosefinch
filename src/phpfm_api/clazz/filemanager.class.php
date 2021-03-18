@@ -21,7 +21,7 @@ class FileManager
 {
     private $request_sub_dir; // request sub directory path, UTF-8.
     private $request_dir; // request directory absolute path.
-    private $sort_type; // sort.
+    private $sort_by; // sort.
     private $sort_order; // sort order.
 
     private $is_mobile;
@@ -71,44 +71,44 @@ class FileManager
         }
         //echo $this->request_sub_dir;
 
-        $this->sort_type = get_query(SORT_PARAM);
+        $this->sort_by = get_query(SORT_PARAM);
         $this->sort_order = get_query(ORDER_PARAM);
 
-        if ($this->sort_type == '') {
+        if ($this->sort_by == '') {
             // read cookie value
-            $this->sort_type = get_cookie(SORT_PARAM);
+            $this->sort_by = get_cookie(SORT_PARAM);
         }
         if ($this->sort_order == '') {
             $this->sort_order = get_cookie(ORDER_PARAM);
         }
 
-        $allowed_sort_type = array('', 'n', 's', 't', 'm');
-        if (!in_array($this->sort_type, $allowed_sort_type)) {
-            $this->sort_type = '';
+        $allowed_sort_by = array('', 'n', 's', 't', 'm');
+        if (!in_array($this->sort_by, $allowed_sort_by)) {
+            $this->sort_by = '';
         }
         if ($this->sort_order != 'd') {
             $this->sort_order = 'a';
         }
 
-        setcookie(SORT_PARAM, $this->sort_type, time() + 60 * 60 * 24 * 365);
+        setcookie(SORT_PARAM, $this->sort_by, time() + 60 * 60 * 24 * 365);
         setcookie(ORDER_PARAM, $this->sort_order, time() + 60 * 60 * 24 * 365);
 
         $this->sort = 1;
-        if ($this->sort_type == '' || ($this->sort_type == 'n' && $this->sort_order == 'a')) {
+        if ($this->sort_by == '' || ($this->sort_by == 'n' && $this->sort_order == 'a')) {
             $this->sort = 1;
-        } else if ($this->sort_type == 'n' && $this->sort_order == 'd') {
+        } else if ($this->sort_by == 'n' && $this->sort_order == 'd') {
             $this->sort = -1;
-        } else if ($this->sort_type == 's' && $this->sort_order == 'a') {
+        } else if ($this->sort_by == 's' && $this->sort_order == 'a') {
             $this->sort = 2;
-        } else if ($this->sort_type == 's' && $this->sort_order == 'd') {
+        } else if ($this->sort_by == 's' && $this->sort_order == 'd') {
             $this->sort = -2;
-        } else if ($this->sort_type == 't' && $this->sort_order == 'a') {
+        } else if ($this->sort_by == 't' && $this->sort_order == 'a') {
             $this->sort = 3;
-        } else if ($this->sort_type == 't' && $this->sort_order == 'd') {
+        } else if ($this->sort_by == 't' && $this->sort_order == 'd') {
             $this->sort = -3;
-        } else if ($this->sort_type == 'm' && $this->sort_order == 'a') {
+        } else if ($this->sort_by == 'm' && $this->sort_order == 'a') {
             $this->sort = 4;
-        } else if ($this->sort_type == 'm' && $this->sort_order == 'd') {
+        } else if ($this->sort_by == 'm' && $this->sort_order == 'd') {
             $this->sort = -4;
         }
 
@@ -119,7 +119,7 @@ class FileManager
             $this->dsort = $this->sort > 0 ? 2 : -2;
         }
 
-        $this->query_str = 's=' . $this->sort_type . '&o=' . $this->sort_order;
+        $this->query_str = 's=' . $this->sort_by . '&o=' . $this->sort_order;
 
         $this->init_view();
 
@@ -476,12 +476,12 @@ class FileManager
     }
 
     /**
-     * Get item list sort type.
+     * Get item list sort by.
      * @return string
      */
-    public function get_sort_type()
+    public function get_sort_by()
     {
-        return $this->sort_type;
+        return $this->sort_by;
     }
 
     /**
@@ -874,21 +874,21 @@ class FileManager
         $this_page = $this->view_page;
 
         $request_sub_dir = $this->request_sub_dir;
-        $sort_type = $this->sort_type;
-        $order = $this->sort_order;
+        $sort_by = $this->sort_by;
+        $sort_order = $this->sort_order;
 
         $norder = 'a';
         $sorder = 'a';
         $torder = 'a';
         $morder = 'a';
 
-        if ($sort_type == '' || ($sort_type == 'n' && $order == 'a')) {
+        if ($sort_by == '' || ($sort_by == 'n' && $sort_order == 'a')) {
             $norder = 'd';
-        } else if ($sort_type == 's' && $order == 'a') {
+        } else if ($sort_by == 's' && $sort_order == 'a') {
             $sorder = 'd';
-        } else if ($sort_type == 't' && $order == 'a') {
+        } else if ($sort_by == 't' && $sort_order == 'a') {
             $torder = 'd';
-        } else if ($sort_type == 'm' && $order == 'a') {
+        } else if ($sort_by == 'm' && $sort_order == 'a') {
             $morder = 'd';
         }
         ?>
@@ -920,18 +920,18 @@ class FileManager
         </div>
         <?php
         $javascript_call_arg = 'name';
-        if ($sort_type == 's') {
+        if ($sort_by == 's') {
             $javascript_call_arg = 'size';
-        } else if ($sort_type == 't') {
+        } else if ($sort_by == 't') {
             $javascript_call_arg = 'type';
-        } else if ($sort_type == 'm') {
+        } else if ($sort_by == 'm') {
             $javascript_call_arg = 'mtime';
         }
 
         ?>
         <script type="text/javascript">
             //<![CDATA[
-            FileManager.setSortArrow('<?php echo $javascript_call_arg; ?>', '<?php echo $order; ?>');
+            FileManager.setSortArrow('<?php echo $javascript_call_arg; ?>', '<?php echo $sort_order; ?>');
             //]]>
         </script>
         <?php
