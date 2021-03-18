@@ -320,37 +320,6 @@ class RosefinchPage {
         });
     }
 
-    generateSortButton(sortBy, sortOrder) {
-        let spanButton = $('<span/>');
-        let iBi = $('<i/>').addClass('bi');
-        let sortOrderClass = '';
-        if (sortBy == this.sortByName || sortBy == this.sortByType) {
-            if (sortOrder == this.sortOrderAsc) {
-                sortOrderClass = 'bi-sort-alpha-down';
-            } else if (sortOrder == this.sortOrderDesc) {
-                sortOrderClass = 'bi-sort-alpha-down-alt';
-            }
-        } else if (sortBy == this.sortByMTime) {
-            if (sortOrder == this.sortOrderAsc) {
-                sortOrderClass = 'bi-sort-numeric-down';
-            } else if (sortOrder == this.sortOrderDesc) {
-                sortOrderClass = 'bi-sort-numeric-down-alt';
-            }
-        }
-        iBi.addClass(sortOrderClass);
-        spanButton.append(iBi);
-        let sortByString = '';
-        if (sortBy == this.sortByName) {
-            sortByString = 'Name';
-        } else if (sortBy == this.sortByType) {
-            sortByString = 'Type';
-        } else if (sortBy == this.sortByMTime) {
-            sortByString = 'Modified time';
-        }
-        spanButton.append(sortByString);
-        return spanButton;
-    }
-
     onLayoutResize() {
         let windowWidth = this.getWindowWidth();
         let windowHeight = this.getWindowHeight();
@@ -448,6 +417,7 @@ class RosefinchPage {
             }
 
             that.renderBreadcrumb();
+            that.updateSortMenu();
             that.onLayoutResize();
             that.renderMainList();
             that.onFileSelected();
@@ -630,7 +600,40 @@ class RosefinchPage {
     }
 
     updateSortMenu() {
+        this.buttonSortDropDown.empty();
+        let spanButton = this.generateSortButton(this.sortBy, this.sortOrder);
+        this.buttonSortDropDown.append(spanButton);
+    }
 
+    generateSortButton(sortBy, sortOrder) {
+        let spanButton = $('<span/>');
+        let iBi = $('<i/>').addClass('bi');
+        let sortOrderClass = '';
+        if (sortBy == this.sortByName || sortBy == this.sortByType) {
+            if (sortOrder == this.sortOrderAsc) {
+                sortOrderClass = 'bi-sort-alpha-down';
+            } else if (sortOrder == this.sortOrderDesc) {
+                sortOrderClass = 'bi-sort-alpha-down-alt';
+            }
+        } else if (sortBy == this.sortByMTime) {
+            if (sortOrder == this.sortOrderAsc) {
+                sortOrderClass = 'bi-sort-numeric-down';
+            } else if (sortOrder == this.sortOrderDesc) {
+                sortOrderClass = 'bi-sort-numeric-down-alt';
+            }
+        }
+        iBi.addClass(sortOrderClass);
+        spanButton.append(iBi);
+        let sortByString = '';
+        if (sortBy == this.sortByName) {
+            sortByString = 'Name';
+        } else if (sortBy == this.sortByType) {
+            sortByString = 'Type';
+        } else if (sortBy == this.sortByMTime) {
+            sortByString = 'Modified time';
+        }
+        spanButton.append(sortByString);
+        return spanButton;
     }
 
     isImageType(type) {
