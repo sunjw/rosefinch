@@ -615,10 +615,24 @@ class RosefinchPage {
                 let aDropDownItem = this.buttonSortArray[itrSortBy][itrSortOrder];
                 let sortHref = this.generateDirHrefEx(this.currentDir, itrSortBy, itrSortOrder);
                 aDropDownItem.attr('href', sortHref);
-                if (itrSortBy == this.sortBy && itrSortOrder == this.sortOrder) {
-                    aDropDownItem.hide();
-                } else {
-                    aDropDownItem.show();
+                if (itrSortBy == this.sortBy) {
+                    if (itrSortOrder == this.sortOrder) {
+                        aDropDownItem.hide();
+                    } else {
+                        aDropDownItem.show();
+                    }
+                } else if (itrSortBy == this.sortByName || itrSortBy == this.sortByType) {
+                    if (itrSortOrder == this.sortOrderAsc) {
+                        aDropDownItem.show();
+                    } else {
+                        aDropDownItem.hide();
+                    }
+                } else if (itrSortBy == this.sortByMTime) {
+                    if (itrSortOrder == this.sortOrderDesc) {
+                        aDropDownItem.show();
+                    } else {
+                        aDropDownItem.hide();
+                    }
                 }
             }
         }
