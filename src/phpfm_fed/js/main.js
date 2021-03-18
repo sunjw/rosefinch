@@ -389,7 +389,7 @@ class RosefinchPage {
             that.hideMainListLoading();
 
             that.currentDir = data.data['current_path'];
-            that.sort = data.data['sort']['type'];
+            that.sort = data.data['sort']['by'];
             that.sortOrder = data.data['sort']['order'];
             that.mainList = data.data['main_list'];
             if (!Array.isArray(that.mainList)) {
