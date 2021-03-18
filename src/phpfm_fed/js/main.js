@@ -320,42 +320,6 @@ class RosefinchPage {
         });
     }
 
-    initSortMenu() {
-        let divBtnGroup = $('<div/>').addClass('btn-group');
-        let spanButton = null;
-
-        this.buttonSortDropDown = $('<button/>').attr({
-            'type': 'button',
-            'data-toggle': 'dropdown',
-            'aria-haspopup': 'true',
-            'aria-expanded': 'false'
-        }).addClass('btn btn-sm btn-outline-secondary dropdown-toggle');
-        spanButton = this.generateSortButton(this.sortByName, this.sortOrderAsc);
-        this.buttonSortDropDown.append(spanButton);
-        divBtnGroup.append(this.buttonSortDropDown);
-
-        let divDropDownMenu = $('<div/>').addClass('dropdown-menu dropdown-menu-right');
-        for (let i = 0; i < this.sortByArray.length; i++) {
-            let itrSortBy = this.sortByArray[i];
-            this.buttonSortArray[itrSortBy] = {};
-            for (let j = 0; j < this.sortOrderArray.length; j++) {
-                let itrSortOrder = this.sortOrderArray[j];
-                let aDropDownItem = $('<a/>').attr('href', '#').addClass('dropdown-item');
-                spanButton = this.generateSortButton(itrSortBy, itrSortOrder);
-                aDropDownItem.append(spanButton);
-                this.buttonSortArray[itrSortBy][itrSortOrder] = aDropDownItem;
-                divDropDownMenu.append(aDropDownItem);
-            }
-        }
-        divBtnGroup.append(divDropDownMenu);
-
-        this.divPathBtnWrapper.append(divBtnGroup);
-    }
-
-    updateSortMenu() {
-
-    }
-
     generateSortButton(sortBy, sortOrder) {
         let spanButton = $('<span/>');
         let iBi = $('<i/>').addClass('bi');
@@ -631,6 +595,42 @@ class RosefinchPage {
 
     needFixButtonFocus() {
         return (npmUtils.isiOS() || npmUtils.isMacOS());
+    }
+
+    initSortMenu() {
+        let divBtnGroup = $('<div/>').addClass('btn-group');
+        let spanButton = null;
+
+        this.buttonSortDropDown = $('<button/>').attr({
+            'type': 'button',
+            'data-toggle': 'dropdown',
+            'aria-haspopup': 'true',
+            'aria-expanded': 'false'
+        }).addClass('btn btn-sm btn-outline-secondary dropdown-toggle');
+        spanButton = this.generateSortButton(this.sortByName, this.sortOrderAsc);
+        this.buttonSortDropDown.append(spanButton);
+        divBtnGroup.append(this.buttonSortDropDown);
+
+        let divDropDownMenu = $('<div/>').addClass('dropdown-menu dropdown-menu-right');
+        for (let i = 0; i < this.sortByArray.length; i++) {
+            let itrSortBy = this.sortByArray[i];
+            this.buttonSortArray[itrSortBy] = {};
+            for (let j = 0; j < this.sortOrderArray.length; j++) {
+                let itrSortOrder = this.sortOrderArray[j];
+                let aDropDownItem = $('<a/>').attr('href', '#').addClass('dropdown-item');
+                spanButton = this.generateSortButton(itrSortBy, itrSortOrder);
+                aDropDownItem.append(spanButton);
+                this.buttonSortArray[itrSortBy][itrSortOrder] = aDropDownItem;
+                divDropDownMenu.append(aDropDownItem);
+            }
+        }
+        divBtnGroup.append(divDropDownMenu);
+
+        this.divPathBtnWrapper.append(divBtnGroup);
+    }
+
+    updateSortMenu() {
+
     }
 
     isImageType(type) {
