@@ -607,6 +607,19 @@ class RosefinchPage {
         this.buttonSortDropDown.empty();
         let spanButton = this.generateSortButton(this.sortBy, this.sortOrder);
         this.buttonSortDropDown.append(spanButton);
+
+        for (let i = 0; i < this.sortByArray.length; i++) {
+            let itrSortBy = this.sortByArray[i];
+            for (let j = 0; j < this.sortOrderArray.length; j++) {
+                let itrSortOrder = this.sortOrderArray[j];
+                let aDropDownItem = this.buttonSortArray[itrSortBy][itrSortOrder];
+                if (itrSortBy == this.sortBy && itrSortOrder == this.sortOrder) {
+                    aDropDownItem.hide();
+                } else {
+                    aDropDownItem.show();
+                }
+            }
+        }
     }
 
     generateSortButton(sortBy, sortOrder) {
