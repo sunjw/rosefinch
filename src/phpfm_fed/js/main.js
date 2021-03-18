@@ -217,6 +217,7 @@ class RosefinchPage {
         this.apiBase = utils.isString(apiPrefix) ? apiPrefix : '';
         this.restApiEndpoint = 'func/rest.api.php';
         this.dlApiEndpoint = 'func/download.func.php';
+        this.reqSortByKey = 's';
 
         // elements
         this.body = $('body');
@@ -263,6 +264,7 @@ class RosefinchPage {
 
         // vars
         this.currentDir = [];
+
         this.sortBy = '';
         this.sortOrder = '';
 
@@ -358,13 +360,13 @@ class RosefinchPage {
             locationHash = locationHash.slice(1);
         }
 
-        let requestSort = utils.getUrlQueryVariable(locationHash, 's');
-        let requestOrder = utils.getUrlQueryVariable(locationHash, 'o');
+        let requestSortBy = utils.getUrlQueryVariable(locationHash, this.reqSortByKey);
+        let requestSortOrder = utils.getUrlQueryVariable(locationHash, 'o');
         let requestDir = utils.getUrlQueryVariable(locationHash, 'dir');
 
         let requestApi = this.generateRestApiUrl('api/v1/fm/ls');
-        requestApi += ('&s=' + requestSort);
-        requestApi += ('&o=' + requestOrder);
+        requestApi += ('&' + this.reqSortByKey + '=' + requestSortBy);
+        requestApi += ('&o=' + requestSortOrder);
         requestApi += ('&dir=' + requestDir);
         utils.log('RosefinchPage.onHashChange, requestApi=[%s]', requestApi);
 
@@ -619,9 +621,9 @@ class RosefinchPage {
         return (this.apiBase + this.dlApiEndpoint);
     }
 
-    generateDirHrefEx(dirArray, sort, sortOrder) {
+    generateDirHrefEx(dirArray, sortBy, sortOrder) {
         let paramDir = encodeURIComponent(dirArray.join('/'));
-        let href = '#s=' + sort + '&o=' + sortOrder + '&dir=' + paramDir;
+        let href = '#' + this.reqSortByKey + '=' + sortBy + '&o=' + sortOrder + '&dir=' + paramDir;
         return href;
     }
 
