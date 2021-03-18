@@ -263,7 +263,7 @@ class RosefinchPage {
 
         // vars
         this.currentDir = [];
-        this.sort = '';
+        this.sortBy = '';
         this.sortOrder = '';
 
         this.mainList = null;
@@ -389,7 +389,7 @@ class RosefinchPage {
             that.hideMainListLoading();
 
             that.currentDir = data.data['current_path'];
-            that.sort = data.data['sort']['by'];
+            that.sortBy = data.data['sort']['by'];
             that.sortOrder = data.data['sort']['order'];
             that.mainList = data.data['main_list'];
             if (!Array.isArray(that.mainList)) {
@@ -626,7 +626,7 @@ class RosefinchPage {
     }
 
     generateDirHref(dirArray) {
-        return this.generateDirHrefEx(dirArray, this.sort, this.sortOrder);
+        return this.generateDirHrefEx(dirArray, this.sortBy, this.sortOrder);
     }
 
     generateFileHref(dirArray, file) {
