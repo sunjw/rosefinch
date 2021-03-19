@@ -284,6 +284,8 @@ class RosefinchPage {
 
         this.mainList = null;
         this.mainListSelectedList = null;
+        this.mainListSelectedItemKey = 'item';
+        this.mainListSelectedFilePathKey = 'filePath';
         this.fileSelectedList = null;
 
         this.currentDialog = null;
@@ -760,6 +762,8 @@ class RosefinchPage {
     }
 
     onFileSelected() {
+        const itemKey = this.mainListSelectedItemKey;
+        const filePathKey = this.mainListSelectedFilePathKey;
         this.mainListSelectedList = [];
         this.fileSelectedList = [];
         let liDetailLines = $('li.detailLine');
@@ -769,12 +773,15 @@ class RosefinchPage {
             let inputCheckboxElem = inputCheckbox.get(0);
             if (inputCheckboxElem.checked) {
                 let filePath = inputCheckbox.attr('name');
-                this.mainListSelectedList.push(liDetailLine);
+                let selectedObject = {};
+                selectedObject[itemKey] = liDetailLine;
+                selectedObject[filePathKey] = filePath;
+                this.mainListSelectedList.push(selectedObject);
                 this.fileSelectedList.push(filePath);
             }
         }
 
-        let fileSelectedCount = this.fileSelectedList.length;
+        let fileSelectedCount = this.mainListSelectedList.length;
         utils.log('RosefinchPage.onFileSelected, fileSelectedCount=%d', fileSelectedCount);
 
         if (fileSelectedCount == 0) {
