@@ -286,7 +286,6 @@ class RosefinchPage {
         this.mainListSelectedList = null;
         this.mainListSelectedItemKey = 'item';
         this.mainListSelectedFilePathKey = 'filePath';
-        this.fileSelectedList = null;
 
         this.currentDialog = null;
         this.dropFileEvent = null;
@@ -765,7 +764,6 @@ class RosefinchPage {
         const itemKey = this.mainListSelectedItemKey;
         const filePathKey = this.mainListSelectedFilePathKey;
         this.mainListSelectedList = [];
-        this.fileSelectedList = [];
         let liDetailLines = $('li.detailLine');
         for (let i = 0; i < liDetailLines.length; i++) {
             let liDetailLine = $(liDetailLines.get(i));
@@ -777,7 +775,6 @@ class RosefinchPage {
                 selectedObject[itemKey] = liDetailLine;
                 selectedObject[filePathKey] = filePath;
                 this.mainListSelectedList.push(selectedObject);
-                this.fileSelectedList.push(filePath);
             }
         }
 
@@ -806,6 +803,16 @@ class RosefinchPage {
             this.buttonDelete.show();
             this.buttonShare.hide();
         }
+    }
+
+    getFileSelectedList() {
+        const filePathKey = this.mainListSelectedFilePathKey;
+        let fileSelectedList = [];
+        for (let i = 0; i < this.mainListSelectedList.length; i++) {
+            let filePath = this.mainListSelectedList[i][filePathKey];
+            fileSelectedList.push(filePath);
+        }
+        return fileSelectedList;
     }
 
     showMainListLoading() {
@@ -1129,7 +1136,7 @@ class RosefinchPage {
                 let requestApi = that.generateRestApiUrl('api/v1/fm/delete');
                 utils.log('RosefinchPage.showDeleteDialog, requestApi=[%s]', requestApi);
                 let reqObj = {};
-                reqObj['items'] = that.fileSelectedList;
+                reqObj['items'] = that.getFileSelectedList();
 
                 let toastTitle = 'Delete';
                 jqueryUtils.postRestRequest(requestApi, reqObj, function (data) {
