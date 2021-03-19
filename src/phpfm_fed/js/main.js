@@ -283,6 +283,7 @@ class RosefinchPage {
         this.sortOrder = '';
 
         this.mainList = null;
+        this.mainListSelectedList = null;
         this.fileSelectedList = null;
 
         this.currentDialog = null;
@@ -455,7 +456,7 @@ class RosefinchPage {
         });
         this.buttonRefresh = this.generateToolbarButton('buttonRefresh', 'bi-arrow-clockwise', 'Refresh');
         this.buttonRefresh.addClass('toolbarBtnLoading');
-        this.buttonIconRefresh = this.buttonRefresh.children('i.bi');
+        this.buttonIconRefresh = this.buttonRefresh.find('i.bi');
         this.spanLoadingSpinnerLeft = $('<span/>').attr({
             'role': 'status',
             'aria-hidden': true
@@ -759,13 +760,16 @@ class RosefinchPage {
     }
 
     onFileSelected() {
+        this.mainListSelectedList = [];
         this.fileSelectedList = [];
-        let inputCheckboxes = $('li.detailLine .fileCheck input:checkbox');
-        for (let i = 0; i < inputCheckboxes.length; i++) {
-            let inputCheckboxElem = inputCheckboxes.get(i);
+        let liDetailLines = $('li.detailLine');
+        for (let i = 0; i < liDetailLines.length; i++) {
+            let liDetailLine = $(liDetailLines.get(i));
+            let inputCheckbox = liDetailLine.find('.fileCheck input:checkbox');
+            let inputCheckboxElem = inputCheckbox.get(0);
             if (inputCheckboxElem.checked) {
-                let inputCheckboxChecked = $(inputCheckboxElem);
-                let filePath = inputCheckboxChecked.attr('name');
+                let filePath = inputCheckbox.attr('name');
+                this.mainListSelectedList.push(liDetailLine);
                 this.fileSelectedList.push(filePath);
             }
         }
