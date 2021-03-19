@@ -760,12 +760,12 @@ class RosefinchPage {
 
     onFileSelected() {
         this.fileSelectedList = [];
-        let fileListCheckboxes = $('li.detailLine .fileCheck input:checkbox');
-        for (let i = 0; i < fileListCheckboxes.length; i++) {
-            let fileListCheckboxElem = fileListCheckboxes.get(i);
-            if (fileListCheckboxElem.checked) {
-                let fileListCheckbox = $(fileListCheckboxElem);
-                let filePath = fileListCheckbox.attr('name');
+        let inputCheckboxes = $('li.detailLine .fileCheck input:checkbox');
+        for (let i = 0; i < inputCheckboxes.length; i++) {
+            let inputCheckboxElem = inputCheckboxes.get(i);
+            if (inputCheckboxElem.checked) {
+                let inputCheckboxChecked = $(inputCheckboxElem);
+                let filePath = inputCheckboxChecked.attr('name');
                 this.fileSelectedList.push(filePath);
             }
         }
