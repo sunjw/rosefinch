@@ -270,6 +270,7 @@ class RosefinchPage {
         // dialogs
         this.modalUpload = null;
         this.modalNewFolder = null;
+        this.modalRename = null;
         this.modalDelete = null;
         this.modalAbout = null;
 
@@ -482,6 +483,9 @@ class RosefinchPage {
         this.buttonPaste = this.generateToolbarButton('buttonPaste', 'bi-clipboard', 'Paste');
         this.buttonPaste.hide();
         this.buttonRename = this.generateToolbarButton('buttonRename', 'bi-input-cursor-text', 'Rename');
+        this.onButtonClick(this.buttonRename, function () {
+            that.showRenameDialog();
+        });
         this.buttonRename.hide();
         this.buttonDelete = this.generateToolbarButton('buttonDelete', 'bi-trash', 'Delete');
         this.onButtonClick(this.buttonDelete, function () {
@@ -1105,6 +1109,89 @@ class RosefinchPage {
         utils.log('RosefinchPage.showNewFolderDialog');
         this.currentDialog = this.modalNewFolder;
         this.modalNewFolder.show();
+    }
+
+    showRenameDialog() {
+        if (this.modalRename == null) {
+            utils.log('RosefinchPage.showRenameDialog, init modalRename.');
+            let that = this;
+
+            this.modalRename = new RosefinchDialog();
+            this.modalRename.init('divModalRename', true, true);
+            this.modalRename.setTitle('Rename');
+            this.modalRename.setCloseButtonText('Cancel');
+
+            let formBody = $('<form/>');
+            formBody.on('submit', function (e) {
+                utils.log('RosefinchPage.showRenameDialog, formBody.submit');
+                e.preventDefault();
+                that.modalRename.clickOkButton();
+            });
+            let divFormGroup = $('<div/>').addClass('form-group');
+            let labelName = $('<label/>').attr('for', 'inputName').addClass('col-form-label').text('Name: ');
+            let inputName = $('<input/>').attr({
+                'id': 'inputName',
+                'type': 'text'
+            }).addClass('form-control');
+            divFormGroup.append(labelName);
+            divFormGroup.append(inputName);
+            formBody.append(divFormGroup);
+            this.modalRename.appendBody(formBody);
+
+            this.modalRename.setShowHandler(function () {
+                utils.log('RosefinchPage.showRenameDialog, show.');
+                jqueryUtils.focusOnInput(inputName);
+            });
+
+            this.modalRename.setCloseHandler(function () {
+                utils.log('RosefinchPage.showRenameDialog, close.');
+                inputName.val('');
+                inputName.removeAttr('disabled');
+                that.currentDialog = null;
+            });
+
+            this.modalRename.setOkButtonHandler(function () {
+                utils.log('RosefinchPage.showRenameDialog, ok.');
+
+                inputName.attr('disabled', 'disabled');
+                that.modalRename.showOkButtonLoading();
+
+                // let requestApi = that.generateRestApiUrl('api/v1/fm/newfolder');
+                // utils.log('RosefinchPage.showRenameDialog, requestApi=[%s]', requestApi);
+                // let reqObj = {};
+                // reqObj['subdir'] = that.getCurrentDirStr();
+                // reqObj['newname'] = inputName.val();
+                //
+                // let toastTitle = 'New folder';
+                // jqueryUtils.postRestRequest(requestApi, reqObj, function (data) {
+                //     that.modalRename.close();
+                //
+                //     if (!that.checkRestRespData(data)) {
+                //         utils.log('RosefinchPage.showRenameDialog, response ERROR!');
+                //         that.showToast(toastTitle, 'Response error.', 'danger');
+                //     } else {
+                //         let dataCode = data['code'];
+                //         let dataMessage = data['message'];
+                //         utils.log('RosefinchPage.showRenameDialog, request OK, data[\'code\']=%d', dataCode);
+                //         if (dataCode == 0) {
+                //             that.showToast(toastTitle, dataMessage, 'success');
+                //         } else {
+                //             that.showToast(toastTitle, dataMessage, 'danger');
+                //         }
+                //     }
+                //
+                //     that.onHashChange();
+                // }, function () {
+                //     utils.log('RosefinchPage.showRenameDialog, request ERROR!');
+                //     that.modalRename.close();
+                //     that.showToast(toastTitle, 'Request error.', 'danger');
+                // });
+            });
+        }
+
+        utils.log('RosefinchPage.showRenameDialog');
+        this.currentDialog = this.modalRename;
+        this.modalRename.show();
     }
 
     showDeleteDialog() {
