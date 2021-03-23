@@ -409,16 +409,17 @@ class Rest
             get_logger()->error('handle_rename, illegal name: sub_dir=[' . $sub_dir . '], oldname=[' . $oldname . '], newname=[' . $newname . '].');
         }
 
+        $code = 0;
         $message = '';
         if ($success) {
-            $message = sprintf(_('Rename %s to %s ') . _('succeed'),
-                htmlentities_utf8($oldname_req), htmlentities_utf8($newname_req));
+            $message = 'File/folder rename successfully.';
         } else {
-            $message = sprintf(_('Rename %s to %s ') . ' <strong>' . _('failed') . '<strong>',
-                htmlentities_utf8($oldname_req), htmlentities_utf8($newname_req));
+            $code = 400;
+            $message = 'File/folder rename failed.';
         }
 
         $resp_obj = new RestRet();
+        $resp_obj->code = $code;
         $resp_obj->message = $message;
         $this->response_json($resp_obj);
     }

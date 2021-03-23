@@ -453,10 +453,11 @@ class Utility
         // The same name.
         if (file_exists($plat_oldname)) {
             if (file_exists($plat_newname)) {
-                if ($deal_same_name)
+                if ($deal_same_name) {
                     $newname = Utility::resolve_same_name($newname);
-                else
+                } else {
                     return false;
+                }
             }
         } else {
             return false;
