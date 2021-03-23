@@ -131,6 +131,10 @@ function getLocation() {
     return window.location.href;
 }
 
+function getFileName(fullPath) {
+    return fullPath.replace(/^.*[\\\/]/, '');
+}
+
 function navToLocation(url) {
     window.location.href = url;
 }
@@ -168,6 +172,7 @@ exports.getParentDir = getParentDir;
 exports.getUrlQueryVariable = getUrlQueryVariable;
 exports.getQueryVariable = getQueryVariable;
 exports.getLocation = getLocation;
+exports.getFileName = getFileName;
 exports.navToLocation = navToLocation;
 exports.navToHash = navToHash;
 // exports.isWindows = isWindows;
