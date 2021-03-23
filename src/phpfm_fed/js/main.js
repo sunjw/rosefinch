@@ -1286,38 +1286,34 @@ class RosefinchPage {
             this.modalShare.init('divModalShare');
             this.modalShare.setTitle('Share');
 
-            // let divPreviewContent = $('<div/>').addClass('previewContent text-center');
-            // let audioControl = $('<audio controls/>');
-            // divPreviewContent.append(audioControl);
-            // this.modalShare.appendBody(divPreviewContent);
-            // let divPreviewDownload = $('<div/>').addClass('previewDownload text-truncate');
-            // divPreviewDownload.html('Download:&nbsp;');
-            // let aDownload = $('<a/>');
-            // divPreviewDownload.append(aDownload);
-            // this.modalShare.appendBody(divPreviewDownload);
+            let divShare = $('<div/>').addClass('text-center');
+            let canvasQrImage = $('<canvas/>');
+            divShare.append(canvasQrImage);
+            this.modalShare.appendBody(divShare);
 
             this.modalShare.setDataHandler(function (data) {
-                // let dataTitle = data['title'];
-                // let dataLink = data['link'];
-                // audioControl.attr('src', dataLink);
-                // aDownload.attr('href', dataLink).html(dataTitle);
+                let dataLink = data['link'];
+                qrcode.toCanvas(canvasQrImage.get(0), dataLink, {
+                    width: 300
+                });
             });
 
             this.modalShare.setCloseHandler(function () {
                 utils.log('RosefinchPage.showShareDialog, close.');
-                // audioControl.get(0).pause();
-                // audioControl.attr('src', '');
-                // aDownload.attr('href', '').html('');
                 that.currentDialog = null;
             });
         }
 
-        utils.log('RosefinchPage.showShareDialog');
         this.currentDialog = this.modalShare;
-        // this.modalShare.setData({
-        //     'title': audioTitle,
-        //     'link': audioLink
-        // });
+        let shareLink = '';
+        let fileSelectedList = this.getFileSelectedList();
+        if (fileSelectedList.length == 0) {
+            shareLink = window.location.href;
+        }
+        utils.log('RosefinchPage.showShareDialog, shareLink=[%s]', shareLink);
+        this.modalShare.setData({
+            'link': shareLink
+        });
         this.modalShare.show();
     }
 
