@@ -1306,9 +1306,15 @@ class RosefinchPage {
 
         this.currentDialog = this.modalShare;
         let shareLink = '';
-        let fileSelectedList = this.getFileSelectedList();
-        if (fileSelectedList.length == 0) {
+        if (this.mainListSelectedList.length == 0) {
             shareLink = window.location.href;
+        } else {
+            const itemKey = this.mainListSelectedItemKey;
+            let liSelectedItem = this.mainListSelectedList[0][itemKey];
+            let aFileLink = liSelectedItem.find('a.fileLink');
+            let aFileLinkHref = aFileLink.attr('href');
+            let uri = window.location.href.split('#')[0];
+            shareLink = uri + aFileLinkHref;
         }
         utils.log('RosefinchPage.showShareDialog, shareLink=[%s]', shareLink);
         this.modalShare.setData({
