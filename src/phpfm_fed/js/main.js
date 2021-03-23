@@ -1166,36 +1166,37 @@ class RosefinchPage {
                 inputName.attr('disabled', 'disabled');
                 that.modalRename.showOkButtonLoading();
 
-                // let requestApi = that.generateRestApiUrl('api/v1/fm/newfolder');
-                // utils.log('RosefinchPage.showRenameDialog, requestApi=[%s]', requestApi);
-                // let reqObj = {};
-                // reqObj['subdir'] = that.getCurrentDirStr();
-                // reqObj['newname'] = inputName.val();
-                //
-                // let toastTitle = 'New folder';
-                // jqueryUtils.postRestRequest(requestApi, reqObj, function (data) {
-                //     that.modalRename.close();
-                //
-                //     if (!that.checkRestRespData(data)) {
-                //         utils.log('RosefinchPage.showRenameDialog, response ERROR!');
-                //         that.showToast(toastTitle, 'Response error.', 'danger');
-                //     } else {
-                //         let dataCode = data['code'];
-                //         let dataMessage = data['message'];
-                //         utils.log('RosefinchPage.showRenameDialog, request OK, data[\'code\']=%d', dataCode);
-                //         if (dataCode == 0) {
-                //             that.showToast(toastTitle, dataMessage, 'success');
-                //         } else {
-                //             that.showToast(toastTitle, dataMessage, 'danger');
-                //         }
-                //     }
-                //
-                //     that.onHashChange();
-                // }, function () {
-                //     utils.log('RosefinchPage.showRenameDialog, request ERROR!');
-                //     that.modalRename.close();
-                //     that.showToast(toastTitle, 'Request error.', 'danger');
-                // });
+                let requestApi = that.generateRestApiUrl('api/v1/fm/rename');
+                utils.log('RosefinchPage.showRenameDialog, requestApi=[%s]', requestApi);
+                let reqObj = {};
+                reqObj['renamePath'] = renamePath;
+                reqObj['oldname'] = oldname;
+                reqObj['newname'] = inputName.val();
+
+                let toastTitle = 'Rename';
+                jqueryUtils.postRestRequest(requestApi, reqObj, function (data) {
+                    that.modalRename.close();
+
+                    if (!that.checkRestRespData(data)) {
+                        utils.log('RosefinchPage.showRenameDialog, response ERROR!');
+                        that.showToast(toastTitle, 'Response error.', 'danger');
+                    } else {
+                        let dataCode = data['code'];
+                        let dataMessage = data['message'];
+                        utils.log('RosefinchPage.showRenameDialog, request OK, data[\'code\']=%d', dataCode);
+                        if (dataCode == 0) {
+                            that.showToast(toastTitle, dataMessage, 'success');
+                        } else {
+                            that.showToast(toastTitle, dataMessage, 'danger');
+                        }
+                    }
+
+                    that.onHashChange();
+                }, function () {
+                    utils.log('RosefinchPage.showRenameDialog, request ERROR!');
+                    that.modalRename.close();
+                    that.showToast(toastTitle, 'Request error.', 'danger');
+                });
             });
         }
 
