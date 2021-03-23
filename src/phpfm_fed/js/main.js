@@ -1128,7 +1128,7 @@ class RosefinchPage {
                 that.modalRename.clickOkButton();
             });
             let divFormGroup = $('<div/>').addClass('form-group');
-            let labelName = $('<label/>').attr('for', 'inputName').addClass('col-form-label').text('Name: ');
+            let labelName = $('<label/>').attr('for', 'inputName').addClass('col-form-label').text('New name: ');
             let inputName = $('<input/>').attr({
                 'id': 'inputName',
                 'type': 'text'
@@ -1138,6 +1138,14 @@ class RosefinchPage {
             formBody.append(divFormGroup);
             this.modalRename.appendBody(formBody);
 
+            let renamePath = '';
+            let oldname = '';
+            this.modalRename.setDataHandler(function (data) {
+                renamePath = data['renamePath'];
+                oldname = utils.getFileName(renamePath);
+                inputName.val(oldname);
+            });
+
             this.modalRename.setShowHandler(function () {
                 utils.log('RosefinchPage.showRenameDialog, show.');
                 jqueryUtils.focusOnInput(inputName);
@@ -1145,6 +1153,8 @@ class RosefinchPage {
 
             this.modalRename.setCloseHandler(function () {
                 utils.log('RosefinchPage.showRenameDialog, close.');
+                renamePath = '';
+                oldname = '';
                 inputName.val('');
                 inputName.removeAttr('disabled');
                 that.currentDialog = null;
@@ -1191,6 +1201,10 @@ class RosefinchPage {
 
         utils.log('RosefinchPage.showRenameDialog');
         this.currentDialog = this.modalRename;
+        let fileSelectedList = this.getFileSelectedList();
+        this.modalRename.setData({
+            'renamePath': fileSelectedList[0]
+        });
         this.modalRename.show();
     }
 
