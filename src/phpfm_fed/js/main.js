@@ -7,6 +7,7 @@ require('../css/main.css');
 // js
 window.$ = require('jquery');
 require('bootstrap');
+const qrcode = require('qrcode');
 const utils = require('./utils');
 const npmUtils = require('./npmUtils');
 const jqueryUtils = require('./jqueryUtils');
@@ -272,6 +273,7 @@ class RosefinchPage {
         this.modalNewFolder = null;
         this.modalRename = null;
         this.modalDelete = null;
+        this.modalShare = null;
         this.modalAbout = null;
 
         this.modalAudio = null;
@@ -493,6 +495,9 @@ class RosefinchPage {
         });
         this.buttonDelete.hide();
         this.buttonShare = this.generateToolbarButton('buttonShare', 'bi-upc-scan', 'QR Code');
+        this.onButtonClick(this.buttonShare, function () {
+            that.showShareDialog();
+        });
 
         this.divToolbarLeft.append(this.buttonBack);
         this.divToolbarLeft.append('\n'); // fix strange layout
@@ -1270,6 +1275,50 @@ class RosefinchPage {
         utils.log('RosefinchPage.showDeleteDialog');
         this.currentDialog = this.modalDelete;
         this.modalDelete.show();
+    }
+
+    showShareDialog() {
+        if (this.modalShare == null) {
+            utils.log('RosefinchPage.showShareDialog, init modalShare.');
+            let that = this;
+
+            this.modalShare = new RosefinchDialog();
+            this.modalShare.init('divModalShare');
+            this.modalShare.setTitle('Share');
+
+            // let divPreviewContent = $('<div/>').addClass('previewContent text-center');
+            // let audioControl = $('<audio controls/>');
+            // divPreviewContent.append(audioControl);
+            // this.modalShare.appendBody(divPreviewContent);
+            // let divPreviewDownload = $('<div/>').addClass('previewDownload text-truncate');
+            // divPreviewDownload.html('Download:&nbsp;');
+            // let aDownload = $('<a/>');
+            // divPreviewDownload.append(aDownload);
+            // this.modalShare.appendBody(divPreviewDownload);
+
+            this.modalShare.setDataHandler(function (data) {
+                // let dataTitle = data['title'];
+                // let dataLink = data['link'];
+                // audioControl.attr('src', dataLink);
+                // aDownload.attr('href', dataLink).html(dataTitle);
+            });
+
+            this.modalShare.setCloseHandler(function () {
+                utils.log('RosefinchPage.showShareDialog, close.');
+                // audioControl.get(0).pause();
+                // audioControl.attr('src', '');
+                // aDownload.attr('href', '').html('');
+                that.currentDialog = null;
+            });
+        }
+
+        utils.log('RosefinchPage.showShareDialog');
+        this.currentDialog = this.modalShare;
+        // this.modalShare.setData({
+        //     'title': audioTitle,
+        //     'link': audioLink
+        // });
+        this.modalShare.show();
     }
 
     showAboutDialog() {
