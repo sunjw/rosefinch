@@ -111,6 +111,10 @@ function getParentDir(path) {
     return parentDirPath;
 }
 
+function getFileName(fullPath) {
+    return fullPath.replace(/^.*[\\\/]/, '');
+}
+
 function getUrlQueryVariable(queryStr, key) {
     let vars = queryStr.split('&');
     for (let i = 0; i < vars.length; i++) {
@@ -129,10 +133,6 @@ function getQueryVariable(key) {
 
 function getLocation() {
     return window.location.href;
-}
-
-function getFileName(fullPath) {
-    return fullPath.replace(/^.*[\\\/]/, '');
 }
 
 function navToLocation(url) {
@@ -169,10 +169,10 @@ exports.escapeHtmlPath = escapeHtmlPath;
 exports.getRandomInt = getRandomInt;
 exports.byteSizeToShortSize = byteSizeToShortSize;
 exports.getParentDir = getParentDir;
+exports.getFileName = getFileName;
 exports.getUrlQueryVariable = getUrlQueryVariable;
 exports.getQueryVariable = getQueryVariable;
 exports.getLocation = getLocation;
-exports.getFileName = getFileName;
 exports.navToLocation = navToLocation;
 exports.navToHash = navToHash;
 // exports.isWindows = isWindows;
