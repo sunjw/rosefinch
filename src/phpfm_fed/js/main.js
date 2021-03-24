@@ -1313,8 +1313,11 @@ class RosefinchPage {
             let liSelectedItem = this.mainListSelectedList[0][itemKey];
             let aFileLink = liSelectedItem.find('a.fileLink');
             let aFileLinkHref = aFileLink.attr('href');
-            let uri = window.location.href.split('#')[0];
-            shareLink = uri + aFileLinkHref;
+            let curUri = window.location.href.split('#')[0];
+            if (!aFileLinkHref.startsWith('#') && !curUri.endsWith('/')) {
+                curUri = utils.getParentDir(curUri);
+            }
+            shareLink = curUri + aFileLinkHref;
         }
         utils.log('RosefinchPage.showShareDialog, shareLink=[%s]', shareLink);
         this.modalShare.setData({
