@@ -1082,7 +1082,7 @@ class RosefinchPage {
                 utils.log('RosefinchPage.showNewFolderDialog, requestApi=[%s]', requestApi);
                 let reqObj = {};
                 reqObj['subdir'] = that.getCurrentDirStr();
-                reqObj['newname'] = inputName.val();
+                reqObj['newname'] = inputName.val().trim();
 
                 let toastTitle = 'New folder';
                 jqueryUtils.postRestRequest(requestApi, reqObj, function (data) {
@@ -1176,7 +1176,7 @@ class RosefinchPage {
                 let reqObj = {};
                 reqObj['renamePath'] = renamePath;
                 reqObj['oldname'] = oldname;
-                reqObj['newname'] = inputName.val();
+                reqObj['newname'] = inputName.val().trim();
 
                 let toastTitle = 'Rename';
                 jqueryUtils.postRestRequest(requestApi, reqObj, function (data) {
