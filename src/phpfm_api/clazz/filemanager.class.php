@@ -1083,7 +1083,7 @@ class FileManager
     {
         $paste_img = 'images/toolbar-paste.png';
         $paste_class = 'disable';
-        if ($this->clipboard->has_items()) {
+        if ($this->clipboard->items_count() > 0) {
             $paste_img = 'images/toolbar-paste.png';
             $paste_class = '';
         }

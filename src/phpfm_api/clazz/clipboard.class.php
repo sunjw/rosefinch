@@ -82,18 +82,19 @@ class ClipBoard
     }
 
     /**
-     * Check has items in clipboard.
-     * @return bool
+     * Clipboard items count.
+     * @return int
      */
-    public function has_items()
+    public function items_count()
     {
         if (is_array($this->items)) {
-            if (count($this->items) > 0 && $this->oper != '') {
-                return true;
+            $items_count = count($this->items);
+            if ($items_count > 0 && $this->oper != '') {
+                return $items_count;
             }
         }
 
-        return false;
+        return 0;
     }
 
     /**

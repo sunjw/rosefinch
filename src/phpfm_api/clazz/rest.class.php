@@ -226,7 +226,7 @@ class Rest
         $message = 'handle_cut_copy, add items to clipboard: [' . join(', ', $items) . '].';
         get_logger()->info($message);
 
-        if ($this->clipboard->has_items()) {
+        if ($this->clipboard->items_count() > 0) {
             $message = _('Add items to clipboard:') . '&nbsp;<br />';
             $message .= htmlentities_utf8((join('***', $items)));
             $message = str_replace('***', '<br />', $message);
