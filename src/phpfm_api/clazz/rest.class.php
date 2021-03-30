@@ -197,6 +197,9 @@ class Rest
         }
         $resp_obj->data['main_list'] = $main_list;
 
+        $resp_obj->data['clipboard'] = array();
+        $resp_obj->data['clipboard']['count'] = $this->clipboard->items_count();
+
         $this->response_json($resp_obj);
     }
 
