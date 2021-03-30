@@ -703,7 +703,43 @@ class RosefinchPage {
     }
 
     onCutCopy(oper) {
+        let that = this;
 
+        this.showMainListLoading();
+        let requestApi = that.generateRestApiUrl('api/v1/fm/' + oper);
+        utils.log('RosefinchPage.onCutCopy, requestApi=[%s]', requestApi);
+        let reqObj = {};
+        reqObj['items'] = that.getFileSelectedList();
+
+        let toastTitle = 'Clipboard';
+        if (oper == this.operCut) {
+            toastTitle = 'Cut';
+        } else if (oper == this.operCopy) {
+            toastTitle = 'Copy';
+        }
+        jqueryUtils.postRestRequest(requestApi, reqObj, function (data) {
+            that.hideMainListLoading();
+
+            if (!that.checkRestRespData(data)) {
+                utils.log('RosefinchPage.onCutCopy, response ERROR!');
+                that.showToast(toastTitle, 'Response error.', 'danger');
+            } else {
+                let dataCode = data['code'];
+                let dataMessage = data['message'];
+                utils.log('RosefinchPage.onCutCopy, request OK, data[\'code\']=%d', dataCode);
+                if (dataCode == 0) {
+                    that.showToast(toastTitle, dataMessage, 'success');
+                } else {
+                    that.showToast(toastTitle, dataMessage, 'danger');
+                }
+            }
+
+            that.updateClipboard();
+        }, function () {
+            utils.log('RosefinchPage.onCutCopy, request ERROR!');
+            that.hideMainListLoading();
+            that.showToast(toastTitle, 'Request error.', 'danger');
+        });
     }
 
     isImageType(type) {
