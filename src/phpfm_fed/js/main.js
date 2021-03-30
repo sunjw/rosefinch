@@ -274,6 +274,7 @@ class RosefinchPage {
         // dialogs
         this.modalUpload = null;
         this.modalNewFolder = null;
+        this.modalPaste = null;
         this.modalRename = null;
         this.modalDelete = null;
         this.modalShare = null;
@@ -497,6 +498,9 @@ class RosefinchPage {
         });
         this.buttonCopy.hide();
         this.buttonPaste = this.generateToolbarButton('buttonPaste', 'bi-clipboard', 'Paste');
+        this.onButtonClick(this.buttonPaste, function () {
+            that.showPasteDialog();
+        });
         this.buttonPaste.hide();
         this.buttonRename = this.generateToolbarButton('buttonRename', 'bi-input-cursor-text', 'Rename');
         this.onButtonClick(this.buttonRename, function () {
@@ -1175,6 +1179,69 @@ class RosefinchPage {
         utils.log('RosefinchPage.showNewFolderDialog');
         this.currentDialog = this.modalNewFolder;
         this.modalNewFolder.show();
+    }
+
+    showPasteDialog() {
+        if (this.modalPaste == null) {
+            utils.log('RosefinchPage.showPasteDialog, init modalPaste.');
+            let that = this;
+
+            this.modalPaste = new RosefinchDialog();
+            this.modalPaste.init('divModalPaste', true, true);
+            this.modalPaste.setTitle('Paste');
+            this.modalPaste.setCloseButtonText('Cancel');
+
+            let divMessage = $('<div/>');
+            let pPasteMessage = $('<p/>');
+            pPasteMessage.html('Are you sure to paste files/folders here?');
+            divMessage.append(pPasteMessage);
+            this.modalPaste.appendBody(divMessage);
+
+            this.modalPaste.setCloseHandler(function () {
+                utils.log('RosefinchPage.showPasteDialog, close.');
+                that.currentDialog = null;
+            });
+
+            this.modalPaste.setOkButtonHandler(function () {
+                utils.log('RosefinchPage.showPasteDialog, ok.');
+
+                that.modalPaste.showOkButtonLoading();
+
+                // let requestApi = that.generateRestApiUrl('api/v1/fm/delete');
+                // utils.log('RosefinchPage.showPasteDialog, requestApi=[%s]', requestApi);
+                // let reqObj = {};
+                // reqObj['items'] = that.getFileSelectedList();
+                //
+                // let toastTitle = 'Delete';
+                // jqueryUtils.postRestRequest(requestApi, reqObj, function (data) {
+                //     that.modalPaste.close();
+                //
+                //     if (!that.checkRestRespData(data)) {
+                //         utils.log('RosefinchPage.showPasteDialog, response ERROR!');
+                //         that.showToast(toastTitle, 'Response error.', 'danger');
+                //     } else {
+                //         let dataCode = data['code'];
+                //         let dataMessage = data['message'];
+                //         utils.log('RosefinchPage.showPasteDialog, request OK, data[\'code\']=%d', dataCode);
+                //         if (dataCode == 0) {
+                //             that.showToast(toastTitle, dataMessage, 'success');
+                //         } else {
+                //             that.showToast(toastTitle, dataMessage, 'danger');
+                //         }
+                //     }
+                //
+                //     that.onHashChange();
+                // }, function () {
+                //     utils.log('RosefinchPage.showPasteDialog, request ERROR!');
+                //     that.modalPaste.close();
+                //     that.showToast(toastTitle, 'Request error.', 'danger');
+                // });
+            });
+        }
+
+        utils.log('RosefinchPage.showPasteDialog');
+        this.currentDialog = this.modalPaste;
+        this.modalPaste.show();
     }
 
     showRenameDialog() {
