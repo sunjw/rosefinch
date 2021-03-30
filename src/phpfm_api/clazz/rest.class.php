@@ -236,10 +236,10 @@ class Rest
         $message = '';
         $items_count = $this->clipboard->items_count();
         if ($items_count > 0) {
-            $message = 'Added items to clipboard successfully.';
+            $message = 'Added files/folders to clipboard successfully.';
         } else {
             get_logger()->error('handle_cut_copy, no item in clipboard.');
-            $message = 'Add items to clipboard failed.';
+            $message = 'Add files/folders to clipboard failed.';
             $code = 500;
         }
 
@@ -271,21 +271,28 @@ class Rest
         $target_subdir = rawurldecode($req_obj['subdir']);
         $paste_result = $this->clipboard->paste($target_subdir);
 
-        $message = '';
-        $oper_str = ($paste_result['oper'] == 'cut') ? 'Cut' : 'Copy';
+        $oper_result = true;
         $items = $paste_result['items'];
         foreach ($items as $item => $result) {
-            $message .= (_($oper_str) . ' ' . htmlentities_utf8($item) . ' ');
-            if ($result) {
-                $message .= (_('succeed') . '<br />');
-            } else {
-                $message .= ('<strong>' . _('failed') . '</strong><br />');
+            if (!$result) {
+                $oper_result = false;
+                break;
             }
         }
 
         //print_r($_GET);
+        $code = 0;
+        $message = '';
+        if ($oper_result) {
+            $code = 0;
+            $message = 'Files/folders pasted successfully.';
+        } else {
+            $code = 500;
+            $message = 'Some files/folders paste failed.';
+        }
 
         $resp_obj = new RestRet();
+        $resp_obj->code = $code;
         $resp_obj->message = $message;
         $this->response_json($resp_obj);
     }
