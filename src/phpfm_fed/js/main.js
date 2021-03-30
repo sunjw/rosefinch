@@ -734,6 +734,7 @@ class RosefinchPage {
                 }
             }
 
+            that.clipboardCount = data.data['clipboard']['count'];
             that.updateClipboard();
         }, function () {
             utils.log('RosefinchPage.onCutCopy, request ERROR!');
