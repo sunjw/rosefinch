@@ -1207,35 +1207,35 @@ class RosefinchPage {
 
                 that.modalPaste.showOkButtonLoading();
 
-                // let requestApi = that.generateRestApiUrl('api/v1/fm/delete');
-                // utils.log('RosefinchPage.showPasteDialog, requestApi=[%s]', requestApi);
-                // let reqObj = {};
-                // reqObj['items'] = that.getFileSelectedList();
-                //
-                // let toastTitle = 'Delete';
-                // jqueryUtils.postRestRequest(requestApi, reqObj, function (data) {
-                //     that.modalPaste.close();
-                //
-                //     if (!that.checkRestRespData(data)) {
-                //         utils.log('RosefinchPage.showPasteDialog, response ERROR!');
-                //         that.showToast(toastTitle, 'Response error.', 'danger');
-                //     } else {
-                //         let dataCode = data['code'];
-                //         let dataMessage = data['message'];
-                //         utils.log('RosefinchPage.showPasteDialog, request OK, data[\'code\']=%d', dataCode);
-                //         if (dataCode == 0) {
-                //             that.showToast(toastTitle, dataMessage, 'success');
-                //         } else {
-                //             that.showToast(toastTitle, dataMessage, 'danger');
-                //         }
-                //     }
-                //
-                //     that.onHashChange();
-                // }, function () {
-                //     utils.log('RosefinchPage.showPasteDialog, request ERROR!');
-                //     that.modalPaste.close();
-                //     that.showToast(toastTitle, 'Request error.', 'danger');
-                // });
+                let requestApi = that.generateRestApiUrl('api/v1/fm/paste');
+                utils.log('RosefinchPage.showPasteDialog, requestApi=[%s]', requestApi);
+                let reqObj = {};
+                reqObj['subdir'] = that.getCurrentDirStr();
+
+                let toastTitle = 'Paste';
+                jqueryUtils.postRestRequest(requestApi, reqObj, function (data) {
+                    that.modalPaste.close();
+
+                    if (!that.checkRestRespData(data)) {
+                        utils.log('RosefinchPage.showPasteDialog, response ERROR!');
+                        that.showToast(toastTitle, 'Response error.', 'danger');
+                    } else {
+                        let dataCode = data['code'];
+                        let dataMessage = data['message'];
+                        utils.log('RosefinchPage.showPasteDialog, request OK, data[\'code\']=%d', dataCode);
+                        if (dataCode == 0) {
+                            that.showToast(toastTitle, dataMessage, 'success');
+                        } else {
+                            that.showToast(toastTitle, dataMessage, 'danger');
+                        }
+                    }
+
+                    that.onHashChange();
+                }, function () {
+                    utils.log('RosefinchPage.showPasteDialog, request ERROR!');
+                    that.modalPaste.close();
+                    that.showToast(toastTitle, 'Request error.', 'danger');
+                });
             });
         }
 
