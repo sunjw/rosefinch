@@ -290,6 +290,8 @@ class RosefinchPage {
         this.mainListSelectedItemKey = 'item';
         this.mainListSelectedFilePathKey = 'filePath';
 
+        this.clipboardCount = 0;
+
         this.currentDialog = null;
         this.dropFileEvent = null;
     }
@@ -415,6 +417,8 @@ class RosefinchPage {
             that.sortBy = data.data['sort']['by'];
             that.sortOrder = data.data['sort']['order'];
             that.mainList = data.data['main_list'];
+            that.clipboardCount = data.data['clipboard']['count'];
+
             if (that.sortBy == '') {
                 that.sortBy = that.sortByName;
                 that.sortOrder = that.sortOrderAsc;
@@ -426,6 +430,7 @@ class RosefinchPage {
             }
 
             that.renderBreadcrumb();
+            that.updateClipboard();
             that.updateSortMenu();
             that.onLayoutResize();
             that.renderMainList();
@@ -680,6 +685,14 @@ class RosefinchPage {
         return spanButton;
     }
 
+    updateClipboard() {
+        if (this.clipboardCount > 0) {
+            this.buttonPaste.show();
+        } else {
+            this.buttonPaste.hide();
+        }
+    }
+
     isImageType(type) {
         const imgTypes = ['jpg', 'jpeg', 'bmp', 'png', 'gif'];
         type = type.toLowerCase();
@@ -793,21 +806,18 @@ class RosefinchPage {
         if (fileSelectedCount == 0) {
             this.buttonCut.hide();
             this.buttonCopy.hide();
-            this.buttonPaste.hide();
             this.buttonRename.hide();
             this.buttonDelete.hide();
             this.buttonShare.show();
         } else if (fileSelectedCount == 1) {
             this.buttonCut.show();
             this.buttonCopy.show();
-            this.buttonPaste.show();
             this.buttonRename.show();
             this.buttonDelete.show();
             this.buttonShare.show();
         } else if (fileSelectedCount > 1) {
             this.buttonCut.show();
             this.buttonCopy.show();
-            this.buttonPaste.show();
             this.buttonRename.hide();
             this.buttonDelete.show();
             this.buttonShare.hide();
