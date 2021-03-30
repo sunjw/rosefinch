@@ -197,8 +197,7 @@ class Rest
         }
         $resp_obj->data['main_list'] = $main_list;
 
-        $resp_obj->data['clipboard'] = array();
-        $resp_obj->data['clipboard']['count'] = 0;
+        $resp_obj->data['clipboard'] = ['count' => 0];
         if ($this->clipboard != null) {
             $resp_obj->data['clipboard']['count'] = $this->clipboard->items_count();
         }
@@ -229,21 +228,26 @@ class Rest
         //print_r($files);
 
         $this->clipboard->set_items(($is_cut ? 'cut' : 'copy'), $items);
-        $message = 'handle_cut_copy, add items to clipboard: [' . join(', ', $items) . '].';
-        get_logger()->info($message);
 
-        if ($this->clipboard->items_count() > 0) {
-            $message = _('Add items to clipboard:') . '&nbsp;<br />';
-            $message .= htmlentities_utf8((join('***', $items)));
-            $message = str_replace('***', '<br />', $message);
-            $resp_obj = new RestRet();
-            $resp_obj->message = $message;
-            $this->response_json($resp_obj);
-            return;
+        $log_message = 'handle_cut_copy, add items to clipboard: [' . join(', ', $items) . '].';
+        get_logger()->info($log_message);
+
+        $code = 0;
+        $message = '';
+        $items_count = $this->clipboard->items_count();
+        if ($items_count > 0) {
+            $message = 'Added items to clipboard successfully.';
+        } else {
+            get_logger()->error('handle_cut_copy, no item in clipboard.');
+            $message = 'Add items to clipboard failed.';
+            $code = 500;
         }
 
-        get_logger()->error('handle_cut_copy, no item in clipboard.');
-        $this->response_json_500();
+        $resp_obj = new RestRet();
+        $resp_obj->code = $code;
+        $resp_obj->message = $message;
+        $resp_obj->data['clipboard'] = ['count' => $items_count];
+        $this->response_json($resp_obj);
     }
 
     /**
