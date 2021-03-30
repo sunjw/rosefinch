@@ -231,6 +231,9 @@ class RosefinchPage {
         this.sortOrderDesc = 'd';
         this.sortOrderArray = [this.sortOrderAsc, this.sortOrderDesc];
 
+        this.operCut = 'cut';
+        this.operCopy = 'copy';
+
         // elements
         this.body = $('body');
         this.divWrapper = $('#divWrapper');
@@ -484,8 +487,14 @@ class RosefinchPage {
             that.showNewFolderDialog();
         });
         this.buttonCut = this.generateToolbarButton('buttonCut', 'bi-scissors', 'Cut');
+        this.onButtonClick(this.buttonCut, function () {
+            that.onCutCopy(that.operCut);
+        });
         this.buttonCut.hide();
         this.buttonCopy = this.generateToolbarButton('buttonCopy', 'bi-files', 'Copy');
+        this.onButtonClick(this.buttonCopy, function () {
+            that.onCutCopy(that.operCopy);
+        });
         this.buttonCopy.hide();
         this.buttonPaste = this.generateToolbarButton('buttonPaste', 'bi-clipboard', 'Paste');
         this.buttonPaste.hide();
@@ -691,6 +700,10 @@ class RosefinchPage {
         } else {
             this.buttonPaste.hide();
         }
+    }
+
+    onCutCopy(oper) {
+
     }
 
     isImageType(type) {
