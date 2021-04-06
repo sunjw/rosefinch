@@ -120,7 +120,7 @@ img {
   margin-left: 0.5rem;
 }
 #ulDetailView .list-group-item .fileCheck {
-  width: 1.6rem;
+  width: 2.4rem;
 }
 #ulDetailView .list-group-item .fileCheck input {
   margin-left: 1px;
@@ -139,7 +139,6 @@ img {
   color: var(--secondary);
   font-size: 2.25rem;
   padding-top: 0.2rem;
-  padding-left: 0.4rem;
   padding-right: 0.8rem;
 }
 #ulDetailView .list-group-item .fileIcon::before {
