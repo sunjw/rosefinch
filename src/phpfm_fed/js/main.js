@@ -1849,6 +1849,8 @@ class RosefinchPage {
 
             this.ulDetailView.append(liDetailLine);
         }
+
+        this.divListWrapper.scrollTop(0);
     }
 }
 
