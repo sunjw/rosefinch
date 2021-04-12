@@ -1505,7 +1505,7 @@ class RosefinchPage {
                 let dataTitle = data['title'];
                 let dataLink = data['link'];
                 audioControl.attr('src', dataLink);
-                aDownload.attr('href', dataLink).html(dataTitle);
+                aDownload.attr('href', dataLink).html(utils.escapeHtml(dataTitle));
             });
 
             this.modalAudio.setCloseHandler(function () {
@@ -1606,7 +1606,7 @@ class RosefinchPage {
                     return;
                 }
 
-                aDownload.attr('href', dataLink).html(dataTitle);
+                aDownload.attr('href', dataLink).html(utils.escapeHtml(dataTitle));
                 imgObj = new Image();
                 imgObj.onload = function () {
                     imgObj.onload = function () {
