@@ -45,12 +45,24 @@ function clone(obj) {
     throw new Error('Unable to copy obj! Its type is not supported.');
 }
 
+function variableExists(variable) {
+    return !(variable == undefined || variable == null);
+}
+
 function isString(variable) {
     return (typeof variable === 'string' || variable instanceof String);
 }
 
 function isObject(variable) {
     return (typeof variable === 'object' && variable !== null);
+}
+
+function getRandomInt(max) {
+    return Math.floor(Math.random() * Math.floor(max));
+}
+
+function capitalizeFirstLetter(string) {
+    return string.charAt(0).toUpperCase() + string.slice(1);
 }
 
 function stringReplaceAll(string, target, replace) {
@@ -73,17 +85,13 @@ function escapeShellPath(path) {
     return pathEscape;
 }
 
-function escapeHtmlPath(path) {
-    let pathEscape = path;
-    pathEscape = stringReplaceAll(pathEscape, '&', '&amp;');
-    pathEscape = stringReplaceAll(pathEscape, '<', '&lt;');
-    pathEscape = stringReplaceAll(pathEscape, '>', '&gt;');
-    pathEscape = stringReplaceAll(pathEscape, ' ', '&nbsp;');
-    return pathEscape;
-}
-
-function getRandomInt(max) {
-    return Math.floor(Math.random() * Math.floor(max));
+function escapeHtml(string) {
+    let htmlEscape = string;
+    htmlEscape = stringReplaceAll(htmlEscape, '&', '&amp;');
+    htmlEscape = stringReplaceAll(htmlEscape, '<', '&lt;');
+    htmlEscape = stringReplaceAll(htmlEscape, '>', '&gt;');
+    htmlEscape = stringReplaceAll(htmlEscape, ' ', '&nbsp;');
+    return htmlEscape;
 }
 
 function byteSizeToShortSize(size) {
@@ -143,30 +151,45 @@ function navToHash(hash) {
     window.location.hash = hash;
 }
 
-// function isWindows() {
-//     return (process.platform == 'win32');
-// }
+function isWindows() {
+    return (process.platform == 'win32');
+}
 
-// function isMacOS() {
-//     return (process.platform == 'darwin');
-// }
+function isLinux() {
+    return (process.platform == 'linux');
+}
 
-// function fixWindowsPath(path) {
-//     if (isWindows()) {
-//         path = stringReplaceAll(path, '\/', '\\');
-//     }
-//     return path;
-// }
+function isMacOS() {
+    return (process.platform == 'darwin');
+}
+
+function fixWindowsPath(path) {
+    if (isWindows()) {
+        path = stringReplaceAll(path, '\/', '\\');
+    }
+    return path;
+}
+
+function expireKey(obj, key, ms, expiredCallback = 0) {
+    setTimeout(() => {
+        delete obj[key];
+        if (expiredCallback != 0) {
+            expiredCallback(obj, key);
+        }
+    }, ms);
+}
 
 // exports
 exports.log = log;
 exports.clone = clone;
+exports.variableExists = variableExists;
 exports.isString = isString;
 exports.isObject = isObject;
+exports.getRandomInt = getRandomInt;
+exports.capitalizeFirstLetter = capitalizeFirstLetter;
 exports.stringReplaceAll = stringReplaceAll;
 exports.escapeShellPath = escapeShellPath;
-exports.escapeHtmlPath = escapeHtmlPath;
-exports.getRandomInt = getRandomInt;
+exports.escapeHtml = escapeHtml;
 exports.byteSizeToShortSize = byteSizeToShortSize;
 exports.getParentDir = getParentDir;
 exports.getFileName = getFileName;
@@ -175,6 +198,8 @@ exports.getQueryVariable = getQueryVariable;
 exports.getLocation = getLocation;
 exports.navToLocation = navToLocation;
 exports.navToHash = navToHash;
-// exports.isWindows = isWindows;
-// exports.isMacOS = isMacOS;
-// exports.fixWindowsPath = fixWindowsPath;
+exports.isWindows = isWindows;
+exports.isLinux = isLinux;
+exports.isMacOS = isMacOS;
+exports.fixWindowsPath = fixWindowsPath;
+exports.expireKey = expireKey;

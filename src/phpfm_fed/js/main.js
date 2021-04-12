@@ -997,7 +997,7 @@ class RosefinchPage {
                         // multi files
                         fileName = fileName + ', ...';
                     }
-                    fileName = utils.escapeHtmlPath(fileName);
+                    fileName = utils.escapeHtml(fileName);
                     labelUploadFileInfo.html(fileName);
                     let tipsText = '';
                     if (fileList.length == 1) {
@@ -1684,7 +1684,7 @@ class RosefinchPage {
             } else {
                 dirName = this.currentDir[i - 1];
             }
-            aDir.html(utils.escapeHtmlPath(dirName));
+            aDir.html(utils.escapeHtml(dirName));
             li.append(aDir);
 
             if (i == this.currentDir.length) {
@@ -1781,7 +1781,7 @@ class RosefinchPage {
                 iFileIcon.addClass('bi-file-text');
             }
             aFileLink.append(iFileIcon);
-            let spanFileName = $('<span/>').addClass('fileName text-truncate').html(utils.escapeHtmlPath(itemName));
+            let spanFileName = $('<span/>').addClass('fileName text-truncate').html(utils.escapeHtml(itemName));
             aFileLink.append(spanFileName);
             divDetailLineLeft.append(aFileLink);
 
