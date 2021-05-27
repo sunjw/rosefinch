@@ -214,6 +214,7 @@ class RosefinchPage {
 
     constructor(apiPrefix) {
         // consts
+        this.hashPrefix = '#!'
         this.titleName = 'Rosefinch';
         this.apiBase = utils.isString(apiPrefix) ? apiPrefix : '';
         this.restApiEndpoint = 'func/rest.api.php';
@@ -312,7 +313,7 @@ class RosefinchPage {
 
         // prepare layout
         let spanBrand = $('<span/>').attr('id', 'spanBrand').addClass('navbar-brand');
-        let aBrand = $('<a/>').attr('href', '#').addClass('noOutline').text(this.titleName);
+        let aBrand = $('<a/>').attr('href', this.hashPrefix).addClass('noOutline').text(this.titleName);
         spanBrand.append(aBrand);
         this.divToolbarBrand.append(spanBrand);
 
@@ -383,8 +384,8 @@ class RosefinchPage {
         let locationHash = window.location.hash;
         utils.log('RosefinchPage.onHashChange, locationHash=[%s]', locationHash);
 
-        if (locationHash.startsWith('#')) {
-            locationHash = locationHash.slice(1);
+        if (locationHash.startsWith(this.hashPrefix)) {
+            locationHash = locationHash.slice(this.hashPrefix.length);
         }
 
         let requestSortBy = utils.getUrlQueryVariable(locationHash, this.reqSortByKey);
@@ -620,7 +621,7 @@ class RosefinchPage {
             this.buttonSortArray[itrSortBy] = {};
             for (let j = 0; j < this.sortOrderArray.length; j++) {
                 let itrSortOrder = this.sortOrderArray[j];
-                let aDropDownItem = $('<a/>').attr('href', '#').addClass('dropdown-item');
+                let aDropDownItem = $('<a/>').attr('href', this.hashPrefix).addClass('dropdown-item');
                 spanButton = this.generateSortButton(itrSortBy, itrSortOrder);
                 aDropDownItem.append(spanButton);
                 this.buttonSortArray[itrSortBy][itrSortOrder] = aDropDownItem;
@@ -821,7 +822,7 @@ class RosefinchPage {
 
     generateDirHrefEx(dirArray, sortBy, sortOrder) {
         let paramDir = encodeURIComponent(dirArray.join('/'));
-        let href = '#' + this.reqSortByKey + '=' + sortBy +
+        let href = this.hashPrefix + this.reqSortByKey + '=' + sortBy +
             '&' + this.reqSortOrderKey + '=' + sortOrder +
             '&' + this.reqDirKey + '=' + paramDir;
         return href;
@@ -1441,8 +1442,8 @@ class RosefinchPage {
             let liSelectedItem = this.mainListSelectedList[0][itemKey];
             let aFileLink = liSelectedItem.find('a.fileLink');
             let aFileLinkHref = aFileLink.attr('href');
-            let curUri = window.location.href.split('#')[0];
-            if (!aFileLinkHref.startsWith('#') && !curUri.endsWith('/')) {
+            let curUri = window.location.href.split(this.hashPrefix)[0];
+            if (!aFileLinkHref.startsWith(this.hashPrefix) && !curUri.endsWith('/')) {
                 curUri = utils.getParentDir(curUri);
             }
             shareLink = curUri + aFileLinkHref;
@@ -1760,7 +1761,7 @@ class RosefinchPage {
             } else if (itemIsAudio) {
                 aFileLink.addClass(previewAudioClass);
             }
-            let aFileLinkHref = '#';
+            let aFileLinkHref = this.hashPrefix;
             if (itemIsFolder) {
                 aFileLinkHref = this.generateDirHref(this.currentDir.concat([itemName]));
             } else {
