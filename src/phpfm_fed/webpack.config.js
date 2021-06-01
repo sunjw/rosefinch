@@ -9,8 +9,8 @@ const extractCSS = new MiniCssExtractPlugin({
 // Copy file
 const copyPlugin = new CopyPlugin({
   patterns: [{
-      from: "phpfm.config.js",
-      to: "",
+      from: 'phpfm.config.js',
+      to: '',
     }],
 });
 
