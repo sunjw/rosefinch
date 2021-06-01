@@ -6,7 +6,7 @@
   "scripts": {
     "build": "webpack --mode production",
     "build:dev": "webpack --mode development",
-    "start:dev": "webpack-dev-server"
+    "start:dev": "webpack serve --mode development"
   },
   "keywords": [
     "PHPFM",
