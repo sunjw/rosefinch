@@ -213,12 +213,14 @@ class RosefinchDialog {
 class RosefinchPage {
 
     constructor(apiPrefix) {
-        // consts
+        // const
         this.hashPrefix = '#!'
         this.titleName = 'Rosefinch';
         this.apiBase = utils.isString(apiPrefix) ? apiPrefix : '';
         this.restApiEndpoint = 'func/rest.api.php';
         this.dlApiEndpoint = 'func/download.func.php';
+
+        this.config = null;
 
         this.reqSortByKey = 's';
         this.reqSortOrderKey = 'o';
@@ -360,6 +362,9 @@ class RosefinchPage {
             that.onHashChange();
         });
 
+        // get config
+        this.initConfig();
+
         // begin
         this.onHashChange();
     }
@@ -378,6 +383,26 @@ class RosefinchPage {
             currentDirStr = currentDirStr + '/';
         }
         return currentDirStr;
+    }
+
+    initConfig() {
+        let that = this;
+
+        let requestApi = this.generateRestApiUrl('api/v1/sys/config');
+        utils.log('RosefinchPage.initConfig, requestApi=[%s]', requestApi);
+
+        this.showMainListLoading();
+        jqueryUtils.getRestRequest(requestApi, function (data) {
+            that.hideMainListLoading();
+
+            if (!that.checkRestRespData(data)) {
+                utils.log('RosefinchPage.initConfig, response ERROR!');
+                that.showToast(that.titleName, 'Response error.', 'danger');
+                return;
+            }
+            that.config = data.data;
+            utils.log('RosefinchPage.initConfig, installed=[%s]', that.config['installed']);
+        });
     }
 
     onHashChange(isRetry = false) {
