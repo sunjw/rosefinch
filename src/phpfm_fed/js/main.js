@@ -359,6 +359,8 @@ class RosefinchPage {
         $(window).on('hashchange', function () {
             that.onHashChange();
         });
+
+        // begin
         this.onHashChange();
     }
 
