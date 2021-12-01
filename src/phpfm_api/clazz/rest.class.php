@@ -2,7 +2,6 @@
 require_once dirname(__FILE__) . '/../log/log.func.php';
 require_once dirname(__FILE__) . '/../inc/defines.inc.php';
 require_once dirname(__FILE__) . '/../inc/common.inc.php';
-require_once dirname(__FILE__) . '/../inc/gettext.inc.php';
 require_once 'utility.class.php';
 require_once 'clipboard.class.php';
 require_once 'messageboard.class.php';
@@ -457,7 +456,7 @@ class Rest
 
         if (!Utility::allow_to_modify()) {
             if (!$is_ajax) {
-                $this->messageboard->set_message(_('Please login to upload file.'), 400);
+                $this->messageboard->set_message('Please login to upload file.', 400);
                 $this->response_redirect(false);
             } else {
                 get_logger()->warning('handle_upload, not allowed to upload.');
