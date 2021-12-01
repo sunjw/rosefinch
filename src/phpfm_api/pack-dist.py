@@ -105,9 +105,6 @@ def main():
     fed_publish_dir = os.path.join(fed_dir, 'publish')
     copy_dir(fed_publish_dir, publish_dir)
 
-    # Rename fed index.html.
-    os.rename(os.path.join(publish_dir, 'index.html'), os.path.join(publish_dir, 'index_newui.html'))
-
     # Copy app.
     app_dirs = ['about', 'admin', 'clazz', 'css',
                 'func', 'images', 'inc', 'js',
@@ -122,6 +119,9 @@ def main():
     for app_file in app_files:
         dest_app_file = os.path.join(publish_dir, app_file)
         copy_file(app_file, dest_app_file)
+
+    # Rename api index.php.
+    os.rename(os.path.join(publish_dir, 'index.php'), os.path.join(publish_dir, 'index_oldui.php'))
 
     # Clear up.
     log_stage('Clear up...')
