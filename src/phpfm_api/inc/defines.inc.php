@@ -20,8 +20,7 @@ define('DOMAIN', 'phpfm'); // gettext param
  * @param string $str
  * @return string UTF-8 encoded string
  */
-function convert_toutf8($str)
-{
+function convert_toutf8($str) {
     return @iconv(PLAT_CHARSET, 'UTF-8', $str);
 }
 
@@ -30,8 +29,7 @@ function convert_toutf8($str)
  * @param string $str
  * @return string platform encoded string
  */
-function convert_toplat($str)
-{
+function convert_toplat($str) {
     return @iconv('UTF-8', PLAT_CHARSET, $str);
 }
 
