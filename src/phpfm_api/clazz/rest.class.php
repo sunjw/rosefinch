@@ -540,7 +540,7 @@ class Rest {
         $req_obj = read_body_json();
         $root_type = $req_obj['rootType'];
         $root_path = rawurldecode($req_obj['rootPath']);
-
+        get_logger()->info('handle_install, install to [' . $root_type . '][' . $root_path . ']');
 
         $resp_obj = new RestRet();
 

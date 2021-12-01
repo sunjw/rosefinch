@@ -50,7 +50,7 @@ if ($mode == 0) {
 }
 
 if (isset($_POST['settingsForm'])) {
-    if (!save_settings($settings, $mode)) {
+    if (!save_settings($settings, $mode, null)) {
         Utility::get_messageboard()->set_message(_('There is something wrong in your settings.'), 400);
     } else {
         Utility::get_messageboard()->set_message(_('Settings have been changed. Go to <a href="../index.php">index page</a> and see.'));

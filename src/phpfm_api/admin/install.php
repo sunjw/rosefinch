@@ -26,7 +26,7 @@ $settings = array('root_type' => 'absolute',
 $wrong = false;
 
 if (isset($_POST['settingsForm'])) {
-    if (save_settings($settings, 0)) {
+    if (save_settings($settings, 0, null)) {
         redirect('../');
     } else {
         $wrong = true;
