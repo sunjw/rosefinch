@@ -2,8 +2,6 @@
 
 require_once 'common.inc.php';
 
-// DO NOT EDIT
-
 define('VERSION', '3.2101.10');
 
 define('INC_DIR_NAME', 'inc'); // include directory
@@ -44,11 +42,6 @@ if (file_exists($settings)) {
     if (file_exists($user_managment)) {
         require_once $user_managment;
     }
-} else if (!defined('INSTALL')) {
-    // No setting file, jump to install.
-    redirect('admin/install.php');
 }
-
-// DO NOT EDIT
 
 ?>
