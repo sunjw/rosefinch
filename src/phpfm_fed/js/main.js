@@ -1780,12 +1780,11 @@ class RosefinchPage {
                         utils.log('RosefinchPage.showInstallDialog, request OK, data[\'code\']=%d', dataCode);
                         if (dataCode == 0) {
                             that.showToast(toastTitle, dataMessage, 'success');
+                            that.onHashChange();
                         } else {
                             that.showToast(toastTitle, dataMessage, 'danger');
                         }
                     }
-
-                    //that.onHashChange();
                 }, function () {
                     utils.log('RosefinchPage.showInstallDialog, request ERROR!');
                     that.modalInstall.close();
