@@ -362,11 +362,8 @@ class RosefinchPage {
             that.onHashChange();
         });
 
-        // get config
+        // begin with get config
         this.initConfig();
-
-        // begin
-        this.onHashChange();
     }
 
     getWindowWidth() {
@@ -402,6 +399,13 @@ class RosefinchPage {
             }
             that.config = data.data;
             utils.log('RosefinchPage.initConfig, installed=[%s]', that.config['installed']);
+
+            if (that.config['installed']) {
+                // begin
+                that.onHashChange();
+            } else {
+                // install
+            }
         });
     }
 
