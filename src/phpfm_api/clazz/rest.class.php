@@ -510,6 +510,9 @@ class Rest {
 
     private function handle_sys_request($api) {
         switch ($api) {
+            case 'install':
+                $this->handle_install();
+                break;
             case 'config':
                 $this->handle_config();
                 break;
@@ -521,6 +524,27 @@ class Rest {
                 $this->response_json_400();
                 break;
         }
+    }
+
+    /**
+     * Install.
+     */
+    private function handle_install() {
+        $resp_obj = new RestRet();
+
+        $this->response_json($resp_obj);
+    }
+
+    /**
+     * Get config.
+     */
+    private function handle_config() {
+        $public_config = get_public_config();
+
+        $resp_obj = new RestRet();
+        $resp_obj->data = $public_config;
+
+        $this->response_json($resp_obj);
     }
 
     /**
@@ -542,18 +566,6 @@ class Rest {
             $resp_obj->code = $stat;
             $resp_obj->message = $message;
         }
-
-        $this->response_json($resp_obj);
-    }
-
-    /**
-     * Get config.
-     */
-    private function handle_config() {
-        $public_config = get_public_config();
-
-        $resp_obj = new RestRet();
-        $resp_obj->data = $public_config;
 
         $this->response_json($resp_obj);
     }
