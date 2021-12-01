@@ -530,6 +530,18 @@ class Rest {
      * Install.
      */
     private function handle_install() {
+        $public_config = get_public_config();
+        if ($public_config['installed']) {
+            get_logger()->error('handle_install, already installed.');
+            $this->response_json_500();
+            return;
+        }
+
+        $req_obj = read_body_json();
+        $root_type = $req_obj['rootType'];
+        $root_path = rawurldecode($req_obj['rootPath']);
+
+
         $resp_obj = new RestRet();
 
         $this->response_json($resp_obj);
