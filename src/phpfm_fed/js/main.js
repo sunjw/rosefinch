@@ -1499,6 +1499,8 @@ class RosefinchPage {
             divMessage.append(pAboutMessage);
             this.modalAbout.appendBody(divMessage);
 
+            this.modalAbout.setTipsText(this.config['version']);
+
             this.modalAbout.setCloseHandler(function () {
                 utils.log('RosefinchPage.showAboutDialog, close.');
                 that.currentDialog = null;
