@@ -1720,32 +1720,45 @@ class RosefinchPage {
                 that.modalInstall.clickOkButton();
             });
             let divFormGroup = $('<div/>').addClass('form-group');
-            let labelName = $('<label/>').attr('for', 'inputName').addClass('col-form-label').text('Name: ');
-            let inputName = $('<input/>').attr({
-                'id': 'inputName',
+            let labelType = $('<label/>').attr('for', 'selectType').addClass('col-form-label').text('Path type: ');
+            let selectType = $('<select/>').attr('id', 'selectType')
+                .addClass('form-control')
+                .append($('<option/>').attr('value', 'absolute').text('absolute'))
+                .append($('<option/>').attr('value', 'relative').text('relative'));
+            divFormGroup.append(labelType);
+            divFormGroup.append(selectType);
+            let labelPath = $('<label/>').attr('for', 'inputPath').addClass('col-form-label').text('Path: ');
+            let inputPath = $('<input/>').attr({
+                'id': 'inputPath',
                 'type': 'text'
             }).addClass('form-control');
-            divFormGroup.append(labelName);
-            divFormGroup.append(inputName);
+            divFormGroup.append(labelPath);
+            divFormGroup.append(inputPath);
             formBody.append(divFormGroup);
             this.modalInstall.appendBody(formBody);
 
             this.modalInstall.setShowHandler(function () {
                 utils.log('RosefinchPage.showInstallDialog, show.');
-                jqueryUtils.focusOnInput(inputName);
+                jqueryUtils.focusOnInput(inputPath);
             });
 
             this.modalInstall.setCloseHandler(function () {
                 utils.log('RosefinchPage.showInstallDialog, close.');
-                inputName.val('');
-                inputName.removeAttr('disabled');
                 that.currentDialog = null;
             });
 
             this.modalInstall.setOkButtonHandler(function () {
                 utils.log('RosefinchPage.showInstallDialog, ok.');
 
-                inputName.attr('disabled', 'disabled');
+                let inputPathVal = inputPath.val().trim();
+                if (inputPathVal == '') {
+                    jqueryUtils.focusOnInput(inputPath);
+                    return;
+                }
+
+                selectType.attr('disabled', 'disabled');
+                inputPath.attr('disabled', 'disabled');
+
                 that.modalInstall.showOkButtonLoading();
 
                 // let requestApi = that.generateRestApiUrl('api/v1/fm/newfolder');
