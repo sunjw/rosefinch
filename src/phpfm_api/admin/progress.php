@@ -10,8 +10,7 @@ require_once dirname(__FILE__) . '/../clazz/utility.class.php';
  * @param array $new_settings if null, read from POST, or read from this
  * @return bool
  */
-function save_settings(&$settings, $mode, $new_settings)
-{
+function save_settings(&$settings, $mode, $new_settings) {
     if (!Utility::allow_to_admin()) {
         return false;
     }
@@ -30,8 +29,7 @@ function save_settings(&$settings, $mode, $new_settings)
     return $ret;
 }
 
-function save_general(&$settings, $new_settings)
-{
+function save_general(&$settings, $new_settings) {
     $settings['root_type'] = post_query('rootType');
     $settings['root_path'] = post_query('rootPath');
     $settings['charset'] = post_query('charset');
@@ -124,8 +122,7 @@ function save_general(&$settings, $new_settings)
     return false;
 }
 
-function save_usermng(&$settings, $new_settings)
-{
+function save_usermng(&$settings, $new_settings) {
     $settings['rose_view'] = post_query('roseView');
     $settings['rose_modify'] = post_query('roseModify');
     $settings['rose_admin'] = post_query('roseAdmin');
