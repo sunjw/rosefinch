@@ -30,16 +30,26 @@ function save_settings(&$settings, $mode, $new_settings) {
 }
 
 function save_general(&$settings, $new_settings) {
-    $settings['root_type'] = post_query('rootType');
-    $settings['root_path'] = post_query('rootPath');
-    $settings['charset'] = post_query('charset');
-    $settings['timezone'] = post_query('timezone');
-    $settings['language'] = post_query('language');
-    $settings['title_name'] = post_query('titleName');
+    if ($new_settings == null) {
+        $settings['root_type'] = post_query('rootType');
+        $settings['root_path'] = post_query('rootPath');
+        $settings['charset'] = post_query('charset');
+        $settings['timezone'] = post_query('timezone');
+        $settings['language'] = post_query('language');
+        $settings['title_name'] = post_query('titleName');
+        $settings['usermng'] = post_query('usermng');
+    } else {
+        $settings['root_type'] = $new_settings['root_type'];
+        $settings['root_path'] = $new_settings['root_path'];
+        $settings['charset'] = $new_settings['charset'];
+        $settings['timezone'] = $new_settings['timezone'];
+        $settings['language'] = $new_settings['language'];
+        $settings['title_name'] = $new_settings['title_name'];
+        $settings['usermng'] = $new_settings['usermng'];
+    }
+
     if (isset($settings['install']) && $settings['install']) {
         $settings['usermng'] = '0';
-    } else {
-        $settings['usermng'] = post_query('usermng');
     }
 
     if ($settings['root_type'] == '' ||
@@ -64,7 +74,7 @@ function save_general(&$settings, $new_settings) {
     if (file_exists($plat_root_path)) {
         // path exists.
         //echo 1;
-        $file_name = 'settings.inc.tpl';
+        $file_name = dirname(__FILE__) . '/settings.inc.tpl';
         $settings_tpl = fopen($file_name, 'r');
         $settings_str = fread($settings_tpl, filesize($file_name));
         fclose($settings_tpl);
@@ -92,7 +102,7 @@ function save_general(&$settings, $new_settings) {
         $settings_str = str_replace($templates, $values, $settings_str);
         //echo $settings;
 
-        $settings_php = fopen('settings.inc.php', 'w');
+        $settings_php = fopen(dirname(__FILE__) . '/settings.inc.php', 'w');
         fwrite($settings_php, $settings_str); // write back
         fclose($settings_php);
 

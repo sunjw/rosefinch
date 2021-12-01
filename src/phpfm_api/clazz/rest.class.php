@@ -6,6 +6,7 @@ require_once 'utility.class.php';
 require_once 'clipboard.class.php';
 require_once 'messageboard.class.php';
 require_once 'filemanager.class.php';
+require_once dirname(__FILE__) . '/../admin/progress.php';
 
 /**
  * Rest API return object Class.
@@ -543,6 +544,22 @@ class Rest {
         get_logger()->info('handle_install, install to [' . $root_type . '][' . $root_path . ']');
 
         $resp_obj = new RestRet();
+        $settings = array(
+            'root_type' => $root_type,
+            'root_path' => $root_path,
+            'charset' => 'UTF-8',
+            'timezone' => 'Asia/Shanghai',
+            'language' => 'en_US',
+            'title_name' => 'Rosefinch',
+            'usermng' => 0,
+            'install' => 1);
+        if (save_settings($settings, 0, $settings)) {
+            $resp_obj->code = 0;
+            $resp_obj->message = 'Install successfully.';
+        } else {
+            $resp_obj->code = 500;
+            $resp_obj->message = 'Install failed. Refresh to re-install.';
+        }
 
         $this->response_json($resp_obj);
     }
