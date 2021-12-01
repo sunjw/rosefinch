@@ -38,6 +38,9 @@ module.exports = {
       }
     ]
   },
+  devServer: {
+    static: __dirname
+  },
   plugins: [
     extractCSS,
     copyPlugin
