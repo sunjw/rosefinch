@@ -286,6 +286,8 @@ class RosefinchPage {
         this.modalAudio = null;
         this.modalImage = null;
 
+        this.modalInstall = null;
+
         // vars
         this.currentDir = [];
 
@@ -405,6 +407,7 @@ class RosefinchPage {
                 that.onHashChange();
             } else {
                 // install
+                that.showInstallDialog();
             }
         });
     }
@@ -1698,6 +1701,89 @@ class RosefinchPage {
             'link': imageLink
         });
         this.modalImage.show();
+    }
+
+    showInstallDialog() {
+        if (this.modalInstall == null) {
+            utils.log('RosefinchPage.showInstallDialog, init modalInstall.');
+            let that = this;
+
+            this.modalInstall = new RosefinchDialog();
+            this.modalInstall.init('divModalInstall', true, true);
+            this.modalInstall.setTitle('Install');
+            this.modalInstall.setCloseButtonText('Cancel');
+
+            let formBody = $('<form/>');
+            formBody.on('submit', function (e) {
+                utils.log('RosefinchPage.showInstallDialog, formBody.submit');
+                e.preventDefault();
+                that.modalInstall.clickOkButton();
+            });
+            let divFormGroup = $('<div/>').addClass('form-group');
+            let labelName = $('<label/>').attr('for', 'inputName').addClass('col-form-label').text('Name: ');
+            let inputName = $('<input/>').attr({
+                'id': 'inputName',
+                'type': 'text'
+            }).addClass('form-control');
+            divFormGroup.append(labelName);
+            divFormGroup.append(inputName);
+            formBody.append(divFormGroup);
+            this.modalInstall.appendBody(formBody);
+
+            this.modalInstall.setShowHandler(function () {
+                utils.log('RosefinchPage.showInstallDialog, show.');
+                jqueryUtils.focusOnInput(inputName);
+            });
+
+            this.modalInstall.setCloseHandler(function () {
+                utils.log('RosefinchPage.showInstallDialog, close.');
+                inputName.val('');
+                inputName.removeAttr('disabled');
+                that.currentDialog = null;
+            });
+
+            this.modalInstall.setOkButtonHandler(function () {
+                utils.log('RosefinchPage.showInstallDialog, ok.');
+
+                inputName.attr('disabled', 'disabled');
+                that.modalInstall.showOkButtonLoading();
+
+                // let requestApi = that.generateRestApiUrl('api/v1/fm/newfolder');
+                // utils.log('RosefinchPage.showInstallDialog, requestApi=[%s]', requestApi);
+                // let reqObj = {};
+                // reqObj['subdir'] = that.getCurrentDirStr();
+                // reqObj['newname'] = inputName.val().trim();
+                //
+                // let toastTitle = 'New folder';
+                // jqueryUtils.postRestRequest(requestApi, reqObj, function (data) {
+                //     that.modalInstall.close();
+                //
+                //     if (!that.checkRestRespData(data)) {
+                //         utils.log('RosefinchPage.showInstallDialog, response ERROR!');
+                //         that.showToast(toastTitle, 'Response error.', 'danger');
+                //     } else {
+                //         let dataCode = data['code'];
+                //         let dataMessage = data['message'];
+                //         utils.log('RosefinchPage.showInstallDialog, request OK, data[\'code\']=%d', dataCode);
+                //         if (dataCode == 0) {
+                //             that.showToast(toastTitle, dataMessage, 'success');
+                //         } else {
+                //             that.showToast(toastTitle, dataMessage, 'danger');
+                //         }
+                //     }
+                //
+                //     that.onHashChange();
+                // }, function () {
+                //     utils.log('RosefinchPage.showInstallDialog, request ERROR!');
+                //     that.modalInstall.close();
+                //     that.showToast(toastTitle, 'Request error.', 'danger');
+                // });
+            });
+        }
+
+        utils.log('RosefinchPage.showInstallDialog');
+        this.currentDialog = this.modalInstall;
+        this.modalInstall.show();
     }
 
     renderBreadcrumb() {
