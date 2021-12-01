@@ -19,6 +19,9 @@ class Utility
      */
     public static function get_file_base_dir()
     {
+        if (!defined('FILE_POSITION')) {
+            return null;
+        }
         if (FILE_POSITION == 'relative') {
             $base_dir = get_base_dir();
             $files_base_dir = $base_dir . FILES_DIR . '/';
