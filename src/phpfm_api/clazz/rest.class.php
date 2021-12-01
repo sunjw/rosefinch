@@ -510,6 +510,9 @@ class Rest {
 
     private function handle_sys_request($api) {
         switch ($api) {
+            case 'config':
+                $this->handle_config();
+                break;
             case 'message':
                 $this->handle_message();
                 break;
@@ -539,6 +542,18 @@ class Rest {
             $resp_obj->code = $stat;
             $resp_obj->message = $message;
         }
+
+        $this->response_json($resp_obj);
+    }
+
+    /**
+     * Get config.
+     */
+    private function handle_config() {
+        $public_config = get_public_config();
+
+        $resp_obj = new RestRet();
+        $resp_obj->data = $public_config;
 
         $this->response_json($resp_obj);
     }

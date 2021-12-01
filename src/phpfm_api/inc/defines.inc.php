@@ -4,14 +4,11 @@ require_once 'common.inc.php';
 
 define('VERSION', '3.2101.10');
 
-define('INC_DIR_NAME', 'inc'); // include directory
 define('DEBUG', true); // debug mode
 
 define('DIR_PARAM', 'dir'); // request dir param
 define('SORT_PARAM', 's'); // request sort param
 define('ORDER_PARAM', 'o'); // request order param
-
-define('DOMAIN', 'phpfm'); // gettext param
 
 /**
  * Convert platform encoding string to UTF-8.
@@ -42,6 +39,21 @@ if (file_exists($settings)) {
     if (file_exists($user_managment)) {
         require_once $user_managment;
     }
+}
+
+/**
+ * Get some public config value.
+ * @return array some key-value
+ */
+function get_public_config() {
+    $installed = false;
+    if (defined('FILES_DIR')) {
+        $installed = true;
+    }
+    return [
+        'installed' => $installed,
+        'version' => VERSION
+    ];
 }
 
 ?>
