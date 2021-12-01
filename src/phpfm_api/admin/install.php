@@ -1,7 +1,5 @@
 <?php
 
-define('INSTALL', 1);
-
 require_once dirname(__FILE__) . '/../inc/common.inc.php';
 require_once dirname(__FILE__) . '/../inc/gettext.inc.php';
 require_once 'progress.php';
@@ -39,7 +37,7 @@ $settings['root_path'] = str_replace('\\\\', '\\', $settings['root_path']); // f
 
 ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
-        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
     <title><?php echo _('Install'); ?></title>
