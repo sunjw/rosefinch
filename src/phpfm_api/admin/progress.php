@@ -63,6 +63,7 @@ function save_general(&$settings, $new_settings) {
     }
 
     // prepare $settings['root_path']
+    $settings['root_path'] = trim_last_slash($settings['root_path']);
     if (strpos($settings['root_path'], '\\\\') === false) {
         $settings['root_path'] = str_replace('\\', '\\\\', $settings['root_path']);
     }
