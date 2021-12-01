@@ -10,21 +10,18 @@ require_once 'filemanager.class.php';
 /**
  * Rest API return object Class.
  */
-class RestRet implements JsonSerializable
-{
+class RestRet implements JsonSerializable {
     public $code; // 0: OK, 400: request error, 500: internal error.
     public $message; // OK: '', error: 'some message'.
     public $data; // data array.
 
-    function __construct($code = 0, $message = '', $data = [])
-    {
+    function __construct($code = 0, $message = '', $data = []) {
         $this->code = $code;
         $this->message = $message;
         $this->data = $data;
     }
 
-    public function jsonSerialize()
-    {
+    public function jsonSerialize() {
         return [
             'code' => $this->code,
             'message' => $this->message,
@@ -39,15 +36,13 @@ class RestRet implements JsonSerializable
  * @author Sun Junwen
  *
  */
-class Rest
-{
+class Rest {
     private $files_base_dir;
     private $messageboard;
     private $clipboard;
     private $api;
 
-    function __construct()
-    {
+    function __construct() {
         $this->files_base_dir = Utility::get_file_base_dir();
         $this->messageboard = Utility::get_messageboard(false);
         $this->clipboard = Utility::get_clipboard(false);
@@ -60,8 +55,7 @@ class Rest
      * @param string $prefix
      * @return string api with prefix removed
      */
-    private function api_chain($api, $prefix)
-    {
+    private function api_chain($api, $prefix) {
         return substr($api, strlen($prefix));
     }
 
@@ -70,8 +64,7 @@ class Rest
      * Read "return" from request, rawurldecode and jump.
      * @param bool $from_get read "return" from GET, default is true
      */
-    private function response_redirect($from_get = true)
-    {
+    private function response_redirect($from_get = true) {
         if (post_query('noredirect') != '') {
             return;
         }
@@ -90,21 +83,18 @@ class Rest
         redirect($return_url);
     }
 
-    private function response_json($resp_obj)
-    {
+    private function response_json($resp_obj) {
         header('Content-Type: application/json');
         echo json_encode($resp_obj);
         exit;
     }
 
-    private function response_json_500()
-    {
+    private function response_json_500() {
         $resp_obj = new RestRet(500, 'Internal Server Error.');
         $this->response_json($resp_obj);
     }
 
-    private function response_json_400()
-    {
+    private function response_json_400() {
         $resp_obj = new RestRet(400, 'Bad request.');
         $this->response_json($resp_obj);
     }
@@ -112,8 +102,7 @@ class Rest
     /**
      * Handle API request.
      */
-    public function handle_request()
-    {
+    public function handle_request() {
         $api_v1_prefix = 'api/v1/';
         if (starts_with($this->api, $api_v1_prefix)) {
             $api = $this->api_chain($this->api, $api_v1_prefix);
@@ -137,8 +126,7 @@ class Rest
         }
     }
 
-    private function handle_fm_request($api)
-    {
+    private function handle_fm_request($api) {
         switch ($api) {
             case 'ls':
                 $this->handle_list();
@@ -172,8 +160,7 @@ class Rest
     /*
      * List directory.
      */
-    private function handle_list()
-    {
+    private function handle_list() {
         $file_manager = new FileManager('index.php');
         $main_list = $file_manager->get_main_list();
 
@@ -207,8 +194,7 @@ class Rest
     /**
      * Cut and copy.
      */
-    private function handle_cut_copy($is_cut)
-    {
+    private function handle_cut_copy($is_cut) {
         if ($this->clipboard == null) {
             get_logger()->error('handle_cut_copy, Rest->clipboard is null.');
             $this->response_json_500();
@@ -252,8 +238,7 @@ class Rest
     /**
      * Paste.
      */
-    private function handle_paste()
-    {
+    private function handle_paste() {
         if ($this->clipboard == null) {
             get_logger()->error('handle_paste, Rest->clipboard is null.');
             $this->response_json_500();
@@ -299,8 +284,7 @@ class Rest
     /**
      * Delete.
      */
-    private function handle_delete()
-    {
+    private function handle_delete() {
         if (!Utility::allow_to_modify()) {
             get_logger()->warning('handle_delete, not allowed to delete.');
             $this->response_json_400();
@@ -352,8 +336,7 @@ class Rest
     /**
      * New folder.
      */
-    private function handle_newfolder()
-    {
+    private function handle_newfolder() {
         if (!Utility::allow_to_modify()) {
             get_logger()->warning('handle_newfolder, not allowed to make new folder.');
             $this->response_json_400();
@@ -392,8 +375,7 @@ class Rest
     /**
      * Rename.
      */
-    private function handle_rename()
-    {
+    private function handle_rename() {
         if (!Utility::allow_to_modify()) {
             get_logger()->warning('handle_rename, not allowed to rename.');
             $this->response_json_400();
@@ -443,8 +425,7 @@ class Rest
     /**
      * Upload.
      */
-    private function handle_upload()
-    {
+    private function handle_upload() {
         $is_ajax = post_query('ajax') == 'ajax';
         $sub_dir = rawurldecode(post_query('subdir'));
 
@@ -527,8 +508,7 @@ class Rest
         }
     }
 
-    private function handle_sys_request($api)
-    {
+    private function handle_sys_request($api) {
         switch ($api) {
             case 'message':
                 $this->handle_message();
@@ -543,8 +523,7 @@ class Rest
     /**
      * Get message.
      */
-    private function handle_message()
-    {
+    private function handle_message() {
         if ($this->messageboard == null) {
             get_logger()->error('handle_message, Rest->messageboard is null.');
             $this->response_json_500();
