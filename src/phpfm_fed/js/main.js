@@ -1761,36 +1761,36 @@ class RosefinchPage {
 
                 that.modalInstall.showOkButtonLoading();
 
-                // let requestApi = that.generateRestApiUrl('api/v1/fm/newfolder');
-                // utils.log('RosefinchPage.showInstallDialog, requestApi=[%s]', requestApi);
-                // let reqObj = {};
-                // reqObj['subdir'] = that.getCurrentDirStr();
-                // reqObj['newname'] = inputName.val().trim();
-                //
-                // let toastTitle = 'New folder';
-                // jqueryUtils.postRestRequest(requestApi, reqObj, function (data) {
-                //     that.modalInstall.close();
-                //
-                //     if (!that.checkRestRespData(data)) {
-                //         utils.log('RosefinchPage.showInstallDialog, response ERROR!');
-                //         that.showToast(toastTitle, 'Response error.', 'danger');
-                //     } else {
-                //         let dataCode = data['code'];
-                //         let dataMessage = data['message'];
-                //         utils.log('RosefinchPage.showInstallDialog, request OK, data[\'code\']=%d', dataCode);
-                //         if (dataCode == 0) {
-                //             that.showToast(toastTitle, dataMessage, 'success');
-                //         } else {
-                //             that.showToast(toastTitle, dataMessage, 'danger');
-                //         }
-                //     }
-                //
-                //     that.onHashChange();
-                // }, function () {
-                //     utils.log('RosefinchPage.showInstallDialog, request ERROR!');
-                //     that.modalInstall.close();
-                //     that.showToast(toastTitle, 'Request error.', 'danger');
-                // });
+                let requestApi = that.generateRestApiUrl('api/v1/sys/install');
+                utils.log('RosefinchPage.showInstallDialog, requestApi=[%s]', requestApi);
+                let reqObj = {};
+                reqObj['rootType'] = selectType.val();
+                reqObj['rootPath'] = inputPathVal;
+
+                let toastTitle = 'Install';
+                jqueryUtils.postRestRequest(requestApi, reqObj, function (data) {
+                    that.modalInstall.close();
+
+                    if (!that.checkRestRespData(data)) {
+                        utils.log('RosefinchPage.showInstallDialog, response ERROR!');
+                        that.showToast(toastTitle, 'Response error.', 'danger');
+                    } else {
+                        let dataCode = data['code'];
+                        let dataMessage = data['message'];
+                        utils.log('RosefinchPage.showInstallDialog, request OK, data[\'code\']=%d', dataCode);
+                        if (dataCode == 0) {
+                            that.showToast(toastTitle, dataMessage, 'success');
+                        } else {
+                            that.showToast(toastTitle, dataMessage, 'danger');
+                        }
+                    }
+
+                    //that.onHashChange();
+                }, function () {
+                    utils.log('RosefinchPage.showInstallDialog, request ERROR!');
+                    that.modalInstall.close();
+                    that.showToast(toastTitle, 'Request error.', 'danger');
+                });
             });
         }
 
