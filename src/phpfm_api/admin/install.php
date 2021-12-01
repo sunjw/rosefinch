@@ -3,6 +3,7 @@
 define('INSTALL', 1);
 
 require_once dirname(__FILE__) . '/../inc/common.inc.php';
+require_once dirname(__FILE__) . '/../inc/gettext.inc.php';
 require_once 'progress.php';
 require_once dirname(__FILE__) . '/../log/log.func.php';
 
@@ -36,37 +37,6 @@ if (isset($_POST['settingsForm'])) {
 
 $settings['root_path'] = str_replace('\\\\', '\\', $settings['root_path']); // fix path display
 
-$locale = get_query('lang');
-if ($locale == '') {
-    $locale = 'en_US';
-}
-
-putenv('LANG=' . $locale);
-setlocale(LC_ALL, $locale);
-
-$lang_dir = 'locales';
-
-$directory = get_base_dir() . $lang_dir;
-
-$domain = 'phpfm';
-
-if (function_exists('bindtextdomain')) {
-    bindtextdomain($domain, $directory);
-    bind_textdomain_codeset($domain, get_encoding()); // Let gettext read mo by utf-8.
-    textdomain($domain);
-} else {
-    function bindtextdomain($arg1, $arg2) {}
-
-    function bind_textdomain_codeset($arg1, $arg2) {}
-
-    function textdomain($arg1) {}
-
-    function _($str)
-    {
-        return $str;
-    }
-}
-
 ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
         "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
@@ -89,14 +59,6 @@ if (function_exists('bindtextdomain')) {
     </div>
     <div id="subTitle">
         <?php echo _('Prepare Rosefinch for first time using.'); ?>
-        <form id="installPrefer" action="<?php echo $_SERVER['PHP_SELF']; ?>" method="get">
-            <label for="lang">Language for install:&nbsp;</label>
-            <select id="lang" name="lang">
-                <option value="en_US" <?php if ($locale == 'en_US') print('selected="selected"'); ?>>English</option>
-                <option value="zh_CN" <?php if ($locale == 'zh_CN') print('selected="selected"'); ?>>简体中文</option>
-            </select>
-            <input type="submit" value="Change"/>
-        </form>
     </div>
 </div>
 <div id="content">

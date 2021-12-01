@@ -3,6 +3,7 @@ $begin_time = microtime(true);
 
 require_once dirname(__FILE__) . '/../inc/defines.inc.php';
 require_once dirname(__FILE__) . '/../inc/common.inc.php';
+require_once dirname(__FILE__) . '/../inc/gettext.inc.php';
 require_once dirname(__FILE__) . '/../clazz/utility.class.php';
 require_once 'progress.php';
 require_once dirname(__FILE__) . '/../log/log.func.php';
@@ -59,24 +60,6 @@ if (isset($_POST['settingsForm'])) {
 if ($mode == 0) {
     $settings['root_path'] = str_replace('\\\\', '\\', $settings['root_path']); // fix path display
 }
-
-if ($mode == 0) {
-    $locale = $settings['language'];
-} else {
-    $locale = LOCALE;
-}
-putenv('LANG=' . $locale);
-setlocale(LC_ALL, $locale);
-
-$lang_dir = 'locales';
-
-$directory = get_base_dir() . $lang_dir;
-
-$domain = 'phpfm';
-
-bindtextdomain($domain, $directory);
-bind_textdomain_codeset($domain, get_encoding()); // make gettext read mo by utf-8
-textdomain($domain);
 
 ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
