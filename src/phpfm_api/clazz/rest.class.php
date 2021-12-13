@@ -517,6 +517,9 @@ class Rest {
             case 'config':
                 $this->handle_config();
                 break;
+            case 'setting':
+                $this->handle_setting();
+                break;
             case 'message':
                 $this->handle_message();
                 break;
@@ -571,6 +574,25 @@ class Rest {
 
         $resp_obj = new RestRet();
         $resp_obj->data = $public_config;
+
+        $this->response_json($resp_obj);
+    }
+
+    /**
+     * Get setting.
+     */
+    private function handle_setting() {
+        $setting = array(
+            'root_type' => FILE_POSITION,
+            'root_path' => FILES_DIR,
+            'charset' => PLAT_CHARSET,
+            'language' => LOCALE,
+            'title_name' => TITLENAME,
+            'usermng' => USERMNG
+        );
+
+        $resp_obj = new RestRet();
+        $resp_obj->data = $setting;
 
         $this->response_json($resp_obj);
     }

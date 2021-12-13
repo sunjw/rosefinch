@@ -82,18 +82,22 @@ function save_general(&$settings, $new_settings) {
             $settings['usermng'] = 0;
         }
 
-        $templates = array('&&FILE_POSITION&&',
+        $templates = array(
+            '&&FILE_POSITION&&',
             '&&FILES_DIR&&',
             '&&PLAT_CHARSET&&',
             '&&LOCALE&&',
             '&&TITLENAME&&',
-            '&&USERMNG&&');
-        $values = array($settings['root_type'],
+            '&&USERMNG&&'
+        );
+        $values = array(
+            $settings['root_type'],
             $settings['root_path'],
             $settings['charset'],
             $settings['language'],
             $settings['title_name'],
-            $settings['usermng']);
+            $settings['usermng']
+        );
 
         $settings_str = str_replace($templates, $values, $settings_str);
         //echo $settings;
@@ -110,9 +114,11 @@ function save_general(&$settings, $new_settings) {
             fclose($settings_tpl);
             //print_r( $settings);
 
-            $templates = array('&&ROSE_VIEW&&',
+            $templates = array(
+                '&&ROSE_VIEW&&',
                 '&&ROSE_MODIFY&&',
-                '&&ROSE_ADMIN&&');
+                '&&ROSE_ADMIN&&'
+            );
             $values = array(0, 100, 100);
 
             $settings_str = str_replace($templates, $values, $settings_str);
@@ -150,12 +156,16 @@ function save_usermng(&$settings, $new_settings) {
     fclose($settings_tpl);
     //print_r( $settings);
 
-    $templates = array('&&ROSE_VIEW&&',
+    $templates = array(
+        '&&ROSE_VIEW&&',
         '&&ROSE_MODIFY&&',
-        '&&ROSE_ADMIN&&');
-    $values = array($settings['rose_view'],
+        '&&ROSE_ADMIN&&'
+    );
+    $values = array(
+        $settings['rose_view'],
         $settings['rose_modify'],
-        $settings['rose_admin']);
+        $settings['rose_admin']
+    );
 
     $settings_str = str_replace($templates, $values, $settings_str);
     //echo $settings;
