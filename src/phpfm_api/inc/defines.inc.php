@@ -47,13 +47,18 @@ if (file_exists($settings)) {
  */
 function get_public_config() {
     $installed = false;
+    $title_name = '';
+
     if (defined('FILES_DIR')) {
         $installed = true;
+    }
+    if ($installed) {
+        $title_name = TITLENAME;
     }
     return [
         'installed' => $installed,
         'version' => VERSION,
-        'title_name' => TITLENAME
+        'title_name' => $title_name
     ];
 }
 
