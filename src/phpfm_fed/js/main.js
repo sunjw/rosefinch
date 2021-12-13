@@ -585,6 +585,9 @@ class RosefinchPage {
         this.buttonDebug.append(debugIcon);
 
         this.buttonSetting = this.generateToolbarButton('buttonSetting', 'bi-gear', 'Setting');
+        this.onButtonClick(this.buttonSetting, function () {
+            that.showSettingDialog();
+        });
         this.buttonAbout = this.generateToolbarButton('buttonAbout', 'bi-info-circle', 'About');
         this.onButtonClick(this.buttonAbout, function () {
             that.showAboutDialog();
