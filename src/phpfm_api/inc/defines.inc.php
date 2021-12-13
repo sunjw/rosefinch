@@ -52,7 +52,8 @@ function get_public_config() {
     }
     return [
         'installed' => $installed,
-        'version' => VERSION
+        'version' => VERSION,
+        'title_name' => TITLENAME
     ];
 }
 
