@@ -1781,22 +1781,16 @@ class RosefinchPage {
             this.modalSetting.setOkButtonHandler(function () {
                 utils.log('RosefinchPage.showSettingDialog, ok.');
 
-                let inputPathVal = inputPath.val().trim();
-                if (inputPathVal == '') {
-                    jqueryUtils.focusOnInput(inputPath);
-                    return;
-                }
-
-                selectType.attr('disabled', 'disabled');
-                inputPath.attr('disabled', 'disabled');
+                inputCharset.attr('disabled', 'disabled');
+                inputTitle.attr('disabled', 'disabled');
 
                 that.modalSetting.showOkButtonLoading();
 
-                let requestApi = that.generateRestApiUrl('api/v1/sys/install');
+                let requestApi = that.generateRestApiUrl('api/v1/sys/setting');
                 utils.log('RosefinchPage.showSettingDialog, requestApi=[%s]', requestApi);
                 let reqObj = {};
-                reqObj['rootType'] = selectType.val();
-                reqObj['rootPath'] = inputPathVal;
+                reqObj['charset'] = inputCharset.val().trim();
+                reqObj['titleName'] = inputTitle.val().trim();
 
                 jqueryUtils.postRestRequest(requestApi, reqObj, function (data) {
                     that.modalSetting.close();
