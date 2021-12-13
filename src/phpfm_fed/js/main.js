@@ -1007,7 +1007,9 @@ class RosefinchPage {
             this.modalUpload.setCloseButtonText('Cancel');
 
             let formBody = $('<form/>');
-            jqueryUtils.formOnSubmit(formBody, this.modalUpload.clickOkButton());
+            jqueryUtils.formOnSubmit(formBody, function () {
+                that.modalUpload.clickOkButton();
+            });
             let divFormGroup = $('<div/>').addClass('form-group');
 
             let labelUploadFileInfo = $('<label/>').attr({
@@ -1141,7 +1143,9 @@ class RosefinchPage {
             this.modalNewFolder.setCloseButtonText('Cancel');
 
             let formBody = $('<form/>');
-            jqueryUtils.formOnSubmit(formBody, this.modalNewFolder.clickOkButton());
+            jqueryUtils.formOnSubmit(formBody, function () {
+                that.modalNewFolder.clickOkButton();
+            });
             let divFormGroup = $('<div/>').addClass('form-group');
             let labelName = $('<label/>').attr('for', 'inputName').addClass('col-form-label').text('Name: ');
             let inputName = $('<input/>').attr({
@@ -1283,7 +1287,9 @@ class RosefinchPage {
             this.modalRename.setCloseButtonText('Cancel');
 
             let formBody = $('<form/>');
-            jqueryUtils.formOnSubmit(formBody, this.modalRename.clickOkButton());
+            jqueryUtils.formOnSubmit(formBody, function () {
+                that.modalRename.clickOkButton()
+            });
             let divFormGroup = $('<div/>').addClass('form-group');
             let labelName = $('<label/>').attr('for', 'inputName').addClass('col-form-label').text('New name: ');
             let inputName = $('<input/>').attr({
@@ -1703,7 +1709,9 @@ class RosefinchPage {
             this.modalSetting.setCloseButtonText('Cancel');
 
             let formBody = $('<form/>');
-            jqueryUtils.formOnSubmit(formBody, this.modalSetting.clickOkButton());
+            jqueryUtils.formOnSubmit(formBody, function () {
+                that.modalSetting.clickOkButton
+            });
             let divFormGroup = $('<div/>').addClass('form-group');
             let labelType = $('<label/>').attr('for', 'selectType').addClass('col-form-label').text('Path type: ');
             let selectType = $('<select/>').attr('id', 'selectType')
@@ -1794,7 +1802,9 @@ class RosefinchPage {
             this.modalInstall.setCloseButtonText('Cancel');
 
             let formBody = $('<form/>');
-            jqueryUtils.formOnSubmit(formBody, this.modalInstall.clickOkButton());
+            jqueryUtils.formOnSubmit(formBody, function () {
+                that.modalInstall.clickOkButton();
+            });
             let divFormGroup = $('<div/>').addClass('form-group');
             let labelType = $('<label/>').attr('for', 'selectType').addClass('col-form-label').text('Path type: ');
             let selectType = $('<select/>').attr('id', 'selectType')
