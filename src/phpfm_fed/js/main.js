@@ -1723,7 +1723,7 @@ class RosefinchPage {
 
             let formBody = $('<form/>');
             jqueryUtils.formOnSubmit(formBody, function () {
-                that.modalSetting.clickOkButton
+                that.modalSetting.clickOkButton();
             });
             let divFormGroup = $('<div/>').addClass('form-group');
             let labelType = $('<label/>').attr('for', 'selectType').addClass('col-form-label').text('Path type: ');
@@ -1741,12 +1741,26 @@ class RosefinchPage {
             divFormGroup.append(labelPath);
             divFormGroup.append(inputPath);
             formBody.append(divFormGroup);
-            //formBody.hide();
+            formBody.hide();
             this.modalSetting.appendBody(formBody);
+
+            let toastTitle = 'Setting';
 
             this.modalSetting.setShowHandler(function () {
                 utils.log('RosefinchPage.showSettingDialog, show.');
-                jqueryUtils.focusOnInput(inputPath);
+
+                let requestApi = that.generateRestApiUrl('api/v1/sys/setting');
+                utils.log('RosefinchPage.showSettingDialog, requestApi=[%s]', requestApi);
+                jqueryUtils.getRestRequest(requestApi, function (data) {
+                    if (!that.checkRestRespData(data)) {
+                        utils.log('RosefinchPage.showSettingDialog, response ERROR!');
+                        that.showToast(toastTitle, 'Response error.', 'danger');
+                    } else {
+                        divLoadingWrapper.hide();
+                        formBody.show();
+                        jqueryUtils.focusOnInput(inputPath);
+                    }
+                });
             });
 
             this.modalSetting.setCloseHandler(function () {
@@ -1774,7 +1788,6 @@ class RosefinchPage {
                 reqObj['rootType'] = selectType.val();
                 reqObj['rootPath'] = inputPathVal;
 
-                let toastTitle = 'Setting';
                 jqueryUtils.postRestRequest(requestApi, reqObj, function (data) {
                     that.modalSetting.close();
 
