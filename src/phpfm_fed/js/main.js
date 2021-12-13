@@ -215,7 +215,7 @@ class RosefinchPage {
     constructor(apiPrefix) {
         // const
         this.hashPrefix = '#!'
-        this.titleName = 'Rosefinch';
+        this.productName = 'Rosefinch';
         this.apiBase = utils.isString(apiPrefix) ? apiPrefix : '';
         this.restApiEndpoint = 'func/rest.api.php';
         this.dlApiEndpoint = 'func/download.func.php';
@@ -318,7 +318,7 @@ class RosefinchPage {
 
         // prepare layout
         let spanBrand = $('<span/>').attr('id', 'spanBrand').addClass('navbar-brand');
-        let aBrand = $('<a/>').attr('href', this.hashPrefix).addClass('noOutline').text(this.titleName);
+        let aBrand = $('<a/>').attr('href', this.hashPrefix).addClass('noOutline').text(this.productName);
         spanBrand.append(aBrand);
         this.divToolbarBrand.append(spanBrand);
 
@@ -397,7 +397,7 @@ class RosefinchPage {
 
             if (!that.checkRestRespData(data)) {
                 utils.log('RosefinchPage.initConfig, response ERROR!');
-                that.showToast(that.titleName, 'Response error.', 'danger');
+                that.showToast(that.productName, 'Response error.', 'danger');
                 return;
             }
             that.config = data.data;
@@ -446,7 +446,7 @@ class RosefinchPage {
                     // still error!
                     utils.log('RosefinchPage.onHashChange, response ERROR!');
                     that.hideMainListLoading();
-                    that.showToast(that.titleName, 'Response error.', 'danger');
+                    that.showToast(that.productName, 'Response error.', 'danger');
                 }
                 return;
             }
@@ -465,7 +465,7 @@ class RosefinchPage {
             }
             if (!Array.isArray(that.mainList)) {
                 utils.log('RosefinchPage.onHashChange, mainList not an Array.');
-                that.showToast(that.titleName, 'Response error.', 'danger');
+                that.showToast(that.productName, 'Response error.', 'danger');
                 return;
             }
 
@@ -477,7 +477,7 @@ class RosefinchPage {
             that.onFileSelected();
         }, function () {
             utils.log('RosefinchPage.onHashChange, request ERROR!');
-            that.showToast(that.titleName, 'Request error.', 'danger');
+            that.showToast(that.productName, 'Request error.', 'danger');
             that.hideMainListLoading();
         });
     }
@@ -1494,7 +1494,7 @@ class RosefinchPage {
 
             this.modalAbout = new RosefinchDialog();
             this.modalAbout.init('divModalAbout');
-            this.modalAbout.setTitle(this.titleName);
+            this.modalAbout.setTitle(this.productName);
 
             let divMessage = $('<div/>');
             let pAboutMessage = $('<p/>');
