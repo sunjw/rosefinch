@@ -1,4 +1,5 @@
 const jq = require('jquery');
+const utils = require("./utils");
 
 function restRequest(method, api, reqObj, successCallback, errorCallback) {
     jq.ajax({
@@ -41,9 +42,17 @@ function stopBubble(event) {
     }
 }
 
+function formOnSubmit(form, submitCallback) {
+    form.on('submit', function (e) {
+        e.preventDefault();
+        submitCallback(e);
+    });
+}
+
 // exports
 exports.restRequest = restRequest;
 exports.postRestRequest = postRestRequest;
 exports.getRestRequest = getRestRequest;
 exports.focusOnInput = focusOnInput;
 exports.stopBubble = stopBubble;
+exports.formOnSubmit = formOnSubmit;
