@@ -180,7 +180,7 @@ img {
 #divModalAudio .previewDownload, #divModalImage .previewDownload {
   margin-top: 0.6rem;
 }
-#divModalImage .previewContent .spinner-border {
+#divModalImage .previewContent .spinner-border, #divModalSetting .loadingWrapper .spinner-border {
   color: var(--phpfm-tint);
   border-width: 0.1rem;
 }

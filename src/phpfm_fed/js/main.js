@@ -1574,14 +1574,17 @@ class RosefinchPage {
             this.modalImage.setTitle('Preview');
 
             let divPreviewContent = $('<div/>').addClass('previewContent text-center');
+
             let divLoading = $('<div/>').attr('role', 'status').addClass('spinner-border');
             let spanLoading = $('<span/>').addClass('sr-only');
             divLoading.append(spanLoading);
             divPreviewContent.append(divLoading);
+
             let imgPreview = $('<img/>').attr('src', '');
             imgPreview.hide();
             divPreviewContent.append(imgPreview);
             this.modalImage.appendBody(divPreviewContent);
+
             let divPreviewDownload = $('<div/>').addClass('previewDownload text-truncate');
             divPreviewDownload.html('Download:&nbsp;');
             let aDownload = $('<a/>');
@@ -1711,6 +1714,13 @@ class RosefinchPage {
             this.modalSetting.setTitle('Setting');
             this.modalSetting.setCloseButtonText('Cancel');
 
+            let divLoadingWrapper = $('<div/>').addClass('loadingWrapper text-center');
+            let divLoading = $('<div/>').attr('role', 'status').addClass('spinner-border');
+            let spanLoading = $('<span/>').addClass('sr-only');
+            divLoading.append(spanLoading);
+            divLoadingWrapper.append(divLoading);
+            this.modalSetting.appendBody(divLoadingWrapper);
+
             let formBody = $('<form/>');
             jqueryUtils.formOnSubmit(formBody, function () {
                 that.modalSetting.clickOkButton
@@ -1731,6 +1741,7 @@ class RosefinchPage {
             divFormGroup.append(labelPath);
             divFormGroup.append(inputPath);
             formBody.append(divFormGroup);
+            //formBody.hide();
             this.modalSetting.appendBody(formBody);
 
             this.modalSetting.setShowHandler(function () {
