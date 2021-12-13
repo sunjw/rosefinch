@@ -554,7 +554,8 @@ class Rest {
             'language' => 'en_US',
             'title_name' => 'Rosefinch',
             'usermng' => 0,
-            'install' => 1);
+            'install' => 1
+        );
         if (save_settings($settings, 0, $settings)) {
             $resp_obj->code = 0;
             $resp_obj->message = 'Install successfully.';
@@ -592,6 +593,40 @@ class Rest {
         $this->response_json($resp_obj);
     }
 
+    private function post_setting() {
+        $public_config = get_public_config();
+        if (!$public_config['installed']) {
+            get_logger()->error('post_setting, not install.');
+            $this->response_json_500();
+            return;
+        }
+
+        $req_obj = read_body_json();
+        $charset = $req_obj['charset'];
+        $title_name = $req_obj['titleName'];
+        get_logger()->info('post_setting, set charset=[' . $charset . '], title_name=[' . $title_name . ']');
+
+        $resp_obj = new RestRet();
+        $settings = array(
+            'root_type' => FILE_POSITION,
+            'root_path' => FILES_DIR,
+            'charset' => $charset,
+            'language' => 'en_US',
+            'title_name' => $title_name,
+            'usermng' => 0,
+            'install' => 1
+        );
+        if (save_settings($settings, 0, $settings)) {
+            $resp_obj->code = 0;
+            $resp_obj->message = 'Save setting successfully.';
+        } else {
+            $resp_obj->code = 500;
+            $resp_obj->message = 'Save setting failed.';
+        }
+
+        $this->response_json($resp_obj);
+    }
+
     /**
      * Handle setting.
      */
@@ -600,7 +635,7 @@ class Rest {
         if ($request_method === 'GET') {
             $this->get_setting();
         } else if ($request_method === 'POST') {
-
+            $this->post_setting();
         }
     }
 
