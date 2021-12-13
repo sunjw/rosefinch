@@ -49,6 +49,15 @@ function formOnSubmit(form, submitCallback) {
     });
 }
 
+function inputOnEnter(input, enterCallback) {
+    input.on('keydown', function (e) {
+        if (e.code == 'Enter' || e.code == 'NumpadEnter') {
+            e.preventDefault();
+            enterCallback(e);
+        }
+    });
+}
+
 // exports
 exports.restRequest = restRequest;
 exports.postRestRequest = postRestRequest;
@@ -56,3 +65,4 @@ exports.getRestRequest = getRestRequest;
 exports.focusOnInput = focusOnInput;
 exports.stopBubble = stopBubble;
 exports.formOnSubmit = formOnSubmit;
+exports.inputOnEnter = inputOnEnter;

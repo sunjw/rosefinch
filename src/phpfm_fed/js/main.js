@@ -1710,7 +1710,7 @@ class RosefinchPage {
             let that = this;
 
             this.modalSetting = new RosefinchDialog();
-            this.modalSetting.init('divModalSetting', true, true);
+            this.modalSetting.init('divModalSetting', false, true);
             this.modalSetting.setTitle('Setting');
             this.modalSetting.setCloseButtonText('Cancel');
 
@@ -1732,6 +1732,9 @@ class RosefinchPage {
                 'id': 'inputCharset',
                 'type': 'text'
             }).addClass('form-control');
+            jqueryUtils.inputOnEnter(inputCharset, function () {
+                that.modalSetting.clickOkButton();
+            });
             divFormGroup.append(labelCharset);
             divFormGroup.append(inputCharset);
             let labelTitle = $('<label/>').attr('for', 'inputTitle').addClass('col-form-label').text('Title: ');
@@ -1739,6 +1742,9 @@ class RosefinchPage {
                 'id': 'inputTitle',
                 'type': 'text'
             }).addClass('form-control');
+            jqueryUtils.inputOnEnter(inputTitle, function () {
+                that.modalSetting.clickOkButton();
+            });
             divFormGroup.append(labelTitle);
             divFormGroup.append(inputTitle);
             formBody.append(divFormGroup);
