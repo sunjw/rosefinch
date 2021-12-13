@@ -583,8 +583,6 @@ class Rest {
      */
     private function handle_setting() {
         $setting = array(
-            'root_type' => FILE_POSITION,
-            'root_path' => FILES_DIR,
             'charset' => PLAT_CHARSET,
             'language' => LOCALE,
             'title_name' => TITLENAME,
