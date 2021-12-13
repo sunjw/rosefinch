@@ -286,6 +286,7 @@ class RosefinchPage {
         this.modalAudio = null;
         this.modalImage = null;
 
+        this.modalSetting = null;
         this.modalInstall = null;
 
         // vars
@@ -1701,6 +1702,101 @@ class RosefinchPage {
             'link': imageLink
         });
         this.modalImage.show();
+    }
+
+    showSettingDialog() {
+        if (this.modalSetting == null) {
+            utils.log('RosefinchPage.showSettingDialog, init modalSetting.');
+            let that = this;
+
+            this.modalSetting = new RosefinchDialog();
+            this.modalSetting.init('divModalSetting', true, true);
+            this.modalSetting.setTitle('Setting');
+            this.modalSetting.setCloseButtonText('Cancel');
+
+            let formBody = $('<form/>');
+            formBody.on('submit', function (e) {
+                utils.log('RosefinchPage.showSettingDialog, formBody.submit');
+                e.preventDefault();
+                that.modalSetting.clickOkButton();
+            });
+            let divFormGroup = $('<div/>').addClass('form-group');
+            let labelType = $('<label/>').attr('for', 'selectType').addClass('col-form-label').text('Path type: ');
+            let selectType = $('<select/>').attr('id', 'selectType')
+                .addClass('form-control')
+                .append($('<option/>').attr('value', 'absolute').text('absolute'))
+                .append($('<option/>').attr('value', 'relative').text('relative'));
+            divFormGroup.append(labelType);
+            divFormGroup.append(selectType);
+            let labelPath = $('<label/>').attr('for', 'inputPath').addClass('col-form-label').text('Path: ');
+            let inputPath = $('<input/>').attr({
+                'id': 'inputPath',
+                'type': 'text'
+            }).addClass('form-control');
+            divFormGroup.append(labelPath);
+            divFormGroup.append(inputPath);
+            formBody.append(divFormGroup);
+            this.modalSetting.appendBody(formBody);
+
+            this.modalSetting.setShowHandler(function () {
+                utils.log('RosefinchPage.showSettingDialog, show.');
+                jqueryUtils.focusOnInput(inputPath);
+            });
+
+            this.modalSetting.setCloseHandler(function () {
+                utils.log('RosefinchPage.showSettingDialog, close.');
+                that.currentDialog = null;
+            });
+
+            this.modalSetting.setOkButtonHandler(function () {
+                utils.log('RosefinchPage.showSettingDialog, ok.');
+
+                let inputPathVal = inputPath.val().trim();
+                if (inputPathVal == '') {
+                    jqueryUtils.focusOnInput(inputPath);
+                    return;
+                }
+
+                selectType.attr('disabled', 'disabled');
+                inputPath.attr('disabled', 'disabled');
+
+                that.modalSetting.showOkButtonLoading();
+
+                let requestApi = that.generateRestApiUrl('api/v1/sys/install');
+                utils.log('RosefinchPage.showSettingDialog, requestApi=[%s]', requestApi);
+                let reqObj = {};
+                reqObj['rootType'] = selectType.val();
+                reqObj['rootPath'] = inputPathVal;
+
+                let toastTitle = 'Setting';
+                jqueryUtils.postRestRequest(requestApi, reqObj, function (data) {
+                    that.modalSetting.close();
+
+                    if (!that.checkRestRespData(data)) {
+                        utils.log('RosefinchPage.showSettingDialog, response ERROR!');
+                        that.showToast(toastTitle, 'Response error.', 'danger');
+                    } else {
+                        let dataCode = data['code'];
+                        let dataMessage = data['message'];
+                        utils.log('RosefinchPage.showSettingDialog, request OK, data[\'code\']=%d', dataCode);
+                        if (dataCode == 0) {
+                            that.showToast(toastTitle, dataMessage, 'success');
+                            that.onHashChange();
+                        } else {
+                            that.showToast(toastTitle, dataMessage, 'danger');
+                        }
+                    }
+                }, function () {
+                    utils.log('RosefinchPage.showSettingDialog, request ERROR!');
+                    that.modalSetting.close();
+                    that.showToast(toastTitle, 'Request error.', 'danger');
+                });
+            });
+        }
+
+        utils.log('RosefinchPage.showSettingDialog');
+        this.currentDialog = this.modalSetting;
+        this.modalSetting.show();
     }
 
     showInstallDialog() {
