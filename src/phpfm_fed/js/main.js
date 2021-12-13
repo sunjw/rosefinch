@@ -216,6 +216,7 @@ class RosefinchPage {
         // const
         this.hashPrefix = '#!'
         this.productName = 'Rosefinch';
+
         this.apiBase = utils.isString(apiPrefix) ? apiPrefix : '';
         this.restApiEndpoint = 'func/rest.api.php';
         this.dlApiEndpoint = 'func/download.func.php';
@@ -242,6 +243,7 @@ class RosefinchPage {
         this.divWrapper = $('#divWrapper');
         this.navToolbarWrapper = $('#navToolbarWrapper');
         this.divToolbarBrand = $('#divToolbarBrand');
+        this.aBrand = null;
         this.divToolbarLeft = $('#divToolbarLeft');
         this.divToolbarRight = $('#divToolbarRight');
         this.navPathWrapper = $('#navPathWrapper');
@@ -318,8 +320,8 @@ class RosefinchPage {
 
         // prepare layout
         let spanBrand = $('<span/>').attr('id', 'spanBrand').addClass('navbar-brand');
-        let aBrand = $('<a/>').attr('href', this.hashPrefix).addClass('noOutline').text(this.productName);
-        spanBrand.append(aBrand);
+        this.aBrand = $('<a/>').attr('href', this.hashPrefix).addClass('noOutline').text(this.productName);
+        spanBrand.append(this.aBrand);
         this.divToolbarBrand.append(spanBrand);
 
         this.initSortMenu();
@@ -404,6 +406,7 @@ class RosefinchPage {
             utils.log('RosefinchPage.initConfig, installed=[%s]', that.config['installed']);
 
             if (that.config['installed']) {
+                that.aBrand.text(that.config['title_name']);
                 // begin
                 that.onHashChange();
             } else {
@@ -1810,7 +1813,7 @@ class RosefinchPage {
                         utils.log('RosefinchPage.showSettingDialog, request OK, data[\'code\']=%d', dataCode);
                         if (dataCode == 0) {
                             that.showToast(toastTitle, dataMessage, 'success');
-                            that.onHashChange();
+                            that.initConfig();
                         } else {
                             that.showToast(toastTitle, dataMessage, 'danger');
                         }
