@@ -578,10 +578,7 @@ class Rest {
         $this->response_json($resp_obj);
     }
 
-    /**
-     * Get setting.
-     */
-    private function handle_setting() {
+    private function get_setting() {
         $setting = array(
             'charset' => PLAT_CHARSET,
             'language' => LOCALE,
@@ -593,6 +590,18 @@ class Rest {
         $resp_obj->data = $setting;
 
         $this->response_json($resp_obj);
+    }
+
+    /**
+     * Handle setting.
+     */
+    private function handle_setting() {
+        $request_method = $_SERVER['REQUEST_METHOD'];
+        if ($request_method === 'GET') {
+            $this->get_setting();
+        } else if ($request_method === 'POST') {
+
+        }
     }
 
     /**
