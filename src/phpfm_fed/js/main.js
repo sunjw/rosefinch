@@ -1725,21 +1725,22 @@ class RosefinchPage {
             jqueryUtils.formOnSubmit(formBody, function () {
                 that.modalSetting.clickOkButton();
             });
+
             let divFormGroup = $('<div/>').addClass('form-group');
-            let labelType = $('<label/>').attr('for', 'selectType').addClass('col-form-label').text('Path type: ');
-            let selectType = $('<select/>').attr('id', 'selectType')
-                .addClass('form-control')
-                .append($('<option/>').attr('value', 'absolute').text('absolute'))
-                .append($('<option/>').attr('value', 'relative').text('relative'));
-            divFormGroup.append(labelType);
-            divFormGroup.append(selectType);
-            let labelPath = $('<label/>').attr('for', 'inputPath').addClass('col-form-label').text('Path: ');
-            let inputPath = $('<input/>').attr({
-                'id': 'inputPath',
+            let labelCharset = $('<label/>').attr('for', 'inputCharset').addClass('col-form-label').text('Charset: ');
+            let inputCharset = $('<input/>').attr({
+                'id': 'inputCharset',
                 'type': 'text'
             }).addClass('form-control');
-            divFormGroup.append(labelPath);
-            divFormGroup.append(inputPath);
+            divFormGroup.append(labelCharset);
+            divFormGroup.append(inputCharset);
+            let labelTitle = $('<label/>').attr('for', 'inputTitle').addClass('col-form-label').text('Title: ');
+            let inputTitle = $('<input/>').attr({
+                'id': 'inputTitle',
+                'type': 'text'
+            }).addClass('form-control');
+            divFormGroup.append(labelTitle);
+            divFormGroup.append(inputTitle);
             formBody.append(divFormGroup);
             formBody.hide();
             this.modalSetting.appendBody(formBody);
@@ -1756,9 +1757,12 @@ class RosefinchPage {
                         utils.log('RosefinchPage.showSettingDialog, response ERROR!');
                         that.showToast(toastTitle, 'Response error.', 'danger');
                     } else {
+                        let setting = data.data;
+                        inputCharset.val(setting['charset']);
+                        inputTitle.val(setting['title_name']);
+
                         divLoadingWrapper.hide();
                         formBody.show();
-                        jqueryUtils.focusOnInput(inputPath);
                     }
                 });
             });
