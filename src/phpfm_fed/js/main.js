@@ -1769,6 +1769,12 @@ class RosefinchPage {
 
             this.modalSetting.setCloseHandler(function () {
                 utils.log('RosefinchPage.showSettingDialog, close.');
+                divLoadingWrapper.show();
+                formBody.hide();
+                inputCharset.val('');
+                inputCharset.removeAttr('disabled');
+                inputTitle.val('');
+                inputTitle.removeAttr('disabled');
                 that.currentDialog = null;
             });
 
