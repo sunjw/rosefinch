@@ -548,7 +548,6 @@ class Rest {
             'root_type' => $root_type,
             'root_path' => $root_path,
             'charset' => 'UTF-8',
-            'timezone' => 'Asia/Shanghai',
             'language' => 'en_US',
             'title_name' => 'Rosefinch',
             'usermng' => 0,

@@ -16,8 +16,6 @@ define('FILES_DIR', '&&FILES_DIR&&');
  */
 define('PLAT_CHARSET', '&&PLAT_CHARSET&&');
 
-date_default_timezone_set('&&TIME_ZONE&&'); // timezone
-
 define('LOCALE', '&&LOCALE&&'); // language, like 'zh_CN', 'en_US'
 
 // User management

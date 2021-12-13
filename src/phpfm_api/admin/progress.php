@@ -34,7 +34,6 @@ function save_general(&$settings, $new_settings) {
         $settings['root_type'] = post_query('rootType');
         $settings['root_path'] = post_query('rootPath');
         $settings['charset'] = post_query('charset');
-        $settings['timezone'] = post_query('timezone');
         $settings['language'] = post_query('language');
         $settings['title_name'] = post_query('titleName');
         $settings['usermng'] = post_query('usermng');
@@ -42,7 +41,6 @@ function save_general(&$settings, $new_settings) {
         $settings['root_type'] = $new_settings['root_type'];
         $settings['root_path'] = $new_settings['root_path'];
         $settings['charset'] = $new_settings['charset'];
-        $settings['timezone'] = $new_settings['timezone'];
         $settings['language'] = $new_settings['language'];
         $settings['title_name'] = $new_settings['title_name'];
         $settings['usermng'] = $new_settings['usermng'];
@@ -55,7 +53,6 @@ function save_general(&$settings, $new_settings) {
     if ($settings['root_type'] == '' ||
         $settings['root_path'] == '' ||
         $settings['charset'] == '' ||
-        $settings['timezone'] == '' ||
         $settings['language'] == '' ||
         $settings['title_name'] == '' ||
         $settings['usermng'] == '') {
@@ -88,14 +85,12 @@ function save_general(&$settings, $new_settings) {
         $templates = array('&&FILE_POSITION&&',
             '&&FILES_DIR&&',
             '&&PLAT_CHARSET&&',
-            '&&TIME_ZONE&&',
             '&&LOCALE&&',
             '&&TITLENAME&&',
             '&&USERMNG&&');
         $values = array($settings['root_type'],
             $settings['root_path'],
             $settings['charset'],
-            $settings['timezone'],
             $settings['language'],
             $settings['title_name'],
             $settings['usermng']);
