@@ -1291,7 +1291,7 @@ class RosefinchPage {
 
             let formBody = $('<form/>');
             jqueryUtils.formOnSubmit(formBody, function () {
-                that.modalRename.clickOkButton()
+                that.modalRename.clickOkButton();
             });
             let divFormGroup = $('<div/>').addClass('form-group');
             let labelName = $('<label/>').attr('for', 'inputName').addClass('col-form-label').text('New name: ');
