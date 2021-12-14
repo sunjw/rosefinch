@@ -5,8 +5,7 @@
  * @param string $param_name param name
  * @return string value or ''
  */
-function post_query($param_name)
-{
+function post_query($param_name) {
     $query = '';
     if (isset($_POST[$param_name])) {
         $query = $_POST[$param_name];
@@ -19,8 +18,7 @@ function post_query($param_name)
  * @param string $param_name param name
  * @return string value or ''
  */
-function get_query($param_name)
-{
+function get_query($param_name) {
     $query = '';
     if (isset($_GET[$param_name])) {
         $query = $_GET[$param_name];
@@ -32,8 +30,7 @@ function get_query($param_name)
  * Get request body JSON data.
  * @return mixed
  */
-function read_body_json()
-{
+function read_body_json() {
     $req_body = file_get_contents('php://input');
     $req_json = json_decode($req_body, TRUE); //convert JSON into array
     return $req_json;
@@ -44,8 +41,7 @@ function read_body_json()
  * @param string $name cookie name
  * @return string value or ''
  */
-function get_cookie($name)
-{
+function get_cookie($name) {
     $value = '';
     if (isset($_COOKIE[$name])) {
         $value = $_COOKIE[$name];
@@ -57,8 +53,7 @@ function get_cookie($name)
  * Get current URI.
  * @return string URI
  */
-function get_URI()
-{
+function get_URI() {
     if ($_SERVER['QUERY_STRING'] != '') {
         $uri = $_SERVER['PHP_SELF'] . '?' . $_SERVER['QUERY_STRING'];
     } else {
@@ -72,8 +67,7 @@ function get_URI()
  * Get base directory path, end with '/'.
  * @return string base path
  */
-function get_base_dir()
-{
+function get_base_dir() {
     $current_file_path = dirname(__FILE__); // "inc" directory path
     $current_base_path = substr($current_file_path, 0, -3);
     if (substr($current_base_path, strlen($current_base_path) - 1, 1) != '\\' &&
@@ -87,8 +81,7 @@ function get_base_dir()
  * Get encoding.
  * @return string encoding name
  */
-function get_encoding()
-{
+function get_encoding() {
     return 'UTF-8';
 }
 
@@ -97,8 +90,7 @@ function get_encoding()
  * @param string $str GB2312 string
  * @return string UTF-8 string
  */
-function convert_gbtoutf8($str)
-{
+function convert_gbtoutf8($str) {
     return @iconv('GB2312', 'UTF-8', $str);
 }
 
@@ -107,8 +99,7 @@ function convert_gbtoutf8($str)
  * @param string $str UTF-8 string
  * @return string GB2312 string
  */
-function convert_utf8togb($str)
-{
+function convert_utf8togb($str) {
     return @iconv('UTF-8', 'GB2312', $str);
 }
 
@@ -118,8 +109,7 @@ function convert_utf8togb($str)
  * @param string $dest destination directory path
  * @return bool
  */
-function xcopy($src, $dest)
-{
+function xcopy($src, $dest) {
     if (!$dh = @opendir($src)) {
         return false;
     }
@@ -153,16 +143,14 @@ function xcopy($src, $dest)
  * @param string $filename
  * @return string basename
  */
-function get_basename($filename)
-{
+function get_basename($filename) {
     return preg_replace('/^.+[\\\\\\/]/', '', $filename);
 }
 
 /**
  * Set header "Content-Type" to "text/html; charset=UTF-8".
  */
-function set_response_utf8()
-{
+function set_response_utf8() {
     header('Content-Type: text/html; charset=UTF-8');
 }
 
@@ -171,8 +159,7 @@ function set_response_utf8()
  * @param string $url
  * @param bool $need_rawurldecode need to call rawurldecode(), default is false
  */
-function redirect($url, $need_rawurldecode = false)
-{
+function redirect($url, $need_rawurldecode = false) {
     if ($need_rawurldecode) {
         $url = rawurldecode($url);
     }
@@ -184,8 +171,7 @@ function redirect($url, $need_rawurldecode = false)
 /**
  * Response 400 Bad Request.
  */
-function response_400()
-{
+function response_400() {
     header('HTTP/1.1 400 Bad Request');
     echo '400 Bad Request';
     exit;
@@ -194,8 +180,7 @@ function response_400()
 /**
  * Response 404 Not Found.
  */
-function response_404()
-{
+function response_404() {
     header('HTTP/1.1 404 Not Found');
     echo '404 Not Found';
     exit;
@@ -204,8 +189,7 @@ function response_404()
 /**
  * Response 500 Internal Error.
  */
-function response_500()
-{
+function response_500() {
     header('HTTP/1.1 500 Internal Server Error');
     echo '500 Internal Server Error';
     exit;
@@ -216,8 +200,7 @@ function response_500()
  * @param int $time timestamp
  * @return string time string, format is: Y-n-j H:i:s
  */
-function timetotimestr($time)
-{
+function timetotimestr($time) {
     return date('Y-n-j H:i', $time);
 }
 
@@ -226,8 +209,7 @@ function timetotimestr($time)
  * @param string $str time string, format is: Y-n-j H:i:s
  * @return number timestamp
  */
-function timestrtotime($str)
-{
+function timestrtotime($str) {
     $array = explode(' ', $str);
     $date = $array[0];
     $time = $array[1];
@@ -246,8 +228,7 @@ function timestrtotime($str)
  * @param bool $encode_space
  * @return string
  */
-function htmlentities_utf8($str, $encode_space = false)
-{
+function htmlentities_utf8($str, $encode_space = false) {
     $ret = htmlentities($str, ENT_COMPAT, 'UTF-8');
     if ($encode_space) {
         $ret = str_replace(' ', '&nbsp;', $ret);
@@ -260,8 +241,7 @@ function htmlentities_utf8($str, $encode_space = false)
  * @param string $str
  * @return string
  */
-function trim_last_slash($str)
-{
+function trim_last_slash($str) {
     $temp = $str;
     if (mb_substr($str, -1) == '/' || mb_substr($str, -1) == '\\') {
         $temp = mb_substr($str, 0, mb_strlen($str) - 1);
@@ -274,8 +254,7 @@ function trim_last_slash($str)
  * Check mobile browser.
  * @return bool
  */
-function is_mobile_browser()
-{
+function is_mobile_browser() {
     if (!isset($_SERVER['HTTP_USER_AGENT'])) {
         return false;
     }
@@ -294,8 +273,7 @@ function is_mobile_browser()
  * @param $needle
  * @return bool
  */
-function starts_with($haystack, $needle)
-{
+function starts_with($haystack, $needle) {
     $length = strlen($needle);
     return substr($haystack, 0, $length) === $needle;
 }
@@ -306,8 +284,7 @@ function starts_with($haystack, $needle)
  * @param $needle
  * @return bool
  */
-function ends_with($haystack, $needle)
-{
+function ends_with($haystack, $needle) {
     $length = strlen($needle);
     if (!$length) {
         return true;
