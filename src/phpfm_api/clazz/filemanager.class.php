@@ -2,7 +2,6 @@
 
 require_once dirname(__FILE__) . '/../inc/defines.inc.php';
 require_once dirname(__FILE__) . '/../inc/common.inc.php';
-require_once dirname(__FILE__) . '/../inc/gettext.inc.php';
 require_once dirname(__FILE__) . '/../inc/sort.inc.php';
 require_once 'clipboard.class.php';
 require_once 'messageboard.class.php';
@@ -116,19 +115,11 @@ class FileManager {
      */
     private function init_view() {
         if (!Utility::allow_to_view()) {
-            $this->messageboard->set_message(_('Please login to browse files.'), 400);
+            $this->messageboard->set_message('Please login to browse files.', 400);
             return;
         }
         $this->dstats = $this->get_dirs_list($this->request_dir, $this->dsort); // get sorted directory list
         $this->fstats = $this->get_files_list($this->request_dir, $this->sort); // get sorted file list
-    }
-
-    /**
-     * Title string.
-     * @return string title string
-     */
-    public function title() {
-        return _(TITLENAME) . ' - ' . _('PHP File Manager');
     }
 
     /**
