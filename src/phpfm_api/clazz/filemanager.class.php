@@ -17,8 +17,7 @@ require_once 'utility.class.php';
  * @author Sun Junwen
  *
  */
-class FileManager
-{
+class FileManager {
     private $request_sub_dir; // request sub directory path, UTF-8.
     private $request_dir; // request directory absolute path.
     private $sort_by; // sort.
@@ -39,8 +38,7 @@ class FileManager
     private $messageboard;
     private $history;
 
-    function __construct($view_page = 'index.php')
-    {
+    function __construct($view_page = 'index.php') {
         /*
          * all string are UTF-8!!!
          */
@@ -132,8 +130,7 @@ class FileManager
     /**
      * Init view page.
      */
-    private function init_view()
-    {
+    private function init_view() {
         if (!Utility::allow_to_view()) {
             $this->messageboard->set_message(_('Please login to browse files.'), 400);
             return;
@@ -146,8 +143,7 @@ class FileManager
      * Title string.
      * @return string title string
      */
-    public function title()
-    {
+    public function title() {
         return _(TITLENAME) . ' - ' . _('PHP File Manager');
     }
 
@@ -155,8 +151,7 @@ class FileManager
      * Get current path.
      * @return string current path
      */
-    public function get_current_path()
-    {
+    public function get_current_path() {
         return '/' . $this->request_sub_dir;
     }
 
@@ -164,8 +159,7 @@ class FileManager
      * Get current path array.
      * @return array current path exploded by "/"
      */
-    public function get_current_path_array()
-    {
+    public function get_current_path_array() {
         $request_sub_dir_array = explode('/', $this->request_sub_dir);
         $request_sub_dir_array_count = count($request_sub_dir_array);
         if ($request_sub_dir_array_count > 0) {
@@ -181,8 +175,7 @@ class FileManager
      * Get current directory.
      * @return string current directory
      */
-    public function get_current_dir()
-    {
+    public function get_current_dir() {
         $current_dir = '';
         $temp = $this->request_sub_dir;
         $temp = trim_last_slash($this->request_sub_dir);
@@ -200,8 +193,7 @@ class FileManager
      * Get request sub directory in $_GET.
      * @return string requested sub directory
      */
-    private function get_request_subdir()
-    {
+    private function get_request_subdir() {
         $request_sub_dir = rawurldecode(get_query(DIR_PARAM));
 
         if (false !== strpos($request_sub_dir, '..')) {
@@ -224,8 +216,7 @@ class FileManager
      * @param string $request_sub_dir request sub directory, by UTF-8.
      * @return string $request_dir
      */
-    private function prepare_request_dir($files_base_dir, $request_sub_dir)
-    {
+    private function prepare_request_dir($files_base_dir, $request_sub_dir) {
         //echo $request_sub_dir;
         $files_base_dir_plat = convert_toplat($files_base_dir);
         $request_dir = $files_base_dir_plat . $request_sub_dir; // get request directory.
@@ -273,8 +264,7 @@ class FileManager
      * -4 modified time reverse
      * @return array files info array
      */
-    private function get_files_list($path, $sort = 1)
-    {
+    private function get_files_list($path, $sort = 1) {
         $files = array();
         if ($handle = @opendir($path)) {
             //echo 'List of files:<br />';
@@ -372,8 +362,7 @@ class FileManager
      * -2 modified time reverse
      * @return array directory info array
      */
-    private function get_dirs_list($path, $sort = 1)
-    {
+    private function get_dirs_list($path, $sort = 1) {
         $dirs = array();
         if ($handle = @opendir($path)) {
             //echo 'List of dirs:<br />';
@@ -442,8 +431,7 @@ class FileManager
      * Merge directories and files into one array (directory first).
      * @return array
      */
-    public function get_main_list()
-    {
+    public function get_main_list() {
         return $items = array_merge($this->dstats, $this->fstats);
     }
 
@@ -451,8 +439,7 @@ class FileManager
      * Get item list sort by.
      * @return string
      */
-    public function get_sort_by()
-    {
+    public function get_sort_by() {
         return $this->sort_by;
     }
 
@@ -460,8 +447,7 @@ class FileManager
      * Get item list sort order.
      * @return string
      */
-    public function get_sort_order()
-    {
+    public function get_sort_order() {
         return $this->sort_order;
     }
 
@@ -470,8 +456,7 @@ class FileManager
      * @param item $item
      * @return bool true to filter，false not
      */
-    private function filter_item($item)
-    {
+    private function filter_item($item) {
         // Filter hidden files.
         if (substr($item['name'], 0, 1) == '.') {
             // Unix style.
@@ -488,8 +473,7 @@ class FileManager
      * @param string $request_sub_dir current directory path
      * @return string upper directory path
      */
-    private function get_parent_dir($request_sub_dir)
-    {
+    private function get_parent_dir($request_sub_dir) {
         //echo $request_sub_dir;
         $last_slash = strrpos($request_sub_dir, '/');
         $parent = '';
