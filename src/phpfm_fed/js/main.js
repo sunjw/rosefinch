@@ -268,7 +268,6 @@ class RosefinchPage {
         this.buttonDelete = null;
         this.buttonShare = null;
 
-        this.buttonDebug = null;
         this.buttonSetting = null;
         this.buttonAbout = null;
         this.buttonLoadingRight = null;
@@ -578,15 +577,6 @@ class RosefinchPage {
         this.divToolbarLeft.append('\n');
 
         // right
-        this.buttonDebug = $('<a/>').attr({
-            'id': 'buttonDebug',
-            'href': 'index.php',
-            'role': 'button',
-            'title': 'Debug'
-        }).addClass('toolbarBtn btn btn-light');
-        let debugIcon = $('<i/>').addClass('bi').addClass('bi-bug');
-        this.buttonDebug.append(debugIcon);
-
         this.buttonSetting = this.generateToolbarButton('buttonSetting', 'bi-gear', 'Setting');
         this.onButtonClick(this.buttonSetting, function () {
             that.showSettingDialog();
@@ -607,7 +597,6 @@ class RosefinchPage {
         this.buttonLoadingRight.append(spanLoadingSpinnerRight);
         this.buttonLoadingRight.hide();
 
-        this.divToolbarRight.append(this.buttonDebug);
         this.divToolbarRight.append('\n');
         this.divToolbarRight.append(this.buttonSetting);
         this.divToolbarRight.append('\n');
