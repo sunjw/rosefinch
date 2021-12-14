@@ -86,7 +86,8 @@ function dl_file($file) {
     //header('Pragma: public');
 
     header('Content-Type: ' . $ctype);
-    header('Content-Disposition: attachment; filename="' . $filename . '"');
+    $filename_utf8 = convert_toutf8($filename);
+    header('Content-Disposition: attachment; filename="' . $filename_utf8 . '"');
     header('Content-Length: ' . ($seek_end - $seek_start + 1));
 
     // Open the file.
