@@ -10,14 +10,12 @@ require_once 'messageboard.class.php';
  * @author Sun Junwen
  *
  */
-class Utility
-{
+class Utility {
     /**
      * Get base directory path.
      * @return string base directory path
      */
-    public static function get_file_base_dir()
-    {
+    public static function get_file_base_dir() {
         if (!defined('FILE_POSITION')) {
             return null;
         }
@@ -36,8 +34,7 @@ class Utility
      * @param number $size size in bytes
      * @return string formatted size string
      */
-    public static function format_size($size)
-    {
+    public static function format_size($size) {
         if ($size > 1024) {
             $size /= 1024.0;
             if ($size > 1024) {
@@ -60,8 +57,7 @@ class Utility
      * @param string $file file path
      * @return string ext (exclude .)
      */
-    public static function get_file_ext($file)
-    {
+    public static function get_file_ext($file) {
         $dot_pos = strrpos($file, '.');
         $type = '';
         if ($dot_pos !== false) {
@@ -75,8 +71,7 @@ class Utility
      * @param string $name
      * @return bool
      */
-    public static function check_name($name)
-    {
+    public static function check_name($name) {
         if ($name == '') {
             return false;
         }
@@ -101,8 +96,7 @@ class Utility
      * @param string $path
      * @return bool
      */
-    public static function check_path($path, $allow_empty = false)
-    {
+    public static function check_path($path, $allow_empty = false) {
         if (!$allow_empty && $path == '') {
             return false;
         }
@@ -125,8 +119,7 @@ class Utility
      * @param string $file_extension file ext
      * @return string MIME
      */
-    public static function get_mime_type($file_extension)
-    {
+    public static function get_mime_type($file_extension) {
         $mimetypes = array(
             'ez' => 'application/andrew-inset',
             'hqx' => 'application/mac-binhex40',
@@ -282,8 +275,7 @@ class Utility
      * @param array $files file names
      * @return array filtered file names
      */
-    public static function filter_files($files)
-    {
+    public static function filter_files($files) {
         $new_files = array();
         $count = count($files);
         for ($i = 0; $i < $count; $i++) {
@@ -300,8 +292,7 @@ class Utility
      * @param array $paths paths
      * @return array filtered paths
      */
-    public static function filter_paths($paths)
-    {
+    public static function filter_paths($paths) {
         $new_paths = array();
         $count = count($paths);
         for ($i = 0; $i < $count; $i++) {
@@ -313,8 +304,7 @@ class Utility
         return $new_paths;
     }
 
-    private static function get_name_part($name_part)
-    {
+    private static function get_name_part($name_part) {
         $suffix_len = 0;
         $suffix = substr($name_part, -1);
         if (strcmp($suffix, ')') == 0) {
@@ -345,8 +335,7 @@ class Utility
      * @param string $name full path (UTF-8)
      * @return string new full path (UTF-8)
      */
-    public static function resolve_same_name($name, $i = 2)
-    {
+    public static function resolve_same_name($name, $i = 2) {
         $file_name = get_basename($name);
         $dir_name = dirname($name);
         $dot_pos = strrpos($file_name, '.');
@@ -383,8 +372,7 @@ class Utility
      * @param bool $deal_same_name need deal with the same name
      * @return bool
      */
-    public static function phpfm_rename($oldname, $newname, $deal_same_name = false)
-    {
+    public static function phpfm_rename($oldname, $newname, $deal_same_name = false) {
         $newname_dir_part = dirname($newname);
         if ($newname_dir_part == $oldname) {
             return false;
@@ -419,8 +407,7 @@ class Utility
      * @param string $newname new path (UTF-8)
      * @return bool
      */
-    public static function phpfm_copy($oldname, $newname)
-    {
+    public static function phpfm_copy($oldname, $newname) {
         $newname_dir_part = dirname($newname);
         if ($newname_dir_part == $oldname) {
             return false;
@@ -446,8 +433,7 @@ class Utility
      * @param string $path
      * @return bool
      */
-    public static function phpfm_rmdir($path)
-    {
+    public static function phpfm_rmdir($path) {
         if (!$dh = @opendir($path)) {
             return false;
         }
@@ -477,8 +463,7 @@ class Utility
      * @param string $destination (UTF-8)
      * @return bool the same to move_uploaded_file
      */
-    public static function phpfm_move_uploaded_file($filename, $destination)
-    {
+    public static function phpfm_move_uploaded_file($filename, $destination) {
         $plat_destination = convert_toplat($destination);
         if (file_exists($plat_destination)) {
             $plat_destination = convert_toplat(Utility::resolve_same_name($destination));
@@ -494,8 +479,7 @@ class Utility
      * @param bool $need_new create new when not exists, default is true
      * @return MessageBoard message board or null
      */
-    public static function get_messageboard($need_new = true)
-    {
+    public static function get_messageboard($need_new = true) {
         if ($need_new) {
             $messageboard = isset($_SESSION['messageboard']) ? $_SESSION['messageboard'] : new MessageBoard();
             $_SESSION['messageboard'] = $messageboard; // put MessageBoard into SESSION.
@@ -511,8 +495,7 @@ class Utility
      * @param bool $need_new create new when not exists, default is true
      * @return ClipBoard clipboard or null
      */
-    public static function get_clipboard($need_new = true)
-    {
+    public static function get_clipboard($need_new = true) {
         if ($need_new) {
             $clipboard = isset($_SESSION['clipboard']) ? $_SESSION['clipboard'] : new ClipBoard();
             $_SESSION['clipboard'] = $clipboard; // put ClipBoard into SESSION.
@@ -523,8 +506,7 @@ class Utility
         return $clipboard;
     }
 
-    private static function allow_to($do)
-    {
+    private static function allow_to($do) {
         if (!USERMNG) {
             return true;
         }
@@ -541,8 +523,7 @@ class Utility
      * Check current user is able to view file.
      * @return bool
      */
-    public static function allow_to_view()
-    {
+    public static function allow_to_view() {
         if (!defined('ROSE_VIEW')) {
             return true;
         }
@@ -553,8 +534,7 @@ class Utility
      * Check current user is able to modify file.
      * @return bool
      */
-    public static function allow_to_modify()
-    {
+    public static function allow_to_modify() {
         if (!defined('ROSE_MODIFY')) {
             return true;
         }
@@ -565,8 +545,7 @@ class Utility
      * Check current user is admin.
      * @return bool
      */
-    public static function allow_to_admin()
-    {
+    public static function allow_to_admin() {
         if (!defined('ROSE_ADMIN')) {
             return true;
         }
@@ -576,8 +555,7 @@ class Utility
     /**
      * Display user.
      */
-    public static function display_user()
-    {
+    public static function display_user() {
         if (is_mobile_browser() || !USERMNG) {
             return '';
         }
