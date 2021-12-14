@@ -114,14 +114,10 @@ def main():
         os.mkdir(dest_app_dir)
         copy_dir(app_dir, dest_app_dir)
 
-    app_files = ['about.php', 'composer.json', 'composer.lock',
-                'gpl-2.0.txt', 'index.php', 'web.config']
+    app_files = ['composer.json', 'composer.lock', 'gpl-2.0.txt', 'web.config']
     for app_file in app_files:
         dest_app_file = os.path.join(publish_dir, app_file)
         copy_file(app_file, dest_app_file)
-
-    # Rename api index.php.
-    os.rename(os.path.join(publish_dir, 'index.php'), os.path.join(publish_dir, 'index_oldui.php'))
 
     # Clear up.
     log_stage('Clear up...')
