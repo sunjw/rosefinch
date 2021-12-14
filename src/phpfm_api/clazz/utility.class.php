@@ -3,7 +3,6 @@ require_once dirname(__FILE__) . '/../inc/defines.inc.php';
 require_once dirname(__FILE__) . '/../inc/common.inc.php';
 require_once 'clipboard.class.php';
 require_once 'messageboard.class.php';
-require_once 'history.class.php';
 
 /**
  * Utility Class
@@ -578,23 +577,6 @@ class Utility
         }
 
         return $clipboard;
-    }
-
-    /**
-     * Read History from SESSION.
-     * @param bool $need_new create new when not exists, default is true
-     * @return History history or null
-     */
-    public static function get_history($need_new = true)
-    {
-        if ($need_new) {
-            $history = isset($_SESSION['history']) ? $_SESSION['history'] : new History();
-            $_SESSION['history'] = $history; // put History into SESSION.
-        } else {
-            $history = isset($_SESSION['history']) ? $_SESSION['history'] : null;
-        }
-
-        return $history;
     }
 
     private static function allow_to($do)

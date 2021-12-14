@@ -6,7 +6,6 @@ require_once dirname(__FILE__) . '/../inc/gettext.inc.php';
 require_once dirname(__FILE__) . '/../inc/sort.inc.php';
 require_once 'clipboard.class.php';
 require_once 'messageboard.class.php';
-require_once 'history.class.php';
 require_once 'utility.class.php';
 
 @session_start();
@@ -32,7 +31,6 @@ class FileManager {
 
     private $clipboard;
     private $messageboard;
-    private $history;
 
     function __construct() {
         /*
@@ -42,7 +40,6 @@ class FileManager {
 
         $this->clipboard = Utility::get_clipboard();
         $this->messageboard = Utility::get_messageboard();
-        $this->history = Utility::get_history();
 
         $this->dstats = array();
         $this->fstats = array();
@@ -112,11 +109,6 @@ class FileManager {
         $this->query_str = 's=' . $this->sort_by . '&o=' . $this->sort_order;
 
         $this->init_view();
-
-        if (!isset($_GET['h'])) {
-            // h means visit by back/forward.
-            $this->history->push($this->request_sub_dir);
-        }
     }
 
     /**
