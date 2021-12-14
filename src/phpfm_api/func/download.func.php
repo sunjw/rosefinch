@@ -10,8 +10,7 @@ require_once dirname(__FILE__) . '/../log/log.func.php';
  * Write file to HTTP client.
  * @param string $file file path
  */
-function dl_file($file)
-{
+function dl_file($file) {
     // Gather relevant info about file.
     $size = filesize($file);
     $fileinfo['basename'] = get_basename($file);
@@ -114,8 +113,7 @@ function dl_file($file)
  * @param string $request_file request file path
  * @return string platform file path or false
  */
-function prepare_file_path($request_file)
-{
+function prepare_file_path($request_file) {
     $files_base_dir = Utility::get_file_base_dir();
     $files_base_dir_plat = convert_toplat($files_base_dir);
     $file = $files_base_dir_plat . $request_file; // Get file path.
