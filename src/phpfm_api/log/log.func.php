@@ -14,8 +14,7 @@ $stream_handler = new StreamHandler($log_file_path);
 $stream_handler->setFormatter(new LineFormatter(null, null, false, true));
 $logger->pushHandler($stream_handler);
 
-function get_logger()
-{
+function get_logger() {
     global $logger;
     return $logger;
 }
