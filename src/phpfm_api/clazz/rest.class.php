@@ -162,7 +162,7 @@ class Rest {
      * List directory.
      */
     private function handle_list() {
-        $file_manager = new FileManager('index.php');
+        $file_manager = new FileManager();
         $main_list = $file_manager->get_main_list();
 
         $resp_obj = new RestRet();

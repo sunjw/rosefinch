@@ -23,8 +23,6 @@ class FileManager {
     private $sort_by; // sort.
     private $sort_order; // sort order.
 
-    private $is_mobile;
-
     private $sort; // sort by (a number).
     private $dsort;
     private $query_str;
@@ -32,25 +30,19 @@ class FileManager {
     private $fstats;
     private $dstats;
 
-    private $view_page; // view page, default is index.php
-
     private $clipboard;
     private $messageboard;
     private $history;
 
-    function __construct($view_page = 'index.php') {
+    function __construct() {
         /*
          * all string are UTF-8!!!
          */
         set_response_utf8();
 
-        $this->is_mobile = is_mobile_browser();
-
         $this->clipboard = Utility::get_clipboard();
         $this->messageboard = Utility::get_messageboard();
         $this->history = Utility::get_history();
-
-        $this->view_page = $view_page;
 
         $this->dstats = array();
         $this->fstats = array();
@@ -387,17 +379,11 @@ class FileManager {
                         continue;
                     }
 
-                    $a_href = $this->view_page . '?' .
-                        $this->query_str . '&dir=' .
-                        rawurlencode($this->request_sub_dir .
-                            $dir['name']);
-
                     $item_path = $this->request_sub_dir . $dir['name'];
 
                     $dir['size'] = 0;
                     $dir['size_str'] = '&nbsp;';
                     $dir['type_html'] = 'folder';
-                    $dir['a_href'] = $a_href;
                     $dir['item_path'] = $item_path;
 
                     array_push($dirs, $dir);
