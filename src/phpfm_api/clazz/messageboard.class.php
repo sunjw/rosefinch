@@ -8,13 +8,11 @@
  * @author Sun Junwen
  *
  */
-class MessageBoard
-{
+class MessageBoard {
     private $cur_msg;
     private $cur_msg_stat; // 0: normal, other: some wrong.
 
-    function __construct()
-    {
+    function __construct() {
         $this->clear();
     }
 
@@ -23,8 +21,7 @@ class MessageBoard
      * @param string $message message
      * @param number $stat 0: normal, other: some wrong
      */
-    public function set_message($message, $stat = 0)
-    {
+    public function set_message($message, $stat = 0) {
         $this->cur_msg = $message;
         $this->cur_msg_stat = $stat;
     }
@@ -34,8 +31,7 @@ class MessageBoard
      * @param string $message message
      * @param number $stat 0: normal, other: some wrong
      */
-    public function get_message(&$message, &$stat)
-    {
+    public function get_message(&$message, &$stat) {
         $message = $this->cur_msg;
         $stat = $this->cur_msg_stat;
         $this->clear();
@@ -45,8 +41,7 @@ class MessageBoard
      * Has message.
      * @return bool
      */
-    public function has_message()
-    {
+    public function has_message() {
         if ($this->cur_msg == '') {
             return false;
         } else {
@@ -57,14 +52,12 @@ class MessageBoard
     /**
      * Clear message.
      */
-    private function clear()
-    {
+    private function clear() {
         $this->cur_msg = '';
         $this->cur_msg_stat = 0;
     }
 
-    public function debug()
-    {
+    public function debug() {
         echo('Msg: ' . $this->cur_msg . ', Stat: ' . $this->cur_msg_stat);
     }
 }
