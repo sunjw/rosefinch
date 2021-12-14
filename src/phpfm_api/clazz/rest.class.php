@@ -177,7 +177,6 @@ class Rest {
         $main_list_count = count($main_list);
         for ($i = 0; $i < $main_list_count; $i++) {
             $main_list[$i]['mtime'] = $main_list[$i]['stat']['mtime'];
-            $main_list[$i]['img_html'] = Utility::get_icon($main_list[$i]['type'], 36);
             $main_list[$i]['mtime_str'] = timetotimestr($main_list[$i]['mtime']);
             unset($main_list[$i]['stat']);
             unset($main_list[$i]['path']);

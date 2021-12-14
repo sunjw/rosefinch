@@ -121,62 +121,6 @@ class Utility
     }
 
     /**
-     * Generate icon html by file type.
-     * @param string $file_type file type
-     * @return string icon HTML
-     */
-    public static function get_icon($file_type, $size = 16)
-    {
-        $img_ext = '.png';
-        $file_type = strtolower($file_type);
-        $img_postfix = '_32';
-        switch ($file_type) {
-            case '文件夹':
-            case 'folder':
-            case 'dir':
-                return Utility::generate_img_html('images/folder' . $img_postfix . $img_ext, $size, $size, 'zip');
-            case 'zip':
-            case 'rar':
-            case 'tar':
-            case 'bz':
-            case 'bz2':
-            case 'gz':
-                return Utility::generate_img_html('images/compressed' . $img_postfix . $img_ext, $size, $size, 'zip');
-            case 'exe':
-            case 'com':
-                return Utility::generate_img_html('images/binary' . $img_postfix . $img_ext, $size, $size, 'app');
-            case 'mp3':
-            case 'wma':
-                return Utility::generate_img_html('images/music' . $img_postfix . $img_ext, $size, $size, 'music');
-            case 'html':
-            case 'htm':
-                return Utility::generate_img_html('images/html' . $img_postfix . $img_ext, $size, $size, 'html');
-            case 'jpg':
-            case 'jpeg':
-            case 'bmp':
-            case 'png':
-            case 'gif':
-                return Utility::generate_img_html('images/image' . $img_postfix . $img_ext, $size, $size, 'image');
-            default:
-                return Utility::generate_img_html('images/generic' . $img_postfix . $img_ext, $size, $size, 'file');
-        }
-    }
-
-    /**
-     * Generate image HTML.
-     * @param string $src image path
-     * @param number $width
-     * @param number $height
-     * @param string $alt alt string
-     * @return string image HTML
-     */
-    private static function generate_img_html($src, $width, $height, $alt)
-    {
-        $imagehtml = '<img src="' . $src . '" alt="' . $alt . '" width="' . $width . '" height="' . $height . '" border="0" />';
-        return $imagehtml;
-    }
-
-    /**
      * Get MIME by file ext.
      * @param string $file_extension file ext
      * @return string MIME
@@ -637,60 +581,6 @@ class Utility
         if (is_mobile_browser() || !USERMNG) {
             return '';
         }
-    }
-
-    /**
-     * Display navigation bar.
-     */
-    public static function html_navigation($page = 'index')
-    {
-        if (!is_mobile_browser()) {
-            if ($page == 'setting') {
-                ?>
-                <ul>
-                    <li class="li-item"><a href=".."><?php echo htmlentities_utf8(_(TITLENAME)); ?></a></li>
-                    <li class="li-item current"><a href="setting.php"><?php echo _('Setting'); ?></a></li>
-                    <li class="li-item"><a href="../about.php"><?php echo _('About'); ?></a></li>
-                </ul>
-                <?php
-            } else {
-                ?>
-                <ul>
-                    <li class="li-item<?php $page == 'index' ? print(' current') : print(''); ?>"><a
-                                href="index.php"><?php echo htmlentities_utf8(_(TITLENAME)); ?></a></li>
-                    <li class="li-item<?php $page == 'setting' ? print(' current') : print(''); ?>"><a
-                                href="admin/setting.php"><?php echo _('Setting'); ?></a></li>
-                    <li class="li-item<?php $page == 'about' ? print(' current') : print(''); ?>"><a
-                                href="about.php"><?php echo _('About'); ?></a></li>
-                    <li class="li-item"><a href="index_newui.html">NEWUI</a></li>
-                </ul>
-                <?php
-            }
-        } else {
-            ?>
-            <ul>
-                <li class="li-item<?php $page == 'index' ? print(' current') : print(''); ?>"><a
-                            href="index.php"><?php echo htmlentities_utf8(_(TITLENAME)); ?></a></li>
-            </ul>
-            <?php
-        }
-    }
-
-    /**
-     * Footer part.
-     */
-    public static function html_footer($begin_time)
-    {
-        ?>
-        <div id="copyright">
-            <div>
-                <?php
-                $generating_time = _('Generating time') . '&nbsp;' . (microtime(true) - $begin_time) . 's';
-                printf('Rosefinch - %s - PHPFM %s&nbsp;|&nbsp;SUN Junwen&nbsp;|&nbsp;%s', _('Rosefinch'), VERSION, $generating_time);
-                ?>
-            </div>
-        </div>
-        <?php
     }
 
 }
