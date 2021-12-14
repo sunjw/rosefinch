@@ -106,9 +106,7 @@ def main():
     copy_dir(fed_publish_dir, publish_dir)
 
     # Copy app.
-    app_dirs = ['about', 'admin', 'clazz', 'css',
-                'func', 'images', 'inc', 'js',
-                'log', 'vendor']
+    app_dirs = ['admin', 'clazz', 'func', 'inc', 'log', 'vendor']
     for app_dir in app_dirs:
         dest_app_dir = os.path.join(publish_dir, app_dir)
         os.mkdir(dest_app_dir)
