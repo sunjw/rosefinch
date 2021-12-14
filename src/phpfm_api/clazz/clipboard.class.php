@@ -11,21 +11,18 @@ require_once 'utility.class.php';
  * @author Sun Junwen
  *
  */
-class ClipBoard
-{
+class ClipBoard {
     private $oper; // cut/copy
     private $items;
 
-    function __construct()
-    {
+    function __construct() {
         $this->clear();
     }
 
     /**
      * Clear clipboard content.
      */
-    private function clear()
-    {
+    private function clear() {
         $this->oper = '';
         $this->items = array();
     }
@@ -35,8 +32,7 @@ class ClipBoard
      * @param string $oper cut/copy
      * @param array $items paths array
      */
-    public function set_items($oper, $items)
-    {
+    public function set_items($oper, $items) {
         $this->oper = $oper;
         $this->items = $items;
     }
@@ -46,8 +42,7 @@ class ClipBoard
      * @param string $target_subdir target directory
      * @return array result array (path => true/false)
      */
-    public function paste($target_subdir)
-    {
+    public function paste($target_subdir) {
         $result = [];
         $result['items'] = [];
 
@@ -85,8 +80,7 @@ class ClipBoard
      * Clipboard items count.
      * @return int
      */
-    public function items_count()
-    {
+    public function items_count() {
         if (is_array($this->items)) {
             $items_count = count($this->items);
             if ($items_count > 0 && $this->oper != '') {
@@ -100,8 +94,7 @@ class ClipBoard
     /**
      * Debug.
      */
-    public function debug()
-    {
+    public function debug() {
         print_r($this->oper);
         print_r($this->items);
     }
