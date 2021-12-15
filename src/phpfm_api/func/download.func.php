@@ -86,8 +86,11 @@ function dl_file($file) {
     //header('Pragma: public');
 
     header('Content-Type: ' . $ctype);
-    header('Content-Disposition: attachment; filename="' . convert_toutf8($filename) . '"');
     header('Content-Length: ' . ($seek_end - $seek_start + 1));
+
+    $filename_utf8 = convert_toutf8($filename);
+    $filename_urlencode = rawurlencode($filename_utf8);
+    header('Content-Disposition: attachment; filename="' . $filename_utf8 . '"; filename*=UTF-8\'\'' . $filename_urlencode);
 
     // Open the file.
     $fp = fopen($file, 'rb');
