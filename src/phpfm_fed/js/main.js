@@ -2113,7 +2113,7 @@ $(function () {
         }
     }
 
-    utils.log('init, apiPrefix=[%s]', apiPrefix)
+    utils.log('init, apiPrefix=[%s]', apiPrefix);
 
     let page = new RosefinchPage(apiPrefix);
     page.initContent();
