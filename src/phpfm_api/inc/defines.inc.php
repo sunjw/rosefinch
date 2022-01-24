@@ -2,7 +2,7 @@
 
 require_once 'common.inc.php';
 
-define('VERSION', '3.2112.19');
+define('VERSION', '3.2201.0');
 
 define('DEBUG', true); // debug mode
 
