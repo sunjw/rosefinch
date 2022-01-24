@@ -405,7 +405,13 @@ class RosefinchPage {
             utils.log('RosefinchPage.initConfig, installed=[%s]', that.config['installed']);
 
             if (that.config['installed']) {
-                that.aBrand.text(that.config['title_name']);
+                let titleName = that.config['title_name'];
+                that.aBrand.text(titleName);
+                if (titleName != that.productName) {
+                    document.title = that.productName + ' - ' + titleName;
+                } else {
+                    document.title = that.productName;
+                }
                 // begin
                 that.onHashChange();
             } else {
