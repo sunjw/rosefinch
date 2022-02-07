@@ -1,5 +1,4 @@
 const jq = require('jquery');
-const utils = require("./utils");
 
 function restRequest(method, api, reqObj, successCallback, errorCallback) {
     jq.ajax({
@@ -35,11 +34,12 @@ function focusOnInput(inputElem) {
 }
 
 function stopBubble(event) {
-    event = event ? event : window.event;
-    if (window.event) {
-        event.cancelBubble = true;
-    } else {
+    // only for browser
+    if (event) {
         event.stopPropagation();
+    }
+    if (window.event) {
+        window.event.cancelBubble = true;
     }
 }
 
