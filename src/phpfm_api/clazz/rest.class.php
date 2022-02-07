@@ -601,8 +601,8 @@ class Rest {
         }
 
         $req_obj = read_body_json();
-        $charset = $req_obj['charset'];
-        $title_name = $req_obj['titleName'];
+        $charset = addslashes($req_obj['charset']);
+        $title_name = addslashes($req_obj['titleName']);
         get_logger()->info('post_setting, set charset=[' . $charset . '], title_name=[' . $title_name . ']');
 
         $resp_obj = new RestRet();
