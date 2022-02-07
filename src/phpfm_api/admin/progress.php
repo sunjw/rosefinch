@@ -102,13 +102,16 @@ function save_general(&$settings, $new_settings) {
         $settings_str = str_replace($templates, $values, $settings_str);
         //echo $settings;
 
-        $settings_php = fopen(dirname(__FILE__) . '/settings.inc.php', 'w');
+        $settings_php_filename = dirname(__FILE__) . '/settings.inc.php';
+        $settings_php = fopen($settings_php_filename, 'w');
         fwrite($settings_php, $settings_str); // write back
         fclose($settings_php);
+        // force refresh opcode
+        opcache_invalidate($settings_php_filename, true);
 
         if ($settings['usermng'] && !USERMNG && !file_exists('usermng.inc.php')) {
             // enabled usermng
-            $file_name = 'usermng.inc.tpl';
+            $file_name = dirname(__FILE__) . '/usermng.inc.tpl';
             $settings_tpl = fopen($file_name, 'r');
             $settings_str = fread($settings_tpl, filesize($file_name));
             fclose($settings_tpl);
@@ -124,9 +127,12 @@ function save_general(&$settings, $new_settings) {
             $settings_str = str_replace($templates, $values, $settings_str);
             //echo $settings;
 
-            $settings_php = fopen('usermng.inc.php', 'w');
+            $settings_php_filename = dirname(__FILE__) . '/usermng.inc.php';
+            $settings_php = fopen($settings_php_filename, 'w');
             fwrite($settings_php, $settings_str); // write back
             fclose($settings_php);
+            // force refresh opcode
+            opcache_invalidate($settings_php_filename, true);
         }
 
         return true;
