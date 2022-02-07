@@ -5,7 +5,7 @@ function restRequest(method, api, reqObj, successCallback, errorCallback) {
         type: method,
         url: api,
         data: reqObj ? JSON.stringify(reqObj) : null,
-        contentType: "application/json",
+        contentType: 'application/json',
         cache: false,
         success: function (data) {
             if (successCallback) {
