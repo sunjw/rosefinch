@@ -292,4 +292,16 @@ function ends_with($haystack, $needle) {
     return substr($haystack, -$length) === $needle;
 }
 
+/**
+ * Force opcache to recompile script.
+ * @param $file
+ * @param $force
+ * @return void
+ */
+function opcache_invalidate_safe($file, $force) {
+    if (function_exists('opcache_invalidate')) {
+        opcache_invalidate($file, $force);
+    }
+}
+
 ?>

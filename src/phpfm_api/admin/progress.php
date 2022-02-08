@@ -107,7 +107,7 @@ function save_general(&$settings, $new_settings) {
         fwrite($settings_php, $settings_str); // write back
         fclose($settings_php);
         // force refresh opcode
-        opcache_invalidate($settings_php_filename, true);
+        opcache_invalidate_safe($settings_php_filename, true);
 
         if ($settings['usermng'] && !USERMNG && !file_exists('usermng.inc.php')) {
             // enabled usermng
@@ -132,7 +132,7 @@ function save_general(&$settings, $new_settings) {
             fwrite($settings_php, $settings_str); // write back
             fclose($settings_php);
             // force refresh opcode
-            opcache_invalidate($settings_php_filename, true);
+            opcache_invalidate_safe($settings_php_filename, true);
         }
 
         return true;
