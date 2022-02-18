@@ -88,40 +88,44 @@ def write_file_content(file_path, file_content):
 def log_stage(stage_message):
     log('\n%s\n' % (stage_message))
 
-def main():
-    publish_dir = 'publish'
-    fed_dir = '../phpfm_fed'
+PUBLISH_DIR = 'publish'
 
+FED_DIR = '../phpfm_fed'
+FED_PUBLISH_DIR = 'publish'
+FED_PACK_CMD = 'python3 ./pack-dist-webpack.py'
+
+APP_DIRS = ['admin', 'clazz', 'func', 'inc', 'log', 'vendor']
+APP_FILES = ['composer.json', 'composer.lock', 'gpl-2.0.txt', 'web.config']
+CLEAR_FILES = ['admin/settings.inc.php', 'admin/usermng.inc.php', 'log/phpfm.log']
+
+def main():
     cwd = os.getcwd()
 
     # Pack fed.
-    os.chdir(fed_dir)
-    run_cmd('python3 ./pack-dist-webpack.py')
+    os.chdir(FED_DIR)
+    run_cmd(FED_PACK_CMD)
     os.chdir(cwd)
 
     # Copy fed.
-    remove_dir(publish_dir)
-    os.mkdir(publish_dir)
-    fed_publish_dir = os.path.join(fed_dir, 'publish')
-    copy_dir(fed_publish_dir, publish_dir)
+    remove_dir(PUBLISH_DIR)
+    os.mkdir(PUBLISH_DIR)
+    fed_publish_dir = os.path.join(FED_DIR, FED_PUBLISH_DIR)
+    copy_dir(fed_publish_dir, PUBLISH_DIR)
 
     # Copy app.
-    app_dirs = ['admin', 'clazz', 'func', 'inc', 'log', 'vendor']
-    for app_dir in app_dirs:
-        dest_app_dir = os.path.join(publish_dir, app_dir)
+    for app_dir in APP_DIRS:
+        dest_app_dir = os.path.join(PUBLISH_DIR, app_dir)
         os.mkdir(dest_app_dir)
         copy_dir(app_dir, dest_app_dir)
 
-    app_files = ['composer.json', 'composer.lock', 'gpl-2.0.txt', 'web.config']
-    for app_file in app_files:
-        dest_app_file = os.path.join(publish_dir, app_file)
+    for app_file in APP_FILES:
+        dest_app_file = os.path.join(PUBLISH_DIR, app_file)
         copy_file(app_file, dest_app_file)
 
     # Clear up.
     log_stage('Clear up...')
-    clear_files = ['admin/settings.inc.php', 'admin/usermng.inc.php', 'log/phpfm.log']
-    for clear_file in clear_files:
-        dest_clear_file = os.path.join(publish_dir, clear_file)
+    for clear_file in CLEAR_FILES:
+        dest_clear_file = os.path.join(PUBLISH_DIR, clear_file)
         if os.path.exists(dest_clear_file):
             os.remove(dest_clear_file)
 
