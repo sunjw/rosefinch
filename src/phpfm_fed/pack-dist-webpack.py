@@ -88,11 +88,18 @@ def write_file_content(file_path, file_content):
 def log_stage(stage_message):
     log('\n%s\n' % (stage_message))
 
+PUBLISH_DIR = 'publish'
+
+APP_DIRS = ['dist']
+APP_FILES = ['index.html']
+CLEAR_FILES = []
+CONFIG_PUBLISH_FILE = 'phpfm.config.publish.js'
+CONFIG_PUBLISH_DIST_FILE = 'dist/phpfm.config.js'
+
 def main():
     cwd = os.getcwd()
 
-    publish_dir = 'publish'
-    publish_dir_absolute = os.path.join(cwd, publish_dir)
+    publish_dir_absolute = os.path.join(cwd, PUBLISH_DIR)
     if not os.path.exists(publish_dir_absolute):
         os.mkdir(publish_dir_absolute)
     else:
@@ -109,31 +116,27 @@ def main():
 
     # Copy new app.
     log_stage('Copy new app...')
-    app_dirs = ['dist']
-    for app_dir in app_dirs:
-        dest_app_dir = os.path.join(publish_dir, app_dir)
+    for app_dir in APP_DIRS:
+        dest_app_dir = os.path.join(PUBLISH_DIR, app_dir)
         os.mkdir(dest_app_dir)
         copy_dir(app_dir, dest_app_dir)
 
-    app_files = ['index.html']
-    for app_file in app_files:
-        dest_app_file = os.path.join(publish_dir, app_file)
+    for app_file in APP_FILES:
+        dest_app_file = os.path.join(PUBLISH_DIR, app_file)
         copy_file(app_file, dest_app_file)
 
     # Clear up.
     log_stage('Clear up...')
-    clear_files = []
-    for clear_file in clear_files:
-        dest_clear_file = os.path.join(publish_dir, clear_file)
+    for clear_file in CLEAR_FILES:
+        dest_clear_file = os.path.join(PUBLISH_DIR, clear_file)
         if os.path.exists(dest_clear_file):
             os.remove(dest_clear_file)
 
     # Post step.
     log_stage('Post step...')
-    phpfm_config_publish_path = 'phpfm.config.publish.js'
-    phpfm_config_dist_path = os.path.join(publish_dir, 'dist/phpfm.config.js')
-    phpfm_config_publish_content = read_file_content(phpfm_config_publish_path)
-    write_file_content(phpfm_config_dist_path, phpfm_config_publish_content)
+    config_dist_path = os.path.join(PUBLISH_DIR, CONFIG_PUBLISH_DIST_FILE)
+    config_publish_content = read_file_content(CONFIG_PUBLISH_FILE)
+    write_file_content(config_dist_path, config_publish_content)
 
 if __name__ == '__main__':
     main()
