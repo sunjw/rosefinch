@@ -96,17 +96,20 @@ FED_PACK_CMD = 'python3 ./pack-dist-webpack.py'
 
 APP_DIRS = ['admin', 'clazz', 'func', 'inc', 'log', 'vendor']
 APP_FILES = ['composer.json', 'composer.lock', 'gpl-2.0.txt', 'web.config']
+MK_DIRS = []
 CLEAR_FILES = ['admin/settings.inc.php', 'admin/usermng.inc.php', 'log/phpfm.log']
 
 def main():
     cwd = os.getcwd()
 
     # Pack fed.
+    log_stage('Pack FED...')
     os.chdir(FED_DIR)
     run_cmd(FED_PACK_CMD)
     os.chdir(cwd)
 
     # Copy fed.
+    log_stage('Copy new app...')
     remove_dir(PUBLISH_DIR)
     os.mkdir(PUBLISH_DIR)
     fed_publish_dir = os.path.join(FED_DIR, FED_PUBLISH_DIR)
@@ -121,6 +124,11 @@ def main():
     for app_file in APP_FILES:
         dest_app_file = os.path.join(PUBLISH_DIR, app_file)
         copy_file(app_file, dest_app_file)
+
+    # Make dirs.
+    for some_dir in MK_DIRS:
+        dest_dir_path = os.path.join(PUBLISH_DIR, some_dir)
+        os.mkdir(dest_dir_path)
 
     # Clear up.
     log_stage('Clear up...')
