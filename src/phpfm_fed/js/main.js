@@ -450,11 +450,11 @@ class RosefinchPage {
                 return;
             }
             if (this.currentInPreview) {
+                this.currentInPreview = false;
                 if (this.isCurrentDialog(this.modalImage)) {
                     // close preview dialog
                     this.modalImage.close();
                 }
-                this.currentInPreview = false;
                 return;
             }
         }
