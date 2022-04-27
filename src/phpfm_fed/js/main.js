@@ -507,16 +507,16 @@ class RosefinchPage {
             that.onLayoutResize();
             that.renderMainList();
             that.onFileSelected();
+
+            if (that.firstLoad) {
+                utils.log('RosefinchPage.onHashChange, firstLoad.');
+            }
+            that.firstLoad = false;
         }, function () {
             utils.log('RosefinchPage.onHashChange, request ERROR!');
             that.showToast(that.productName, 'Request error.', 'danger');
             that.hideMainListLoading();
         });
-
-        if (this.firstLoad) {
-            utils.log('RosefinchPage.onHashChange, firstLoad.');
-        }
-        this.firstLoad = false;
     }
 
     generateToolbarButton(buttonId, iconName, title = null) {
