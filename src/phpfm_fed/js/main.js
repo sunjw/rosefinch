@@ -307,6 +307,8 @@ class RosefinchPage {
 
         this.currentDialog = null;
         this.dropFileEvent = null;
+
+        this.currentInPreview = false;
     }
 
     initContent() {
@@ -438,11 +440,23 @@ class RosefinchPage {
         let requestDir = utils.getUrlQueryVariable(locationHash, this.reqDirKey);
         let requestFilePreview = utils.getUrlQueryVariable(locationHash, this.reqFilePreviewKey);
 
-        if (!this.firstLoad && requestFilePreview != '') {
-            utils.log('RosefinchPage.onHashChange, not firstLoad, requestFilePreview=[%s]',
-                requestFilePreview);
-            this.showImagePreviewDialogByHash(requestFilePreview);
-            return;
+        if (!this.firstLoad) {
+            // already loaded
+            if (requestFilePreview != '') {
+                // try to show preview
+                utils.log('RosefinchPage.onHashChange, not firstLoad, requestFilePreview=[%s]',
+                    requestFilePreview);
+                this.showImagePreviewDialogByHash(requestFilePreview);
+                return;
+            }
+            if (this.currentInPreview) {
+                if (this.isCurrentDialog(this.modalImage)) {
+                    // close preview dialog
+                    this.modalImage.close();
+                }
+                this.currentInPreview = false;
+                return;
+            }
         }
 
         let requestApi = this.generateRestApiUrl('api/v1/fm/ls');
@@ -1716,6 +1730,7 @@ class RosefinchPage {
         utils.log('RosefinchPage.showImagePreviewDialog, imageTitle=[%s], imageLink=[%s]',
             imageTitle, imageLink);
         this.currentDialog = this.modalImage;
+        this.currentInPreview = true;
         this.modalImage.setData({
             'title': imageTitle,
             'link': imageLink
