@@ -226,6 +226,7 @@ class RosefinchPage {
         this.reqSortByKey = 's';
         this.reqSortOrderKey = 'o';
         this.reqDirKey = 'dir';
+        this.reqFilePreviewKey = 'preview';
 
         this.sortByName = 'n';
         this.sortByType = 't';
@@ -871,6 +872,12 @@ class RosefinchPage {
     generateFileHref(dirArray, file) {
         let paramFile = encodeURIComponent((dirArray.concat([file])).join('/'));
         let href = this.generateDlApiUrl() + '?file=' + paramFile;
+        return href;
+    }
+
+    generateFilePreviewHref(dirArray, file) {
+        let href = this.generateDirHref(dirArray);
+        href = href + '&' + this.reqFilePreviewKey + '=' + file;
         return href;
     }
 
@@ -2094,8 +2101,10 @@ class RosefinchPage {
             }
 
             if (aFileLink.hasClass(previewImageClass)) {
+                let previewHref = this.generateFilePreviewHref(this.currentDir, itemName);
                 aFileLink.on('click', function () {
-                    that.showImagePreviewDialog(itemName, aFileLinkHref);
+                    utils.navToHash(previewHref);
+                    // that.showImagePreviewDialog(itemName, aFileLinkHref);
                     return false;
                 });
             }
