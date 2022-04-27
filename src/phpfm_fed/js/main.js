@@ -510,6 +510,11 @@ class RosefinchPage {
 
             if (that.firstLoad) {
                 utils.log('RosefinchPage.onHashChange, firstLoad.');
+                if (requestFilePreview != '') {
+                    utils.log('RosefinchPage.onHashChange, firstLoad, requestFilePreview=[%s]',
+                        requestFilePreview);
+                    that.showImagePreviewDialogByHash(requestFilePreview);
+                }
             }
             that.firstLoad = false;
         }, function () {
