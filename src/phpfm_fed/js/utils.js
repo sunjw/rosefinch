@@ -179,6 +179,10 @@ function expireKey(obj, key, ms, expiredCallback = 0) {
     }, ms);
 }
 
+function historyBack() {
+    window.history.back();
+}
+
 // exports
 exports.log = log;
 exports.clone = clone;
@@ -203,3 +207,4 @@ exports.isLinux = isLinux;
 exports.isMacOS = isMacOS;
 exports.fixWindowsPath = fixWindowsPath;
 exports.expireKey = expireKey;
+exports.historyBack = historyBack;

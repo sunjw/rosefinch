@@ -1724,6 +1724,9 @@ class RosefinchPage {
                 divPreviewDownload.css('max-width', 'none');
                 that.modalImage.removeClass(previewImageLoadedClass);
                 that.currentDialog = null;
+                if (that.currentInPreview) {
+                    utils.historyBack();
+                }
             });
         }
 
