@@ -222,6 +222,7 @@ class RosefinchPage {
         this.dlApiEndpoint = 'func/download.func.php';
 
         this.config = null;
+        this.firstLoad = true;
 
         this.reqSortByKey = 's';
         this.reqSortOrderKey = 'o';
@@ -435,6 +436,13 @@ class RosefinchPage {
         let requestSortBy = utils.getUrlQueryVariable(locationHash, this.reqSortByKey);
         let requestSortOrder = utils.getUrlQueryVariable(locationHash, this.reqSortOrderKey);
         let requestDir = utils.getUrlQueryVariable(locationHash, this.reqDirKey);
+        let requestFilePreview = utils.getUrlQueryVariable(locationHash, this.reqFilePreviewKey);
+
+        if (!this.firstLoad && requestFilePreview != '') {
+            utils.log('RosefinchPage.onHashChange, not firstLoad, requestFilePreview=[%s]',
+                requestFilePreview);
+            return;
+        }
 
         let requestApi = this.generateRestApiUrl('api/v1/fm/ls');
         requestApi += ('&' + this.reqSortByKey + '=' + requestSortBy);
@@ -489,6 +497,11 @@ class RosefinchPage {
             that.showToast(that.productName, 'Request error.', 'danger');
             that.hideMainListLoading();
         });
+
+        if (this.firstLoad) {
+            utils.log('RosefinchPage.onHashChange, firstLoad.');
+        }
+        this.firstLoad = false;
     }
 
     generateToolbarButton(buttonId, iconName, title = null) {
