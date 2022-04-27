@@ -443,7 +443,7 @@ class RosefinchPage {
         if (!this.firstLoad) {
             // already loaded
             if (requestFilePreview != '') {
-                // try to show preview
+                // show preview
                 utils.log('RosefinchPage.onHashChange, not firstLoad, requestFilePreview=[%s]',
                     requestFilePreview);
                 this.showImagePreviewDialogByHash(requestFilePreview);
@@ -513,6 +513,12 @@ class RosefinchPage {
                 if (requestFilePreview != '') {
                     utils.log('RosefinchPage.onHashChange, firstLoad, requestFilePreview=[%s]',
                         requestFilePreview);
+                    // tweak history
+                    let curHash = window.location.hash;
+                    let dirHref = that.generateDirHref(that.currentDir);
+                    utils.historyReplace(dirHref);
+                    utils.historyPush(curHash);
+                    // show preview
                     that.showImagePreviewDialogByHash(requestFilePreview);
                 }
             }

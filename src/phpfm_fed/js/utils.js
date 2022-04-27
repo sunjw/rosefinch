@@ -183,6 +183,14 @@ function historyBack() {
     window.history.back();
 }
 
+function historyReplace(url) {
+    window.history.replaceState(null, '', url);
+}
+
+function historyPush(url) {
+    window.history.pushState(null, '', url);
+}
+
 // exports
 exports.log = log;
 exports.clone = clone;
@@ -208,3 +216,5 @@ exports.isMacOS = isMacOS;
 exports.fixWindowsPath = fixWindowsPath;
 exports.expireKey = expireKey;
 exports.historyBack = historyBack;
+exports.historyReplace = historyReplace;
+exports.historyPush = historyPush;
