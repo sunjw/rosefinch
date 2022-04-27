@@ -441,6 +441,7 @@ class RosefinchPage {
         if (!this.firstLoad && requestFilePreview != '') {
             utils.log('RosefinchPage.onHashChange, not firstLoad, requestFilePreview=[%s]',
                 requestFilePreview);
+            this.showImagePreviewDialogByHash(requestFilePreview);
             return;
         }
 
@@ -2126,6 +2127,28 @@ class RosefinchPage {
         }
 
         this.divListWrapper.scrollTop(0);
+    }
+
+    findFileLinkByFileName(fileName) {
+        let aFileLinkList = this.ulDetailView.find('a.fileLink');
+        for (let i = 0; i < aFileLinkList.length; i++) {
+            let aFileLink = $(aFileLinkList.get(i));
+            let aFileLinkTitle = aFileLink.attr('title');
+            if (aFileLinkTitle == fileName) {
+                return aFileLink;
+            }
+        }
+        return null;
+    }
+
+    showImagePreviewDialogByHash(previewFileName) {
+        utils.log('RosefinchPage.showImagePreviewDialogByHash, previewFileName=[%s]',
+            previewFileName);
+        let previewFileLink = this.findFileLinkByFileName(previewFileName);
+        if (previewFileLink) {
+            let previewFileHref = previewFileLink.attr('href');
+            this.showImagePreviewDialog(previewFileName, previewFileHref);
+        }
     }
 }
 
