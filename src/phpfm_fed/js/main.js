@@ -1512,8 +1512,11 @@ class RosefinchPage {
         }
 
         this.currentDialog = this.modalShare;
+
+        // get share link
         let shareLink = '';
         if (this.mainListSelectedList.length == 0) {
+            // current directory
             shareLink = window.location.href;
         } else {
             const itemKey = this.mainListSelectedItemKey;
@@ -1522,6 +1525,7 @@ class RosefinchPage {
             let aFileLinkHref = aFileLink.attr('href');
             let curUri = window.location.href.split(this.hashPrefix)[0];
             if (!aFileLinkHref.startsWith(this.hashPrefix) && !curUri.endsWith('/')) {
+                // a directory selected, get parent directory
                 curUri = utils.getParentDir(curUri);
             }
             shareLink = curUri + aFileLinkHref;
