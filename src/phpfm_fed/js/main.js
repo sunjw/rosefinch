@@ -1519,13 +1519,14 @@ class RosefinchPage {
             // current directory
             shareLink = window.location.href;
         } else {
+            // selected one item
             const itemKey = this.mainListSelectedItemKey;
             let liSelectedItem = this.mainListSelectedList[0][itemKey];
             let aFileLink = liSelectedItem.find('a.fileLink');
             let aFileLinkHref = aFileLink.attr('href');
             let curUri = window.location.href.split(this.hashPrefix)[0];
             if (!aFileLinkHref.startsWith(this.hashPrefix) && !curUri.endsWith('/')) {
-                // a directory selected, get parent directory
+                // a file selected and using index.html, then get parent directory
                 curUri = utils.getParentDir(curUri);
             }
             shareLink = curUri + aFileLinkHref;
