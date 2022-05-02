@@ -240,6 +240,8 @@ class RosefinchPage {
         this.operCut = 'cut';
         this.operCopy = 'copy';
 
+        this.dataPreview = 'data-preview';
+
         // elements
         this.body = $('body');
         this.divWrapper = $('#divWrapper');
@@ -2145,6 +2147,7 @@ class RosefinchPage {
 
             if (aFileLink.hasClass(previewImageClass)) {
                 let previewHref = this.generateFilePreviewHref(this.currentDir, itemName);
+                aFileLink.attr(this.dataPreview, previewHref);
                 aFileLink.on('click', function () {
                     utils.navToHash(previewHref);
                     // that.showImagePreviewDialog(itemName, aFileLinkHref);
