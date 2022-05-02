@@ -1524,6 +1524,10 @@ class RosefinchPage {
             let liSelectedItem = this.mainListSelectedList[0][itemKey];
             let aFileLink = liSelectedItem.find('a.fileLink');
             let aFileLinkHref = aFileLink.attr('href');
+            let aPreviewLinkHref = aFileLink.attr(this.dataPreview);
+            if (aPreviewLinkHref) {
+                aFileLinkHref = aPreviewLinkHref;
+            }
             let curUri = window.location.href.split(this.hashPrefix)[0];
             if (!aFileLinkHref.startsWith(this.hashPrefix) && !curUri.endsWith('/')) {
                 // a file selected and using index.html, then get parent directory
