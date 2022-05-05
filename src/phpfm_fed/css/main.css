@@ -66,6 +66,9 @@ img {
 #navToolbarWrapper .toolbarBtnLoading.disabled,#navToolbarWrapper .toolbarBtnLoading:disabled {
   opacity: 1;
 }
+#navToolbarWrapper #spanBrand {
+  padding-bottom: 0.55rem;
+}
 
 #navPathWrapper {
   border-bottom: 1px solid rgba(0, 0, 0, 0.125);
