@@ -598,7 +598,7 @@ class RosefinchPage {
             that.showDeleteDialog();
         });
         this.buttonDelete.hide();
-        this.buttonShare = this.generateToolbarButton('buttonShare', 'bi-upc-scan', 'QR Code');
+        this.buttonShare = this.generateToolbarButton('buttonShare', 'bi-qr-code', 'QR Code');
         this.onButtonClick(this.buttonShare, function () {
             that.showShareDialog();
         });
