@@ -11,4 +11,3 @@ GPL 2.0
  * Web based
  * Copy/paste files and directories
  * Upload and download files
-
