@@ -1016,7 +1016,7 @@ class RosefinchPage {
             'type': 'button',
             'data-dismiss': 'toast',
             'aria-label': 'Close'
-        }).addClass('noOutline ml-2 mb-1 close');
+        }).addClass('ms-2 mb-1 close');
         let spanClose = $('<span/>').attr('aria-hidden', 'true').html('&times;');
         buttonToastClose.append(spanClose);
         divToastHeader.append(buttonToastClose);
