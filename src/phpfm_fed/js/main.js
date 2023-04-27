@@ -5,7 +5,7 @@ require('bootstrap-icons/font/bootstrap-icons.css');
 require('../css/main.css');
 
 // js
-window.$ = require('jquery');
+window.$ = window.jQuery = require('jquery'); // bootstrap 5 must see window.jQuery
 require('bootstrap');
 const qrcode = require('qrcode');
 const utils = require('./utils');
