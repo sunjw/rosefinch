@@ -42,14 +42,14 @@ img {
   font-size: 1.2rem;
 }
 #navToolbarWrapper .toolbarBtn:hover {
-  color: var(--primary);
+  color: var(--bs-primary);
 }
 @media (hover: none) {
   /* Touch screen hover and focus fix */
   #navToolbarWrapper .toolbarBtn:hover {
     color: #212529;
     background-color: inherit;
-    border-color: var(--light);
+    border-color: var(--bs-light);
   }
   #navToolbarWrapper .toolbarBtn:focus, #navToolbarWrapper .toolbarBtn.focus {
     color: #212529;
@@ -80,13 +80,13 @@ img {
   /*border-radius: 0;*/
 }
 #navPathWrapper .breadcrumb .breadcrumb-item a {
-  color: var(--secondary);
+  color: var(--bs-secondary);
 }
 #navPathWrapper .breadcrumb .breadcrumb-item a:hover {
   text-decoration: none;
 }
 #navPathWrapper .breadcrumb .breadcrumb-item.active a {
-  color: var(--primary);
+  color: var(--bs-primary);
 }
 #navPathWrapper #divPathBtnWrapper {
   padding: 0.6rem 1rem;
@@ -139,7 +139,7 @@ img {
   text-decoration: none;
 }
 #ulDetailView .list-group-item .fileIcon {
-  color: var(--secondary);
+  color: var(--bs-secondary);
   font-size: 2.25rem;
   padding-top: 0.2rem;
   padding-right: 0.8rem;
@@ -160,7 +160,7 @@ img {
 }
 
 .modal .modal-footer .dialogTips {
-  color: var(--secondary);
+  color: var(--bs-secondary);
 }
 .modal .modal-footer .btn .loadingText {
   margin-left: 0.4rem;
@@ -175,10 +175,10 @@ img {
   line-height: 80px;
 }
 #divModalUpload.dropFile .modal-content {
-  border-color: var(--danger);
+  border-color: var(--bs-danger);
 }
 #divModalUpload.dropFile #labelUploadFileInfo {
-  color: var(--danger);
+  color: var(--bs-danger);
 }
 #divModalAudio .previewDownload, #divModalImage .previewDownload {
   margin-top: 0.6rem;
@@ -215,13 +215,13 @@ img {
   padding-right: 0.4rem;
 }
 #divToastWrapper .toast.info .toast-header .toastIcon, #divToastWrapper .toast.info .toast-header .toastTitle {
-  color: var(--info);
+  color: var(--bs-info);
 }
 #divToastWrapper .toast.success .toast-header .toastIcon, #divToastWrapper .toast.success .toast-header .toastTitle {
-  color: var(--success);
+  color: var(--bs-success);
 }
 #divToastWrapper .toast.danger .toast-header .toastIcon, #divToastWrapper .toast.danger .toast-header .toastTitle {
-  color: var(--danger);
+  color: var(--bs-danger);
 }
 #divToastWrapper .toast .toast-body {
   min-width: 18rem;
