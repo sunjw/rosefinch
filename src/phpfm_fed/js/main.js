@@ -1010,7 +1010,7 @@ class RosefinchPage {
         let divToastHeader = $('<div/>').addClass('toast-header');
         let iToastIcon = $('<i/>').addClass('toastIcon bi bi-bell');
         divToastHeader.append(iToastIcon);
-        let strongToastTitle = $('<strong/>').addClass('toastTitle mr-auto').text(title);
+        let strongToastTitle = $('<strong/>').addClass('toastTitle me-auto').text(title);
         divToastHeader.append(strongToastTitle);
         let buttonToastClose = $('<button/>').attr({
             'type': 'button',
