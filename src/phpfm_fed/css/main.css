@@ -74,7 +74,7 @@ img {
   border-bottom: 1px solid rgba(0, 0, 0, 0.125);
 }
 #navPathWrapper .breadcrumb {
-  padding-left: 1.6rem;
+  padding: 0.75rem 1rem 0.75rem 1.6rem;
   margin-bottom: 0;
   /*border-bottom: 1px solid var(--light);*/
   /*border-radius: 0;*/
