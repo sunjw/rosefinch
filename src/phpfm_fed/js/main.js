@@ -1003,8 +1003,8 @@ class RosefinchPage {
             'role': 'alert',
             'aria-live': 'assertive',
             'aria-atomic': 'true',
-            //'data-bs-autohide': 'false',
-            'data-bs-delay': '5000'
+            'data-bs-autohide': 'false',
+            //'data-bs-delay': '5000'
         }).addClass('toast').addClass(type);
 
         let divToastHeader = $('<div/>').addClass('toast-header');
@@ -1016,9 +1016,7 @@ class RosefinchPage {
             'type': 'button',
             'data-bs-dismiss': 'toast',
             'aria-label': 'Close'
-        }).addClass('ms-2 mb-1 close');
-        let spanClose = $('<span/>').attr('aria-hidden', 'true').html('&times;');
-        buttonToastClose.append(spanClose);
+        }).addClass('noShadow me-0 btn-close');
         divToastHeader.append(buttonToastClose);
         divToast.append(divToastHeader);
 

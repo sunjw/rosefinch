@@ -20,6 +20,9 @@ img {
 .noOutline:hover, .noOutline:active, .noOutline:focus {
   outline: 0;
 }
+.noShadow:hover, .noShadow:active, .noShadow:focus {
+  box-shadow: none;
+}
 /* Common */
 
 /* PHPFM */
