@@ -31,9 +31,9 @@ module.exports = {
         ]
       }, {
         test: /\.(woff|woff2|eot|ttf|otf)$/,
-        loader: 'file-loader',
-        options: {
-          outputPath: 'assets'
+        type: 'asset/resource',
+        generator: {
+          filename: 'assets/[hash][ext]'
         }
       }
     ]
