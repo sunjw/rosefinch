@@ -193,7 +193,7 @@ img {
 
 @media (min-width: 576px) {
   #divModalImage.previewImageLoaded .modal-dialog {
-    max-width: none;
+    max-width: fit-content;
   }
   #divModalImage.previewImageLoaded .modal-content {
     width: auto;
