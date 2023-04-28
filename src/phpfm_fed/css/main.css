@@ -17,9 +17,6 @@ a {
 img {
   /*border: 0;*/
 }
-.noOutline:hover, .noOutline:active, .noOutline:focus {
-  outline: 0;
-}
 .noShadow:hover, .noShadow:active, .noShadow:focus {
   box-shadow: none;
 }

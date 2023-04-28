@@ -325,7 +325,7 @@ class RosefinchPage {
 
         // prepare layout
         let spanBrand = $('<span/>').attr('id', 'spanBrand').addClass('navbar-brand');
-        this.aBrand = $('<a/>').attr('href', this.hashPrefix).addClass('noOutline').text(this.productName);
+        this.aBrand = $('<a/>').attr('href', this.hashPrefix).text(this.productName);
         spanBrand.append(this.aBrand);
         this.divToolbarBrand.append(spanBrand);
 
@@ -1987,7 +1987,7 @@ class RosefinchPage {
         for (let i = 0; i <= this.currentDir.length; i++) {
             let li = $('<li/>').addClass('breadcrumb-item');
 
-            let aDir = $('<a/>').addClass('noOutline');
+            let aDir = $('<a/>');
             let dirHref = this.generateDirHref(dirs);
             aDir.attr('href', dirHref);
             let dirName = '';
@@ -2066,7 +2066,7 @@ class RosefinchPage {
             spanFileCheck.append(inputCheckbox);
             divDetailLineLeft.append(spanFileCheck);
 
-            let aFileLink = $('<a/>').addClass('fileLink noOutline flex-grow-1 d-flex align-items-center');
+            let aFileLink = $('<a/>').addClass('fileLink flex-grow-1 d-flex align-items-center');
             if (itemIsImage) {
                 aFileLink.addClass(previewImageClass);
             } else if (itemIsAudio) {
