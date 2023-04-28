@@ -334,7 +334,7 @@ class RosefinchPage {
         this.ulDetailView = $('<ul/>').attr('id', 'ulDetailView').addClass('list-group list-group-flush');
         this.divListWrapper.append(this.ulDetailView);
 
-        this.divToastWrapper = $('<div/>').attr('id', 'divToastWrapper');
+        this.divToastWrapper = $('<div/>').attr('id', 'divToastWrapper').addClass('toast-container');
         this.divWrapper.append(this.divToastWrapper);
 
         // prepare event handler
@@ -1003,8 +1003,8 @@ class RosefinchPage {
             'role': 'alert',
             'aria-live': 'assertive',
             'aria-atomic': 'true',
-            'data-bs-autohide': 'false',
-            //'data-bs-delay': '5000'
+            //'data-bs-autohide': 'false',
+            'data-bs-delay': '5000'
         }).addClass('toast').addClass(type);
 
         let divToastHeader = $('<div/>').addClass('toast-header');
