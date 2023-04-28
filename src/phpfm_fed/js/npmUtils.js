@@ -5,7 +5,7 @@ const filesize = require('filesize');
 const platform = require('platform');
 
 function formatSize(size) {
-    return filesize(size);
+    return filesize.filesize(size);
 }
 
 function formatTimestamp(timestamp) {
