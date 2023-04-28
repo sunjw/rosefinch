@@ -45,7 +45,7 @@ class RosefinchDialog {
             'tabindex': -1
         }).addClass('modal fade');
         if (isStatic) {
-            this.divModal.attr('data-backdrop', 'static');
+            this.divModal.attr('data-bs-backdrop', 'static');
         }
         let divModalDialog = $('<div/>').addClass('modal-dialog modal-dialog-centered modal-dialog-scrollable');
         let divModalContent = $('<div/>').addClass('modal-content');
@@ -77,7 +77,7 @@ class RosefinchDialog {
         }
         this.buttonClose = $('<button/>').attr({
             'type': 'button',
-            'data-dismiss': 'modal'
+            'data-bs-dismiss': 'modal'
         }).addClass('btn btn-outline-secondary').text(this.closeText);
         this.divModalFooter.append(this.buttonClose);
         divModalContent.append(this.divModalFooter);
@@ -685,7 +685,7 @@ class RosefinchPage {
 
         this.buttonSortDropDown = $('<button/>').attr({
             'type': 'button',
-            'data-toggle': 'dropdown',
+            'data-bs-toggle': 'dropdown',
             'aria-haspopup': 'true',
             'aria-expanded': 'false'
         }).addClass('btn btn-sm btn-outline-secondary dropdown-toggle');
@@ -1003,8 +1003,8 @@ class RosefinchPage {
             'role': 'alert',
             'aria-live': 'assertive',
             'aria-atomic': 'true',
-            //'data-autohide': 'false',
-            'data-delay': '5000'
+            //'data-bs-autohide': 'false',
+            'data-bs-delay': '5000'
         }).addClass('toast').addClass(type);
 
         let divToastHeader = $('<div/>').addClass('toast-header');
@@ -1014,7 +1014,7 @@ class RosefinchPage {
         divToastHeader.append(strongToastTitle);
         let buttonToastClose = $('<button/>').attr({
             'type': 'button',
-            'data-dismiss': 'toast',
+            'data-bs-dismiss': 'toast',
             'aria-label': 'Close'
         }).addClass('ms-2 mb-1 close');
         let spanClose = $('<span/>').attr('aria-hidden', 'true').html('&times;');
