@@ -9,6 +9,7 @@
       <excludeFolder url="file://$MODULE_DIR$/phpfm_api/vendor/composer" />
       <excludeFolder url="file://$MODULE_DIR$/phpfm_fed/publish" />
       <excludeFolder url="file://$MODULE_DIR$/phpfm_api/publish" />
+      <excludeFolder url="file://$MODULE_DIR$/phpfm_api/vendor/firebase/php-jwt" />
     </content>
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />
