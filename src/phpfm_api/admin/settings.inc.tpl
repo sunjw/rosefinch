@@ -16,12 +16,22 @@ define('FILES_DIR', '&&FILES_DIR&&');
  */
 define('PLAT_CHARSET', '&&PLAT_CHARSET&&');
 
+/**
+ * Locale
+ */
 define('LOCALE', '&&LOCALE&&'); // language, like 'zh_CN', 'en_US'
 
 // User management
 define('USERMNG', &&USERMNG&&);
 
-// Title
+/**
+ * Title
+ */
 define('TITLENAME', '&&TITLENAME&&');
+
+/**
+ * JWT key
+ */
+define('JWT_KEY', '$$JWT_KEY$$');
 
 ?>
