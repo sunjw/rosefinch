@@ -132,6 +132,16 @@ class Rest {
      * Handle API request.
      */
     public function handle_request() {
+        // update jwt
+        $jwt = $this->get_jwt_from_cookie();
+        if ($jwt != '') {
+            $jwt_updated = JwtUtil::update_exp($jwt);
+            if ($jwt_updated) {
+                get_logger()->info('handle_request, jwt updated.');
+                $this->save_jwt_to_cookie($jwt_updated);
+            }
+        }
+
         $api_v1_prefix = 'api/v1/';
         if (starts_with($this->api, $api_v1_prefix)) {
             $api = $this->api_chain($this->api, $api_v1_prefix);
