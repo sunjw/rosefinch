@@ -7,6 +7,7 @@ require_once 'clipboard.class.php';
 require_once 'messageboard.class.php';
 require_once 'filemanager.class.php';
 require_once dirname(__FILE__) . '/../admin/progress.php';
+require_once 'jwtutil.class.php';
 
 /**
  * Rest API return object Class.
@@ -38,6 +39,7 @@ class RestRet implements JsonSerializable {
  *
  */
 class Rest {
+    private static $COOKIE_JWT = 'phpfm_jwt';
     private $files_base_dir;
     private $messageboard;
     private $clipboard;
@@ -98,6 +100,32 @@ class Rest {
     private function response_json_400() {
         $resp_obj = new RestRet(400, 'Bad request.');
         $this->response_json($resp_obj);
+    }
+
+    private function get_jwt_from_cookie() {
+        $jwt = get_cookie(self::$COOKIE_JWT);
+        return $jwt;
+    }
+
+    private function save_jwt_to_cookie($jwt) {
+        setcookie(self::$COOKIE_JWT, $jwt, 0, '/');
+    }
+
+    private function check_su_mode() {
+        $jwt = $this->get_jwt_from_cookie();
+        if ($jwt != '') {
+            $payload = JwtUtil::decode($jwt);
+            if ($payload && $payload['su']) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    private function check_su_mode_with_unauthorized() {
+        if (!$this->check_su_mode()) {
+            response_401();
+        }
     }
 
     /**

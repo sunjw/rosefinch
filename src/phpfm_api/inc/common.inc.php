@@ -178,6 +178,15 @@ function response_400() {
 }
 
 /**
+ * Response 401 Unauthorized.
+ */
+function response_401() {
+    header('HTTP/1.1 401 Unauthorized');
+    echo '401 Unauthorized';
+    exit;
+}
+
+/**
  * Response 404 Not Found.
  */
 function response_404() {
