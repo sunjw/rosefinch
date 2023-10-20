@@ -2072,7 +2072,7 @@ class RosefinchPage {
                 inputPassword.attr('disabled', 'disabled');
                 that.modalSuMode.showOkButtonLoading();
 
-                let requestApi = that.generateRestApiUrl('/api/v1/sys/su');
+                let requestApi = that.generateRestApiUrl('api/v1/sys/su');
                 utils.log('RosefinchPage.showSuModeDialog, requestApi=[%s]', requestApi);
                 let reqObj = {};
                 reqObj['action'] = 'login';
