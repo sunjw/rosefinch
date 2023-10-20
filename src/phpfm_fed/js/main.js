@@ -636,6 +636,7 @@ class RosefinchPage {
         this.onButtonClick(this.buttonSuClear, function () {
             utils.log('RosefinchPage.initButtons, buttonSuClear clicked.');
         });
+        this.buttonSuClear.hide();
         this.buttonSetting = this.generateToolbarButton('buttonSetting', 'bi-gear', 'Setting');
         this.onButtonClick(this.buttonSetting, function () {
             that.showSettingDialog();
