@@ -299,6 +299,7 @@ class RosefinchPage {
         this.modalSetting = null;
         this.modalInstall = null;
         this.modalSuMode = null;
+        this.modalSuClear = null;
 
         // vars
         this.currentDir = [];
@@ -638,7 +639,7 @@ class RosefinchPage {
         });
         this.buttonSuClear = this.generateToolbarButton('buttonSuClear', 'bi-unlock', 'Exit SU mode');
         this.onButtonClick(this.buttonSuClear, function () {
-            utils.log('RosefinchPage.initButtons, buttonSuClear clicked.');
+            that.showSuClearDialog();
         });
         this.buttonSuClear.hide();
         this.buttonSetting = this.generateToolbarButton('buttonSetting', 'bi-gear', 'Setting');
@@ -2106,9 +2107,48 @@ class RosefinchPage {
             });
         }
 
-        utils.log('RosefinchPage.showNewFolderDialog');
+        utils.log('RosefinchPage.showSuModeDialog');
         this.currentDialog = this.modalSuMode;
         this.modalSuMode.show();
+    }
+
+    showSuClearDialog() {
+        if (this.modalSuClear == null) {
+            utils.log('RosefinchPage.showSuClearDialog, init modalSuClear.');
+            let that = this;
+
+            this.modalSuClear = new RosefinchDialog();
+            this.modalSuClear.init('divModalSuClear', true, true);
+            this.modalSuClear.setTitle('SU mode');
+            this.modalSuClear.setCloseButtonText('Cancel');
+
+            let divMessage = $('<div/>');
+            let pSuClearMessage = $('<p/>');
+            pSuClearMessage.html('Are you sure to exit SU mode?');
+            divMessage.append(pSuClearMessage);
+            this.modalSuClear.appendBody(divMessage);
+
+            this.modalSuClear.setCloseHandler(function () {
+                utils.log('RosefinchPage.showSuClearDialog, close.');
+                that.currentDialog = null;
+                that.updateSuModeButtons();
+            });
+
+            this.modalSuClear.setOkButtonHandler(function () {
+                utils.log('RosefinchPage.showSuClearDialog, ok.');
+                that.clearJwtCookie();
+                that.modalSuClear.close();
+
+                let toastTitle = 'SU Mode';
+                that.showToast(toastTitle, 'Exited SU mode.', 'success');
+
+                that.updateSuModeButtons();
+            });
+        }
+
+        utils.log('RosefinchPage.showSuClearDialog');
+        this.currentDialog = this.modalSuClear;
+        this.modalSuClear.show();
     }
 
     renderBreadcrumb() {
