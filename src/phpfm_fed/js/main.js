@@ -632,6 +632,10 @@ class RosefinchPage {
         this.onButtonClick(this.buttonSu, function () {
             utils.log('RosefinchPage.initButtons, buttonSu clicked.');
         });
+        this.buttonSuClear = this.generateToolbarButton('buttonSuClear', 'bi-unlock', 'Exit SU mode');
+        this.onButtonClick(this.buttonSuClear, function () {
+            utils.log('RosefinchPage.initButtons, buttonSuClear clicked.');
+        });
         this.buttonSetting = this.generateToolbarButton('buttonSetting', 'bi-gear', 'Setting');
         this.onButtonClick(this.buttonSetting, function () {
             that.showSettingDialog();
@@ -654,6 +658,8 @@ class RosefinchPage {
 
         this.divToolbarRight.append('\n');
         this.divToolbarRight.append(this.buttonSu);
+        this.divToolbarRight.append('\n');
+        this.divToolbarRight.append(this.buttonSuClear);
         this.divToolbarRight.append('\n');
         this.divToolbarRight.append(this.buttonSetting);
         this.divToolbarRight.append('\n');
