@@ -557,6 +557,9 @@ class Rest {
             case 'setting':
                 $this->handle_setting();
                 break;
+            case 'su':
+                $this->handle_su();
+                break;
             case 'message':
                 $this->handle_message();
                 break;
@@ -674,6 +677,33 @@ class Rest {
         } else if ($request_method === 'POST') {
             $this->post_setting();
         }
+    }
+
+    private function handle_su() {
+        get_logger()->info('handle_su');
+
+        $req_obj = read_body_json();
+        $action = get_array_value($req_obj, 'action');
+        $password = get_array_value($req_obj, 'password');
+
+        $resp_obj = new RestRet();
+        if ($action == 'login') {
+            if ($password == SU_PASSWORD) {
+                $jwt_payload = array(
+                    'su' => true
+                );
+                $jwt = JwtUtil::encode($jwt_payload);
+                $this->save_jwt_to_cookie($jwt);
+                $resp_obj->message = 'SU mode successfully.';
+                get_logger()->info('handle_su, su login.');
+            } else {
+                get_logger()->warning('handle_su, wrong password.');
+                $resp_obj->code = 400;
+                $resp_obj->message = 'SU mode failed.';
+            }
+        }
+
+        $this->response_json($resp_obj);
     }
 
     /**
