@@ -298,6 +298,7 @@ class RosefinchPage {
 
         this.modalSetting = null;
         this.modalInstall = null;
+        this.modalSuMode = null;
 
         // vars
         this.currentDir = [];
@@ -633,7 +634,7 @@ class RosefinchPage {
         // right
         this.buttonSu = this.generateToolbarButton('buttonSu', 'bi-key', 'SU mode');
         this.onButtonClick(this.buttonSu, function () {
-            utils.log('RosefinchPage.initButtons, buttonSu clicked.');
+            that.showSuModeDialog();
         });
         this.buttonSuClear = this.generateToolbarButton('buttonSuClear', 'bi-unlock', 'Exit SU mode');
         this.onButtonClick(this.buttonSuClear, function () {
@@ -2021,6 +2022,93 @@ class RosefinchPage {
         utils.log('RosefinchPage.showInstallDialog');
         this.currentDialog = this.modalInstall;
         this.modalInstall.show();
+    }
+
+    showSuModeDialog() {
+        if (this.modalSuMode == null) {
+            utils.log('RosefinchPage.showSuModeDialog, init modalSuMode.');
+            let that = this;
+
+            this.modalSuMode = new RosefinchDialog();
+            this.modalSuMode.init('divModalSuMode', true, true);
+            this.modalSuMode.setTitle('SU mode');
+            this.modalSuMode.setCloseButtonText('Cancel');
+
+            let formBody = $('<form/>');
+            jqueryUtils.formOnSubmit(formBody, function () {
+                that.modalSuMode.clickOkButton();
+            });
+            let divFormGroup = $('<div/>').addClass('form-group');
+            let inputPassword = $('<input/>').attr({
+                'id': 'inputPassword',
+                'type': 'password',
+                'placeholder': 'Password'
+            }).addClass('form-control');
+            divFormGroup.append(inputPassword);
+            formBody.append(divFormGroup);
+            this.modalSuMode.appendBody(formBody);
+
+            this.modalSuMode.setShowHandler(function () {
+                utils.log('RosefinchPage.showSuModeDialog, show.');
+                jqueryUtils.focusOnInput(inputPassword);
+            });
+
+            this.modalSuMode.setCloseHandler(function () {
+                utils.log('RosefinchPage.showSuModeDialog, close.');
+                inputPassword.val('');
+                inputPassword.removeAttr('disabled');
+                that.currentDialog = null;
+            });
+
+            this.modalSuMode.setOkButtonHandler(function () {
+                utils.log('RosefinchPage.showSuModeDialog, ok.');
+
+                let inputPasswordVal = inputPassword.val();
+                if (inputPasswordVal == '') {
+                    jqueryUtils.focusOnInput(inputPassword);
+                    return;
+                }
+
+                inputPassword.attr('disabled', 'disabled');
+                that.modalSuMode.showOkButtonLoading();
+
+                let requestApi = that.generateRestApiUrl('/api/v1/sys/su');
+                utils.log('RosefinchPage.showSuModeDialog, requestApi=[%s]', requestApi);
+                let reqObj = {};
+                reqObj['action'] = 'login';
+                reqObj['password'] = inputPasswordVal;
+
+                let toastTitle = 'SU Mode';
+                jqueryUtils.postRestRequest(requestApi, reqObj, function (data) {
+                    that.modalSuMode.close();
+
+                    if (!that.checkRestRespData(data)) {
+                        utils.log('RosefinchPage.showSuModeDialog, response ERROR!');
+                        that.showToast(toastTitle, 'Response error.', 'danger');
+                    } else {
+                        let dataCode = data['code'];
+                        let dataMessage = data['message'];
+                        utils.log('RosefinchPage.showSuModeDialog, request OK, data[\'code\']=%d', dataCode);
+                        if (dataCode == 0 && that.checkSuMode()) {
+                            that.showToast(toastTitle, dataMessage, 'success');
+                        } else {
+                            that.showToast(toastTitle, dataMessage, 'danger');
+                        }
+                    }
+
+                    that.updateSuModeButtons();
+                }, function () {
+                    utils.log('RosefinchPage.showSuModeDialog, request ERROR!');
+                    that.modalSuMode.close();
+                    that.updateSuModeButtons();
+                    that.showToast(toastTitle, 'Request error.', 'danger');
+                });
+            });
+        }
+
+        utils.log('RosefinchPage.showNewFolderDialog');
+        this.currentDialog = this.modalSuMode;
+        this.modalSuMode.show();
     }
 
     renderBreadcrumb() {
