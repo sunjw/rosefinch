@@ -34,4 +34,9 @@ define('TITLENAME', '&&TITLENAME&&');
  */
 define('JWT_KEY', '$$JWT_KEY$$');
 
+/**
+ * SU mode password.
+ */
+define('SU_PASSWORD', '$$SU_PASSWORD$$');
+
 ?>
