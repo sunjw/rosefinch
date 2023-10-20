@@ -683,8 +683,8 @@ class Rest {
         get_logger()->info('handle_su');
 
         $req_obj = read_body_json();
-        $action = get_array_value($req_obj, 'action');
-        $password = get_array_value($req_obj, 'password');
+        $action = $req_obj['action'];
+        $password = $req_obj['password'];
 
         $resp_obj = new RestRet();
         if ($action == 'login') {
