@@ -272,6 +272,9 @@ class RosefinchPage {
         this.buttonDelete = null;
         this.buttonShare = null;
 
+        this.buttonSu = null;
+        this.buttonSuClear = null;
+
         this.buttonSetting = null;
         this.buttonAbout = null;
         this.buttonLoadingRight = null;
@@ -625,6 +628,10 @@ class RosefinchPage {
         this.divToolbarLeft.append('\n');
 
         // right
+        this.buttonSu = this.generateToolbarButton('buttonSu', 'bi-key', 'SU mode');
+        this.onButtonClick(this.buttonSu, function () {
+            utils.log('RosefinchPage.initButtons, buttonSu clicked.');
+        });
         this.buttonSetting = this.generateToolbarButton('buttonSetting', 'bi-gear', 'Setting');
         this.onButtonClick(this.buttonSetting, function () {
             that.showSettingDialog();
@@ -645,6 +652,8 @@ class RosefinchPage {
         this.buttonLoadingRight.append(spanLoadingSpinnerRight);
         this.buttonLoadingRight.hide();
 
+        this.divToolbarRight.append('\n');
+        this.divToolbarRight.append(this.buttonSu);
         this.divToolbarRight.append('\n');
         this.divToolbarRight.append(this.buttonSetting);
         this.divToolbarRight.append('\n');
