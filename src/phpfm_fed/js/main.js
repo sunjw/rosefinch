@@ -7,6 +7,7 @@ require('../css/main.css');
 // js
 window.$ = window.jQuery = require('jquery'); // bootstrap 5 must see window.jQuery
 require('bootstrap');
+const jsCookie = require('js-cookie');
 const qrcode = require('qrcode');
 const utils = require('./utils');
 const npmUtils = require('./npmUtils');
@@ -216,6 +217,7 @@ class RosefinchPage {
         // const
         this.hashPrefix = '#!'
         this.productName = 'Rosefinch';
+        this.cookieJwt = 'phpfm_jwt';
 
         this.apiBase = utils.isString(apiPrefix) ? apiPrefix : '';
         this.restApiEndpoint = 'func/rest.api.php';
@@ -508,6 +510,7 @@ class RosefinchPage {
 
             that.renderBreadcrumb();
             that.updateClipboard();
+            that.updateSuModeButtons();
             that.updateSortMenu();
             that.onLayoutResize();
             that.renderMainList();
@@ -693,6 +696,32 @@ class RosefinchPage {
 
     needFixButtonFocus() {
         return (npmUtils.isiOS() || npmUtils.isMacOS());
+    }
+
+    clearJwtCookie() {
+        jsCookie.remove(this.cookieJwt);
+    }
+
+    checkSuMode() {
+        let jwt = jsCookie.get(this.cookieJwt);
+        if (jwt && jwt != '') {
+            return true;
+        }
+        return false;
+    }
+
+    updateSuModeButtons() {
+        // let allBtnNeedSu = $('.' + this.btnNeedSuClass);
+        if (this.checkSuMode()) {
+            // su mode
+            this.buttonSu.hide();
+            this.buttonSuClear.show();
+            // this.setControlDisabled(allBtnNeedSu, false);
+        } else {
+            this.buttonSu.show();
+            this.buttonSuClear.hide();
+            // this.setControlDisabled(allBtnNeedSu, true);
+        }
     }
 
     initSortMenu() {
