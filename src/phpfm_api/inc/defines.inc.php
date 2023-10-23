@@ -42,23 +42,33 @@ if (file_exists($settings)) {
 }
 
 /**
+ * @return bool has set su mode
+ */
+function has_su_mode() {
+    return !empty(SU_PASSWORD);
+}
+
+/**
  * Get some public config value.
  * @return array some key-value
  */
 function get_public_config() {
     $installed = false;
     $title_name = '';
+    $has_su_mode = false;
 
     if (defined('FILES_DIR')) {
         $installed = true;
     }
     if ($installed) {
         $title_name = TITLENAME;
+        $has_su_mode = has_su_mode();
     }
     return [
         'installed' => $installed,
         'version' => VERSION,
-        'title_name' => $title_name
+        'title_name' => $title_name,
+        'has_su_mode' => $has_su_mode
     ];
 }
 
