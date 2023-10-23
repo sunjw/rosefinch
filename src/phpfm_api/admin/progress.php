@@ -30,24 +30,19 @@ function save_settings(&$settings, $mode, $new_settings) {
 }
 
 function save_general(&$settings, $new_settings) {
-    if ($new_settings == null) {
-        $settings['root_type'] = post_query('rootType');
-        $settings['root_path'] = post_query('rootPath');
-        $settings['charset'] = post_query('charset');
-        $settings['language'] = post_query('language');
-        $settings['title_name'] = post_query('titleName');
-        $settings['usermng'] = post_query('usermng');
-    } else {
-        $settings['root_type'] = $new_settings['root_type'];
-        $settings['root_path'] = $new_settings['root_path'];
-        $settings['charset'] = $new_settings['charset'];
-        $settings['language'] = $new_settings['language'];
-        $settings['title_name'] = $new_settings['title_name'];
-        $settings['usermng'] = $new_settings['usermng'];
-    }
+    $settings['root_type'] = $new_settings['root_type'];
+    $settings['root_path'] = $new_settings['root_path'];
+    $settings['charset'] = $new_settings['charset'];
+    $settings['language'] = $new_settings['language'];
+    $settings['title_name'] = $new_settings['title_name'];
+    $settings['su_password'] = $new_settings['su_password'];
+    $settings['usermng'] = $new_settings['usermng'];
 
     if (isset($settings['install']) && $settings['install']) {
         $settings['usermng'] = 0;
+    }
+    if ($settings['su_password'] == 0) {
+        $settings['su_password'] = SU_PASSWORD;
     }
 
     if (empty($settings['root_type']) || empty($settings['root_path']) ||
@@ -55,6 +50,9 @@ function save_general(&$settings, $new_settings) {
         empty($settings['title_name']) || $settings['usermng'] == '') {
         return false;
     }
+
+    // Update JWT_KEY.
+    $settings['jwt_key'] = generate_random_string(16, true);
 
     // prepare $settings['root_path']
     $settings['root_path'] = trim_last_slash($settings['root_path']);
@@ -85,6 +83,8 @@ function save_general(&$settings, $new_settings) {
             '&&PLAT_CHARSET&&',
             '&&LOCALE&&',
             '&&TITLENAME&&',
+            '&&JWT_KEY&&',
+            '&&SU_PASSWORD&&',
             '&&USERMNG&&'
         );
         $values = array(
@@ -93,6 +93,8 @@ function save_general(&$settings, $new_settings) {
             $settings['charset'],
             $settings['language'],
             $settings['title_name'],
+            $settings['jwt_key'],
+            $settings['su_password'],
             $settings['usermng']
         );
 

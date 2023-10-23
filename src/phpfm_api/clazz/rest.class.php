@@ -593,6 +593,7 @@ class Rest {
             'charset' => 'UTF-8',
             'language' => 'en_US',
             'title_name' => 'Rosefinch',
+            'su_password' => '',
             'usermng' => 0,
             'install' => 1
         );
@@ -646,6 +647,10 @@ class Rest {
         $req_obj = read_body_json();
         $charset = addslashes($req_obj['charset']);
         $title_name = addslashes($req_obj['titleName']);
+        $su_password = 0;
+        if (isset($req_obj['suPassword'])) {
+            $su_password = $req_obj['suPassword'];
+        }
         get_logger()->info('post_setting, set charset=[' . $charset . '], title_name=[' . $title_name . ']');
 
         $resp_obj = new RestRet();
@@ -655,6 +660,7 @@ class Rest {
             'charset' => $charset,
             'language' => 'en_US',
             'title_name' => $title_name,
+            'su_password' => $su_password,
             'usermng' => 0,
             'install' => 1
         );

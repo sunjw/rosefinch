@@ -32,11 +32,11 @@ define('TITLENAME', '&&TITLENAME&&');
 /**
  * JWT key
  */
-define('JWT_KEY', '$$JWT_KEY$$');
+define('JWT_KEY', '&&JWT_KEY&&');
 
 /**
  * SU mode password.
  */
-define('SU_PASSWORD', '$$SU_PASSWORD$$');
+define('SU_PASSWORD', '&&SU_PASSWORD&&');
 
 ?>
