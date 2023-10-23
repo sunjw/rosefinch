@@ -1831,6 +1831,7 @@ class RosefinchPage {
             });
 
             let divFormGroup = $('<div/>').addClass('form-group');
+            // Charset
             let labelCharset = $('<label/>').attr('for', 'inputCharset').addClass('col-form-label').text('Charset: ');
             let inputCharset = $('<input/>').attr({
                 'id': 'inputCharset',
@@ -1841,6 +1842,7 @@ class RosefinchPage {
             });
             divFormGroup.append(labelCharset);
             divFormGroup.append(inputCharset);
+            // Title
             let labelTitle = $('<label/>').attr('for', 'inputTitle').addClass('col-form-label').text('Title: ');
             let inputTitle = $('<input/>').attr({
                 'id': 'inputTitle',
@@ -1851,6 +1853,17 @@ class RosefinchPage {
             });
             divFormGroup.append(labelTitle);
             divFormGroup.append(inputTitle);
+            // SU Password
+            let labelPassword = $('<label/>').attr('for', 'inputPassword').addClass('col-form-label').text('SU password: ');
+            let inputPassword = $('<input/>').attr({
+                'id': 'inputPassword',
+                'type': 'password'
+            }).addClass('form-control');
+            jqueryUtils.inputOnEnter(inputPassword, function () {
+                that.modalSetting.clickOkButton();
+            });
+            divFormGroup.append(labelPassword);
+            divFormGroup.append(inputPassword);
             formBody.append(divFormGroup);
             formBody.hide();
             this.modalSetting.appendBody(formBody);
