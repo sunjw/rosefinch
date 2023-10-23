@@ -47,12 +47,12 @@ function save_general(&$settings, $new_settings) {
     }
 
     if (isset($settings['install']) && $settings['install']) {
-        $settings['usermng'] = '0';
+        $settings['usermng'] = 0;
     }
 
     if (empty($settings['root_type']) || empty($settings['root_path']) ||
         empty($settings['charset']) || empty($settings['language']) ||
-        empty($settings['title_name']) || empty($settings['usermng'])) {
+        empty($settings['title_name']) || $settings['usermng'] == '') {
         return false;
     }
 
