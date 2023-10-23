@@ -176,7 +176,7 @@ class FileManager {
             $request_sub_dir = '';
         }
 
-        if ($request_sub_dir != '') {
+        if (!empty($request_sub_dir)) {
             if (substr($request_sub_dir, -1) != '/') {
                 $request_sub_dir .= '/';
             }

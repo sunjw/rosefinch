@@ -83,7 +83,7 @@ class ClipBoard {
     public function items_count() {
         if (is_array($this->items)) {
             $items_count = count($this->items);
-            if ($items_count > 0 && $this->oper != '') {
+            if ($items_count > 0 && !empty($this->oper)) {
                 return $items_count;
             }
         }

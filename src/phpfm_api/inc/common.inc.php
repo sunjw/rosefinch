@@ -54,7 +54,7 @@ function get_cookie($name) {
  * @return string URI
  */
 function get_URI() {
-    if ($_SERVER['QUERY_STRING'] != '') {
+    if (!empty($_SERVER['QUERY_STRING'])) {
         $uri = $_SERVER['PHP_SELF'] . '?' . $_SERVER['QUERY_STRING'];
     } else {
         $uri = $_SERVER['PHP_SELF'];

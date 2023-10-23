@@ -68,7 +68,7 @@ class Rest {
      * @param bool $from_get read "return" from GET, default is true
      */
     private function response_redirect($from_get = true) {
-        if (post_query('noredirect') != '') {
+        if (!empty(post_query('noredirect'))) {
             return;
         }
 
@@ -138,7 +138,7 @@ class Rest {
     public function handle_request() {
         // update jwt
         $jwt = $this->get_jwt_from_cookie();
-        if ($jwt != '') {
+        if (!empty($jwt)) {
             $jwt_updated = JwtUtil::update_exp($jwt);
             if ($jwt_updated) {
                 get_logger()->info('handle_request, jwt updated.');
