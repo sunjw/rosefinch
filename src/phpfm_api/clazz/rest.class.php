@@ -111,9 +111,13 @@ class Rest {
         setcookie(self::$COOKIE_JWT, $jwt, 0, '/');
     }
 
+    private function has_su_mode() {
+        return !empty(SU_PASSWORD);
+    }
+
     private function check_su_mode() {
         $jwt = $this->get_jwt_from_cookie();
-        if ($jwt != '') {
+        if (!empty($jwt)) {
             $payload = JwtUtil::decode($jwt);
             if ($payload && $payload['su']) {
                 return true;
