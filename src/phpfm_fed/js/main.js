@@ -1882,11 +1882,11 @@ class RosefinchPage {
                         that.showToast(toastTitle, 'Response error.', 'danger');
                     } else {
                         let setting = data.data;
-                        inputCharset.val(setting['charset']);
-                        inputTitle.val(setting['title_name']);
                         if (setting['has_su_mode']) {
                             fakeSuPassword = utils.getRandomString(8);
                         }
+                        inputCharset.val(setting['charset']);
+                        inputTitle.val(setting['title_name']);
                         inputPassword.val(fakeSuPassword);
 
                         divLoadingWrapper.hide();
@@ -1903,6 +1903,8 @@ class RosefinchPage {
                 inputCharset.removeAttr('disabled');
                 inputTitle.val('');
                 inputTitle.removeAttr('disabled');
+                inputPassword.val('');
+                inputPassword.removeAttr('disabled');
                 that.currentDialog = null;
             });
 
@@ -1911,14 +1913,25 @@ class RosefinchPage {
 
                 inputCharset.attr('disabled', 'disabled');
                 inputTitle.attr('disabled', 'disabled');
+                inputPassword.attr('disabled', 'disabled');
 
                 that.modalSetting.showOkButtonLoading();
+
+                let newSuPassword = 0;
+                let curSuPassword = inputPassword.val(); // don't trim password.
+                if (curSuPassword != fakeSuPassword) {
+                    // password changed.
+                    newSuPassword = curSuPassword;
+                }
 
                 let requestApi = that.generateRestApiUrl('api/v1/sys/setting');
                 utils.log('RosefinchPage.showSettingDialog, requestApi=[%s]', requestApi);
                 let reqObj = {};
                 reqObj['charset'] = inputCharset.val().trim();
                 reqObj['titleName'] = inputTitle.val().trim();
+                if (newSuPassword !== 0) {
+                    reqObj['suPassword'] = newSuPassword;
+                }
 
                 jqueryUtils.postRestRequest(requestApi, reqObj, function (data) {
                     that.modalSetting.close();
