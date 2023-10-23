@@ -1869,6 +1869,7 @@ class RosefinchPage {
             this.modalSetting.appendBody(formBody);
 
             let toastTitle = 'Setting';
+            let fakeSuPassword = '';
 
             this.modalSetting.setShowHandler(function () {
                 utils.log('RosefinchPage.showSettingDialog, show.');
@@ -1883,6 +1884,10 @@ class RosefinchPage {
                         let setting = data.data;
                         inputCharset.val(setting['charset']);
                         inputTitle.val(setting['title_name']);
+                        if (setting['has_su_mode']) {
+                            fakeSuPassword = utils.getRandomString(8);
+                        }
+                        inputPassword.val(fakeSuPassword);
 
                         divLoadingWrapper.hide();
                         formBody.show();
