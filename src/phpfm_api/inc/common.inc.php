@@ -302,6 +302,26 @@ function ends_with($haystack, $needle) {
 }
 
 /**
+ * Generate random string by given length.
+ * @param $length
+ * @param $with_capital_letter
+ * @return string
+ */
+function generate_random_string($length, $with_capital_letter = false) {
+    $capital = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
+    $characters = '0123456789abcdefghijklmnopqrstuvwxyz';
+    if ($with_capital_letter) {
+        $characters = $characters . $capital;
+    }
+    $charactersLength = strlen($characters);
+    $randomString = '';
+    for ($i = 0; $i < $length; $i++) {
+        $randomString .= $characters[rand(0, $charactersLength - 1)];
+    }
+    return $randomString;
+}
+
+/**
  * Force opcache to recompile script.
  * @param $file
  * @param $force
