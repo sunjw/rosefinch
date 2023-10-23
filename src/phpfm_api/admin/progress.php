@@ -50,12 +50,12 @@ function save_general(&$settings, $new_settings) {
         $settings['usermng'] = '0';
     }
 
-    if ($settings['root_type'] == '' ||
-        $settings['root_path'] == '' ||
-        $settings['charset'] == '' ||
-        $settings['language'] == '' ||
-        $settings['title_name'] == '' ||
-        $settings['usermng'] == '') {
+    if (empty($settings['root_type']) ||
+        empty($settings['root_path']) ||
+        empty($settings['charset']) ||
+        empty($settings['language']) ||
+        empty($settings['title_name']) ||
+        empty($settings['usermng'])) {
         return false;
     }
 

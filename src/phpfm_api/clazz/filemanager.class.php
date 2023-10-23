@@ -60,11 +60,11 @@ class FileManager {
         $this->sort_by = get_query(SORT_PARAM);
         $this->sort_order = get_query(ORDER_PARAM);
 
-        if ($this->sort_by == '') {
+        if (empty($this->sort_by)) {
             // read cookie value
             $this->sort_by = get_cookie(SORT_PARAM);
         }
-        if ($this->sort_order == '') {
+        if (empty($this->sort_order)) {
             $this->sort_order = get_cookie(ORDER_PARAM);
         }
 
@@ -80,7 +80,7 @@ class FileManager {
         setcookie(ORDER_PARAM, $this->sort_order, time() + 60 * 60 * 24 * 365);
 
         $this->sort = 1;
-        if ($this->sort_by == '' || ($this->sort_by == 'n' && $this->sort_order == 'a')) {
+        if (empty($this->sort_by) || ($this->sort_by == 'n' && $this->sort_order == 'a')) {
             $this->sort = 1;
         } else if ($this->sort_by == 'n' && $this->sort_order == 'd') {
             $this->sort = -1;
@@ -139,7 +139,7 @@ class FileManager {
         $request_sub_dir_array_count = count($request_sub_dir_array);
         if ($request_sub_dir_array_count > 0) {
             // Remove the last "" element in array.
-            if ($request_sub_dir_array[$request_sub_dir_array_count - 1] == '') {
+            if (empty($request_sub_dir_array[$request_sub_dir_array_count - 1])) {
                 array_pop($request_sub_dir_array);
             }
         }
@@ -155,7 +155,7 @@ class FileManager {
         $temp = $this->request_sub_dir;
         $temp = trim_last_slash($this->request_sub_dir);
 
-        if ($temp == '') {
+        if (empty($temp)) {
             $current_dir = 'Root';
         } else {
             $current_dir = get_basename($temp);
@@ -274,7 +274,7 @@ class FileManager {
                     //$a_href = FILES_DIR.'/'.$this->request_sub_dir.$file['name'];
                     $a_href = 'func/download.func.php?file=' . rawurlencode($this->request_sub_dir . $file['name']);
                     $type_html = '';
-                    if ($file['type'] == '') {
+                    if (empty($file['type'])) {
                         $type_html = 'file';
                     } else {
                         $type_html = $file['type'];

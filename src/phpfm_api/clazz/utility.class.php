@@ -72,7 +72,7 @@ class Utility {
      * @return bool
      */
     public static function check_name($name) {
-        if ($name == '') {
+        if (empty($name)) {
             return false;
         }
         if (false !== strpos($name, '..') ||
@@ -97,7 +97,7 @@ class Utility {
      * @return bool
      */
     public static function check_path($path, $allow_empty = false) {
-        if (!$allow_empty && $path == '') {
+        if (!$allow_empty && empty($path)) {
             return false;
         }
         if (false !== strpos($path, '..') ||

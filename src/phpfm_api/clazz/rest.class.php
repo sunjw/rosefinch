@@ -78,7 +78,7 @@ class Rest {
             $return_url = rawurldecode(post_query('return'));
         }
 
-        if ($return_url == '') {
+        if (empty($return_url)) {
             get_logger()->error('response_redirect, no "return" found in request.');
             response_400();
         }

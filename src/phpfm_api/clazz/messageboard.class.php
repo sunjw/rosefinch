@@ -42,7 +42,7 @@ class MessageBoard {
      * @return bool
      */
     public function has_message() {
-        if ($this->cur_msg == '') {
+        if (empty($this->cur_msg)) {
             return false;
         } else {
             return true;
