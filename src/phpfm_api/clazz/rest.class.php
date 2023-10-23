@@ -620,11 +620,13 @@ class Rest {
     }
 
     private function get_setting() {
+        $has_su_mode = has_su_mode();
         $setting = array(
             'charset' => PLAT_CHARSET,
             'language' => LOCALE,
             'title_name' => TITLENAME,
-            'usermng' => USERMNG
+            'usermng' => USERMNG,
+            'has_su_mode' => $has_su_mode
         );
 
         $resp_obj = new RestRet();
