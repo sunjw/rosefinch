@@ -704,7 +704,11 @@ class RosefinchPage {
         jsCookie.remove(this.cookieJwt);
     }
 
-    checkSuMode() {
+    hasSuMode() {
+        return this.config['has_su_mode'];
+    }
+
+    inSuMode() {
         let jwt = jsCookie.get(this.cookieJwt);
         if (jwt && jwt != '') {
             return true;
@@ -712,16 +716,40 @@ class RosefinchPage {
         return false;
     }
 
+    grantedSuPermission() {
+        if (!this.hasSuMode()) {
+            return true;
+        }
+
+        if (this.inSuMode()) {
+            return true;
+        }
+
+        return false;
+    }
+
     updateSuModeButtons() {
-        // let allBtnNeedSu = $('.' + this.btnNeedSuClass);
-        if (this.checkSuMode()) {
+        if (this.hasSuMode()) {
+            this.setControlDisabled(this.buttonSu, false);
+            this.setControlDisabled(this.buttonSuClear, false);
+        } else {
+            this.setControlDisabled(this.buttonSu, true);
+            this.setControlDisabled(this.buttonSuClear, true);
+        }
+        if (this.hasSuMode() && this.inSuMode()) {
             // su mode
             this.buttonSu.hide();
             this.buttonSuClear.show();
-            // this.setControlDisabled(allBtnNeedSu, false);
         } else {
             this.buttonSu.show();
             this.buttonSuClear.hide();
+        }
+
+        // let allBtnNeedSu = $('.' + this.btnNeedSuClass);
+        if (this.grantedSuPermission()) {
+            // su permission
+            // this.setControlDisabled(allBtnNeedSu, false);
+        } else {
             // this.setControlDisabled(allBtnNeedSu, true);
         }
     }
@@ -1036,6 +1064,14 @@ class RosefinchPage {
             that.buttonLoadingRight.hide();
             that.buttonAbout.show();
         }, 250);
+    }
+
+    setControlDisabled(control, disabled) {
+        if (disabled) {
+            control.attr('disabled', 'disabled');
+        } else {
+            control.removeAttr('disabled');
+        }
     }
 
     showToast(title, message, type = 'info') {
@@ -1888,6 +1924,7 @@ class RosefinchPage {
                         that.showToast(toastTitle, 'Response error.', 'danger');
                     } else {
                         let setting = data.data;
+                        fakeSuPassword = '';
                         if (setting['has_su_mode']) {
                             fakeSuPassword = utils.getRandomString(8);
                         }
@@ -2141,7 +2178,7 @@ class RosefinchPage {
                         let dataCode = data['code'];
                         let dataMessage = data['message'];
                         utils.log('RosefinchPage.showSuModeDialog, request OK, data[\'code\']=%d', dataCode);
-                        if (dataCode == 0 && that.checkSuMode()) {
+                        if (dataCode == 0 && that.inSuMode()) {
                             that.showToast(toastTitle, dataMessage, 'success');
                         } else {
                             that.showToast(toastTitle, dataMessage, 'danger');
