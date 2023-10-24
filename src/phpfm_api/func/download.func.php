@@ -149,28 +149,25 @@ function prepare_file_path($request_file) {
     return $file;
 }
 
-if (Utility::allow_to_view()) {
-    // Need view permission.
-    $request_file = rawurldecode(get_query('file'));
-    get_logger()->info(join($_GET));
+// Need view permission.
+$request_file = rawurldecode(get_query('file'));
+get_logger()->info(join($_GET));
 
-    if (substr($request_file, -1) == '"') {
-        $request_file = substr($request_file, 0, -1);
-    }
-
-    if ($request_file != false) {
-        $test_array[0] = $request_file;
-        $test_array = Utility::filter_paths($test_array);
-        if (count($test_array) > 0) {
-            $request_file = prepare_file_path($request_file);
-            get_logger()->info('Download start');
-            dl_file($request_file);
-        }
-    } else {
-        get_logger()->info('Download fail');
-        response_404();
-    }
+if (substr($request_file, -1) == '"') {
+    $request_file = substr($request_file, 0, -1);
 }
-//
+
+if ($request_file != false) {
+    $test_array[0] = $request_file;
+    $test_array = Utility::filter_paths($test_array);
+    if (count($test_array) > 0) {
+        $request_file = prepare_file_path($request_file);
+        get_logger()->info('Download start');
+        dl_file($request_file);
+    }
+} else {
+    get_logger()->info('Download fail');
+    response_404();
+}
 
 ?>

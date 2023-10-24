@@ -114,10 +114,6 @@ class FileManager {
      * Init view page.
      */
     private function init_view() {
-        if (!Utility::allow_to_view()) {
-            $this->messageboard->set_message('Please login to browse files.', 400);
-            return;
-        }
         $this->dstats = $this->get_dirs_list($this->request_dir, $this->dsort); // get sorted directory list
         $this->fstats = $this->get_files_list($this->request_dir, $this->sort); // get sorted file list
     }

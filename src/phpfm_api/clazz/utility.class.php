@@ -520,17 +520,6 @@ class Utility {
     }
 
     /**
-     * Check current user is able to view file.
-     * @return bool
-     */
-    public static function allow_to_view() {
-        if (!defined('ROSE_VIEW')) {
-            return true;
-        }
-        return Utility::allow_to(ROSE_VIEW);
-    }
-
-    /**
      * Check current user is able to modify file.
      * @return bool
      */

@@ -622,7 +622,7 @@ class Rest {
             'usermng' => 0,
             'install' => 1
         );
-        if (save_settings($settings, 0, $settings)) {
+        if (save_settings($settings, $settings)) {
             $resp_obj->code = 0;
             $resp_obj->message = 'Install successfully.';
         } else {
@@ -689,7 +689,7 @@ class Rest {
             'usermng' => 0,
             'install' => 1
         );
-        if (save_settings($settings, 0, $settings)) {
+        if (save_settings($settings, $settings)) {
             $resp_obj->code = 0;
             $resp_obj->message = 'Save setting successfully.';
         } else {
