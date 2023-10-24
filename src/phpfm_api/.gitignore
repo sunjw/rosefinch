@@ -3,7 +3,6 @@ vendor/**/.git
 .buildpath
 .project
 .settings/
-admin/database.inc.php
 admin/settings.inc.php
 images/Thumbs.db
 images/png/

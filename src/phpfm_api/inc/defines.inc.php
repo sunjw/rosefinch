@@ -29,12 +29,8 @@ function convert_toplat($str) {
 }
 
 $settings = dirname(__FILE__) . '/../admin/settings.inc.php';
-$database_inc = dirname(__FILE__) . '/../admin/database.inc.php';
 if (file_exists($settings)) {
     require_once $settings;
-    if (file_exists($database_inc)) {
-        require_once $database_inc;
-    }
 }
 
 /**
