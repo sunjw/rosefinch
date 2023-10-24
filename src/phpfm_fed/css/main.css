@@ -282,8 +282,13 @@ img {
 /* Small screen */
 
 /* Even small screen */
+@media (max-width: 480px) {
+  #navToolbarWrapper #buttonBack {
+    display: none;
+  }
+}
 @media (max-width: 430px) {
-  #navToolbarWrapper #buttonBack, #navToolbarWrapper #buttonRefresh {
+  #navToolbarWrapper #buttonRefresh {
     display: none;
   }
 }
