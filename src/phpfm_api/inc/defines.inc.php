@@ -30,14 +30,10 @@ function convert_toplat($str) {
 
 $settings = dirname(__FILE__) . '/../admin/settings.inc.php';
 $database_inc = dirname(__FILE__) . '/../admin/database.inc.php';
-$user_managment = dirname(__FILE__) . '/../admin/usermng.inc.php';
 if (file_exists($settings)) {
     require_once $settings;
     if (file_exists($database_inc)) {
         require_once $database_inc;
-    }
-    if (file_exists($user_managment)) {
-        require_once $user_managment;
     }
 }
 

@@ -5,7 +5,6 @@ vendor/**/.git
 .settings/
 admin/database.inc.php
 admin/settings.inc.php
-admin/usermng.inc.php
 images/Thumbs.db
 images/png/
 images/psd/

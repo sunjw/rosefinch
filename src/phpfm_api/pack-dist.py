@@ -97,7 +97,7 @@ FED_PACK_CMD = 'python3 ./pack-dist-webpack.py'
 APP_DIRS = ['admin', 'clazz', 'func', 'inc', 'log', 'vendor']
 APP_FILES = ['composer.json', 'composer.lock', 'gpl-2.0.txt', 'web.config']
 MK_DIRS = []
-CLEAR_FILES = ['admin/settings.inc.php', 'admin/usermng.inc.php', 'log/phpfm.log']
+CLEAR_FILES = ['admin/settings.inc.php', 'log/phpfm.log']
 
 def main():
     cwd = os.getcwd()
