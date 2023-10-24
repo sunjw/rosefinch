@@ -12,9 +12,9 @@ function restRequest(method, api, reqObj, successCallback, errorCallback) {
                 successCallback(data);
             }
         },
-        error: function () {
+        error: function (resp, textStatus, errorThrown) {
             if (errorCallback) {
-                errorCallback();
+                errorCallback(resp, textStatus, errorThrown);
             }
         }
     });
