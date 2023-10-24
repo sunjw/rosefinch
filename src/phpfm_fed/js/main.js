@@ -425,6 +425,9 @@ class RosefinchPage {
                 } else {
                     document.title = that.productName;
                 }
+                if (!that.hasSuMode()) {
+                    that.clearJwtCookie();
+                }
                 // begin
                 that.onHashChange();
             } else {
