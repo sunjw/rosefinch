@@ -127,10 +127,24 @@ class Rest {
         return false;
     }
 
-    private function in_su_mode_with_unauthorized() {
-        if (!$this->in_su_mode()) {
-            response_401();
+    private function granted_su_permission() {
+        if (!has_su_mode()) {
+            return true;
         }
+
+        if ($this->in_su_mode()) {
+            return true;
+        }
+
+        return false;
+    }
+
+    private function granted_su_permission_with_401() {
+        if (!$this->granted_su_permission()) {
+            response_401();
+            return false;
+        }
+        return true;
     }
 
     /**
@@ -684,6 +698,10 @@ class Rest {
      * Handle setting.
      */
     private function handle_setting() {
+        if (!$this->granted_su_permission_with_401()) {
+            return;
+        }
+
         $request_method = $_SERVER['REQUEST_METHOD'];
         if ($request_method === 'GET') {
             $this->get_setting();
