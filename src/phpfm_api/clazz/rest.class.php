@@ -116,6 +116,25 @@ class Rest {
         setcookie(self::$COOKIE_JWT, $jwt, 0, '/');
     }
 
+    private function update_jwt_cookie() {
+        $jwt = $this->get_jwt_from_cookie();
+        if (!empty($jwt)) {
+            $jwt_updated = JwtUtil::update_exp($jwt);
+            if ($jwt_updated) {
+                // get_logger()->info('update_jwt_cookie, jwt updated.');
+                $this->save_jwt_to_cookie($jwt_updated);
+            }
+        }
+    }
+
+    private function generate_su_jwt($temp_jwt_key = null) {
+        $jwt_payload = array(
+            'su' => true
+        );
+        $jwt = JwtUtil::encode($jwt_payload, $temp_jwt_key);
+        return $jwt;
+    }
+
     private function in_su_mode() {
         $jwt = $this->get_jwt_from_cookie();
         if (!empty($jwt)) {
@@ -151,15 +170,7 @@ class Rest {
      * Handle API request.
      */
     public function handle_request() {
-        // update jwt
-        $jwt = $this->get_jwt_from_cookie();
-        if (!empty($jwt)) {
-            $jwt_updated = JwtUtil::update_exp($jwt);
-            if ($jwt_updated) {
-                get_logger()->info('handle_request, jwt updated.');
-                $this->save_jwt_to_cookie($jwt_updated);
-            }
-        }
+        $this->update_jwt_cookie();
 
         $api_v1_prefix = 'api/v1/';
         if (starts_with($this->api, $api_v1_prefix)) {
@@ -691,6 +702,11 @@ class Rest {
             $resp_obj->message = 'Save setting failed.';
         }
 
+        $new_jwt_key = $settings['jwt_key'];
+        $jwt = $this->generate_su_jwt($new_jwt_key);
+        $this->save_jwt_to_cookie($jwt);
+        get_logger()->info('post_setting, jwt updated.');
+
         $this->response_json($resp_obj);
     }
 
@@ -720,10 +736,7 @@ class Rest {
         $resp_obj = new RestRet();
         if ($action == 'login') {
             if ($password == SU_PASSWORD) {
-                $jwt_payload = array(
-                    'su' => true
-                );
-                $jwt = JwtUtil::encode($jwt_payload);
+                $jwt = $this->generate_su_jwt();
                 $this->save_jwt_to_cookie($jwt);
                 $resp_obj->message = 'SU mode successfully.';
                 get_logger()->info('handle_su, su login.');

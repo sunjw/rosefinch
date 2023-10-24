@@ -22,9 +22,13 @@ class JwtUtil {
      * @param $payload
      * @return string
      */
-    public static function encode($payload) {
+    public static function encode($payload, $temp_jwt_key = null) {
         $payload[self::$JWT_EXP] = time() + self::$JWT_TIMEOUT;
-        $jwt = JWT::encode($payload, JWT_KEY, self::$JWT_ALG);
+        $use_jwt_key = JWT_KEY;
+        if (!is_null($temp_jwt_key)) {
+            $use_jwt_key = $temp_jwt_key;
+        }
+        $jwt = JWT::encode($payload, $use_jwt_key, self::$JWT_ALG);
         return $jwt;
     }
 
