@@ -107,11 +107,6 @@ class Rest {
         return $jwt;
     }
 
-    private function remove_jwt_from_cookie() {
-        unset($_COOKIE[self::$COOKIE_JWT]);
-        setcookie(self::$COOKIE_JWT, '', time() - 3600, '/');
-    }
-
     private function save_jwt_to_cookie($jwt) {
         setcookie(self::$COOKIE_JWT, $jwt, 0, '/');
     }
