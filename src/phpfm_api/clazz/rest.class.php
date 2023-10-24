@@ -697,10 +697,12 @@ class Rest {
             $resp_obj->message = 'Save setting failed.';
         }
 
-        $new_jwt_key = $settings['jwt_key'];
-        $jwt = $this->generate_su_jwt($new_jwt_key);
-        $this->save_jwt_to_cookie($jwt);
-        get_logger()->info('post_setting, jwt updated.');
+        if ($settings['su_password'] != '') {
+            $new_jwt_key = $settings['jwt_key'];
+            $jwt = $this->generate_su_jwt($new_jwt_key);
+            $this->save_jwt_to_cookie($jwt);
+            get_logger()->info('post_setting, jwt updated.');
+        }
 
         $this->response_json($resp_obj);
     }
