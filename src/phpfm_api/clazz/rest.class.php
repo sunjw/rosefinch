@@ -107,11 +107,16 @@ class Rest {
         return $jwt;
     }
 
+    private function remove_jwt_from_cookie() {
+        unset($_COOKIE[self::$COOKIE_JWT]);
+        setcookie(self::$COOKIE_JWT, '', time() - 3600, '/');
+    }
+
     private function save_jwt_to_cookie($jwt) {
         setcookie(self::$COOKIE_JWT, $jwt, 0, '/');
     }
 
-    private function check_su_mode() {
+    private function in_su_mode() {
         $jwt = $this->get_jwt_from_cookie();
         if (!empty($jwt)) {
             $payload = JwtUtil::decode($jwt);
@@ -122,8 +127,8 @@ class Rest {
         return false;
     }
 
-    private function check_su_mode_with_unauthorized() {
-        if (!$this->check_su_mode()) {
+    private function in_su_mode_with_unauthorized() {
+        if (!$this->in_su_mode()) {
             response_401();
         }
     }
