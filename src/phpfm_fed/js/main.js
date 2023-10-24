@@ -1081,6 +1081,12 @@ class RosefinchPage {
         divToast.toast('show');
     }
 
+    handleDialogSuModeUnauthorized(toastTitle) {
+        this.showToast(toastTitle, 'Unauthorized.', 'danger');
+        this.clearJwtCookie();
+        this.updateSuModeButtons();
+    }
+
     isCurrentDialog(someDialog) {
         if (!someDialog) {
             return false;
@@ -1892,6 +1898,15 @@ class RosefinchPage {
                         divLoadingWrapper.hide();
                         formBody.show();
                     }
+                }, function (resp) {
+                    let respStatus = resp.status;
+                    utils.log('RosefinchPage.showSettingDialog, request ERROR, status=%d', respStatus);
+                    that.modalSetting.close();
+                    if (respStatus == 401) {
+                        that.handleDialogSuModeUnauthorized(toastTitle);
+                    } else {
+                        that.showToast(toastTitle, 'Request error.', 'danger');
+                    }
                 });
             });
 
@@ -1950,10 +1965,15 @@ class RosefinchPage {
                             that.showToast(toastTitle, dataMessage, 'danger');
                         }
                     }
-                }, function () {
-                    utils.log('RosefinchPage.showSettingDialog, request ERROR!');
+                }, function (resp) {
+                    let respStatus = resp.status;
+                    utils.log('RosefinchPage.showSettingDialog, request ERROR, status=%d', respStatus);
                     that.modalSetting.close();
-                    that.showToast(toastTitle, 'Request error.', 'danger');
+                    if (respStatus == 401) {
+                        that.handleDialogSuModeUnauthorized(toastTitle);
+                    } else {
+                        that.showToast(toastTitle, 'Request error.', 'danger');
+                    }
                 });
             });
         }
