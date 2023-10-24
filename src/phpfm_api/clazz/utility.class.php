@@ -520,28 +520,6 @@ class Utility {
     }
 
     /**
-     * Check current user is able to modify file.
-     * @return bool
-     */
-    public static function allow_to_modify() {
-        if (!defined('ROSE_MODIFY')) {
-            return true;
-        }
-        return Utility::allow_to(ROSE_MODIFY);
-    }
-
-    /**
-     * Check current user is admin.
-     * @return bool
-     */
-    public static function allow_to_admin() {
-        if (!defined('ROSE_ADMIN')) {
-            return true;
-        }
-        return Utility::allow_to(ROSE_ADMIN);
-    }
-
-    /**
      * Display user.
      */
     public static function display_user() {

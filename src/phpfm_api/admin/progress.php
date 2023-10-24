@@ -10,10 +10,6 @@ require_once dirname(__FILE__) . '/../clazz/utility.class.php';
  * @return bool
  */
 function save_settings(&$settings, $new_settings) {
-    if (!Utility::allow_to_admin()) {
-        return false;
-    }
-
     $old_settings = $settings;
     $ret = false;
 

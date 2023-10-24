@@ -264,11 +264,7 @@ class Rest {
             return;
         }
 
-        if (!Utility::allow_to_modify()) {
-            get_logger()->warning('handle_cut_copy, not allowed to cut or copy.');
-            $this->response_json_400();
-            return;
-        }
+        // grant su
 
         $req_obj = read_body_json();
         $items = $req_obj['items'];
@@ -308,11 +304,7 @@ class Rest {
             return;
         }
 
-        if (!Utility::allow_to_modify()) {
-            get_logger()->warning('handle_paste, not allowed to paste.');
-            $this->response_json_400();
-            return;
-        }
+        // grant su
 
         $req_obj = read_body_json();
         $target_subdir = rawurldecode($req_obj['subdir']);
@@ -348,11 +340,7 @@ class Rest {
      * Delete.
      */
     private function handle_delete() {
-        if (!Utility::allow_to_modify()) {
-            get_logger()->warning('handle_delete, not allowed to delete.');
-            $this->response_json_400();
-            return;
-        }
+        // grant su
 
         $req_obj = read_body_json();
         $items = $req_obj['items'];
@@ -400,11 +388,7 @@ class Rest {
      * New folder.
      */
     private function handle_newfolder() {
-        if (!Utility::allow_to_modify()) {
-            get_logger()->warning('handle_newfolder, not allowed to make new folder.');
-            $this->response_json_400();
-            return;
-        }
+        // grant su
 
         $req_obj = read_body_json();
         $sub_dir = rawurldecode($req_obj['subdir']);
@@ -439,11 +423,7 @@ class Rest {
      * Rename.
      */
     private function handle_rename() {
-        if (!Utility::allow_to_modify()) {
-            get_logger()->warning('handle_rename, not allowed to rename.');
-            $this->response_json_400();
-            return;
-        }
+        // grant su
 
         $req_obj = read_body_json();
         //$sub_dir = rawurldecode(post_query('subdir'));
@@ -498,16 +478,16 @@ class Rest {
         //get_logger()->info('handle_upload, post_query='.$post_subdir);
         //get_logger()->info('handle_upload, sub_dir='.$sub_dir);
 
-        if (!Utility::allow_to_modify()) {
-            if (!$is_ajax) {
-                $this->messageboard->set_message('Please login to upload file.', 400);
-                $this->response_redirect(false);
-            } else {
-                get_logger()->warning('handle_upload, not allowed to upload.');
-                $this->response_json_400();
-            }
-            return;
-        }
+        //if (!Utility::allow_to_modify()) {
+        //    if (!$is_ajax) {
+        //        $this->messageboard->set_message('Please login to upload file.', 400);
+        //        $this->response_redirect(false);
+        //    } else {
+        //        get_logger()->warning('handle_upload, not allowed to upload.');
+        //        $this->response_json_400();
+        //    }
+        //    return;
+        //}
 
         if (isset($_FILES['uploadFile'])) {
             $upload_result = false;
