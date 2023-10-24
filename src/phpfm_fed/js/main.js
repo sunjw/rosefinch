@@ -243,6 +243,7 @@ class RosefinchPage {
         this.operCopy = 'copy';
 
         this.dataPreview = 'data-preview';
+        this.buttonNeedSuClass = 'buttonNeedSu';
 
         // elements
         this.body = $('body');
@@ -676,6 +677,15 @@ class RosefinchPage {
         this.divToolbarRight.append('\n');
         this.divToolbarRight.append(this.buttonLoadingRight);
         this.divToolbarRight.append('\n');
+
+        // Init su mode buttons.
+        let buttonToNeedSuMode = [
+            this.buttonSetting
+        ];
+        buttonToNeedSuMode.forEach((buttonItr) => {
+            buttonItr.addClass(this.buttonNeedSuClass);
+            this.setControlDisabled(buttonItr, true);
+        });
     }
 
     onButtonClick(button, handler) {
@@ -732,6 +742,9 @@ class RosefinchPage {
     }
 
     updateSuModeButtons() {
+        utils.log('RosefinchPage.updateSuModeButtons, hasSuMode=[%s], inSuMode=[%s], grantedSuPermission=[%s]',
+            this.hasSuMode(), this.inSuMode(), this.grantedSuPermission());
+
         if (this.hasSuMode()) {
             this.setControlDisabled(this.buttonSu, false);
             this.setControlDisabled(this.buttonSuClear, false);
@@ -748,12 +761,12 @@ class RosefinchPage {
             this.buttonSuClear.hide();
         }
 
-        // let allBtnNeedSu = $('.' + this.btnNeedSuClass);
+        let allButtonNeedSu = $('.' + this.buttonNeedSuClass);
         if (this.grantedSuPermission()) {
             // su permission
-            // this.setControlDisabled(allBtnNeedSu, false);
+            this.setControlDisabled(allButtonNeedSu, false);
         } else {
-            // this.setControlDisabled(allBtnNeedSu, true);
+            this.setControlDisabled(allButtonNeedSu, true);
         }
     }
 
