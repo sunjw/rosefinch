@@ -505,29 +505,6 @@ class Utility {
 
         return $clipboard;
     }
-
-    private static function allow_to($do) {
-        if (!USERMNG) {
-            return true;
-        }
-
-        $modify_permission = $do;
-        if ($modify_permission == User::$NOBODY) {
-            return true;
-        }
-
-        return false;
-    }
-
-    /**
-     * Display user.
-     */
-    public static function display_user() {
-        if (is_mobile_browser() || !USERMNG) {
-            return '';
-        }
-    }
-
 }
 
 ?>

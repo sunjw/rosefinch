@@ -27,18 +27,14 @@ function save_general(&$settings, $new_settings) {
     $settings['language'] = $new_settings['language'];
     $settings['title_name'] = $new_settings['title_name'];
     $settings['su_password'] = $new_settings['su_password'];
-    $settings['usermng'] = $new_settings['usermng'];
 
-    if (isset($settings['install']) && $settings['install']) {
-        $settings['usermng'] = 0;
-    }
     if ($settings['su_password'] === 0) {
         $settings['su_password'] = SU_PASSWORD;
     }
 
     if (empty($settings['root_type']) || empty($settings['root_path']) ||
         empty($settings['charset']) || empty($settings['language']) ||
-        empty($settings['title_name']) || $settings['usermng'] == '') {
+        empty($settings['title_name'])) {
         return false;
     }
 
@@ -64,10 +60,6 @@ function save_general(&$settings, $new_settings) {
         fclose($settings_tpl);
         //print_r( $settings);
 
-        if ($settings['usermng']) {
-            $settings['usermng'] = 0;
-        }
-
         $templates = array(
             '&&FILE_POSITION&&',
             '&&FILES_DIR&&',
@@ -75,8 +67,7 @@ function save_general(&$settings, $new_settings) {
             '&&LOCALE&&',
             '&&TITLENAME&&',
             '&&JWT_KEY&&',
-            '&&SU_PASSWORD&&',
-            '&&USERMNG&&'
+            '&&SU_PASSWORD&&'
         );
         $values = array(
             $settings['root_type'],
@@ -85,8 +76,7 @@ function save_general(&$settings, $new_settings) {
             $settings['language'],
             $settings['title_name'],
             $settings['jwt_key'],
-            $settings['su_password'],
-            $settings['usermng']
+            $settings['su_password']
         );
 
         $settings_str = str_replace($templates, $values, $settings_str);

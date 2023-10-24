@@ -21,9 +21,6 @@ define('PLAT_CHARSET', '&&PLAT_CHARSET&&');
  */
 define('LOCALE', '&&LOCALE&&'); // language, like 'zh_CN', 'en_US'
 
-// User management
-define('USERMNG', &&USERMNG&&);
-
 /**
  * Title
  */
