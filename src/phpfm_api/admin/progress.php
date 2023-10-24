@@ -41,7 +41,7 @@ function save_general(&$settings, $new_settings) {
     if (isset($settings['install']) && $settings['install']) {
         $settings['usermng'] = 0;
     }
-    if ($settings['su_password'] == 0) {
+    if ($settings['su_password'] === 0) {
         $settings['su_password'] = SU_PASSWORD;
     }
 
