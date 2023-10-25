@@ -218,7 +218,9 @@ class Rest {
                 });
                 break;
             case 'delete':
-                $this->handle_delete();
+                $this->handle_su_permission_request(function () {
+                    $this->handle_delete();
+                });
                 break;
             case 'newfolder':
                 $this->handle_newfolder();
