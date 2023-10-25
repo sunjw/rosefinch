@@ -680,7 +680,7 @@ class RosefinchPage {
 
         // Init su mode buttons.
         let buttonToNeedSuMode = [
-            this.buttonUpload, this.buttonSetting
+            this.buttonUpload, this.buttonCut, this.buttonCopy, this.buttonSetting
         ];
         buttonToNeedSuMode.forEach((buttonItr) => {
             buttonItr.addClass(this.buttonNeedSuClass);
@@ -917,10 +917,15 @@ class RosefinchPage {
             that.clipboardCount = data.data['clipboard']['count'];
             utils.log('RosefinchPage.onCutCopy, request OK, clipboardCount=%d', that.clipboardCount);
             that.updateClipboard();
-        }, function () {
-            utils.log('RosefinchPage.onCutCopy, request ERROR!');
+        }, function (resp) {
+            let respStatus = resp.status;
+            utils.log('RosefinchPage.onCutCopy, request ERROR, status=%d', respStatus);
             that.hideMainListLoading();
-            that.showToast(toastTitle, 'Request error.', 'danger');
+            if (respStatus == 401) {
+                that.handleRequestSuModeUnauthorized(toastTitle);
+            } else {
+                that.showToast(toastTitle, 'Request error.', 'danger');
+            }
         });
     }
 
