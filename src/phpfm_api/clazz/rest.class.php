@@ -155,6 +155,7 @@ class Rest {
 
     private function granted_su_permission_with_401() {
         if (!$this->granted_su_permission()) {
+            get_logger()->error('granted_su_permission_with_401, unauthorized API request: [' . $this->api . '].');
             response_401();
             return false;
         }
@@ -187,6 +188,16 @@ class Rest {
         } else {
             get_logger()->error('handle_request, wrong API request: [' . $this->api . '].');
             $this->response_json_400();
+        }
+    }
+
+    private function handle_su_permission_request($next_request_handle) {
+        if (!$this->granted_su_permission_with_401()) {
+            return;
+        }
+
+        if (is_callable($next_request_handle)) {
+            $next_request_handle();
         }
     }
 
@@ -560,7 +571,9 @@ class Rest {
                 $this->handle_config();
                 break;
             case 'setting':
-                $this->handle_setting();
+                $this->handle_su_permission_request(function () {
+                    $this->handle_setting();
+                });
                 break;
             case 'su':
                 $this->handle_su();
@@ -688,10 +701,6 @@ class Rest {
      * Handle setting.
      */
     private function handle_setting() {
-        if (!$this->granted_su_permission_with_401()) {
-            return;
-        }
-
         $request_method = $_SERVER['REQUEST_METHOD'];
         if ($request_method === 'GET') {
             $this->get_setting();
