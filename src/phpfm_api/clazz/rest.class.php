@@ -208,7 +208,9 @@ class Rest {
                 break;
             case 'cut':
             case 'copy':
-                $this->handle_cut_copy(($api == 'cut'));
+                $this->handle_su_permission_request(function () use ($api) {
+                    $this->handle_cut_copy(($api == 'cut'));
+                });
                 break;
             case 'paste':
                 $this->handle_paste();
