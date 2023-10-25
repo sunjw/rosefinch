@@ -37,7 +37,7 @@ if (file_exists($settings)) {
  * @return bool has set su mode
  */
 function has_su_mode() {
-    return !empty(SU_PASSWORD);
+    return (SU_PASSWORD != '');
 }
 
 /**
