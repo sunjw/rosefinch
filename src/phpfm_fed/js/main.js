@@ -1205,6 +1205,7 @@ class RosefinchPage {
                 inputUploadFile.val('');
                 labelUploadFileInfo.text(uploadFileInfoText);
                 that.modalUpload.setTipsText('');
+                that.dropFileEvent = null;
                 that.currentDialog = null;
             });
 
