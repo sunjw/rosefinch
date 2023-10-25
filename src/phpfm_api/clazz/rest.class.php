@@ -223,7 +223,9 @@ class Rest {
                 $this->handle_rename();
                 break;
             case 'upload':
-                $this->handle_upload();
+                $this->handle_su_permission_request(function () {
+                    $this->handle_upload();
+                });
                 break;
             default:
                 get_logger()->error('handle_fm_request, wrong API request: [' . $this->api . '].');
