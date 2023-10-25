@@ -1231,9 +1231,16 @@ class RosefinchPage {
                         that.modalUpload.close();
 
                         if (!that.checkRestRespData(data)) {
-                            utils.log('RosefinchPage.showUploadDialog, response ERROR!');
-                            that.showToast(toastTitle, 'Response error.', 'danger');
+                            // error
+                            let respStatus = xhrUpload.status;
+                            utils.log('RosefinchPage.showUploadDialog, response ERROR, status=%d', respStatus);
+                            if (respStatus == 401) {
+                                that.handleRequestSuModeUnauthorized(toastTitle);
+                            } else {
+                                that.showToast(toastTitle, 'Response error.', 'danger');
+                            }
                         } else {
+                            // uploaded
                             let dataCode = data['code'];
                             let dataMessage = data['message'];
                             utils.log('RosefinchPage.showUploadDialog, request OK, data[\'code\']=%d', dataCode);
@@ -1248,9 +1255,14 @@ class RosefinchPage {
                     }, 500);
                 };
                 xhrUpload.onerror = function () {
-                    utils.log('RosefinchPage.showUploadDialog, request ERROR!');
+                    let respStatus = xhrUpload.status;
+                    utils.log('RosefinchPage.showUploadDialog, request ERROR, status=%d', respStatus);
                     that.modalUpload.close();
-                    that.showToast(toastTitle, 'Request error.', 'danger');
+                    if (respStatus == 401) {
+                        that.handleRequestSuModeUnauthorized(toastTitle);
+                    } else {
+                        that.showToast(toastTitle, 'Request error.', 'danger');
+                    }
                 };
 
                 let form = new FormData();
