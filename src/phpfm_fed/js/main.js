@@ -741,6 +741,12 @@ class RosefinchPage {
         return false;
     }
 
+    handleRequestSuModeUnauthorized(toastTitle) {
+        this.showToast(toastTitle, 'Unauthorized.', 'danger');
+        this.clearJwtCookie();
+        this.updateSuModeButtons();
+    }
+
     updateSuModeButtons() {
         utils.log('RosefinchPage.updateSuModeButtons, hasSuMode=[%s], inSuMode=[%s], grantedSuPermission=[%s]',
             this.hasSuMode(), this.inSuMode(), this.grantedSuPermission());
@@ -1131,12 +1137,6 @@ class RosefinchPage {
         });
 
         divToast.toast('show');
-    }
-
-    handleDialogSuModeUnauthorized(toastTitle) {
-        this.showToast(toastTitle, 'Unauthorized.', 'danger');
-        this.clearJwtCookie();
-        this.updateSuModeButtons();
     }
 
     isCurrentDialog(someDialog) {
@@ -1956,7 +1956,7 @@ class RosefinchPage {
                     utils.log('RosefinchPage.showSettingDialog, request ERROR, status=%d', respStatus);
                     that.modalSetting.close();
                     if (respStatus == 401) {
-                        that.handleDialogSuModeUnauthorized(toastTitle);
+                        that.handleRequestSuModeUnauthorized(toastTitle);
                     } else {
                         that.showToast(toastTitle, 'Request error.', 'danger');
                     }
@@ -2023,7 +2023,7 @@ class RosefinchPage {
                     utils.log('RosefinchPage.showSettingDialog, request ERROR, status=%d', respStatus);
                     that.modalSetting.close();
                     if (respStatus == 401) {
-                        that.handleDialogSuModeUnauthorized(toastTitle);
+                        that.handleRequestSuModeUnauthorized(toastTitle);
                     } else {
                         that.showToast(toastTitle, 'Request error.', 'danger');
                     }
