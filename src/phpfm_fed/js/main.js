@@ -1211,12 +1211,18 @@ class RosefinchPage {
             this.modalUpload.setOkButtonHandler(function () {
                 utils.log('RosefinchPage.showUploadDialog, ok.');
 
+                let toastTitle = 'Upload';
+                if (!that.grantedSuPermission()) {
+                    that.modalUpload.close();
+                    that.handleRequestSuModeUnauthorized(toastTitle);
+                    return;
+                }
+
                 that.modalUpload.showOkButtonLoading();
 
                 let requestApi = that.generateRestApiUrl('api/v1/fm/upload');
                 utils.log('RosefinchPage.showUploadDialog, requestApi=[%s]', requestApi);
 
-                let toastTitle = 'Upload';
                 let xhrUpload = new XMLHttpRequest();
                 xhrUpload.open('POST', requestApi);
                 xhrUpload.onload = function () {
