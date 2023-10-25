@@ -1277,16 +1277,16 @@ class RosefinchPage {
                 form.append('subdir', that.getCurrentDirStr());
 
                 let uploadFiles = [];
-                if (that.dropFileEvent) {
+                if (that.dropFileEvent && that.dropFileEvent.dataTransfer != null) {
                     // drag and drop
                     uploadFiles = that.dropFileEvent.dataTransfer.files;
                     utils.log('RosefinchPage.showUploadDialog, dropFileEvent=%d', uploadFiles.length);
-                    that.dropFileEvent = null;
                 } else {
                     // click
                     uploadFiles = inputUploadFile.prop('files');
                     utils.log('RosefinchPage.showUploadDialog, inputUploadFile=%d', uploadFiles.length);
                 }
+                that.dropFileEvent = null;
 
                 let filesCount = uploadFiles.length;
                 for (let i = 0; i < filesCount; i++) {
