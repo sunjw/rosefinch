@@ -213,7 +213,9 @@ class Rest {
                 });
                 break;
             case 'paste':
-                $this->handle_paste();
+                $this->handle_su_permission_request(function () {
+                    $this->handle_paste();
+                });
                 break;
             case 'delete':
                 $this->handle_delete();
