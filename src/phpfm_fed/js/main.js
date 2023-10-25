@@ -680,7 +680,7 @@ class RosefinchPage {
 
         // Init su mode buttons.
         let buttonToNeedSuMode = [
-            this.buttonSetting
+            this.buttonUpload, this.buttonSetting
         ];
         buttonToNeedSuMode.forEach((buttonItr) => {
             buttonItr.addClass(this.buttonNeedSuClass);
