@@ -228,7 +228,9 @@ class Rest {
                 });
                 break;
             case 'rename':
-                $this->handle_rename();
+                $this->handle_su_permission_request(function () {
+                    $this->handle_rename();
+                });
                 break;
             case 'upload':
                 $this->handle_su_permission_request(function () {
