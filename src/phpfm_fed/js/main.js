@@ -680,8 +680,8 @@ class RosefinchPage {
 
         // Init su mode buttons.
         let buttonToNeedSuMode = [
-            this.buttonUpload, this.buttonCut, this.buttonCopy, this.buttonPaste, this.buttonDelete,
-            this.buttonSetting
+            this.buttonUpload, this.buttonNewFolder, this.buttonCut, this.buttonCopy, this.buttonPaste,
+            this.buttonDelete, this.buttonSetting
         ];
         buttonToNeedSuMode.forEach((buttonItr) => {
             buttonItr.addClass(this.buttonNeedSuClass);
@@ -1377,10 +1377,15 @@ class RosefinchPage {
                     }
 
                     that.onHashChange();
-                }, function () {
-                    utils.log('RosefinchPage.showNewFolderDialog, request ERROR!');
+                }, function (resp) {
+                    let respStatus = resp.status;
+                    utils.log('RosefinchPage.showNewFolderDialog, request ERROR, status=%d', respStatus);
                     that.modalNewFolder.close();
-                    that.showToast(toastTitle, 'Request error.', 'danger');
+                    if (respStatus == 401) {
+                        that.handleRequestSuModeUnauthorized(toastTitle);
+                    } else {
+                        that.showToast(toastTitle, 'Request error.', 'danger');
+                    }
                 });
             });
         }
