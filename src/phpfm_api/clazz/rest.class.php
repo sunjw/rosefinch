@@ -223,7 +223,9 @@ class Rest {
                 });
                 break;
             case 'newfolder':
-                $this->handle_newfolder();
+                $this->handle_su_permission_request(function () {
+                    $this->handle_newfolder();
+                });
                 break;
             case 'rename':
                 $this->handle_rename();
