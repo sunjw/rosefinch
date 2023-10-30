@@ -112,6 +112,9 @@ class Rest {
     }
 
     private function update_jwt_cookie() {
+        if (!is_installed()) {
+            return;
+        }
         $jwt = $this->get_jwt_from_cookie();
         if (!empty($jwt)) {
             $jwt_updated = JwtUtil::update_exp($jwt);
@@ -604,8 +607,7 @@ class Rest {
      * Install.
      */
     private function handle_install() {
-        $public_config = get_public_config();
-        if ($public_config['installed']) {
+        if (is_installed()) {
             get_logger()->error('handle_install, already installed.');
             $this->response_json_500();
             return;
@@ -665,8 +667,7 @@ class Rest {
     }
 
     private function post_setting() {
-        $public_config = get_public_config();
-        if (!$public_config['installed']) {
+        if (!is_installed()) {
             get_logger()->error('post_setting, not install.');
             $this->response_json_500();
             return;

@@ -33,6 +33,10 @@ if (file_exists($settings)) {
     require_once $settings;
 }
 
+function is_installed() {
+    return defined('FILES_DIR');
+}
+
 /**
  * @return bool has set su mode
  */
@@ -49,7 +53,7 @@ function get_public_config() {
     $title_name = '';
     $has_su_mode = false;
 
-    if (defined('FILES_DIR')) {
+    if (is_installed()) {
         $installed = true;
     }
     if ($installed) {
