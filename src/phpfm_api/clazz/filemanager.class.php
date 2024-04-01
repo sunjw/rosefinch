@@ -253,7 +253,7 @@ class FileManager {
                     $type = Utility::get_file_ext($file_name);
 
                     $file = array();
-                    $file['name'] = htmlspecialchars(convert_toutf8($file_name), ENT_NOQUOTES);
+                    $file['name'] = htmlspecialchars(convert_toutf8($file_name), ENT_COMPAT);
                     $file['path'] = convert_toutf8($full_file_path);
                     $file['type'] = strtolower(convert_toutf8($type));
                     $file['stat'] = $fstat;
@@ -349,7 +349,7 @@ class FileManager {
                     //echo convert_toutf8($full_dir_path).'<br />';
                     $dstat = stat($full_dir_path);
                     $dir = array();
-                    $dir['name'] = htmlspecialchars(convert_toutf8($dir_name), ENT_NOQUOTES);
+                    $dir['name'] = htmlspecialchars(convert_toutf8($dir_name), ENT_COMPAT);
                     $dir['path'] = convert_toutf8($full_dir_path);
                     $dir['stat'] = $dstat;
                     $dir['type'] = 'folder';
