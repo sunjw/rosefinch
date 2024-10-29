@@ -1022,7 +1022,8 @@ class RosefinchPage {
 
     generateFilePreviewHref(dirArray, file) {
         let href = this.generateDirHref(dirArray);
-        href = href + '&' + this.reqFilePreviewKey + '=' + file;
+        let fileFix = utils.stringReplaceAll(file, '&', '%26');
+        href = href + '&' + this.reqFilePreviewKey + '=' + fileFix;
         return href;
     }
 
