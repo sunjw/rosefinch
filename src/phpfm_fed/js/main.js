@@ -475,7 +475,8 @@ class RosefinchPage {
         let requestApi = this.generateRestApiUrl('api/v1/fm/ls');
         requestApi += ('&' + this.reqSortByKey + '=' + requestSortBy);
         requestApi += ('&' + this.reqSortOrderKey + '=' + requestSortOrder);
-        requestApi += ('&' + this.reqDirKey + '=' + requestDir);
+        let requestDirFix = utils.stringReplaceAll(requestDir, '&', '%26');
+        requestApi += ('&' + this.reqDirKey + '=' + requestDirFix);
         utils.log('RosefinchPage.onHashChange, requestApi=[%s]', requestApi);
 
         this.showMainListLoading();
