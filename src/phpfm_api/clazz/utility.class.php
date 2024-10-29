@@ -82,7 +82,7 @@ class Utility {
             false !== strpos($name, '?') ||
             false !== strpos($name, '"') ||
             false !== strpos($name, '|') ||
-            false !== strpos($name, '&') ||
+            //false !== strpos($name, '&') ||
             false !== strpos($name, '>') ||
             false !== strpos($name, '<')) {
             return false;
