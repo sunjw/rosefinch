@@ -105,7 +105,7 @@ class Utility {
             false !== strpos($path, '?') ||
             false !== strpos($path, '"') ||
             false !== strpos($path, '|') ||
-            false !== strpos($path, '&') ||
+            //false !== strpos($path, '&') ||
             false !== strpos($path, '>') ||
             false !== strpos($path, '<')) {
             return false;
