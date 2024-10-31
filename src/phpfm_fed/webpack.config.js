@@ -27,7 +27,14 @@ module.exports = {
           MiniCssExtractPlugin.loader,
           'css-loader',
           'postcss-loader',
-          'sass-loader'
+          {
+            loader: 'sass-loader',
+            options: {
+              sassOptions: {
+                silenceDeprecations: ['mixed-decls', 'color-functions', 'global-builtin', 'import'],
+              }
+            }
+          }
         ]
       }, {
         test: /\.(woff|woff2|eot|ttf|otf)$/,
