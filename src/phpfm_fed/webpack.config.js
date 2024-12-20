@@ -22,28 +22,27 @@ module.exports = {
   },
   module: {
     rules: [{
-        test: /\.s?css$/,
-        use: [
-          MiniCssExtractPlugin.loader,
-          'css-loader',
-          'postcss-loader',
-          {
-            loader: 'sass-loader',
-            options: {
-              sassOptions: {
-                silenceDeprecations: ['mixed-decls', 'color-functions', 'global-builtin', 'import'],
-              }
+      test: /\.s?css$/,
+      use: [
+        MiniCssExtractPlugin.loader,
+        'css-loader',
+        'postcss-loader',
+        {
+          loader: 'sass-loader',
+          options: {
+            sassOptions: {
+              silenceDeprecations: ['mixed-decls', 'color-functions', 'global-builtin', 'import'],
             }
           }
-        ]
-      }, {
-        test: /\.(woff|woff2|eot|ttf|otf)$/,
-        type: 'asset/resource',
-        generator: {
-          filename: 'assets/[hash][ext]'
         }
+      ]
+    }, {
+      test: /\.(woff|woff2|eot|ttf|otf)$/,
+      type: 'asset/resource',
+      generator: {
+        filename: 'assets/[hash][ext]'
       }
-    ]
+    }]
   },
   devServer: {
     static: __dirname
