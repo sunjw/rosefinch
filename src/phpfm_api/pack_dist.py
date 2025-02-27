@@ -92,7 +92,7 @@ PUBLISH_DIR = 'publish'
 
 FED_DIR = '../phpfm_fed'
 FED_PUBLISH_DIR = 'publish'
-FED_PACK_CMD = 'python3 ./pack-dist-webpack.py'
+FED_PACK_CMD = 'python3 ./pack_dist_webpack.py'
 
 APP_DIRS = ['admin', 'clazz', 'func', 'inc', 'log', 'vendor']
 APP_FILES = ['composer.json', 'composer.lock', 'gpl-2.0.txt', 'web.config']

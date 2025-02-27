@@ -7,4 +7,4 @@ All deps are in git repo. If need install, follow steps below:
 2. composer install
 
 ## Publish
-python3 pack-dist.py
+python3 pack_dist.py
