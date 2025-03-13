@@ -7,6 +7,7 @@ require('../css/main.css');
 // js
 window.$ = window.jQuery = require('jquery'); // bootstrap 5 must see window.jQuery
 require('bootstrap');
+const clipboardCopy = require('clipboard-copy');
 const jsCookie = require('js-cookie');
 const qrcode = require('qrcode');
 const utils = require('./utils');
@@ -1653,10 +1654,14 @@ class RosefinchPage {
                 qrcode.toCanvas(canvasQrImage.get(0), dataLink, {
                     width: 300
                 });
+
+                clipboardCopy(dataLink);
+                that.modalShare.setTipsText('Link copied.');
             });
 
             this.modalShare.setCloseHandler(function () {
                 utils.log('RosefinchPage.showShareDialog, close.');
+                that.modalShare.setTipsText('');
                 that.currentDialog = null;
             });
         }
