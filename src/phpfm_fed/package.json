@@ -1,6 +1,6 @@
 {
   "name": "phpfm-fed",
-  "version": "3.2506.0",
+  "version": "25.10.3",
   "description": "Rosefinch FED",
   "main": "js/main.js",
   "scripts": {
