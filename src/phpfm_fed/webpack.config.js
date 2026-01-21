@@ -22,19 +22,11 @@ module.exports = {
   },
   module: {
     rules: [{
-      test: /\.s?css$/,
+      test: /\.css$/,
       use: [
         MiniCssExtractPlugin.loader,
         'css-loader',
-        'postcss-loader',
-        {
-          loader: 'sass-loader',
-          options: {
-            sassOptions: {
-              silenceDeprecations: ['mixed-decls', 'color-functions', 'global-builtin', 'import'],
-            }
-          }
-        }
+        'postcss-loader'
       ]
     }, {
       test: /\.(woff|woff2|eot|ttf|otf)$/,
