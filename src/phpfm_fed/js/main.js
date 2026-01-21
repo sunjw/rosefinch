@@ -66,7 +66,7 @@ class RosefinchDialog {
         if (needOkButton) {
             this.buttonOk = $('<button/>').attr({
                 'type': 'button'
-            }).addClass('btn btn-primary')
+            }).addClass('btn btn-primary');
             this.spanOkText = $('<span/>').text(this.okText);
             this.spanOkLoadingSpinner = $('<span/>').attr({
                 'role': 'status',
@@ -216,7 +216,7 @@ class RosefinchPage {
 
     constructor(apiPrefix) {
         // const
-        this.hashPrefix = '#!'
+        this.hashPrefix = '#!';
         this.productName = 'Rosefinch';
         this.cookieJwt = 'phpfm_jwt';
 
@@ -1864,8 +1864,7 @@ class RosefinchPage {
                 aDownload.attr('href', dataLink).html(utils.escapeHtml(dataTitle));
                 imgObj = new Image();
                 imgObj.onload = function () {
-                    imgObj.onload = function () {
-                    };
+                    imgObj.onload = function () {};
 
                     if (!that.isCurrentDialog(that.modalImage)) {
                         return;
@@ -1900,8 +1899,7 @@ class RosefinchPage {
                     'alt': ''
                 }).width(0).height(0);
                 if (imgObj) {
-                    imgObj.onload = function () {
-                    };
+                    imgObj.onload = function () {};
                 }
                 imgObj = null;
                 aDownload.attr('href', '').html('');
@@ -2440,7 +2438,7 @@ class RosefinchPage {
 
             let spanFileType = $('<span/>').addClass('fileType').text(item['type_html']);
             divDetailLineRight.append(spanFileType);
-            let spanFileSize = $('<span/>').addClass('fileSize')
+            let spanFileSize = $('<span/>').addClass('fileSize');
             if (itemIsFolder) {
                 spanFileSize.html('&nbsp;');
             } else {
