@@ -476,7 +476,7 @@ class RosefinchPage {
         let requestApi = this.generateRestApiUrl('api/v1/fm/ls');
         requestApi += ('&' + this.reqSortByKey + '=' + requestSortBy);
         requestApi += ('&' + this.reqSortOrderKey + '=' + requestSortOrder);
-        let requestDirFix = utils.stringReplaceAll(requestDir, '&', '%26');
+        let requestDirFix = this.fixUrlPath(requestDir);
         requestApi += ('&' + this.reqDirKey + '=' + requestDirFix);
         utils.log('RosefinchPage.onHashChange, requestApi=[%s]', requestApi);
 
@@ -995,6 +995,13 @@ class RosefinchPage {
         return true;
     }
 
+    fixUrlPath(pathRaw) {
+        let pathFix = pathRaw;
+        pathFix = utils.stringReplaceAll(pathFix, '&', '%26');
+        pathFix = utils.stringReplaceAll(pathFix, '#', '%23');
+        return pathFix;
+    }
+
     generateRestApiUrl(api) {
         return (this.apiBase + this.restApiEndpoint + '?api=' + api);
     }
@@ -1023,7 +1030,7 @@ class RosefinchPage {
 
     generateFilePreviewHref(dirArray, file) {
         let href = this.generateDirHref(dirArray);
-        let fileFix = utils.stringReplaceAll(file, '&', '%26');
+        let fileFix = this.fixUrlPath(file);
         href = href + '&' + this.reqFilePreviewKey + '=' + fileFix;
         return href;
     }
