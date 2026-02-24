@@ -39,7 +39,7 @@ function save_general(&$settings, $new_settings) {
     }
 
     // Update JWT_KEY.
-    $settings['jwt_key'] = generate_random_string(16, true);
+    $settings['jwt_key'] = generate_random_string(128, true);
 
     // prepare $settings['root_path']
     $settings['root_path'] = trim_last_slash($settings['root_path']);
