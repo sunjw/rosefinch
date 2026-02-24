@@ -11,12 +11,13 @@
 
 namespace Monolog\Handler;
 
+use MongoDB\Client;
+use MongoDB\Collection;
 use MongoDB\Driver\BulkWrite;
 use MongoDB\Driver\Manager;
-use MongoDB\Client;
-use Monolog\Logger;
 use Monolog\Formatter\FormatterInterface;
 use Monolog\Formatter\MongoDBFormatter;
+use Monolog\Logger;
 
 /**
  * Logs to a MongoDB database.
@@ -33,9 +34,12 @@ use Monolog\Formatter\MongoDBFormatter;
  */
 class MongoDBHandler extends AbstractProcessingHandler
 {
+    /** @var Collection */
     private $collection;
+    /** @var Client|Manager */
     private $manager;
-    private $namespace;
+    /** @var string|null */
+    private $namespace = null;
 
     /**
      * Constructor.
@@ -43,8 +47,6 @@ class MongoDBHandler extends AbstractProcessingHandler
      * @param Client|Manager $mongodb    MongoDB library or driver client
      * @param string         $database   Database name
      * @param string         $collection Collection name
-     * @param string|int     $level      The minimum logging level at which this handler will be triggered
-     * @param bool           $bubble     Whether the messages that are handled can bubble up the stack or not
      */
     public function __construct($mongodb, string $database, string $collection, $level = Logger::DEBUG, bool $bubble = true)
     {
@@ -53,7 +55,7 @@ class MongoDBHandler extends AbstractProcessingHandler
         }
 
         if ($mongodb instanceof Client) {
-            $this->collection = $mongodb->selectCollection($database, $collection);
+            $this->collection = method_exists($mongodb, 'getCollection') ? $mongodb->getCollection($database, $collection) : $mongodb->selectCollection($database, $collection);
         } else {
             $this->manager = $mongodb;
             $this->namespace = $database . '.' . $collection;
