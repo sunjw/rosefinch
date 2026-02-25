@@ -11,6 +11,6 @@ vendor/**/.git
 vendor/firebase/php-jwt/tests/
 vendor/firebase/php-jwt/.github/
 
-*/php_errors.log
+**/php_errors.log
 
 publish
