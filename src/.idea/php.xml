@@ -12,13 +12,13 @@
   </component>
   <component name="PhpIncludePathManager">
     <include_path>
-      <path value="$PROJECT_DIR$/phpfm_api/vendor/psr/log" />
-      <path value="$PROJECT_DIR$/phpfm_api/vendor/monolog/monolog" />
       <path value="$PROJECT_DIR$/phpfm_api/vendor/composer" />
       <path value="$PROJECT_DIR$/phpfm_api/vendor/firebase/php-jwt" />
+      <path value="$PROJECT_DIR$/phpfm_api/vendor/monolog/monolog" />
+      <path value="$PROJECT_DIR$/phpfm_api/vendor/psr/log" />
     </include_path>
   </component>
-  <component name="PhpProjectSharedConfiguration" php_language_level="7.4" />
+  <component name="PhpProjectSharedConfiguration" php_language_level="8.5" />
   <component name="PhpStanOptionsConfiguration">
     <option name="transferred" value="true" />
   </component>
