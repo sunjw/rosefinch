@@ -12,204 +12,7 @@ const qrcode = require('qrcode');
 const utils = require('./utils');
 const npmUtils = require('./npmUtils');
 const jqueryUtils = require('./jqueryUtils');
-
-class RosefinchDialog {
-
-    constructor() {
-        this.okText = 'OK';
-        this.closeText = 'Close';
-        this.loadingText = 'Working...';
-
-        this.divModal = null;
-        this.h5ModalTitle = null;
-        this.divModalBody = null;
-        this.divModalFooter = null;
-
-        this.spanTips = null;
-        this.buttonOk = null;
-        this.spanOkText = null;
-        this.spanOkLoadingSpinner = null;
-        this.buttonClose = null;
-
-        this.isShown = false;
-        this.pendingClose = false;
-
-        this.dataHandler = null;
-        this.showHandler = null;
-        this.closeHandler = null;
-    }
-
-    init(modalId, isStatic = false, needOkButton = false) {
-        let that = this;
-        this.divModal = $('<div/>').attr({
-            'id': modalId,
-            'tabindex': -1
-        }).addClass('modal fade');
-        if (isStatic) {
-            this.divModal.attr('data-bs-backdrop', 'static');
-        }
-        let divModalDialog = $('<div/>').addClass('modal-dialog modal-dialog-centered modal-dialog-scrollable');
-        let divModalContent = $('<div/>').addClass('modal-content');
-
-        let divModalHeader = $('<div/>').addClass('modal-header');
-        this.h5ModalTitle = $('<h5/>').addClass('modal-title');
-        divModalHeader.append(this.h5ModalTitle);
-        divModalContent.append(divModalHeader);
-
-        this.divModalBody = $('<div/>').addClass('modal-body');
-        divModalContent.append(this.divModalBody);
-
-        this.divModalFooter = $('<div/>').addClass('modal-footer');
-        this.spanTips = $('<span/>').addClass('dialogTips flex-grow-1');
-        this.divModalFooter.append(this.spanTips);
-        if (needOkButton) {
-            this.buttonOk = $('<button/>').attr({
-                'type': 'button'
-            }).addClass('btn btn-primary');
-            this.spanOkText = $('<span/>').text(this.okText);
-            this.spanOkLoadingSpinner = $('<span/>').attr({
-                'role': 'status',
-                'aria-hidden': true
-            }).addClass('spinner-border spinner-border-sm');
-            this.spanOkLoadingSpinner.hide();
-            this.buttonOk.append(this.spanOkLoadingSpinner);
-            this.buttonOk.append(this.spanOkText);
-            this.divModalFooter.append(this.buttonOk);
-        }
-        this.buttonClose = $('<button/>').attr({
-            'type': 'button',
-            'data-bs-dismiss': 'modal'
-        }).addClass('btn btn-outline-secondary').text(this.closeText);
-        this.divModalFooter.append(this.buttonClose);
-        divModalContent.append(this.divModalFooter);
-
-        divModalDialog.append(divModalContent);
-        this.divModal.append(divModalDialog);
-
-        this.divModal.on('shown.bs.modal', function () {
-            that.isShown = true;
-            if (that.showHandler) {
-                that.showHandler();
-            }
-            if (that.pendingClose) {
-                that.close();
-            }
-        });
-        this.divModal.on('hidden.bs.modal', function () {
-            that.isShown = false;
-            that.onclose();
-        });
-    }
-
-    onclose() {
-        this.hideOkButtonLoading();
-        if (this.closeHandler) {
-            this.closeHandler();
-        }
-    }
-
-    show() {
-        this.divModal.modal('show');
-    }
-
-    close() {
-        if (this.isShown) {
-            this.divModal.modal('hide');
-            this.pendingClose = false;
-        } else {
-            this.pendingClose = true;
-        }
-    }
-
-    addClass(className) {
-        this.divModal.addClass(className);
-    }
-
-    removeClass(className) {
-        this.divModal.removeClass(className);
-    }
-
-    setTitle(titleText) {
-        this.h5ModalTitle.text(titleText);
-    }
-
-    appendBody(childElement) {
-        this.divModalBody.append(childElement);
-    }
-
-    setDataHandler(dataHandler) {
-        this.dataHandler = dataHandler;
-    }
-
-    setData(data) {
-        if (this.dataHandler) {
-            this.dataHandler(data);
-        }
-    }
-
-    hasShown() {
-        return this.isShown;
-    }
-
-    handleUpdate() {
-        this.divModal.modal('handleUpdate');
-    }
-
-    setShowHandler(showHandler) {
-        this.showHandler = showHandler;
-    }
-
-    setCloseHandler(closeHandler) {
-        this.closeHandler = closeHandler;
-    }
-
-    setTipsText(tipsText) {
-        this.spanTips.text(tipsText);
-    }
-
-    setOkButtonHandler(okHandler) {
-        if (this.buttonOk == null) {
-            return;
-        }
-        this.buttonOk.on('click', function () {
-            okHandler();
-        });
-    }
-
-    showOkButtonLoading() {
-        if (this.buttonOk == null) {
-            return;
-        }
-        this.buttonOk.attr('disabled', 'disabled');
-        this.buttonClose.attr('disabled', 'disabled');
-        this.spanOkText.text(this.loadingText);
-        this.spanOkText.addClass('loadingText');
-        this.spanOkLoadingSpinner.show();
-    }
-
-    hideOkButtonLoading() {
-        if (this.buttonOk == null) {
-            return;
-        }
-        this.spanOkText.text(this.okText);
-        this.spanOkText.removeClass('loadingText');
-        this.spanOkLoadingSpinner.hide();
-        this.buttonOk.removeAttr('disabled');
-        this.buttonClose.removeAttr('disabled');
-    }
-
-    clickOkButton() {
-        if (this.buttonOk == null) {
-            return;
-        }
-        this.buttonOk.get(0).click();
-    }
-
-    setCloseButtonText(closeText) {
-        this.closeText = closeText;
-        this.buttonClose.text(this.closeText);
-    }
-}
+const BsDialog = require('./bsDialog');
 
 class RosefinchPage {
 
@@ -1168,7 +971,7 @@ class RosefinchPage {
 
             const uploadFileInfoText = 'Click or drop files to upload.';
 
-            this.modalUpload = new RosefinchDialog();
+            this.modalUpload = new BsDialog();
             this.modalUpload.init('divModalUpload', true, true);
             this.modalUpload.setTitle('Upload');
             this.modalUpload.setCloseButtonText('Cancel');
@@ -1323,7 +1126,7 @@ class RosefinchPage {
             utils.log('RosefinchPage.showNewFolderDialog, init modalNewFolder.');
             let that = this;
 
-            this.modalNewFolder = new RosefinchDialog();
+            this.modalNewFolder = new BsDialog();
             this.modalNewFolder.init('divModalNewFoler', true, true);
             this.modalNewFolder.setTitle('New folder');
             this.modalNewFolder.setCloseButtonText('Cancel');
@@ -1409,7 +1212,7 @@ class RosefinchPage {
             utils.log('RosefinchPage.showPasteDialog, init modalPaste.');
             let that = this;
 
-            this.modalPaste = new RosefinchDialog();
+            this.modalPaste = new BsDialog();
             this.modalPaste.init('divModalPaste', true, true);
             this.modalPaste.setTitle('Paste');
             this.modalPaste.setCloseButtonText('Cancel');
@@ -1477,7 +1280,7 @@ class RosefinchPage {
             utils.log('RosefinchPage.showRenameDialog, init modalRename.');
             let that = this;
 
-            this.modalRename = new RosefinchDialog();
+            this.modalRename = new BsDialog();
             this.modalRename.init('divModalRename', true, true);
             this.modalRename.setTitle('Rename');
             this.modalRename.setCloseButtonText('Cancel');
@@ -1578,7 +1381,7 @@ class RosefinchPage {
             utils.log('RosefinchPage.showDeleteDialog, init modalDelete.');
             let that = this;
 
-            this.modalDelete = new RosefinchDialog();
+            this.modalDelete = new BsDialog();
             this.modalDelete.init('divModalDelete', true, true);
             this.modalDelete.setTitle('Delete');
             this.modalDelete.setCloseButtonText('Cancel');
@@ -1646,7 +1449,7 @@ class RosefinchPage {
             utils.log('RosefinchPage.showShareDialog, init modalShare.');
             let that = this;
 
-            this.modalShare = new RosefinchDialog();
+            this.modalShare = new BsDialog();
             this.modalShare.init('divModalShare');
             this.modalShare.setTitle('Share');
 
@@ -1708,7 +1511,7 @@ class RosefinchPage {
             utils.log('RosefinchPage.showAboutDialog, init modalAbout.');
             let that = this;
 
-            this.modalAbout = new RosefinchDialog();
+            this.modalAbout = new BsDialog();
             this.modalAbout.init('divModalAbout');
             this.modalAbout.setTitle(this.productName);
 
@@ -1738,7 +1541,7 @@ class RosefinchPage {
             utils.log('RosefinchPage.showAudioPreviewDialog, init modalAudio.');
             let that = this;
 
-            this.modalAudio = new RosefinchDialog();
+            this.modalAudio = new BsDialog();
             this.modalAudio.init('divModalAudio');
             this.modalAudio.setTitle('Preview');
 
@@ -1785,7 +1588,7 @@ class RosefinchPage {
 
             let that = this;
 
-            this.modalImage = new RosefinchDialog();
+            this.modalImage = new BsDialog();
             this.modalImage.init('divModalImage');
             this.modalImage.setTitle('Preview');
 
@@ -1927,7 +1730,7 @@ class RosefinchPage {
             utils.log('RosefinchPage.showSettingDialog, init modalSetting.');
             let that = this;
 
-            this.modalSetting = new RosefinchDialog();
+            this.modalSetting = new BsDialog();
             this.modalSetting.init('divModalSetting', false, true);
             this.modalSetting.setTitle('Setting');
             this.modalSetting.setCloseButtonText('Cancel');
@@ -2097,7 +1900,7 @@ class RosefinchPage {
             utils.log('RosefinchPage.showInstallDialog, init modalInstall.');
             let that = this;
 
-            this.modalInstall = new RosefinchDialog();
+            this.modalInstall = new BsDialog();
             this.modalInstall.init('divModalInstall', true, true);
             this.modalInstall.setTitle('Install');
             this.modalInstall.setCloseButtonText('Cancel');
@@ -2190,7 +1993,7 @@ class RosefinchPage {
             utils.log('RosefinchPage.showSuModeDialog, init modalSuMode.');
             let that = this;
 
-            this.modalSuMode = new RosefinchDialog();
+            this.modalSuMode = new BsDialog();
             this.modalSuMode.init('divModalSuMode', true, true);
             this.modalSuMode.setTitle('SU mode');
             this.modalSuMode.setCloseButtonText('Cancel');
@@ -2277,7 +2080,7 @@ class RosefinchPage {
             utils.log('RosefinchPage.showSuClearDialog, init modalSuClear.');
             let that = this;
 
-            this.modalSuClear = new RosefinchDialog();
+            this.modalSuClear = new BsDialog();
             this.modalSuClear.init('divModalSuClear', true, true);
             this.modalSuClear.setTitle('SU mode');
             this.modalSuClear.setCloseButtonText('Cancel');
