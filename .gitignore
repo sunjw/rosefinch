@@ -73,6 +73,9 @@ fabric.properties
 
 .DS_Store
 *~
+*.bak
+
 .vscode
 tags
-*.bak
+
+rosefinch_data/
