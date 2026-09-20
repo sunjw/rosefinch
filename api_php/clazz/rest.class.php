@@ -23,6 +23,7 @@ class RestRet implements JsonSerializable {
         $this->data = $data;
     }
 
+    #[\ReturnTypeWillChange]
     public function jsonSerialize() {
         return [
             'code' => $this->code,
