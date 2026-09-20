@@ -5,7 +5,7 @@
       <excludeFolder url="file://$MODULE_DIR$/phpfm_api/vendor/psr/log" />
       <excludeFolder url="file://$MODULE_DIR$/phpfm_api/vendor/monolog/monolog" />
       <excludeFolder url="file://$MODULE_DIR$/phpfm_api/vendor/composer" />
-      <excludeFolder url="file://$MODULE_DIR$/phpfm_fed/publish" />
+      <excludeFolder url="file://$MODULE_DIR$/fed/publish" />
       <excludeFolder url="file://$MODULE_DIR$/phpfm_api/publish" />
       <excludeFolder url="file://$MODULE_DIR$/phpfm_api/vendor/firebase/php-jwt" />
     </content>

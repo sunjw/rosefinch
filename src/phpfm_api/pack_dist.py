@@ -90,7 +90,7 @@ def log_stage(stage_message):
 
 PUBLISH_DIR = 'publish'
 
-FED_DIR = '../phpfm_fed'
+FED_DIR = '../fed'
 FED_PUBLISH_DIR = 'publish'
 FED_PACK_CMD = 'python3 ./pack_dist_webpack.py'
 
