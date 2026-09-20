@@ -7,7 +7,7 @@
           <option name="path" value="$PROJECT_DIR$/tests" />
         </Configuration>
         <Configuration>
-          <option name="path" value="$PROJECT_DIR$/phpfm_api/tests" />
+          <option name="path" value="$PROJECT_DIR$/api_php/tests" />
         </Configuration>
       </list>
     </option>

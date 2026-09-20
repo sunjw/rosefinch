@@ -6,7 +6,7 @@
         <option name="myPath" value="$PROJECT_DIR$" />
       </PhpSpecSuiteConfiguration>
       <PhpSpecSuiteConfiguration>
-        <option name="myPath" value="$PROJECT_DIR$/phpfm_api" />
+        <option name="myPath" value="$PROJECT_DIR$/api_php" />
       </PhpSpecSuiteConfiguration>
     </suites>
   </component>

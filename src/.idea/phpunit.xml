@@ -3,7 +3,7 @@
   <component name="PHPUnit">
     <option name="directories">
       <list>
-        <option value="$PROJECT_DIR$/phpfm_api/tests" />
+        <option value="$PROJECT_DIR$/api_php/tests" />
       </list>
     </option>
   </component>

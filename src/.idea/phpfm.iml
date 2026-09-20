@@ -2,12 +2,12 @@
 <module type="WEB_MODULE" version="4">
   <component name="NewModuleRootManager">
     <content url="file://$MODULE_DIR$">
-      <excludeFolder url="file://$MODULE_DIR$/phpfm_api/vendor/psr/log" />
-      <excludeFolder url="file://$MODULE_DIR$/phpfm_api/vendor/monolog/monolog" />
-      <excludeFolder url="file://$MODULE_DIR$/phpfm_api/vendor/composer" />
+<excludeFolder url="file://$MODULE_DIR$/api_php/vendor/psr/log" />
+      <excludeFolder url="file://$MODULE_DIR$/api_php/vendor/monolog/monolog" />
+      <excludeFolder url="file://$MODULE_DIR$/api_php/vendor/composer" />
       <excludeFolder url="file://$MODULE_DIR$/fed/publish" />
-      <excludeFolder url="file://$MODULE_DIR$/phpfm_api/publish" />
-      <excludeFolder url="file://$MODULE_DIR$/phpfm_api/vendor/firebase/php-jwt" />
+      <excludeFolder url="file://$MODULE_DIR$/api_php/publish" />
+      <excludeFolder url="file://$MODULE_DIR$/api_php/vendor/firebase/php-jwt" />
     </content>
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />
